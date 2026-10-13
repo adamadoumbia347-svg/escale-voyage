@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- TRAVELPAYOUTS:START -->
+<script type="text/plain" data-consent="marketing" nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1" data-cmp-ab="2">
+  (function () {
+      var script = document.createElement("script");
+      script.async = 1;
+      script.setAttribute("data-cmp-ab","2");
+      script.src = 'https://emrld.ltd/NTg1MjU5.js?t=585259';
+      document.head.appendChild(script);
+  })();
+</script>
+<script src="/consent.js" defer></script>
+<!-- TRAVELPAYOUTS:END -->
+<title>Escale Comparateur</title>
+<meta name="description" content="Trouvez les vols les moins chers, les hôtels et les locations de voitures en une seule recherche : Google Flights, Skyscanner, Kayak, Booking, Agoda et plus. Gratuit, sans inscription.">
+<meta name="keywords" content="vol pas cher, billet d'avion, comparateur de vols, hôtel pas cher, location voiture, Paris Bamako, Paris Dakar, Paris Abidjan">
+<link rel="canonical" href="https://escale-voyage.netlify.app/">
+<meta property="og:url" content="https://escale-voyage.netlify.app/">
+<meta name="theme-color" content="#18202c">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Escale">
+<meta property="og:title" content="Escale : vols, hôtels et voitures au meilleur prix">
+<meta property="og:description" content="Une seule recherche, tous les grands comparateurs. Trouvez le vol, l'hôtel ou la voiture le moins cher.">
+<meta property="og:image" content="https://escale-voyage.netlify.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"Escale","url":"https://escale-voyage.netlify.app/","description":"Comparateur de vols, hôtels et locations de voitures","inLanguage":"fr"}
+</script>
+<script type="application/ld+json" id="faq-ld"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+Arabic:wght@400;600;700&display=swap">
+<style>
+/* Layout: signage band (departure-board header) over a single working column; form card, then result rows like a ticket list. */
+:root {
+  --bg: #f3f5f8;
+  --surface: #ffffff;
+  --ink: #141a24;
+  --muted: #5a6474;
+  --line: #d9dee6;
+  --sign: #ffcc1a;        /* airport wayfinding yellow */
+  --sign-ink: #141a24;
+  --board: #18202c;       /* departure board slate */
+  --board-ink: #f3f5f8;
+  --accent: #0b5cd6;
+  --accent-ink: #ffffff;
+  --ok: #18794e;
+  --warn: #9a5b00;
+  --focus: #0b5cd6;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --r: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f141b; --surface: #171e28; --ink: #e9edf3; --muted: #9aa5b5; --line: #2a3442;
+    --sign: #ffcc1a; --sign-ink: #141a24; --board: #0a0e14; --board-ink: #e9edf3;
+    --accent: #6ea8ff; --accent-ink: #0b1220; --ok: #4cc38a; --warn: #f0b04a; --focus: #6ea8ff;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f141b; --surface: #171e28; --ink: #e9edf3; --muted: #9aa5b5; --line: #2a3442;
+  --sign: #ffcc1a; --sign-ink: #141a24; --board: #0a0e14; --board-ink: #e9edf3;
+  --accent: #6ea8ff; --accent-ink: #0b1220; --ok: #4cc38a; --warn: #f0b04a; --focus: #6ea8ff;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 15px/1.55 var(--f-body); }
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; }
+
+/* Header: departure board */
+.board { background: var(--board); color: var(--board-ink); padding-block: 28px 64px; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-mark { background: var(--sign); color: var(--sign-ink); font: 800 20px/1 var(--f-display); padding: 8px 10px; border-radius: 6px; letter-spacing: .02em; }
+.brand-name { font: 700 22px/1 var(--f-display); letter-spacing: .01em; }
+.board h1 { font: 800 clamp(30px, 6vw, 52px)/1.05 var(--f-display); margin: 28px 0 10px; text-wrap: balance; max-width: 18ch; }
+.board h1 em { font-style: normal; color: var(--sign); }
+.board p { color: color-mix(in srgb, var(--board-ink) 75%, transparent); max-width: 60ch; margin: 0; }
+.ticker { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 22px; font: 700 13px/1 var(--f-mono); }
+.ticker span { background: color-mix(in srgb, var(--board-ink) 10%, transparent); padding: 7px 9px; border-radius: 4px; letter-spacing: .08em; }
+.ticker b { color: var(--sign); font-weight: 700; }
+
+/* Search card */
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; margin-top: -40px; box-shadow: 0 10px 30px -18px rgb(0 0 0 / .35); }
+.tabs { display: flex; gap: 4px; padding: 8px; border-bottom: 1px solid var(--line); overflow-x: auto; }
+.tab { appearance: none; border: 0; background: transparent; color: var(--muted); font: 600 15px/1 var(--f-body); padding: 12px 16px; border-radius: 8px; cursor: pointer; display: flex; gap: 8px; align-items: center; white-space: nowrap; }
+.tab svg { width: 18px; height: 18px; }
+.tab[aria-selected="true"] { background: var(--sign); color: var(--sign-ink); }
+.tab:hover:not([aria-selected="true"]) { background: color-mix(in srgb, var(--ink) 6%, transparent); color: var(--ink); }
+
+form { padding: 20px; display: grid; gap: 16px; }
+.row { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+.row.route { grid-template-columns: 1fr auto 1fr; align-items: end; }
+@media (max-width: 560px) { .row.route { grid-template-columns: 1fr; } .swap { justify-self: center; transform: rotate(90deg); } }
+.field { display: grid; gap: 6px; min-width: 0; }
+label, .label { font: 600 12px/1.2 var(--f-body); text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+input, select { width: 100%; font: 500 16px/1.2 var(--f-body); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: var(--r); padding: 12px; min-height: 46px; }
+input:focus, select:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
+.hint { font-size: 12px; color: var(--muted); }
+.swap { appearance: none; border: 1px solid var(--line); background: var(--surface); color: var(--ink); width: 46px; height: 46px; border-radius: 50%; cursor: pointer; display: grid; place-items: center; }
+.swap:hover { border-color: var(--accent); color: var(--accent); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: var(--r); padding: 3px; gap: 3px; background: var(--bg); flex-wrap: wrap; }
+.seg input { position: absolute; opacity: 0; pointer-events: none; width: 1px; height: 1px; }
+.seg label { text-transform: none; letter-spacing: 0; font: 600 14px/1 var(--f-body); color: var(--muted); padding: 10px 14px; border-radius: 7px; cursor: pointer; }
+.seg input:checked + label { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgb(0 0 0 / .15); }
+.seg input:focus-visible + label { outline: 3px solid var(--focus); }
+.opts { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; }
+.check { display: flex; gap: 8px; align-items: center; text-transform: none; letter-spacing: 0; font: 500 14px/1.3 var(--f-body); color: var(--ink); cursor: pointer; }
+.check input { width: 18px; height: 18px; min-height: 0; accent-color: var(--accent); }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+.btn { appearance: none; border: 0; background: var(--accent); color: var(--accent-ink); font: 700 16px/1 var(--f-body); padding: 15px 22px; border-radius: var(--r); cursor: pointer; display: inline-flex; gap: 8px; align-items: center; }
+.btn:hover { filter: brightness(1.08); }
+.error { color: #c0362c; font-weight: 600; font-size: 14px; }
+:root[data-theme="dark"] .error { color: #ff8a80; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .error { color: #ff8a80; } }
+
+/* Results */
+.results { margin-top: 28px; display: grid; gap: 14px; }
+.results-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px; }
+.results-head h2 { font: 700 22px/1.2 var(--f-display); margin: 0; text-wrap: balance; }
+.summary { font: 500 13px/1.4 var(--f-mono); color: var(--muted); }
+.pass { display: grid; grid-template-columns: 1fr auto; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.pass-main { padding: 16px 18px; display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; min-width: 0; }
+.pass-codes { font: 700 30px/1 var(--f-mono); letter-spacing: .04em; display: flex; gap: 12px; align-items: center; }
+.pass-codes small { font-size: 16px; color: var(--muted); }
+.pass-meta { display: grid; gap: 2px; font-size: 13px; color: var(--muted); min-width: 0; }
+.pass-meta strong { color: var(--ink); font-weight: 600; font-size: 15px; }
+.pass-stub { border-left: 2px dashed var(--line); background: var(--sign); color: var(--sign-ink); padding: 16px 18px; display: grid; place-content: center; text-align: center; font: 700 13px/1.25 var(--f-mono); letter-spacing: .06em; }
+.pass-stub b { font-size: 26px; display: block; }
+@media (max-width: 560px) { .pass { grid-template-columns: 1fr; } .pass-stub { border-left: 0; border-top: 2px dashed var(--line); } }
+
+.providers { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.prov { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; display: grid; grid-template-columns: 44px 1fr auto; gap: 14px; align-items: center; padding: 14px 16px; }
+.prov:hover { border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); }
+.logo { width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center; font: 800 16px/1 var(--f-display); color: #fff; }
+.prov-body { min-width: 0; }
+.prov-name { font: 700 16px/1.2 var(--f-display); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.prov-desc { color: var(--muted); font-size: 14px; margin-top: 3px; }
+.pill { font: 600 11px/1 var(--f-body); text-transform: uppercase; letter-spacing: .06em; padding: 5px 7px; border-radius: 999px; border: 1px solid currentColor; }
+.pill.best { color: var(--ok); }
+.pill.manual { color: var(--warn); }
+.go { text-decoration: none; background: var(--bg); color: var(--ink); border: 1px solid var(--line); padding: 11px 14px; border-radius: var(--r); font-weight: 700; white-space: nowrap; }
+.go:hover { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+@media (max-width: 560px) { .prov { grid-template-columns: 44px 1fr; } .go { grid-column: 1 / -1; text-align: center; } }
+
+.flex-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 8px; }
+.flex-grid a { text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px; display: grid; gap: 2px; font-variant-numeric: tabular-nums; }
+.flex-grid a:hover { border-color: var(--accent); }
+.flex-grid a.cur { border-color: var(--ink); }
+.flex-grid small { color: var(--muted); font-size: 12px; }
+.flex-grid strong { font: 700 14px/1.2 var(--f-mono); }
+.sub-h { font: 700 16px/1.2 var(--f-display); margin: 10px 0 0; }
+
+/* Recent + tips */
+section.block { margin-top: 44px; }
+section.block h2 { font: 700 24px/1.2 var(--f-display); margin: 0 0 14px; text-wrap: balance; }
+.recent { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { appearance: none; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 8px 12px; font: 500 13px/1 var(--f-mono); cursor: pointer; }
+.chip:hover { border-color: var(--accent); }
+.tips { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0; border-top: 1px solid var(--line); }
+.tip { padding: 16px 16px 16px 0; border-bottom: 1px solid var(--line); }
+.tip h3 { font: 700 16px/1.25 var(--f-display); margin: 0 0 6px; }
+.tip p { margin: 0; color: var(--muted); font-size: 14px; max-width: 60ch; }
+.tip .k { font: 700 12px/1 var(--f-mono); color: var(--accent); letter-spacing: .08em; display: block; margin-bottom: 8px; }
+/* Partage, destinations, FAQ */
+.share { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.share .go { font-size: 14px; padding: 9px 12px; cursor: pointer; font-family: var(--f-body); }
+.share .ok { color: var(--ok); font-size: 13px; font-weight: 600; }
+.dests { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+.dest { appearance: none; text-align: left; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 12px; padding: 14px; cursor: pointer; display: grid; gap: 4px; font: inherit; }
+.dest:hover { border-color: var(--accent); }
+.dest .codes { font: 700 18px/1 var(--f-mono); letter-spacing: .04em; }
+.dest .codes span { color: var(--muted); font-size: 13px; }
+.dest small { color: var(--muted); font-size: 13px; }
+.lead { color: var(--muted); margin: -6px 0 16px; max-width: 65ch; }
+.faq details { border-bottom: 1px solid var(--line); padding: 14px 0; }
+.faq details:first-child { border-top: 1px solid var(--line); }
+.faq summary { cursor: pointer; font: 700 16px/1.35 var(--f-display); list-style-position: outside; }
+.faq p { margin: 10px 0 0; color: var(--muted); max-width: 70ch; }
+.route-links { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 6px 16px; list-style: none; padding: 0; margin: 0; }
+.route-links a { display: block; padding: 8px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--ink); font-weight: 500; }
+.route-links a:hover { color: var(--accent); }
+.foot-nav { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 14px; }
+.foot-nav a { color: var(--ink); font-weight: 600; }
+.price-hint { background: color-mix(in srgb, var(--ok) 12%, var(--surface)); border: 1px solid color-mix(in srgb, var(--ok) 40%, var(--line)); border-radius: 12px; padding: 12px 16px; font-size: 14px; }
+.price-hint strong { font: 700 18px/1.2 var(--f-mono); color: var(--ok); }
+/* En-tête : langue, devise */
+.topbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+.prefs { display: flex; gap: 8px; align-items: center; }
+.lang-switch { display: inline-flex; border: 1px solid color-mix(in srgb, var(--board-ink) 30%, transparent); border-radius: 8px; overflow: hidden; }
+.lang { appearance: none; border: 0; background: transparent; color: var(--board-ink); font: 700 13px/1 var(--f-mono); padding: 9px 11px; cursor: pointer; letter-spacing: .06em; }
+.lang[aria-pressed="true"] { background: var(--sign); color: var(--sign-ink); }
+.cur-select { width: auto; min-height: 0; padding: 8px 10px; font: 700 13px/1 var(--f-mono); background: transparent; color: var(--board-ink); border: 1px solid color-mix(in srgb, var(--board-ink) 30%, transparent); border-radius: 8px; }
+.cur-select option { color: #141a24; background: #fff; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Panneau d'affichage façon aéroport (lettres qui basculent) */
+.flap-board { display: inline-flex; align-items: center; gap: 12px; margin-top: 22px; background: color-mix(in srgb, #000 35%, var(--board)); border-radius: 8px; padding: 8px 12px; max-width: 100%; overflow: hidden; }
+.flap-label { font: 600 11px/1 var(--f-body); text-transform: uppercase; letter-spacing: .12em; color: var(--sign); }
+.flap { display: inline-flex; gap: 2px; font: 700 clamp(14px, 3.2vw, 18px)/1 var(--f-mono); }
+.flap i { font-style: normal; display: inline-block; min-width: .78em; text-align: center; padding: 5px 1px; border-radius: 3px; background: color-mix(in srgb, var(--board-ink) 9%, transparent); color: var(--board-ink); }
+.flap i.sp { background: transparent; }
+.flap i.hl { color: var(--sign); }
+@media (prefers-reduced-motion: no-preference) {
+  .flap i.flip { animation: flip .32s ease-in both; }
+  @keyframes flip { 0% { transform: rotateX(0); } 50% { transform: rotateX(90deg); filter: brightness(.6); } 100% { transform: rotateX(0); } }
+}
+
+/* Recherche d'aéroports et de villes */
+.ac { position: relative; }
+.ac-list { position: absolute; z-index: 30; left: 0; right: 0; top: calc(100% + 4px); margin: 0; padding: 4px; list-style: none; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 16px 40px -18px rgb(0 0 0 / .45); max-height: 320px; overflow-y: auto; }
+.ac-list li { display: grid; grid-template-columns: auto 1fr auto; gap: 2px 10px; align-items: center; padding: 9px 10px; border-radius: 8px; cursor: pointer; }
+.ac-list li[aria-selected="true"], .ac-list li:hover { background: color-mix(in srgb, var(--accent) 12%, var(--surface)); }
+.ac-flag { font-size: 20px; line-height: 1; grid-row: span 2; }
+.ac-main { font-weight: 600; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ac-sub { grid-column: 2; color: var(--muted); font-size: 12px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ac-code { grid-row: span 2; font: 700 14px/1 var(--f-mono); color: var(--accent); }
+.ac-empty { color: var(--muted); font-size: 13px; padding: 10px; cursor: default; }
+@media (prefers-reduced-motion: no-preference) { .ac-list { animation: drop .14s ease-out; } @keyframes drop { from { opacity: 0; transform: translateY(-4px); } } }
+
+/* Idées de voyage */
+.explore-head { display: flex; flex-wrap: wrap; gap: 10px 20px; align-items: baseline; justify-content: space-between; }
+.explore-head h2 { margin-bottom: 0; }
+.ex-city { color: var(--accent); }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chips button { appearance: none; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 7px 12px; font: 600 13px/1 var(--f-body); cursor: pointer; text-transform: capitalize; }
+.chips button[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.ex-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
+.ex-card { appearance: none; text-align: left; font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; cursor: pointer; display: grid; gap: 4px; transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease; }
+.ex-card:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: 0 10px 24px -16px rgb(0 0 0 / .4); }
+.ex-top { display: flex; align-items: center; gap: 8px; font-size: 20px; line-height: 1; }
+.ex-top b { font: 700 13px/1 var(--f-mono); color: var(--muted); letter-spacing: .06em; }
+.ex-name { font: 700 16px/1.2 var(--f-display); }
+.ex-meta { color: var(--muted); font-size: 12px; }
+.ex-price { font: 700 18px/1.1 var(--f-mono); color: var(--ok); }
+.ex-skel { height: 104px; border-radius: 12px; background: linear-gradient(90deg, var(--line), color-mix(in srgb, var(--line) 40%, var(--surface)), var(--line)); background-size: 200% 100%; }
+@media (prefers-reduced-motion: no-preference) { .ex-skel { animation: shimmer 1.2s linear infinite; } @keyframes shimmer { to { background-position: -200% 0; } } }
+.credits { font-size: 12px; }
+
+/* Animations douces */
+@media (prefers-reduced-motion: no-preference) {
+  .prov, .ex-card { animation: rise .35s ease-out both; animation-delay: calc(var(--i, 0) * 45ms); }
+  .btn { transition: transform .12s ease, filter .12s ease; }
+  .btn:active { transform: scale(.98); }
+  .tab { transition: background-color .15s ease, color .15s ease; }
+  .go { transition: background-color .15s ease, color .15s ease, border-color .15s ease; }
+  .swap { transition: transform .25s ease, color .15s ease, border-color .15s ease; }
+  .swap:hover { transform: rotate(180deg); }
+}
+/* Arabe : police et sens d'écriture */
+html[lang="ar"] body, html[lang="ar"] h1, html[lang="ar"] h2, html[lang="ar"] h3, html[lang="ar"] .btn, html[lang="ar"] .tab,
+html[lang="ar"] input, html[lang="ar"] select, html[lang="ar"] .prov-name { font-family: "Noto Sans Arabic", var(--f-body); }
+html[lang="ar"] label, html[lang="ar"] .label, html[lang="ar"] .pill, html[lang="ar"] .flap-label { letter-spacing: 0; text-transform: none; }
+[dir="rtl"] .tip { padding: 16px 0 16px 16px; }
+[dir="rtl"] .pass-stub { border-left: 0; border-right: 2px dashed var(--line); }
+@media (max-width: 560px) { [dir="rtl"] .pass-stub { border-right: 0; } }
+.lang-select { max-width: 9.5em; }
+.see-all { display: inline-block; margin-top: 14px; font-weight: 700; text-decoration: none; }
+.see-all:hover { text-decoration: underline; }
+.extras-res { display: grid; gap: 8px; }
+.extra { display: grid; grid-template-columns: 40px 1fr auto; gap: 12px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+.extra .logo { width: 40px; height: 40px; }
+.extra div { display: grid; gap: 2px; min-width: 0; }
+.extra div span { color: var(--muted); font-size: 14px; }
+@media (max-width: 560px) { .extra { grid-template-columns: 40px 1fr; } .extra .go { grid-column: 1 / -1; text-align: center; } }
+footer { margin-top: 48px; padding-block: 24px 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+footer p { margin: 0 0 6px; max-width: 75ch; }
+@media (prefers-reduced-motion: no-preference) {
+  .results { animation: rise .25s ease-out; }
+  @keyframes rise { from { transform: translateY(6px); opacity: .6; } to { transform: none; opacity: 1; } }
+}
+</style>
+</head>
+<body>
+
+<header class="board">
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand"><span class="brand-mark">ESC</span><span class="brand-name">Escale</span></div>
+      <div class="prefs">
+        <label class="sr-only" for="lang" data-en="Language">Langue</label>
+        <select id="lang" class="cur-select lang-select">
+          <option value="fr">FR · Français</option><option value="en">EN · English</option><option value="es">ES · Español</option>
+          <option value="pt">PT · Português</option><option value="ar">AR · العربية</option>
+        </select>
+        <label class="sr-only" for="cur" data-en="Currency">Devise</label>
+        <select id="cur" class="cur-select">
+          <option value="EUR">€ EUR</option><option value="USD">$ USD</option><option value="GBP">£ GBP</option><option value="CAD">$ CAD</option>
+          <option value="CHF">CHF</option><option value="XOF">F CFA</option><option value="MAD">MAD</option>
+        </select>
+      </div>
+    </div>
+    <h1 data-en-html="Flights, hotels and cars <em>at the best price</em>">Vols, hôtels et voitures <em>au meilleur prix</em></h1>
+    <p data-en="One search, every major comparison site, worldwide. Escale opens your search on Google Flights, Skyscanner, Kayak, Booking and more, sorted from cheapest to most expensive.">Une seule recherche, tous les grands comparateurs, partout dans le monde. Escale prépare vos recherches sur Google Flights, Skyscanner, Kayak, Booking et d’autres, triées du moins cher au plus cher.</p>
+    <div class="flap-board" aria-hidden="true" dir="ltr"><span class="flap-label" data-en="Departures">Départs</span><span class="flap" id="flap"></span></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="card">
+    <div class="tabs" role="tablist" aria-label="Type de recherche" data-en-aria="Search type">
+      <button class="tab" role="tab" id="tab-vols" aria-controls="form-vols" aria-selected="true" data-tab="vols">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg><span data-en="Flights">Vols</span></button>
+      <button class="tab" role="tab" id="tab-hotels" aria-controls="form-hotels" aria-selected="false" data-tab="hotels">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9a4 4 0 0 0-4-4z"/></svg><span data-en="Hotels">Hôtels</span></button>
+      <button class="tab" role="tab" id="tab-voitures" aria-controls="form-voitures" aria-selected="false" data-tab="voitures">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 6a1.5 1.5 0 0 0-1.4-1h-11a1.5 1.5 0 0 0-1.4 1L3 12v8a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h12v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-8zM6.5 16a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm11 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM5 11l1.5-4.5h11L19 11z"/></svg><span data-en="Cars">Voitures</span></button>
+    </div>
+
+    <!-- VOLS -->
+    <form id="form-vols" role="tabpanel" aria-labelledby="tab-vols" novalidate>
+      <div class="opts">
+        <div class="seg" role="radiogroup" aria-label="Type de trajet" data-en-aria="Trip type">
+          <input type="radio" name="trip" id="trip-rt" value="rt" checked><label for="trip-rt" data-en="Round trip">Aller-retour</label>
+          <input type="radio" name="trip" id="trip-ow" value="ow"><label for="trip-ow" data-en="One way">Aller simple</label>
+        </div>
+        <label class="check"><input type="checkbox" id="f-flex" checked> <span data-en="Flexible dates (±3 days)">Dates flexibles (±3 jours)</span></label>
+        <label class="check"><input type="checkbox" id="f-direct"> <span data-en="Direct flights only">Vols directs uniquement</span></label>
+      </div>
+      <div class="row route">
+        <div class="field">
+          <label for="f-from" data-en="From">Départ</label>
+          <input id="f-from" data-ac="airport" placeholder="Ville, aéroport ou pays" data-en-ph="City, airport or country" autocomplete="off" required>
+        </div>
+        <button type="button" class="swap" id="f-swap" aria-label="Inverser départ et arrivée" data-en-aria="Swap origin and destination">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 7h13l-4-4M17 17H4l4 4"/></svg>
+        </button>
+        <div class="field">
+          <label for="f-to" data-en="To">Arrivée</label>
+          <input id="f-to" data-ac="airport" placeholder="Vide = partout dans le monde" data-en-ph="Empty = anywhere in the world" autocomplete="off">
+        </div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="f-dep" data-en="Depart">Aller</label><input type="date" id="f-dep" required></div>
+        <div class="field" id="f-ret-wrap"><label for="f-ret" data-en="Return">Retour</label><input type="date" id="f-ret"></div>
+        <div class="field"><label for="f-adults" data-en="Adults">Adultes</label>
+          <select id="f-adults"></select></div>
+        <div class="field"><label for="f-children" data-en="Children (2–11)">Enfants (2–11 ans)</label>
+          <select id="f-children"></select></div>
+        <div class="field"><label for="f-cabin" data-en="Class">Classe</label>
+          <select id="f-cabin">
+            <option value="economy" data-en="Economy">Économique</option>
+            <option value="premium" data-en="Premium economy">Premium éco.</option>
+            <option value="business" data-en="Business">Affaires</option>
+            <option value="first" data-en="First">Première</option>
+          </select></div>
+      </div>
+      <div class="actions">
+        <span class="error" id="f-err" role="alert"></span>
+        <button class="btn" type="submit" data-en="Find the cheapest flights">Trouver les vols les moins chers</button>
+      </div>
+    </form>
+
+    <!-- HOTELS -->
+    <form id="form-hotels" role="tabpanel" aria-labelledby="tab-hotels" novalidate hidden>
+      <div class="row">
+        <div class="field" style="grid-column: 1 / -1">
+          <label for="h-dest" data-en="Destination">Destination</label>
+          <input id="h-dest" data-ac="city" placeholder="N’importe quelle ville du monde, quartier ou hôtel" data-en-ph="Any city in the world, area or hotel" autocomplete="off" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="h-in" data-en="Check-in">Arrivée</label><input type="date" id="h-in" required></div>
+        <div class="field"><label for="h-out" data-en="Check-out">Départ</label><input type="date" id="h-out" required></div>
+        <div class="field"><label for="h-adults" data-en="Adults">Adultes</label><select id="h-adults"></select></div>
+        <div class="field"><label for="h-rooms" data-en="Rooms">Chambres</label><select id="h-rooms"></select></div>
+      </div>
+      <div class="actions">
+        <span class="error" id="h-err" role="alert"></span>
+        <button class="btn" type="submit" data-en="Compare hotels">Comparer les hôtels</button>
+      </div>
+    </form>
+
+    <!-- VOITURES -->
+    <form id="form-voitures" role="tabpanel" aria-labelledby="tab-voitures" novalidate hidden>
+      <div class="opts">
+        <label class="check"><input type="checkbox" id="c-other"> <span data-en="Drop off at a different location">Restituer dans un autre lieu</span></label>
+      </div>
+      <div class="row">
+        <div class="field"><label for="c-pick" data-en="Pick-up location">Lieu de prise en charge</label>
+          <input id="c-pick" data-ac="airport" placeholder="Aéroport ou ville" data-en-ph="Airport or city" autocomplete="off" required></div>
+        <div class="field" id="c-drop-wrap" hidden><label for="c-drop" data-en="Drop-off location">Lieu de restitution</label>
+          <input id="c-drop" data-ac="airport" placeholder="Aéroport ou ville" data-en-ph="Airport or city" autocomplete="off"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="c-d1" data-en="Pick-up">Prise en charge</label><input type="date" id="c-d1" required></div>
+        <div class="field"><label for="c-t1" data-en="Time">Heure</label><select id="c-t1"></select></div>
+        <div class="field"><label for="c-d2" data-en="Drop-off">Restitution</label><input type="date" id="c-d2" required></div>
+        <div class="field"><label for="c-t2" data-en="Time">Heure</label><select id="c-t2"></select></div>
+        <div class="field"><label for="c-age" data-en="Driver age">Âge du conducteur</label>
+          <select id="c-age"><option value="30" data-en="26 to 65">26 à 65 ans</option><option value="22" data-en="21 to 25">21 à 25 ans</option><option value="70" data-en="Over 65">Plus de 65 ans</option></select></div>
+      </div>
+      <div class="actions">
+        <span class="error" id="c-err" role="alert"></span>
+        <button class="btn" type="submit" data-en="Compare car rentals">Comparer les locations</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="results" class="results" aria-live="polite"></div>
+
+  <section class="block" id="explore" hidden>
+    <div class="explore-head">
+      <h2><span data-en="Cheap trip ideas from">Idées de voyage pas chères depuis</span> <span id="ex-city" class="ex-city"></span></h2>
+      <div class="chips" id="ex-months" role="group" aria-label="Mois de départ" data-en-aria="Departure month"></div>
+    </div>
+    <p class="lead" data-en="Real round-trip prices found recently by travelers. Click a destination to fill in the search.">Prix aller-retour réels trouvés récemment par des voyageurs. Cliquez sur une destination pour remplir la recherche.</p>
+    <div class="ex-grid" id="ex-grid"></div>
+    <p><a class="see-all" id="deals-link" href="/bons-plans/" data-en="See all this week’s deals →">Voir tous les bons plans de la semaine →</a></p>
+  </section>
+
+  <section class="block" id="recent-block" hidden>
+    <h2 data-en="Your recent searches">Vos recherches récentes</h2>
+    <div class="recent" id="recent"></div>
+  </section>
+
+  <section class="block" id="destinations">
+    <h2 data-en="Popular routes">Destinations populaires</h2>
+    <p class="lead" data-en="One click fills in the search with dates three weeks from now. Change them if needed.">Un clic remplit la recherche avec des dates dans trois semaines. Modifiez-les ensuite si besoin.</p>
+    <div class="dests" id="dests"></div>
+  </section>
+
+  <section class="block">
+    <h2 data-en="Pay less: what really works">Payer moins cher : ce qui marche vraiment</h2>
+    <div class="tips">
+      <div class="tip"><span class="k">±3 J</span><h3 data-en="Move your dates">Bougez vos dates</h3><p data-en="Shifting your departure by a day or two often changes the price more than the choice of site. Tuesdays, Wednesdays and Saturdays are usually cheaper.">Décaler le départ de un ou deux jours change souvent le prix plus que le choix du site. Les mardis, mercredis et samedis sont en général moins chers.</p></div>
+      <div class="tip"><span class="k">CMP</span><h3 data-en="Compare at least three sites">Comparez au moins trois sites</h3><p data-en="Each comparison site has its own partners. Open Google Flights, Skyscanner and Kayak: the gap can be tens of euros.">Chaque comparateur a ses partenaires. Ouvrez Google Flights, Skyscanner et Kayak : l’écart atteint parfois plusieurs dizaines d’euros.</p></div>
+      <div class="tip"><span class="k">AÉRO</span><h3 data-en="Try the nearby airport">Essayez l’aéroport voisin</h3><p data-en="Paris: CDG, ORY and BVA. London: LHR, LGW, STN. Secondary airports are often served by low-cost airlines.">Paris : CDG, ORY et BVA. Bruxelles : BRU et CRL. Un aéroport secondaire est souvent desservi par les compagnies low-cost.</p></div>
+      <div class="tip"><span class="k">BAG</span><h3 data-en="Check the baggage">Vérifiez les bagages</h3><p data-en="The lowest fare sometimes only includes an under-seat bag. Add the price of a suitcase before comparing.">Le tarif le plus bas n’inclut parfois qu’un sac sous le siège. Ajoutez le prix de la valise avant de comparer.</p></div>
+      <div class="tip"><span class="k">ALERT</span><h3 data-en="Set a price alert">Activez une alerte prix</h3><p data-en="Google Flights, Kayak and Skyscanner email you when the price drops on your route.">Google Flights, Kayak et Skyscanner vous préviennent par e-mail quand le prix baisse sur votre trajet.</p></div>
+      <div class="tip"><span class="k">CAR</span><h3 data-en="Cars: excess and fuel">Voiture : franchise et carburant</h3><p data-en="Choose a full-to-full fuel policy and check the excess amount. Picking up in town is often cheaper than at the airport.">Préférez la politique « plein/plein » et vérifiez le montant de la franchise. Une prise en charge en ville coûte souvent moins cher qu’à l’aéroport.</p></div>
+    </div>
+  </section>
+
+  <section class="block" id="guides">
+    <h2 data-en="Route and hotel guides (in French)">Guides des trajets et des hôtels</h2>
+    <p class="lead" data-en="Flight time, airports, best time to book, where to stay: our tips destination by destination.">Durée du vol, aéroports, meilleure période pour réserver, quartiers où dormir : nos conseils destination par destination.</p>
+    <!-- ROUTES:START -->
+    <h3 class="sub-h">Vols au départ de Paris</h3><ul class="route-links"><li><a href="/vol-paris-bamako/">Vol Paris → Bamako</a></li><li><a href="/vol-paris-dakar/">Vol Paris → Dakar</a></li><li><a href="/vol-paris-abidjan/">Vol Paris → Abidjan</a></li><li><a href="/vol-paris-conakry/">Vol Paris → Conakry</a></li><li><a href="/vol-paris-douala/">Vol Paris → Douala</a></li><li><a href="/vol-paris-lome/">Vol Paris → Lomé</a></li><li><a href="/vol-paris-cotonou/">Vol Paris → Cotonou</a></li><li><a href="/vol-paris-ouagadougou/">Vol Paris → Ouagadougou</a></li><li><a href="/vol-paris-casablanca/">Vol Paris → Casablanca</a></li><li><a href="/vol-paris-alger/">Vol Paris → Alger</a></li><li><a href="/vol-paris-tunis/">Vol Paris → Tunis</a></li><li><a href="/vol-paris-montreal/">Vol Paris → Montréal</a></li><li><a href="/vol-paris-dubai/">Vol Paris → Dubaï</a></li><li><a href="/vol-paris-kinshasa/">Vol Paris → Kinshasa</a></li><li><a href="/vol-paris-libreville/">Vol Paris → Libreville</a></li><li><a href="/vol-paris-yaounde/">Vol Paris → Yaoundé</a></li><li><a href="/vol-paris-nouakchott/">Vol Paris → Nouakchott</a></li><li><a href="/vol-paris-niamey/">Vol Paris → Niamey</a></li><li><a href="/vol-paris-marrakech/">Vol Paris → Marrakech</a></li><li><a href="/vol-paris-istanbul/">Vol Paris → Istanbul</a></li><li><a href="/vol-paris-djeddah/">Vol Paris → Djeddah</a></li><li><a href="/vol-paris-pointe-a-pitre/">Vol Paris → Pointe-à-Pitre</a></li><li><a href="/vol-paris-la-reunion/">Vol Paris → La Réunion</a></li></ul><h3 class="sub-h">Vols au départ de Bruxelles</h3><ul class="route-links"><li><a href="/vol-bruxelles-kinshasa/">Vol Bruxelles → Kinshasa</a></li><li><a href="/vol-bruxelles-dakar/">Vol Bruxelles → Dakar</a></li><li><a href="/vol-bruxelles-abidjan/">Vol Bruxelles → Abidjan</a></li><li><a href="/vol-bruxelles-douala/">Vol Bruxelles → Douala</a></li></ul><h3 class="sub-h">Vols au départ de Marseille</h3><ul class="route-links"><li><a href="/vol-marseille-alger/">Vol Marseille → Alger</a></li><li><a href="/vol-marseille-tunis/">Vol Marseille → Tunis</a></li><li><a href="/vol-marseille-dakar/">Vol Marseille → Dakar</a></li></ul><h3 class="sub-h">Vols au départ de Lyon</h3><ul class="route-links"><li><a href="/vol-lyon-casablanca/">Vol Lyon → Casablanca</a></li><li><a href="/vol-lyon-dakar/">Vol Lyon → Dakar</a></li></ul><h3 class="sub-h">Vols au départ de Genève</h3><ul class="route-links"><li><a href="/vol-geneve-casablanca/">Vol Genève → Casablanca</a></li><li><a href="/vol-geneve-dakar/">Vol Genève → Dakar</a></li></ul><h3 class="sub-h">Hôtels pas chers</h3><ul class="route-links"><li><a href="/hotel-pas-cher-dakar/">Hôtel pas cher à Dakar</a></li><li><a href="/hotel-pas-cher-abidjan/">Hôtel pas cher à Abidjan</a></li><li><a href="/hotel-pas-cher-bamako/">Hôtel pas cher à Bamako</a></li><li><a href="/hotel-pas-cher-casablanca/">Hôtel pas cher à Casablanca</a></li><li><a href="/hotel-pas-cher-marrakech/">Hôtel pas cher à Marrakech</a></li><li><a href="/hotel-pas-cher-douala/">Hôtel pas cher à Douala</a></li><li><a href="/hotel-pas-cher-conakry/">Hôtel pas cher à Conakry</a></li><li><a href="/hotel-pas-cher-lome/">Hôtel pas cher à Lomé</a></li><li><a href="/hotel-pas-cher-cotonou/">Hôtel pas cher à Cotonou</a></li><li><a href="/hotel-pas-cher-kinshasa/">Hôtel pas cher à Kinshasa</a></li><li><a href="/hotel-pas-cher-alger/">Hôtel pas cher à Alger</a></li><li><a href="/hotel-pas-cher-tunis/">Hôtel pas cher à Tunis</a></li><li><a href="/hotel-pas-cher-paris/">Hôtel pas cher à Paris</a></li><li><a href="/hotel-pas-cher-dubai/">Hôtel pas cher à Dubaï</a></li><li><a href="/hotel-pas-cher-istanbul/">Hôtel pas cher à Istanbul</a></li><li><a href="/hotel-pas-cher-montreal/">Hôtel pas cher à Montréal</a></li></ul><p class="lead guides-langs">Guides in English, en español, em português, بالعربية : <a href="/en/" hreflang="en" lang="en">English</a> · <a href="/es/" hreflang="es" lang="es">Español</a> · <a href="/pt/" hreflang="pt" lang="pt">Português</a> · <a href="/ar/" hreflang="ar" lang="ar">العربية</a></p>
+    <!-- ROUTES:END -->
+  </section>
+
+  <section class="block faq" id="faq">
+    <h2 data-en="Frequently asked questions">Questions fréquentes</h2>
+    <div id="faq-list"></div>
+  </section>
+
+  <footer>
+    <nav class="foot-nav" aria-label="Pages du site"><a href="/mentions-legales/" data-en="Legal notice">Mentions légales</a><a href="/confidentialite/" data-en="Privacy">Confidentialité</a><a href="/contact/">Contact</a><a href="/bons-plans/" class="deals-href" data-en="Deals">Bons plans</a><a href="/#guides" data-en="Route guides">Guides des trajets</a><a href="#cookies" data-open-consent data-en="Cookie settings">Gérer les cookies</a></nav>
+    <p data-en="Escale does not sell tickets or set any prices. Each button opens the matching search on the partner site, where real prices are shown and where you book.">Escale ne vend pas de billets et ne fixe aucun prix. Chaque bouton ouvre la recherche correspondante sur le site partenaire, où s’affichent les prix réels et où se fait la réservation.</p>
+    <p id="aff-note" data-en="Some links are partner links: if you book, Escale may earn a commission at no extra cost to you. That is what keeps the site free.">Certains liens sont des liens partenaires : si vous réservez, Escale peut toucher une commission, sans aucun surcoût pour vous. C’est ce qui permet au site de rester gratuit.</p>
+    <p data-en="Prices and availability change constantly: always check the final fare, including baggage and fees, before paying.">Les prix et disponibilités changent en permanence : vérifiez toujours le tarif final, bagages et frais inclus, avant de payer.</p>
+    <p class="credits" data-en="Airport data: OurAirports (public domain). Prices: Aviasales via Travelpayouts.">Données des aéroports : OurAirports (domaine public). Prix : Aviasales via Travelpayouts.</p>
+  </footer>
+</main>
+
+<script src="/i18n.js" defer></script>
+<script src="/app.js" defer></script>
+</body>
+</html>

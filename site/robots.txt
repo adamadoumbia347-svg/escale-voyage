@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://escale-voyage.netlify.app/sitemap.xml

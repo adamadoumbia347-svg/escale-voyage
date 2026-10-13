@@ -1,0 +1,17 @@
+[build]
+  publish = "site"
+  command = "python3 scripts/build_pages.py"
+
+[functions]
+  directory = "netlify/functions"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
