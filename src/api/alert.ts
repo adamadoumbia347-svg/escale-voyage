@@ -1,5 +1,5 @@
 import { Ctx, json, IATA, CURRENCIES, siteUrl, esc } from "../_lib/common"
-import { mailerReady, sendMail } from "../_lib/mail"
+import { mailerReady, sendMail, lastMailError } from "../_lib/mail"
 import { TXT, fill, page } from "../_lib/alert-texts"
 // Alertes prix par e-mail (stockées dans l'espace KV ESCALE, clé alert:<id>).
 //  GET  /api/alert?action=status                    -> { enabled }
@@ -51,6 +51,6 @@ export const onRequest = async (ctx: Ctx) => {
   const t = TXT[lang]
   const v = { a: from, b: to, max: money, link: `${base}/api/alert?action=confirm&id=${id}&token=${token}`, unsub: `${base}/api/alert?action=unsubscribe&id=${id}&token=${token}` }
   const ok = await sendMail(env, email, fill(t.confirmSubject, v), fill(t.confirmBody, v) + fill(t.footer, v))
-  if (!ok) { await kv.delete(`alert:${id}`); await kv.delete(lim); return json({ error: "mail" }, { status: 502 }) }
+  if (!ok) { await kv.delete(`alert:${id}`); await kv.delete(lim); return json({ error: "mail", detail: lastMailError }, { status: 502 }) }
   return json({ ok: true, email: esc(email) })
 }

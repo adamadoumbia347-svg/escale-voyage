@@ -4,7 +4,10 @@ import { Env, pricesForDates } from "./common"
 const sender = (env: Env) => (env.ALERT_FROM || (env as any).MAIL_FROM || "").trim()
 export const mailerReady = (env: Env) => Boolean((env.RESEND_API_KEY || env.BREVO_API_KEY) && sender(env) && env.ESCALE)
 
+// Dernière erreur d'envoi (sans la clé), renvoyée dans le champ « detail » pour faciliter le diagnostic
+export let lastMailError = ""
 export async function sendMail(env: Env, to: string, subject: string, html: string): Promise<boolean> {
+  lastMailError = ""
   // Accepte « alertes@escale.live » comme « Escale <alertes@escale.live> »
   const raw = sender(env)
   const from = (raw.match(/<([^>]+)>/)?.[1] || raw).trim()
@@ -12,9 +15,10 @@ export async function sendMail(env: Env, to: string, subject: string, html: stri
     if (env.RESEND_API_KEY) {
       const r = await fetch("https://api.resend.com/emails", {
         method: "POST",
-        headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, "Content-Type": "application/json" },
+        headers: { Authorization: `Bearer ${env.RESEND_API_KEY.trim()}`, "Content-Type": "application/json" },
         body: JSON.stringify({ from: `Escale <${from}>`, to: [to], subject, html }),
       })
+      if (!r.ok) lastMailError = `resend-${r.status}: ${(await r.text()).slice(0, 200)}`
       return r.ok
     }
     if (env.BREVO_API_KEY) {
@@ -25,7 +29,7 @@ export async function sendMail(env: Env, to: string, subject: string, html: stri
       })
       return r.ok
     }
-  } catch { /* l'erreur est signalée par le retour false */ }
+  } catch (e) { lastMailError = `reseau: ${String((e as any)?.message || e).slice(0, 120)}` }
   return false
 }
 
