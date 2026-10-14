@@ -104,7 +104,12 @@ Pistes suivantes : allemand, italien, chinois, turc (ajouter une colonne dans tr
 
 ## Déménagement sur Cloudflare (14 octobre 2026)
 - Les crédits gratuits de Netlify (300 par mois, 15 par mise en ligne) étaient épuisés : le site passe sur Cloudflare Workers (gratuit).
-- Nouvelle adresse : https://escale-voyage.adamadoumbia347.workers.dev ; l'ancienne redirige (301) dès que Netlify accepte une nouvelle mise en ligne.
+- Nouvelle adresse : https://escale.live ; l'ancienne redirige (301) dès que Netlify accepte une nouvelle mise en ligne.
 - Formulaires (contact, bons plans) lus sur `/admin/` ; statistiques dans Cloudflare Web Analytics.
 - À faire : ajouter la nouvelle adresse dans Google Search Console (et Bing Webmaster Tools), renvoyer le sitemap,
   puis utiliser l'outil « Changement d'adresse » de Search Console une fois la redirection active.
+
+## Nom de domaine escale.live (octobre 2026)
+- Domaine acheté chez Squarespace, serveurs de noms confiés à Cloudflare, branché sur le Worker (escale.live et www.escale.live).
+- Toutes les adresses officielles (canonical, sitemap, hreflang, images de partage) pointent vers https://escale.live.
+- À faire : Search Console (propriété « Domaine » escale.live), renvoyer le sitemap, Bing Webmaster Tools.

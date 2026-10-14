@@ -4,7 +4,7 @@
 //   ADMIN_KEY            accès à la page /admin/ (messages et inscriptions)
 //   RESEND_API_KEY ou BREVO_API_KEY + ALERT_FROM   envoi des alertes prix par e-mail
 //   CRON_KEY             appel quotidien de /api/cron (vérification des alertes)
-//   SITE_URL             adresse publique du site (par défaut https://escale-voyage.adamadoumbia347.workers.dev)
+//   SITE_URL             adresse publique du site (par défaut https://escale.live)
 // Stockage : espace KV « escale », relié sous le nom ESCALE dans wrangler.jsonc (formulaires, alertes, cache des bons plans).
 export type Env = {
   TRAVELPAYOUTS_TOKEN?: string; ADMIN_KEY?: string; CRON_KEY?: string; SITE_URL?: string
@@ -21,7 +21,7 @@ export const MONTH = /^\d{4}-\d{2}$/
 export const DATE = /^\d{4}-\d{2}-\d{2}$/
 export const CURRENCIES = ["EUR", "USD", "GBP", "CAD", "CHF", "XOF", "MAD"]
 export const currencyOf = (v: string | null) => { const c = (v || "EUR").toUpperCase(); return CURRENCIES.includes(c) ? c : "EUR" }
-export const siteUrl = (env: Env, req?: Request) => (env.SITE_URL || (req ? new URL(req.url).origin : "") || "https://escale-voyage.adamadoumbia347.workers.dev").replace(/\/$/, "")
+export const siteUrl = (env: Env, req?: Request) => (env.SITE_URL || (req ? new URL(req.url).origin : "") || "https://escale.live").replace(/\/$/, "")
 
 // API Travelpayouts « prices_for_dates » (prix en cache Aviasales)
 // Dernière erreur rencontrée (sans la clé), renvoyée dans le champ « reason » pour faciliter le diagnostic

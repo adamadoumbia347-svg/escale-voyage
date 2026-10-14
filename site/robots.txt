@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://escale-voyage.adamadoumbia347.workers.dev/sitemap.xml
+Sitemap: https://escale.live/sitemap.xml
