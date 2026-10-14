@@ -29,7 +29,7 @@ Bonjour [prénom ou « à l'équipe de l'association »],
 Je suis [votre prénom], [membre de la diaspora / habitant de …], et je suis vos actions [citez une action récente : fête, collecte, soutien aux étudiants…].
 
 Je sais combien le billet d'avion pour rentrer au pays pèse dans le budget des familles. J'ai donc créé Escale, un comparateur gratuit qui cherche en une seule fois sur Google Flights, Skyscanner, Kayak et momondo, avec les prix repérés récemment et un calendrier pour voir les jours les moins chers :
-[https://escale-voyage.netlify.app/vol-paris-bamako/]
+[https://escale.live/vol-paris-bamako/]
 
 Pas d'inscription, aucun frais ajouté : on réserve directement sur le site de son choix.
 
@@ -45,9 +45,9 @@ Bonjour [nom du BDE / de l'association] 👋
 
 Je m'appelle [prénom]. Pour les vacances de Noël et d'été, beaucoup d'étudiants cherchent un billet pas cher pour rentrer : j'ai créé Escale, un comparateur gratuit qui compare Google Flights, Skyscanner, Kayak et momondo en une recherche, avec un calendrier des prix et une recherche « tout le mois » pour trouver le jour le moins cher.
 
-👉 [https://escale-voyage.netlify.app/]
+👉 [https://escale.live/]
 
-Il existe aussi un guide pour éviter les frais de bagages : [https://escale-voyage.netlify.app/guides/bagages-avion/]
+Il existe aussi un guide pour éviter les frais de bagages : [https://escale.live/guides/bagages-avion/]
 
 Si ça peut servir à vos membres, un partage sur votre page ou votre site serait top. Merci !
 [prénom]
@@ -60,7 +60,7 @@ Bonjour [prénom du blogueur],
 
 J'ai lu votre article « [titre] » : [une phrase sincère sur ce qui vous a plu ou appris].
 
-Vous y parlez du prix des billets pour [destination]. J'ai créé Escale, un comparateur gratuit qui donne pour chaque trajet la durée du vol, la meilleure période pour réserver, les prix repérés récemment et un calendrier des prix : [https://escale-voyage.netlify.app/vol-paris-dakar/]
+Vous y parlez du prix des billets pour [destination]. J'ai créé Escale, un comparateur gratuit qui donne pour chaque trajet la durée du vol, la meilleure période pour réserver, les prix repérés récemment et un calendrier des prix : [https://escale.live/vol-paris-dakar/]
 
 Si vous pensez qu'il est utile à vos lecteurs, un lien dans l'article serait formidable. De mon côté, je peux vous fournir des informations sur les prix d'un trajet (moyennes, meilleurs mois) pour un prochain article.
 
@@ -80,7 +80,7 @@ J'ai créé Escale, un site gratuit qui compare en une seule recherche Google Fl
 • une recherche « tout le mois » pour trouver le jour le moins cher ;
 • un calculateur pour comparer les offres avec les bagages.
 
-👉 [https://escale-voyage.netlify.app/vol-paris-bamako/]
+👉 [https://escale.live/vol-paris-bamako/]
 
 Aucune inscription, on réserve directement sur le site choisi. Vos retours m'aident à l'améliorer 🙏
 
@@ -101,7 +101,7 @@ Bonjour,
 Je vous propose d'inscrire Escale dans votre rubrique [Voyage / Services / Diaspora] :
 
 - Nom : Escale
-- Adresse : https://escale-voyage.netlify.app/
+- Adresse : https://escale.live/
 - Description : Comparateur gratuit de vols, hôtels et locations de voitures. Une recherche sur Google Flights, Skyscanner, Kayak, Booking et Agoda, avec les prix repérés récemment pour plus de 170 trajets entre l'Europe, l'Afrique et le monde. En français, anglais, espagnol, portugais et arabe.
 
 Merci d'avance,
@@ -115,7 +115,7 @@ Merci d'avance,
 Hello [name],
 
 I'm [first name]. I built Escale, a free comparison tool that searches Google Flights, Skyscanner, Kayak and momondo at once, with recent prices and a price calendar for each route:
-[https://escale-voyage.netlify.app/en/flights-london-accra/]
+[https://escale.live/en/flights-london-accra/]
 
 No sign-up and no added fees: you book directly on the site you choose. If you think it would help your members or readers, a link on your resources page would mean a lot.
 
