@@ -1,9 +1,9 @@
-import { Ctx, json, IATA, DATE, currencyOf, pricesForDates, edgeCached } from "../_lib/common"
+import { Ctx, json, lastApiError, IATA, DATE, currencyOf, pricesForDates, edgeCached } from "../_lib/common"
 // Prix repérés récemment pour un trajet (cache Aviasales via Travelpayouts).
 // GET /api/prix?from=CDG&to=BKO&dep=2026-11-03&ret=2026-11-10[&list=1][&direct=1]
 export const onRequestGet = (ctx: Ctx) => edgeCached(ctx, 3600, async () => {
   const token = ctx.env.TRAVELPAYOUTS_TOKEN
-  if (!token) return json({ available: false })
+  if (!token) return json({ available: false, reason: "cle-absente" })
   const q = new URL(ctx.request.url).searchParams
   const from = (q.get("from") || "").toUpperCase(), to = (q.get("to") || "").toUpperCase()
   const dep = q.get("dep") || "", ret = q.get("ret") || ""
@@ -18,7 +18,7 @@ export const onRequestGet = (ctx: Ctx) => edgeCached(ctx, 3600, async () => {
   })
   let data = await ask(currency)
   if (!data && currency !== "EUR") { currency = "EUR"; data = await ask(currency) }
-  if (!data) return json({ available: false })
+  if (!data) return json({ available: false, reason: lastApiError || "inconnue" })
   const best = data[0]
   if (!best) return json({ available: true, price: null, currency, offers: [] })
   const offers = list ? data.slice(0, 30).map((o: any) => ({

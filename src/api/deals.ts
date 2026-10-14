@@ -1,4 +1,4 @@
-import { Ctx, json, currencyOf, pricesForDates, edgeCached } from "../_lib/common"
+import { Ctx, json, lastApiError, currencyOf, pricesForDates, edgeCached } from "../_lib/common"
 // Bons plans : destinations les moins chères depuis plusieurs grandes villes, sur les deux prochains mois.
 // Gardé 6 heures (cache Cloudflare + espace KV ESCALE s'il est relié). GET /api/deals?currency=EUR
 const ORIGINS = ["CDG", "BRU", "LYS", "MRS", "GVA", "LHR", "JFK", "YUL"]
@@ -26,7 +26,7 @@ async function build(token: string, currency: string) {
 
 export const onRequestGet = (ctx: Ctx) => edgeCached(ctx, 900, async () => {
   const token = ctx.env.TRAVELPAYOUTS_TOKEN
-  if (!token) return json({ available: false })
+  if (!token) return json({ available: false, reason: "cle-absente" })
   const currency = currencyOf(new URL(ctx.request.url).searchParams.get("currency"))
   const kv = ctx.env.ESCALE, key = `cache:deals:${currency}`
   if (kv) {
