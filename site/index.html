@@ -336,6 +336,18 @@ footer p { margin: 0 0 6px; max-width: 75ch; }
 .route-group[open] summary::after { transform: rotate(180deg); }
 .route-group summary span { flex: 1; }
 .route-group .route-links { padding: 0 16px 14px; margin: 0; }
+/* Le formulaire passe au-dessus du bandeau (sinon le bandeau recouvre les onglets Vols / Hôtels / Voitures) */
+.card { position: relative; z-index: 2; }
+/* Téléphone : bandeau du haut plus compact, pour voir le formulaire tout de suite */
+@media (max-width: 600px) {
+  .board { padding-block: 14px 50px; }
+  .board h1 { font-size: 27px; margin: 14px 0 6px; }
+  .board .wrap > p { display: none; }
+  .perks { margin-top: 10px; gap: 5px 6px; }
+  .perks li { font-size: 12px; padding: 6px 9px; }
+  .flap-board { margin-top: 12px; padding: 6px 10px; }
+  .sky { opacity: .25; }
+}
 /* Résultats de vols façon comparateur : bande de dates, onglets de tri, cartes vol */
 .res-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
 .res-bar .edit-search { cursor: pointer; font: 700 14px/1 var(--f-body); padding: 10px 14px; }
