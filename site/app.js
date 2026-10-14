@@ -765,14 +765,61 @@
     ["CDG", "YUL", "Nombreux vols directs, environ 7 h 30", "Many direct flights, about 7 h 30"],
     ["JFK", "DSS", "Vols directs, environ 8 h", "Direct flights, about 8 h"]
   ];
+  // Couleurs des cartes postales, par destination
+  const DEST_COLORS = { BKO: ["#f59e0b", "#c2410c"], DSS: ["#0ea5e9", "#1d4ed8"], ABJ: ["#f97316", "#16a34a"], FIH: ["#0284c7", "#7c3aed"],
+    CMN: ["#e11d48", "#9a3412"], LOS: ["#16a34a", "#065f46"], YUL: ["#dc2626", "#7f1d1d"] };
+  const destPrices = new Map();
+  const destKey = (a, b) => `${a}-${b}-${CUR}`;
+  function destPriceHtml(v) {
+    if (v && v.price) return `<span>${T("dès", "from")}</span><b>${esc(money(v.price, v.currency))}</b>`;
+    if ((v === undefined || v === null) && isLive) return `<span>${T("dès", "from")}</span><b></b>`;
+    return `<span>${T("Voir les prix", "See prices")} →</span>`;
+  }
+  let destSeen = false;
   function paintDests() {
     $("dests").innerHTML = DESTS.map(([a, b, dfr, den], i) => {
       const dsc = T(dfr, den);
       const A = byCode.get(a), B = byCode.get(b);
       const title = `${A ? A[1] : a} → ${B ? B[1] : b}`;
-      return `<button type="button" class="dest" data-i="${i}"><span class="codes">${a} <span>→</span> ${b}</span><strong>${esc(title)}</strong><small>${esc(dsc)}</small></button>`;
+      const [c1, c2] = DEST_COLORS[b] || ["#0b5cd6", "#18202c"];
+      const known = destPrices.get(destKey(a, b));
+      const loading = isLive && (known === undefined || known === null);
+      return `<button type="button" class="dest" data-i="${i}" style="--c1:${c1};--c2:${c2}">
+        <span class="dest-art" aria-hidden="true">
+          <svg viewBox="0 0 200 104" preserveAspectRatio="none"><path class="arc" d="M18 92 C 60 18, 140 10, 184 50"/><circle class="pin" cx="18" cy="92" r="3"/><circle class="pin" cx="184" cy="50" r="3"/></svg>
+          <span class="dest-flag">${flag(B ? B[3] : "")}</span><span class="dest-code">${esc(b)}</span>
+        </span>
+        <span class="dest-body"><span class="codes">${a} <span>→</span> ${b}</span><strong>${esc(title)}</strong><small>${esc(dsc)}</small>
+          <span class="dest-price${loading ? " loading" : ""}" data-k="${destKey(a, b)}">${destPriceHtml(known)}</span></span>
+      </button>`;
     }).join("");
+    if (destSeen) loadDestPrices();
   }
+  // Prix « dès » chargés seulement quand la section devient visible (moins d'appels)
+  function loadDestPrices() {
+    if (!isLive) return;
+    // La devise a pu changer (position du visiteur) depuis l'affichage : on redessine avec les bonnes clés
+    const first = document.querySelector(".dest-price");
+    if (first && first.dataset.k !== destKey(DESTS[0][0], DESTS[0][1])) { paintDests(); return; }
+    const dep = addDays(today, 21), ret = addDays(today, 35);
+    DESTS.forEach(([a, b]) => {
+      const k = destKey(a, b);
+      if (destPrices.has(k)) return;
+      destPrices.set(k, null);
+      fetch("/api/prix?" + q({ from: a, to: b, dep, ret, currency: CUR }))
+        .then((r) => (r.ok ? r.json() : null)).catch(() => null)
+        .then((d) => {
+          const v = d && d.available && d.price ? { price: d.price, currency: d.currency } : false;
+          destPrices.set(k, v);
+          const el = document.querySelector(`.dest-price[data-k="${k}"]`);
+          if (el) { el.classList.remove("loading"); el.innerHTML = destPriceHtml(v); }
+        });
+    });
+  }
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { destSeen = true; loadDestPrices(); io.disconnect(); } }, { rootMargin: "200px" });
+    io.observe($("destinations"));
+  } else { destSeen = true; }
   $("dests").addEventListener("click", (ev) => {
     const b = ev.target.closest(".dest"); if (!b) return;
     const [a, c] = DESTS[+b.dataset.i];
@@ -943,6 +990,79 @@
     remember({ tab: "voitures", label: `🚗 ${pick.code || pick.name} · ${d1.slice(5)}`, fields: snapshot(["c-pick", "c-drop", "c-other", "c-d1", "c-t1", "c-d2", "c-t2", "c-age"]) });
   });
 
+  // Avion du bandeau : immobile si l'utilisateur préfère réduire les animations
+  if (reduceMotion) document.querySelectorAll(".sky animateMotion").forEach((m) => { m.setAttribute("keyTimes", "0;1"); m.setAttribute("keyPoints", "0.6;0.6"); });
+
+  // ---------- Thème clair / sombre ----------
+  const root = document.documentElement;
+  const isDark = () => root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  function paintThemeBtn() {
+    const b = $("theme-btn"); if (!b) return;
+    const dark = isDark();
+    b.dataset.frAria = dark ? "Thème clair" : "Thème sombre";
+    b.dataset.enAria = dark ? "Light theme" : "Dark theme";
+    b.setAttribute("aria-label", T(b.dataset.frAria, b.dataset.enAria));
+    b.title = b.getAttribute("aria-label");
+  }
+  $("theme-btn").addEventListener("click", () => {
+    root.dataset.theme = isDark() ? "light" : "dark";
+    store.set("escale.theme", root.dataset.theme);
+    paintThemeBtn();
+  });
+
+  // ---------- Check-list avant le départ ----------
+  const CHECKS = [
+    ["passport", "Passeport valide 6 mois après le retour", "Souvent exigé à l’entrée, même pour un court séjour.", "Passport valid 6 months after return", "Often required at entry, even for a short stay."],
+    ["visa", "Visa ou e-visa vérifié", "Regardez le site officiel du pays : certains se font en ligne en quelques jours.", "Visa or e-visa checked", "Check the country’s official site: some are done online in a few days."],
+    ["vaccine", "Carnet de vaccination", "Fièvre jaune obligatoire pour une grande partie de l’Afrique de l’Ouest et centrale.", "Vaccination card", "Yellow fever is required for much of West and Central Africa."],
+    ["checkin", "Enregistrement en ligne fait", "Ouvert 24 à 48 h avant le vol : vous choisissez votre siège et gagnez du temps.", "Online check-in done", "Opens 24–48 h before the flight: pick your seat and save time."],
+    ["bags", "Bagages pesés", "Comparez avec la franchise de votre billet : l’excédent coûte cher à l’aéroport.", "Bags weighed", "Compare with your ticket’s allowance: excess baggage is expensive at the airport."],
+    ["offline", "Billets et réservations hors ligne", "Captures d’écran ou PDF sur le téléphone, au cas où il n’y a pas de réseau.", "Tickets and bookings offline", "Screenshots or PDFs on your phone, in case there is no signal."],
+    ["copies", "Copies des papiers", "Photo du passeport et du visa, envoyée aussi à vous-même par e-mail.", "Copies of documents", "Photo of passport and visa, also emailed to yourself."],
+    ["insurance", "Assurance voyage", "Frais médicaux et annulation, surtout hors d’Europe.", "Travel insurance", "Medical costs and cancellation, especially outside Europe."],
+    ["sim", "eSIM ou forfait à l’étranger", "Pour avoir internet dès l’atterrissage, sans frais d’itinérance.", "eSIM or roaming plan", "To have data as soon as you land, without roaming fees."],
+    ["cash", "Un peu d’argent liquide", "Pour le taxi ou les premiers achats, et une carte sans frais à l’étranger.", "Some cash", "For the taxi or first purchases, plus a card with no foreign fees."]
+  ];
+  const CK_KEY = "escale.checklist.v1";
+  const ckLoad = () => { try { return JSON.parse(store.get(CK_KEY)) || {}; } catch (e) { return {}; } };
+  function paintChecklist() {
+    const st = ckLoad();
+    $("ck-list").innerHTML = CHECKS.map(([id, tf, df, te, de]) => `<li><label class="ck-item"><input type="checkbox" data-ck="${id}"${st[id] ? " checked" : ""}>
+      <span><span class="ck-t">${esc(T(tf, te))}</span><small>${esc(T(df, de))}</small></span></label></li>`).join("");
+    paintCkProgress();
+  }
+  function paintCkProgress() {
+    const st = ckLoad(), n = CHECKS.filter(([id]) => st[id]).length;
+    $("ck-count").textContent = fmt(T("{n} sur {t} prêts", "{n} of {t} ready"), { n, t: CHECKS.length });
+    $("ck-bar").style.width = (n / CHECKS.length * 100) + "%";
+    $("ck-done").hidden = n !== CHECKS.length;
+    $("ck-reset").hidden = n === 0;
+  }
+  $("ck-list").addEventListener("change", (ev) => {
+    const c = ev.target.closest("[data-ck]"); if (!c) return;
+    const st = ckLoad(); if (c.checked) st[c.dataset.ck] = 1; else delete st[c.dataset.ck];
+    store.set(CK_KEY, JSON.stringify(st)); paintCkProgress();
+  });
+  $("ck-reset").addEventListener("click", () => { store.set(CK_KEY, "{}"); paintChecklist(); });
+
+  // ---------- Bouton flottant « Nouvelle recherche » ----------
+  if ("IntersectionObserver" in window) {
+    const card = document.querySelector("main > .card");
+    new IntersectionObserver(([e]) => { $("fab").hidden = e.isIntersecting || e.boundingClientRect.top > 0; }).observe(card);
+    $("fab").addEventListener("click", () => {
+      card.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      const tab = document.querySelector('.tabs .tab[aria-selected="true"]');
+      if (tab) setTimeout(() => tab.focus({ preventScroll: true }), reduceMotion ? 0 : 450);
+    });
+  }
+
+  // ---------- Apparition douce des sections ----------
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    root.classList.add("js-reveal");
+    const rio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); rio.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
+    document.querySelectorAll("section.block").forEach((sec) => rio.observe(sec));
+  }
+
   // ---------- Onglets ----------
   const TABS = ["vols", "hotels", "voitures"];
   let currentTab = "vols";
@@ -974,12 +1094,12 @@
   $("lang").addEventListener("change", () => {
     LANG = $("lang").value; store.set("escale.lang", LANG);
     countryNames = null; paintMonthOptions(); calc();
-    applyLang(); paintDests(); paintFaq(); paintRecent(); rerender();
+    applyLang(); paintDests(); paintFaq(); paintRecent(); paintChecklist(); paintThemeBtn(); rerender();
     if (!$("explore").hidden) { paintExploreMonths(); renderExplore($("ex-grid"), exploreFrom, exploreMonth); }
   });
   $("cur").addEventListener("change", () => {
     CUR = $("cur").value; store.set("escale.cur", CUR);
-    rerender();
+    rerender(); paintDests();
     if (!$("explore").hidden) renderExplore($("ex-grid"), exploreFrom, exploreMonth);
   });
 
@@ -1011,7 +1131,7 @@
 
   // ---------- Démarrage ----------
   $("cur").value = CUR;
-  applyLang(); paintDests(); paintFaq();
+  applyLang(); paintDests(); paintFaq(); paintChecklist(); paintThemeBtn();
   let start = applyUrl() || (location.hash || "").slice(1);
   if (!TABS.includes(start)) start = store.get("escale.tab") || "vols";
   selectTab(start);
