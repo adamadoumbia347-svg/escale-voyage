@@ -4,6 +4,7 @@ import type { Config } from "@netlify/functions"
 // Inactif tant que la variable d'environnement TRAVELPAYOUTS_TOKEN n'est pas définie dans Netlify.
 // GET /api/prix?from=CDG&to=BKO&dep=2026-11-03&ret=2026-11-10
 // GET /api/prix?from=CDG&to=BKO&dep=2026-11-01&rt=1   (aller-retour, date de retour libre)
+// GET /api/prix?...&list=1[&direct=1]                   (jusqu'à 30 offres du mois : compagnie, horaires, durée, escales, lien)
 
 const IATA = /^[A-Z]{3}$/
 const DATE = /^\d{4}-\d{2}-\d{2}$/
@@ -19,6 +20,8 @@ export default async (req: Request) => {
   const dep = q.get("dep") || ""
   const ret = q.get("ret") || ""
   const roundTrip = Boolean(ret) || q.get("rt") === "1"
+  const list = q.get("list") === "1"
+  const direct = q.get("direct") === "1"
   let currency = (q.get("currency") || "EUR").toUpperCase()
   if (!CURRENCIES.includes(currency)) currency = "EUR"
   if (!IATA.test(from) || !IATA.test(to) || !DATE.test(dep) || (ret && !DATE.test(ret))) {
@@ -34,8 +37,9 @@ export default async (req: Request) => {
       ...(ret ? { return_at: ret.slice(0, 7) } : {}),
       one_way: roundTrip ? "false" : "true",
       sorting: "price",
+      ...(direct ? { direct: "true" } : {}),
       currency: cur.toLowerCase(),
-      limit: "1",
+      limit: list ? "30" : "1",
       token,
     }).toString()
     const res = await fetch(api, { headers: { "Accept-Encoding": "gzip" } })
@@ -49,7 +53,15 @@ export default async (req: Request) => {
     if (!body && currency !== "EUR") { currency = "EUR"; body = await ask(currency) }
     if (!body) return Response.json({ available: false }, { status: 200 })
     const best = body?.data?.[0]
-    if (!best) return Response.json({ available: true, price: null, currency }, { status: 200, headers: cache() })
+    if (!best) return Response.json({ available: true, price: null, currency, offers: [] }, { status: 200, headers: cache() })
+    const offers = list ? (body.data as any[]).slice(0, 30).map((o) => ({
+      price: o.price, airline: o.airline, flight_number: o.flight_number,
+      departure_at: o.departure_at, return_at: o.return_at ?? null,
+      origin_airport: o.origin_airport, destination_airport: o.destination_airport,
+      transfers: o.transfers, return_transfers: o.return_transfers ?? null,
+      duration_to: o.duration_to ?? o.duration ?? null, duration_back: o.duration_back ?? null,
+      link: typeof o.link === "string" && o.link.startsWith("/") ? o.link : null,
+    })) : undefined
     return Response.json({
       available: true,
       price: best.price,
@@ -58,6 +70,7 @@ export default async (req: Request) => {
       transfers: best.transfers,
       departure_at: best.departure_at,
       return_at: best.return_at ?? null,
+      ...(offers ? { offers } : {}),
     }, { status: 200, headers: cache() })
   } catch {
     return Response.json({ available: false }, { status: 200 })

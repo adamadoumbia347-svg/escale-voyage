@@ -20,18 +20,18 @@ UI = {
     "en": dict(
         flight_slug="flights", hotel_slug="cheap-hotels", app_lang="en", arrow="→",
         title_route="Cheap flights {a} to {b}: compare prices",
-        desc_route="Find a cheap flight {a} – {b} ({fa} → {ta}): flight time, airport, best time to book and price comparison on Google Flights, Skyscanner, Kayak and momondo.",
+        desc_route="Find a cheap flight {a} – {b} ({fa} → {ta}): flight time, airport, best time to book and price comparison on Skyscanner, Kayak, momondo and Aviasales.",
         h1_route="Cheap flights {a} <span>→</span> {b}", cta="Compare prices now", back="Return trip {b} → {a}",
         duration="Flight time", arrival="Arrival", peak="Most expensive periods",
         dur_direct="About {d} on a direct flight", dur_var="Varies: most trips have at least one stop",
         prices_h="Prices found recently", prices_p="Lowest round-trip prices found by travellers in the last few days, by departure month. The exact available fare is shown on the booking sites.",
         tip_h="Our tip for this route", cheap_h="How to pay less",
         steps=["<strong>Turn on flexible dates.</strong> Moving your departure by a day or two often changes the price more than the choice of site.",
-               "<strong>Compare at least three sites.</strong> Escale opens your search, already sorted by price, on Google Flights, Skyscanner, Kayak and momondo.",
+               "<strong>Compare at least three sites.</strong> Escale opens your search, already sorted by price, on Skyscanner, Kayak, momondo and Aviasales.",
                "<strong>Check the baggage allowance.</strong> Add the price of a suitcase before comparing two fares.",
-               "<strong>Set a price alert</strong> on Google Flights or Kayak if you are travelling in several months."],
+               "<strong>Set a price alert</strong> on Kayak or Skyscanner if you are travelling in several months."],
         launch="Search {a} → {b}", direct_h="Go straight to the comparison sites",
-        gf="Price calendar on Google Flights", sky="Monthly prices on Skyscanner", hotels_in="Hotels in {b}", cars_in="Car rental in {b}",
+        sky="Monthly prices on Skyscanner", hotels_in="Hotels in {b}", cars_in="Car rental in {b}",
         faq_h="Frequently asked questions", other_routes="Other routes",
         faq=[("How long is a flight from {a} to {b}?", "{dur_long}. With a stop, the total trip often takes several hours more depending on the connection."),
              ("When should I book a cheap flight from {a} to {b}?", "Usually two to three months before departure. Prices rise sharply during {peak}: book earlier for those periods."),
@@ -57,18 +57,18 @@ UI = {
     "es": dict(
         flight_slug="vuelos", hotel_slug="hoteles-baratos", app_lang="es", arrow="→",
         title_route="Vuelos baratos {a} – {b}: compara precios",
-        desc_route="Encuentra un vuelo barato {a} – {b} ({fa} → {ta}): duración, aeropuerto, mejor época para reservar y comparación de precios en Google Flights, Skyscanner, Kayak y momondo.",
+        desc_route="Encuentra un vuelo barato {a} – {b} ({fa} → {ta}): duración, aeropuerto, mejor época para reservar y comparación de precios en Skyscanner, Kayak, momondo y Aviasales.",
         h1_route="Vuelos baratos {a} <span>→</span> {b}", cta="Comparar precios ahora", back="Vuelta {b} → {a}",
         duration="Duración", arrival="Llegada", peak="Precios más altos",
         dur_direct="Unas {d} en vuelo directo", dur_var="Variable: la mayoría de los trayectos tiene al menos una escala",
         prices_h="Precios encontrados recientemente", prices_p="Precios de ida y vuelta más bajos encontrados por viajeros en los últimos días, por mes de salida. La tarifa exacta disponible aparece en los sitios de reserva.",
         tip_h="Nuestro consejo para esta ruta", cheap_h="Cómo pagar menos",
         steps=["<strong>Activa las fechas flexibles.</strong> Mover la salida uno o dos días suele cambiar el precio más que el sitio elegido.",
-               "<strong>Compara al menos tres sitios.</strong> Escale abre tu búsqueda, ya ordenada por precio, en Google Flights, Skyscanner, Kayak y momondo.",
+               "<strong>Compara al menos tres sitios.</strong> Escale abre tu búsqueda, ya ordenada por precio, en Skyscanner, Kayak, momondo y Aviasales.",
                "<strong>Revisa el equipaje.</strong> Suma el precio de la maleta antes de comparar dos tarifas.",
-               "<strong>Crea una alerta de precio</strong> en Google Flights o Kayak si viajas dentro de varios meses."],
+               "<strong>Crea una alerta de precio</strong> en Kayak o Skyscanner si viajas dentro de varios meses."],
         launch="Buscar {a} → {b}", direct_h="Acceso directo a los comparadores",
-        gf="Calendario de precios en Google Flights", sky="Precios del mes en Skyscanner", hotels_in="Hoteles en {b}", cars_in="Alquiler de coches en {b}",
+        sky="Precios del mes en Skyscanner", hotels_in="Hoteles en {b}", cars_in="Alquiler de coches en {b}",
         faq_h="Preguntas frecuentes", other_routes="Otras rutas",
         faq=[("¿Cuánto dura un vuelo {a} – {b}?", "{dur_long}. Con escala, el viaje total suele durar varias horas más según la conexión."),
              ("¿Cuándo reservar un vuelo barato {a} – {b}?", "En general, dos o tres meses antes de la salida. Los precios suben mucho durante {peak}: reserva antes para esas fechas."),
@@ -94,18 +94,18 @@ UI = {
     "pt": dict(
         flight_slug="voos", hotel_slug="hoteis-baratos", app_lang="pt", arrow="→",
         title_route="Voos baratos {a} – {b}: compare preços",
-        desc_route="Encontre um voo barato {a} – {b} ({fa} → {ta}): duração, aeroporto, melhor época para reservar e comparação de preços no Google Flights, Skyscanner, Kayak e momondo.",
+        desc_route="Encontre um voo barato {a} – {b} ({fa} → {ta}): duração, aeroporto, melhor época para reservar e comparação de preços no Skyscanner, Kayak, momondo e Aviasales.",
         h1_route="Voos baratos {a} <span>→</span> {b}", cta="Comparar preços agora", back="Regresso {b} → {a}",
         duration="Duração", arrival="Chegada", peak="Preços mais altos",
         dur_direct="Cerca de {d} em voo direto", dur_var="Variável: a maioria das viagens tem pelo menos uma escala",
         prices_h="Preços encontrados recentemente", prices_p="Preços de ida e volta mais baixos encontrados por viajantes nos últimos dias, por mês de partida. A tarifa exata disponível aparece nos sites de reserva.",
         tip_h="O nosso conselho para esta rota", cheap_h="Como pagar menos",
         steps=["<strong>Ative as datas flexíveis.</strong> Mudar a partida um ou dois dias costuma alterar o preço mais do que o site escolhido.",
-               "<strong>Compare pelo menos três sites.</strong> A Escale abre a sua pesquisa, já ordenada por preço, no Google Flights, Skyscanner, Kayak e momondo.",
+               "<strong>Compare pelo menos três sites.</strong> A Escale abre a sua pesquisa, já ordenada por preço, no Skyscanner, Kayak, momondo e Aviasales.",
                "<strong>Verifique a bagagem.</strong> Some o preço da mala antes de comparar duas tarifas.",
-               "<strong>Crie um alerta de preço</strong> no Google Flights ou Kayak se viajar daqui a alguns meses."],
+               "<strong>Crie um alerta de preço</strong> no Kayak ou Skyscanner se viajar daqui a alguns meses."],
         launch="Pesquisar {a} → {b}", direct_h="Acesso direto aos comparadores",
-        gf="Calendário de preços no Google Flights", sky="Preços do mês no Skyscanner", hotels_in="Hotéis em {b}", cars_in="Aluguer de carros em {b}",
+        sky="Preços do mês no Skyscanner", hotels_in="Hotéis em {b}", cars_in="Aluguer de carros em {b}",
         faq_h="Perguntas frequentes", other_routes="Outras rotas",
         faq=[("Quanto tempo dura um voo {a} – {b}?", "{dur_long}. Com escala, a viagem total costuma demorar várias horas a mais, conforme a ligação."),
              ("Quando reservar um voo barato {a} – {b}?", "Em geral, dois a três meses antes da partida. Os preços sobem muito durante {peak}: reserve mais cedo nessas alturas."),
@@ -131,18 +131,18 @@ UI = {
     "ar": dict(
         flight_slug="flights", hotel_slug="hotels", app_lang="ar", arrow="←",
         title_route="رحلات طيران رخيصة من {a} إلى {b}: قارن الأسعار",
-        desc_route="ابحث عن رحلة رخيصة من {a} إلى {b} ({fa} → {ta}): مدة الرحلة، المطار، أفضل وقت للحجز ومقارنة الأسعار على Google Flights وSkyscanner وKayak وmomondo.",
+        desc_route="ابحث عن رحلة رخيصة من {a} إلى {b} ({fa} → {ta}): مدة الرحلة، المطار، أفضل وقت للحجز ومقارنة الأسعار على Skyscanner وKayak وmomondo وAviasales.",
         h1_route="رحلات رخيصة {a} <span>←</span> {b}", cta="قارن الأسعار الآن", back="رحلة العودة {b} ← {a}",
         duration="مدة الرحلة", arrival="الوصول", peak="أغلى الفترات",
         dur_direct="حوالي {d} في رحلة مباشرة", dur_var="متغيرة: معظم الرحلات فيها توقف واحد على الأقل",
         prices_h="أسعار وُجدت مؤخرًا", prices_p="أقل أسعار الذهاب والعودة التي وجدها المسافرون في الأيام الأخيرة، حسب شهر المغادرة. السعر النهائي المتاح يظهر على مواقع الحجز.",
         tip_h="نصيحتنا لهذا الخط", cheap_h="كيف تدفع أقل",
         steps=["<strong>فعّل التواريخ المرنة.</strong> تغيير موعد المغادرة يومًا أو يومين يغيّر السعر غالبًا أكثر من اختيار الموقع.",
-               "<strong>قارن ثلاثة مواقع على الأقل.</strong> يفتح Escale بحثك مرتّبًا حسب السعر على Google Flights وSkyscanner وKayak وmomondo.",
+               "<strong>قارن ثلاثة مواقع على الأقل.</strong> يفتح Escale بحثك مرتّبًا حسب السعر على Skyscanner وKayak وmomondo وAviasales.",
                "<strong>تحقّق من الأمتعة.</strong> أضف ثمن الحقيبة قبل المقارنة بين سعرين.",
-               "<strong>فعّل تنبيه الأسعار</strong> على Google Flights أو Kayak إذا كان سفرك بعد عدة أشهر."],
+               "<strong>فعّل تنبيه الأسعار</strong> على Kayak أو Skyscanner إذا كان سفرك بعد عدة أشهر."],
         launch="ابحث {a} ← {b}", direct_h="روابط مباشرة إلى مواقع المقارنة",
-        gf="تقويم الأسعار على Google Flights", sky="أسعار الشهر على Skyscanner", hotels_in="فنادق في {b}", cars_in="تأجير سيارات في {b}",
+        sky="أسعار الشهر على Skyscanner", hotels_in="فنادق في {b}", cars_in="تأجير سيارات في {b}",
         faq_h="أسئلة شائعة", other_routes="خطوط أخرى",
         faq=[("كم تستغرق الرحلة من {a} إلى {b}؟", "{dur_long}. مع التوقف، تطول الرحلة غالبًا عدة ساعات حسب مدة الانتظار."),
              ("متى أحجز رحلة رخيصة من {a} إلى {b}؟", "عادةً قبل شهرين إلى ثلاثة أشهر من السفر. ترتفع الأسعار كثيرًا خلال: {peak}. احجز مبكرًا لهذه الفترات."),
@@ -355,7 +355,6 @@ def build(site, ctx):
             hp = next((h for h in hotels if h[0] == ct), None)
             hotels_l = f"/{hotel_paths[hp[0]][lang]}/" if hp else "/?" + urllib.parse.urlencode({"type": "hotels", "dest": b, "lang": u["app_lang"]})
             cars_l = "/?" + urllib.parse.urlencode({"type": "voitures", "pick": to, "lang": u["app_lang"]})
-            gf = "https://www.google.com/travel/flights?" + urllib.parse.urlencode({"q": f"Flights from {fr_} to {to}", "hl": lang, "curr": "EUR"})
             sky = f"https://www.skyscanner.net/transport/flights/{fr_.lower()}/{to.lower()}/"
             f = dict(a=a, b=b, fa=fr_, ta=to, peak=peak_t, airport=airport, dur_long=dur_long)
             faq = [(q.format(**f), ans.format(**f)) for q, ans in u["faq"]]
@@ -383,7 +382,6 @@ def build(site, ctx):
 </section>
 <section><h2>{E(u["direct_h"])}</h2>
 <ul class="links">
-  <li><a href="{E(gf)}" target="_blank" rel="noopener noreferrer">{E(u["gf"])}</a></li>
   <li><a href="{E(sky)}" target="_blank" rel="noopener noreferrer">{E(u["sky"])}</a></li>
   <li><a href="{E(hotels_l)}">{E(u["hotels_in"].format(b=b))}</a></li>
   <li><a href="{E(cars_l)}">{E(u["cars_in"].format(b=b))}</a></li>

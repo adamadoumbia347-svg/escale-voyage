@@ -50,10 +50,10 @@ window.ESCALE_I18N = {
   "Currency": ["Moneda", "Moeda", "العملة"],
   "Language": ["Idioma", "Idioma", "اللغة"],
   "Flights, hotels and cars <em>at the best price</em>": ["Vuelos, hoteles y coches <em>al mejor precio</em>", "Voos, hotéis e carros <em>ao melhor preço</em>", "رحلات وفنادق وسيارات <em>بأفضل سعر</em>"],
-  "One search, every major comparison site, worldwide. Escale opens your search on Google Flights, Skyscanner, Kayak, Booking and more, sorted from cheapest to most expensive.": [
-    "Una sola búsqueda, todos los grandes comparadores, en todo el mundo. Escale abre tu búsqueda en Google Flights, Skyscanner, Kayak, Booking y otros, ordenada del más barato al más caro.",
-    "Uma só pesquisa, todos os grandes comparadores, no mundo inteiro. A Escale abre a sua pesquisa no Google Flights, Skyscanner, Kayak, Booking e outros, ordenada do mais barato ao mais caro.",
-    "بحث واحد في كل مواقع المقارنة الكبرى، في العالم كله. يفتح Escale بحثك على Google Flights وSkyscanner وKayak وBooking وغيرها، مرتّبًا من الأرخص إلى الأغلى."],
+  "One search, every major comparison site, worldwide. Escale opens your search on Skyscanner, Kayak, Aviasales, Booking and more, sorted from cheapest to most expensive.": [
+    "Una sola búsqueda, todos los grandes comparadores, en todo el mundo. Escale abre tu búsqueda en Skyscanner, Kayak, Aviasales, Booking y otros, ordenada del más barato al más caro.",
+    "Uma só pesquisa, todos os grandes comparadores, no mundo inteiro. A Escale abre a sua pesquisa no Skyscanner, Kayak, Aviasales, Booking e outros, ordenada do mais barato ao mais caro.",
+    "بحث واحد في كل مواقع المقارنة الكبرى، في العالم كله. يفتح Escale بحثك على Skyscanner وKayak وAviasales وBooking وغيرها، مرتّبًا من الأرخص إلى الأغلى."],
   "Departures": ["Salidas", "Partidas", "المغادرة"],
   "Search type": ["Tipo de búsqueda", "Tipo de pesquisa", "نوع البحث"],
   "Flights": ["Vuelos", "Voos", "رحلات"],
@@ -120,10 +120,10 @@ window.ESCALE_I18N = {
     "Mudar a partida um ou dois dias costuma alterar o preço mais do que o site escolhido. Terças, quartas e sábados costumam ser mais baratos.",
     "تأخير المغادرة أو تقديمها يومًا أو يومين يغيّر السعر غالبًا أكثر من اختيار الموقع. أيام الثلاثاء والأربعاء والسبت أرخص عادةً."],
   "Compare at least three sites": ["Compara al menos tres sitios", "Compare pelo menos três sites", "قارن ثلاثة مواقع على الأقل"],
-  "Each comparison site has its own partners. Open Google Flights, Skyscanner and Kayak: the gap can be tens of euros.": [
-    "Cada comparador tiene sus socios. Abre Google Flights, Skyscanner y Kayak: la diferencia puede ser de decenas de euros.",
-    "Cada comparador tem os seus parceiros. Abra o Google Flights, Skyscanner e Kayak: a diferença pode chegar a dezenas de euros.",
-    "لكل موقع مقارنة شركاؤه. افتح Google Flights وSkyscanner وKayak: قد يصل الفرق إلى عشرات اليوروهات."],
+  "Each comparison site has its own partners. Open Skyscanner, Kayak and momondo: the gap can be tens of euros.": [
+    "Cada comparador tiene sus socios. Abre Skyscanner, Kayak y momondo: la diferencia puede ser de decenas de euros.",
+    "Cada comparador tem os seus parceiros. Abra o Skyscanner, o Kayak e o momondo: a diferença pode chegar a dezenas de euros.",
+    "لكل موقع مقارنة شركاؤه. افتح Skyscanner وKayak وmomondo: قد يصل الفرق إلى عشرات اليوروهات."],
   "Try the nearby airport": ["Prueba el aeropuerto cercano", "Experimente o aeroporto vizinho", "جرّب المطار القريب"],
   "Paris: CDG, ORY and BVA. London: LHR, LGW, STN. Secondary airports are often served by low-cost airlines.": [
     "París: CDG, ORY y BVA. Londres: LHR, LGW, STN. Los aeropuertos secundarios suelen tener aerolíneas de bajo coste.",
@@ -135,10 +135,10 @@ window.ESCALE_I18N = {
     "A tarifa mais baixa às vezes só inclui uma mala debaixo do assento. Some o preço da mala antes de comparar.",
     "أرخص سعر يشمل أحيانًا حقيبة صغيرة تحت المقعد فقط. أضف ثمن الحقيبة قبل المقارنة."],
   "Set a price alert": ["Activa una alerta de precio", "Ative um alerta de preço", "فعّل تنبيه الأسعار"],
-  "Google Flights, Kayak and Skyscanner email you when the price drops on your route.": [
-    "Google Flights, Kayak y Skyscanner te avisan por correo cuando baja el precio de tu ruta.",
-    "O Google Flights, Kayak e Skyscanner avisam-no por e-mail quando o preço da sua rota baixa.",
-    "يرسل لك Google Flights وKayak وSkyscanner رسالة عند انخفاض سعر رحلتك."],
+  "Skyscanner, Kayak and Aviasales email you when the price drops on your route.": [
+    "Skyscanner, Kayak y Aviasales te avisan por correo cuando baja el precio de tu ruta.",
+    "O Skyscanner, o Kayak e a Aviasales avisam-no por e-mail quando o preço da sua rota baixa.",
+    "يرسل لك Skyscanner وKayak وAviasales رسالة عند انخفاض سعر رحلتك."],
   "Cars: excess and fuel": ["Coches: franquicia y combustible", "Carros: franquia e combustível", "السيارات: مبلغ التحمّل والوقود"],
   "Choose a full-to-full fuel policy and check the excess amount. Picking up in town is often cheaper than at the airport.": [
     "Elige la política de combustible lleno/lleno y revisa la franquicia. Recoger en la ciudad suele ser más barato que en el aeropuerto.",
@@ -216,7 +216,6 @@ window.ESCALE_I18N = {
   "one way": ["solo ida", "só ida", "ذهاب فقط"],
   "Your dates": ["Tus fechas", "As suas datas", "تواريخك"],
   " d": [" d", " d", " ي"],
-  "Compare day by day on Google Flights": ["Comparar día a día en Google Flights", "Comparar dia a dia no Google Flights", "قارن يومًا بيوم على Google Flights"],
   "Cheapest destinations found": ["Destinos más baratos encontrados", "Destinos mais baratos encontrados", "أرخص الوجهات التي وُجدت"],
   "Flights {a} → {b}": ["Vuelos {a} → {b}", "Voos {a} → {b}", "رحلات {a} ← {b}"],
   "anywhere": ["cualquier lugar", "qualquer lugar", "أي مكان"],
@@ -276,10 +275,10 @@ window.ESCALE_I18N = {
     "Sim: mais de 3200 aeroportos em 234 países, e a pesquisa de hotéis aceita qualquer cidade do mundo. Deixe o destino vazio para ver os destinos mais baratos.",
     "نعم: أكثر من 3200 مطار في 234 بلدًا، والبحث عن الفنادق يقبل أي مدينة في العالم. اترك الوجهة فارغة لترى أرخص الوجهات."],
   "How do I find the cheapest flight?": ["¿Cómo encuentro el vuelo más barato?", "Como encontro o voo mais barato?", "كيف أجد أرخص رحلة؟"],
-  "Turn on flexible dates, compare at least three sites (Google Flights, Skyscanner, Kayak) and check the day-by-day grid: moving your departure by a day or two often lowers the price.": [
-    "Activa las fechas flexibles, compara al menos tres sitios (Google Flights, Skyscanner, Kayak) y mira la tabla día a día: mover la salida uno o dos días suele bajar el precio.",
-    "Ative as datas flexíveis, compare pelo menos três sites (Google Flights, Skyscanner, Kayak) e veja a grelha dia a dia: mudar a partida um ou dois dias costuma baixar o preço.",
-    "فعّل التواريخ المرنة، وقارن ثلاثة مواقع على الأقل (Google Flights وSkyscanner وKayak)، وانظر إلى جدول الأيام: تغيير المغادرة يومًا أو يومين يخفض السعر غالبًا."],
+  "Turn on flexible dates, compare at least three sites (Skyscanner, Kayak, momondo) and check the day-by-day grid: moving your departure by a day or two often lowers the price.": [
+    "Activa las fechas flexibles, compara al menos tres sitios (Skyscanner, Kayak, momondo) y mira la tabla día a día: mover la salida uno o dos días suele bajar el precio.",
+    "Ative as datas flexíveis, compare pelo menos três sites (Skyscanner, Kayak, momondo) e veja a grelha dia a dia: mudar a partida um ou dois dias costuma baixar o preço.",
+    "فعّل التواريخ المرنة، وقارن ثلاثة مواقع على الأقل (Skyscanner وKayak وmomondo)، وانظر إلى جدول الأيام: تغيير المغادرة يومًا أو يومين يخفض السعر غالبًا."],
   "Where do the prices come from?": ["¿De dónde vienen los precios?", "De onde vêm os preços?", "من أين تأتي الأسعار؟"],
   "They are real prices recently found by travellers on Aviasales. The exact available fare is then shown on the booking sites.": [
     "Son precios reales encontrados recientemente por viajeros en Aviasales. La tarifa exacta disponible aparece después en los sitios de reserva.",
@@ -294,5 +293,26 @@ window.ESCALE_I18N = {
   "Book early, choose a full-to-full fuel policy and compare picking up in town with the airport, which is often more expensive.": [
     "Reserva pronto, elige combustible lleno/lleno y compara recoger en la ciudad con el aeropuerto, que suele ser más caro.",
     "Reserve cedo, escolha combustível cheio/cheio e compare o levantamento na cidade com o aeroporto, que costuma ser mais caro.",
-    "احجز مبكرًا، واختر سياسة الوقود ممتلئ/ممتلئ، وقارن الاستلام في المدينة مع المطار الذي يكون غالبًا أغلى."]
+    "احجز مبكرًا، واختر سياسة الوقود ممتلئ/ممتلئ، وقارن الاستلام في المدينة مع المطار الذي يكون غالبًا أغلى."],
+  // Résultats de vols (liste façon comparateur)
+  "travellers": ["viajeros", "viajantes", "مسافرين"],
+  "traveller": ["viajero", "viajante", "مسافر"],
+  "Prices around your dates": ["Precios alrededor de tus fechas", "Preços à volta das suas datas", "الأسعار حول تواريخك"],
+  "Edit": ["Modificar", "Alterar", "تعديل"],
+  "Sort flights": ["Ordenar vuelos", "Ordenar voos", "ترتيب الرحلات"],
+  "Cheapest": ["El más barato", "O mais barato", "الأرخص"],
+  "Fastest": ["El más rápido", "O mais rápido", "الأسرع"],
+  "Best": ["El mejor", "O melhor", "الأفضل"],
+  "Direct only": ["Solo directos", "Só diretos", "رحلات مباشرة فقط"],
+  "Looking for the best prices…": ["Buscando los mejores precios…", "A procurar os melhores preços…", "جارٍ البحث عن أفضل الأسعار…"],
+  "Also compare on": ["Compara también en", "Compare também em", "قارن أيضًا على"],
+  "No recent price for this route: compare directly on the sites below.": ["No hay precios recientes para esta ruta: compara directamente en los sitios de abajo.", "Sem preços recentes para esta rota: compare diretamente nos sites abaixo.", "لا توجد أسعار حديثة لهذا المسار: قارن مباشرة على المواقع أدناه."],
+  "Prices found in the last few days for your dates. The final fare is confirmed on the booking site.": ["Precios encontrados en los últimos días para tus fechas. La tarifa final se confirma en el sitio de reserva.", "Preços encontrados nos últimos dias para as suas datas. A tarifa final confirma-se no site de reserva.", "أسعار رُصدت في الأيام الأخيرة لتواريخك. يُؤكَّد السعر النهائي على موقع الحجز."],
+  "No price found for your exact dates: here are the cheapest of the month.": ["No hay precios para tus fechas exactas: estos son los más baratos del mes.", "Sem preços para as suas datas exatas: eis os mais baratos do mês.", "لا توجد أسعار لتواريخك بالضبط: إليك الأرخص خلال الشهر."],
+  "Out": ["Ida", "Ida", "ذهاب"],
+  "Back": ["Vuelta", "Volta", "عودة"],
+  "per person": ["por persona", "por pessoa", "للشخص"],
+  "View deal": ["Ver vuelo", "Ver voo", "عرض الرحلة"],
+  "No direct flight found: untick “Direct only”.": ["No hay vuelos directos: desmarca «Solo directos».", "Sem voos diretos: desmarque «Só diretos».", "لا توجد رحلات مباشرة: ألغِ تحديد «رحلات مباشرة فقط»."],
+  "{h}h {m}m": ["{h} h {m}", "{h} h {m}", "{h} س {m} د"],
 };

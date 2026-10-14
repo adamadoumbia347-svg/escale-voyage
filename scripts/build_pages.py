@@ -252,13 +252,12 @@ def route_page(r):
     s = route_slug(r)
     title = f"Vol pas cher {cf} {ct} : comparer les prix"
     desc = (f"Trouvez un billet d'avion pas cher {cf} – {ct} ({fr} → {to}) : durée du vol, aéroport, meilleure période pour réserver "
-            f"et comparaison des prix sur Google Flights, Skyscanner, Kayak et momondo.")
+            f"et comparaison des prix sur Skyscanner, Kayak, momondo et Aviasales.")
     app = "/?" + urllib.parse.urlencode({"type": "vols", "from": fr, "to": to})
     back = "/?" + urllib.parse.urlencode({"type": "vols", "from": to, "to": fr})
     hp = next((h for h in HOTELS if h[0] == ct), None)
     hotels = f"/{hotel_slug(hp)}/" if hp else "/?" + urllib.parse.urlencode({"type": "hotels", "dest": ct})
     cars = "/?" + urllib.parse.urlencode({"type": "voitures", "pick": to})
-    gf = "https://www.google.com/travel/flights?" + urllib.parse.urlencode({"q": f"Flights from {fr} to {to}", "hl": "fr", "curr": "EUR"})
     sky = f"https://www.skyscanner.fr/transport/vols/{fr.lower()}/{to.lower()}/"
     km = DISTANCES.get((fr, to))
     if dur and dur.startswith("~"):
@@ -297,15 +296,14 @@ def route_page(r):
 <section><h2>Comment payer moins cher</h2>
 <ol class="steps">
   <li><strong>Activez les dates flexibles.</strong> Décaler le départ d'un ou deux jours change souvent plus le prix que le choix du site.</li>
-  <li><strong>Comparez au moins trois sites.</strong> Escale ouvre votre recherche déjà triée par prix sur Google Flights, Skyscanner, Kayak et momondo.</li>
+  <li><strong>Comparez au moins trois sites.</strong> Escale ouvre votre recherche déjà triée par prix sur Skyscanner, Kayak, momondo et Aviasales.</li>
   <li><strong>Vérifiez les bagages.</strong> Ajoutez le prix de la valise avant de comparer deux tarifs.</li>
-  <li><strong>Créez une alerte prix</strong> sur Google Flights ou Kayak si vous partez dans plusieurs mois.</li>
+  <li><strong>Créez une alerte prix</strong> sur Kayak ou Skyscanner si vous partez dans plusieurs mois.</li>
 </ol>
 <p><a class="btn" href="{E(app)}">Lancer la recherche {E(cf)} → {E(ct)}</a></p>
 </section>
 <section><h2>Accès direct aux comparateurs</h2>
 <ul class="links">
-  <li><a href="{E(gf)}" target="_blank" rel="noopener noreferrer">Calendrier des prix sur Google Flights</a></li>
   <li><a href="{E(sky)}" target="_blank" rel="noopener noreferrer">Prix du mois sur Skyscanner</a></li>
   <li><a href="{E(hotels)}">Hôtels à {E(ct)}</a></li>
   <li><a href="{E(cars)}">Location de voiture à {E(ct)}</a></li>
@@ -394,7 +392,7 @@ def legal_pages():
 <p>Certains liens peuvent être des liens partenaires : si vous réservez, Escale peut percevoir une commission, sans surcoût pour vous.</p>
 </section>
 <section><h2>Propriété intellectuelle</h2>
-<p>Les textes et le design du site sont la propriété de l'éditeur. Les marques citées (Google Flights, Skyscanner, Kayak, momondo, Booking.com, Hotels.com, Agoda, Airbnb, Rentalcars, Discover Cars) appartiennent à leurs propriétaires respectifs et sont citées uniquement pour identifier les services comparés.</p>
+<p>Les textes et le design du site sont la propriété de l'éditeur. Les marques citées (Google, Aviasales, Skyscanner, Kayak, momondo, Booking.com, Hotels.com, Agoda, Airbnb, Rentalcars, Discover Cars) appartiennent à leurs propriétaires respectifs et sont citées uniquement pour identifier les services comparés.</p>
 </section>"""
     urls.append(page("mentions-legales", "Mentions légales | Escale", "Mentions légales du site Escale, comparateur de vols, hôtels et locations de voitures.", hero, body))
     hero = '<h1>Confidentialité</h1>'
@@ -473,8 +471,13 @@ def main():
     idx = SITE / "index.html"
     s = idx.read_text(encoding="utf-8")
     s = s.replace(DEFAULT_DOMAIN, DOMAIN)
+    opened = [True]
     def group(title, items):
-        return f'<h3 class="sub-h">{title}</h3><ul class="route-links">' + "".join(items) + "</ul>"
+        # Groupes repliables : la page reste courte, et le contenu reste lisible par Google
+        op = " open" if opened[0] else ""
+        opened[0] = False
+        return (f'<details class="route-group"{op}><summary><span>{title}</span><small>{len(items)}</small></summary>'
+                f'<ul class="route-links">' + "".join(items) + "</ul></details>")
     by_origin = {}
     for r in ROUTES:
         by_origin.setdefault(r[2], []).append(f'<li><a href="/{route_slug(r)}/">Vol {E(r[2])} → {E(r[3])}</a></li>')

@@ -279,7 +279,6 @@
     const F = s.from.code.toLowerCase(), Tt = s.to && s.to.code ? s.to.code.toLowerCase() : null;
     const cabinSky = { economy: "economy", premium: "premiumeconomy", business: "business", first: "first" }[s.cabin];
     const cabinKayak = { economy: "", premium: "/premium", business: "/business", first: "/first" }[s.cabin];
-    const cabinG = { economy: "", premium: " premium economy", business: " business class", first: " first class" }[s.cabin];
     const pax = s.adults > 1 ? `/${s.adults}adults` : "";
     const kids = s.children > 0 ? "/children" + "-11".repeat(s.children) : "";
     const flex = s.flex ? "-flexible-3days" : "";
@@ -287,18 +286,12 @@
     const kParams = "?" + q({ sort: "price_a", fs: s.direct ? "stops=0" : "" });
     const list = [];
     if (!Tt) {
-      list.push({ k: "google", name: "Google Flights Explore", desc: T("Carte des destinations les moins chères depuis votre aéroport.", "Map of the cheapest destinations from your airport."), best: true,
-        url: `https://www.google.com/travel/explore?${q({ q: `Flights from ${s.from.code}`, hl: LANG, curr: CUR })}` });
       list.push({ k: "sky", name: T("Skyscanner « Partout »", "Skyscanner “Everywhere”"), desc: T("Toutes les destinations triées par prix.", "Every destination sorted by price."),
         url: `https://${d.sky}/${F}/anywhere/${yymmdd(s.dep)}/` + (s.ret ? `${yymmdd(s.ret)}/` : "") + "?" + q({ adultsv2: s.adults, cabinclass: cabinSky, rtn: s.ret ? 1 : 0 }) });
       list.push({ k: "kayak", name: "Kayak Explore", desc: T("Destinations selon votre budget et vos dates.", "Destinations by budget and dates."),
         url: `https://${d.kayak}/explore/${s.from.code}-anywhere` });
       return list;
     }
-    const gq = `Flights to ${s.to.code} from ${s.from.code} on ${s.dep}` + (s.ret ? ` through ${s.ret}` : " one way") +
-      (s.adults > 1 ? ` ${s.adults} adults` : "") + (s.children ? ` ${s.children} children` : "") + cabinG + (s.direct ? " nonstop" : "");
-    list.push({ k: "google", name: "Google Flights", desc: T("Graphique et calendrier des prix pour repérer le jour le moins cher.", "Price graph and calendar to spot the cheapest day."), best: true,
-      url: `https://www.google.com/travel/flights?${q({ q: gq, hl: LANG, curr: CUR })}` });
     list.push({ k: "sky", name: "Skyscanner", desc: T("Très bon sur les compagnies low-cost et les agences en ligne.", "Great for low-cost airlines and online agencies."), best: true,
       url: `https://${d.sky}/${F}/${Tt}/${yymmdd(s.dep)}/` + (s.ret ? `${yymmdd(s.ret)}/` : "") + "?" +
         q({ adultsv2: s.adults, childrenv2: s.children ? Array(s.children).fill(8).join("|") : "", cabinclass: cabinSky,
@@ -377,50 +370,161 @@
   }
   const stopsText = (n) => n === 0 ? T("vol direct", "direct") : n === 1 ? T("1 escale", "1 stop") : fmt(T("{n} escales", "{n} stops"), { n });
 
+  // Lien Aviasales (partenaire Travelpayouts) pour des dates précises
+  function aviasalesUrl(s, dep, ret) {
+    const ddmm = (x) => x.slice(8, 10) + x.slice(5, 7);
+    const paxAv = String(s.adults) + (s.children ? String(s.children) : "");
+    return `https://www.aviasales.com/search/${s.from.code}${ddmm(dep)}${s.to.code}${ret ? ddmm(ret) : ""}${paxAv}?` +
+      q({ marker: AFFILIATE.travelpayouts_marker, currency: CUR.toLowerCase() });
+  }
+  const AIRLINES = { AF: "Air France", TO: "Transavia", TK: "Turkish Airlines", AT: "Royal Air Maroc", SN: "Brussels Airlines", TP: "TAP Air Portugal",
+    AH: "Air Algérie", TU: "Tunisair", ET: "Ethiopian Airlines", KQ: "Kenya Airways", MS: "EgyptAir", EK: "Emirates", QR: "Qatar Airways",
+    EY: "Etihad", HF: "Air Côte d’Ivoire", KP: "ASKY", HC: "Air Sénégal", WB: "RwandAir", "2J": "Air Burkina", DT: "TAAG", SA: "South African Airways",
+    LH: "Lufthansa", KL: "KLM", LX: "Swiss", IB: "Iberia", UX: "Air Europa", VY: "Vueling", FR: "Ryanair", U2: "easyJet", BA: "British Airways",
+    AZ: "ITA Airways", LO: "LOT", PC: "Pegasus", XK: "Air Corsica", SS: "Corsair", TX: "Air Caraïbes", BF: "French bee", UU: "Air Austral",
+    TS: "Air Transat", AC: "Air Canada", DL: "Delta", UA: "United", AA: "American Airlines", SV: "Saudia", RJ: "Royal Jordanian", "3O": "Air Arabia Maroc",
+    G9: "Air Arabia", FZ: "flydubai", W6: "Wizz Air", V7: "Volotea", BJ: "Nouvelair", "5Z": "Cem Air", P4: "Air Peace", MU: "China Eastern", CA: "Air China" };
+  const hm = (iso8601) => (iso8601 && iso8601.length >= 16 ? iso8601.slice(11, 16) : "");
+  const dur = (min) => {
+    if (!min) return "";
+    const h = Math.floor(min / 60), m = String(min % 60).padStart(2, "0");
+    return fmt(T("{h} h {m}", "{h}h {m}m"), { h, m });
+  };
+  // Liste des comparateurs en boutons compacts (« Comparer aussi sur »)
+  function compareRow(items) {
+    return `<div class="cmp-row">` + items.map((p) => `<a class="cmp" href="${esc(tag(p.k, p.url))}" target="_blank" rel="noopener noreferrer">
+      <span class="logo sm" style="background:${COLORS[p.k]}" aria-hidden="true">${esc(p.name[0].toUpperCase())}</span>${esc(p.name)} <span aria-hidden="true">↗</span></a>`).join("") + `</div>`;
+  }
+
+  let flightState = null;
   function renderFlights(s) {
-    const toCode = s.to && s.to.code ? s.to.code : "ANY";
     const pax = s.adults + s.children;
-    const head = `<div class="results-head"><h2><bdi dir="ltr">${esc(s.from.name)} → ${esc(s.to ? s.to.name : T("Partout", "Anywhere"))}</bdi></h2>
-      <span class="summary">${T("Ouvrez 2 ou 3 sites et comparez le prix final", "Open 2 or 3 sites and compare the final price")}</span></div>`;
-    const card = pass(`${esc(s.from.code)} <small>→</small> ${esc(toCode)}`,
-      [[T("Aller", "Depart"), human(s.dep)], [T("Retour", "Return"), s.ret ? human(s.ret) : T("Aller simple", "One way")],
-       [T("Voyageurs", "Travellers"), `${pax} · ${$("f-cabin").selectedOptions[0].text}`]],
-      s.ret ? `${nights(s.dep, s.ret)} ${T("J", "D")}` : T("1 VOL", "1 WAY"), s.ret ? T("séjour", "trip") : T("aller simple", "one way"));
-    let flexHtml = "";
-    if (s.flex && s.to && s.to.code) {
-      const len = s.ret ? nights(s.dep, s.ret) : 0;
-      const cells = [-3, -2, -1, 0, 1, 2, 3].map((o) => {
-        const d = addDays(s.dep, o);
-        if (d < today) return "";
-        const r = s.ret ? addDays(d, len) : null;
-        const u = flightLinks({ ...s, dep: d, ret: r, flex: false })[0].url;
-        return `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer" class="${o === 0 ? "cur" : ""}"><small>${o === 0 ? T("Vos dates", "Your dates") : (o > 0 ? "+" : "") + o + T(" j", " d")}</small><strong>${esc(human(d))}</strong></a>`;
-      }).join("");
-      flexHtml = `<h3 class="sub-h">${T("Comparer jour par jour sur Google Flights", "Compare day by day on Google Flights")}</h3><div class="flex-grid">${cells}</div>`;
+    const travellers = `${pax} ${pax > 1 ? T("voyageurs", "travellers") : T("voyageur", "traveller")} · ${$("f-cabin").selectedOptions[0].text}`;
+    const dates = s.ret ? `${human(s.dep)} – ${human(s.ret)}` : `${human(s.dep)} · ${T("aller simple", "one way")}`;
+    const head = `<div class="results-head res-bar"><div><h2><bdi dir="ltr">${esc(s.from.name)} → ${esc(s.to ? s.to.name : T("Partout", "Anywhere"))}</bdi></h2>
+      <span class="summary">${esc(dates)} · ${esc(travellers)}</span></div>
+      <button type="button" class="go edit-search" id="edit-search">${T("Modifier", "Edit")}</button></div>`;
+    const share = shareBar("vols", fmt(T("Vols {a} → {b}", "Flights {a} → {b}"), { a: s.from.name, b: s.to ? s.to.name : T("partout", "anywhere") }));
+    const links = flightLinks(s);
+    if (!s.to || !s.to.code) {
+      show(head + share + providerList(links) + `<h3 class="sub-h">${T("Destinations les moins chères repérées", "Cheapest destinations found")}</h3><div class="ex-grid" id="res-explore"></div>`);
+      renderExplore($("res-explore"), s.from.code, s.dep.slice(0, 7));
+      bindEdit();
+      return;
     }
-    const priceSlot = isLive && s.to && s.to.code ? '<div class="price-hint" id="price-hint" hidden></div>' : "";
-    const anywhere = !s.to ? `<h3 class="sub-h">${T("Destinations les moins chères repérées", "Cheapest destinations found")}</h3><div class="ex-grid" id="res-explore"></div>` : "";
-    const extras = s.to && s.to.code ? extrasSlot(s.to.name) : "";
-    show(head + card + priceSlot + shareBar("vols", fmt(T("Vols {a} → {b}", "Flights {a} → {b}"), { a: s.from.name, b: s.to ? s.to.name : T("partout", "anywhere") })) + providerList(flightLinks(s)) + flexHtml + anywhere + extras);
-    if (extras) fillExtras(s.to.name, s.to.code);
-    if (priceSlot) loadPrice(s);
-    if (!s.to) renderExplore($("res-explore"), s.from.code, s.dep.slice(0, 7));
+    const skel = Array.from({ length: 3 }, () => `<li class="fl skel" aria-hidden="true"><span></span><span></span><span></span></li>`).join("");
+    show(head + `<div id="day-strip" class="day-strip" role="group" aria-label="${esc(T("Prix autour de vos dates", "Prices around your dates"))}"></div>
+      <div class="fl-tools" id="fl-tools" hidden>
+        <div class="sort-tabs" role="tablist" aria-label="${esc(T("Trier les vols", "Sort flights"))}">
+          <button type="button" role="tab" data-sort="cheap" aria-selected="true"><span>${T("Le moins cher", "Cheapest")}</span><b id="sort-cheap"></b></button>
+          <button type="button" role="tab" data-sort="fast" aria-selected="false"><span>${T("Le plus rapide", "Fastest")}</span><b id="sort-fast"></b></button>
+          <button type="button" role="tab" data-sort="best" aria-selected="false"><span>${T("Le meilleur", "Best")}</span><b id="sort-best"></b></button>
+        </div>
+        <label class="chip-toggle"><input type="checkbox" id="fl-direct"${s.direct ? " checked" : ""}> ${T("Vols directs", "Direct only")}</label>
+      </div>
+      <p class="summary" id="fl-note" aria-live="polite">${esc(T("Recherche des meilleurs prix…", "Looking for the best prices…"))}</p>
+      <ul class="fl-list" id="fl-list">${skel}</ul>
+      <div id="cmp-wrap"><h3 class="sub-h">${T("Comparer aussi sur", "Also compare on")}</h3>${compareRow(links)}</div>` + share + extrasSlot(s.to.name));
+    fillExtras(s.to.name, s.to.code);
+    bindEdit();
+    flightState = { s, offers: [], sort: "cheap", direct: s.direct };
+    renderStrip(s, null);
+    loadOffers(s);
+  }
+  function bindEdit() {
+    const b = $("edit-search");
+    if (b) b.addEventListener("click", () => { $("panel-vols").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" }); $("f-to").focus({ preventScroll: true }); });
+  }
+  // Bande de dates ±3 jours, avec le prix le plus bas repéré pour chaque jour
+  function renderStrip(s, offers) {
+    const box = $("day-strip");
+    if (!box) return;
+    const len = s.ret ? nights(s.dep, s.ret) : 0;
+    const best = {};
+    (offers || []).forEach((o) => { const d = (o.departure_at || "").slice(0, 10); if (!best[d] || o.price < best[d]) best[d] = o.price; });
+    const vals = Object.values(best), min = vals.length ? Math.min(...vals) : 0;
+    box.innerHTML = [-3, -2, -1, 0, 1, 2, 3].map((o) => {
+      const d = addDays(s.dep, o);
+      if (d < today) return "";
+      const p = best[d];
+      return `<button type="button" class="day${o === 0 ? " cur" : ""}${p && p === min ? " low" : ""}" data-day="${d}"${o === 0 ? ' aria-current="date"' : ""}>
+        <small>${esc(human(d))}</small><strong>${p ? esc(money(p, flightState && flightState.cur)) : offers ? "—" : "·"}</strong></button>`;
+    }).join("");
+    const cur = box.querySelector(".day.cur");
+    if (cur) box.scrollLeft = cur.offsetLeft - box.offsetLeft - (box.clientWidth - cur.offsetWidth) / 2;
+    box.querySelectorAll("button[data-day]").forEach((b) => b.addEventListener("click", () => {
+      const d = b.dataset.day;
+      if (d === s.dep) return;
+      $("f-dep").value = d;
+      if (s.ret) $("f-ret").value = addDays(d, len);
+      $("form-vols").requestSubmit();
+    }));
   }
   let priceReq = 0;
-  async function loadPrice(s) {
+  async function loadOffers(s) {
     const id = ++priceReq;
-    try {
-      const r = await fetch("/api/prix?" + q({ from: s.from.code, to: s.to.code, dep: s.dep, ret: s.ret || "", currency: CUR }));
-      if (!r.ok || id !== priceReq) return;
-      const d = await r.json();
-      const box = $("price-hint");
-      if (!d.available || !d.price || !box) return;
-      const month = parse(s.dep).toLocaleDateString(locale(), { month: "long" });
-      box.innerHTML = fmt(T("Prix repéré récemment pour {month} : <strong>dès {price}</strong> ({stops}, {kind}). Le tarif exact et disponible s’affiche sur les sites ci-dessous.",
-        "Recently found for {month}: <strong>from {price}</strong> ({stops}, {kind}). The exact available fare is shown on the sites below."),
-        { month: esc(month), price: esc(money(d.price, d.currency)), stops: esc(stopsText(d.transfers)), kind: s.ret ? T("aller-retour", "round trip") : T("aller simple", "one way") });
-      box.hidden = false;
-    } catch (e) { /* prix indisponibles : rien n'est affiché */ }
+    let d = null;
+    if (isLive) {
+      try {
+        const r = await fetch("/api/prix?" + q({ from: s.from.code, to: s.to.code, dep: s.dep, ret: s.ret || "", currency: CUR, list: 1, direct: s.direct ? 1 : "" }));
+        if (r.ok) d = await r.json();
+      } catch (e) { d = null; }
+    }
+    if (id !== priceReq || !$("fl-list")) return;
+    const offers = d && d.available && Array.isArray(d.offers) ? d.offers.filter((o) => o && o.price > 0 && o.departure_at) : [];
+    flightState.offers = offers;
+    flightState.cur = d && d.currency;
+    renderStrip(s, offers);
+    if (!offers.length) {
+      $("fl-list").innerHTML = "";
+      $("fl-note").textContent = T("Pas de prix récent pour ce trajet : comparez directement sur les sites ci-dessous.", "No recent price for this route: compare directly on the sites below.");
+      $("fl-list").insertAdjacentHTML("afterend", providerList(flightLinks(s)));
+      if ($("cmp-wrap")) $("cmp-wrap").remove();
+      return;
+    }
+    $("fl-tools").hidden = false;
+    $("fl-tools").querySelectorAll("[data-sort]").forEach((b) => b.addEventListener("click", () => { flightState.sort = b.dataset.sort; paintOffers(); }));
+    $("fl-direct").addEventListener("change", (e) => { flightState.direct = e.target.checked; paintOffers(); });
+    paintOffers();
+  }
+  const totalMin = (o) => (o.duration_to || 0) + (o.duration_back || 0) || 99999;
+  const stopsOf = (o) => (o.transfers || 0) + (o.return_transfers || 0);
+  function paintOffers() {
+    const { s, offers, sort, direct } = flightState;
+    const cur = flightState.cur;
+    let list = offers.filter((o) => !direct || stopsOf(o) === 0);
+    const day = (o) => (o.departure_at || "").slice(0, 10);
+    const near = (o) => Math.abs(nights(s.dep, day(o))) <= (s.flex ? 3 : 0) && (!s.ret || !o.return_at || Math.abs(nights(s.ret, o.return_at.slice(0, 10))) <= (s.flex ? 3 : 0));
+    const exact = list.filter(near);
+    const note = $("fl-note");
+    if (exact.length) { list = exact; note.textContent = T("Prix repérés ces derniers jours pour vos dates. Le tarif final se confirme sur le site de réservation.", "Prices found in the last few days for your dates. The final fare is confirmed on the booking site."); }
+    else note.textContent = T("Aucun prix repéré exactement à vos dates : voici les moins chers du mois.", "No price found for your exact dates: here are the cheapest of the month.");
+    const minP = Math.min(...list.map((o) => o.price)), minT = Math.min(...list.map(totalMin));
+    const score = (o) => o.price / minP + 0.6 * (totalMin(o) / minT);
+    const by = { cheap: (a, b) => a.price - b.price, fast: (a, b) => totalMin(a) - totalMin(b) || a.price - b.price, best: (a, b) => score(a) - score(b) };
+    const tops = {};
+    Object.keys(by).forEach((k) => { tops[k] = list.slice().sort(by[k])[0]; });
+    Object.keys(by).forEach((k) => {
+      const t = tops[k], el = $("sort-" + k);
+      if (el) el.textContent = t ? `${money(t.price, cur)}${totalMin(t) < 99999 ? " · " + dur(totalMin(t)) : ""}` : "";
+      const btn = el && el.parentElement; if (btn) btn.setAttribute("aria-selected", String(k === sort));
+    });
+    list = list.slice().sort(by[sort]);
+    const leg = (label, at, minutes, stops) => at ? `<div class="leg"><span class="leg-l">${esc(label)}</span>
+      <span class="leg-d">${esc(human(at.slice(0, 10)))}${hm(at) ? ` · <b dir="ltr">${esc(hm(at))}</b>` : ""}</span>
+      <span class="leg-m">${minutes ? esc(dur(minutes)) + " · " : ""}<span class="${stops === 0 ? "ok" : ""}">${esc(stopsText(stops || 0))}</span></span></div>` : "";
+    $("fl-list").innerHTML = list.length ? list.slice(0, 15).map((o, i) => {
+      const al = /^[A-Z0-9]{2}$/.test(o.airline || "") ? o.airline : "";
+      const badge = o === tops.cheap ? T("Le moins cher", "Cheapest") : o === tops.fast ? T("Le plus rapide", "Fastest") : "";
+      const url = aviasalesUrl(s, day(o), s.ret && o.return_at ? o.return_at.slice(0, 10) : null);
+      return `<li class="fl" style="--i:${i}">
+        <div class="fl-air">${al ? `<img src="https://pics.avs.io/64/64/${al}.png" alt="" width="32" height="32" loading="lazy" onerror="this.remove()">${AIRLINES[al] ? `<span class="al-name">${esc(AIRLINES[al])}</span>` : ""}<span>${esc(al)}${o.flight_number ? " " + esc(o.flight_number) : ""}</span>` : ""}
+          ${badge ? `<span class="pill best">${esc(badge)}</span>` : ""}</div>
+        <div class="fl-legs">${leg(T("Aller", "Out"), o.departure_at, o.duration_to, o.transfers)}${s.ret ? leg(T("Retour", "Back"), o.return_at, o.duration_back, o.return_transfers) : ""}</div>
+        <div class="fl-buy"><strong>${esc(money(o.price, cur))}</strong><small>${esc(T("par personne", "per person"))}</small>
+          <a class="go buy" href="${esc(url)}" target="_blank" rel="sponsored noopener noreferrer">${T("Voir le vol", "View deal")} →</a></div>
+      </li>`;
+    }).join("") : `<li class="fl-empty">${esc(T("Aucun vol direct repéré : décochez « Vols directs ».", "No direct flight found: untick “Direct only”."))}</li>`;
   }
   function renderHotels(s) {
     const n = nights(s.in, s.out);
@@ -469,12 +573,10 @@
     const yymm = s.month.slice(2).replace("-", "");
     const retMonth = (() => { const x = new Date(y, mo - 1, 1); x.setDate(x.getDate() + 32); return iso(x).slice(2, 7).replace("-", ""); })();
     const sky = `https://${d.sky}/${s.from.code.toLowerCase()}/${s.to.code.toLowerCase()}/${yymm}/` + (s.ow ? "" : `${s.stay > 20 ? retMonth : yymm}/`) + "?" + q({ adultsv2: s.adults, rtn: s.ow ? 0 : 1 });
-    const gf = `https://www.google.com/travel/flights?${q({ q: `Flights from ${s.from.code} to ${s.to.code} in ${parse(s.month + "-01").toLocaleDateString("en-GB", { month: "long", year: "numeric" })}`, hl: LANG, curr: CUR })}`;
     const head = `<div class="results-head"><h2><bdi dir="ltr">${esc(s.from.name)} → ${esc(s.to.name)}</bdi> · ${esc(monthName)}</h2>
       <span class="summary">${esc(fmt(T("Séjour de {n} nuits · cliquez sur un jour pour lancer la recherche", "{n}-night trip · click a day to search"), { n: s.stay || 1 }))}</span></div>`;
     const links = providerList([
-      { k: "sky", name: T("Skyscanner : le mois entier", "Skyscanner: whole month"), desc: T("Vue du mois avec le prix de chaque jour.", "Month view with the price of each day."), best: true, url: sky },
-      { k: "google", name: "Google Flights", desc: T("Graphique des prix sur le mois.", "Price graph for the month."), url: gf }
+      { k: "sky", name: T("Skyscanner : le mois entier", "Skyscanner: whole month"), desc: T("Vue du mois avec le prix de chaque jour.", "Month view with the price of each day."), best: true, url: sky }
     ]);
     show(head + `<div id="month-cal"><p class="lead">${esc(T("Chargement des prix du mois…", "Loading prices for the month…"))}</p></div>` + links);
     const id = ++monthReq;
@@ -687,8 +789,8 @@
      "Is Escale free?", "Yes. No sign-up, no fees. You only pay for your booking, directly on the site you choose."],
     ["Puis-je chercher n’importe quelle destination ?", "Oui : plus de 3 200 aéroports dans 234 pays sont proposés, et la recherche d’hôtels accepte n’importe quelle ville du monde. Laissez l’arrivée vide pour voir les destinations les moins chères.",
      "Can I search any destination?", "Yes: over 3,200 airports in 234 countries, and hotel search accepts any city in the world. Leave the destination empty to see the cheapest places to go."],
-    ["Comment trouver le vol le moins cher ?", "Activez les dates flexibles, comparez au moins trois sites (Google Flights, Skyscanner, Kayak) et regardez la grille jour par jour : décaler le départ d’un ou deux jours fait souvent baisser le prix.",
-     "How do I find the cheapest flight?", "Turn on flexible dates, compare at least three sites (Google Flights, Skyscanner, Kayak) and check the day-by-day grid: moving your departure by a day or two often lowers the price."],
+    ["Comment trouver le vol le moins cher ?", "Activez les dates flexibles, comparez au moins trois sites (Skyscanner, Kayak, momondo) et regardez la grille jour par jour : décaler le départ d’un ou deux jours fait souvent baisser le prix.",
+     "How do I find the cheapest flight?", "Turn on flexible dates, compare at least three sites (Skyscanner, Kayak, momondo) and check the day-by-day grid: moving your departure by a day or two often lowers the price."],
     ["D’où viennent les prix affichés ?", "Ce sont des prix réels trouvés récemment par des voyageurs sur Aviasales. Le tarif exact et disponible s’affiche ensuite sur les sites de réservation.",
      "Where do the prices come from?", "They are real prices recently found by travellers on Aviasales. The exact available fare is then shown on the booking sites."],
     ["Les prix incluent-ils les bagages ?", "Pas toujours. Les tarifs les plus bas incluent parfois seulement un petit sac. Vérifiez la franchise bagage avant de payer.",
