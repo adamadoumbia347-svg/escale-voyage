@@ -6,6 +6,6 @@
 
 [[redirects]]
   from = "/*"
-  to = "https://escale-voyage.adamadoumbia347.workers.dev/:splat"
+  to = "https://escale.live/:splat"
   status = 301
   force = true

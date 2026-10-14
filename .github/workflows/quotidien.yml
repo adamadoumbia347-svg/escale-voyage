@@ -18,7 +18,7 @@ permissions:
   contents: read
 
 env:
-  SITE_URL: ${{ inputs.url || vars.SITE_URL || 'https://escale-voyage.adamadoumbia347.workers.dev' }}
+  SITE_URL: ${{ inputs.url || vars.SITE_URL || 'https://escale.live' }}
 
 jobs:
   alertes:
