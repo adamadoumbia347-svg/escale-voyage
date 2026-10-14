@@ -14,7 +14,7 @@ permissions:
   contents: read
 
 env:
-  SITE_URL: ${{ vars.SITE_URL || 'https://escale-voyage.pages.dev' }}
+  SITE_URL: ${{ vars.SITE_URL || 'https://escale-voyage.adamadoumbia347.workers.dev' }}
 
 jobs:
   alertes:

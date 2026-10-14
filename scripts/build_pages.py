@@ -20,9 +20,9 @@ import translations  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
-# Adresse du site (hébergé sur Cloudflare Pages). Pour un nom de domaine à vous : changez DEFAULT_DOMAIN
+# Adresse du site (hébergé sur Cloudflare Workers). Pour un nom de domaine à vous : changez DEFAULT_DOMAIN
 # (ou la variable SITE_URL) et relancez la génération : canonical, sitemap, hreflang et images de partage suivent.
-DEFAULT_DOMAIN = "https://escale-voyage.pages.dev"
+DEFAULT_DOMAIN = "https://escale-voyage.adamadoumbia347.workers.dev"
 DOMAIN = (os.environ.get("SITE_URL") or DEFAULT_DOMAIN).rstrip("/")
 if not DOMAIN.startswith("https://"):
     DOMAIN = DEFAULT_DOMAIN

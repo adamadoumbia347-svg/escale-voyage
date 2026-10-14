@@ -1,4 +1,4 @@
-# Le site a déménagé sur Cloudflare Pages (voir README).
+# Le site a déménagé sur Cloudflare Workers (voir README).
 # L'ancienne adresse escale-voyage.netlify.app redirige définitivement (301) chaque page vers la nouvelle,
 # pour que Google et les liens déjà partagés suivent.
 [build]
@@ -6,6 +6,6 @@
 
 [[redirects]]
   from = "/*"
-  to = "https://escale-voyage.pages.dev/:splat"
+  to = "https://escale-voyage.adamadoumbia347.workers.dev/:splat"
   status = 301
   force = true
