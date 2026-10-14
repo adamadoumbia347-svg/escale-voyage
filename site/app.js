@@ -220,6 +220,12 @@
   // ---------- Champs : valeurs par défaut ----------
   const fill = (sel, from, to, def, fmt) => { for (let i = from; i <= to; i++) { const o = new Option(fmt ? fmt(i) : String(i), String(i)); if (i === def) o.selected = true; sel.add(o); } };
   fill($("f-adults"), 1, 9, 1); fill($("f-children"), 0, 8, 0);
+  // Bouton « passagers » façon Google Flights : nombre total, liste déroulante qui se ferme en touchant ailleurs
+  const paxCount = () => { $("pax-n").textContent = String(+$("f-adults").value + +$("f-children").value); };
+  ["f-adults", "f-children"].forEach((id) => $(id).addEventListener("change", paxCount));
+  document.addEventListener("click", (ev) => { const p = $("pax"); if (p.open && !p.contains(ev.target)) p.open = false; });
+  document.addEventListener("keydown", (ev) => { if (ev.key === "Escape" && $("pax").open) { $("pax").open = false; $("pax").querySelector("summary").focus(); } });
+  paxCount();
   fill($("h-adults"), 1, 10, 2); fill($("h-rooms"), 1, 5, 1);
   fill($("c-t1"), 6, 22, 10, (h) => String(h).padStart(2, "0") + ":00");
   fill($("c-t2"), 6, 22, 10, (h) => String(h).padStart(2, "0") + ":00");
@@ -398,6 +404,7 @@
 
   let flightState = null;
   function renderFlights(s) {
+    paxCount(); $("pax").open = false;
     const pax = s.adults + s.children;
     const travellers = `${pax} ${pax > 1 ? T("voyageurs", "travellers") : T("voyageur", "traveller")} · ${$("f-cabin").selectedOptions[0].text}`;
     const dates = s.ret ? `${human(s.dep)} – ${human(s.ret)}` : `${human(s.dep)} · ${T("aller simple", "one way")}`;
@@ -420,14 +427,24 @@
           <button type="button" role="tab" data-sort="fast" aria-selected="false"><span>${T("Le plus rapide", "Fastest")}</span><b id="sort-fast"></b></button>
           <button type="button" role="tab" data-sort="best" aria-selected="false"><span>${T("Le meilleur", "Best")}</span><b id="sort-best"></b></button>
         </div>
-        <label class="chip-toggle"><input type="checkbox" id="fl-direct"${s.direct ? " checked" : ""}> ${T("Vols directs", "Direct only")}</label>
+        <div class="fl-filters">
+          <label class="sr-only" for="fl-stops">${T("Escales", "Stops")}</label>
+          <select id="fl-stops" class="chip-select">
+            <option value="any">${T("Toutes les escales", "Any number of stops")}</option>
+            <option value="0"${s.direct ? " selected" : ""}>${T("Vols directs", "Direct only")}</option>
+            <option value="1">${T("1 escale maximum", "1 stop or fewer")}</option>
+          </select>
+          <label class="sr-only" for="fl-airline">${T("Compagnie", "Airline")}</label>
+          <select id="fl-airline" class="chip-select"><option value="">${T("Toutes les compagnies", "All airlines")}</option></select>
+        </div>
       </div>
+      <div class="fl-insight" id="fl-insight" hidden></div>
       <p class="summary" id="fl-note" aria-live="polite">${esc(T("Recherche des meilleurs prix…", "Looking for the best prices…"))}</p>
       <ul class="fl-list" id="fl-list">${skel}</ul>
       <div id="cmp-wrap"><h3 class="sub-h">${T("Comparer aussi sur", "Also compare on")}</h3>${compareRow(links)}</div>` + share + extrasSlot(s.to.name));
     fillExtras(s.to.name, s.to.code);
     bindEdit();
-    flightState = { s, offers: [], sort: "cheap", direct: s.direct };
+    flightState = { s, offers: [], sort: "cheap", stops: s.direct ? "0" : "any", airline: "" };
     renderStrip(s, null);
     loadOffers(s);
   }
@@ -484,15 +501,48 @@
     }
     $("fl-tools").hidden = false;
     $("fl-tools").querySelectorAll("[data-sort]").forEach((b) => b.addEventListener("click", () => { flightState.sort = b.dataset.sort; paintOffers(); }));
-    $("fl-direct").addEventListener("change", (e) => { flightState.direct = e.target.checked; paintOffers(); });
+    // Filtres : escales et compagnie (la liste des compagnies vient des vols trouvés)
+    const als = [...new Set(offers.map((o) => o.airline).filter((a) => /^[A-Z0-9]{2}$/.test(a || "")))].sort((a, b) => (AIRLINES[a] || a).localeCompare(AIRLINES[b] || b));
+    $("fl-airline").insertAdjacentHTML("beforeend", als.map((a) => `<option value="${a}">${esc(AIRLINES[a] || a)}</option>`).join(""));
+    $("fl-airline").hidden = als.length < 2;
+    $("fl-stops").addEventListener("change", (e) => { flightState.stops = e.target.value; paintOffers(); });
+    $("fl-airline").addEventListener("change", (e) => { flightState.airline = e.target.value; paintOffers(); });
+    insight(s, offers);
     paintOffers();
+  }
+  // Conseil de prix : vos dates sont-elles parmi les moins chères du mois ?
+  function insight(s, offers) {
+    const box = $("fl-insight");
+    if (!box || !offers.length) return;
+    const cur = flightState.cur, day = (o) => (o.departure_at || "").slice(0, 10);
+    const best = offers.reduce((a, b) => (b.price < a.price ? b : a));
+    const near = offers.filter((o) => Math.abs(nights(s.dep, day(o))) <= (s.flex ? 3 : 0));
+    const mine = near.length ? Math.min(...near.map((o) => o.price)) : null;
+    const diff = mine != null ? mine - best.price : null;
+    if (mine != null && diff <= Math.max(10, mine * 0.05)) {
+      box.className = "fl-insight good";
+      box.textContent = "✓ " + T("Bon prix : vos dates sont parmi les moins chères du mois.", "Good price: your dates are among the cheapest of the month.");
+    } else {
+      box.className = "fl-insight tip";
+      const txt = fmt(T("Moins cher ce mois-ci : {price} le {date} ({diff} de moins).", "Cheaper this month: {price} on {date} ({diff} less)."),
+        { price: money(best.price, cur), date: human(day(best)), diff: diff != null ? money(diff, cur) : "—" });
+      box.innerHTML = `<span>💡 ${esc(txt)}</span> <button type="button" class="go" id="fl-insight-go">${esc(T("Voir cette date", "See this date"))}</button>`;
+      $("fl-insight-go").addEventListener("click", () => {
+        const len = s.ret ? nights(s.dep, s.ret) : 0;
+        $("f-dep").value = day(best);
+        if (s.ret) $("f-ret").value = best.return_at ? best.return_at.slice(0, 10) : addDays(day(best), len);
+        $("form-vols").requestSubmit();
+      });
+    }
+    box.hidden = false;
   }
   const totalMin = (o) => (o.duration_to || 0) + (o.duration_back || 0) || 99999;
   const stopsOf = (o) => (o.transfers || 0) + (o.return_transfers || 0);
   function paintOffers() {
-    const { s, offers, sort, direct } = flightState;
+    const { s, offers, sort, stops, airline } = flightState;
     const cur = flightState.cur;
-    let list = offers.filter((o) => !direct || stopsOf(o) === 0);
+    const maxLeg = (o) => Math.max(o.transfers || 0, o.return_transfers || 0);
+    let list = offers.filter((o) => (stops === "any" || maxLeg(o) <= +stops) && (!airline || o.airline === airline));
     const day = (o) => (o.departure_at || "").slice(0, 10);
     const near = (o) => Math.abs(nights(s.dep, day(o))) <= (s.flex ? 3 : 0) && (!s.ret || !o.return_at || Math.abs(nights(s.ret, o.return_at.slice(0, 10))) <= (s.flex ? 3 : 0));
     const exact = list.filter(near);
@@ -524,7 +574,7 @@
         <div class="fl-buy"><strong>${esc(money(o.price, cur))}</strong><small>${esc(T("par personne", "per person"))}</small>
           <a class="go buy" href="${esc(url)}" target="_blank" rel="sponsored noopener noreferrer">${T("Voir le vol", "View deal")} →</a></div>
       </li>`;
-    }).join("") : `<li class="fl-empty">${esc(T("Aucun vol direct repéré : décochez « Vols directs ».", "No direct flight found: untick “Direct only”."))}</li>`;
+    }).join("") : `<li class="fl-empty">${esc(T("Aucun vol ne correspond à ces filtres : élargissez les escales ou la compagnie.", "No flight matches these filters: widen the stops or airline."))}</li>`;
   }
   function renderHotels(s) {
     const n = nights(s.in, s.out);
