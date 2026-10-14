@@ -168,6 +168,14 @@ UI = {
 }
 
 
+EST = {
+    "en": "About {d} non-stop (estimate based on the {km} km distance)",
+    "es": "Unas {d} sin escalas (estimación según la distancia de {km} km)",
+    "pt": "Cerca de {d} sem escalas (estimativa pela distância de {km} km)",
+    "ar": "حوالي {d} دون توقف (تقدير حسب المسافة {km} كم)",
+}
+
+
 def slugify(t):
     t = t.lower().replace("'", "-")
     for a, b in (("é", "e"), ("è", "e"), ("ê", "e"), ("ë", "e"), ("à", "a"), ("á", "a"), ("â", "a"), ("ã", "a"), ("í", "i"), ("ï", "i"),
@@ -243,7 +251,9 @@ HEAD = """<!doctype html>
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{url}">
-<meta property="og:image" content="{domain}/og-image.png">
+<meta property="og:image" content="{domain}/{ogimg}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -260,7 +270,7 @@ HEAD = """<!doctype html>
 {body}
 </main>
 <footer class="wrap">
-  <nav class="foot-nav"><a href="/{homeq}">{home}</a><a href="/mentions-legales/">{legal}</a><a href="/confidentialite/">{privacy}</a><a href="/contact/">Contact</a><a href="/{dealsp}/">{dealsl}</a><a href="#cookies" data-open-consent>{cookies}</a></nav>
+  <nav class="foot-nav"><a href="/{homeq}">{home}</a><a href="/mentions-legales/">{legal}</a><a href="/confidentialite/">{privacy}</a><a href="/contact/">Contact</a><a href="/{aboutp}/">{aboutl}</a><a href="/{guidesp}/">Guides</a><a href="/{dealsp}/">{dealsl}</a><a href="#cookies" data-open-consent>{cookies}</a></nav>
   <p>{disclaimer}</p>
 </footer>
 </body>
@@ -275,14 +285,17 @@ def faq_ld(faq):
     }, ensure_ascii=False) + "</script>"
 
 
-def write(site, path, lang, title, desc, hero, body, ld, paths, ctx):
+def write(site, path, lang, title, desc, hero, body, ld, paths, ctx, og="og-image.png"):
     u = UI[lang]
     out = HEAD.format(
         lang=lang, dir="rtl" if lang == "ar" else "ltr", tp=ctx["tp"], title=E(title), desc=E(desc),
         url=f"{ctx['domain']}/{path}/", alts=alternates(paths, ctx["domain"]), oglocale=LOCALE[lang], domain=ctx["domain"],
-        arfont="&family=Noto+Sans+Arabic:wght@400;600;700" if lang == "ar" else "", ld=ld, homeq="" if lang == "fr" else "?lang=" + u["app_lang"],
+        ogimg=og, arfont="&family=Noto+Sans+Arabic:wght@400;600;700" if lang == "ar" else "", ld=ld, homeq="" if lang == "fr" else "?lang=" + u["app_lang"],
         dealsp={"fr": "bons-plans", "en": "en/deals", "es": "es/ofertas", "pt": "pt/promocoes", "ar": "ar/deals"}[lang],
         dealsl={"fr": "Bons plans", "en": "Deals", "es": "Ofertas", "pt": "Promoções", "ar": "العروض"}[lang],
+        aboutp={"fr": "a-propos", "en": "en/about", "es": "es/acerca-de", "pt": "pt/sobre", "ar": "ar/about"}[lang],
+        aboutl={"fr": "À propos", "en": "About", "es": "Acerca de", "pt": "Sobre", "ar": "عن Escale"}[lang],
+        guidesp={"fr": "guides", "en": "en/guides", "es": "es/guias", "pt": "pt/guias", "ar": "ar/guides"}[lang],
         switch=switcher(paths, lang), hero=hero, body=body, home=E(u["home"]), legal=E(u["legal"]), privacy=E(u["privacy"]),
         cookies=E(u["cookies"]), disclaimer=E(u["disclaimer"]))
     d = site / path
@@ -304,8 +317,14 @@ def build(site, ctx):
             a, b = city(cf, lang), city(ct, lang)
             ap = ctx["airports"].get(to)
             airport = ap[2] if ap else to
-            dur_txt = u["dur_direct"].format(d=duration(dur, lang)) if dur else u["dur_var"]
-            dur_long = u["dur_long_direct"].format(d=duration(dur, lang)) if dur else u["dur_long_var"]
+            km = ctx.get("distances", {}).get((fr_, to))
+            if dur and dur.startswith("~"):
+                kms = f"{km:,}".replace(",", " " if lang != "en" else ",")
+                dur_txt = EST[lang].format(d=duration(dur[1:], lang), km=kms)
+                dur_long = dur_txt
+            else:
+                dur_txt = u["dur_direct"].format(d=duration(dur, lang)) if dur else u["dur_var"]
+                dur_long = u["dur_long_direct"].format(d=duration(dur, lang)) if dur else u["dur_long_var"]
             peak_t = tr(TR.PEAKS, peak, lang)
             note = TR.NOTES[f"{fr_}-{to}"][COL[lang]]
             app = "/?" + urllib.parse.urlencode({"type": "vols", "from": fr_, "to": to, "lang": u["app_lang"]})
@@ -352,7 +371,8 @@ def build(site, ctx):
 </section>
 <section><h2>{E(u["other_routes"])}</h2><ul class="route-links">{others}</ul></section>"""
             urls.append(write(site, route_paths[r][lang], lang, u["title_route"].format(a=a, b=b),
-                              u["desc_route"].format(a=a, b=b, fa=fr_, ta=to), hero, body, faq_ld(faq), route_paths[r], ctx))
+                              u["desc_route"].format(a=a, b=b, fa=fr_, ta=to), hero, body, faq_ld(faq), route_paths[r], ctx,
+                              f"og/{fr_}-{to}.jpg" if (site / "og" / f"{fr_}-{to}.jpg").exists() else "og-image.png"))
 
         for h in hotels:
             cname, country, areas, _tip, code = h
@@ -462,7 +482,9 @@ def calendar_html(lang, fr_, to):
     return (f'<section id="route-calendar" data-from="{fr_}" data-to="{to}" hidden><h2>{E(b["cal_h"])}</h2>'
             f'<p class="small">{E(b["cal_p"])}</p><div class="chips cal-months" role="group"></div>'
             f'<div class="cal-grid" dir="ltr"></div><p class="small cal-legend"></p></section>\n'
-            f'<script src="/route-calendar.js" defer></script>')
+            f'<script src="/route-calendar.js" defer></script>\n'
+            f'<section id="price-alert" class="price-alert" data-from="{fr_}" data-to="{to}" hidden></section>\n'
+            f'<script src="/alerts.js" defer></script>')
 
 
 def extras_html(site, lang, city_label, city_en, code):
@@ -500,6 +522,9 @@ DEALS = {
 }
 
 
+NEWSLETTER = json.loads((__import__("pathlib").Path(__file__).parent / "newsletter_forms.json").read_text(encoding="utf-8"))
+
+
 def build_deals(site, ctx):
     paths = {l: DEALS[l]["path"] for l in ALL}
     urls = []
@@ -509,6 +534,80 @@ def build_deals(site, ctx):
                 f'<p class="small deal-updated" id="deal-updated"></p>')
         body = ('<section id="deals"><div class="chips deal-origins" id="deal-origins" role="group"></div>'
                 '<div class="deal-grid" id="deal-grid"><div class="ex-skel"></div><div class="ex-skel"></div><div class="ex-skel"></div></div></section>'
-                '<script src="/deals.js" defer></script>')
+                '<script src="/deals.js" defer></script>'
+                '<section class="nl-block">' + NEWSLETTER[lang] + '</section><script src="/newsletter.js" defer></script>')
         urls.append(write(site, d["path"], lang, d["title"] + " | Escale", d["desc"], hero, body, "", paths, ctx))
+    return urls
+
+
+# ---------------------------------------------------------------------------
+# Guides pratiques (5 langues)
+# ---------------------------------------------------------------------------
+GUIDE_UI = {
+    "fr": dict(cta="Comparer les prix des vols", others="Autres guides", eyebrow="Guide pratique"),
+    "en": dict(cta="Compare flight prices", others="Other guides", eyebrow="Practical guide"),
+    "es": dict(cta="Comparar precios de vuelos", others="Otras guías", eyebrow="Guía práctica"),
+    "pt": dict(cta="Comparar preços de voos", others="Outros guias", eyebrow="Guia prático"),
+    "ar": dict(cta="قارن أسعار الرحلات", others="أدلة أخرى", eyebrow="دليل عملي"),
+}
+
+
+def _para_html(items):
+    out, ul = [], []
+    for t in items:
+        if t.startswith("- "):
+            ul.append(f"<li>{E(t[2:])}</li>")
+            continue
+        if ul:
+            out.append('<ul class="links">' + "".join(ul) + "</ul>")
+            ul = []
+        out.append(f"<p>{E(t)}</p>")
+    if ul:
+        out.append('<ul class="links">' + "".join(ul) + "</ul>")
+    return "".join(out)
+
+
+def build_guides(site, ctx):
+    import guides as G
+    urls = []
+    for g in G.GUIDES:
+        paths = {l: g[l]["slug"] for l in ALL}
+        for lang in ALL:
+            d, gu = g[lang], GUIDE_UI[lang]
+            homeq = "" if lang == "fr" else f"?lang={lang}"
+            hero = (f'<p class="eyebrow">{E(gu["eyebrow"])}</p><h1>{E(d["title"])}</h1>'
+                    f'<p class="hero-lead">{E(d["intro"])}</p>'
+                    f'<div class="cta-row"><a class="btn" href="/{homeq}">{E(gu["cta"])}</a></div>')
+            body = "".join(f"<section><h2>{E(h)}</h2>{_para_html(items)}</section>" for h, items in d["sections"])
+            body += f'<section><p class="small">{E(d["note"])}</p></section>'
+            others = [o for o in G.GUIDES if o is not g]
+            body += (f'<section><h2>{E(gu["others"])}</h2><ul class="route-links">' +
+                     "".join(f'<li><a href="/{o[lang]["slug"]}/">{E(o[lang]["title"])}</a></li>' for o in others) + "</ul></section>")
+            ld = '<script type="application/ld+json">' + json.dumps({
+                "@context": "https://schema.org", "@type": "Article", "headline": d["title"], "description": d["desc"],
+                "inLanguage": lang, "author": {"@type": "Organization", "name": "Escale"}}, ensure_ascii=False) + "</script>"
+            urls.append(write(site, d["slug"], lang, d["title"] + " | Escale", d["desc"], hero, body, ld, paths, ctx))
+    ipaths = {l: G.INDEX[l]["slug"] for l in ALL}
+    for lang in ALL:
+        ix = G.INDEX[lang]
+        hero = f'<h1>{E(ix["title"])}</h1><p class="hero-lead">{E(ix["lead"])}</p>'
+        body = '<section><ul class="extra-list">' + "".join(
+            f'<li class="extra"><span class="logo" style="background:#0b5cd6" aria-hidden="true">{i + 1}</span>'
+            f'<div><strong>{E(g[lang]["title"])}</strong><span>{E(g[lang]["desc"])}</span></div>'
+            f'<a class="price-go" href="/{g[lang]["slug"]}/">{E(ix["more"])}</a></li>' for i, g in enumerate(G.GUIDES)) + "</ul></section>"
+        urls.append(write(site, ix["slug"], lang, ix["title"] + " | Escale", ix["lead"], hero, body, "", ipaths, ctx))
+    return urls
+
+
+def build_about(site, ctx):
+    import about as A
+    paths = {l: A.ABOUT[l]["slug"] for l in ALL}
+    urls = []
+    for lang in ALL:
+        d = A.ABOUT[lang]
+        hero = f'<h1>{E(d["title"])}</h1><p class="hero-lead">{E(d["lead"])}</p>'
+        body = "".join(f"<section><h2>{E(h)}</h2>{_para_html(ps)}</section>" for h, ps in d["sections"])
+        body += f'<p><a class="btn" href="/contact/">{E(d["contact"])}</a></p>'
+        ld = '<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", "@type": "AboutPage", "name": d["title"], "inLanguage": lang}, ensure_ascii=False) + "</script>"
+        urls.append(write(site, d["slug"], lang, d["title"] + " | Escale", d["lead"], hero, body, ld, paths, ctx))
     return urls

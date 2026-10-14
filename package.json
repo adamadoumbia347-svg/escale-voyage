@@ -1,0 +1,8 @@
+{
+  "name": "escale-voyage",
+  "private": true,
+  "description": "Escale : comparateur de vols, hôtels et voitures (site statique + fonctions Netlify)",
+  "dependencies": {
+    "@netlify/blobs": "11.1.1"
+  }
+}

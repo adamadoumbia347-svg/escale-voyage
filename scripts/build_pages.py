@@ -13,6 +13,8 @@ import urllib.parse
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import build_i18n  # noqa: E402
+import routes_extra  # noqa: E402
+import translations  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
@@ -185,6 +187,7 @@ E = html.escape
 TRAVELPAYOUTS = (ROOT / "scripts" / "travelpayouts-snippet.html").read_text(encoding="utf-8").strip()
 TRAVELPAYOUTS = TRAVELPAYOUTS.replace("<script ", '<script type="text/plain" data-consent="marketing" ', 1)
 TRAVELPAYOUTS += '\n<script src="/consent.js" defer></script>'
+TRAVELPAYOUTS += '\n<script src="/track.js" defer></script>'
 
 HEAD = """<!doctype html>
 <html lang="fr">
@@ -204,7 +207,9 @@ HEAD = """<!doctype html>
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{url}">
-<meta property="og:image" content="{domain}/og-image.png">
+<meta property="og:image" content="{domain}/{ogimg}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -221,19 +226,19 @@ HEAD = """<!doctype html>
 {body}
 </main>
 <footer class="wrap">
-  <nav class="foot-nav" aria-label="Pages du site"><a href="/">Comparer vols, hôtels et voitures</a><a href="/#guides">Guides des trajets</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/contact/">Contact</a><a href="/bons-plans/">Bons plans</a><a href="#cookies" data-open-consent>Gérer les cookies</a></nav>
+  <nav class="foot-nav" aria-label="Pages du site"><a href="/">Comparer vols, hôtels et voitures</a><a href="/#guides">Guides des trajets</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/contact/">Contact</a><a href="/a-propos/">À propos</a><a href="/guides/">Guides</a><a href="/bons-plans/">Bons plans</a><a href="#cookies" data-open-consent>Gérer les cookies</a></nav>
   <p>Escale ne vend pas de billets et ne fixe aucun prix. Les durées et informations sont indicatives : les programmes des compagnies changent, vérifiez toujours sur le site de réservation.</p>
 </footer>
 </body>
 </html>
 """
 
-def page(path, title, desc, hero, body, ld="", paths=None):
+def page(path, title, desc, hero, body, ld="", paths=None, og="og-image.png"):
     url = f"{DOMAIN}/{path}/" if path else f"{DOMAIN}/"
     if paths:
         ld = build_i18n.alternates(paths, DOMAIN) + "\n" + ld
     switch = build_i18n.switcher(paths, "fr") if paths else ""
-    out = HEAD.format(tp=TRAVELPAYOUTS, title=E(title), desc=E(desc), url=url, domain=DOMAIN, hero=hero, body=body, ld=ld, switch=switch)
+    out = HEAD.format(tp=TRAVELPAYOUTS, title=E(title), desc=E(desc), url=url, domain=DOMAIN, hero=hero, body=body, ld=ld, switch=switch, ogimg=og)
     d = SITE / path
     d.mkdir(parents=True, exist_ok=True)
     (d / "index.html").write_text(out, encoding="utf-8")
@@ -252,11 +257,17 @@ def route_page(r):
     cars = "/?" + urllib.parse.urlencode({"type": "voitures", "pick": to})
     gf = "https://www.google.com/travel/flights?" + urllib.parse.urlencode({"q": f"Flights from {fr} to {to}", "hl": "fr", "curr": "EUR"})
     sky = f"https://www.skyscanner.fr/transport/vols/{fr.lower()}/{to.lower()}/"
-    dur_txt = f"environ {dur} en vol direct" if dur else "variable : la plupart des trajets ont au moins une escale"
+    km = DISTANCES.get((fr, to))
+    if dur and dur.startswith("~"):
+        kms = f"{km:,}".replace(",", " ")
+        dur_txt = f"environ {dur[1:]} de vol sans escale (estimation d'après la distance, {kms} km)"
+    else:
+        dur_txt = f"environ {dur} en vol direct" if dur else "variable : la plupart des trajets ont au moins une escale"
     faq = [
         (f"Combien de temps dure un vol {cf} – {ct} ?", f"Comptez {dur_txt}. Avec une escale, le trajet total dure souvent plusieurs heures de plus selon la correspondance."),
         (f"Quand réserver un vol {cf} – {ct} pas cher ?", f"En général deux à trois mois avant le départ. Les prix montent fortement pendant {peak} : réservez plus tôt pour ces périodes."),
-        (f"Quel aéroport à {ct} ?", f"Les vols arrivent à l'{airport[0].lower() + airport[1:]} (code {to})."),
+        (f"Quel aéroport à {ct} ?", f"Les vols arrivent à l'{airport[0].lower() + airport[1:]} (code {to})." if airport.startswith("Aéroport")
+         else f"Les vols arrivent à {airport} (code {to})."),
         ("Les bagages sont-ils inclus ?", "Pas toujours. Les tarifs les plus bas n'incluent parfois qu'un petit sac. Vérifiez la franchise bagage en soute avant de payer, surtout si vous voyagez avec des valises."),
     ]
     ld = '<script type="application/ld+json">' + __import__("json").dumps({
@@ -302,7 +313,8 @@ def route_page(r):
 </section>
 <section><h2>Autres trajets</h2><ul class="route-links">{''.join(f'<li><a href="/{route_slug(o)}/">{E(o[2])} → {E(o[3])}</a></li>' for o in related(r))}</ul></section>"""
     paths = {"fr": s, **{l: build_i18n.route_path(r, l) for l in build_i18n.LANGS}}
-    return page(s, title, desc, hero, body, ld, paths)
+    og = f"og/{fr}-{to}.jpg" if (SITE / "og" / f"{fr}-{to}.jpg").exists() else "og-image.png"
+    return page(s, title, desc, hero, body, ld, paths, og)
 
 def related(r, n=9):
     """Trajets proches : même destination, même pays ou même ville de départ, puis le reste."""
@@ -384,7 +396,16 @@ def legal_pages():
     urls.append(page("mentions-legales", "Mentions légales | Escale", "Mentions légales du site Escale, comparateur de vols, hôtels et locations de voitures.", hero, body))
     hero = '<h1>Confidentialité</h1>'
     body = """<section><h2>En bref</h2>
-<p>Escale ne demande aucun compte et ne collecte ni nom, ni e-mail, ni numéro de téléphone (sauf si vous nous écrivez via le formulaire de contact).</p>
+<p>Escale ne demande aucun compte. Nous ne recevons un e-mail ou un numéro de téléphone que si vous nous le donnez vous-même : formulaire de contact, inscription aux bons plans ou alerte prix.</p>
+</section>
+<section><h2>Mesure d'audience anonyme</h2>
+<p>Pour savoir quelles pages sont utiles, chaque page vue envoie à notre serveur le chemin de la page, sa langue, le site d'où vous venez (par exemple google.com) et, lors d'un clic vers un site partenaire, le nom de ce site. Aucun cookie n'est déposé, aucune adresse IP ni aucun identifiant n'est enregistré : il est impossible de reconnaître un visiteur ou de suivre son parcours. Ces données sont regroupées chaque nuit en totaux par jour. Si votre navigateur envoie le signal « Do Not Track », rien n'est envoyé.</p>
+</section>
+<section><h2>Bons plans par e-mail ou WhatsApp</h2>
+<p>Si vous vous inscrivez, nous conservons votre e-mail et/ou votre numéro WhatsApp et la langue de la page, uniquement pour vous envoyer nos bons plans. Le formulaire est géré par notre hébergeur Netlify (Netlify Forms). Vous pouvez vous désinscrire à tout moment en répondant « STOP » ou via la page Contact ; vos coordonnées sont alors supprimées.</p>
+</section>
+<section><h2>Alertes prix</h2>
+<p>Si vous créez une alerte prix, nous conservons votre e-mail, le trajet, votre budget et la langue choisie, uniquement pour vous prévenir quand le prix baisse. L'alerte n'est active qu'après confirmation par le lien reçu par e-mail ; sans confirmation, elle est effacée au bout de 7 jours. Chaque e-mail contient un lien de désinscription qui efface immédiatement l'alerte. Une alerte est de toute façon supprimée au bout d'un an. Les e-mails sont envoyés par un prestataire d'envoi (Resend ou Brevo), qui ne reçoit que l'adresse et le contenu du message.</p>
 </section>
 <section><h2>Ce qui reste sur votre appareil</h2>
 <p>Vos dernières recherches, le dernier onglet, la langue, la devise, votre aéroport de départ et votre choix concernant les cookies sont enregistrés dans le stockage local de votre navigateur, uniquement pour vous les reproposer. Ces données ne quittent pas votre appareil. Vous pouvez les effacer à tout moment en supprimant les données du site dans votre navigateur.</p>
@@ -406,9 +427,9 @@ def legal_pages():
 <p>Quand vous cliquez sur « Voir les prix », vous quittez Escale. Le site ouvert (Google, Skyscanner, Booking, etc.) applique sa propre politique de confidentialité et ses propres cookies.</p>
 </section>
 <section><h2>Vos droits</h2>
-<p>Conformément au RGPD, vous pouvez demander l'accès, la rectification ou l'effacement de données vous concernant. Escale ne détenant aucune donnée personnelle sur ses visiteurs, aucune information ne peut normalement vous être rattachée.</p>
+<p>Conformément au RGPD, vous pouvez demander l'accès, la rectification ou l'effacement de données vous concernant. Les seules données personnelles que nous pouvons détenir sont celles que vous nous avez données (contact, bons plans, alertes) : écrivez-nous via la page <a href="/contact/">Contact</a> pour y accéder ou les faire effacer.</p>
 </section>"""
-    urls.append(page("confidentialite", "Confidentialité | Escale", "Politique de confidentialité du site Escale : aucun compte, aucun cookie de suivi.", hero, body))
+    urls.append(page("confidentialite", "Confidentialité | Escale", "Politique de confidentialité du site Escale : aucun compte, mesure d'audience anonyme sans cookie, alertes et bons plans sur demande.", hero, body))
     hero = '<h1>Contact</h1>'
     body = """<section><p>Une question, une erreur sur le site, une destination à ajouter ? Écrivez-nous. Pour une réservation, contactez directement le site où vous avez réservé : Escale ne gère aucune réservation.</p>
 <form class="contact" name="contact" method="POST" action="/contact/merci/" data-netlify="true" netlify-honeypot="site-web">
@@ -425,15 +446,24 @@ def legal_pages():
          '<section><p>Merci, votre message est bien arrivé. Nous vous répondrons par e-mail.</p><p><a class="btn" href="/">Retour à la recherche</a></p></section>')
     return urls
 
+DISTANCES = {}
+
+
 def main():
+    airports_all = {a[0]: a for a in __import__("json").loads((SITE / "data" / "airports.json").read_text(encoding="utf-8"))}
+    _, dist = routes_extra.extend(ROUTES, translations, airports_all)
+    DISTANCES.update(dist)
     urls = [f"{DOMAIN}/"]
+    # Liste des trajets (utilisée par scripts/make_og.js pour les images de partage)
+    (SITE / "data" / "routes.json").write_text(__import__("json").dumps(
+        [[r[0], r[1], r[2], r[3]] for r in ROUTES], ensure_ascii=False), encoding="utf-8")
     urls += [route_page(r) for r in ROUTES]
     urls += [hotel_page(h) for h in HOTELS]
     airports = {a[0]: a for a in __import__("json").loads((SITE / "data" / "airports.json").read_text(encoding="utf-8"))}
     ctx = dict(domain=DOMAIN, tp=TRAVELPAYOUTS, routes=ROUTES, hotels=HOTELS, route_slug=route_slug, hotel_slug=hotel_slug,
-               airports=airports, related=related)
+               airports=airports, related=related, distances=DISTANCES)
     i18n_urls, route_paths, hotel_paths = build_i18n.build(SITE, ctx)
-    urls += i18n_urls + build_i18n.build_indexes(SITE, ctx, route_paths, hotel_paths) + build_i18n.build_deals(SITE, ctx)
+    urls += i18n_urls + build_i18n.build_indexes(SITE, ctx, route_paths, hotel_paths) + build_i18n.build_deals(SITE, ctx) + build_i18n.build_guides(SITE, ctx) + build_i18n.build_about(SITE, ctx)
     urls += legal_pages()
 
     # Liste des guides sur la page d'accueil
@@ -447,6 +477,9 @@ def main():
         by_origin.setdefault(r[2], []).append(f'<li><a href="/{route_slug(r)}/">Vol {E(r[2])} → {E(r[3])}</a></li>')
     links = "".join(group(f"Vols au départ de {E(o)}", items) for o, items in by_origin.items())
     links += group("Hôtels pas chers", [f'<li><a href="/{hotel_slug(h)}/">Hôtel pas cher à {E(h[0])}</a></li>' for h in HOTELS])
+    links += group("Guides pratiques", ['<li><a href="/guides/bagages-avion/">Bagages : ne pas payer plus cher</a></li>',
+                                        '<li><a href="/guides/quand-reserver/">Quand réserver son billet</a></li>',
+                                        '<li><a href="/guides/voyager-avec-enfants/">Voyager avec des enfants</a></li>'])
     links += '<p class="lead guides-langs">Guides in English, en español, em português, بالعربية : ' + " · ".join(
         f'<a href="/{l}/" hreflang="{l}" lang="{l}">{build_i18n.NAMES[l]}</a>' for l in build_i18n.LANGS) + "</p>"
     s = re.sub(r"<!-- TRAVELPAYOUTS:START -->.*?<!-- TRAVELPAYOUTS:END -->",

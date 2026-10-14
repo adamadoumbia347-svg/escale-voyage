@@ -13,6 +13,7 @@
   })();
 </script>
 <script src="/consent.js" defer></script>
+<script src="/track.js" defer></script>
 <title>Vol pas cher Paris Lomé : comparer les prix</title>
 <meta name="description" content="Trouvez un billet d&#x27;avion pas cher Paris – Lomé (CDG → LFW) : durée du vol, aéroport, meilleure période pour réserver et comparaison des prix sur Google Flights, Skyscanner, Kayak et momondo.">
 <link rel="canonical" href="https://escale-voyage.netlify.app/vol-paris-lome/">
@@ -25,7 +26,9 @@
 <meta property="og:title" content="Vol pas cher Paris Lomé : comparer les prix">
 <meta property="og:description" content="Trouvez un billet d&#x27;avion pas cher Paris – Lomé (CDG → LFW) : durée du vol, aéroport, meilleure période pour réserver et comparaison des prix sur Google Flights, Skyscanner, Kayak et momondo.">
 <meta property="og:url" content="https://escale-voyage.netlify.app/vol-paris-lome/">
-<meta property="og:image" content="https://escale-voyage.netlify.app/og-image.png">
+<meta property="og:image" content="https://escale-voyage.netlify.app/og/CDG-LFW.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,6 +63,8 @@
 <script src="/route-prices.js" defer></script>
 <section id="route-calendar" data-from="CDG" data-to="LFW" hidden><h2>Calendrier des prix</h2><p class="small">Prix aller-retour le plus bas trouvé pour chaque jour de départ. Cliquez sur un jour pour lancer la recherche.</p><div class="chips cal-months" role="group"></div><div class="cal-grid" dir="ltr"></div><p class="small cal-legend"></p></section>
 <script src="/route-calendar.js" defer></script>
+<section id="price-alert" class="price-alert" data-from="CDG" data-to="LFW" hidden></section>
+<script src="/alerts.js" defer></script>
 <section><h2>Notre conseil pour ce trajet</h2><p>Comparez avec un vol vers Cotonou (COO) ou Accra (ACC), puis la route : c&#x27;est parfois moins cher.</p></section>
 <section><h2>Comment payer moins cher</h2>
 <ol class="steps">
@@ -81,10 +86,10 @@
 <section class="faq"><h2>Questions fréquentes</h2>
 <details><summary>Combien de temps dure un vol Paris – Lomé ?</summary><p>Comptez environ 6 h en vol direct. Avec une escale, le trajet total dure souvent plusieurs heures de plus selon la correspondance.</p></details><details><summary>Quand réserver un vol Paris – Lomé pas cher ?</summary><p>En général deux à trois mois avant le départ. Les prix montent fortement pendant juillet-août et les fêtes de fin d&#x27;année : réservez plus tôt pour ces périodes.</p></details><details><summary>Quel aéroport à Lomé ?</summary><p>Les vols arrivent à l&#x27;aéroport international Gnassingbé-Eyadéma (code LFW).</p></details><details><summary>Les bagages sont-ils inclus ?</summary><p>Pas toujours. Les tarifs les plus bas n&#x27;incluent parfois qu&#x27;un petit sac. Vérifiez la franchise bagage en soute avant de payer, surtout si vous voyagez avec des valises.</p></details>
 </section>
-<section><h2>Autres trajets</h2><ul class="route-links"><li><a href="/vol-paris-bamako/">Paris → Bamako</a></li><li><a href="/vol-paris-dakar/">Paris → Dakar</a></li><li><a href="/vol-paris-abidjan/">Paris → Abidjan</a></li><li><a href="/vol-paris-conakry/">Paris → Conakry</a></li><li><a href="/vol-paris-douala/">Paris → Douala</a></li><li><a href="/vol-paris-cotonou/">Paris → Cotonou</a></li><li><a href="/vol-paris-ouagadougou/">Paris → Ouagadougou</a></li><li><a href="/vol-paris-casablanca/">Paris → Casablanca</a></li><li><a href="/vol-paris-alger/">Paris → Alger</a></li></ul></section>
+<section><h2>Autres trajets</h2><ul class="route-links"><li><a href="/vol-bruxelles-lome/">Bruxelles → Lomé</a></li><li><a href="/vol-paris-bamako/">Paris → Bamako</a></li><li><a href="/vol-paris-dakar/">Paris → Dakar</a></li><li><a href="/vol-paris-abidjan/">Paris → Abidjan</a></li><li><a href="/vol-paris-conakry/">Paris → Conakry</a></li><li><a href="/vol-paris-douala/">Paris → Douala</a></li><li><a href="/vol-paris-cotonou/">Paris → Cotonou</a></li><li><a href="/vol-paris-ouagadougou/">Paris → Ouagadougou</a></li><li><a href="/vol-paris-casablanca/">Paris → Casablanca</a></li></ul></section>
 </main>
 <footer class="wrap">
-  <nav class="foot-nav" aria-label="Pages du site"><a href="/">Comparer vols, hôtels et voitures</a><a href="/#guides">Guides des trajets</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/contact/">Contact</a><a href="/bons-plans/">Bons plans</a><a href="#cookies" data-open-consent>Gérer les cookies</a></nav>
+  <nav class="foot-nav" aria-label="Pages du site"><a href="/">Comparer vols, hôtels et voitures</a><a href="/#guides">Guides des trajets</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/contact/">Contact</a><a href="/a-propos/">À propos</a><a href="/guides/">Guides</a><a href="/bons-plans/">Bons plans</a><a href="#cookies" data-open-consent>Gérer les cookies</a></nav>
   <p>Escale ne vend pas de billets et ne fixe aucun prix. Les durées et informations sont indicatives : les programmes des compagnies changent, vérifiez toujours sur le site de réservation.</p>
 </footer>
 </body>

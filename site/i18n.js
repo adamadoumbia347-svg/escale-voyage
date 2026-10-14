@@ -1,8 +1,47 @@
 // Traductions de l'accueil : clé = texte anglais, valeur = [espagnol, portugais, arabe].
 // Le français et l'anglais sont directement dans index.html (data-en) et app.js (T("fr", "en")).
 window.ESCALE_I18N = {
+  // Inscription aux bons plans
+  "Get the deals": ["Recibe las ofertas", "Receba as promoções", "احصل على العروض"],
+  "A selection of the best prices, once or twice a month, by email or on WhatsApp. Free, unsubscribe anytime.": ["Una selección de los mejores precios, una o dos veces al mes, por correo o por WhatsApp. Gratis, baja cuando quieras.", "Uma seleção dos melhores preços, uma ou duas vezes por mês, por e-mail ou WhatsApp. Grátis, cancele quando quiser.", "مختارات من أفضل الأسعار، مرة أو مرتين في الشهر، عبر البريد أو واتساب. مجانًا، ويمكنك الإلغاء في أي وقت."],
+  "Email": ["Correo", "E-mail", "البريد الإلكتروني"],
+  "WhatsApp (optional)": ["WhatsApp (opcional)", "WhatsApp (opcional)", "واتساب (اختياري)"],
+  "I agree to receive Escale deals. My details are used only for this; I can unsubscribe at any time.": ["Acepto recibir las ofertas de Escale. Mis datos solo se usan para esto; puedo darme de baja en cualquier momento.", "Aceito receber as promoções da Escale. Os meus dados só servem para isso; posso cancelar a qualquer momento.", "أوافق على تلقي عروض Escale. تُستخدم بياناتي لهذا فقط، ويمكنني الإلغاء في أي وقت."],
+  "Sign me up": ["Suscribirme", "Inscrever-me", "اشترك"],
+  // Calculateur du vrai prix
+  "Real price calculator (with baggage)": ["Calculadora del precio real (con equipaje)", "Calculadora do preço real (com bagagem)", "حاسبة السعر الحقيقي (مع الأمتعة)"],
+  "The cheapest ticket is not always the cheapest trip. Enter up to three offers to compare the total with suitcases and fees.": [
+    "El billete más barato no siempre es el viaje más barato. Introduce hasta tres ofertas para comparar el total con maletas y gastos.",
+    "O bilhete mais barato nem sempre é a viagem mais barata. Introduza até três ofertas para comparar o total com malas e taxas.",
+    "أرخص تذكرة ليست دائمًا أرخص رحلة. أدخل حتى ثلاثة عروض لمقارنة المجموع مع الحقائب والرسوم."],
+  "Suitcases needed per person": ["Maletas facturadas por persona", "Malas de porão por pessoa", "الحقائب المشحونة لكل شخص"],
+  "Offers": ["Ofertas", "Ofertas", "العروض"],
+  "Ticket price per person": ["Precio del billete por persona", "Preço do bilhete por pessoa", "سعر التذكرة للشخص"],
+  "Suitcases included per person": ["Maletas incluidas por persona", "Malas incluídas por pessoa", "الحقائب المشمولة لكل شخص"],
+  "Price of one extra suitcase": ["Precio de una maleta extra", "Preço de uma mala extra", "سعر حقيبة إضافية"],
+  "Seats and other fees per person": ["Asientos y otros gastos por persona", "Lugares e outras taxas por pessoa", "المقاعد ورسوم أخرى للشخص"],
+  "Real total": ["Total real", "Total real", "المجموع الحقيقي"],
+  "Offer {w} is the cheapest: {d} less than offer {l}.": ["La oferta {w} es la más barata: {d} menos que la oferta {l}.", "A oferta {w} é a mais barata: {d} a menos do que a oferta {l}.", "العرض {w} هو الأرخص: أقل بـ {d} من العرض {l}."],
+  // Recherche par mois et budget
+  "Whole month (I’m flexible)": ["Todo el mes (soy flexible)", "O mês inteiro (sou flexível)", "الشهر كله (أنا مرن)"],
+  "Month": ["Mes", "Mês", "الشهر"],
+  "Trip length": ["Duración del viaje", "Duração da viagem", "مدة الإقامة"],
+  "{n} nights": ["{n} noches", "{n} noites", "{n} ليالٍ"],
+  "Choose a destination to see prices for the whole month.": ["Elige un destino para ver los precios de todo el mes.", "Escolha um destino para ver os preços do mês inteiro.", "اختر وجهة لرؤية أسعار الشهر كله."],
+  "{n}-night trip · click a day to search": ["Viaje de {n} noches · haz clic en un día para buscar", "Viagem de {n} noites · clique num dia para pesquisar", "إقامة {n} ليالٍ · انقر على يوم للبحث"],
+  "Skyscanner: whole month": ["Skyscanner: todo el mes", "Skyscanner: o mês inteiro", "Skyscanner: الشهر كله"],
+  "Month view with the price of each day.": ["Vista del mes con el precio de cada día.", "Vista do mês com o preço de cada dia.", "عرض الشهر مع سعر كل يوم."],
+  "Price graph for the month.": ["Gráfico de precios del mes.", "Gráfico de preços do mês.", "رسم بياني لأسعار الشهر."],
+  "Loading prices for the month…": ["Cargando los precios del mes…", "A carregar os preços do mês…", "جارٍ تحميل أسعار الشهر…"],
+  "No known prices for this month yet. Use the links below.": ["Aún no hay precios para este mes. Usa los enlaces de abajo.", "Ainda não há preços para este mês. Use os links abaixo.", "لا توجد أسعار معروفة لهذا الشهر بعد. استخدم الروابط أدناه."],
+  "Cheapest days in {m}": ["Días más baratos en {m}", "Dias mais baratos em {m}", "أرخص الأيام في {m}"],
+  "Cheaper": ["Más barato", "Mais barato", "أرخص"],
+  "More expensive": ["Más caro", "Mais caro", "أغلى"],
+  "Max budget": ["Presupuesto máximo", "Orçamento máximo", "الميزانية القصوى"],
+  "{n} destinations": ["{n} destinos", "{n} destinos", "{n} وجهات"],
   // Bons plans et « Avant de partir »
   "See all this week’s deals →": ["Ver todas las ofertas de la semana →", "Ver todas as promoções da semana →", "اعرض كل عروض هذا الأسبوع ←"],
+  "About": ["Acerca de", "Sobre", "عن Escale"],
   "Deals": ["Ofertas", "Promoções", "العروض"],
   "Before you go": ["Antes de salir", "Antes de partir", "قبل السفر"],
   "Useful services for your trip to {c}.": ["Servicios útiles para tu viaje a {c}.", "Serviços úteis para a sua viagem a {c}.", "خدمات مفيدة لرحلتك إلى {c}."],

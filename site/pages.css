@@ -130,3 +130,28 @@ a.cal-day { color: var(--ink); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .deal-price { color: #4cc38a; } }
 :root[data-theme="dark"] .deal-price { color: #4cc38a; }
 .hero-lead { margin: 0 0 18px; max-width: 62ch; color: color-mix(in srgb, var(--board-ink) 80%, transparent); }
+
+/* Alerte prix */
+.price-alert { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+.price-alert h2 { margin-top: 0; }
+.alert-form { display: grid; gap: 12px; }
+.alert-row { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 10px; }
+.alert-row label { display: grid; gap: 4px; font: 600 13px/1.2 var(--f-body); color: var(--muted); }
+.alert-row input { font: 500 16px/1.2 var(--f-body); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 11px; min-width: 0; }
+.alert-consent { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: var(--muted); }
+.alert-consent input { margin-top: 3px; }
+.alert-form .btn { justify-self: start; border: 0; cursor: pointer; font: 700 15px/1 var(--f-body); }
+.alert-form .btn:disabled { opacity: .6; cursor: default; }
+@media (max-width: 520px) { .alert-row { grid-template-columns: 1fr; } }
+
+/* Inscription aux bons plans */
+.nl-block .nl { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: grid; gap: 12px; }
+.nl h2 { margin: 0; }
+.nl-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.nl-row label { display: grid; gap: 4px; font: 600 13px/1.2 var(--f-body); color: var(--muted); }
+.nl-row input { font: 500 16px/1.2 var(--f-body); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 11px; min-width: 0; }
+.nl-consent { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: var(--muted); }
+.nl-consent input { margin-top: 3px; }
+.nl .btn { justify-self: start; border: 0; cursor: pointer; font: 700 15px/1 var(--f-body); }
+.nl .btn:disabled { opacity: .6; }
+@media (max-width: 520px) { .nl-row { grid-template-columns: 1fr; } }

@@ -13,6 +13,7 @@
   })();
 </script>
 <script src="/consent.js" defer></script>
+<script src="/track.js" defer></script>
 <title>رحلات طيران رخيصة من باريس إلى كينشاسا: قارن الأسعار</title>
 <meta name="description" content="ابحث عن رحلة رخيصة من باريس إلى كينشاسا (CDG → FIH): مدة الرحلة، المطار، أفضل وقت للحجز ومقارنة الأسعار على Google Flights وSkyscanner وKayak وmomondo.">
 <link rel="canonical" href="https://escale-voyage.netlify.app/ar/flights-paris-kinshasa/">
@@ -31,7 +32,9 @@
 <meta property="og:title" content="رحلات طيران رخيصة من باريس إلى كينشاسا: قارن الأسعار">
 <meta property="og:description" content="ابحث عن رحلة رخيصة من باريس إلى كينشاسا (CDG → FIH): مدة الرحلة، المطار، أفضل وقت للحجز ومقارنة الأسعار على Google Flights وSkyscanner وKayak وmomondo.">
 <meta property="og:url" content="https://escale-voyage.netlify.app/ar/flights-paris-kinshasa/">
-<meta property="og:image" content="https://escale-voyage.netlify.app/og-image.png">
+<meta property="og:image" content="https://escale-voyage.netlify.app/og/CDG-FIH.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,6 +63,8 @@
 <script src="/route-prices.js" defer></script>
 <section id="route-calendar" data-from="CDG" data-to="FIH" hidden><h2>تقويم الأسعار</h2><p class="small">أقل سعر ذهاب وعودة وُجد لكل يوم مغادرة. انقر على يوم لبدء البحث.</p><div class="chips cal-months" role="group"></div><div class="cal-grid" dir="ltr"></div><p class="small cal-legend"></p></section>
 <script src="/route-calendar.js" defer></script>
+<section id="price-alert" class="price-alert" data-from="CDG" data-to="FIH" hidden></section>
+<script src="/alerts.js" defer></script>
 <section><h2>نصيحتنا لهذا الخط</h2><p>قارن مع الانطلاق من بروكسل، المرتبطة تقليديًا بكينشاسا بشكل جيد جدًا: فرق السعر قد يغطي قطار باريس–بروكسل.</p></section>
 <section><h2>كيف تدفع أقل</h2>
 <ol class="steps"><li><strong>فعّل التواريخ المرنة.</strong> تغيير موعد المغادرة يومًا أو يومين يغيّر السعر غالبًا أكثر من اختيار الموقع.</li><li><strong>قارن ثلاثة مواقع على الأقل.</strong> يفتح Escale بحثك مرتّبًا حسب السعر على Google Flights وSkyscanner وKayak وmomondo.</li><li><strong>تحقّق من الأمتعة.</strong> أضف ثمن الحقيبة قبل المقارنة بين سعرين.</li><li><strong>فعّل تنبيه الأسعار</strong> على Google Flights أو Kayak إذا كان سفرك بعد عدة أشهر.</li></ol>
@@ -76,10 +81,10 @@
 <section class="faq"><h2>أسئلة شائعة</h2>
 <details><summary>كم تستغرق الرحلة من باريس إلى كينشاسا؟</summary><p>حوالي 8 ساعات في رحلة مباشرة. مع التوقف، تطول الرحلة غالبًا عدة ساعات حسب مدة الانتظار.</p></details><details><summary>متى أحجز رحلة رخيصة من باريس إلى كينشاسا؟</summary><p>عادةً قبل شهرين إلى ثلاثة أشهر من السفر. ترتفع الأسعار كثيرًا خلال: يوليو وأغسطس وعطلات نهاية السنة. احجز مبكرًا لهذه الفترات.</p></details><details><summary>في أي مطار تصل الرحلات إلى كينشاسا؟</summary><p>تصل الرحلات إلى Ndjili International Airport (FIH).</p></details><details><summary>هل الأمتعة مشمولة؟</summary><p>ليس دائمًا. أرخص الأسعار تشمل أحيانًا حقيبة صغيرة فقط. تحقّق من وزن الأمتعة المسموح قبل الدفع.</p></details>
 </section>
-<section><h2>خطوط أخرى</h2><ul class="route-links"><li><a href="/ar/flights-brussels-kinshasa/">بروكسل ← كينشاسا</a></li><li><a href="/ar/flights-paris-bamako/">باريس ← باماكو</a></li><li><a href="/ar/flights-paris-dakar/">باريس ← داكار</a></li><li><a href="/ar/flights-paris-abidjan/">باريس ← أبيدجان</a></li><li><a href="/ar/flights-paris-conakry/">باريس ← كوناكري</a></li><li><a href="/ar/flights-paris-douala/">باريس ← دوالا</a></li><li><a href="/ar/flights-paris-lome/">باريس ← لومي</a></li><li><a href="/ar/flights-paris-cotonou/">باريس ← كوتونو</a></li><li><a href="/ar/flights-paris-ouagadougou/">باريس ← واغادوغو</a></li></ul></section>
+<section><h2>خطوط أخرى</h2><ul class="route-links"><li><a href="/ar/flights-brussels-kinshasa/">بروكسل ← كينشاسا</a></li><li><a href="/ar/flights-london-kinshasa/">لندن ← كينشاسا</a></li><li><a href="/ar/flights-paris-bamako/">باريس ← باماكو</a></li><li><a href="/ar/flights-paris-dakar/">باريس ← داكار</a></li><li><a href="/ar/flights-paris-abidjan/">باريس ← أبيدجان</a></li><li><a href="/ar/flights-paris-conakry/">باريس ← كوناكري</a></li><li><a href="/ar/flights-paris-douala/">باريس ← دوالا</a></li><li><a href="/ar/flights-paris-lome/">باريس ← لومي</a></li><li><a href="/ar/flights-paris-cotonou/">باريس ← كوتونو</a></li></ul></section>
 </main>
 <footer class="wrap">
-  <nav class="foot-nav"><a href="/?lang=ar">قارن الرحلات والفنادق والسيارات</a><a href="/mentions-legales/">الإشعار القانوني (FR)</a><a href="/confidentialite/">الخصوصية (FR)</a><a href="/contact/">Contact</a><a href="/ar/deals/">العروض</a><a href="#cookies" data-open-consent>إعدادات ملفات تعريف الارتباط</a></nav>
+  <nav class="foot-nav"><a href="/?lang=ar">قارن الرحلات والفنادق والسيارات</a><a href="/mentions-legales/">الإشعار القانوني (FR)</a><a href="/confidentialite/">الخصوصية (FR)</a><a href="/contact/">Contact</a><a href="/ar/about/">عن Escale</a><a href="/ar/guides/">Guides</a><a href="/ar/deals/">العروض</a><a href="#cookies" data-open-consent>إعدادات ملفات تعريف الارتباط</a></nav>
   <p>لا يبيع Escale التذاكر ولا يحدد الأسعار. المدد والمعلومات تقريبية: جداول شركات الطيران تتغير، تحقّق دائمًا على موقع الحجز.</p>
 </footer>
 </body>

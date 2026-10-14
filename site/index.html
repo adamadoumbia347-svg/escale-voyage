@@ -14,6 +14,7 @@
   })();
 </script>
 <script src="/consent.js" defer></script>
+<script src="/track.js" defer></script>
 <!-- TRAVELPAYOUTS:END -->
 <title>Escale Comparateur</title>
 <meta name="description" content="Trouvez les vols les moins chers, les hôtels et les locations de voitures en une seule recherche : Google Flights, Skyscanner, Kayak, Booking, Agoda et plus. Gratuit, sans inscription.">
@@ -54,7 +55,7 @@
   --board-ink: #f3f5f8;
   --accent: #0b5cd6;
   --accent-ink: #ffffff;
-  --ok: #18794e;
+  --ok: #146c45;
   --warn: #9a5b00;
   --focus: #0b5cd6;
   --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
@@ -279,6 +280,48 @@ html[lang="ar"] label, html[lang="ar"] .label, html[lang="ar"] .pill, html[lang=
 .extra div { display: grid; gap: 2px; min-width: 0; }
 .extra div span { color: var(--muted); font-size: 14px; }
 @media (max-width: 560px) { .extra { grid-template-columns: 40px 1fr; } .extra .go { grid-column: 1 / -1; text-align: center; } }
+/* Budget et calendrier du mois */
+.budget { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin: 12px 0 4px; }
+.budget input[type="range"] { width: min(320px, 100%); min-height: 0; padding: 0; accent-color: var(--accent); background: transparent; border: 0; }
+.budget output { font: 700 15px/1 var(--f-mono); color: var(--ok); }
+.ex-card[hidden] { display: none !important; }
+:root { --t0: #1f9d55; --t1: #7cb342; --t2: #f2b705; --t3: #f08c2e; --t4: #d9483b; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; max-width: 620px; }
+.cal-head { text-align: center; font: 600 11px/1 var(--f-body); color: var(--muted); padding: 4px 0; text-transform: uppercase; }
+.cal-day { appearance: none; border: 0; font: inherit; display: grid; place-items: center; gap: 1px; min-height: 52px; border-radius: 8px; color: var(--ink); background: var(--line); font-variant-numeric: tabular-nums; cursor: pointer; }
+.cal-day b { font: 700 13px/1 var(--f-body); }
+.cal-day span { font: 700 11px/1 var(--f-mono); }
+.cal-day.off { background: transparent; color: var(--muted); border: 1px dashed var(--line); cursor: default; }
+.cal-day.t0 { background: color-mix(in srgb, var(--t0) 30%, var(--surface)); } .cal-day.t1 { background: color-mix(in srgb, var(--t1) 30%, var(--surface)); }
+.cal-day.t2 { background: color-mix(in srgb, var(--t2) 32%, var(--surface)); } .cal-day.t3 { background: color-mix(in srgb, var(--t3) 32%, var(--surface)); }
+.cal-day.t4 { background: color-mix(in srgb, var(--t4) 30%, var(--surface)); }
+button.cal-day:not(.off):hover { outline: 2px solid var(--accent); }
+.cal-scale { display: inline-flex; gap: 2px; vertical-align: middle; }
+.cal-scale i { width: 14px; height: 10px; border-radius: 2px; }
+.cal-scale .t0 { background: var(--t0); } .cal-scale .t1 { background: var(--t1); } .cal-scale .t2 { background: var(--t2); } .cal-scale .t3 { background: var(--t3); } .cal-scale .t4 { background: var(--t4); }
+@media (max-width: 420px) { .cal-day { min-height: 44px; } .cal-day span { font-size: 9px; } }
+/* Calculateur du vrai prix */
+.calc { padding: 0; }
+.calc-top { max-width: 520px; }
+.calc-table { display: grid; grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr)); gap: 8px 10px; align-items: center; max-width: 760px; }
+.calc-table > strong { font: 700 14px/1 var(--f-mono); text-align: center; }
+.calc-table label, .calc-total-label { text-transform: none; letter-spacing: 0; font: 600 14px/1.3 var(--f-body); color: var(--ink); }
+.calc-table input { min-height: 40px; padding: 8px; text-align: center; font-variant-numeric: tabular-nums; }
+.calc-table output { text-align: center; font: 700 16px/1.2 var(--f-mono); padding: 10px 4px; border-radius: 8px; background: var(--bg); border: 1px solid var(--line); font-variant-numeric: tabular-nums; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.calc-table output.best { background: color-mix(in srgb, var(--ok) 14%, var(--surface)); border-color: var(--ok); color: var(--ok); }
+@media (max-width: 560px) { .calc-table { grid-template-columns: minmax(0, 1fr) repeat(3, minmax(0, 0.9fr)); gap: 6px; } .calc-table label, .calc-total-label { font-size: 12px; } .calc-table output { font-size: 13px; } }
+/* Inscription aux bons plans */
+.nl-block .nl { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: grid; gap: 12px; max-width: 760px; }
+.nl h2 { margin: 0; }
+.nl-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.nl-row label { display: grid; gap: 4px; }
+.nl-row label span { font: 600 12px/1.2 var(--f-body); text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+.nl-consent { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: var(--muted); text-transform: none; letter-spacing: 0; font-weight: 400; }
+.nl-consent input { width: 18px; height: 18px; min-height: 0; margin-top: 2px; }
+.nl .btn { justify-self: start; }
+.nl .btn:disabled { opacity: .6; }
+.hp { position: absolute; left: -9999px; }
+@media (max-width: 560px) { .nl-row { grid-template-columns: 1fr; } }
 footer { margin-top: 48px; padding-block: 24px 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
 footer p { margin: 0 0 6px; max-width: 75ch; }
 @media (prefers-reduced-motion: no-preference) {
@@ -315,16 +358,17 @@ footer p { margin: 0 0 6px; max-width: 75ch; }
 <main class="wrap">
   <div class="card">
     <div class="tabs" role="tablist" aria-label="Type de recherche" data-en-aria="Search type">
-      <button class="tab" role="tab" id="tab-vols" aria-controls="form-vols" aria-selected="true" data-tab="vols">
+      <button class="tab" role="tab" id="tab-vols" aria-controls="panel-vols" aria-selected="true" data-tab="vols">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg><span data-en="Flights">Vols</span></button>
-      <button class="tab" role="tab" id="tab-hotels" aria-controls="form-hotels" aria-selected="false" data-tab="hotels">
+      <button class="tab" role="tab" id="tab-hotels" aria-controls="panel-hotels" aria-selected="false" data-tab="hotels">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9a4 4 0 0 0-4-4z"/></svg><span data-en="Hotels">Hôtels</span></button>
-      <button class="tab" role="tab" id="tab-voitures" aria-controls="form-voitures" aria-selected="false" data-tab="voitures">
+      <button class="tab" role="tab" id="tab-voitures" aria-controls="panel-voitures" aria-selected="false" data-tab="voitures">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 6a1.5 1.5 0 0 0-1.4-1h-11a1.5 1.5 0 0 0-1.4 1L3 12v8a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h12v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-8zM6.5 16a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm11 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM5 11l1.5-4.5h11L19 11z"/></svg><span data-en="Cars">Voitures</span></button>
     </div>
 
     <!-- VOLS -->
-    <form id="form-vols" role="tabpanel" aria-labelledby="tab-vols" novalidate>
+    <div id="panel-vols" role="tabpanel" aria-labelledby="tab-vols">
+<form id="form-vols" novalidate>
       <div class="opts">
         <div class="seg" role="radiogroup" aria-label="Type de trajet" data-en-aria="Trip type">
           <input type="radio" name="trip" id="trip-rt" value="rt" checked><label for="trip-rt" data-en="Round trip">Aller-retour</label>
@@ -332,6 +376,7 @@ footer p { margin: 0 0 6px; max-width: 75ch; }
         </div>
         <label class="check"><input type="checkbox" id="f-flex" checked> <span data-en="Flexible dates (±3 days)">Dates flexibles (±3 jours)</span></label>
         <label class="check"><input type="checkbox" id="f-direct"> <span data-en="Direct flights only">Vols directs uniquement</span></label>
+        <label class="check"><input type="checkbox" id="f-monthmode"> <span data-en="Whole month (I’m flexible)">Tout le mois (je suis flexible)</span></label>
       </div>
       <div class="row route">
         <div class="field">
@@ -347,7 +392,9 @@ footer p { margin: 0 0 6px; max-width: 75ch; }
         </div>
       </div>
       <div class="row">
-        <div class="field"><label for="f-dep" data-en="Depart">Aller</label><input type="date" id="f-dep" required></div>
+        <div class="field" id="f-dep-wrap"><label for="f-dep" data-en="Depart">Aller</label><input type="date" id="f-dep" required></div>
+        <div class="field" id="f-month-wrap" hidden><label for="f-month" data-en="Month">Mois</label><select id="f-month"></select></div>
+        <div class="field" id="f-stay-wrap" hidden><label for="f-stay" data-en="Trip length">Durée du séjour</label><select id="f-stay"></select></div>
         <div class="field" id="f-ret-wrap"><label for="f-ret" data-en="Return">Retour</label><input type="date" id="f-ret"></div>
         <div class="field"><label for="f-adults" data-en="Adults">Adultes</label>
           <select id="f-adults"></select></div>
@@ -366,9 +413,11 @@ footer p { margin: 0 0 6px; max-width: 75ch; }
         <button class="btn" type="submit" data-en="Find the cheapest flights">Trouver les vols les moins chers</button>
       </div>
     </form>
+    </div>
 
     <!-- HOTELS -->
-    <form id="form-hotels" role="tabpanel" aria-labelledby="tab-hotels" novalidate hidden>
+    <div id="panel-hotels" role="tabpanel" aria-labelledby="tab-hotels" hidden>
+<form id="form-hotels" novalidate>
       <div class="row">
         <div class="field" style="grid-column: 1 / -1">
           <label for="h-dest" data-en="Destination">Destination</label>
@@ -386,9 +435,11 @@ footer p { margin: 0 0 6px; max-width: 75ch; }
         <button class="btn" type="submit" data-en="Compare hotels">Comparer les hôtels</button>
       </div>
     </form>
+    </div>
 
     <!-- VOITURES -->
-    <form id="form-voitures" role="tabpanel" aria-labelledby="tab-voitures" novalidate hidden>
+    <div id="panel-voitures" role="tabpanel" aria-labelledby="tab-voitures" hidden>
+<form id="form-voitures" novalidate>
       <div class="opts">
         <label class="check"><input type="checkbox" id="c-other"> <span data-en="Drop off at a different location">Restituer dans un autre lieu</span></label>
       </div>
@@ -411,6 +462,7 @@ footer p { margin: 0 0 6px; max-width: 75ch; }
         <button class="btn" type="submit" data-en="Compare car rentals">Comparer les locations</button>
       </div>
     </form>
+    </div>
   </div>
 
   <div id="results" class="results" aria-live="polite"></div>
@@ -420,9 +472,26 @@ footer p { margin: 0 0 6px; max-width: 75ch; }
       <h2><span data-en="Cheap trip ideas from">Idées de voyage pas chères depuis</span> <span id="ex-city" class="ex-city"></span></h2>
       <div class="chips" id="ex-months" role="group" aria-label="Mois de départ" data-en-aria="Departure month"></div>
     </div>
+    <div class="budget" id="ex-budget" hidden>
+      <label for="ex-max" data-en="Max budget">Budget max</label>
+      <input type="range" id="ex-max" min="0" max="100" step="1">
+      <output id="ex-max-out" for="ex-max"></output>
+    </div>
     <p class="lead" data-en="Real round-trip prices found recently by travelers. Click a destination to fill in the search.">Prix aller-retour réels trouvés récemment par des voyageurs. Cliquez sur une destination pour remplir la recherche.</p>
     <div class="ex-grid" id="ex-grid"></div>
     <p><a class="see-all" id="deals-link" href="/bons-plans/" data-en="See all this week’s deals →">Voir tous les bons plans de la semaine →</a></p>
+  </section>
+
+  <section class="block nl-block" id="newsletter">
+<form class="nl" name="bons-plans" method="POST" data-netlify="true" netlify-honeypot="site-web" novalidate>
+  <input type="hidden" name="form-name" value="bons-plans"><input type="hidden" name="langue" value="fr">
+  <p class="hp" hidden><label>Ne pas remplir <input name="site-web" tabindex="-1" autocomplete="off"></label></p>
+  <h2 data-en="Get the deals">Recevez les bons plans</h2><p class="small nl-lead" data-en="A selection of the best prices, once or twice a month, by email or on WhatsApp. Free, unsubscribe anytime.">Une sélection des meilleurs prix, une à deux fois par mois, par e-mail ou sur WhatsApp. Gratuit, désinscription à tout moment.</p>
+  <div class="nl-row"><label><span data-en="Email">E-mail</span><input type="email" name="email" autocomplete="email"></label>
+  <label><span data-en="WhatsApp (optional)">WhatsApp (facultatif)</span><input type="tel" name="whatsapp" autocomplete="tel" placeholder="+33 6 12 34 56 78"></label></div>
+  <label class="nl-consent"><input type="checkbox" name="consent" value="oui"> <span data-en="I agree to receive Escale deals. My details are used only for this; I can unsubscribe at any time.">J’accepte de recevoir les bons plans d’Escale. Mes coordonnées servent uniquement à cela ; je peux me désinscrire à tout moment.</span></label>
+  <button class="btn" type="submit" data-en="Sign me up">Je m’inscris</button><p class="small nl-msg" role="status"></p>
+</form>
   </section>
 
   <section class="block" id="recent-block" hidden>
@@ -448,11 +517,36 @@ footer p { margin: 0 0 6px; max-width: 75ch; }
     </div>
   </section>
 
+  <section class="block" id="calculateur">
+    <h2 data-en="Real price calculator (with baggage)">Calculateur du vrai prix (bagages compris)</h2>
+    <p class="lead" data-en="The cheapest ticket is not always the cheapest trip. Enter up to three offers to compare the total with suitcases and fees.">Le billet le moins cher n’est pas toujours le voyage le moins cher. Saisissez jusqu’à trois offres pour comparer le total avec les valises et les frais.</p>
+    <form class="calc" id="calc" novalidate>
+      <div class="row calc-top">
+        <div class="field"><label for="calc-pax" data-en="Travellers">Voyageurs</label><input type="number" id="calc-pax" min="1" max="9" value="2" inputmode="numeric"></div>
+        <div class="field"><label for="calc-bags" data-en="Suitcases needed per person">Valises en soute par personne</label><input type="number" id="calc-bags" min="0" max="4" value="1" inputmode="numeric"></div>
+      </div>
+      <div class="calc-table" role="group" aria-label="Offres" data-en-aria="Offers">
+        <span></span><strong>A</strong><strong>B</strong><strong>C</strong>
+        <label for="calc-a-price" data-en="Ticket price per person">Prix du billet par personne</label>
+        <input type="number" id="calc-a-price" min="0" inputmode="decimal" value="420"><input type="number" id="calc-b-price" min="0" inputmode="decimal" value="365" aria-label="B"><input type="number" id="calc-c-price" min="0" inputmode="decimal" aria-label="C">
+        <label for="calc-a-incl" data-en="Suitcases included per person">Valises incluses par personne</label>
+        <input type="number" id="calc-a-incl" min="0" max="4" value="1" inputmode="numeric"><input type="number" id="calc-b-incl" min="0" max="4" value="0" inputmode="numeric" aria-label="B"><input type="number" id="calc-c-incl" min="0" max="4" value="0" inputmode="numeric" aria-label="C">
+        <label for="calc-a-bag" data-en="Price of one extra suitcase">Prix d’une valise en plus</label>
+        <input type="number" id="calc-a-bag" min="0" inputmode="decimal" value="60"><input type="number" id="calc-b-bag" min="0" inputmode="decimal" value="75" aria-label="B"><input type="number" id="calc-c-bag" min="0" inputmode="decimal" aria-label="C">
+        <label for="calc-a-fees" data-en="Seats and other fees per person">Sièges et autres frais par personne</label>
+        <input type="number" id="calc-a-fees" min="0" inputmode="decimal" value="0"><input type="number" id="calc-b-fees" min="0" inputmode="decimal" value="15" aria-label="B"><input type="number" id="calc-c-fees" min="0" inputmode="decimal" aria-label="C">
+        <span class="calc-total-label" data-en="Real total">Total réel</span>
+        <output id="calc-a-out"></output><output id="calc-b-out"></output><output id="calc-c-out"></output>
+      </div>
+      <p class="summary" id="calc-verdict" role="status"></p>
+    </form>
+  </section>
+
   <section class="block" id="guides">
     <h2 data-en="Route and hotel guides (in French)">Guides des trajets et des hôtels</h2>
     <p class="lead" data-en="Flight time, airports, best time to book, where to stay: our tips destination by destination.">Durée du vol, aéroports, meilleure période pour réserver, quartiers où dormir : nos conseils destination par destination.</p>
     <!-- ROUTES:START -->
-    <h3 class="sub-h">Vols au départ de Paris</h3><ul class="route-links"><li><a href="/vol-paris-bamako/">Vol Paris → Bamako</a></li><li><a href="/vol-paris-dakar/">Vol Paris → Dakar</a></li><li><a href="/vol-paris-abidjan/">Vol Paris → Abidjan</a></li><li><a href="/vol-paris-conakry/">Vol Paris → Conakry</a></li><li><a href="/vol-paris-douala/">Vol Paris → Douala</a></li><li><a href="/vol-paris-lome/">Vol Paris → Lomé</a></li><li><a href="/vol-paris-cotonou/">Vol Paris → Cotonou</a></li><li><a href="/vol-paris-ouagadougou/">Vol Paris → Ouagadougou</a></li><li><a href="/vol-paris-casablanca/">Vol Paris → Casablanca</a></li><li><a href="/vol-paris-alger/">Vol Paris → Alger</a></li><li><a href="/vol-paris-tunis/">Vol Paris → Tunis</a></li><li><a href="/vol-paris-montreal/">Vol Paris → Montréal</a></li><li><a href="/vol-paris-dubai/">Vol Paris → Dubaï</a></li><li><a href="/vol-paris-kinshasa/">Vol Paris → Kinshasa</a></li><li><a href="/vol-paris-libreville/">Vol Paris → Libreville</a></li><li><a href="/vol-paris-yaounde/">Vol Paris → Yaoundé</a></li><li><a href="/vol-paris-nouakchott/">Vol Paris → Nouakchott</a></li><li><a href="/vol-paris-niamey/">Vol Paris → Niamey</a></li><li><a href="/vol-paris-marrakech/">Vol Paris → Marrakech</a></li><li><a href="/vol-paris-istanbul/">Vol Paris → Istanbul</a></li><li><a href="/vol-paris-djeddah/">Vol Paris → Djeddah</a></li><li><a href="/vol-paris-pointe-a-pitre/">Vol Paris → Pointe-à-Pitre</a></li><li><a href="/vol-paris-la-reunion/">Vol Paris → La Réunion</a></li></ul><h3 class="sub-h">Vols au départ de Bruxelles</h3><ul class="route-links"><li><a href="/vol-bruxelles-kinshasa/">Vol Bruxelles → Kinshasa</a></li><li><a href="/vol-bruxelles-dakar/">Vol Bruxelles → Dakar</a></li><li><a href="/vol-bruxelles-abidjan/">Vol Bruxelles → Abidjan</a></li><li><a href="/vol-bruxelles-douala/">Vol Bruxelles → Douala</a></li></ul><h3 class="sub-h">Vols au départ de Marseille</h3><ul class="route-links"><li><a href="/vol-marseille-alger/">Vol Marseille → Alger</a></li><li><a href="/vol-marseille-tunis/">Vol Marseille → Tunis</a></li><li><a href="/vol-marseille-dakar/">Vol Marseille → Dakar</a></li></ul><h3 class="sub-h">Vols au départ de Lyon</h3><ul class="route-links"><li><a href="/vol-lyon-casablanca/">Vol Lyon → Casablanca</a></li><li><a href="/vol-lyon-dakar/">Vol Lyon → Dakar</a></li></ul><h3 class="sub-h">Vols au départ de Genève</h3><ul class="route-links"><li><a href="/vol-geneve-casablanca/">Vol Genève → Casablanca</a></li><li><a href="/vol-geneve-dakar/">Vol Genève → Dakar</a></li></ul><h3 class="sub-h">Hôtels pas chers</h3><ul class="route-links"><li><a href="/hotel-pas-cher-dakar/">Hôtel pas cher à Dakar</a></li><li><a href="/hotel-pas-cher-abidjan/">Hôtel pas cher à Abidjan</a></li><li><a href="/hotel-pas-cher-bamako/">Hôtel pas cher à Bamako</a></li><li><a href="/hotel-pas-cher-casablanca/">Hôtel pas cher à Casablanca</a></li><li><a href="/hotel-pas-cher-marrakech/">Hôtel pas cher à Marrakech</a></li><li><a href="/hotel-pas-cher-douala/">Hôtel pas cher à Douala</a></li><li><a href="/hotel-pas-cher-conakry/">Hôtel pas cher à Conakry</a></li><li><a href="/hotel-pas-cher-lome/">Hôtel pas cher à Lomé</a></li><li><a href="/hotel-pas-cher-cotonou/">Hôtel pas cher à Cotonou</a></li><li><a href="/hotel-pas-cher-kinshasa/">Hôtel pas cher à Kinshasa</a></li><li><a href="/hotel-pas-cher-alger/">Hôtel pas cher à Alger</a></li><li><a href="/hotel-pas-cher-tunis/">Hôtel pas cher à Tunis</a></li><li><a href="/hotel-pas-cher-paris/">Hôtel pas cher à Paris</a></li><li><a href="/hotel-pas-cher-dubai/">Hôtel pas cher à Dubaï</a></li><li><a href="/hotel-pas-cher-istanbul/">Hôtel pas cher à Istanbul</a></li><li><a href="/hotel-pas-cher-montreal/">Hôtel pas cher à Montréal</a></li></ul><p class="lead guides-langs">Guides in English, en español, em português, بالعربية : <a href="/en/" hreflang="en" lang="en">English</a> · <a href="/es/" hreflang="es" lang="es">Español</a> · <a href="/pt/" hreflang="pt" lang="pt">Português</a> · <a href="/ar/" hreflang="ar" lang="ar">العربية</a></p>
+    <h3 class="sub-h">Vols au départ de Paris</h3><ul class="route-links"><li><a href="/vol-paris-bamako/">Vol Paris → Bamako</a></li><li><a href="/vol-paris-dakar/">Vol Paris → Dakar</a></li><li><a href="/vol-paris-abidjan/">Vol Paris → Abidjan</a></li><li><a href="/vol-paris-conakry/">Vol Paris → Conakry</a></li><li><a href="/vol-paris-douala/">Vol Paris → Douala</a></li><li><a href="/vol-paris-lome/">Vol Paris → Lomé</a></li><li><a href="/vol-paris-cotonou/">Vol Paris → Cotonou</a></li><li><a href="/vol-paris-ouagadougou/">Vol Paris → Ouagadougou</a></li><li><a href="/vol-paris-casablanca/">Vol Paris → Casablanca</a></li><li><a href="/vol-paris-alger/">Vol Paris → Alger</a></li><li><a href="/vol-paris-tunis/">Vol Paris → Tunis</a></li><li><a href="/vol-paris-montreal/">Vol Paris → Montréal</a></li><li><a href="/vol-paris-dubai/">Vol Paris → Dubaï</a></li><li><a href="/vol-paris-kinshasa/">Vol Paris → Kinshasa</a></li><li><a href="/vol-paris-libreville/">Vol Paris → Libreville</a></li><li><a href="/vol-paris-yaounde/">Vol Paris → Yaoundé</a></li><li><a href="/vol-paris-nouakchott/">Vol Paris → Nouakchott</a></li><li><a href="/vol-paris-niamey/">Vol Paris → Niamey</a></li><li><a href="/vol-paris-marrakech/">Vol Paris → Marrakech</a></li><li><a href="/vol-paris-istanbul/">Vol Paris → Istanbul</a></li><li><a href="/vol-paris-djeddah/">Vol Paris → Djeddah</a></li><li><a href="/vol-paris-pointe-a-pitre/">Vol Paris → Pointe-à-Pitre</a></li><li><a href="/vol-paris-la-reunion/">Vol Paris → La Réunion</a></li><li><a href="/vol-paris-brazzaville/">Vol Paris → Brazzaville</a></li><li><a href="/vol-paris-accra/">Vol Paris → Accra</a></li><li><a href="/vol-paris-lagos/">Vol Paris → Lagos</a></li><li><a href="/vol-paris-banjul/">Vol Paris → Banjul</a></li><li><a href="/vol-paris-bissau/">Vol Paris → Bissau</a></li><li><a href="/vol-paris-praia/">Vol Paris → Praia</a></li><li><a href="/vol-paris-n-djamena/">Vol Paris → N’Djamena</a></li><li><a href="/vol-paris-pointe-noire/">Vol Paris → Pointe-Noire</a></li><li><a href="/vol-paris-addis-abeba/">Vol Paris → Addis-Abeba</a></li><li><a href="/vol-paris-nairobi/">Vol Paris → Nairobi</a></li><li><a href="/vol-paris-johannesburg/">Vol Paris → Johannesburg</a></li><li><a href="/vol-paris-antananarivo/">Vol Paris → Antananarivo</a></li><li><a href="/vol-paris-maurice/">Vol Paris → Maurice</a></li><li><a href="/vol-paris-luanda/">Vol Paris → Luanda</a></li><li><a href="/vol-paris-maputo/">Vol Paris → Maputo</a></li><li><a href="/vol-paris-kigali/">Vol Paris → Kigali</a></li><li><a href="/vol-paris-dar-es-salaam/">Vol Paris → Dar es Salaam</a></li><li><a href="/vol-paris-le-caire/">Vol Paris → Le Caire</a></li><li><a href="/vol-paris-rabat/">Vol Paris → Rabat</a></li><li><a href="/vol-paris-tanger/">Vol Paris → Tanger</a></li><li><a href="/vol-paris-fes/">Vol Paris → Fès</a></li><li><a href="/vol-paris-agadir/">Vol Paris → Agadir</a></li><li><a href="/vol-paris-oujda/">Vol Paris → Oujda</a></li><li><a href="/vol-paris-oran/">Vol Paris → Oran</a></li><li><a href="/vol-paris-constantine/">Vol Paris → Constantine</a></li><li><a href="/vol-paris-djerba/">Vol Paris → Djerba</a></li><li><a href="/vol-paris-monastir/">Vol Paris → Monastir</a></li><li><a href="/vol-paris-doha/">Vol Paris → Doha</a></li><li><a href="/vol-paris-medine/">Vol Paris → Médine</a></li><li><a href="/vol-paris-riyad/">Vol Paris → Riyad</a></li><li><a href="/vol-paris-beyrouth/">Vol Paris → Beyrouth</a></li><li><a href="/vol-paris-amman/">Vol Paris → Amman</a></li><li><a href="/vol-paris-fort-de-france/">Vol Paris → Fort-de-France</a></li><li><a href="/vol-paris-cayenne/">Vol Paris → Cayenne</a></li><li><a href="/vol-paris-mayotte/">Vol Paris → Mayotte</a></li><li><a href="/vol-paris-port-au-prince/">Vol Paris → Port-au-Prince</a></li></ul><h3 class="sub-h">Vols au départ de Bruxelles</h3><ul class="route-links"><li><a href="/vol-bruxelles-kinshasa/">Vol Bruxelles → Kinshasa</a></li><li><a href="/vol-bruxelles-dakar/">Vol Bruxelles → Dakar</a></li><li><a href="/vol-bruxelles-abidjan/">Vol Bruxelles → Abidjan</a></li><li><a href="/vol-bruxelles-douala/">Vol Bruxelles → Douala</a></li><li><a href="/vol-bruxelles-casablanca/">Vol Bruxelles → Casablanca</a></li><li><a href="/vol-bruxelles-marrakech/">Vol Bruxelles → Marrakech</a></li><li><a href="/vol-bruxelles-tanger/">Vol Bruxelles → Tanger</a></li><li><a href="/vol-bruxelles-alger/">Vol Bruxelles → Alger</a></li><li><a href="/vol-bruxelles-tunis/">Vol Bruxelles → Tunis</a></li><li><a href="/vol-bruxelles-kigali/">Vol Bruxelles → Kigali</a></li><li><a href="/vol-bruxelles-lome/">Vol Bruxelles → Lomé</a></li><li><a href="/vol-bruxelles-cotonou/">Vol Bruxelles → Cotonou</a></li><li><a href="/vol-bruxelles-conakry/">Vol Bruxelles → Conakry</a></li><li><a href="/vol-bruxelles-bamako/">Vol Bruxelles → Bamako</a></li><li><a href="/vol-bruxelles-ouagadougou/">Vol Bruxelles → Ouagadougou</a></li><li><a href="/vol-bruxelles-accra/">Vol Bruxelles → Accra</a></li><li><a href="/vol-bruxelles-libreville/">Vol Bruxelles → Libreville</a></li><li><a href="/vol-bruxelles-yaounde/">Vol Bruxelles → Yaoundé</a></li><li><a href="/vol-bruxelles-dubai/">Vol Bruxelles → Dubaï</a></li><li><a href="/vol-bruxelles-istanbul/">Vol Bruxelles → Istanbul</a></li></ul><h3 class="sub-h">Vols au départ de Marseille</h3><ul class="route-links"><li><a href="/vol-marseille-alger/">Vol Marseille → Alger</a></li><li><a href="/vol-marseille-tunis/">Vol Marseille → Tunis</a></li><li><a href="/vol-marseille-dakar/">Vol Marseille → Dakar</a></li><li><a href="/vol-marseille-oran/">Vol Marseille → Oran</a></li><li><a href="/vol-marseille-constantine/">Vol Marseille → Constantine</a></li><li><a href="/vol-marseille-casablanca/">Vol Marseille → Casablanca</a></li><li><a href="/vol-marseille-marrakech/">Vol Marseille → Marrakech</a></li><li><a href="/vol-marseille-abidjan/">Vol Marseille → Abidjan</a></li><li><a href="/vol-marseille-bamako/">Vol Marseille → Bamako</a></li><li><a href="/vol-marseille-djerba/">Vol Marseille → Djerba</a></li><li><a href="/vol-marseille-monastir/">Vol Marseille → Monastir</a></li><li><a href="/vol-marseille-istanbul/">Vol Marseille → Istanbul</a></li></ul><h3 class="sub-h">Vols au départ de Lyon</h3><ul class="route-links"><li><a href="/vol-lyon-casablanca/">Vol Lyon → Casablanca</a></li><li><a href="/vol-lyon-dakar/">Vol Lyon → Dakar</a></li><li><a href="/vol-lyon-alger/">Vol Lyon → Alger</a></li><li><a href="/vol-lyon-tunis/">Vol Lyon → Tunis</a></li><li><a href="/vol-lyon-oran/">Vol Lyon → Oran</a></li><li><a href="/vol-lyon-constantine/">Vol Lyon → Constantine</a></li><li><a href="/vol-lyon-marrakech/">Vol Lyon → Marrakech</a></li><li><a href="/vol-lyon-agadir/">Vol Lyon → Agadir</a></li><li><a href="/vol-lyon-oujda/">Vol Lyon → Oujda</a></li><li><a href="/vol-lyon-fes/">Vol Lyon → Fès</a></li><li><a href="/vol-lyon-abidjan/">Vol Lyon → Abidjan</a></li><li><a href="/vol-lyon-bamako/">Vol Lyon → Bamako</a></li><li><a href="/vol-lyon-djerba/">Vol Lyon → Djerba</a></li><li><a href="/vol-lyon-istanbul/">Vol Lyon → Istanbul</a></li><li><a href="/vol-lyon-dubai/">Vol Lyon → Dubaï</a></li></ul><h3 class="sub-h">Vols au départ de Genève</h3><ul class="route-links"><li><a href="/vol-geneve-casablanca/">Vol Genève → Casablanca</a></li><li><a href="/vol-geneve-dakar/">Vol Genève → Dakar</a></li><li><a href="/vol-geneve-alger/">Vol Genève → Alger</a></li><li><a href="/vol-geneve-tunis/">Vol Genève → Tunis</a></li><li><a href="/vol-geneve-marrakech/">Vol Genève → Marrakech</a></li><li><a href="/vol-geneve-abidjan/">Vol Genève → Abidjan</a></li><li><a href="/vol-geneve-istanbul/">Vol Genève → Istanbul</a></li><li><a href="/vol-geneve-dubai/">Vol Genève → Dubaï</a></li></ul><h3 class="sub-h">Vols au départ de Toulouse</h3><ul class="route-links"><li><a href="/vol-toulouse-alger/">Vol Toulouse → Alger</a></li><li><a href="/vol-toulouse-oran/">Vol Toulouse → Oran</a></li><li><a href="/vol-toulouse-casablanca/">Vol Toulouse → Casablanca</a></li><li><a href="/vol-toulouse-marrakech/">Vol Toulouse → Marrakech</a></li><li><a href="/vol-toulouse-tunis/">Vol Toulouse → Tunis</a></li></ul><h3 class="sub-h">Vols au départ de Nice</h3><ul class="route-links"><li><a href="/vol-nice-alger/">Vol Nice → Alger</a></li><li><a href="/vol-nice-tunis/">Vol Nice → Tunis</a></li><li><a href="/vol-nice-casablanca/">Vol Nice → Casablanca</a></li><li><a href="/vol-nice-dakar/">Vol Nice → Dakar</a></li></ul><h3 class="sub-h">Vols au départ de Bordeaux</h3><ul class="route-links"><li><a href="/vol-bordeaux-alger/">Vol Bordeaux → Alger</a></li><li><a href="/vol-bordeaux-casablanca/">Vol Bordeaux → Casablanca</a></li><li><a href="/vol-bordeaux-marrakech/">Vol Bordeaux → Marrakech</a></li><li><a href="/vol-bordeaux-dakar/">Vol Bordeaux → Dakar</a></li></ul><h3 class="sub-h">Vols au départ de Londres</h3><ul class="route-links"><li><a href="/vol-londres-lagos/">Vol Londres → Lagos</a></li><li><a href="/vol-londres-accra/">Vol Londres → Accra</a></li><li><a href="/vol-londres-abuja/">Vol Londres → Abuja</a></li><li><a href="/vol-londres-nairobi/">Vol Londres → Nairobi</a></li><li><a href="/vol-londres-johannesburg/">Vol Londres → Johannesburg</a></li><li><a href="/vol-londres-addis-abeba/">Vol Londres → Addis-Abeba</a></li><li><a href="/vol-londres-le-caire/">Vol Londres → Le Caire</a></li><li><a href="/vol-londres-dubai/">Vol Londres → Dubaï</a></li><li><a href="/vol-londres-casablanca/">Vol Londres → Casablanca</a></li><li><a href="/vol-londres-marrakech/">Vol Londres → Marrakech</a></li><li><a href="/vol-londres-alger/">Vol Londres → Alger</a></li><li><a href="/vol-londres-dakar/">Vol Londres → Dakar</a></li><li><a href="/vol-londres-abidjan/">Vol Londres → Abidjan</a></li><li><a href="/vol-londres-kinshasa/">Vol Londres → Kinshasa</a></li></ul><h3 class="sub-h">Vols au départ de New York</h3><ul class="route-links"><li><a href="/vol-new-york-dakar/">Vol New York → Dakar</a></li><li><a href="/vol-new-york-accra/">Vol New York → Accra</a></li><li><a href="/vol-new-york-lagos/">Vol New York → Lagos</a></li><li><a href="/vol-new-york-addis-abeba/">Vol New York → Addis-Abeba</a></li><li><a href="/vol-new-york-casablanca/">Vol New York → Casablanca</a></li><li><a href="/vol-new-york-abidjan/">Vol New York → Abidjan</a></li><li><a href="/vol-new-york-le-caire/">Vol New York → Le Caire</a></li><li><a href="/vol-new-york-port-au-prince/">Vol New York → Port-au-Prince</a></li></ul><h3 class="sub-h">Vols au départ de Montréal</h3><ul class="route-links"><li><a href="/vol-montreal-dakar/">Vol Montréal → Dakar</a></li><li><a href="/vol-montreal-abidjan/">Vol Montréal → Abidjan</a></li><li><a href="/vol-montreal-casablanca/">Vol Montréal → Casablanca</a></li><li><a href="/vol-montreal-alger/">Vol Montréal → Alger</a></li><li><a href="/vol-montreal-tunis/">Vol Montréal → Tunis</a></li><li><a href="/vol-montreal-port-au-prince/">Vol Montréal → Port-au-Prince</a></li><li><a href="/vol-montreal-douala/">Vol Montréal → Douala</a></li><li><a href="/vol-montreal-conakry/">Vol Montréal → Conakry</a></li></ul><h3 class="sub-h">Vols au départ de Madrid</h3><ul class="route-links"><li><a href="/vol-madrid-dakar/">Vol Madrid → Dakar</a></li><li><a href="/vol-madrid-casablanca/">Vol Madrid → Casablanca</a></li><li><a href="/vol-madrid-marrakech/">Vol Madrid → Marrakech</a></li><li><a href="/vol-madrid-tanger/">Vol Madrid → Tanger</a></li><li><a href="/vol-madrid-alger/">Vol Madrid → Alger</a></li><li><a href="/vol-madrid-abidjan/">Vol Madrid → Abidjan</a></li><li><a href="/vol-madrid-bamako/">Vol Madrid → Bamako</a></li><li><a href="/vol-madrid-lagos/">Vol Madrid → Lagos</a></li></ul><h3 class="sub-h">Vols au départ de Lisbonne</h3><ul class="route-links"><li><a href="/vol-lisbonne-luanda/">Vol Lisbonne → Luanda</a></li><li><a href="/vol-lisbonne-maputo/">Vol Lisbonne → Maputo</a></li><li><a href="/vol-lisbonne-praia/">Vol Lisbonne → Praia</a></li><li><a href="/vol-lisbonne-bissau/">Vol Lisbonne → Bissau</a></li><li><a href="/vol-lisbonne-dakar/">Vol Lisbonne → Dakar</a></li><li><a href="/vol-lisbonne-casablanca/">Vol Lisbonne → Casablanca</a></li><li><a href="/vol-lisbonne-abidjan/">Vol Lisbonne → Abidjan</a></li><li><a href="/vol-lisbonne-accra/">Vol Lisbonne → Accra</a></li></ul><h3 class="sub-h">Hôtels pas chers</h3><ul class="route-links"><li><a href="/hotel-pas-cher-dakar/">Hôtel pas cher à Dakar</a></li><li><a href="/hotel-pas-cher-abidjan/">Hôtel pas cher à Abidjan</a></li><li><a href="/hotel-pas-cher-bamako/">Hôtel pas cher à Bamako</a></li><li><a href="/hotel-pas-cher-casablanca/">Hôtel pas cher à Casablanca</a></li><li><a href="/hotel-pas-cher-marrakech/">Hôtel pas cher à Marrakech</a></li><li><a href="/hotel-pas-cher-douala/">Hôtel pas cher à Douala</a></li><li><a href="/hotel-pas-cher-conakry/">Hôtel pas cher à Conakry</a></li><li><a href="/hotel-pas-cher-lome/">Hôtel pas cher à Lomé</a></li><li><a href="/hotel-pas-cher-cotonou/">Hôtel pas cher à Cotonou</a></li><li><a href="/hotel-pas-cher-kinshasa/">Hôtel pas cher à Kinshasa</a></li><li><a href="/hotel-pas-cher-alger/">Hôtel pas cher à Alger</a></li><li><a href="/hotel-pas-cher-tunis/">Hôtel pas cher à Tunis</a></li><li><a href="/hotel-pas-cher-paris/">Hôtel pas cher à Paris</a></li><li><a href="/hotel-pas-cher-dubai/">Hôtel pas cher à Dubaï</a></li><li><a href="/hotel-pas-cher-istanbul/">Hôtel pas cher à Istanbul</a></li><li><a href="/hotel-pas-cher-montreal/">Hôtel pas cher à Montréal</a></li></ul><h3 class="sub-h">Guides pratiques</h3><ul class="route-links"><li><a href="/guides/bagages-avion/">Bagages : ne pas payer plus cher</a></li><li><a href="/guides/quand-reserver/">Quand réserver son billet</a></li><li><a href="/guides/voyager-avec-enfants/">Voyager avec des enfants</a></li></ul><p class="lead guides-langs">Guides in English, en español, em português, بالعربية : <a href="/en/" hreflang="en" lang="en">English</a> · <a href="/es/" hreflang="es" lang="es">Español</a> · <a href="/pt/" hreflang="pt" lang="pt">Português</a> · <a href="/ar/" hreflang="ar" lang="ar">العربية</a></p>
     <!-- ROUTES:END -->
   </section>
 
@@ -462,7 +556,7 @@ footer p { margin: 0 0 6px; max-width: 75ch; }
   </section>
 
   <footer>
-    <nav class="foot-nav" aria-label="Pages du site"><a href="/mentions-legales/" data-en="Legal notice">Mentions légales</a><a href="/confidentialite/" data-en="Privacy">Confidentialité</a><a href="/contact/">Contact</a><a href="/bons-plans/" class="deals-href" data-en="Deals">Bons plans</a><a href="/#guides" data-en="Route guides">Guides des trajets</a><a href="#cookies" data-open-consent data-en="Cookie settings">Gérer les cookies</a></nav>
+    <nav class="foot-nav" aria-label="Pages du site"><a href="/mentions-legales/" data-en="Legal notice">Mentions légales</a><a href="/confidentialite/" data-en="Privacy">Confidentialité</a><a href="/contact/">Contact</a><a href="/a-propos/" class="about-href" data-en="About">À propos</a><a href="/guides/" class="guides-href">Guides</a><a href="/bons-plans/" class="deals-href" data-en="Deals">Bons plans</a><a href="/#guides" data-en="Route guides">Guides des trajets</a><a href="#cookies" data-open-consent data-en="Cookie settings">Gérer les cookies</a></nav>
     <p data-en="Escale does not sell tickets or set any prices. Each button opens the matching search on the partner site, where real prices are shown and where you book.">Escale ne vend pas de billets et ne fixe aucun prix. Chaque bouton ouvre la recherche correspondante sur le site partenaire, où s’affichent les prix réels et où se fait la réservation.</p>
     <p id="aff-note" data-en="Some links are partner links: if you book, Escale may earn a commission at no extra cost to you. That is what keeps the site free.">Certains liens sont des liens partenaires : si vous réservez, Escale peut toucher une commission, sans aucun surcoût pour vous. C’est ce qui permet au site de rester gratuit.</p>
     <p data-en="Prices and availability change constantly: always check the final fare, including baggage and fees, before paying.">Les prix et disponibilités changent en permanence : vérifiez toujours le tarif final, bagages et frais inclus, avant de payer.</p>
@@ -472,5 +566,6 @@ footer p { margin: 0 0 6px; max-width: 75ch; }
 
 <script src="/i18n.js" defer></script>
 <script src="/app.js" defer></script>
+<script src="/newsletter.js" defer></script>
 </body>
 </html>

@@ -13,6 +13,7 @@
   })();
 </script>
 <script src="/consent.js" defer></script>
+<script src="/track.js" defer></script>
 <title>Voos baratos Paris – Marraquexe: compare preços</title>
 <meta name="description" content="Encontre um voo barato Paris – Marraquexe (CDG → RAK): duração, aeroporto, melhor época para reservar e comparação de preços no Google Flights, Skyscanner, Kayak e momondo.">
 <link rel="canonical" href="https://escale-voyage.netlify.app/pt/voos-paris-marraquexe/">
@@ -31,7 +32,9 @@
 <meta property="og:title" content="Voos baratos Paris – Marraquexe: compare preços">
 <meta property="og:description" content="Encontre um voo barato Paris – Marraquexe (CDG → RAK): duração, aeroporto, melhor época para reservar e comparação de preços no Google Flights, Skyscanner, Kayak e momondo.">
 <meta property="og:url" content="https://escale-voyage.netlify.app/pt/voos-paris-marraquexe/">
-<meta property="og:image" content="https://escale-voyage.netlify.app/og-image.png">
+<meta property="og:image" content="https://escale-voyage.netlify.app/og/CDG-RAK.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,6 +63,8 @@
 <script src="/route-prices.js" defer></script>
 <section id="route-calendar" data-from="CDG" data-to="RAK" hidden><h2>Calendário de preços</h2><p class="small">Preço de ida e volta mais baixo encontrado para cada dia de partida. Clique num dia para pesquisar.</p><div class="chips cal-months" role="group"></div><div class="cal-grid" dir="ltr"></div><p class="small cal-legend"></p></section>
 <script src="/route-calendar.js" defer></script>
+<section id="price-alert" class="price-alert" data-from="CDG" data-to="RAK" hidden></section>
+<script src="/alerts.js" defer></script>
 <section><h2>O nosso conselho para esta rota</h2><p>Muitos voos low-cost partem de Orly e Beauvais: verifique os três aeroportos de Paris.</p></section>
 <section><h2>Como pagar menos</h2>
 <ol class="steps"><li><strong>Ative as datas flexíveis.</strong> Mudar a partida um ou dois dias costuma alterar o preço mais do que o site escolhido.</li><li><strong>Compare pelo menos três sites.</strong> A Escale abre a sua pesquisa, já ordenada por preço, no Google Flights, Skyscanner, Kayak e momondo.</li><li><strong>Verifique a bagagem.</strong> Some o preço da mala antes de comparar duas tarifas.</li><li><strong>Crie um alerta de preço</strong> no Google Flights ou Kayak se viajar daqui a alguns meses.</li></ol>
@@ -76,10 +81,10 @@
 <section class="faq"><h2>Perguntas frequentes</h2>
 <details><summary>Quanto tempo dura um voo Paris – Marraquexe?</summary><p>Cerca de 3 h 15 em voo direto. Com escala, a viagem total costuma demorar várias horas a mais, conforme a ligação.</p></details><details><summary>Quando reservar um voo barato Paris – Marraquexe?</summary><p>Em geral, dois a três meses antes da partida. Os preços sobem muito durante as férias escolares, o Natal e a Páscoa: reserve mais cedo nessas alturas.</p></details><details><summary>Em que aeroporto de Marraquexe se chega?</summary><p>Os voos chegam a Menara Airport (RAK).</p></details><details><summary>A bagagem está incluída?</summary><p>Nem sempre. As tarifas mais baratas às vezes incluem só uma mala pequena. Verifique a bagagem de porão antes de pagar.</p></details>
 </section>
-<section><h2>Outras rotas</h2><ul class="route-links"><li><a href="/pt/voos-paris-casablanca/">Paris → Casablanca</a></li><li><a href="/pt/voos-lyon-casablanca/">Lyon → Casablanca</a></li><li><a href="/pt/voos-genebra-casablanca/">Genebra → Casablanca</a></li><li><a href="/pt/voos-paris-bamako/">Paris → Bamako</a></li><li><a href="/pt/voos-paris-dacar/">Paris → Dacar</a></li><li><a href="/pt/voos-paris-abidjan/">Paris → Abidjan</a></li><li><a href="/pt/voos-paris-conacri/">Paris → Conacri</a></li><li><a href="/pt/voos-paris-douala/">Paris → Douala</a></li><li><a href="/pt/voos-paris-lome/">Paris → Lomé</a></li></ul></section>
+<section><h2>Outras rotas</h2><ul class="route-links"><li><a href="/pt/voos-bruxelas-marraquexe/">Bruxelas → Marraquexe</a></li><li><a href="/pt/voos-lyon-marraquexe/">Lyon → Marraquexe</a></li><li><a href="/pt/voos-marselha-marraquexe/">Marselha → Marraquexe</a></li><li><a href="/pt/voos-genebra-marraquexe/">Genebra → Marraquexe</a></li><li><a href="/pt/voos-toulouse-marraquexe/">Toulouse → Marraquexe</a></li><li><a href="/pt/voos-bordeus-marraquexe/">Bordéus → Marraquexe</a></li><li><a href="/pt/voos-londres-marraquexe/">Londres → Marraquexe</a></li><li><a href="/pt/voos-madrid-marraquexe/">Madrid → Marraquexe</a></li><li><a href="/pt/voos-paris-casablanca/">Paris → Casablanca</a></li></ul></section>
 </main>
 <footer class="wrap">
-  <nav class="foot-nav"><a href="/?lang=pt">Comparar voos, hotéis e carros</a><a href="/mentions-legales/">Aviso legal (FR)</a><a href="/confidentialite/">Privacidade (FR)</a><a href="/contact/">Contact</a><a href="/pt/promocoes/">Promoções</a><a href="#cookies" data-open-consent>Gerir cookies</a></nav>
+  <nav class="foot-nav"><a href="/?lang=pt">Comparar voos, hotéis e carros</a><a href="/mentions-legales/">Aviso legal (FR)</a><a href="/confidentialite/">Privacidade (FR)</a><a href="/contact/">Contact</a><a href="/pt/sobre/">Sobre</a><a href="/pt/guias/">Guides</a><a href="/pt/promocoes/">Promoções</a><a href="#cookies" data-open-consent>Gerir cookies</a></nav>
   <p>A Escale não vende bilhetes nem fixa preços. As durações e informações são indicativas: os horários das companhias mudam, confirme sempre no site de reserva.</p>
 </footer>
 </body>

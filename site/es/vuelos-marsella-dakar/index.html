@@ -13,6 +13,7 @@
   })();
 </script>
 <script src="/consent.js" defer></script>
+<script src="/track.js" defer></script>
 <title>Vuelos baratos Marsella – Dakar: compara precios</title>
 <meta name="description" content="Encuentra un vuelo barato Marsella – Dakar (MRS → DSS): duración, aeropuerto, mejor época para reservar y comparación de precios en Google Flights, Skyscanner, Kayak y momondo.">
 <link rel="canonical" href="https://escale-voyage.netlify.app/es/vuelos-marsella-dakar/">
@@ -31,7 +32,9 @@
 <meta property="og:title" content="Vuelos baratos Marsella – Dakar: compara precios">
 <meta property="og:description" content="Encuentra un vuelo barato Marsella – Dakar (MRS → DSS): duración, aeropuerto, mejor época para reservar y comparación de precios en Google Flights, Skyscanner, Kayak y momondo.">
 <meta property="og:url" content="https://escale-voyage.netlify.app/es/vuelos-marsella-dakar/">
-<meta property="og:image" content="https://escale-voyage.netlify.app/og-image.png">
+<meta property="og:image" content="https://escale-voyage.netlify.app/og/MRS-DSS.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,6 +63,8 @@
 <script src="/route-prices.js" defer></script>
 <section id="route-calendar" data-from="MRS" data-to="DSS" hidden><h2>Calendario de precios</h2><p class="small">Precio de ida y vuelta más bajo encontrado para cada día de salida. Haz clic en un día para buscar.</p><div class="chips cal-months" role="group"></div><div class="cal-grid" dir="ltr"></div><p class="small cal-legend"></p></section>
 <script src="/route-calendar.js" defer></script>
+<section id="price-alert" class="price-alert" data-from="MRS" data-to="DSS" hidden></section>
+<script src="/alerts.js" defer></script>
 <section><h2>Nuestro consejo para esta ruta</h2><p>Compara un vuelo con escala desde Marsella con un tren a París y un vuelo directo: lo segundo a veces es más barato.</p></section>
 <section><h2>Cómo pagar menos</h2>
 <ol class="steps"><li><strong>Activa las fechas flexibles.</strong> Mover la salida uno o dos días suele cambiar el precio más que el sitio elegido.</li><li><strong>Compara al menos tres sitios.</strong> Escale abre tu búsqueda, ya ordenada por precio, en Google Flights, Skyscanner, Kayak y momondo.</li><li><strong>Revisa el equipaje.</strong> Suma el precio de la maleta antes de comparar dos tarifas.</li><li><strong>Crea una alerta de precio</strong> en Google Flights o Kayak si viajas dentro de varios meses.</li></ol>
@@ -76,10 +81,10 @@
 <section class="faq"><h2>Preguntas frecuentes</h2>
 <details><summary>¿Cuánto dura un vuelo Marsella – Dakar?</summary><p>Depende: la mayoría de los trayectos tiene al menos una escala. Con escala, el viaje total suele durar varias horas más según la conexión.</p></details><details><summary>¿Cuándo reservar un vuelo barato Marsella – Dakar?</summary><p>En general, dos o tres meses antes de la salida. Los precios suben mucho durante julio-agosto, las fiestas de fin de año y la Tabaski: reserva antes para esas fechas.</p></details><details><summary>¿A qué aeropuerto de Dakar se llega?</summary><p>Los vuelos llegan a Blaise Diagne International Airport (DSS).</p></details><details><summary>¿El equipaje está incluido?</summary><p>No siempre. Las tarifas más baratas a veces solo incluyen un bolso pequeño. Revisa el equipaje facturado antes de pagar.</p></details>
 </section>
-<section><h2>Otras rutas</h2><ul class="route-links"><li><a href="/es/vuelos-paris-dakar/">París → Dakar</a></li><li><a href="/es/vuelos-lyon-dakar/">Lyon → Dakar</a></li><li><a href="/es/vuelos-bruselas-dakar/">Bruselas → Dakar</a></li><li><a href="/es/vuelos-ginebra-dakar/">Ginebra → Dakar</a></li><li><a href="/es/vuelos-marsella-argel/">Marsella → Argel</a></li><li><a href="/es/vuelos-marsella-tunez/">Marsella → Túnez</a></li><li><a href="/es/vuelos-paris-bamako/">París → Bamako</a></li><li><a href="/es/vuelos-paris-abiyan/">París → Abiyán</a></li><li><a href="/es/vuelos-paris-conakri/">París → Conakri</a></li></ul></section>
+<section><h2>Otras rutas</h2><ul class="route-links"><li><a href="/es/vuelos-paris-dakar/">París → Dakar</a></li><li><a href="/es/vuelos-lyon-dakar/">Lyon → Dakar</a></li><li><a href="/es/vuelos-bruselas-dakar/">Bruselas → Dakar</a></li><li><a href="/es/vuelos-ginebra-dakar/">Ginebra → Dakar</a></li><li><a href="/es/vuelos-niza-dakar/">Niza → Dakar</a></li><li><a href="/es/vuelos-burdeos-dakar/">Burdeos → Dakar</a></li><li><a href="/es/vuelos-londres-dakar/">Londres → Dakar</a></li><li><a href="/es/vuelos-nueva-york-dakar/">Nueva York → Dakar</a></li><li><a href="/es/vuelos-montreal-dakar/">Montreal → Dakar</a></li></ul></section>
 </main>
 <footer class="wrap">
-  <nav class="foot-nav"><a href="/?lang=es">Comparar vuelos, hoteles y coches</a><a href="/mentions-legales/">Aviso legal (FR)</a><a href="/confidentialite/">Privacidad (FR)</a><a href="/contact/">Contact</a><a href="/es/ofertas/">Ofertas</a><a href="#cookies" data-open-consent>Gestionar cookies</a></nav>
+  <nav class="foot-nav"><a href="/?lang=es">Comparar vuelos, hoteles y coches</a><a href="/mentions-legales/">Aviso legal (FR)</a><a href="/confidentialite/">Privacidad (FR)</a><a href="/contact/">Contact</a><a href="/es/acerca-de/">Acerca de</a><a href="/es/guias/">Guides</a><a href="/es/ofertas/">Ofertas</a><a href="#cookies" data-open-consent>Gestionar cookies</a></nav>
   <p>Escale no vende billetes ni fija precios. Las duraciones y datos son orientativos: los horarios de las aerolíneas cambian, compruébalo siempre en el sitio de reserva.</p>
 </footer>
 </body>

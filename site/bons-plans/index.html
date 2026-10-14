@@ -13,6 +13,7 @@
   })();
 </script>
 <script src="/consent.js" defer></script>
+<script src="/track.js" defer></script>
 <title>Bons plans vols de la semaine | Escale</title>
 <meta name="description" content="Les vols aller-retour les moins chers trouvés cette semaine au départ de Paris, Bruxelles, Lyon, Marseille, Genève, Londres, New York et Montréal.">
 <link rel="canonical" href="https://escale-voyage.netlify.app/bons-plans/">
@@ -32,6 +33,8 @@
 <meta property="og:description" content="Les vols aller-retour les moins chers trouvés cette semaine au départ de Paris, Bruxelles, Lyon, Marseille, Genève, Londres, New York et Montréal.">
 <meta property="og:url" content="https://escale-voyage.netlify.app/bons-plans/">
 <meta property="og:image" content="https://escale-voyage.netlify.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,10 +48,18 @@
   <h1>Bons plans <span>de la semaine</span></h1><p class="hero-lead">Les destinations les moins chères trouvées par des voyageurs ces derniers jours, au départ de grandes villes. Mis à jour automatiquement toutes les 6 heures.</p><p class="small deal-updated" id="deal-updated"></p>
 </div></header>
 <main class="wrap">
-<section id="deals"><div class="chips deal-origins" id="deal-origins" role="group"></div><div class="deal-grid" id="deal-grid"><div class="ex-skel"></div><div class="ex-skel"></div><div class="ex-skel"></div></div></section><script src="/deals.js" defer></script>
+<section id="deals"><div class="chips deal-origins" id="deal-origins" role="group"></div><div class="deal-grid" id="deal-grid"><div class="ex-skel"></div><div class="ex-skel"></div><div class="ex-skel"></div></div></section><script src="/deals.js" defer></script><section class="nl-block"><form class="nl" name="bons-plans" method="POST" data-netlify="true" netlify-honeypot="site-web" novalidate>
+  <input type="hidden" name="form-name" value="bons-plans"><input type="hidden" name="langue" value="fr">
+  <p class="hp" hidden><label>Ne pas remplir <input name="site-web" tabindex="-1" autocomplete="off"></label></p>
+  <h2>Recevez les bons plans</h2><p class="small nl-lead">Une sélection des meilleurs prix, une à deux fois par mois, par e-mail ou sur WhatsApp. Gratuit, désinscription à tout moment.</p>
+  <div class="nl-row"><label><span>E-mail</span><input type="email" name="email" autocomplete="email"></label>
+  <label><span>WhatsApp (facultatif)</span><input type="tel" name="whatsapp" autocomplete="tel" placeholder="+33 6 12 34 56 78"></label></div>
+  <label class="nl-consent"><input type="checkbox" name="consent" value="oui"> <span>J’accepte de recevoir les bons plans d’Escale. Mes coordonnées servent uniquement à cela ; je peux me désinscrire à tout moment.</span></label>
+  <button class="btn" type="submit">Je m’inscris</button><p class="small nl-msg" role="status"></p>
+</form></section><script src="/newsletter.js" defer></script>
 </main>
 <footer class="wrap">
-  <nav class="foot-nav"><a href="/">Comparer vols, hôtels et voitures</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/contact/">Contact</a><a href="/bons-plans/">Bons plans</a><a href="#cookies" data-open-consent>Gérer les cookies</a></nav>
+  <nav class="foot-nav"><a href="/">Comparer vols, hôtels et voitures</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/contact/">Contact</a><a href="/a-propos/">À propos</a><a href="/guides/">Guides</a><a href="/bons-plans/">Bons plans</a><a href="#cookies" data-open-consent>Gérer les cookies</a></nav>
   <p>Escale ne vend pas de billets et ne fixe aucun prix. Les prix affichés sont des prix réels trouvés récemment : le tarif exact s’affiche sur le site de réservation.</p>
 </footer>
 </body>

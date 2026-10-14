@@ -69,6 +69,8 @@
     $("lang").value = LANG;
     const dealsPath = { fr: "/bons-plans/", en: "/en/deals/", es: "/es/ofertas/", pt: "/pt/promocoes/", ar: "/ar/deals/" }[LANG];
     document.querySelectorAll("#deals-link, .deals-href").forEach((a) => { a.href = dealsPath; });
+    document.querySelectorAll(".about-href").forEach((a) => { a.href = { fr: "/a-propos/", en: "/en/about/", es: "/es/acerca-de/", pt: "/pt/sobre/", ar: "/ar/about/" }[LANG]; });
+    document.querySelectorAll(".guides-href").forEach((a) => { a.href = { fr: "/guides/", en: "/en/guides/", es: "/es/guias/", pt: "/pt/guias/", ar: "/ar/guides/" }[LANG]; });
     countryNames = null;
   }
 
@@ -234,6 +236,16 @@
   [["f-dep", 21], ["f-ret", 28], ["h-in", 21], ["h-out", 25], ["c-d1", 21], ["c-d2", 28]].forEach(([id, n]) => {
     $(id).value = addDays(today, n); $(id).min = today;
   });
+  // Recherche par mois : 12 prochains mois, durée du séjour en nuits
+  function paintMonthOptions() {
+    const keep = $("f-month").value, keepStay = $("f-stay").value || "7";
+    $("f-month").innerHTML = Array.from({ length: 12 }, (_, i) => { const d = new Date(); d.setDate(1); d.setMonth(d.getMonth() + i); return iso(d).slice(0, 7); })
+      .map((m) => `<option value="${m}">${esc(parse(m + "-01").toLocaleDateString(locale(), { month: "long", year: "numeric" }))}</option>`).join("");
+    if (keep) $("f-month").value = keep; else $("f-month").selectedIndex = 1;
+    $("f-stay").innerHTML = [3, 5, 7, 10, 14, 21, 28].map((n) => `<option value="${n}">${esc(fmt(T("{n} nuits", "{n} nights"), { n }))}</option>`).join("");
+    $("f-stay").value = keepStay;
+  }
+  paintMonthOptions();
   const DEFAULT_FROM = "Paris (CDG)";
   $("f-from").value = store.get("escale.from") || DEFAULT_FROM;
   $("f-to").value = "Bamako (BKO)";
@@ -449,6 +461,99 @@
     });
   }
 
+  // ---------- Recherche par mois : calendrier des prix dans les résultats ----------
+  let monthReq = 0;
+  function renderMonth(s) {
+    const d = D(), [y, mo] = s.month.split("-").map(Number);
+    const monthName = parse(s.month + "-01").toLocaleDateString(locale(), { month: "long", year: "numeric" });
+    const yymm = s.month.slice(2).replace("-", "");
+    const retMonth = (() => { const x = new Date(y, mo - 1, 1); x.setDate(x.getDate() + 32); return iso(x).slice(2, 7).replace("-", ""); })();
+    const sky = `https://${d.sky}/${s.from.code.toLowerCase()}/${s.to.code.toLowerCase()}/${yymm}/` + (s.ow ? "" : `${s.stay > 20 ? retMonth : yymm}/`) + "?" + q({ adultsv2: s.adults, rtn: s.ow ? 0 : 1 });
+    const gf = `https://www.google.com/travel/flights?${q({ q: `Flights from ${s.from.code} to ${s.to.code} in ${parse(s.month + "-01").toLocaleDateString("en-GB", { month: "long", year: "numeric" })}`, hl: LANG, curr: CUR })}`;
+    const head = `<div class="results-head"><h2><bdi dir="ltr">${esc(s.from.name)} → ${esc(s.to.name)}</bdi> · ${esc(monthName)}</h2>
+      <span class="summary">${esc(fmt(T("Séjour de {n} nuits · cliquez sur un jour pour lancer la recherche", "{n}-night trip · click a day to search"), { n: s.stay || 1 }))}</span></div>`;
+    const links = providerList([
+      { k: "sky", name: T("Skyscanner : le mois entier", "Skyscanner: whole month"), desc: T("Vue du mois avec le prix de chaque jour.", "Month view with the price of each day."), best: true, url: sky },
+      { k: "google", name: "Google Flights", desc: T("Graphique des prix sur le mois.", "Price graph for the month."), url: gf }
+    ]);
+    show(head + `<div id="month-cal"><p class="lead">${esc(T("Chargement des prix du mois…", "Loading prices for the month…"))}</p></div>` + links);
+    const id = ++monthReq;
+    if (!isLive) { $("month-cal").innerHTML = ""; return; }
+    fetch("/api/calendar?" + q({ from: s.from.code, to: s.to.code, month: s.month, currency: CUR })).then((r) => (r.ok ? r.json() : null)).catch(() => null).then((data) => {
+      if (id !== monthReq || !$("month-cal")) return;
+      const days = data && data.available ? data.days || {} : {};
+      const keys = Object.keys(days).filter((k) => k >= today);
+      if (!keys.length) { $("month-cal").innerHTML = `<p class="lead">${esc(T("Pas encore de prix connus pour ce mois. Utilisez les liens ci-dessous.", "No known prices for this month yet. Use the links below."))}</p>`; return; }
+      const prices = keys.map((k) => days[k].price), min = Math.min(...prices), max = Math.max(...prices);
+      const first = new Date(y, mo - 1, 1), nDays = new Date(y, mo, 0).getDate(), offset = (first.getDay() + 6) % 7;
+      const cells = [];
+      for (let i = 0; i < 7; i++) cells.push(`<span class="cal-head" aria-hidden="true">${esc(new Date(2024, 0, 1 + i).toLocaleDateString(locale(), { weekday: "narrow" }))}</span>`);
+      for (let k = 0; k < offset; k++) cells.push("<span></span>");
+      for (let dd = 1; dd <= nDays; dd++) {
+        const day = `${s.month}-${String(dd).padStart(2, "0")}`, info = days[day];
+        if (day < today || !info) { cells.push(`<span class="cal-day off"><b>${dd}</b></span>`); continue; }
+        const tier = max > min ? Math.min(4, Math.floor(((info.price - min) / (max - min)) * 5)) : 0;
+        const p = money(info.price, data.currency);
+        cells.push(`<button type="button" class="cal-day t${tier}" data-day="${day}" title="${esc(p + " · " + stopsText(info.transfers))}" aria-label="${esc(short(day) + " : " + p)}"><b>${dd}</b><span>${esc(String(Math.round(info.price)))}</span></button>`);
+      }
+      $("month-cal").innerHTML = `<h3 class="sub-h">${esc(fmt(T("Jours les moins chers en {m}", "Cheapest days in {m}"), { m: monthName }))}</h3>
+        <div class="cal-grid" dir="ltr">${cells.join("")}</div>
+        <p class="summary">${esc(T("Moins cher", "Cheaper"))} <span class="cal-scale" aria-hidden="true"><i class="t0"></i><i class="t1"></i><i class="t2"></i><i class="t3"></i><i class="t4"></i></span> ${esc(T("Plus cher", "More expensive"))} · ${esc(money(min, data.currency))} – ${esc(money(max, data.currency))}</p>`;
+      $("month-cal").onclick = (ev) => {
+        const b = ev.target.closest("button[data-day]"); if (!b) return;
+        $("f-monthmode").checked = false;
+        $("f-dep").value = b.dataset.day;
+        if (!s.ow) { $("trip-rt").checked = true; $("f-ret").value = addDays(b.dataset.day, s.stay); }
+        syncTrip();
+        $("form-vols").requestSubmit();
+      };
+    });
+  }
+
+  // ---------- Filtre de budget sur les idées de voyage ----------
+  function setupBudget(items, currency) {
+    const box = $("ex-budget"), range = $("ex-max");
+    if (!items.length) { box.hidden = true; return; }
+    const prices = items.map((it) => Math.round(it.price)), min = Math.min(...prices), max = Math.max(...prices);
+    if (max <= min) { box.hidden = true; return; }
+    range.min = String(min); range.max = String(max); range.step = "1";
+    range.value = String(max);
+    const apply = () => {
+      const v = +range.value;
+      let n = 0;
+      $("ex-grid").querySelectorAll(".ex-card").forEach((c) => { const ok = +c.dataset.price <= v; c.hidden = !ok; if (ok) n++; });
+      $("ex-max-out").textContent = `${money(v, currency)} · ${fmt(T("{n} destinations", "{n} destinations"), { n })}`;
+    };
+    range.oninput = apply;
+    apply();
+    box.hidden = false;
+  }
+
+  // ---------- Calculateur du vrai prix ----------
+  function calc() {
+    const pax = Math.max(1, +$("calc-pax").value || 1), need = Math.max(0, +$("calc-bags").value || 0);
+    const totals = ["a", "b", "c"].map((k) => {
+      const price = $(`calc-${k}-price`).value;
+      if (price === "") return null;
+      const incl = +$(`calc-${k}-incl`).value || 0, bag = +$(`calc-${k}-bag`).value || 0, fees = +$(`calc-${k}-fees`).value || 0;
+      return (+price + fees + Math.max(0, need - incl) * bag) * pax;
+    });
+    const valid = totals.filter((t) => t != null), best = valid.length ? Math.min(...valid) : null;
+    ["a", "b", "c"].forEach((k, i) => {
+      const o = $(`calc-${k}-out`), t = totals[i];
+      o.textContent = t == null ? "–" : money(t);
+      o.classList.toggle("best", t != null && valid.length > 1 && t === best);
+    });
+    if (valid.length > 1) {
+      const order = totals.map((t, i) => [t, "ABC"[i]]).filter((x) => x[0] != null).sort((x, y) => x[0] - y[0]);
+      $("calc-verdict").textContent = fmt(T("L’offre {w} est la moins chère : {d} d’économie sur l’offre {l}.", "Offer {w} is the cheapest: {d} less than offer {l}."),
+        { w: order[0][1], l: order[order.length - 1][1], d: money(order[order.length - 1][0] - order[0][0]) });
+    } else $("calc-verdict").textContent = "";
+  }
+  $("calc").addEventListener("input", calc);
+  $("calc").addEventListener("submit", (ev) => ev.preventDefault());
+  calc();
+
   // ---------- Idées de voyage (prix réels) ----------
   const exploreCache = new Map();
   function fetchExplore(from, month) {
@@ -466,6 +571,7 @@
     const [data] = await Promise.all([fetchExplore(from, month), loadDB()]);
     const items = data && data.available && Array.isArray(data.items) ? data.items.filter((it) => it.departure_at && it.departure_at.slice(0, 10) >= today) : [];
     if (!items.length) {
+      if (grid.id === "ex-grid") $("ex-budget").hidden = true;
       grid.innerHTML = `<p class="lead" style="grid-column:1/-1">${T("Pas encore de prix repérés pour ce mois. Essayez un autre mois ou les liens ci-dessus.", "No prices found yet for this month. Try another month or the links above.")}</p>`;
       return false;
     }
@@ -473,14 +579,14 @@
       const a = byCode.get(it.to) || byCode.get(it.city_code);
       const city = a ? a[1] : it.to, cc = a ? a[3] : "";
       const dep = it.departure_at.slice(0, 10), ret = it.return_at ? it.return_at.slice(0, 10) : "";
-      return `<button type="button" class="ex-card" style="--i:${i}" data-to="${esc(a ? a[0] : it.to)}" data-dep="${dep}" data-ret="${ret}" data-from="${esc(from)}">
+      return `<button type="button" class="ex-card" style="--i:${i}" data-price="${Math.round(it.price)}" data-to="${esc(a ? a[0] : it.to)}" data-dep="${dep}" data-ret="${ret}" data-from="${esc(from)}">
         <span class="ex-top"><span aria-hidden="true">${flag(cc)}</span><b>${esc(a ? a[0] : it.to)}</b></span>
         <span class="ex-name">${esc(city)}</span>
         <span class="ex-meta">${esc(cc ? countryName(cc) : "")}${ret ? ` · ${esc(short(dep))} → ${esc(short(ret))}` : ""} · ${esc(stopsText(it.transfers))}</span>
         <span class="ex-price">${T("dès", "from")} ${esc(money(it.price, data.currency))}</span>
       </button>`;
     }).join("");
-    if (grid.id === "ex-grid") feedFlap(from, items);
+    if (grid.id === "ex-grid") { feedFlap(from, items); setupBudget(items.slice(0, 16), data.currency); }
     return true;
   }
   document.addEventListener("click", (ev) => {
@@ -666,7 +772,15 @@
   const snapshot = (ids) => Object.fromEntries(ids.map((id) => [id, isBool($(id)) ? $(id).checked : $(id).value]));
 
   // ---------- Formulaires ----------
-  function syncTrip() { $("f-ret-wrap").hidden = $("trip-ow").checked; }
+  function syncTrip() {
+    const month = $("f-monthmode").checked, ow = $("trip-ow").checked;
+    $("f-dep-wrap").hidden = month;
+    $("f-ret-wrap").hidden = ow || month;
+    $("f-month-wrap").hidden = !month;
+    $("f-stay-wrap").hidden = !month || ow;
+    $("f-dep").required = !month;
+  }
+  $("f-monthmode").addEventListener("change", syncTrip);
   document.querySelectorAll('input[name="trip"]').forEach((r) => r.addEventListener("change", syncTrip));
   function syncDrop() { $("c-drop-wrap").hidden = !$("c-other").checked; }
   $("c-other").addEventListener("change", syncDrop);
@@ -681,6 +795,13 @@
     if (!from.code) return (err.textContent = T("Choisissez l’aéroport de départ dans la liste ou tapez son code à 3 lettres (ex. CDG).", "Pick the departure airport from the list or type its 3-letter code (e.g. JFK)."));
     if (to && !to.code) return (err.textContent = T("Choisissez l’aéroport d’arrivée dans la liste ou tapez son code à 3 lettres (ex. BKO).", "Pick the destination airport from the list or type its 3-letter code (e.g. LHR)."));
     if (to && to.code === from.code) return (err.textContent = T("Le départ et l’arrivée sont identiques.", "Origin and destination are the same."));
+    if ($("f-monthmode").checked) {
+      if (!to) return (err.textContent = T("Choisissez une destination pour voir les prix du mois entier.", "Choose a destination to see prices for the whole month."));
+      renderMonth({ from, to, month: $("f-month").value, stay: ow ? 0 : +$("f-stay").value, ow,
+        adults: +$("f-adults").value, children: +$("f-children").value, cabin: $("f-cabin").value });
+      if (!booting) store.set("escale.from", labelOf(from.code));
+      return;
+    }
     const dep = $("f-dep").value, ret = ow ? null : $("f-ret").value;
     if (!dep) return (err.textContent = T("Choisissez une date d’aller.", "Choose a departure date."));
     if (dep < today) return (err.textContent = T("La date d’aller est déjà passée.", "The departure date is in the past."));
@@ -734,7 +855,7 @@
     TABS.forEach((t) => {
       $("tab-" + t).setAttribute("aria-selected", String(t === name));
       $("tab-" + t).tabIndex = t === name ? 0 : -1;
-      $("form-" + t).hidden = t !== name;
+      $("panel-" + t).hidden = t !== name;
     });
     store.set("escale.tab", name);
     rerender();
@@ -750,6 +871,7 @@
   // ---------- Langue et devise : changements ----------
   $("lang").addEventListener("change", () => {
     LANG = $("lang").value; store.set("escale.lang", LANG);
+    countryNames = null; paintMonthOptions(); calc();
     applyLang(); paintDests(); paintFaq(); paintRecent(); rerender();
     if (!$("explore").hidden) { paintExploreMonths(); renderExplore($("ex-grid"), exploreFrom, exploreMonth); }
   });

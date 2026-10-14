@@ -60,7 +60,17 @@ Pistes suivantes : allemand, italien, chinois, turc (ajouter une colonne dans tr
 - ✔ Calendrier des prix sur les 170 pages trajets (fonction `/api/calendar`).
 - ✔ Bloc « Avant de partir » : eSIM Airalo avec lien partenaire Travelpayouts (airalo.tpm.lv). Autres liens dans `site/data/partners.json`,
   à remplacer par vos liens partenaires Travelpayouts pour être rémunéré.
-- À faire de votre côté : relier GitHub à Netlify (voir README, « Déploiement automatique »).
+- ✔ GitHub relié à Netlify : chaque envoi sur `main` publie le site.
+
+### 4 quater. Nouveautés du 14 octobre 2026 (suite)
+- ✔ 139 nouveaux trajets (173 au total) depuis 13 villes de départ, en 5 langues.
+- ✔ Image de partage par trajet (`site/og/`, `scripts/make_og.js`) ; sur WhatsApp/Facebook l'aperçu affiche « dès X € » (edge function `apercu-prix`).
+- ✔ Guides pratiques (bagages, quand réserver, voyager avec des enfants) en 5 langues ; page À propos.
+- ✔ Recherche « tout le mois », filtre budget sur les idées de voyage, calculateur du vrai prix (bagages et frais).
+- ✔ Formulaire « bons plans » (e-mail / WhatsApp) : les inscrits sont dans Netlify > Forms > `bons-plans`.
+- ✔ Alertes prix par e-mail (`/api/alert`, vérification quotidienne) : **s'affichent seulement quand** `RESEND_API_KEY` (ou `BREVO_API_KEY`) et `ALERT_FROM` sont définis dans Netlify.
+- ✔ Statistiques sans cookie : tableau de bord `/stats/` (clé `STATS_KEY` dans les variables Netlify).
+- ✔ Audit accessibilité (axe-core) : 0 erreur sur les pages principales, en clair et en sombre.
 
 ### 5. Réseaux sociaux et bouche-à-oreille
 - Une **chaîne WhatsApp** « Bons plans billets Afrique » avec 2 ou 3 bons plans par semaine et le lien de recherche.
@@ -68,19 +78,18 @@ Pistes suivantes : allemand, italien, chinois, turc (ajouter une colonne dans tr
 - Groupes Facebook de la diaspora (Maliens, Sénégalais, Ivoiriens de France), en respectant leurs règles.
 
 ### 6. Faire revenir les visiteurs
-- **Alertes prix** par e-mail ou WhatsApp quand un trajet baisse (nécessite les prix réels de l'étape 4).
-- Newsletter mensuelle (Brevo a une offre gratuite).
+- ✔ Alertes prix par e-mail (à activer avec une clé Resend ou Brevo).
+- ✔ Inscription aux bons plans : envoyer chaque semaine un message aux inscrits.
 
 ### 7. Mesurer
-- Statistiques sans bannière de cookies : Plausible, GoatCounter ou Cloudflare Web Analytics.
-- Suivre : visiteurs, pages trajets les plus vues, clics « Voir les prix » par site partenaire.
+- ✔ Statistiques sans cookie sur `/stats/` : pages vues, pages les plus vues, provenance, langues, clics par site partenaire.
 
 ### 8. Élargir le public
 - Version anglaise, affichage en francs CFA (XOF) en plus des euros.
 - Plus d'aéroports et de villes (actuellement environ 85).
 
 ### 9. Obligations légales (France)
-- Page **mentions légales** (obligatoire) et **politique de confidentialité** si vous ajoutez des statistiques ou une newsletter.
+- Page **mentions légales** (obligatoire) et **politique de confidentialité** ✔ (mise à jour : statistiques, bons plans, alertes prix).
 
 ## Sources
 - [Travelpayouts : fonctionnement des programmes](https://support.travelpayouts.com/hc/en-us/articles/203955763)

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Statistiques | Escale</title>
+<link rel="stylesheet" href="/pages.css">
+<style>
+  .st-form { display: flex; flex-wrap: wrap; gap: 8px; align-items: end; margin: 16px 0; }
+  .st-form input, .st-form select { font: inherit; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); }
+  .st-form button { font: inherit; font-weight: 700; padding: 10px 16px; border: 0; border-radius: 8px; background: var(--accent); color: var(--accent-ink); cursor: pointer; }
+  .st-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 16px 0; }
+  .st-kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+  .st-kpi b { display: block; font: 800 26px/1.1 var(--f-display); }
+  .st-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .st-grid section, .st-chart { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  td { padding: 4px 0; border-bottom: 1px solid var(--line); word-break: break-all; }
+  td:last-child { text-align: right; font-variant-numeric: tabular-nums; padding-left: 8px; word-break: normal; }
+  .bars { display: flex; align-items: end; gap: 2px; height: 120px; }
+  .bars span { flex: 1; background: var(--accent); min-height: 1px; border-radius: 2px 2px 0 0; }
+  .small { color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<header class="board"><div class="wrap"><a class="brand" href="/"><span class="brand-mark">ESC</span><span class="brand-name">Escale</span></a><h1>Statistiques</h1><p class="small" style="color:inherit;opacity:.8">Mesure anonyme, sans cookie. Page privée : non référencée.</p></div></header>
+<main class="wrap">
+  <form class="st-form" id="f">
+    <label>Clé d’accès<br><input id="key" type="password" autocomplete="current-password" required></label>
+    <label>Période<br><select id="days"><option value="7">7 jours</option><option value="30" selected>30 jours</option><option value="90">90 jours</option><option value="365">1 an</option></select></label>
+    <button type="submit">Afficher</button>
+  </form>
+  <p id="msg" class="small" role="status"></p>
+  <div id="out" hidden>
+    <div class="st-kpis">
+      <div class="st-kpi"><span class="small">Pages vues</span><b id="k-views">0</b></div>
+      <div class="st-kpi"><span class="small">Clics partenaires</span><b id="k-clicks">0</b></div>
+      <div class="st-kpi"><span class="small">Aujourd’hui</span><b id="k-today">0</b></div>
+      <div class="st-kpi"><span class="small">Taux de clic</span><b id="k-rate">0 %</b></div>
+    </div>
+    <div class="st-chart"><h2 style="margin-top:0">Pages vues par jour</h2><div class="bars" id="bars" aria-hidden="true"></div><p class="small" id="range"></p></div>
+    <div class="st-grid" style="margin-top:16px">
+      <section><h2>Pages les plus vues</h2><table id="t-pages"></table></section>
+      <section><h2>Provenance</h2><table id="t-refs"></table></section>
+      <section><h2>Langues</h2><table id="t-langs"></table></section>
+      <section><h2>Clics vers les partenaires</h2><table id="t-partners"></table></section>
+    </div>
+  </div>
+</main>
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  try { $("key").value = localStorage.getItem("escale-stats-key") || ""; } catch (e) {}
+  var nf = new Intl.NumberFormat("fr-FR");
+  var esc = function (t) { return String(t).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
+  function table(id, obj, n) {
+    var rows = Object.keys(obj).map(function (k) { return [k, obj[k]]; }).sort(function (a, b) { return b[1] - a[1]; }).slice(0, n || 15);
+    $(id).innerHTML = rows.length ? rows.map(function (r) { return "<tr><td>" + esc(r[0]) + "</td><td>" + nf.format(r[1]) + "</td></tr>"; }).join("") : '<tr><td class="small">Aucune donnée</td><td></td></tr>';
+  }
+  function show(days) {
+    var keys = Object.keys(days).sort(), tot = { views: 0, clicks: 0, pages: {}, langs: {}, refs: {}, partners: {} };
+    keys.forEach(function (d) {
+      var x = days[d]; tot.views += x.views; tot.clicks += x.clicks;
+      ["pages", "langs", "refs", "partners"].forEach(function (f) { for (var k in x[f]) tot[f][k] = (tot[f][k] || 0) + x[f][k]; });
+    });
+    var max = Math.max.apply(null, keys.map(function (d) { return days[d].views; }).concat(1));
+    $("bars").innerHTML = keys.map(function (d) { return '<span title="' + d + " : " + days[d].views + '" style="height:' + (100 * days[d].views / max) + '%"></span>'; }).join("");
+    $("range").textContent = keys[0] + " → " + keys[keys.length - 1];
+    $("k-views").textContent = nf.format(tot.views);
+    $("k-clicks").textContent = nf.format(tot.clicks);
+    $("k-today").textContent = nf.format(days[keys[keys.length - 1]].views);
+    $("k-rate").textContent = tot.views ? Math.round(100 * tot.clicks / tot.views) + " %" : "0 %";
+    table("t-pages", tot.pages, 20); table("t-refs", tot.refs); table("t-langs", tot.langs); table("t-partners", tot.partners);
+    $("out").hidden = false;
+  }
+  $("f").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var key = $("key").value.trim();
+    $("msg").textContent = "Chargement…";
+    fetch("/api/stats?days=" + $("days").value, { headers: { "x-stats-key": key } }).then(function (r) {
+      if (r.status === 401) throw new Error("Clé incorrecte.");
+      if (!r.ok) throw new Error("Statistiques indisponibles pour le moment.");
+      return r.json();
+    }).then(function (j) {
+      try { localStorage.setItem("escale-stats-key", key); } catch (e) {}
+      $("msg").textContent = ""; show(j.days);
+    }).catch(function (e) { $("msg").textContent = e.message || "Erreur."; });
+  });
+  if ($("key").value) $("f").requestSubmit ? $("f").requestSubmit() : null;
+})();
+</script>
+</body>
+</html>
