@@ -1,11 +1,11 @@
-// Outils communs aux fonctions Cloudflare Pages d'Escale.
-// Variables (Cloudflare > Workers & Pages > escale-voyage > Settings > Variables and Secrets) :
+// Outils communs au Worker Cloudflare d'Escale.
+// Variables (Cloudflare > Workers & Pages > escale-voyage > Paramètres > Variables et secrets) :
 //   TRAVELPAYOUTS_TOKEN  prix réels (Travelpayouts / Aviasales)
 //   ADMIN_KEY            accès à la page /admin/ (messages et inscriptions)
 //   RESEND_API_KEY ou BREVO_API_KEY + ALERT_FROM   envoi des alertes prix par e-mail
 //   CRON_KEY             appel quotidien de /api/cron (vérification des alertes)
 //   SITE_URL             adresse publique du site (par défaut https://escale-voyage.pages.dev)
-// Stockage (Settings > Bindings) : espace KV nommé ESCALE (formulaires, alertes, cache des bons plans).
+// Stockage : espace KV « escale », relié sous le nom ESCALE dans wrangler.jsonc (formulaires, alertes, cache des bons plans).
 export type Env = {
   TRAVELPAYOUTS_TOKEN?: string; ADMIN_KEY?: string; CRON_KEY?: string; SITE_URL?: string
   RESEND_API_KEY?: string; BREVO_API_KEY?: string; ALERT_FROM?: string

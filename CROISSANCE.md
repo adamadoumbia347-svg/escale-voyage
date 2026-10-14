@@ -102,8 +102,8 @@ Pistes suivantes : allemand, italien, chinois, turc (ajouter une colonne dans tr
 - ✔ IndexNow : à chaque mise en ligne, `netlify/functions/deploy-succeeded.mts` envoie toutes les pages à Bing (et DuckDuckGo, Yahoo, Ecosia).
 - À faire : nom de domaine à soi, Bing Webmaster Tools, liens depuis d'autres sites (associations, blogs, groupes de la diaspora), suivi mensuel dans Search Console.
 
-## Déménagement sur Cloudflare Pages (14 octobre 2026)
-- Les crédits gratuits de Netlify (300 par mois, 15 par mise en ligne) étaient épuisés : le site passe sur Cloudflare Pages (gratuit, environ 500 mises en ligne par mois).
+## Déménagement sur Cloudflare (14 octobre 2026)
+- Les crédits gratuits de Netlify (300 par mois, 15 par mise en ligne) étaient épuisés : le site passe sur Cloudflare Workers (gratuit).
 - Nouvelle adresse : https://escale-voyage.pages.dev ; l'ancienne redirige (301) dès que Netlify accepte une nouvelle mise en ligne.
 - Formulaires (contact, bons plans) lus sur `/admin/` ; statistiques dans Cloudflare Web Analytics.
 - À faire : ajouter la nouvelle adresse dans Google Search Console (et Bing Webmaster Tools), renvoyer le sitemap,

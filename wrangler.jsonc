@@ -1,0 +1,19 @@
+// Configuration du Worker Cloudflare d'Escale (lue à chaque mise en ligne depuis GitHub).
+// Les clés secrètes (TRAVELPAYOUTS_TOKEN, ADMIN_KEY, …) ne sont PAS ici : elles se règlent dans
+// Cloudflare > Workers & Pages > escale-voyage > Paramètres > Variables et secrets.
+{
+  "$schema": "https://unpkg.com/wrangler@4.140.0/config-schema.json",
+  "name": "escale-voyage",
+  "main": "src/worker.ts",
+  "compatibility_date": "2024-11-01",
+  "assets": {
+    "directory": "./site",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    // Seules ces adresses passent par le code ; les autres fichiers sont servis directement (gratuit, illimité)
+    "run_worker_first": ["/api/*", "/vol-*", "/en/flights-*", "/es/vuelos-*", "/pt/voos-*", "/ar/flights-*"]
+  },
+  // Espace de stockage « escale » : formulaires (contact, bons plans), alertes prix, cache des bons plans
+  "kv_namespaces": [{ "binding": "ESCALE", "id": "fb7a62181772457db6855d0ddf31d2c4" }],
+  "observability": { "enabled": true }
+}

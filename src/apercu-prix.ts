@@ -2,7 +2,7 @@ import { Ctx } from "./_lib/common"
 import { cheapestRoundTrip } from "./_lib/mail"
 // Aperçus de liens (WhatsApp, Facebook, Telegram…) : ajoute le prix le plus bas au titre des pages trajets,
 // par exemple « Vol pas cher Paris Dakar : comparer les prix · dès 389 € ». Seulement pour ces robots ;
-// les visiteurs reçoivent la page telle quelle. Les chemins concernés sont listés dans site/_routes.json.
+// les visiteurs reçoivent la page telle quelle. Les chemins concernés sont listés dans wrangler.jsonc (run_worker_first).
 const BOTS = /facebookexternalhit|Facebot|WhatsApp|TelegramBot|Twitterbot|LinkedInBot|Slackbot|Discordbot|Pinterest|SkypeUriPreview|redditbot/i
 const PAGES = /^\/(vol-|en\/flights-|es\/vuelos-|pt\/voos-|ar\/flights-)/
 const LABEL: Record<string, string> = { fr: "dès", en: "from", es: "desde", pt: "desde", ar: "من" }
