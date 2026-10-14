@@ -47,3 +47,9 @@ En ligne : https://escale-voyage.netlify.app (projet Netlify `escale-voyage`).
 3. **Branch to deploy** : `claude/escale-comparateur` (ou `main` après fusion).
    Les champs « Build command » et « Publish directory » sont lus dans `netlify.toml` : laisser vides.
 4. Valider. Chaque `git push` sur cette branche régénère les pages (`scripts/build_pages.py`) et publie le site.
+
+## Nom de domaine
+
+Acheter le nom, l'ajouter dans Netlify (Domain management > Add a domain) et le définir comme domaine principal.
+Au déploiement suivant, `scripts/build_pages.py` lit la variable `URL` fournie par Netlify : adresses officielles,
+sitemap, hreflang et image de partage passent automatiquement sur le nouveau nom. Aucune modification de code.

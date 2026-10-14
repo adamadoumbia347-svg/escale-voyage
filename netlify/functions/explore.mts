@@ -39,8 +39,13 @@ export default async (req: Request) => {
     let data = await query(token, from, month, currency)
     if (!data && currency !== "EUR") { currency = "EUR"; data = await query(token, from, month, currency) }
     if (!data) return Response.json({ available: false })
+    // Une seule ligne par destination (la moins chère), sans les dates passées
+    const today = new Date().toISOString().slice(0, 10)
+    const seen = new Set<string>()
     const items = data
-      .filter((d: any) => d && d.price)
+      .filter((d: any) => d && d.price && String(d.departure_at || "").slice(0, 10) >= today)
+      .sort((a: any, b: any) => a.price - b.price)
+      .filter((d: any) => { const k = d.destination_airport || d.destination; if (seen.has(k)) return false; seen.add(k); return true })
       .map((d: any) => ({
         to: d.destination_airport || d.destination,
         city_code: d.destination,

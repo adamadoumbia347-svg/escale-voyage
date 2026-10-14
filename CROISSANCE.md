@@ -58,7 +58,7 @@ Pistes suivantes : allemand, italien, chinois, turc (ajouter une colonne dans tr
 ### 4 ter. Nouveautés du 14 octobre 2026
 - ✔ Page « Bons plans de la semaine » en 5 langues (`/bons-plans/`, `/en/deals/`…), fonction `/api/deals` mise en cache 6 h.
 - ✔ Calendrier des prix sur les 170 pages trajets (fonction `/api/calendar`).
-- ✔ Bloc « Avant de partir » (eSIM, assurance, transfert, activités) : liens dans `site/data/partners.json`,
+- ✔ Bloc « Avant de partir » : eSIM Airalo avec lien partenaire Travelpayouts (airalo.tpm.lv). Autres liens dans `site/data/partners.json`,
   à remplacer par vos liens partenaires Travelpayouts pour être rémunéré.
 - À faire de votre côté : relier GitHub à Netlify (voir README, « Déploiement automatique »).
 

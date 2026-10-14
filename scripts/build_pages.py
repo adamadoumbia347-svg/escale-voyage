@@ -5,6 +5,7 @@ Lancer : python3 scripts/build_pages.py   (Netlify le lance aussi à chaque dép
 """
 import datetime
 import html
+import os
 import pathlib
 import re
 import sys
@@ -15,7 +16,12 @@ import build_i18n  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
-DOMAIN = "https://escale-voyage.netlify.app"
+# Adresse du site. Sur Netlify, la variable URL contient l'adresse principale : dès qu'un nom de domaine
+# est défini comme domaine principal, toutes les adresses (canonical, sitemap, hreflang, image de partage) le suivent.
+DEFAULT_DOMAIN = "https://escale-voyage.netlify.app"
+DOMAIN = (os.environ.get("URL") or DEFAULT_DOMAIN).rstrip("/")
+if not DOMAIN.startswith("https://"):
+    DOMAIN = DEFAULT_DOMAIN
 TODAY = datetime.date.today().isoformat()
 
 # from, to, ville départ, ville arrivée, pays, aéroport arrivée, durée directe (ou None), haute saison, note
@@ -433,6 +439,7 @@ def main():
     # Liste des guides sur la page d'accueil
     idx = SITE / "index.html"
     s = idx.read_text(encoding="utf-8")
+    s = s.replace(DEFAULT_DOMAIN, DOMAIN)
     def group(title, items):
         return f'<h3 class="sub-h">{title}</h3><ul class="route-links">' + "".join(items) + "</ul>"
     by_origin = {}

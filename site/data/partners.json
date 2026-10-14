@@ -5,33 +5,82 @@
       "key": "esim",
       "name": "Airalo",
       "color": "#0b8a6e",
-      "url": "https://www.airalo.com/",
-      "title": {"fr": "Carte SIM internationale (eSIM)", "en": "International SIM (eSIM)", "es": "SIM internacional (eSIM)", "pt": "SIM internacional (eSIM)", "ar": "شريحة دولية (eSIM)"},
-      "desc": {"fr": "Internet dès l’atterrissage, sans frais d’itinérance. S’installe en quelques minutes sur le téléphone.", "en": "Data as soon as you land, no roaming fees. Installs on your phone in minutes.", "es": "Internet nada más aterrizar, sin roaming. Se instala en el móvil en unos minutos.", "pt": "Internet assim que aterra, sem roaming. Instala-se no telemóvel em poucos minutos.", "ar": "إنترنت فور الهبوط بلا رسوم تجوال. تُثبَّت على الهاتف في دقائق."}
+      "url": "https://airalo.tpm.lv/FrG2grmd",
+      "title": {
+        "fr": "Carte SIM internationale (eSIM)",
+        "en": "International SIM (eSIM)",
+        "es": "SIM internacional (eSIM)",
+        "pt": "SIM internacional (eSIM)",
+        "ar": "شريحة دولية (eSIM)"
+      },
+      "desc": {
+        "fr": "Internet dès l’atterrissage, sans frais d’itinérance. S’installe en quelques minutes sur le téléphone.",
+        "en": "Data as soon as you land, no roaming fees. Installs on your phone in minutes.",
+        "es": "Internet nada más aterrizar, sin roaming. Se instala en el móvil en unos minutos.",
+        "pt": "Internet assim que aterra, sem roaming. Instala-se no telemóvel em poucos minutos.",
+        "ar": "إنترنت فور الهبوط بلا رسوم تجوال. تُثبَّت على الهاتف في دقائق."
+      },
+      "affiliate": true
     },
     {
       "key": "insurance",
       "name": "SafetyWing",
       "color": "#5b4bdb",
       "url": "https://safetywing.com/",
-      "title": {"fr": "Assurance voyage", "en": "Travel insurance", "es": "Seguro de viaje", "pt": "Seguro de viagem", "ar": "تأمين السفر"},
-      "desc": {"fr": "Frais médicaux, bagages, annulation : à comparer avant le départ, surtout hors d’Europe.", "en": "Medical costs, baggage, cancellation: compare before you leave, especially outside Europe.", "es": "Gastos médicos, equipaje, cancelación: compáralo antes de salir, sobre todo fuera de Europa.", "pt": "Despesas médicas, bagagem, cancelamento: compare antes de partir, sobretudo fora da Europa.", "ar": "المصاريف الطبية والأمتعة والإلغاء: قارن قبل السفر، خاصة خارج أوروبا."}
+      "title": {
+        "fr": "Assurance voyage",
+        "en": "Travel insurance",
+        "es": "Seguro de viaje",
+        "pt": "Seguro de viagem",
+        "ar": "تأمين السفر"
+      },
+      "desc": {
+        "fr": "Frais médicaux, bagages, annulation : à comparer avant le départ, surtout hors d’Europe.",
+        "en": "Medical costs, baggage, cancellation: compare before you leave, especially outside Europe.",
+        "es": "Gastos médicos, equipaje, cancelación: compáralo antes de salir, sobre todo fuera de Europa.",
+        "pt": "Despesas médicas, bagagem, cancelamento: compare antes de partir, sobretudo fora da Europa.",
+        "ar": "المصاريف الطبية والأمتعة والإلغاء: قارن قبل السفر، خاصة خارج أوروبا."
+      }
     },
     {
       "key": "transfer",
       "name": "GetTransfer",
       "color": "#e8590c",
       "url": "https://gettransfer.com/",
-      "title": {"fr": "Transfert aéroport – hôtel", "en": "Airport – hotel transfer", "es": "Traslado aeropuerto – hotel", "pt": "Transfer aeroporto – hotel", "ar": "التوصيل من المطار إلى الفندق"},
-      "desc": {"fr": "Un chauffeur vous attend à l’arrivée, prix fixé à l’avance. Pratique pour une arrivée de nuit.", "en": "A driver waits for you on arrival, price fixed in advance. Handy for a night arrival.", "es": "Un conductor te espera a la llegada, con precio cerrado. Práctico si llegas de noche.", "pt": "Um motorista espera por si à chegada, preço fixo. Prático para chegadas à noite.", "ar": "سائق ينتظرك عند الوصول بسعر محدد مسبقًا. مناسب للوصول ليلًا."}
+      "title": {
+        "fr": "Transfert aéroport – hôtel",
+        "en": "Airport – hotel transfer",
+        "es": "Traslado aeropuerto – hotel",
+        "pt": "Transfer aeroporto – hotel",
+        "ar": "التوصيل من المطار إلى الفندق"
+      },
+      "desc": {
+        "fr": "Un chauffeur vous attend à l’arrivée, prix fixé à l’avance. Pratique pour une arrivée de nuit.",
+        "en": "A driver waits for you on arrival, price fixed in advance. Handy for a night arrival.",
+        "es": "Un conductor te espera a la llegada, con precio cerrado. Práctico si llegas de noche.",
+        "pt": "Um motorista espera por si à chegada, preço fixo. Prático para chegadas à noite.",
+        "ar": "سائق ينتظرك عند الوصول بسعر محدد مسبقًا. مناسب للوصول ليلًا."
+      }
     },
     {
       "key": "activities",
       "name": "GetYourGuide",
       "color": "#ff5533",
       "url": "https://www.getyourguide.com/s/?q={city}",
-      "title": {"fr": "Activités et visites", "en": "Tours and activities", "es": "Actividades y visitas", "pt": "Atividades e visitas", "ar": "أنشطة وجولات"},
-      "desc": {"fr": "Excursions, visites guidées et billets, avec avis des voyageurs et annulation souvent gratuite.", "en": "Day trips, guided tours and tickets, with traveller reviews and often free cancellation.", "es": "Excursiones, visitas guiadas y entradas, con opiniones y a menudo cancelación gratuita.", "pt": "Excursões, visitas guiadas e bilhetes, com avaliações e muitas vezes cancelamento gratuito.", "ar": "رحلات وجولات مع مرشدين وتذاكر، مع تقييمات المسافرين وإلغاء مجاني غالبًا."}
+      "title": {
+        "fr": "Activités et visites",
+        "en": "Tours and activities",
+        "es": "Actividades y visitas",
+        "pt": "Atividades e visitas",
+        "ar": "أنشطة وجولات"
+      },
+      "desc": {
+        "fr": "Excursions, visites guidées et billets, avec avis des voyageurs et annulation souvent gratuite.",
+        "en": "Day trips, guided tours and tickets, with traveller reviews and often free cancellation.",
+        "es": "Excursiones, visitas guiadas y entradas, con opiniones y a menudo cancelación gratuita.",
+        "pt": "Excursões, visitas guiadas e bilhetes, com avaliações e muitas vezes cancelamento gratuito.",
+        "ar": "رحلات وجولات مع مرشدين وتذاكر، مع تقييمات المسافرين وإلغاء مجاني غالبًا."
+      }
     }
   ]
 }
