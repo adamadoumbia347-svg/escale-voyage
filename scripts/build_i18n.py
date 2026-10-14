@@ -278,6 +278,28 @@ HEAD = """<!doctype html>
 """
 
 
+HOME_NAME = {"fr": "Accueil", "en": "Home", "es": "Inicio", "pt": "Início", "ar": "الرئيسية"}
+GUIDES_DIR = {"fr": "guides", "en": "en/guides", "es": "es/guias", "pt": "pt/guias", "ar": "ar/guides"}
+
+
+def breadcrumb_ld(domain, path, lang, hero):
+    """Fil d'Ariane (BreadcrumbList) : Google l'affiche à la place de l'adresse dans les résultats."""
+    m = re.search(r"<h1[^>]*>(.*?)</h1>", hero, re.S)
+    name = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", m.group(1)))).strip() if m else ""
+    if not name or not path:
+        return ""
+    home = f"{domain}/" if lang == "fr" else f"{domain}/{lang}/"
+    items = [(HOME_NAME[lang], home)]
+    g = GUIDES_DIR[lang]
+    if path.startswith(g + "/"):
+        items.append(("Guides", f"{domain}/{g}/"))
+    items.append((name, f"{domain}/{path}/"))
+    return '<script type="application/ld+json">' + json.dumps({
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": n, "item": u} for i, (n, u) in enumerate(items)]
+    }, ensure_ascii=False) + "</script>"
+
+
 def faq_ld(faq):
     return '<script type="application/ld+json">' + json.dumps({
         "@context": "https://schema.org", "@type": "FAQPage",
@@ -287,6 +309,7 @@ def faq_ld(faq):
 
 def write(site, path, lang, title, desc, hero, body, ld, paths, ctx, og="og-image.png"):
     u = UI[lang]
+    ld = (ld + "\n" + breadcrumb_ld(ctx["domain"], path, lang, hero)).strip()
     out = HEAD.format(
         lang=lang, dir="rtl" if lang == "ar" else "ltr", tp=ctx["tp"], title=E(title), desc=E(desc),
         url=f"{ctx['domain']}/{path}/", alts=alternates(paths, ctx["domain"]), oglocale=LOCALE[lang], domain=ctx["domain"],

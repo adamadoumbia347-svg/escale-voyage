@@ -4,6 +4,8 @@
 Lancer : python3 scripts/build_pages.py   (Netlify le lance aussi à chaque déploiement)
 """
 import datetime
+import hashlib
+import json
 import html
 import os
 import pathlib
@@ -238,6 +240,7 @@ def page(path, title, desc, hero, body, ld="", paths=None, og="og-image.png"):
     if paths:
         ld = build_i18n.alternates(paths, DOMAIN) + "\n" + ld
     switch = build_i18n.switcher(paths, "fr") if paths else ""
+    ld = (ld + "\n" + build_i18n.breadcrumb_ld(DOMAIN, path, "fr", hero)).strip()
     out = HEAD.format(tp=TRAVELPAYOUTS, title=E(title), desc=E(desc), url=url, domain=DOMAIN, hero=hero, body=body, ld=ld, switch=switch, ogimg=og)
     d = SITE / path
     d.mkdir(parents=True, exist_ok=True)
@@ -488,9 +491,27 @@ def main():
                lambda m: "<!-- ROUTES:START -->\n    " + links + "\n    <!-- ROUTES:END -->", s, flags=re.S)
     idx.write_text(s, encoding="utf-8")
 
+    # Date de dernière modification réelle de chaque page (empreinte du contenu gardée dans scripts/lastmod.json),
+    # pour que Google fasse confiance au sitemap au lieu de voir toutes les pages « modifiées » à chaque mise en ligne.
+    lm_file = ROOT / "scripts" / "lastmod.json"
+    try:
+        lm = json.loads(lm_file.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        lm = {}
+    new_lm = {}
+    for u in urls:
+        rel = u[len(DOMAIN):].strip("/")
+        f = SITE / rel / "index.html" if rel else SITE / "index.html"
+        body = f.read_bytes().replace(DOMAIN.encode(), b"") if f.exists() else b""
+        h = hashlib.sha1(body).hexdigest()[:16]
+        key = "/" + (rel + "/" if rel else "")
+        old_h, old_d = lm.get(key, ["", ""])
+        new_lm[key] = [h, old_d if old_h == h and old_d else TODAY]
+    if os.environ.get("CONTEXT") is None:  # en local seulement : sur Netlify, le fichier du dépôt sert de référence
+        lm_file.write_text(json.dumps(new_lm, indent=0, sort_keys=True), encoding="utf-8")
     (SITE / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-        "".join(f"  <url><loc>{u}</loc><lastmod>{TODAY}</lastmod></url>\n" for u in urls) + "</urlset>\n", encoding="utf-8")
+        "".join(f"  <url><loc>{u}</loc><lastmod>{new_lm['/' + (u[len(DOMAIN):].strip('/') + '/' if u[len(DOMAIN):].strip('/') else '')][1]}</lastmod></url>\n" for u in urls) + "</urlset>\n", encoding="utf-8")
     (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {DOMAIN}/sitemap.xml\n", encoding="utf-8")
     print(f"{len(urls)} pages dans le sitemap")
 

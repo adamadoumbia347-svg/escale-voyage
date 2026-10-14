@@ -95,3 +95,9 @@ Pistes suivantes : allemand, italien, chinois, turc (ajouter une colonne dans tr
 - [Travelpayouts : fonctionnement des programmes](https://support.travelpayouts.com/hc/en-us/articles/203955763)
 - [PhocusWire : fermeture d'Amadeus Self-Service](https://www.phocuswire.com/amadeus-shut-down-self-service-apis-portal-developers)
 - [Ignav : alternative après la fermeture d'Amadeus Self-Service](https://ignav.com/docs/amadeus-self-service-shutdown)
+
+## Référencement Google (15 octobre 2026)
+- ✔ Fil d'Ariane (BreadcrumbList) sur toutes les pages, nom du site (WebSite + Organization) sur l'accueil.
+- ✔ Sitemap avec la vraie date de modification de chaque page (`scripts/lastmod.json`, mis à jour en lançant la génération en local).
+- ✔ IndexNow : à chaque mise en ligne, `netlify/functions/deploy-succeeded.mts` envoie toutes les pages à Bing (et DuckDuckGo, Yahoo, Ecosia).
+- À faire : nom de domaine à soi, Bing Webmaster Tools, liens depuis d'autres sites (associations, blogs, groupes de la diaspora), suivi mensuel dans Search Console.
