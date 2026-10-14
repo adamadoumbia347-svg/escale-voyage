@@ -9,12 +9,16 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      url:
+        description: "Adresse à vérifier (vide = adresse du site)"
+        required: false
 
 permissions:
   contents: read
 
 env:
-  SITE_URL: ${{ vars.SITE_URL || 'https://escale-voyage.adamadoumbia347.workers.dev' }}
+  SITE_URL: ${{ inputs.url || vars.SITE_URL || 'https://escale-voyage.adamadoumbia347.workers.dev' }}
 
 jobs:
   alertes:
@@ -51,6 +55,7 @@ jobs:
       - name: Vérifier le site en ligne (pages, prix réels, formulaires, admin)
         run: |
           D=$(date -u -d '+45 days' +%Y-%m-%d); R=$(date -u -d '+59 days' +%Y-%m-%d)
+          echo "Adresse vérifiée : $SITE_URL"
           echo "Accueil : $(curl -s -o /dev/null -w '%{http_code}' $SITE_URL/)"
           echo "Page trajet : $(curl -s -o /dev/null -w '%{http_code}' $SITE_URL/vol-paris-dakar/)"
           echo "Page absente : $(curl -s -o /dev/null -w '%{http_code}' $SITE_URL/page-qui-n-existe-pas/)"
