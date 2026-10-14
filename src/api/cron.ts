@@ -1,11 +1,15 @@
-import { Ctx, json, sameKey, siteUrl } from "../_lib/common"
+import { Ctx, Env, json, sameKey, siteUrl } from "../_lib/common"
 import { mailerReady, sendMail, cheapestRoundTrip } from "../_lib/mail"
 import { TXT, fill } from "../_lib/alert-texts"
-// Vérification quotidienne des alertes prix, appelée par GitHub Actions (.github/workflows/quotidien.yml)
-// avec l'en-tête « x-cron-key: <CRON_KEY> ». Au plus un e-mail tous les 3 jours par alerte.
+// Vérification quotidienne des alertes prix : lancée chaque matin par Cloudflare (« triggers » dans wrangler.jsonc),
+// ou à la main avec POST /api/cron et l'en-tête « x-cron-key: <CRON_KEY> ». Au plus un e-mail tous les 3 jours par alerte.
 export const onRequestPost = async ({ request, env }: Ctx) => {
   if (!sameKey(request.headers.get("x-cron-key") || "", env.CRON_KEY || "")) return json({ error: "unauthorized" }, { status: 401 })
-  if (!mailerReady(env)) return json({ ok: true, skipped: "mail not configured" })
+  return json(await checkAlerts(env))
+}
+
+export async function checkAlerts(env: Env) {
+  if (!mailerReady(env)) return { ok: true, skipped: "mail not configured" }
   const kv = env.ESCALE, base = siteUrl(env)
   const now = Date.now(), cache = new Map<string, number | null>()
   let sent = 0, checked = 0
@@ -32,5 +36,5 @@ export const onRequestPost = async ({ request, env }: Ctx) => {
       sent++
     }
   }
-  return json({ ok: true, checked, sent })
+  return { ok: true, checked, sent }
 }

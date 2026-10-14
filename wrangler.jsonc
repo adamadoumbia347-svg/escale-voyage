@@ -17,5 +17,9 @@
   },
   // Espace de stockage « escale » : formulaires (contact, bons plans), alertes prix, cache des bons plans
   "kv_namespaces": [{ "binding": "ESCALE", "id": "fb7a62181772457db6855d0ddf31d2c4" }],
+  // Adresse d'expéditeur des alertes prix (domaine escale.live validé chez Resend)
+  "vars": { "MAIL_FROM": "alertes@escale.live" },
+  // Vérification des alertes prix chaque jour à 6 h UTC (7 h ou 8 h à Paris)
+  "triggers": { "crons": ["0 6 * * *"] },
   "observability": { "enabled": true }
 }

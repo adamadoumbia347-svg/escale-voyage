@@ -30,4 +30,8 @@ export default {
     }
     return apercu.onRequest(c)
   },
+  // Chaque matin (voir « triggers » dans wrangler.jsonc) : vérification des alertes prix
+  async scheduled(_event: unknown, env: Env, ctx: { waitUntil: (p: Promise<any>) => void }) {
+    ctx.waitUntil(cron.checkAlerts(env).then((r) => console.log("alertes", JSON.stringify(r))))
+  },
 }

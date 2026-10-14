@@ -1,11 +1,9 @@
 # Tâches automatiques d'Escale (gratuites pour un dépôt public) :
-#  - chaque jour à 6 h UTC : vérification des alertes prix (/api/cron, secret CRON_KEY à ajouter dans
-#    GitHub > Settings > Secrets and variables > Actions, même valeur que dans Cloudflare) ;
+#  - les alertes prix sont vérifiées chaque matin par Cloudflare lui-même (wrangler.jsonc) ; le travail « alertes »
+#    ci-dessous ne sert qu'en secours, si le secret CRON_KEY est défini dans GitHub ;
 #  - après chaque envoi sur main : les pages du sitemap sont signalées à Bing & co. via IndexNow.
 name: Tâches Escale
 on:
-  schedule:
-    - cron: "0 6 * * *"
   push:
     branches: [main]
   workflow_dispatch:
