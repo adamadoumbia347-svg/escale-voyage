@@ -30,6 +30,7 @@ Pour faire grandir le site : voir [CROISSANCE.md](CROISSANCE.md).
   - `_middleware.ts` : prix dans l'aperçu des liens partagés (WhatsApp, Facebook…).
 - `site/_headers`, `site/_routes.json` : en-têtes HTTP et chemins qui passent par les fonctions.
 - `.github/workflows/quotidien.yml` : vérification quotidienne des alertes, envoi des pages à IndexNow.
+- `wrangler.toml` : configuration Cloudflare Pages (dossier publié, stockage KV).
 - `netlify.toml` : redirection de l'ancienne adresse escale-voyage.netlify.app vers la nouvelle.
 
 ## Générer les pages
@@ -48,8 +49,7 @@ Toujours lancer la génération avant d'envoyer sur GitHub : Cloudflare publie l
    **Build output directory : `site`**. Valider : chaque envoi sur `main` publie le site.
 3. **Settings > Variables and Secrets** (type *Secret*) : `TRAVELPAYOUTS_TOKEN`, `ADMIN_KEY`
    (et plus tard `RESEND_API_KEY`/`BREVO_API_KEY`, `ALERT_FROM`, `CRON_KEY`). Puis redéployer.
-4. **Storage & Databases > KV** > *Create* un espace nommé `escale` ; puis dans le projet
-   **Settings > Bindings > Add > KV namespace** : nom de variable **`ESCALE`**, espace `escale`. Redéployer.
+4. Stockage : l'espace KV `escale` existe déjà et il est relié par `wrangler.toml` (variable `ESCALE`) : rien à faire.
 5. **Metrics > Web Analytics** : activer (statistiques de visites sans cookie).
 6. Si le nom `escale-voyage.pages.dev` n'est pas disponible : changer `DEFAULT_DOMAIN` dans
    `scripts/build_pages.py`, l'adresse dans `netlify.toml` et `SITE_URL` du workflow, puis régénérer.
