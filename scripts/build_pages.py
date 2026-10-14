@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Génère les pages trajets, les pages légales, le sitemap et la liste des guides de la page d'accueil.
 
-Lancer : python3 scripts/build_pages.py   (Netlify le lance aussi à chaque déploiement)
+Lancer : python3 scripts/build_pages.py   (puis publier : voir README)
 """
 import datetime
 import hashlib
@@ -20,10 +20,10 @@ import translations  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
-# Adresse du site. Sur Netlify, la variable URL contient l'adresse principale : dès qu'un nom de domaine
-# est défini comme domaine principal, toutes les adresses (canonical, sitemap, hreflang, image de partage) le suivent.
-DEFAULT_DOMAIN = "https://escale-voyage.netlify.app"
-DOMAIN = (os.environ.get("URL") or DEFAULT_DOMAIN).rstrip("/")
+# Adresse du site (hébergé sur Cloudflare Pages). Pour un nom de domaine à vous : changez DEFAULT_DOMAIN
+# (ou la variable SITE_URL) et relancez la génération : canonical, sitemap, hreflang et images de partage suivent.
+DEFAULT_DOMAIN = "https://escale-voyage.pages.dev"
+DOMAIN = (os.environ.get("SITE_URL") or DEFAULT_DOMAIN).rstrip("/")
 if not DOMAIN.startswith("https://"):
     DOMAIN = DEFAULT_DOMAIN
 TODAY = datetime.date.today().isoformat()
@@ -189,7 +189,6 @@ E = html.escape
 TRAVELPAYOUTS = (ROOT / "scripts" / "travelpayouts-snippet.html").read_text(encoding="utf-8").strip()
 TRAVELPAYOUTS = TRAVELPAYOUTS.replace("<script ", '<script type="text/plain" data-consent="marketing" ', 1)
 TRAVELPAYOUTS += '\n<script src="/consent.js" defer></script>'
-TRAVELPAYOUTS += '\n<script src="/track.js" defer></script>'
 
 HEAD = """<!doctype html>
 <html lang="fr">
@@ -380,12 +379,12 @@ def legal_pages():
     urls = []
     hero = '<h1>Mentions légales</h1>'
     body = """<section><h2>Éditeur du site</h2>
-<p>Le site Escale (escale-voyage.netlify.app) est édité à titre non professionnel.</p>
+<p>Le site Escale (__HOST__) est édité à titre non professionnel.</p>
 <p>Conformément à l'article 6, III-2 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique, l'éditeur non professionnel peut ne tenir à la disposition du public que le nom et l'adresse de son hébergeur, après lui avoir communiqué ses éléments d'identification.</p>
 <p>Contact : <a href="/contact/">formulaire de contact</a>.</p>
 </section>
 <section><h2>Hébergeur</h2>
-<p>Netlify, Inc.<br>512 2nd Street, Suite 200<br>San Francisco, CA 94107, États-Unis<br>netlify.com</p>
+<p>Cloudflare, Inc.<br>101 Townsend St<br>San Francisco, CA 94107, États-Unis<br>cloudflare.com</p>
 </section>
 <section><h2>Nature du service</h2>
 <p>Escale est un outil de recherche gratuit. Il ne vend aucun billet, nuit d'hôtel ou location et ne fixe aucun prix. Chaque bouton « Voir les prix » ouvre une recherche sur un site tiers, qui est seul responsable de ses tarifs, de ses conditions et des réservations.</p>
@@ -394,16 +393,16 @@ def legal_pages():
 <section><h2>Propriété intellectuelle</h2>
 <p>Les textes et le design du site sont la propriété de l'éditeur. Les marques citées (Google, Aviasales, Skyscanner, Kayak, momondo, Booking.com, Hotels.com, Agoda, Airbnb, Rentalcars, Discover Cars) appartiennent à leurs propriétaires respectifs et sont citées uniquement pour identifier les services comparés.</p>
 </section>"""
-    urls.append(page("mentions-legales", "Mentions légales | Escale", "Mentions légales du site Escale, comparateur de vols, hôtels et locations de voitures.", hero, body))
+    urls.append(page("mentions-legales", "Mentions légales | Escale", "Mentions légales du site Escale, comparateur de vols, hôtels et locations de voitures.", hero, body.replace("__HOST__", DOMAIN.split("//")[1])))
     hero = '<h1>Confidentialité</h1>'
     body = """<section><h2>En bref</h2>
 <p>Escale ne demande aucun compte. Nous ne recevons un e-mail ou un numéro de téléphone que si vous nous le donnez vous-même : formulaire de contact, inscription aux bons plans ou alerte prix.</p>
 </section>
 <section><h2>Mesure d'audience anonyme</h2>
-<p>Pour savoir quelles pages sont utiles, chaque page vue envoie à notre serveur le chemin de la page, sa langue, le site d'où vous venez (par exemple google.com) et, lors d'un clic vers un site partenaire, le nom de ce site. Aucun cookie n'est déposé, aucune adresse IP ni aucun identifiant n'est enregistré : il est impossible de reconnaître un visiteur ou de suivre son parcours. Ces données sont regroupées chaque nuit en totaux par jour. Si votre navigateur envoie le signal « Do Not Track », rien n'est envoyé.</p>
+<p>Pour savoir combien de personnes visitent le site et quelles pages sont utiles, nous utilisons Cloudflare Web Analytics, l'outil de mesure de notre hébergeur. Il ne dépose aucun cookie, n'utilise aucun identifiant et ne suit pas les visiteurs d'un site à l'autre : il compte les pages vues, les pays et les sites d'origine (par exemple google.com) de façon agrégée.</p>
 </section>
 <section><h2>Bons plans par e-mail ou WhatsApp</h2>
-<p>Si vous vous inscrivez, nous conservons votre e-mail et/ou votre numéro WhatsApp et la langue de la page, uniquement pour vous envoyer nos bons plans. Le formulaire est géré par notre hébergeur Netlify (Netlify Forms). Vous pouvez vous désinscrire à tout moment en répondant « STOP » ou via la page Contact ; vos coordonnées sont alors supprimées.</p>
+<p>Si vous vous inscrivez, nous conservons votre e-mail et/ou votre numéro WhatsApp et la langue de la page, uniquement pour vous envoyer nos bons plans. Votre inscription est enregistrée chez notre hébergeur Cloudflare. Vous pouvez vous désinscrire à tout moment en répondant « STOP » ou via la page Contact ; vos coordonnées sont alors supprimées.</p>
 </section>
 <section><h2>Alertes prix</h2>
 <p>Si vous créez une alerte prix, nous conservons votre e-mail, le trajet, votre budget et la langue choisie, uniquement pour vous prévenir quand le prix baisse. L'alerte n'est active qu'après confirmation par le lien reçu par e-mail ; sans confirmation, elle est effacée au bout de 7 jours. Chaque e-mail contient un lien de désinscription qui efface immédiatement l'alerte. Une alerte est de toute façon supprimée au bout d'un an. Les e-mails sont envoyés par un prestataire d'envoi (Resend ou Brevo), qui ne reçoit que l'adresse et le contenu du message.</p>
@@ -412,7 +411,7 @@ def legal_pages():
 <p>Vos dernières recherches, le dernier onglet, la langue, la devise, votre aéroport de départ et votre choix concernant les cookies sont enregistrés dans le stockage local de votre navigateur, uniquement pour vous les reproposer. Ces données ne quittent pas votre appareil. Vous pouvez les effacer à tout moment en supprimant les données du site dans votre navigateur.</p>
 </section>
 <section><h2>Aéroport le plus proche</h2>
-<p>Pour vous proposer l'aéroport de départ le plus proche et la bonne devise, notre hébergeur Netlify déduit votre ville et votre pays approximatifs de votre adresse IP au moment de la visite. Cette information sert uniquement à préremplir le formulaire : elle n'est ni enregistrée ni transmise à des tiers. Vous pouvez toujours changer l'aéroport et la devise.</p>
+<p>Pour vous proposer l'aéroport de départ le plus proche et la bonne devise, notre hébergeur Cloudflare déduit votre ville et votre pays approximatifs de votre adresse IP au moment de la visite. Cette information sert uniquement à préremplir le formulaire : elle n'est ni enregistrée ni transmise à des tiers. Vous pouvez toujours changer l'aéroport et la devise.</p>
 </section>
 <section><h2>Prix indicatifs</h2>
 <p>Pour afficher un prix indicatif, le site envoie le trajet et les dates recherchés (par exemple CDG → BKO en novembre) à notre serveur, qui interroge un fournisseur de données de prix. Aucune donnée personnelle n'est transmise.</p>
@@ -422,7 +421,7 @@ def legal_pages():
 <p>Votre choix (accepter ou refuser) est demandé à votre première visite, gardé 6 mois dans votre navigateur, puis redemandé. Vous pouvez le changer à tout moment avec le lien <a href="#cookies" data-open-consent>Gérer les cookies</a>, aussi présent en bas de chaque page. Refuser ne change rien au fonctionnement des recherches.</p>
 </section>
 <section><h2>Hébergement</h2>
-<p>Comme tout hébergeur, Netlify enregistre des journaux techniques (adresse IP, page demandée, date) nécessaires au fonctionnement et à la sécurité du site.</p>
+<p>Comme tout hébergeur, Cloudflare enregistre des journaux techniques (adresse IP, page demandée, date) nécessaires au fonctionnement et à la sécurité du site.</p>
 </section>
 <section><h2>Sites partenaires</h2>
 <p>Quand vous cliquez sur « Voir les prix », vous quittez Escale. Le site ouvert (Google, Skyscanner, Booking, etc.) applique sa propre politique de confidentialité et ses propres cookies.</p>
@@ -433,7 +432,7 @@ def legal_pages():
     urls.append(page("confidentialite", "Confidentialité | Escale", "Politique de confidentialité du site Escale : aucun compte, mesure d'audience anonyme sans cookie, alertes et bons plans sur demande.", hero, body))
     hero = '<h1>Contact</h1>'
     body = """<section><p>Une question, une erreur sur le site, une destination à ajouter ? Écrivez-nous. Pour une réservation, contactez directement le site où vous avez réservé : Escale ne gère aucune réservation.</p>
-<form class="contact" name="contact" method="POST" action="/contact/merci/" data-netlify="true" netlify-honeypot="site-web">
+<form class="contact" name="contact" method="POST" action="/api/form">
   <input type="hidden" name="form-name" value="contact">
   <p class="hp"><label>Ne pas remplir : <input name="site-web"></label></p>
   <label for="c-nom">Votre nom</label><input id="c-nom" name="nom" autocomplete="name">
@@ -510,7 +509,7 @@ def main():
         key = "/" + (rel + "/" if rel else "")
         old_h, old_d = lm.get(key, ["", ""])
         new_lm[key] = [h, old_d if old_h == h and old_d else TODAY]
-    if os.environ.get("CONTEXT") is None:  # en local seulement : sur Netlify, le fichier du dépôt sert de référence
+    if not os.environ.get("CF_PAGES"):  # en local seulement : sur Cloudflare, le fichier du dépôt sert de référence
         lm_file.write_text(json.dumps(new_lm, indent=0, sort_keys=True), encoding="utf-8")
     (SITE / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +

@@ -1,33 +1,11 @@
+# Le site a déménagé sur Cloudflare Pages (voir README).
+# L'ancienne adresse escale-voyage.netlify.app redirige définitivement (301) chaque page vers la nouvelle,
+# pour que Google et les liens déjà partagés suivent.
 [build]
   publish = "site"
-  command = "python3 scripts/build_pages.py"
 
-[functions]
-  directory = "netlify/functions"
-
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-
-[[headers]]
-  for = "/*.png"
-  [headers.values]
-    Cache-Control = "public, max-age=604800"
-
-[[headers]]
-  for = "/og/*"
-  [headers.values]
-    Cache-Control = "public, max-age=604800"
-
-[[headers]]
-  for = "/*.svg"
-  [headers.values]
-    Cache-Control = "public, max-age=604800"
-
-[[headers]]
-  for = "/stats/*"
-  [headers.values]
-    X-Robots-Tag = "noindex, nofollow"
-    Cache-Control = "no-store"
+[[redirects]]
+  from = "/*"
+  to = "https://escale-voyage.pages.dev/:splat"
+  status = 301
+  force = true

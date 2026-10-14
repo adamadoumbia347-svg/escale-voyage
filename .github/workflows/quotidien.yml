@@ -1,0 +1,45 @@
+# Tâches automatiques d'Escale (gratuites pour un dépôt public) :
+#  - chaque jour à 6 h UTC : vérification des alertes prix (/api/cron, secret CRON_KEY à ajouter dans
+#    GitHub > Settings > Secrets and variables > Actions, même valeur que dans Cloudflare) ;
+#  - après chaque envoi sur main : les pages du sitemap sont signalées à Bing & co. via IndexNow.
+name: Tâches Escale
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  SITE_URL: ${{ vars.SITE_URL || 'https://escale-voyage.pages.dev' }}
+
+jobs:
+  alertes:
+    if: github.event_name != 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Vérifier les alertes prix
+        env:
+          CRON_KEY: ${{ secrets.CRON_KEY }}
+        run: |
+          if [ -z "$CRON_KEY" ]; then echo "CRON_KEY absent : rien à faire"; exit 0; fi
+          curl -fsS -X POST -H "x-cron-key: $CRON_KEY" "$SITE_URL/api/cron"
+
+  indexnow:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Signaler les pages à IndexNow (Bing, Yandex…)
+        run: |
+          sleep 180  # laisser Cloudflare publier la nouvelle version
+          KEY=58b4cc1ae82fde85a120e07836308d90
+          HOST=$(echo "$SITE_URL" | sed -E 's#https?://##; s#/.*##')
+          curl -fsS "$SITE_URL/$KEY.txt" >/dev/null || { echo "Fichier de clé introuvable : site pas encore publié"; exit 0; }
+          URLS=$(curl -fsS "$SITE_URL/sitemap.xml" | grep -o '<loc>[^<]*</loc>' | sed 's#</\?loc>##g' | head -10000 | jq -R . | jq -s .)
+          jq -n --arg host "$HOST" --arg key "$KEY" --arg loc "$SITE_URL/$KEY.txt" --argjson urls "$URLS" \
+            '{host:$host, key:$key, keyLocation:$loc, urlList:$urls}' > body.json
+          curl -sS -o /dev/null -w "IndexNow : %{http_code}\n" -X POST -H "Content-Type: application/json; charset=utf-8" \
+            --data @body.json https://api.indexnow.org/indexnow

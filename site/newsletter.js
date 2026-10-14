@@ -1,4 +1,4 @@
-// Formulaire « Recevoir les bons plans » (Netlify Forms) : envoi sans quitter la page, messages dans la langue de la page.
+// Formulaire « Recevoir les bons plans » (enregistré par /api/form) : envoi sans quitter la page, messages dans la langue de la page.
 (function () {
   "use strict";
   var M = {
@@ -18,7 +18,7 @@
       form.langue.value = document.documentElement.lang || "fr";
       var data = new URLSearchParams(new FormData(form)).toString();
       form.querySelector("button").disabled = true;
-      fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: data })
+      fetch("/api/form", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded", Accept: "application/json" }, body: data })
         .then(function (r) { return r.ok; }).catch(function () { return false; }).then(function (ok) {
           msg.textContent = ok ? L.ok : L.fail;
           if (ok) form.reset(); else form.querySelector("button").disabled = false;

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Administration | Escale</title>
+<link rel="stylesheet" href="/pages.css">
+<style>
+  .ad-form { display: flex; flex-wrap: wrap; gap: 8px; align-items: end; margin: 16px 0; }
+  .ad-form input, .ad-form select { font: inherit; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); }
+  .ad-form button, .ad-tools button { font: inherit; font-weight: 700; padding: 10px 16px; border: 0; border-radius: 8px; background: var(--accent); color: var(--accent-ink); cursor: pointer; }
+  .ad-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 8px 0 16px; }
+  .ad-tools button.ghost { background: var(--surface); color: var(--ink); border: 1px solid var(--line); }
+  .ad-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .ad-list li { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; display: grid; gap: 4px; }
+  .ad-list .meta { color: var(--muted); font-size: 13px; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+  .ad-list .msg { white-space: pre-wrap; word-break: break-word; }
+  .ad-list button { justify-self: start; font: inherit; font-size: 13px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); cursor: pointer; }
+  .small { color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<header class="board"><div class="wrap"><a class="brand" href="/"><span class="brand-mark">ESC</span><span class="brand-name">Escale</span></a><h1>Administration</h1><p class="small" style="color:inherit;opacity:.8">Messages du formulaire de contact et inscriptions aux bons plans. Page privée, non référencée.</p></div></header>
+<main class="wrap">
+  <form class="ad-form" id="f">
+    <label>Clé d’accès<br><input id="key" type="password" autocomplete="current-password" required></label>
+    <label>Afficher<br><select id="form"><option value="bons-plans">Inscriptions aux bons plans</option><option value="contact">Messages de contact</option></select></label>
+    <button type="submit">Afficher</button>
+  </form>
+  <p id="msg" class="small" role="status"></p>
+  <div id="out" hidden>
+    <div class="ad-tools"><strong id="count"></strong><button type="button" class="ghost" id="copy-emails">Copier les e-mails</button><button type="button" class="ghost" id="copy-wa">Copier les numéros WhatsApp</button><button type="button" class="ghost" id="csv">Télécharger (CSV)</button></div>
+    <ul class="ad-list" id="list"></ul>
+  </div>
+  <p class="small">Les statistiques de visites sont dans Cloudflare : Workers &amp; Pages › escale-voyage › Metrics › Web Analytics.</p>
+</main>
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var items = [];
+  try { $("key").value = localStorage.getItem("escale-admin-key") || ""; } catch (e) {}
+  var esc = function (t) { return String(t == null ? "" : t).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
+  var when = function (iso) { try { return new Date(iso).toLocaleString("fr-FR", { dateStyle: "medium", timeStyle: "short" }); } catch (e) { return iso; } };
+  function render() {
+    var form = $("form").value;
+    $("count").textContent = items.length + (form === "contact" ? " message(s)" : " inscrit(s)");
+    $("copy-emails").hidden = $("copy-wa").hidden = form === "contact";
+    $("list").innerHTML = items.length ? items.map(function (it, i) {
+      var f = it.fields || {};
+      var body = form === "contact"
+        ? "<strong>" + esc(f.nom || "(sans nom)") + "</strong> · <a href=\"mailto:" + esc(f.email) + "\">" + esc(f.email) + "</a><div class=\"msg\">" + esc(f.message) + "</div>"
+        : (f.email ? "<a href=\"mailto:" + esc(f.email) + "\">" + esc(f.email) + "</a>" : "") + (f.email && f.whatsapp ? " · " : "") + (f.whatsapp ? "WhatsApp " + esc(f.whatsapp) : "");
+      return "<li><div class=\"meta\"><span>" + esc(when(it.at)) + "</span><span>" + esc(f.langue || "") + "</span></div>" + body +
+        "<button type=\"button\" data-i=\"" + i + "\">Supprimer</button></li>";
+    }).join("") : "<li class=\"small\">Rien pour le moment.</li>";
+    $("out").hidden = false;
+  }
+  function load() {
+    var key = $("key").value.trim();
+    $("msg").textContent = "Chargement…";
+    return fetch("/api/admin?form=" + $("form").value, { headers: { "x-admin-key": key } }).then(function (r) {
+      if (r.status === 401) throw new Error("Clé incorrecte.");
+      if (r.status === 503) throw new Error("Stockage non relié : ajoutez l’espace KV « ESCALE » dans Cloudflare (voir README).");
+      if (!r.ok) throw new Error("Indisponible pour le moment.");
+      return r.json();
+    }).then(function (j) {
+      try { localStorage.setItem("escale-admin-key", key); } catch (e) {}
+      items = j.items || []; $("msg").textContent = ""; render();
+    }).catch(function (e) { $("msg").textContent = e.message || "Erreur."; });
+  }
+  $("f").addEventListener("submit", function (ev) { ev.preventDefault(); load(); });
+  $("form").addEventListener("change", function () { if ($("key").value) load(); });
+  $("list").addEventListener("click", function (ev) {
+    var b = ev.target.closest("button[data-i]");
+    if (!b || !confirm("Supprimer cette entrée ?")) return;
+    var it = items[+b.dataset.i];
+    fetch("/api/admin?key=" + encodeURIComponent(it.key), { method: "DELETE", headers: { "x-admin-key": $("key").value.trim() } })
+      .then(function (r) { if (r.ok) { items.splice(+b.dataset.i, 1); render(); } });
+  });
+  function copy(list, label) {
+    var txt = list.filter(Boolean).join(", ");
+    (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(function () { $("msg").textContent = label + " copiés."; }, function () { prompt("Copiez :", txt); });
+  }
+  $("copy-emails").addEventListener("click", function () { copy(items.map(function (i) { return (i.fields || {}).email; }), "E-mails"); });
+  $("copy-wa").addEventListener("click", function () { copy(items.map(function (i) { return (i.fields || {}).whatsapp; }), "Numéros"); });
+  $("csv").addEventListener("click", function () {
+    var cols = $("form").value === "contact" ? ["nom", "email", "message"] : ["email", "whatsapp", "langue"];
+    var q = function (v) { return '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"'; };
+    var rows = [["date"].concat(cols).map(q).join(";")].concat(items.map(function (i) { return [i.at].concat(cols.map(function (c) { return (i.fields || {})[c]; })).map(q).join(";"); }));
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob(["﻿" + rows.join("\n")], { type: "text/csv" }));
+    a.download = "escale-" + $("form").value + ".csv"; a.click();
+  });
+  if ($("key").value) load();
+})();
+</script>
+</body>
+</html>
