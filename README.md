@@ -26,7 +26,7 @@ Pour faire grandir le site : voir [CROISSANCE.md](CROISSANCE.md).
   - `api/prix`, `api/explore`, `api/calendar`, `api/deals` : prix réels (secret `TRAVELPAYOUTS_TOKEN`) ;
   - `api/geo` : ville et pays approximatifs du visiteur (aéroport et devise par défaut) ;
   - `api/form` : formulaires contact et bons plans, lus sur `/admin/` (secret `ADMIN_KEY`) ;
-  - `api/alert` + `api/cron` : alertes prix par e-mail (`RESEND_API_KEY` ou `BREVO_API_KEY`, `ALERT_FROM`, `CRON_KEY`) ;
+  - `api/alert` + `api/cron` : alertes prix par e-mail (`RESEND_API_KEY` ou `BREVO_API_KEY`, `ALERT_FROM` = `alertes@escale.live`, `CRON_KEY` aussi en secret GitHub Actions) ;
   - `apercu-prix.ts` : prix dans l'aperçu des liens partagés (WhatsApp, Facebook…).
 - `wrangler.jsonc` : configuration du Worker (dossier publié, stockage KV `escale`, adresses qui passent par le code).
 - `site/_headers` : en-têtes HTTP (cache, pages privées).

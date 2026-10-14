@@ -3,7 +3,9 @@ import { Env, pricesForDates } from "./common"
 export const mailerReady = (env: Env) => Boolean((env.RESEND_API_KEY || env.BREVO_API_KEY) && env.ALERT_FROM && env.ESCALE)
 
 export async function sendMail(env: Env, to: string, subject: string, html: string): Promise<boolean> {
-  const from = env.ALERT_FROM || ""
+  // Accepte « alertes@escale.live » comme « Escale <alertes@escale.live> »
+  const raw = (env.ALERT_FROM || "").trim()
+  const from = (raw.match(/<([^>]+)>/)?.[1] || raw).trim()
   try {
     if (env.RESEND_API_KEY) {
       const r = await fetch("https://api.resend.com/emails", {

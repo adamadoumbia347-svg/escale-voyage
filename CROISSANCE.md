@@ -68,7 +68,7 @@ Pistes suivantes : allemand, italien, chinois, turc (ajouter une colonne dans tr
 - ✔ Guides pratiques (bagages, quand réserver, voyager avec des enfants) en 5 langues ; page À propos.
 - ✔ Recherche « tout le mois », filtre budget sur les idées de voyage, calculateur du vrai prix (bagages et frais).
 - ✔ Formulaire « bons plans » (e-mail / WhatsApp) : les inscrits sont dans Netlify > Forms > `bons-plans`.
-- ✔ Alertes prix par e-mail (`/api/alert`, vérification quotidienne) : **s'affichent seulement quand** `RESEND_API_KEY` (ou `BREVO_API_KEY`) et `ALERT_FROM` sont définis dans Netlify.
+- ✔ Alertes prix par e-mail (`/api/alert`, vérification quotidienne) : **s'affichent seulement quand** `RESEND_API_KEY` (ou `BREVO_API_KEY`) et `ALERT_FROM` sont définis dans Cloudflare (Worker > Paramètres > Variables d'exécution et secrets).
 - ✔ Statistiques sans cookie : tableau de bord `/stats/` (clé `STATS_KEY` dans les variables Netlify).
 - ✔ Audit accessibilité (axe-core) : 0 erreur sur les pages principales, en clair et en sombre.
 
