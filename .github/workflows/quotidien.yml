@@ -18,7 +18,7 @@ env:
 
 jobs:
   alertes:
-    if: github.event_name != 'push'
+    if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
     steps:
       - name: Vérifier les alertes prix
@@ -43,3 +43,20 @@ jobs:
             '{host:$host, key:$key, keyLocation:$loc, urlList:$urls}' > body.json
           curl -sS -o /dev/null -w "IndexNow : %{http_code}\n" -X POST -H "Content-Type: application/json; charset=utf-8" \
             --data @body.json https://api.indexnow.org/indexnow
+
+  verification:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Vérifier le site en ligne (pages, prix réels, formulaires, admin)
+        run: |
+          D=$(date -u -d '+45 days' +%Y-%m-%d); R=$(date -u -d '+59 days' +%Y-%m-%d)
+          echo "Accueil : $(curl -s -o /dev/null -w '%{http_code}' $SITE_URL/)"
+          echo "Page trajet : $(curl -s -o /dev/null -w '%{http_code}' $SITE_URL/vol-paris-dakar/)"
+          echo "Page absente : $(curl -s -o /dev/null -w '%{http_code}' $SITE_URL/page-qui-n-existe-pas/)"
+          echo "Admin sans clé : $(curl -s -o /dev/null -w '%{http_code}' $SITE_URL/api/admin)"
+          echo "Alertes : $(curl -s $SITE_URL/api/alert?action=status)"
+          echo "Prix CDG-DSS : $(curl -s "$SITE_URL/api/prix?from=CDG&to=DSS&dep=$D&ret=$R&list=1" | jq -c '{available, price, currency, offres: (.offers // [] | length)}')"
+          echo "Bons plans : $(curl -s "$SITE_URL/api/deals" | jq -c '{available, villes: (.origins // {} | to_entries | map({(.key): (.value|length)}) | add)}')"
+          echo "Calendrier : $(curl -s "$SITE_URL/api/calendar?from=CDG&to=BKO&month=${D:0:7}" | jq -c '{available, jours: (.days // {} | length)}')"
+          echo "Aperçu WhatsApp : $(curl -s -A 'WhatsApp/2.23' $SITE_URL/vol-paris-dakar/ | grep -o '<meta property=\"og:title\" content=\"[^\"]*\"')"
