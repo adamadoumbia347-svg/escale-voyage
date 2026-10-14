@@ -61,6 +61,7 @@ jobs:
           echo "Adresse IP de $H : $(dig +short A $H @1.1.1.1 | tr '\n' ' ')"
           echo "Enregistrement CNAME de $H : $(dig +short CNAME $H @1.1.1.1 | tr '\n' ' ')"
           echo "Connexion HTTPS : $(curl -sS -o /dev/null -w '%{http_code}' $SITE_URL/ 2>&1 | tail -c 200)"
+          echo "Redirection : $(curl -s -o /dev/null -w '%{http_code} -> %{redirect_url}' $SITE_URL/vol-paris-dakar/)"
           echo "Accueil : $(curl -s -o /dev/null -w '%{http_code}' $SITE_URL/)"
           echo "Page trajet : $(curl -s -o /dev/null -w '%{http_code}' $SITE_URL/vol-paris-dakar/)"
           echo "Page absente : $(curl -s -o /dev/null -w '%{http_code}' $SITE_URL/page-qui-n-existe-pas/)"
