@@ -65,9 +65,9 @@
     },
     {
       "key": "transfer",
-      "name": "GetTransfer",
-      "color": "#e8590c",
-      "url": "https://gettransfer.com/",
+      "name": "Kiwitaxi",
+      "color": "#1e9e5a",
+      "url": "https://kiwitaxi.tpm.lv/hWfXu1nw",
       "title": {
         "fr": "Transfert aéroport – hôtel",
         "en": "Airport – hotel transfer",
@@ -81,7 +81,8 @@
         "es": "Un conductor te espera a la llegada, con precio cerrado. Práctico si llegas de noche.",
         "pt": "Um motorista espera por si à chegada, preço fixo. Prático para chegadas à noite.",
         "ar": "سائق ينتظرك عند الوصول بسعر محدد مسبقًا. مناسب للوصول ليلًا."
-      }
+      },
+      "affiliate": true
     },
     {
       "key": "activities",
