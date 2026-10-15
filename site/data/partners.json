@@ -125,6 +125,27 @@
         "ar": "تذاكر المتاحف والمعالم والمعالم السياحية على هاتفك، وغالبًا دون انتظار في الطابور."
       },
       "affiliate": true
+    },
+    {
+      "key": "claim",
+      "name": "Compensair",
+      "color": "#2f6fde",
+      "url": "https://compensair.tpm.lv/9rTXzlp7",
+      "affiliate": true,
+      "title": {
+        "fr": "Vol retardé ou annulé ?",
+        "en": "Flight delayed or cancelled?",
+        "es": "¿Vuelo retrasado o cancelado?",
+        "pt": "Voo atrasado ou cancelado?",
+        "ar": "رحلة متأخرة أو ملغاة؟"
+      },
+      "desc": {
+        "fr": "Jusqu’à 600 € d’indemnisation selon le règlement européen (vols au départ de l’Europe ou sur une compagnie européenne). Vérification gratuite.",
+        "en": "Up to €600 compensation under EU rules (flights from Europe or on a European airline). Free eligibility check.",
+        "es": "Hasta 600 € de indemnización según la normativa europea (vuelos desde Europa o con aerolínea europea). Comprobación gratuita.",
+        "pt": "Até 600 € de indemnização segundo as regras europeias (voos a partir da Europa ou em companhia europeia). Verificação gratuita.",
+        "ar": "تعويض يصل إلى 600 يورو وفق القواعد الأوروبية (رحلات من أوروبا أو على شركة طيران أوروبية). تحقق مجاني."
+      }
     }
   ]
 }

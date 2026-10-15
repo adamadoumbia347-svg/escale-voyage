@@ -391,7 +391,7 @@ def legal_pages():
 <p>Certains liens peuvent être des liens partenaires : si vous réservez, Escale peut percevoir une commission, sans surcoût pour vous.</p>
 </section>
 <section><h2>Propriété intellectuelle</h2>
-<p>Les textes et le design du site sont la propriété de l'éditeur. Les marques citées (Google, Aviasales, Skyscanner, Kayak, momondo, Booking.com, Hotels.com, Agoda, Airbnb, Rentalcars, Discover Cars, EconomyBookings, Airalo, Tiqets, Kiwitaxi, BikesBooking) appartiennent à leurs propriétaires respectifs et sont citées uniquement pour identifier les services comparés.</p>
+<p>Les textes et le design du site sont la propriété de l'éditeur. Les marques citées (Google, Aviasales, Skyscanner, Kayak, momondo, Booking.com, Hotels.com, Agoda, Airbnb, Rentalcars, Discover Cars, EconomyBookings, Airalo, Tiqets, Kiwitaxi, BikesBooking, Compensair) appartiennent à leurs propriétaires respectifs et sont citées uniquement pour identifier les services comparés.</p>
 </section>"""
     urls.append(page("mentions-legales", "Mentions légales | Escale", "Mentions légales du site Escale, comparateur de vols, hôtels et locations de voitures.", hero, body.replace("__HOST__", DOMAIN.split("//")[1])))
     hero = '<h1>Confidentialité</h1>'
