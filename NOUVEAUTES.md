@@ -1,0 +1,22 @@
+# Nouveautés automatiques (tous les 2 jours)
+
+Une tâche planifiée de Claude ajoute une nouveauté au site tous les 2 jours, l'envoie sur `main`
+(Cloudflare publie, IndexNow signale les pages) et la note ici. Ce journal évite de refaire deux fois la même chose.
+
+## Règles
+- Une seule nouveauté par passage, utile aux voyageurs et bonne pour Google, en 5 langues (fr, en, es, pt, ar).
+- Tourner entre les types, dans cet ordre : **guide pratique** → **nouveaux trajets** → **page hôtels d'une ville** → guide pratique…
+- Rien d'inventé : pas de prix, d'horaires ou de règles précises qu'on ne peut pas vérifier ; rester général et renvoyer aux sources officielles.
+- Toujours lancer `python3 scripts/build_pages.py` (et `node scripts/make_og.js` si de nouveaux trajets) avant d'envoyer.
+
+## Idées en réserve
+- Guides : visa et passeport (généralités), escales longues, voyager pendant le ramadan / la Tabaski, argent sur place
+  (cartes, Mobile Money, change), assurance voyage, voyager enceinte, check-list avant le départ, vol de nuit,
+  droits en cas de retard (règlement européen 261/2004), envoyer des colis au pays.
+- Trajets : nouvelles villes de départ (Lille, Nantes, Toulouse, Genève, Londres…) vers l'Afrique et le Maghreb.
+- Hôtels : Accra, Lagos, Nairobi, Addis-Abeba, Libreville, Yaoundé, Niamey, Ouagadougou, Nouakchott.
+
+## Journal
+| Date | Nouveauté |
+|---|---|
+| 2026-10-15 | Mise en place de la tâche planifiée |
