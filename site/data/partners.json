@@ -85,23 +85,24 @@
     },
     {
       "key": "activities",
-      "name": "GetYourGuide",
-      "color": "#ff5533",
-      "url": "https://www.getyourguide.com/s/?q={city}",
+      "name": "Tiqets",
+      "color": "#e5004f",
+      "url": "https://tiqets.tpm.lv/lGv8HrSM",
       "title": {
-        "fr": "Activités et visites",
-        "en": "Tours and activities",
-        "es": "Actividades y visitas",
-        "pt": "Atividades e visitas",
-        "ar": "أنشطة وجولات"
+        "fr": "Attractions et musées",
+        "en": "Attractions and museums",
+        "es": "Atracciones y museos",
+        "pt": "Atrações e museus",
+        "ar": "المعالم والمتاحف"
       },
       "desc": {
-        "fr": "Excursions, visites guidées et billets, avec avis des voyageurs et annulation souvent gratuite.",
-        "en": "Day trips, guided tours and tickets, with traveller reviews and often free cancellation.",
-        "es": "Excursiones, visitas guiadas y entradas, con opiniones y a menudo cancelación gratuita.",
-        "pt": "Excursões, visitas guiadas e bilhetes, com avaliações e muitas vezes cancelamento gratuito.",
-        "ar": "رحلات وجولات مع مرشدين وتذاكر، مع تقييمات المسافرين وإلغاء مجاني غالبًا."
-      }
+        "fr": "Billets pour les musées, monuments et attractions, sur le téléphone, souvent sans faire la queue.",
+        "en": "Tickets for museums, landmarks and attractions, on your phone, often skip-the-line.",
+        "es": "Entradas para museos, monumentos y atracciones, en el móvil, a menudo sin colas.",
+        "pt": "Bilhetes para museus, monumentos e atrações, no telemóvel, muitas vezes sem filas.",
+        "ar": "تذاكر المتاحف والمعالم والمعالم السياحية على هاتفك، وغالبًا دون انتظار في الطابور."
+      },
+      "affiliate": true
     }
   ]
 }
