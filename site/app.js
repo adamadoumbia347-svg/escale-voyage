@@ -265,7 +265,7 @@
 
   // ---------- Sites comparés ----------
   const COLORS = { google: "#1a73e8", sky: "#0062e3", kayak: "#ff690f", momondo: "#d1006e", booking: "#003580",
-    hotels: "#d32f2f", agoda: "#5c2d91", airbnb: "#e0475b", rental: "#00897b", discover: "#2e7d32", aviasales: "#0c73fe", economy: "#f26b21" };
+    hotels: "#d32f2f", agoda: "#5c2d91", airbnb: "#e0475b", rental: "#00897b", discover: "#2e7d32", aviasales: "#0c73fe", economy: "#f26b21", bike: "#ff8a00" };
   const SITES = {
     fr: { kayak: "www.kayak.fr", momondo: "www.momondo.fr", sky: "www.skyscanner.fr/transport/vols", booking: "searchresults.fr.html",
           hotels: "fr.hotels.com", agoda: "fr-fr", airbnb: "www.airbnb.fr", rental: "fr", discover: "fr" },
@@ -351,7 +351,9 @@
       { k: "rental", name: "Rentalcars", desc: T("Courtier connu, assurance « franchise zéro » proposée.", "Well-known broker with full-protection cover."), manual: true,
         url: `https://www.rentalcars.com/${d.rental}/` },
       { k: "discover", name: "Discover Cars", desc: T("Souvent bien placé sur les petites agences locales.", "Often strong on small local agencies."), manual: true,
-        url: `https://www.discovercars.com/${d.discover}` }
+        url: `https://www.discovercars.com/${d.discover}` },
+      { k: "bike", name: T("BikesBooking : scooters et motos", "BikesBooking: scooters and motorbikes"), desc: T("Un deux-roues plutôt qu’une voiture : souvent moins cher et plus pratique en ville.", "A two-wheeler instead of a car: often cheaper and handier in town."), manual: true, sponsored: true,
+        url: "https://bikesbooking.tpm.lv/gqG6Vv6B" }
     ];
   }
 

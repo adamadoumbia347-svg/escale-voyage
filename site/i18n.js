@@ -310,6 +310,8 @@ window.ESCALE_I18N = {
   "Cheaper this month: {price} on {date} ({diff} less).": ["Más barato este mes: {price} el {date} ({diff} menos).", "Mais barato este mês: {price} em {date} ({diff} a menos).", "أرخص هذا الشهر: {price} في {date} (أقل بـ {diff})."],
   "See this date": ["Ver esta fecha", "Ver esta data", "عرض هذا التاريخ"],
   "Compares hundreds of rental companies worldwide, often with free cancellation.": ["Compara cientos de empresas de alquiler en todo el mundo, a menudo con cancelación gratuita.", "Compara centenas de empresas de aluguer no mundo inteiro, muitas vezes com cancelamento gratuito.", "يقارن مئات شركات التأجير حول العالم، غالبًا مع إلغاء مجاني."],
+  "BikesBooking: scooters and motorbikes": ["BikesBooking: scooters y motos", "BikesBooking: scooters e motas", "BikesBooking: سكوتر ودراجات نارية"],
+  "A two-wheeler instead of a car: often cheaper and handier in town.": ["Una moto en lugar de un coche: a menudo más barata y práctica en la ciudad.", "Uma mota em vez de um carro: muitas vezes mais barata e prática na cidade.", "دراجة نارية بدل السيارة: غالبًا أرخص وأسهل في المدينة."],
   "Edit": ["Modificar", "Alterar", "تعديل"],
   "Sort flights": ["Ordenar vuelos", "Ordenar voos", "ترتيب الرحلات"],
   "Cheapest": ["El más barato", "O mais barato", "الأرخص"],

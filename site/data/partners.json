@@ -44,6 +44,27 @@
       "affiliate": true
     },
     {
+      "key": "bike",
+      "name": "BikesBooking",
+      "color": "#ff8a00",
+      "url": "https://bikesbooking.tpm.lv/gqG6Vv6B",
+      "affiliate": true,
+      "title": {
+        "fr": "Scooters, motos et vélos",
+        "en": "Scooters, motorbikes and bikes",
+        "es": "Scooters, motos y bicicletas",
+        "pt": "Scooters, motas e bicicletas",
+        "ar": "دراجات نارية وسكوتر ودراجات"
+      },
+      "desc": {
+        "fr": "Louez un deux-roues sur place pour vous déplacer librement, souvent moins cher qu’une voiture.",
+        "en": "Rent a two-wheeler on arrival to get around freely, often cheaper than a car.",
+        "es": "Alquila una moto o scooter allí para moverte libremente, a menudo más barato que un coche.",
+        "pt": "Alugue uma mota ou scooter no destino para se deslocar à vontade, muitas vezes mais barato do que um carro.",
+        "ar": "استأجر دراجة نارية أو سكوتر عند الوصول للتنقل بحرية، وغالبًا أرخص من السيارة."
+      }
+    },
+    {
       "key": "insurance",
       "name": "SafetyWing",
       "color": "#5b4bdb",
