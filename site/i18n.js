@@ -309,6 +309,7 @@ window.ESCALE_I18N = {
   "Good price: your dates are among the cheapest of the month.": ["Buen precio: tus fechas están entre las más baratas del mes.", "Bom preço: as suas datas estão entre as mais baratas do mês.", "سعر جيد: تواريخك من بين الأرخص هذا الشهر."],
   "Cheaper this month: {price} on {date} ({diff} less).": ["Más barato este mes: {price} el {date} ({diff} menos).", "Mais barato este mês: {price} em {date} ({diff} a menos).", "أرخص هذا الشهر: {price} في {date} (أقل بـ {diff})."],
   "See this date": ["Ver esta fecha", "Ver esta data", "عرض هذا التاريخ"],
+  "Compares hundreds of rental companies worldwide, often with free cancellation.": ["Compara cientos de empresas de alquiler en todo el mundo, a menudo con cancelación gratuita.", "Compara centenas de empresas de aluguer no mundo inteiro, muitas vezes com cancelamento gratuito.", "يقارن مئات شركات التأجير حول العالم، غالبًا مع إلغاء مجاني."],
   "Edit": ["Modificar", "Alterar", "تعديل"],
   "Sort flights": ["Ordenar vuelos", "Ordenar voos", "ترتيب الرحلات"],
   "Cheapest": ["El más barato", "O mais barato", "الأرخص"],

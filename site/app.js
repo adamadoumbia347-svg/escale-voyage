@@ -265,7 +265,7 @@
 
   // ---------- Sites comparés ----------
   const COLORS = { google: "#1a73e8", sky: "#0062e3", kayak: "#ff690f", momondo: "#d1006e", booking: "#003580",
-    hotels: "#d32f2f", agoda: "#5c2d91", airbnb: "#e0475b", rental: "#00897b", discover: "#2e7d32", aviasales: "#0c73fe" };
+    hotels: "#d32f2f", agoda: "#5c2d91", airbnb: "#e0475b", rental: "#00897b", discover: "#2e7d32", aviasales: "#0c73fe", economy: "#f26b21" };
   const SITES = {
     fr: { kayak: "www.kayak.fr", momondo: "www.momondo.fr", sky: "www.skyscanner.fr/transport/vols", booking: "searchresults.fr.html",
           hotels: "fr.hotels.com", agoda: "fr-fr", airbnb: "www.airbnb.fr", rental: "fr", discover: "fr" },
@@ -339,6 +339,9 @@
     const h = (n) => String(n).padStart(2, "0") + "h";
     const path = `${enc(P)}` + (Dr ? `/${enc(Dr)}` : "") + `/${s.d1}-${h(s.t1)}/${s.d2}-${h(s.t2)}`;
     return [
+      // Partenaire Travelpayouts (lien rémunéré) : la date et le lieu se choisissent sur le site du loueur
+      { k: "economy", name: "EconomyBookings", desc: T("Compare des centaines de loueurs dans le monde entier, souvent avec annulation gratuite.", "Compares hundreds of rental companies worldwide, often with free cancellation."), best: true, manual: true, sponsored: true,
+        url: "https://economybookings.tpm.lv/XjcDFT4f" },
       { k: "kayak", name: T("Kayak Voitures", "Kayak Cars"), desc: T("Compare les loueurs et les courtiers, tri par prix.", "Compares rental companies and brokers, sorted by price."), best: true,
         url: `https://${d.kayak}/cars/${path}?sort=price_a` },
       { k: "momondo", name: T("momondo Voitures", "momondo Cars"), desc: T("Bon complément de Kayak, avec d’autres partenaires.", "A good complement to Kayak, with other partners."),
@@ -361,7 +364,7 @@
           <div class="prov-name">${esc(p.name)}${p.best ? ` <span class="pill best">${T("Recommandé", "Recommended")}</span>` : ""}${p.manual ? ` <span class="pill manual">${T("Saisie sur le site", "Enter on site")}</span>` : ""}</div>
           <div class="prov-desc">${esc(p.desc)}</div>
         </div>
-        <a class="go" href="${esc(tag(p.k, p.url))}" target="_blank" rel="noopener noreferrer">${T("Voir les prix", "See prices")} →</a>
+        <a class="go" href="${esc(tag(p.k, p.url))}" target="_blank" rel="${p.sponsored ? "sponsored " : ""}noopener noreferrer">${T("Voir les prix", "See prices")} →</a>
       </li>`).join("") + `</ul>`;
   }
   function pass(codes, meta, stubBig, stubSmall) {

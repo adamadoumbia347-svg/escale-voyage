@@ -23,6 +23,27 @@
       "affiliate": true
     },
     {
+      "key": "car",
+      "name": "EconomyBookings",
+      "color": "#f26b21",
+      "url": "https://economybookings.tpm.lv/XjcDFT4f",
+      "title": {
+        "fr": "Location de voiture",
+        "en": "Car rental",
+        "es": "Alquiler de coche",
+        "pt": "Aluguer de carro",
+        "ar": "تأجير سيارة"
+      },
+      "desc": {
+        "fr": "Comparez des centaines de loueurs sur place, souvent avec annulation gratuite.",
+        "en": "Compare hundreds of local rental companies, often with free cancellation.",
+        "es": "Compara cientos de empresas de alquiler locales, a menudo con cancelación gratuita.",
+        "pt": "Compare centenas de empresas de aluguer locais, muitas vezes com cancelamento gratuito.",
+        "ar": "قارن مئات شركات التأجير المحلية، غالبًا مع إلغاء مجاني."
+      },
+      "affiliate": true
+    },
+    {
       "key": "insurance",
       "name": "SafetyWing",
       "color": "#5b4bdb",
