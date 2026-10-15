@@ -379,12 +379,155 @@ GUIDES = [
             ],
             note="معلومات عامة: قواعد الدخول والصحة تتغير. تحقّق دائمًا لدى السلطات الرسمية وشركة الطيران."),
     },
+    {
+        "key": "checklist",
+        "fr": dict(
+            slug="guides/check-list-depart", title="Check-list avant de partir en voyage : ne rien oublier",
+            desc="Papiers, santé, argent, téléphone, bagages : la liste à vérifier dans les semaines et les jours avant un vol vers l’Afrique, le Maghreb ou ailleurs.",
+            intro="Un oubli peut coûter cher ou faire rater un vol. Voici les points à vérifier, dans l’ordre, pour partir l’esprit tranquille.",
+            sections=[
+                ("Plusieurs semaines avant le départ", [
+                    "- Vérifiez la date de validité de votre passeport : beaucoup de pays demandent qu’il reste valable plusieurs mois après le retour.",
+                    "- Renseignez-vous sur le visa ou l’autorisation d’entrée auprès de l’ambassade ou du site officiel du pays de destination : les délais peuvent être longs.",
+                    "- Demandez à votre médecin ou à un centre de vaccinations internationales quels vaccins et traitements sont recommandés ou obligatoires.",
+                    "- Pensez à une assurance voyage (santé, rapatriement, annulation) et vérifiez ce que couvre déjà votre carte bancaire.",
+                ]),
+                ("La semaine du départ", [
+                    "- Prévenez votre banque de votre voyage et vérifiez les plafonds de paiement et de retrait de votre carte.",
+                    "- Préparez votre téléphone : forfait à l’étranger ou eSIM, applications de la compagnie et de votre banque à jour.",
+                    "- Faites une copie (photo ou fichier) de votre passeport, visa, billet et attestation d’assurance, et gardez-la à part.",
+                    "- Vérifiez les règles de bagages de votre billet et pesez vos valises.",
+                ]),
+                ("La veille et le jour du vol", [
+                    "- Enregistrez-vous en ligne quand c’est possible et gardez votre carte d’embarquement sur le téléphone ou imprimée.",
+                    "- Vérifiez l’heure et le terminal de départ sur le site de la compagnie : ils peuvent changer.",
+                    "- Gardez dans le bagage cabine les papiers, les médicaments, les chargeurs et une tenue de rechange.",
+                    "- Arrivez à l’aéroport en avance, surtout pour un vol international et en période de vacances.",
+                ]),
+                ("En cas de problème", [
+                    "Si votre vol est retardé ou annulé, gardez vos justificatifs (cartes d’embarquement, reçus). Selon la ligne et la compagnie, vous pouvez avoir droit à une assistance ou à une indemnisation.",
+                ]),
+            ],
+            note="Les règles d’entrée, de santé et de bagages changent : vérifiez toujours auprès des autorités officielles et de votre compagnie avant de partir."),
+        "en": dict(
+            slug="en/guides/travel-checklist", title="Pre-trip checklist: don’t forget anything",
+            desc="Documents, health, money, phone, baggage: what to check in the weeks and days before a flight to Africa, North Africa or anywhere else.",
+            intro="One forgotten item can cost a lot or make you miss a flight. Here is what to check, in order, to leave with peace of mind.",
+            sections=[
+                ("Several weeks before departure", [
+                    "- Check your passport’s expiry date: many countries require it to stay valid for several months after your return.",
+                    "- Look up visa or entry authorisation rules with the embassy or the destination country’s official website: processing can take time.",
+                    "- Ask your doctor or a travel vaccination centre which vaccines and treatments are recommended or required.",
+                    "- Consider travel insurance (health, repatriation, cancellation) and check what your bank card already covers.",
+                ]),
+                ("The week of departure", [
+                    "- Tell your bank about your trip and check your card’s payment and withdrawal limits.",
+                    "- Get your phone ready: roaming plan or eSIM, airline and banking apps up to date.",
+                    "- Keep a copy (photo or file) of your passport, visa, ticket and insurance certificate, stored separately.",
+                    "- Check the baggage rules of your ticket and weigh your suitcases.",
+                ]),
+                ("The day before and the day of the flight", [
+                    "- Check in online when possible and keep your boarding pass on your phone or printed.",
+                    "- Check the departure time and terminal on the airline’s website: they can change.",
+                    "- Keep documents, medication, chargers and a change of clothes in your cabin bag.",
+                    "- Arrive at the airport early, especially for an international flight and during holidays.",
+                ]),
+                ("If something goes wrong", [
+                    "If your flight is delayed or cancelled, keep your proof (boarding passes, receipts). Depending on the route and the airline, you may be entitled to assistance or compensation.",
+                ]),
+            ],
+            note="Entry, health and baggage rules change: always check with the official authorities and your airline before you travel."),
+        "es": dict(
+            slug="es/guias/lista-antes-de-viajar", title="Lista antes de viajar: no olvides nada",
+            desc="Documentos, salud, dinero, teléfono, equipaje: qué revisar en las semanas y los días antes de un vuelo a África, el Magreb o cualquier destino.",
+            intro="Un olvido puede salir caro o hacerte perder un vuelo. Esto es lo que conviene revisar, en orden, para viajar tranquilo.",
+            sections=[
+                ("Varias semanas antes de salir", [
+                    "- Revisa la fecha de caducidad de tu pasaporte: muchos países exigen que siga vigente varios meses después del regreso.",
+                    "- Infórmate sobre el visado o la autorización de entrada en la embajada o la web oficial del país de destino: los plazos pueden ser largos.",
+                    "- Pregunta a tu médico o a un centro de vacunación internacional qué vacunas y tratamientos se recomiendan o son obligatorios.",
+                    "- Piensa en un seguro de viaje (salud, repatriación, cancelación) y revisa lo que ya cubre tu tarjeta bancaria.",
+                ]),
+                ("La semana de la salida", [
+                    "- Avisa a tu banco del viaje y revisa los límites de pago y de retirada de tu tarjeta.",
+                    "- Prepara el teléfono: tarifa en el extranjero o eSIM, aplicaciones de la aerolínea y del banco actualizadas.",
+                    "- Guarda una copia (foto o archivo) del pasaporte, visado, billete y certificado del seguro, aparte de los originales.",
+                    "- Revisa las normas de equipaje de tu billete y pesa tus maletas.",
+                ]),
+                ("La víspera y el día del vuelo", [
+                    "- Haz el check-in en línea cuando sea posible y lleva la tarjeta de embarque en el móvil o impresa.",
+                    "- Comprueba la hora y la terminal de salida en la web de la aerolínea: pueden cambiar.",
+                    "- Lleva en el equipaje de mano los documentos, los medicamentos, los cargadores y una muda de ropa.",
+                    "- Llega pronto al aeropuerto, sobre todo en vuelos internacionales y en temporada de vacaciones.",
+                ]),
+                ("Si hay un problema", [
+                    "Si tu vuelo se retrasa o se cancela, guarda los justificantes (tarjetas de embarque, recibos). Según la ruta y la aerolínea, puedes tener derecho a asistencia o a una compensación.",
+                ]),
+            ],
+            note="Las normas de entrada, sanitarias y de equipaje cambian: consulta siempre a las autoridades oficiales y a tu aerolínea antes de viajar."),
+        "pt": dict(
+            slug="pt/guias/lista-antes-de-viajar", title="Lista antes de viajar: não se esqueça de nada",
+            desc="Documentos, saúde, dinheiro, telemóvel, bagagem: o que verificar nas semanas e nos dias antes de um voo para África, o Magrebe ou outro destino.",
+            intro="Um esquecimento pode sair caro ou fazer perder um voo. Eis o que verificar, por ordem, para partir tranquilo.",
+            sections=[
+                ("Várias semanas antes da partida", [
+                    "- Verifique a validade do passaporte: muitos países exigem que continue válido vários meses após o regresso.",
+                    "- Informe-se sobre o visto ou a autorização de entrada junto da embaixada ou do site oficial do país de destino: os prazos podem ser longos.",
+                    "- Pergunte ao seu médico ou a um centro de vacinação internacional que vacinas e tratamentos são recomendados ou obrigatórios.",
+                    "- Pense num seguro de viagem (saúde, repatriamento, cancelamento) e veja o que o seu cartão bancário já cobre.",
+                ]),
+                ("Na semana da partida", [
+                    "- Avise o banco da viagem e verifique os limites de pagamento e levantamento do cartão.",
+                    "- Prepare o telemóvel: tarifário no estrangeiro ou eSIM, aplicações da companhia e do banco atualizadas.",
+                    "- Guarde uma cópia (foto ou ficheiro) do passaporte, visto, bilhete e certificado do seguro, separada dos originais.",
+                    "- Verifique as regras de bagagem do seu bilhete e pese as malas.",
+                ]),
+                ("Na véspera e no dia do voo", [
+                    "- Faça o check-in online quando possível e tenha o cartão de embarque no telemóvel ou impresso.",
+                    "- Confirme a hora e o terminal de partida no site da companhia: podem mudar.",
+                    "- Leve na bagagem de mão os documentos, os medicamentos, os carregadores e uma muda de roupa.",
+                    "- Chegue cedo ao aeroporto, sobretudo num voo internacional e em época de férias.",
+                ]),
+                ("Se houver um problema", [
+                    "Se o voo atrasar ou for cancelado, guarde os comprovativos (cartões de embarque, recibos). Conforme a rota e a companhia, pode ter direito a assistência ou a uma indemnização.",
+                ]),
+            ],
+            note="As regras de entrada, de saúde e de bagagem mudam: confirme sempre junto das autoridades oficiais e da companhia antes de viajar."),
+        "ar": dict(
+            slug="ar/guides/travel-checklist", title="قائمة التحقق قبل السفر: لا تنسَ شيئًا",
+            desc="الوثائق والصحة والمال والهاتف والأمتعة: ما يجب التحقق منه في الأسابيع والأيام التي تسبق رحلة إلى أفريقيا أو المغرب العربي أو أي وجهة أخرى.",
+            intro="قد يكلّفك نسيان أمر واحد الكثير أو يجعلك تفوّت رحلتك. إليك ما يجب التحقق منه بالترتيب لتسافر مطمئنًا.",
+            sections=[
+                ("قبل السفر بعدة أسابيع", [
+                    "- تحقّق من تاريخ انتهاء جواز سفرك: تشترط دول كثيرة أن يبقى صالحًا عدة أشهر بعد العودة.",
+                    "- استعلم عن التأشيرة أو إذن الدخول لدى السفارة أو الموقع الرسمي لبلد الوجهة: قد تطول المدة.",
+                    "- اسأل طبيبك أو مركز التطعيمات الدولية عن اللقاحات والعلاجات الموصى بها أو الإلزامية.",
+                    "- فكّر في تأمين سفر (صحة، إعادة إلى الوطن، إلغاء) وتحقّق مما تغطيه بطاقتك المصرفية أصلًا.",
+                ]),
+                ("في أسبوع السفر", [
+                    "- أبلغ مصرفك بسفرك وتحقّق من حدود الدفع والسحب لبطاقتك.",
+                    "- جهّز هاتفك: باقة تجوال أو شريحة eSIM، وتطبيقات شركة الطيران والمصرف محدّثة.",
+                    "- احتفظ بنسخة (صورة أو ملف) من جواز السفر والتأشيرة والتذكرة وشهادة التأمين، بعيدًا عن الأصول.",
+                    "- تحقّق من قواعد الأمتعة في تذكرتك وزِن حقائبك.",
+                ]),
+                ("في اليوم السابق ويوم الرحلة", [
+                    "- سجّل الدخول عبر الإنترنت إن أمكن واحتفظ ببطاقة الصعود على هاتفك أو مطبوعة.",
+                    "- تحقّق من وقت المغادرة والمبنى على موقع شركة الطيران: قد يتغيران.",
+                    "- ضع في حقيبة اليد الوثائق والأدوية والشواحن وملابس احتياطية.",
+                    "- اذهب إلى المطار مبكرًا، خاصة في الرحلات الدولية وفترات العطل.",
+                ]),
+                ("إذا حدثت مشكلة", [
+                    "إذا تأخرت رحلتك أو أُلغيت، احتفظ بالإثباتات (بطاقات الصعود والإيصالات). بحسب الخط وشركة الطيران، قد يحق لك الحصول على مساعدة أو تعويض.",
+                ]),
+            ],
+            note="تتغير قواعد الدخول والصحة والأمتعة: تحقّق دائمًا لدى السلطات الرسمية وشركة الطيران قبل السفر."),
+    },
 ]
 
 INDEX = {
-    "fr": dict(slug="guides", title="Guides pratiques du voyage", lead="Bagages, meilleur moment pour réserver, voyage avec des enfants : nos conseils pour payer moins cher et voyager serein.", more="Lire le guide"),
-    "en": dict(slug="en/guides", title="Practical travel guides", lead="Baggage, the best time to book, flying with children: our tips to pay less and travel with peace of mind.", more="Read the guide"),
-    "es": dict(slug="es/guias", title="Guías prácticas de viaje", lead="Equipaje, el mejor momento para reservar, viajar con niños: nuestros consejos para pagar menos y viajar tranquilo.", more="Leer la guía"),
-    "pt": dict(slug="pt/guias", title="Guias práticos de viagem", lead="Bagagem, o melhor momento para reservar, viajar com crianças: as nossas dicas para pagar menos e viajar tranquilo.", more="Ler o guia"),
-    "ar": dict(slug="ar/guides", title="أدلة السفر العملية", lead="الأمتعة وأفضل وقت للحجز والسفر مع الأطفال: نصائحنا لتدفع أقل وتسافر براحة.", more="اقرأ الدليل"),
+    "fr": dict(slug="guides", title="Guides pratiques du voyage", lead="Bagages, meilleur moment pour réserver, voyage avec des enfants, check-list avant le départ : nos conseils pour payer moins cher et voyager serein.", more="Lire le guide"),
+    "en": dict(slug="en/guides", title="Practical travel guides", lead="Baggage, the best time to book, flying with children, a pre-trip checklist: our tips to pay less and travel with peace of mind.", more="Read the guide"),
+    "es": dict(slug="es/guias", title="Guías prácticas de viaje", lead="Equipaje, el mejor momento para reservar, viajar con niños, la lista antes de viajar: nuestros consejos para pagar menos y viajar tranquilo.", more="Leer la guía"),
+    "pt": dict(slug="pt/guias", title="Guias práticos de viagem", lead="Bagagem, o melhor momento para reservar, viajar com crianças, a lista antes de viajar: as nossas dicas para pagar menos e viajar tranquilo.", more="Ler o guia"),
+    "ar": dict(slug="ar/guides", title="أدلة السفر العملية", lead="الأمتعة وأفضل وقت للحجز والسفر مع الأطفال وقائمة التحقق قبل السفر: نصائحنا لتدفع أقل وتسافر براحة.", more="اقرأ الدليل"),
 }

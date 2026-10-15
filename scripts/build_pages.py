@@ -484,7 +484,8 @@ def main():
     links += group("Hôtels pas chers", [f'<li><a href="/{hotel_slug(h)}/">Hôtel pas cher à {E(h[0])}</a></li>' for h in HOTELS])
     links += group("Guides pratiques", ['<li><a href="/guides/bagages-avion/">Bagages : ne pas payer plus cher</a></li>',
                                         '<li><a href="/guides/quand-reserver/">Quand réserver son billet</a></li>',
-                                        '<li><a href="/guides/voyager-avec-enfants/">Voyager avec des enfants</a></li>'])
+                                        '<li><a href="/guides/voyager-avec-enfants/">Voyager avec des enfants</a></li>',
+                                        '<li><a href="/guides/check-list-depart/">Check-list avant de partir</a></li>'])
     links += '<p class="lead guides-langs">Guides in English, en español, em português, بالعربية : ' + " · ".join(
         f'<a href="/{l}/" hreflang="{l}" lang="{l}">{build_i18n.NAMES[l]}</a>' for l in build_i18n.LANGS) + "</p>"
     s = re.sub(r"<!-- TRAVELPAYOUTS:START -->.*?<!-- TRAVELPAYOUTS:END -->",

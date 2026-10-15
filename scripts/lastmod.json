@@ -1,7 +1,7 @@
 {
 "/": [
-"591e3ab7f557cc22",
-"2026-10-14"
+"99dc5d0bb286f6ab",
+"2026-10-15"
 ],
 "/a-propos/": [
 "a83a13de6dd010ba",
@@ -712,20 +712,24 @@
 "2026-10-15"
 ],
 "/ar/guides/": [
-"4869f12609d82a23",
-"2026-10-14"
+"1f60ea565c1b39fc",
+"2026-10-15"
 ],
 "/ar/guides/baggage/": [
-"1086bd8e20b8cdcd",
-"2026-10-14"
+"6baca69f7f5c05c3",
+"2026-10-15"
+],
+"/ar/guides/travel-checklist/": [
+"5a6eab93bb8ce7e2",
+"2026-10-15"
 ],
 "/ar/guides/travelling-with-children/": [
-"c28f7735aaea50b5",
-"2026-10-14"
+"be2f3ef08055a939",
+"2026-10-15"
 ],
 "/ar/guides/when-to-book/": [
-"a48421bb5a54befd",
-"2026-10-14"
+"00463ba618781c3d",
+"2026-10-15"
 ],
 "/ar/hotels-abidjan/": [
 "f2b073769ab1b1e3",
@@ -1572,20 +1576,24 @@
 "2026-10-15"
 ],
 "/en/guides/": [
-"cf27be911886c9df",
-"2026-10-14"
+"60f56ab763594ff2",
+"2026-10-15"
 ],
 "/en/guides/baggage/": [
-"af3d7d23c31f9002",
-"2026-10-14"
+"7c0b425b8b3673df",
+"2026-10-15"
+],
+"/en/guides/travel-checklist/": [
+"cef0f61fa1e1539b",
+"2026-10-15"
 ],
 "/en/guides/travelling-with-children/": [
-"6210057a457575a3",
-"2026-10-14"
+"2d3cb0fe8f93b544",
+"2026-10-15"
 ],
 "/en/guides/when-to-book/": [
-"13de6fc20ecae887",
-"2026-10-14"
+"225d18f4e9902f7d",
+"2026-10-15"
 ],
 "/es/": [
 "d40261451fbb9a1b",
@@ -1596,20 +1604,24 @@
 "2026-10-14"
 ],
 "/es/guias/": [
-"1af7ac721701deb0",
-"2026-10-14"
+"47e64836d43f46a3",
+"2026-10-15"
 ],
 "/es/guias/cuando-reservar/": [
-"e91ce383bd21371f",
-"2026-10-14"
+"364b719bd4cf51ae",
+"2026-10-15"
 ],
 "/es/guias/equipaje/": [
-"4a296b76830d8092",
-"2026-10-14"
+"980da525d2e1eaad",
+"2026-10-15"
+],
+"/es/guias/lista-antes-de-viajar/": [
+"010ac98482e2ec6a",
+"2026-10-15"
 ],
 "/es/guias/viajar-con-ninos/": [
-"17eb8821cca6e9a3",
-"2026-10-14"
+"e05d41f37c1be9f3",
+"2026-10-15"
 ],
 "/es/hoteles-baratos-abiyan/": [
 "060afeea000dfaeb",
@@ -2372,20 +2384,24 @@
 "2026-10-15"
 ],
 "/guides/": [
-"9624d3a2511a2c49",
-"2026-10-14"
+"6becf3b8bfb4e704",
+"2026-10-15"
 ],
 "/guides/bagages-avion/": [
-"78832e4b89483239",
-"2026-10-14"
+"30518e84a519ea8f",
+"2026-10-15"
+],
+"/guides/check-list-depart/": [
+"a706a0ec7cb812ef",
+"2026-10-15"
 ],
 "/guides/quand-reserver/": [
-"ed60c883ceab8fd0",
-"2026-10-14"
+"98b8dee395306f3a",
+"2026-10-15"
 ],
 "/guides/voyager-avec-enfants/": [
-"3902547a297bf15c",
-"2026-10-14"
+"ce4ec1e9e2594bda",
+"2026-10-15"
 ],
 "/hotel-pas-cher-abidjan/": [
 "76bfccd44aa13e72",
@@ -2460,20 +2476,24 @@
 "2026-10-14"
 ],
 "/pt/guias/": [
-"96b1c7502fba26cf",
-"2026-10-14"
+"4056b52be403a002",
+"2026-10-15"
 ],
 "/pt/guias/bagagem/": [
-"cda1d4452215c8f5",
-"2026-10-14"
+"de69c74c6e6e6e64",
+"2026-10-15"
+],
+"/pt/guias/lista-antes-de-viajar/": [
+"bf98f62bc50c8915",
+"2026-10-15"
 ],
 "/pt/guias/quando-reservar/": [
-"0bc026872d18eaf5",
-"2026-10-14"
+"00f31ad4bb1af4cc",
+"2026-10-15"
 ],
 "/pt/guias/viajar-com-criancas/": [
-"85d89ac4d319edf1",
-"2026-10-14"
+"0061d41e150f12af",
+"2026-10-15"
 ],
 "/pt/hoteis-baratos-abidjan/": [
 "fbb33b502189bbc0",

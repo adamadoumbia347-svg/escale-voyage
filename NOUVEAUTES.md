@@ -11,7 +11,7 @@ Une tâche planifiée de Claude ajoute une nouveauté au site tous les 2 jours, 
 
 ## Idées en réserve
 - Guides : visa et passeport (généralités), escales longues, voyager pendant le ramadan / la Tabaski, argent sur place
-  (cartes, Mobile Money, change), assurance voyage, voyager enceinte, check-list avant le départ, vol de nuit,
+  (cartes, Mobile Money, change), assurance voyage, voyager enceinte, vol de nuit,
   droits en cas de retard (règlement européen 261/2004), envoyer des colis au pays.
 - Trajets : nouvelles villes de départ (Lille, Nantes, Toulouse, Genève, Londres…) vers l'Afrique et le Maghreb.
 - Hôtels : Accra, Lagos, Nairobi, Addis-Abeba, Libreville, Yaoundé, Niamey, Ouagadougou, Nouakchott.
@@ -20,3 +20,4 @@ Une tâche planifiée de Claude ajoute une nouveauté au site tous les 2 jours, 
 | Date | Nouveauté |
 |---|---|
 | 2026-10-15 | Mise en place de la tâche planifiée |
+| 2026-10-15 | Guide « Check-list avant de partir » en 5 langues (`/guides/check-list-depart/`) — prochain : nouveaux trajets |
