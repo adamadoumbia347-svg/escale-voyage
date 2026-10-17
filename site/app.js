@@ -50,6 +50,13 @@
   function applyLang() {
     document.documentElement.lang = LANG;
     document.documentElement.dir = LANG === "ar" ? "rtl" : "ltr";
+    // Police arabe chargée seulement quand on en a besoin
+    if (LANG === "ar" && !document.getElementById("font-ar")) {
+      const l = document.createElement("link");
+      l.id = "font-ar"; l.rel = "stylesheet";
+      l.href = "https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;700&display=swap";
+      document.head.appendChild(l);
+    }
     document.querySelectorAll("[data-en]").forEach((el) => {
       if (el.dataset.fr == null) el.dataset.fr = el.textContent;
       el.textContent = T(el.dataset.fr, el.dataset.en);
