@@ -250,8 +250,8 @@ def route_page(r):
     fr, to, cf, ct, country, airport, dur, peak, note = r
     s = route_slug(r)
     title = f"Vol pas cher {cf} {ct} : comparer les prix"
-    desc = (f"Trouvez un billet d'avion pas cher {cf} – {ct} ({fr} → {to}) : durée du vol, aéroport, meilleure période pour réserver "
-            f"et comparaison des prix sur Skyscanner, Kayak, momondo et Aviasales.")
+    desc = (f"Billet d'avion pas cher {cf} – {ct} ({fr} → {to}) : durée du vol, meilleure période pour réserver "
+            f"et prix comparés sur Skyscanner, Kayak et momondo.")
     app = "/?" + urllib.parse.urlencode({"type": "vols", "from": fr, "to": to})
     back = "/?" + urllib.parse.urlencode({"type": "vols", "from": to, "to": fr})
     hp = next((h for h in HOTELS if h[0] == ct), None)
@@ -326,8 +326,8 @@ def hotel_page(h):
     city, country, areas, tip, code = h
     s = hotel_slug(h)
     title = f"Hôtel pas cher à {city} : comparer les prix"
-    desc = (f"Trouvez un hôtel pas cher à {city} ({country}) : quartiers où dormir, conseils pour payer moins cher et "
-            f"comparaison des prix sur Booking, Google Hôtels, Kayak, Hotels.com, Agoda et Airbnb.")
+    desc = (f"Hôtel pas cher à {city} ({country}) : quartiers où dormir, conseils pour payer moins cher "
+            f"et prix comparés sur Booking, Agoda et Airbnb.")
     app = "/?" + urllib.parse.urlencode({"type": "hotels", "dest": city})
     booking = "https://www.booking.com/searchresults.fr.html?" + urllib.parse.urlencode({"ss": city, "order": "price"})
     google = "https://www.google.com/travel/search?" + urllib.parse.urlencode({"q": f"hôtels {city}", "hl": "fr", "curr": "EUR"})

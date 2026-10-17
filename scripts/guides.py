@@ -259,7 +259,7 @@ GUIDES = [
     {
         "key": "enfants",
         "fr": dict(
-            slug="guides/voyager-avec-enfants", title="Voyager en avion avec des enfants : documents et conseils",
+            slug="guides/voyager-avec-enfants", title="Voyager en avion avec des enfants : papiers et conseils",
             desc="Passeport, autorisation de sortie du territoire, vaccins, tarifs bébé : la liste pour préparer un voyage en avion avec des enfants, notamment vers l’Afrique.",
             intro="Un voyage avec des enfants se prépare un peu plus tôt : certains documents demandent plusieurs semaines.",
             sections=[
