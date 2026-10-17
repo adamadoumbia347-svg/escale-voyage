@@ -100,16 +100,17 @@ Pistes suivantes : allemand, italien, chinois, turc (ajouter une colonne dans tr
 - ✔ Fil d'Ariane (BreadcrumbList) sur toutes les pages, nom du site (WebSite + Organization) sur l'accueil.
 - ✔ Sitemap avec la vraie date de modification de chaque page (`scripts/lastmod.json`, mis à jour en lançant la génération en local).
 - ✔ IndexNow : à chaque mise en ligne, `netlify/functions/deploy-succeeded.mts` envoie toutes les pages à Bing (et DuckDuckGo, Yahoo, Ecosia).
-- À faire : nom de domaine à soi, Bing Webmaster Tools, liens depuis d'autres sites (associations, blogs, groupes de la diaspora), suivi mensuel dans Search Console.
+- ✔ Nom de domaine escale.live, Bing Webmaster Tools.
+- À faire : liens depuis d'autres sites (associations, blogs, groupes de la diaspora), suivi mensuel dans Search Console.
 
 ## Déménagement sur Cloudflare (14 octobre 2026)
 - Les crédits gratuits de Netlify (300 par mois, 15 par mise en ligne) étaient épuisés : le site passe sur Cloudflare Workers (gratuit).
 - Nouvelle adresse : https://escale.live ; l'ancienne redirige (301) dès que Netlify accepte une nouvelle mise en ligne.
 - Formulaires (contact, bons plans) lus sur `/admin/` ; statistiques dans Cloudflare Web Analytics.
-- À faire : ajouter la nouvelle adresse dans Google Search Console (et Bing Webmaster Tools), renvoyer le sitemap,
-  puis utiliser l'outil « Changement d'adresse » de Search Console une fois la redirection active.
+- ✔ Nouvelle adresse ajoutée dans Google Search Console et Bing Webmaster Tools (octobre 2026).
+- À faire si ce n'est pas déjà fait : utiliser l'outil « Changement d'adresse » de Search Console une fois la redirection active.
 
 ## Nom de domaine escale.live (octobre 2026)
 - Domaine acheté chez Squarespace, serveurs de noms confiés à Cloudflare, branché sur le Worker (escale.live et www.escale.live).
 - Toutes les adresses officielles (canonical, sitemap, hreflang, images de partage) pointent vers https://escale.live.
-- À faire : Search Console (propriété « Domaine » escale.live), renvoyer le sitemap, Bing Webmaster Tools.
+- ✔ Search Console et Bing Webmaster Tools configurés pour escale.live (octobre 2026).
