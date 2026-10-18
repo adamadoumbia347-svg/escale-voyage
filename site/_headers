@@ -27,6 +27,6 @@
   X-Robots-Tag: noindex, nofollow
   Cache-Control: no-store
 
-/widget/prix.html
+/widget/prix
   Cache-Control: public, max-age=600
   X-Robots-Tag: noindex

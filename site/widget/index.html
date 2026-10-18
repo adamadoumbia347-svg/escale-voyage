@@ -61,8 +61,8 @@
   function update() {
     var r = routes[+$("route").value]; if (!r) return;
     var lang = $("lang").value;
-    var src = "https://escale.live/widget/prix.html?from=" + r[0] + "&to=" + r[1] + (lang === "en" ? "&lang=en" : "");
-    $("frame").src = "/widget/prix.html?from=" + r[0] + "&to=" + r[1] + (lang === "en" ? "&lang=en" : "");
+    var src = "https://escale.live/widget/prix?from=" + r[0] + "&to=" + r[1] + (lang === "en" ? "&lang=en" : "");
+    $("frame").src = "/widget/prix?from=" + r[0] + "&to=" + r[1] + (lang === "en" ? "&lang=en" : "");
     var page = "https://escale.live/vol-" + slug(r[2]) + "-" + slug(r[3]) + "/";
     var text = lang === "en" ? "Cheap flights " + r[2] + " – " + r[3] : "Vol " + r[2] + " " + r[3] + " pas cher";
     $("code").value = '<iframe src="' + esc(src) + '" width="320" height="140" style="border:0;max-width:100%" loading="lazy" title="' + esc(text) + '"></iframe>\n' +
