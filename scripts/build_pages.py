@@ -227,7 +227,7 @@ HEAD = """<!doctype html>
 {body}
 </main>
 <footer class="wrap">
-  <nav class="foot-nav" aria-label="Pages du site"><a href="/">Comparer vols, hôtels et voitures</a><a href="/#guides">Guides des trajets</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/contact/">Contact</a><a href="/a-propos/">À propos</a><a href="/guides/">Guides</a><a href="/bons-plans/">Bons plans</a><a href="#cookies" data-open-consent>Gérer les cookies</a></nav>
+  <nav class="foot-nav" aria-label="Pages du site"><a href="/">Comparer vols, hôtels et voitures</a><a href="/#guides">Guides des trajets</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/contact/">Contact</a><a href="/a-propos/">À propos</a><a href="/guides/">Guides</a><a href="/vols-fetes/">Vols pour les fêtes</a><a href="/bons-plans/">Bons plans</a><a href="#cookies" data-open-consent>Gérer les cookies</a></nav>
   <p>Escale ne vend pas de billets et ne fixe aucun prix. Les durées et informations sont indicatives : les programmes des compagnies changent, vérifiez toujours sur le site de réservation.</p>
 </footer>
 </body>
@@ -463,7 +463,7 @@ def main():
     ctx = dict(domain=DOMAIN, tp=TRAVELPAYOUTS, routes=ROUTES, hotels=HOTELS, route_slug=route_slug, hotel_slug=hotel_slug,
                airports=airports, related=related, distances=DISTANCES)
     i18n_urls, route_paths, hotel_paths = build_i18n.build(SITE, ctx)
-    urls += i18n_urls + build_i18n.build_indexes(SITE, ctx, route_paths, hotel_paths) + build_i18n.build_deals(SITE, ctx) + build_i18n.build_guides(SITE, ctx) + build_i18n.build_about(SITE, ctx)
+    urls += i18n_urls + build_i18n.build_indexes(SITE, ctx, route_paths, hotel_paths) + build_i18n.build_deals(SITE, ctx) + build_i18n.build_guides(SITE, ctx) + build_i18n.build_about(SITE, ctx) + build_i18n.build_fetes(SITE, ctx)
     urls += legal_pages()
 
     # Liste des guides sur la page d'accueil
@@ -485,7 +485,9 @@ def main():
     links += group("Guides pratiques", ['<li><a href="/guides/bagages-avion/">Bagages : ne pas payer plus cher</a></li>',
                                         '<li><a href="/guides/quand-reserver/">Quand réserver son billet</a></li>',
                                         '<li><a href="/guides/voyager-avec-enfants/">Voyager avec des enfants</a></li>',
-                                        '<li><a href="/guides/check-list-depart/">Check-list avant de partir</a></li>'])
+                                        '<li><a href="/guides/check-list-depart/">Check-list avant de partir</a></li>',
+                                        '<li><a href="/vols-fetes/">Vols pour les fêtes : Noël, Ramadan, Tabaski, été</a></li>',
+                                        '<li><a href="/widget/">Widget gratuit « Prix des vols » pour votre site</a></li>'])
     links += '<p class="lead guides-langs">Guides in English, en español, em português, بالعربية : ' + " · ".join(
         f'<a href="/{l}/" hreflang="{l}" lang="{l}">{build_i18n.NAMES[l]}</a>' for l in build_i18n.LANGS) + "</p>"
     s = re.sub(r"<!-- TRAVELPAYOUTS:START -->.*?<!-- TRAVELPAYOUTS:END -->",
@@ -494,6 +496,7 @@ def main():
                lambda m: "<!-- ROUTES:START -->\n    " + links + "\n    <!-- ROUTES:END -->", s, flags=re.S)
     idx.write_text(s, encoding="utf-8")
 
+    urls.append(f"{DOMAIN}/widget/")  # page statique (site/widget/index.html)
     # Date de dernière modification réelle de chaque page (empreinte du contenu gardée dans scripts/lastmod.json),
     # pour que Google fasse confiance au sitemap au lieu de voir toutes les pages « modifiées » à chaque mise en ligne.
     lm_file = ROOT / "scripts" / "lastmod.json"

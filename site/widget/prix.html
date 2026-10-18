@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Prix du jour | Escale</title>
+<style>
+  /* Widget « Prix du jour » d'Escale, à intégrer dans une iframe (aucun cookie, aucun script tiers) */
+  :root { --bg: #ffffff; --ink: #141a24; --muted: #5a6474; --line: #d9dee6; --accent: #0b5cd6; --sign: #ffcc1a; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #171e28; --ink: #e9edf3; --muted: #9aa5b5; --line: #2a3442; --accent: #6ea8ff; } }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body { font: 15px/1.35 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--ink); background: var(--bg); }
+  a.card { display: flex; flex-direction: column; justify-content: space-between; gap: 6px; height: 100%; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; color: inherit; text-decoration: none; }
+  a.card:hover { border-color: var(--accent); }
+  .top { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+  .mark { background: var(--sign); color: #141a24; font: 800 11px/1 system-ui, sans-serif; padding: 4px 5px; border-radius: 4px; }
+  .route { font-weight: 700; font-size: 17px; }
+  .price { font-size: 14px; color: var(--muted); }
+  .price b { color: var(--accent); font-size: 20px; }
+  .go { align-self: flex-start; background: var(--accent); color: #fff; font-weight: 700; font-size: 14px; padding: 7px 12px; border-radius: 8px; }
+  @media (prefers-color-scheme: dark) { .go { color: #0b1220; } }
+</style>
+</head>
+<body>
+<a class="card" id="card" href="https://escale.live/" target="_blank" rel="noopener">
+  <span class="top"><span class="mark">ESC</span> <span id="brand">Escale · prix des vols</span></span>
+  <span class="route" id="route">…</span>
+  <span class="price" id="price">&nbsp;</span>
+  <span class="go" id="go">Voir les vols →</span>
+</a>
+<script>
+(function () {
+  "use strict";
+  var q = new URLSearchParams(location.search);
+  var from = (q.get("from") || "CDG").toUpperCase(), to = (q.get("to") || "DSS").toUpperCase();
+  var en = q.get("lang") === "en";
+  var L = en ? { brand: "Escale · flight prices", go: "See flights →", from: "from", rt: "return in", none: "Compare prices", loc: "en-GB" }
+             : { brand: "Escale · prix des vols", go: "Voir les vols →", from: "dès", rt: "l'aller-retour en", none: "Comparer les prix", loc: "fr-FR" };
+  document.documentElement.lang = en ? "en" : "fr";
+  var $ = function (id) { return document.getElementById(id); };
+  $("brand").textContent = L.brand; $("go").textContent = L.go;
+  var slug = function (t) { return t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/'/g, "-").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); };
+  var d = new Date(); d.setDate(1); d.setMonth(d.getMonth() + 1);
+  var month = d.toISOString().slice(0, 7);
+  fetch("/data/routes.json").then(function (r) { return r.json(); }).catch(function () { return []; }).then(function (routes) {
+    var r = (routes || []).filter(function (x) { return x[0] === from && x[1] === to; })[0];
+    $("route").textContent = r ? r[2] + " → " + r[3] : from + " → " + to;
+    var url = r && !en ? "https://escale.live/vol-" + slug(r[2]) + "-" + slug(r[3]) + "/"
+                       : "https://escale.live/?type=vols&from=" + from + "&to=" + to + (en ? "&lang=en" : "");
+    $("card").href = url + (url.indexOf("?") > 0 ? "&" : "?") + "utm_source=widget&utm_medium=iframe";
+  });
+  fetch("/api/prix?from=" + from + "&to=" + to + "&dep=" + month + "-15&rt=1&currency=EUR").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }).then(function (p) {
+    if (p && p.available && p.price) {
+      var m = new Intl.NumberFormat(L.loc, { style: "currency", currency: p.currency || "EUR", maximumFractionDigits: 0 }).format(p.price);
+      var mois = d.toLocaleDateString(L.loc, { month: "long" });
+      $("price").innerHTML = ""; var b = document.createElement("b"); b.textContent = L.from + " " + m;
+      $("price").appendChild(b); $("price").appendChild(document.createTextNode(" " + L.rt + " " + mois));
+    } else $("price").textContent = L.none;
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Widget gratuit « Prix des vols » pour votre site | Escale</title>
+<meta name="description" content="Affichez gratuitement sur votre site ou blog le prix du jour d'un vol (Paris – Dakar, Bamako, Abidjan…), mis à jour automatiquement. Code à copier-coller.">
+<link rel="canonical" href="https://escale.live/widget/">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/instrument-sans-latin-f587e7.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/pages.css">
+<style>
+  .wg-form { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin: 12px 0 18px; }
+  .wg-form label { display: grid; gap: 6px; font: 600 12px/1.2 var(--f-body); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+  .wg-form select { font: 500 16px/1.2 var(--f-body); padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink); }
+  .wg-preview { border: 1px dashed var(--line); border-radius: 14px; padding: 16px; background: var(--bg); }
+  #code { width: 100%; min-height: 150px; font: 13px/1.5 var(--f-mono); padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink); }
+  .wg-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 10px; }
+  .wg-actions button { font: 700 15px/1 var(--f-body); padding: 12px 18px; border: 0; border-radius: 10px; background: var(--accent); color: var(--accent-ink); cursor: pointer; }
+</style>
+</head>
+<body>
+<header class="board"><div class="wrap">
+  <a class="brand" href="/"><span class="brand-mark">ESC</span><span class="brand-name">Escale</span></a>
+  <p class="eyebrow">Pour les associations, blogs et sites de la diaspora</p>
+  <h1>Widget gratuit « Prix des vols »</h1>
+  <p class="hero-lead">Affichez sur votre site le prix du moment d'un trajet, par exemple Paris → Dakar. Il se met à jour tout seul. Gratuit, sans inscription, sans cookie.</p>
+</div></header>
+<main class="wrap">
+<section>
+  <h2>1. Choisissez le trajet</h2>
+  <div class="wg-form">
+    <label>Trajet<select id="route"></select></label>
+    <label>Langue<select id="lang"><option value="fr">Français</option><option value="en">English</option></select></label>
+  </div>
+  <h2>2. Aperçu</h2>
+  <div class="wg-preview"><iframe id="frame" title="Aperçu du widget Escale" width="320" height="140" style="border:0;max-width:100%"></iframe></div>
+</section>
+<section>
+  <h2>3. Copiez ce code sur votre site</h2>
+  <p>Collez-le dans une page ou un article (bloc « HTML personnalisé » sur WordPress, Wix, Blogger…).</p>
+  <textarea id="code" readonly aria-label="Code du widget"></textarea>
+  <div class="wg-actions"><button type="button" id="copy">Copier le code</button><span id="msg" class="small" role="status"></span></div>
+</section>
+<section>
+  <h2>Questions fréquentes</h2>
+  <p><strong>Est-ce vraiment gratuit ?</strong> Oui. Le widget n'affiche aucune publicité et ne dépose aucun cookie chez vos visiteurs.</p>
+  <p><strong>D'où viennent les prix ?</strong> Ce sont les prix aller-retour les plus bas repérés récemment pour le mois prochain. Le tarif exact se confirme sur le site de réservation.</p>
+  <p><strong>Un trajet manque ?</strong> Écrivez-nous via la page <a href="/contact/">Contact</a>.</p>
+</section>
+</main>
+<footer class="wrap"><p><a href="/">Escale : comparer vols, hôtels et voitures</a></p></footer>
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var slug = function (t) { return t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/'/g, "-").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); };
+  var esc = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+  var routes = [];
+  function update() {
+    var r = routes[+$("route").value]; if (!r) return;
+    var lang = $("lang").value;
+    var src = "https://escale.live/widget/prix.html?from=" + r[0] + "&to=" + r[1] + (lang === "en" ? "&lang=en" : "");
+    $("frame").src = "/widget/prix.html?from=" + r[0] + "&to=" + r[1] + (lang === "en" ? "&lang=en" : "");
+    var page = "https://escale.live/vol-" + slug(r[2]) + "-" + slug(r[3]) + "/";
+    var text = lang === "en" ? "Cheap flights " + r[2] + " – " + r[3] : "Vol " + r[2] + " " + r[3] + " pas cher";
+    $("code").value = '<iframe src="' + esc(src) + '" width="320" height="140" style="border:0;max-width:100%" loading="lazy" title="' + esc(text) + '"></iframe>\n' +
+      '<p style="font-size:13px;margin:4px 0 0"><a href="' + esc(page) + '">' + esc(text) + '</a> ' + (lang === "en" ? "with" : "avec") + ' Escale</p>';
+  }
+  fetch("/data/routes.json").then(function (r) { return r.json(); }).then(function (list) {
+    routes = list.slice().sort(function (a, b) { return (a[2] + a[3]).localeCompare(b[2] + b[3], "fr"); });
+    $("route").innerHTML = routes.map(function (r, i) { return '<option value="' + i + '">' + esc(r[2]) + " → " + esc(r[3]) + "</option>"; }).join("");
+    var def = routes.findIndex(function (r) { return r[0] === "CDG" && r[1] === "DSS"; });
+    if (def >= 0) $("route").value = String(def);
+    update();
+  });
+  $("route").addEventListener("change", update);
+  $("lang").addEventListener("change", update);
+  $("copy").addEventListener("click", function () {
+    var t = $("code").value;
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { $("msg").textContent = "Code copié ✓"; },
+      function () { $("code").select(); $("msg").textContent = "Sélectionnez le code et copiez-le."; });
+  });
+})();
+</script>
+</body>
+</html>

@@ -270,7 +270,7 @@ HEAD = """<!doctype html>
 {body}
 </main>
 <footer class="wrap">
-  <nav class="foot-nav"><a href="/{homeq}">{home}</a><a href="/mentions-legales/">{legal}</a><a href="/confidentialite/">{privacy}</a><a href="/contact/">Contact</a><a href="/{aboutp}/">{aboutl}</a><a href="/{guidesp}/">Guides</a><a href="/{dealsp}/">{dealsl}</a><a href="#cookies" data-open-consent>{cookies}</a></nav>
+  <nav class="foot-nav"><a href="/{homeq}">{home}</a><a href="/mentions-legales/">{legal}</a><a href="/confidentialite/">{privacy}</a><a href="/contact/">Contact</a><a href="/{aboutp}/">{aboutl}</a><a href="/{guidesp}/">Guides</a><a href="/{fetesp}/">{fetesl}</a><a href="/{dealsp}/">{dealsl}</a><a href="#cookies" data-open-consent>{cookies}</a></nav>
   <p>{disclaimer}</p>
 </footer>
 </body>
@@ -318,6 +318,8 @@ def write(site, path, lang, title, desc, hero, body, ld, paths, ctx, og="og-imag
         dealsl={"fr": "Bons plans", "en": "Deals", "es": "Ofertas", "pt": "Promoções", "ar": "العروض"}[lang],
         aboutp={"fr": "a-propos", "en": "en/about", "es": "es/acerca-de", "pt": "pt/sobre", "ar": "ar/about"}[lang],
         aboutl={"fr": "À propos", "en": "About", "es": "Acerca de", "pt": "Sobre", "ar": "عن Escale"}[lang],
+        fetesp={"fr": "vols-fetes", "en": "en/holiday-flights", "es": "es/vuelos-fiestas", "pt": "pt/voos-festas", "ar": "ar/holiday-flights"}[lang],
+        fetesl={"fr": "Vols pour les fêtes", "en": "Holiday flights", "es": "Vuelos para las fiestas", "pt": "Voos para as festas", "ar": "رحلات الأعياد"}[lang],
         guidesp={"fr": "guides", "en": "en/guides", "es": "es/guias", "pt": "pt/guias", "ar": "ar/guides"}[lang],
         switch=switcher(paths, lang), hero=hero, body=body, home=E(u["home"]), legal=E(u["legal"]), privacy=E(u["privacy"]),
         cookies=E(u["cookies"]), disclaimer=E(u["disclaimer"]))
@@ -631,4 +633,59 @@ def build_about(site, ctx):
         body += f'<p><a class="btn" href="/contact/">{E(d["contact"])}</a></p>'
         ld = '<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", "@type": "AboutPage", "name": d["title"], "inLanguage": lang}, ensure_ascii=False) + "</script>"
         urls.append(write(site, d["slug"], lang, d["title"] + " | Escale", d["lead"], hero, body, ld, paths, ctx))
+    return urls
+
+
+def build_fetes(site, ctx):
+    """Pages « Vols pour les fêtes » (voir scripts/fetes.py) et page d'ensemble, en 5 langues."""
+    import fetes as F
+    urls = []
+
+    def cname(n, lang):
+        return n if lang == "fr" else city(n, lang)
+
+    def route_page(code, city_fr, lang):
+        r = ("CDG", code, "Paris", city_fr)
+        p = f"vol-paris-{slugify(city_fr)}" if lang == "fr" else route_path(r, lang)
+        return p if (site / p / "index.html").exists() else None
+
+    for f in F.FETES:
+        paths = {l: f[l]["slug"] for l in ALL}
+        for lang in ALL:
+            d, u = f[lang], F.UI[lang]
+            homeq = "" if lang == "fr" else f"&lang={lang}"
+            rows = []
+            for code, city_fr in f["routes"]:
+                search = f"/?type=vols&from=CDG&to={code}&dep={f['dep']}&ret={f['ret']}{homeq}"
+                rp = route_page(code, city_fr, lang)
+                alert = f' <a class="fete-alert" href="/{rp}/#price-alert">{E(u["alert"])}</a>' if rp else ""
+                rows.append(f'<tr data-from="CDG" data-to="{code}"><th scope="row"><bdi>{E(cname("Paris", lang))} → {E(cname(city_fr, lang))}</bdi></th>'
+                            f'<td class="fp" aria-live="polite">{E(u["loading"])}</td>'
+                            f'<td><a class="price-go" href="{E(search)}">{E(u["see"])}</a>{alert}</td></tr>')
+            hero = (f'<p class="eyebrow">{E(u["eyebrow"])}</p><h1>{E(d["title"])}</h1><p class="hero-lead">{E(d["lead"])}</p>'
+                    f'<div class="cta-row"><a class="btn" href="/{"" if lang == "fr" else "?lang=" + lang}">{E(u["cta"])}</a></div>')
+            body = f'<section><h2>{E(u["dates_label"])}</h2>{_para_html(d["dates"])}</section>'
+            body += (f'<section><h2>{E(u["table_h"])}</h2>'
+                     f'<table class="fete-table" data-dep="{f["dep"]}" data-ret="{f["ret"]}" data-from-label="{E(u["from_"])}" data-none="{E(u["none"])}">'
+                     f'<thead><tr><th scope="col">{E(u["route"])}</th><th scope="col">{E(u["price"])}</th><th scope="col"><span class="sr-only">{E(u["see"])}</span></th></tr></thead>'
+                     f'<tbody>{"".join(rows)}</tbody></table><p class="small">{E(u["table_note"])}</p></section>')
+            body += f'<section><h2>{E(u["book_h"])}</h2><ul>' + "".join(f"<li>{E(x)}</li>" for x in d["book"]) + "</ul></section>"
+            body += f'<section><h2>{E(u["alert_h"])}</h2><p>{E(u["alert_p"])}</p></section>'
+            others = [o for o in F.FETES if o is not f]
+            body += (f'<section><h2>{E(u["others"])}</h2><ul class="route-links">' +
+                     "".join(f'<li><a href="/{o[lang]["slug"]}/">{E(o[lang]["title"])}</a></li>' for o in others) + "</ul></section>")
+            body += '<script src="/fetes.js" defer></script>'
+            ld = '<script type="application/ld+json">' + json.dumps({
+                "@context": "https://schema.org", "@type": "Article", "headline": d["title"], "description": d["desc"],
+                "inLanguage": lang, "author": {"@type": "Organization", "name": "Escale"}}, ensure_ascii=False) + "</script>"
+            urls.append(write(site, d["slug"], lang, d["title"] + " | Escale", d["desc"], hero, body, ld, paths, ctx))
+    ipaths = dict(F.INDEX_SLUG)
+    for lang in ALL:
+        u = F.UI[lang]
+        hero = f'<p class="eyebrow">{E(u["eyebrow"])}</p><h1>{E(u["index_title"])}</h1><p class="hero-lead">{E(u["index_lead"])}</p>'
+        body = '<section><ul class="extra-list">' + "".join(
+            f'<li class="extra"><span class="logo" style="background:#0b5cd6" aria-hidden="true">{i + 1}</span>'
+            f'<div><strong>{E(f[lang]["title"])}</strong><span>{E(f[lang]["lead"])}</span></div>'
+            f'<a class="price-go" href="/{f[lang]["slug"]}/">{E(u["more"])}</a></li>' for i, f in enumerate(F.FETES)) + "</ul></section>"
+        urls.append(write(site, ipaths[lang], lang, u["index_title"] + " | Escale", u["index_lead"], hero, body, "", ipaths, ctx))
     return urls

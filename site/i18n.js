@@ -314,6 +314,8 @@ window.ESCALE_I18N = {
   "A two-wheeler instead of a car: often cheaper and handier in town.": ["Una moto en lugar de un coche: a menudo más barata y práctica en la ciudad.", "Uma mota em vez de um carro: muitas vezes mais barata e prática na cidade.", "دراجة نارية بدل السيارة: غالبًا أرخص وأسهل في المدينة."],
   "passenger": ["pasajero", "passageiro", "مسافر"],
   "passengers": ["pasajeros", "passageiros", "مسافرين"],
+  "Prices in": ["Precios en", "Preços em", "الأسعار بـ"],
+  "Price currency": ["Moneda de los precios", "Moeda dos preços", "عملة الأسعار"],
   "Edit": ["Modificar", "Alterar", "تعديل"],
   "Sort flights": ["Ordenar vuelos", "Ordenar voos", "ترتيب الرحلات"],
   "Cheapest": ["El más barato", "O mais barato", "الأرخص"],

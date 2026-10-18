@@ -1160,6 +1160,13 @@
     applyLang(); paintDests(); paintFaq(); paintRecent(); paintChecklist(); paintThemeBtn(); rerender();
     if (!$("explore").hidden) { paintExploreMonths(); renderExplore($("ex-grid"), exploreFrom, exploreMonth); }
   });
+  // Boutons « Prix en € / F CFA / DH / $ » sous le titre : même effet que la liste des devises
+  const syncCurQuick = () => document.querySelectorAll(".cur-quick [data-cur]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.cur === $("cur").value)));
+  document.querySelectorAll(".cur-quick [data-cur]").forEach((b) => b.addEventListener("click", () => {
+    if ($("cur").value === b.dataset.cur) return;
+    $("cur").value = b.dataset.cur; $("cur").dispatchEvent(new Event("change"));
+  }));
+  $("cur").addEventListener("change", syncCurQuick);
   $("cur").addEventListener("change", () => {
     CUR = $("cur").value; store.set("escale.cur", CUR);
     rerender(); paintDests();
@@ -1184,7 +1191,7 @@
     try {
       const g = await fetch("/api/geo").then((r) => (r.ok ? r.json() : null));
       if (!g) return null;
-      if (!store.get("escale.cur") && COUNTRY_CUR[g.country]) { CUR = COUNTRY_CUR[g.country]; $("cur").value = CUR; }
+      if (!store.get("escale.cur") && COUNTRY_CUR[g.country]) { CUR = COUNTRY_CUR[g.country]; $("cur").value = CUR; syncCurQuick(); }
       if (g.lat == null || g.lon == null) return null;
       await loadDB();
       if (!dbLoaded) return null;
@@ -1194,6 +1201,7 @@
 
   // ---------- Démarrage ----------
   $("cur").value = CUR;
+  syncCurQuick();
   applyLang(); paintDests(); paintFaq(); paintChecklist(); paintThemeBtn();
   let start = applyUrl() || (location.hash || "").slice(1);
   if (!TABS.includes(start)) start = store.get("escale.tab") || "vols";
