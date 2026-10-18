@@ -1,8 +1,0 @@
-// Marché Facile : site statique séparé d'Escale, publié sur Cloudflare Workers.
-// Cloudflare > Workers & Pages > Créer > Importer un dépôt : dossier racine « finance ».
-{
-  "$schema": "https://unpkg.com/wrangler@4.140.0/config-schema.json",
-  "name": "marche-facile",
-  "compatibility_date": "2024-11-01",
-  "assets": { "directory": "." }
-}
