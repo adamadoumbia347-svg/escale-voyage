@@ -255,9 +255,9 @@ HEAD = """<!doctype html>
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@700{arfont}&display=swap">
+<link rel="preload" href="/fonts/instrument-sans-latin-f587e7.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/bricolage-grotesque-latin-40c2cb.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">{arpreload}
 <link rel="stylesheet" href="/pages.css">
 {ld}
 </head>
@@ -313,7 +313,7 @@ def write(site, path, lang, title, desc, hero, body, ld, paths, ctx, og="og-imag
     out = HEAD.format(
         lang=lang, dir="rtl" if lang == "ar" else "ltr", tp=ctx["tp"], title=E(title), desc=E(desc),
         url=f"{ctx['domain']}/{path}/", alts=alternates(paths, ctx["domain"]), oglocale=LOCALE[lang], domain=ctx["domain"],
-        ogimg=og, arfont="&family=Noto+Sans+Arabic:wght@400;600;700" if lang == "ar" else "", ld=ld, homeq="" if lang == "fr" else "?lang=" + u["app_lang"],
+        ogimg=og, arpreload=('\n<link rel="preload" href="/fonts/noto-sans-arabic-arabic-378a89.woff2" as="font" type="font/woff2" crossorigin>' if lang == "ar" else ""), ld=ld, homeq="" if lang == "fr" else "?lang=" + u["app_lang"],
         dealsp={"fr": "bons-plans", "en": "en/deals", "es": "es/ofertas", "pt": "pt/promocoes", "ar": "ar/deals"}[lang],
         dealsl={"fr": "Bons plans", "en": "Deals", "es": "Ofertas", "pt": "Promoções", "ar": "العروض"}[lang],
         aboutp={"fr": "a-propos", "en": "en/about", "es": "es/acerca-de", "pt": "pt/sobre", "ar": "ar/about"}[lang],

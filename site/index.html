@@ -38,11 +38,10 @@
 {"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://escale.live/#site","name":"Escale","alternateName":["Escale Comparateur","Escale Voyage"],"url":"https://escale.live/","description":"Comparateur de vols, hôtels et locations de voitures","inLanguage":["fr","en","es","pt","ar"],"publisher":{"@id":"https://escale.live/#org"}},{"@type":"Organization","@id":"https://escale.live/#org","name":"Escale","url":"https://escale.live/","logo":"https://escale.live/icon-512.png"}]}
 </script>
 <script type="application/ld+json" id="faq-ld"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Polices chargées sans bloquer l'affichage (police de secours en attendant) ; la police arabe est ajoutée par app.js seulement en arabe -->
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap"></noscript>
+<!-- Polices hébergées sur le site (site/fonts) : pas de Google Fonts, affichage plus rapide -->
+<link rel="preload" href="/fonts/instrument-sans-latin-f587e7.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/bricolage-grotesque-latin-40c2cb.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
 <style>
 /* Layout: signage band (departure-board header) over a single working column; form card, then result rows like a ticket list. */
 :root {
@@ -357,6 +356,9 @@ footer p { margin: 0 0 6px; max-width: 75ch; }
 .fl-insight .go { font-size: 14px; padding: 8px 12px; cursor: pointer; font-family: var(--f-body); }
 /* Barre du trajet recherché qui reste visible en faisant défiler les vols */
 .res-bar { position: sticky; top: 0; z-index: 6; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding-block: 10px; margin-inline: -4px; padding-inline: 4px; }
+/* Vitesse : les blocs du bas de page ne sont calculés qu'à l'approche de l'écran */
+main > section.block { content-visibility: auto; contain-intrinsic-size: auto 700px; }
+.flap-board { contain: layout paint; }
 /* Formulaires façon Google Flights : libellés dans les cases, lignes compactes, deux colonnes sur téléphone */
 form .field { position: relative; }
 form .field > label { position: absolute; top: 7px; inset-inline-start: 13px; font-size: 11px; letter-spacing: .05em; pointer-events: none; z-index: 1; }
@@ -599,7 +601,7 @@ body:has(.cc-bar:not([hidden])) .fab { display: none; }
           <input type="radio" name="trip" id="trip-ow" value="ow"><label for="trip-ow" data-en="One way">Aller simple</label>
         </div>
         <details class="pax" id="pax">
-          <summary aria-label="Passagers" data-en-aria="Passengers"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9zm0 2c-4.4 0-8 2.2-8 5v2h16v-2c0-2.8-3.6-5-8-5z" fill="currentColor"/></svg><b id="pax-n">1</b><span class="caret" aria-hidden="true">▾</span></summary>
+          <summary aria-label="1 passager"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9zm0 2c-4.4 0-8 2.2-8 5v2h16v-2c0-2.8-3.6-5-8-5z" fill="currentColor"/></svg><b id="pax-n">1</b><span class="caret" aria-hidden="true">▾</span></summary>
           <div class="pax-pop">
             <div class="field"><label for="f-adults" data-en="Adults">Adultes</label><select id="f-adults"></select></div>
             <div class="field"><label for="f-children" data-en="Children (2–11)">Enfants (2–11 ans)</label><select id="f-children"></select></div>

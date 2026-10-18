@@ -50,13 +50,7 @@
   function applyLang() {
     document.documentElement.lang = LANG;
     document.documentElement.dir = LANG === "ar" ? "rtl" : "ltr";
-    // Police arabe chargée seulement quand on en a besoin
-    if (LANG === "ar" && !document.getElementById("font-ar")) {
-      const l = document.createElement("link");
-      l.id = "font-ar"; l.rel = "stylesheet";
-      l.href = "https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;700&display=swap";
-      document.head.appendChild(l);
-    }
+    // La police arabe (site/fonts/fonts.css) ne se télécharge que si du texte arabe est affiché (unicode-range)
     document.querySelectorAll("[data-en]").forEach((el) => {
       if (el.dataset.fr == null) el.dataset.fr = el.textContent;
       el.textContent = T(el.dataset.fr, el.dataset.en);
@@ -228,7 +222,11 @@
   const fill = (sel, from, to, def, fmt) => { for (let i = from; i <= to; i++) { const o = new Option(fmt ? fmt(i) : String(i), String(i)); if (i === def) o.selected = true; sel.add(o); } };
   fill($("f-adults"), 1, 9, 1); fill($("f-children"), 0, 8, 0);
   // Bouton « passagers » façon Google Flights : nombre total, liste déroulante qui se ferme en touchant ailleurs
-  const paxCount = () => { $("pax-n").textContent = String(+$("f-adults").value + +$("f-children").value); };
+  const paxCount = () => {
+    const n = +$("f-adults").value + +$("f-children").value;
+    $("pax-n").textContent = String(n);
+    $("pax").querySelector("summary").setAttribute("aria-label", `${n} ${n > 1 ? T("passagers", "passengers") : T("passager", "passenger")}`);
+  };
   ["f-adults", "f-children"].forEach((id) => $(id).addEventListener("change", paxCount));
   document.addEventListener("click", (ev) => { const p = $("pax"); if (p.open && !p.contains(ev.target)) p.open = false; });
   document.addEventListener("keydown", (ev) => { if (ev.key === "Escape" && $("pax").open) { $("pax").open = false; $("pax").querySelector("summary").focus(); } });
@@ -480,7 +478,7 @@
         <small>${esc(human(d))}</small><strong>${p ? esc(money(p, flightState && flightState.cur)) : offers ? "—" : "·"}</strong></button>`;
     }).join("");
     const cur = box.querySelector(".day.cur");
-    if (cur) box.scrollLeft = cur.offsetLeft - box.offsetLeft - (box.clientWidth - cur.offsetWidth) / 2;
+    if (cur) requestAnimationFrame(() => { box.scrollLeft = cur.offsetLeft - box.offsetLeft - (box.clientWidth - cur.offsetWidth) / 2; });
     box.querySelectorAll("button[data-day]").forEach((b) => b.addEventListener("click", () => {
       const d = b.dataset.day;
       if (d === s.dep) return;
@@ -797,7 +795,10 @@
       // Les 9 premiers caractères forment le trajet (« CDG → BKO ») ; la suite (le prix) est surlignée
       const apply = () => { cell.textContent = ch; cell.className = ch === " " ? "sp" : i >= 10 ? "hl" : ""; };
       if (reduceMotion) { apply(); return; }
-      setTimeout(() => { cell.classList.remove("flip"); void cell.offsetWidth; cell.classList.add("flip"); setTimeout(apply, 140); }, i * 28);
+      setTimeout(() => {
+        if (cell.animate) cell.animate([{ transform: "rotateX(0)" }, { transform: "rotateX(90deg)", filter: "brightness(.6)" }, { transform: "rotateX(0)" }], { duration: 320, easing: "ease-in" });
+        setTimeout(apply, 140);
+      }, i * 28);
     });
   }
   function startFlap() {

@@ -58,13 +58,13 @@
     bar.setAttribute("aria-label", "Cookies");
     var lang = (document.documentElement.lang || "fr").slice(0, 2);
     var M = {
-      fr: ["Cookies partenaires", "Avec votre accord, notre partenaire Travelpayouts utilise des cookies pour savoir que vous venez d’Escale quand vous réservez. Cela nous permet de rester gratuits. Refuser ne change rien aux recherches.", "En savoir plus", "Refuser", "Accepter"],
-      en: ["Partner cookies", "With your consent, our partner Travelpayouts uses cookies to know you came from Escale when you book. This keeps the site free. Declining changes nothing for your searches.", "Learn more", "Decline", "Accept"],
-      es: ["Cookies de socios", "Con tu consentimiento, nuestro socio Travelpayouts usa cookies para saber que vienes de Escale cuando reservas. Así el sitio sigue siendo gratuito. Rechazar no cambia nada en tus búsquedas.", "Más información", "Rechazar", "Aceptar"],
+      fr: ["Cookies partenaires", "Avec votre accord, notre partenaire Travelpayouts utilise des cookies pour savoir que vous venez d’Escale quand vous réservez. Cela nous permet de rester gratuits. Refuser ne change rien aux recherches.", "Politique de confidentialité", "Refuser", "Accepter"],
+      en: ["Partner cookies", "With your consent, our partner Travelpayouts uses cookies to know you came from Escale when you book. This keeps the site free. Declining changes nothing for your searches.", "Privacy policy", "Decline", "Accept"],
+      es: ["Cookies de socios", "Con tu consentimiento, nuestro socio Travelpayouts usa cookies para saber que vienes de Escale cuando reservas. Así el sitio sigue siendo gratuito. Rechazar no cambia nada en tus búsquedas.", "Política de privacidad", "Rechazar", "Aceptar"],
       pt: ["Cookies de parceiros", "Com o seu consentimento, o nosso parceiro Travelpayouts usa cookies para saber que veio da Escale quando reserva. Isto mantém o site gratuito. Recusar não muda nada nas pesquisas.", "Saber mais", "Recusar", "Aceitar"],
-      ar: ["ملفات تعريف الارتباط للشركاء", "بموافقتك، يستخدم شريكنا Travelpayouts ملفات تعريف الارتباط ليعرف أنك جئت من Escale عند الحجز. هذا ما يبقي الموقع مجانيًا. الرفض لا يغيّر شيئًا في عمليات البحث.", "اعرف المزيد", "رفض", "قبول"]
+      ar: ["ملفات تعريف الارتباط للشركاء", "بموافقتك، يستخدم شريكنا Travelpayouts ملفات تعريف الارتباط ليعرف أنك جئت من Escale عند الحجز. هذا ما يبقي الموقع مجانيًا. الرفض لا يغيّر شيئًا في عمليات البحث.", "سياسة الخصوصية", "رفض", "قبول"]
     }[lang] || null;
-    if (!M) M = ["Cookies partenaires", "Avec votre accord, notre partenaire Travelpayouts utilise des cookies pour savoir que vous venez d’Escale quand vous réservez. Cela nous permet de rester gratuits. Refuser ne change rien aux recherches.", "En savoir plus", "Refuser", "Accepter"];
+    if (!M) M = ["Cookies partenaires", "Avec votre accord, notre partenaire Travelpayouts utilise des cookies pour savoir que vous venez d’Escale quand vous réservez. Cela nous permet de rester gratuits. Refuser ne change rien aux recherches.", "Politique de confidentialité", "Refuser", "Accepter"];
     bar.setAttribute("aria-label", M[0]);
     bar.innerHTML =
       '<div class="cc-in"><p class="cc-txt"><strong>' + M[0] + "</strong>" + M[1] + " " +
