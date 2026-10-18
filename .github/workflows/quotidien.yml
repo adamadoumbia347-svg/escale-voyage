@@ -65,6 +65,7 @@ jobs:
           echo "Redirection : $(curl -s -o /dev/null -w '%{http_code} -> %{redirect_url}' $SITE_URL/vol-paris-dakar/)"
           echo "Accueil : $(curl -s -o /dev/null -w '%{http_code}' $SITE_URL/)"
           echo "Page trajet : $(curl -s -o /dev/null -w '%{http_code}' $SITE_URL/vol-paris-dakar/)"
+          for P in /vols-fetes/ /vols-tabaski/ /en/flights-christmas/ /ar/holiday-flights/ /widget/ /widget/prix.html /fetes.js; do echo "Nouveauté $P : $(curl -s -o /dev/null -w '%{http_code}' $SITE_URL$P)"; done
           echo "Page absente : $(curl -s -o /dev/null -w '%{http_code}' $SITE_URL/page-qui-n-existe-pas/)"
           echo "Admin sans clé : $(curl -s -o /dev/null -w '%{http_code}' $SITE_URL/api/admin)"
           echo "Alertes : $(curl -s $SITE_URL/api/alert?action=status)"
