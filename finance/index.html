@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marché Facile</title>
+  <meta name="description" content="Graphiques, actualités et humeur des marchés (actions, crypto, devises, matières premières) expliqués en mots simples.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="logo" href="#">📈 Marché<span>Facile</span></a>
+    <nav class="nav">
+      <a href="#humeur">Humeur</a>
+      <a href="#graphique">Graphique</a>
+      <a href="#marches">Marchés</a>
+      <a href="#crypto">Crypto</a>
+      <a href="#actus">Actualités</a>
+      <a href="#agenda">Agenda</a>
+      <a href="#lexique">Lexique</a>
+    </nav>
+    <button id="theme" class="btn-icon" aria-label="Changer de thème">🌓</button>
+  </header>
+
+  <div id="tape" class="tape tv"></div>
+
+  <main>
+    <!-- Humeur du marché -->
+    <section id="humeur" class="hero">
+      <div class="card resume">
+        <h1>Le marché aujourd'hui, <em>en clair</em></h1>
+        <p id="resume" class="resume-texte">Chargement des dernières données…</p>
+        <p class="maj">Mis à jour : <span id="maj">—</span> · <button id="refresh" class="lien">Actualiser</button></p>
+      </div>
+
+      <div class="card jauge-card">
+        <h2>Peur ou avidité ?</h2>
+        <svg id="jauge" viewBox="0 0 200 120" class="jauge" aria-hidden="true">
+          <defs>
+            <linearGradient id="grad" x1="0" x2="1">
+              <stop offset="0" stop-color="#e5484d"/><stop offset=".25" stop-color="#f76b15"/>
+              <stop offset=".5" stop-color="#f5d90a"/><stop offset=".75" stop-color="#8ac926"/>
+              <stop offset="1" stop-color="#26a69a"/>
+            </linearGradient>
+          </defs>
+          <path d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="url(#grad)" stroke-width="16" stroke-linecap="round"/>
+          <line id="aiguille" x1="100" y1="100" x2="100" y2="34" stroke="var(--text)" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="100" cy="100" r="7" fill="var(--text)"/>
+        </svg>
+        <div class="jauge-val"><strong id="fg-val">—</strong> <span id="fg-label">/ 100</span></div>
+        <p id="fg-explic" class="petit">Indice crypto « Fear &amp; Greed » : 0 = panique, 100 = euphorie.</p>
+        <p id="fg-hier" class="petit muted"></p>
+      </div>
+
+      <div class="card kpis">
+        <h2>Chiffres clés crypto</h2>
+        <div class="kpi"><span>Valeur totale du marché</span><strong id="k-cap">—</strong></div>
+        <div class="kpi"><span>Variation 24 h</span><strong id="k-var">—</strong></div>
+        <div class="kpi"><span>Volume échangé 24 h</span><strong id="k-vol">—</strong></div>
+        <div class="kpi"><span>Part du Bitcoin</span><strong id="k-btc">—</strong></div>
+        <p class="petit muted">La « part du Bitcoin » montre si l'argent va vers le Bitcoin (prudence) ou vers les autres cryptos (prise de risque).</p>
+      </div>
+    </section>
+
+    <!-- Graphique -->
+    <section id="graphique" class="card">
+      <div class="section-tete">
+        <h2>Graphique en direct</h2>
+        <div class="chips" id="symboles">
+          <button data-s="FOREXCOM:SPXUSD" class="actif">S&amp;P 500</button>
+          <button data-s="EURONEXT:PX1">CAC 40</button>
+          <button data-s="NASDAQ:AAPL">Apple</button>
+          <button data-s="NASDAQ:NVDA">Nvidia</button>
+          <button data-s="BITSTAMP:BTCUSD">Bitcoin</button>
+          <button data-s="FX:EURUSD">Euro / Dollar</button>
+          <button data-s="OANDA:XAUUSD">Or</button>
+          <button data-s="TVC:USOIL">Pétrole</button>
+        </div>
+      </div>
+      <div class="grille-graph">
+        <div id="chart" class="tv chart"></div>
+        <aside class="avis">
+          <h3>Avis technique</h3>
+          <div id="tech" class="tv tech"></div>
+          <p class="petit">« <b>Achat fort</b> » : la plupart des indicateurs montrent une tendance haussière.
+            « <b>Neutre</b> » : pas de direction claire. « <b>Vente forte</b> » : tendance baissière.
+            C'est un résumé automatique d'indicateurs, pas une prédiction.</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Vue d'ensemble -->
+    <section id="marches" class="duo">
+      <div class="card">
+        <h2>Tous les marchés</h2>
+        <p class="petit muted">Indices boursiers, devises, matières premières et obligations. Vert = en hausse, rouge = en baisse.</p>
+        <div id="overview" class="tv overview"></div>
+      </div>
+      <div class="card">
+        <h2>Carte des actions américaines</h2>
+        <p class="petit muted">Chaque case est une entreprise : plus elle est grande, plus l'entreprise pèse lourd.</p>
+        <div id="heatmap" class="tv overview"></div>
+      </div>
+    </section>
+
+    <!-- Crypto -->
+    <section id="crypto" class="card">
+      <div class="section-tete">
+        <h2>Top cryptomonnaies</h2>
+        <div class="chips" id="devise">
+          <button data-d="eur" class="actif">€</button>
+          <button data-d="usd">$</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr><th>#</th><th>Nom</th><th class="num">Prix</th><th class="num">24 h</th><th class="num">7 j</th><th class="cacher-mobile">7 derniers jours</th><th>En clair</th></tr>
+          </thead>
+          <tbody id="cryptos"><tr><td colspan="7" class="muted">Chargement…</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Actualités + agenda -->
+    <section class="duo">
+      <div id="actus" class="card">
+        <h2>Dernières actualités</h2>
+        <div class="chips" id="flux">
+          <button data-f="market" data-m="stock" class="actif">Actions</button>
+          <button data-f="market" data-m="crypto">Crypto</button>
+          <button data-f="market" data-m="forex">Devises</button>
+          <button data-f="all">Tout</button>
+        </div>
+        <div id="news" class="tv news"></div>
+      </div>
+      <div id="agenda" class="card">
+        <h2>Agenda économique</h2>
+        <p class="petit muted">Les annonces qui font bouger les marchés : taux d'intérêt, inflation, emploi… Les plus importantes sont marquées en rouge.</p>
+        <div id="events" class="tv news"></div>
+      </div>
+    </section>
+
+    <!-- Lexique -->
+    <section id="lexique" class="card">
+      <h2>Lexique : les mots de la bourse en 1 phrase</h2>
+      <input id="recherche" class="recherche" type="search" placeholder="Chercher un mot (ex. : volatilité)">
+      <dl id="mots" class="mots"></dl>
+    </section>
+
+    <p class="avertissement">⚠️ Informations fournies à titre éducatif uniquement, ce ne sont pas des conseils en investissement.
+      Investir comporte un risque de perte en capital. Données : TradingView, CoinGecko, Alternative.me.</p>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
