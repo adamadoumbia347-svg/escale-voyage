@@ -13,3 +13,10 @@ et humeur du marché expliquée en mots simples. Indépendant du site Escale (do
 
 Aucune clé API ni compilation : ouvrir `index.html`, ou publier le dossier `finance/` tel quel
 (Cloudflare Pages, Netlify « glisser-déposer », GitHub Pages…). Données rafraîchies toutes les 5 minutes.
+
+## Mise en ligne sur Cloudflare (gratuit)
+
+Le dossier contient `wrangler.jsonc` (Worker `marche-facile`, fichiers statiques seulement).
+Cloudflare > Workers & Pages > Créer > Importer un dépôt Git > `escale-voyage`,
+puis **Dossier racine (Root directory) : `finance`**, commande de déploiement `npx wrangler deploy`.
+Adresse obtenue : `https://marche-facile.<votre-sous-domaine>.workers.dev`.
