@@ -168,6 +168,8 @@ HOTELS = [
      "Le nouvel aéroport d'Istanbul est loin du centre : comptez au moins une heure de trajet.", "IST"),
     ("Montréal", "Canada", [("Centre-ville", "proche de tout, métro"), ("Plateau-Mont-Royal", "quartier vivant, appartements"), ("Vieux-Montréal", "charme historique, plus cher")],
      "L'hiver (janvier-mars) est la saison la moins chère pour les hôtels, sauf pendant les festivals.", "YUL"),
+    ("Accra", "Ghana", [("Osu", "animé, restaurants et commerces"), ("Airport Residential Area", "proche de l'aéroport, hôtels d'affaires"), ("East Legon", "résidentiel, plus calme")],
+     "L'aéroport de Kotoka est en ville : un hôtel à Osu ou près de l'aéroport limite les trajets, souvent ralentis par les embouteillages.", "ACC"),
 ]
 
 def hotel_slug(h):

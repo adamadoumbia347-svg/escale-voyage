@@ -1,15 +1,15 @@
 {
 "/": [
-"f9d33b4c81910b3a",
-"2026-10-18"
+"31ac64596a64b288",
+"2026-10-19"
 ],
 "/a-propos/": [
 "acfc699a7c1dbdd6",
 "2026-10-18"
 ],
 "/ar/": [
-"a2793309631617ad",
-"2026-10-18"
+"8f722e3fc8975103",
+"2026-10-19"
 ],
 "/ar/about/": [
 "6eaf931989f53182",
@@ -40,8 +40,8 @@
 "2026-10-18"
 ],
 "/ar/flights-brussels-accra/": [
-"e4c82afeeb0b8882",
-"2026-10-18"
+"be507b7b1250b481",
+"2026-10-19"
 ],
 "/ar/flights-brussels-algiers/": [
 "cb46d5b8217eb1d9",
@@ -192,8 +192,8 @@
 "2026-10-18"
 ],
 "/ar/flights-lisbon-accra/": [
-"eafa874b8ebdee25",
-"2026-10-18"
+"2cb635de3a00c381",
+"2026-10-19"
 ],
 "/ar/flights-lisbon-bissau/": [
 "70b625b83e249a37",
@@ -228,8 +228,8 @@
 "2026-10-18"
 ],
 "/ar/flights-london-accra/": [
-"71039d7ac0ad7e86",
-"2026-10-18"
+"b36ad55865347f68",
+"2026-10-19"
 ],
 "/ar/flights-london-addis-ababa/": [
 "b7292133aa9ae6f5",
@@ -480,8 +480,8 @@
 "2026-10-18"
 ],
 "/ar/flights-new-york-accra/": [
-"aa63c1f6fce25de2",
-"2026-10-18"
+"3ad04e87cbe5b9c1",
+"2026-10-19"
 ],
 "/ar/flights-new-york-addis-ababa/": [
 "992e9685914ba9a2",
@@ -528,8 +528,8 @@
 "2026-10-18"
 ],
 "/ar/flights-paris-accra/": [
-"71e56172c4383896",
-"2026-10-18"
+"a175b5d3e6360aa3",
+"2026-10-19"
 ],
 "/ar/flights-paris-addis-ababa/": [
 "a56a6961f37c0cb1",
@@ -808,68 +808,72 @@
 "2026-10-18"
 ],
 "/ar/hotels-abidjan/": [
-"b4c7b0c1494235d6",
-"2026-10-18"
+"b64d99c9d638518c",
+"2026-10-19"
+],
+"/ar/hotels-accra/": [
+"39ea975089d5a630",
+"2026-10-19"
 ],
 "/ar/hotels-algiers/": [
-"d30852b7305e9e47",
-"2026-10-18"
+"3e0463f92df89a5d",
+"2026-10-19"
 ],
 "/ar/hotels-bamako/": [
-"64f2449a7ab6f428",
-"2026-10-18"
+"45d691b3dc027b23",
+"2026-10-19"
 ],
 "/ar/hotels-casablanca/": [
-"cb91be63f8de62d6",
-"2026-10-18"
+"867d377576037377",
+"2026-10-19"
 ],
 "/ar/hotels-conakry/": [
-"067ecaf3b2164bd1",
-"2026-10-18"
+"96b7b88aa05d6d61",
+"2026-10-19"
 ],
 "/ar/hotels-cotonou/": [
-"b8a661347e2791b2",
-"2026-10-18"
+"bd36de954b6f8fc7",
+"2026-10-19"
 ],
 "/ar/hotels-dakar/": [
-"4752a8f599619f04",
-"2026-10-18"
+"c18f5f65cb9ff7a7",
+"2026-10-19"
 ],
 "/ar/hotels-douala/": [
-"c49560c0ddf0b2d0",
-"2026-10-18"
+"154ffcd6fa9a86d8",
+"2026-10-19"
 ],
 "/ar/hotels-dubai/": [
-"3766bfca8bd0a2a2",
-"2026-10-18"
+"a9f6d81be69219ad",
+"2026-10-19"
 ],
 "/ar/hotels-istanbul/": [
-"aeeab51aa24d414a",
-"2026-10-18"
+"b36960e4a6d0164a",
+"2026-10-19"
 ],
 "/ar/hotels-kinshasa/": [
-"782a63d64fc43d3f",
-"2026-10-18"
+"e34e442069f54231",
+"2026-10-19"
 ],
 "/ar/hotels-lome/": [
-"f04fc8dc511fa4bb",
-"2026-10-18"
+"ca331da34b953d40",
+"2026-10-19"
 ],
 "/ar/hotels-marrakesh/": [
-"4e0e38f7449b79a0",
-"2026-10-18"
+"2d4afd523afda443",
+"2026-10-19"
 ],
 "/ar/hotels-montreal/": [
-"3ee8c5cc6d1ffbf7",
-"2026-10-18"
+"5433c146957b2074",
+"2026-10-19"
 ],
 "/ar/hotels-paris/": [
-"a325e1fb332b9009",
-"2026-10-18"
+"cde1ef7bdf2f410e",
+"2026-10-19"
 ],
 "/ar/hotels-tunis/": [
-"b6c841e7d0f9db2a",
-"2026-10-18"
+"b33b81a3d04bf51b",
+"2026-10-19"
 ],
 "/bons-plans/": [
 "e03551c5eea3e754",
@@ -884,76 +888,80 @@
 "2026-10-18"
 ],
 "/en/": [
-"0bd5abf2d42dca21",
-"2026-10-18"
+"ce2d7f3d6f7995fb",
+"2026-10-19"
 ],
 "/en/about/": [
 "31f531f24c250756",
 "2026-10-18"
 ],
 "/en/cheap-hotels-abidjan/": [
-"c7a3cd89c42ed3b4",
-"2026-10-18"
+"f202dfefc8935abe",
+"2026-10-19"
+],
+"/en/cheap-hotels-accra/": [
+"3f0ee93ca54584d5",
+"2026-10-19"
 ],
 "/en/cheap-hotels-algiers/": [
-"44769cf225330211",
-"2026-10-18"
+"38451106f54bb355",
+"2026-10-19"
 ],
 "/en/cheap-hotels-bamako/": [
-"ee300d256c3b9ea4",
-"2026-10-18"
+"f53296b6b88dd01d",
+"2026-10-19"
 ],
 "/en/cheap-hotels-casablanca/": [
-"3c4956939b0a5ed6",
-"2026-10-18"
+"efc5b90be04ef663",
+"2026-10-19"
 ],
 "/en/cheap-hotels-conakry/": [
-"558e6617fc045088",
-"2026-10-18"
+"7d4dd43fd24b1757",
+"2026-10-19"
 ],
 "/en/cheap-hotels-cotonou/": [
-"b13c5e6c712a69b7",
-"2026-10-18"
+"bd082ec1892e7a26",
+"2026-10-19"
 ],
 "/en/cheap-hotels-dakar/": [
-"8449632daa81505d",
-"2026-10-18"
+"521398a6d2b625dc",
+"2026-10-19"
 ],
 "/en/cheap-hotels-douala/": [
-"38c8b9ae319249f4",
-"2026-10-18"
+"37c374a139af126c",
+"2026-10-19"
 ],
 "/en/cheap-hotels-dubai/": [
-"04d4715b38cce503",
-"2026-10-18"
+"0bb076b0b58974a9",
+"2026-10-19"
 ],
 "/en/cheap-hotels-istanbul/": [
-"b08de8fb8020eb9e",
-"2026-10-18"
+"847a24a00f675980",
+"2026-10-19"
 ],
 "/en/cheap-hotels-kinshasa/": [
-"5571268175448d8c",
-"2026-10-18"
+"6ea9198d8df3a58b",
+"2026-10-19"
 ],
 "/en/cheap-hotels-lome/": [
-"b4368efdd895af0a",
-"2026-10-18"
+"89685e01e6c28800",
+"2026-10-19"
 ],
 "/en/cheap-hotels-marrakesh/": [
-"605c7aeb16d7cd0a",
-"2026-10-18"
+"710eed83a0397be9",
+"2026-10-19"
 ],
 "/en/cheap-hotels-montreal/": [
-"d0e59697ee349836",
-"2026-10-18"
+"748df483e44a4644",
+"2026-10-19"
 ],
 "/en/cheap-hotels-paris/": [
-"33cff3103eed4204",
-"2026-10-18"
+"73b75b74015dd5e2",
+"2026-10-19"
 ],
 "/en/cheap-hotels-tunis/": [
-"11154f2ae3bd4634",
-"2026-10-18"
+"42357020c1318e65",
+"2026-10-19"
 ],
 "/en/deals/": [
 "855b57db4ebe9e9e",
@@ -980,8 +988,8 @@
 "2026-10-18"
 ],
 "/en/flights-brussels-accra/": [
-"cba39b24862abf61",
-"2026-10-18"
+"8cdfffa6daccb838",
+"2026-10-19"
 ],
 "/en/flights-brussels-algiers/": [
 "d3d05e2aeb66370d",
@@ -1128,8 +1136,8 @@
 "2026-10-18"
 ],
 "/en/flights-lisbon-accra/": [
-"923e1c168a82acdd",
-"2026-10-18"
+"6059c2c2cfee4825",
+"2026-10-19"
 ],
 "/en/flights-lisbon-bissau/": [
 "88ed8b3945d1084a",
@@ -1164,8 +1172,8 @@
 "2026-10-18"
 ],
 "/en/flights-london-accra/": [
-"2fc5cff0fc1605fd",
-"2026-10-18"
+"3e49a2740548ecce",
+"2026-10-19"
 ],
 "/en/flights-london-addis-ababa/": [
 "14e6af7164f3c604",
@@ -1416,8 +1424,8 @@
 "2026-10-18"
 ],
 "/en/flights-new-york-accra/": [
-"814c81518c3df928",
-"2026-10-18"
+"4606016fa88ef714",
+"2026-10-19"
 ],
 "/en/flights-new-york-addis-ababa/": [
 "7881340b87580bba",
@@ -1464,8 +1472,8 @@
 "2026-10-18"
 ],
 "/en/flights-paris-accra/": [
-"5a05f878b6fd7522",
-"2026-10-18"
+"b144db1286011e86",
+"2026-10-19"
 ],
 "/en/flights-paris-addis-ababa/": [
 "8fc170a0bf02883b",
@@ -1748,8 +1756,8 @@
 "2026-10-18"
 ],
 "/es/": [
-"bf8002b6aaf998d7",
-"2026-10-18"
+"5991b9506f5a06be",
+"2026-10-19"
 ],
 "/es/acerca-de/": [
 "76e9b97982c2dcca",
@@ -1776,68 +1784,72 @@
 "2026-10-18"
 ],
 "/es/hoteles-baratos-abiyan/": [
-"e646fe4d9d6f202b",
-"2026-10-18"
+"afd93dd912c82c28",
+"2026-10-19"
+],
+"/es/hoteles-baratos-acra/": [
+"ca72e8d72666fbc9",
+"2026-10-19"
 ],
 "/es/hoteles-baratos-argel/": [
-"e008f7765ce95a1b",
-"2026-10-18"
+"237cbe0b2ae85bd9",
+"2026-10-19"
 ],
 "/es/hoteles-baratos-bamako/": [
-"20c22d0450e3de02",
-"2026-10-18"
+"6f66942d4769d438",
+"2026-10-19"
 ],
 "/es/hoteles-baratos-casablanca/": [
-"d046eb002c607f88",
-"2026-10-18"
+"0f8e27978491b36d",
+"2026-10-19"
 ],
 "/es/hoteles-baratos-conakri/": [
-"29386cd83d0cc23c",
-"2026-10-18"
+"fbfc83cd9d69a344",
+"2026-10-19"
 ],
 "/es/hoteles-baratos-cotonu/": [
-"cb92f22d5b520634",
-"2026-10-18"
+"8e7044dcfa02f7f1",
+"2026-10-19"
 ],
 "/es/hoteles-baratos-dakar/": [
-"ccc5da93d56264a1",
-"2026-10-18"
+"169fa0bc38c79464",
+"2026-10-19"
 ],
 "/es/hoteles-baratos-duala/": [
-"3921a2988ed49fd6",
-"2026-10-18"
+"c8b839a33d8e2f77",
+"2026-10-19"
 ],
 "/es/hoteles-baratos-dubai/": [
-"765a62a418db6778",
-"2026-10-18"
+"2219229827b76ae8",
+"2026-10-19"
 ],
 "/es/hoteles-baratos-estambul/": [
-"3ac8da706b204e0b",
-"2026-10-18"
+"1512ad1f50f4c41a",
+"2026-10-19"
 ],
 "/es/hoteles-baratos-kinsasa/": [
-"f5b08937e65fd208",
-"2026-10-18"
+"e926746a9c6cadec",
+"2026-10-19"
 ],
 "/es/hoteles-baratos-lome/": [
-"a4fa5b531aaf22e7",
-"2026-10-18"
+"9fb6a4a96315552f",
+"2026-10-19"
 ],
 "/es/hoteles-baratos-marrakech/": [
-"8f8ee0d750ca7398",
-"2026-10-18"
+"740504f44df6feb5",
+"2026-10-19"
 ],
 "/es/hoteles-baratos-montreal/": [
-"7342d8ac208c7d28",
-"2026-10-18"
+"73a220de85bf1251",
+"2026-10-19"
 ],
 "/es/hoteles-baratos-paris/": [
-"270d167ef53f9495",
-"2026-10-18"
+"0f74cad9017d39b8",
+"2026-10-19"
 ],
 "/es/hoteles-baratos-tunez/": [
-"ab762edcd29fdc76",
-"2026-10-18"
+"4e3ebf03207e304e",
+"2026-10-19"
 ],
 "/es/ofertas/": [
 "eb151c38b8faa1f7",
@@ -1848,8 +1860,8 @@
 "2026-10-18"
 ],
 "/es/vuelos-bruselas-acra/": [
-"916ea96b26a3ef62",
-"2026-10-18"
+"ad6d2d326378ba61",
+"2026-10-19"
 ],
 "/es/vuelos-bruselas-argel/": [
 "b8bd992e6e532217",
@@ -2012,8 +2024,8 @@
 "2026-10-18"
 ],
 "/es/vuelos-lisboa-acra/": [
-"d63f8d70bcc46d71",
-"2026-10-18"
+"b2c99601452f509d",
+"2026-10-19"
 ],
 "/es/vuelos-lisboa-bisau/": [
 "a3ac508694b6bb3b",
@@ -2048,8 +2060,8 @@
 "2026-10-18"
 ],
 "/es/vuelos-londres-acra/": [
-"81ace6799e44bde1",
-"2026-10-18"
+"7a0019eaa1297bc6",
+"2026-10-19"
 ],
 "/es/vuelos-londres-adis-abeba/": [
 "9638c1abe2b4184b",
@@ -2320,8 +2332,8 @@
 "2026-10-18"
 ],
 "/es/vuelos-nueva-york-acra/": [
-"6eaff7a89f9bab60",
-"2026-10-18"
+"1fd5b300c208111d",
+"2026-10-19"
 ],
 "/es/vuelos-nueva-york-adis-abeba/": [
 "f066d4c85576037f",
@@ -2352,8 +2364,8 @@
 "2026-10-18"
 ],
 "/es/vuelos-paris-acra/": [
-"d5a0ed5fcbb3dd66",
-"2026-10-18"
+"2eeb26193b8fcab5",
+"2026-10-19"
 ],
 "/es/vuelos-paris-adis-abeba/": [
 "9d6295f1e249fd95",
@@ -2632,76 +2644,80 @@
 "2026-10-18"
 ],
 "/hotel-pas-cher-abidjan/": [
-"2aa6c75f3a3b11a9",
-"2026-10-18"
+"e227a93a41ed6d57",
+"2026-10-19"
+],
+"/hotel-pas-cher-accra/": [
+"5654fb3318fe62fd",
+"2026-10-19"
 ],
 "/hotel-pas-cher-alger/": [
-"c55a3f63d0b577d4",
-"2026-10-18"
+"7759a39b8c022a0b",
+"2026-10-19"
 ],
 "/hotel-pas-cher-bamako/": [
-"1d58cd6d791ad55c",
-"2026-10-18"
+"8caf1d1e8185b3ef",
+"2026-10-19"
 ],
 "/hotel-pas-cher-casablanca/": [
-"f277d3c6d0806ffd",
-"2026-10-18"
+"de9b60014c8d1dfb",
+"2026-10-19"
 ],
 "/hotel-pas-cher-conakry/": [
-"11fb7f359d875928",
-"2026-10-18"
+"43d6d81a1853f870",
+"2026-10-19"
 ],
 "/hotel-pas-cher-cotonou/": [
-"9e936f1c223a7cf7",
-"2026-10-18"
+"37429aca82d01ed6",
+"2026-10-19"
 ],
 "/hotel-pas-cher-dakar/": [
-"7f040c2ada037ca2",
-"2026-10-18"
+"c1b9b4d0ac0a0935",
+"2026-10-19"
 ],
 "/hotel-pas-cher-douala/": [
-"531e89133c573467",
-"2026-10-18"
+"9074e63ebd2cbe25",
+"2026-10-19"
 ],
 "/hotel-pas-cher-dubai/": [
-"3e255a794b8f11d1",
-"2026-10-18"
+"8df82e4ce5274676",
+"2026-10-19"
 ],
 "/hotel-pas-cher-istanbul/": [
-"c23ccb51e4c9d56c",
-"2026-10-18"
+"3770228daa7fd537",
+"2026-10-19"
 ],
 "/hotel-pas-cher-kinshasa/": [
-"52b97b64b4164594",
-"2026-10-18"
+"0463c47d58b1dc1f",
+"2026-10-19"
 ],
 "/hotel-pas-cher-lome/": [
-"3abb3612be4d7c7c",
-"2026-10-18"
+"ee25b86534dbff28",
+"2026-10-19"
 ],
 "/hotel-pas-cher-marrakech/": [
-"1203c290ea3d26ea",
-"2026-10-18"
+"d817db943b88007d",
+"2026-10-19"
 ],
 "/hotel-pas-cher-montreal/": [
-"fcae0a26db83c22d",
-"2026-10-18"
+"3a84260bb3d0777b",
+"2026-10-19"
 ],
 "/hotel-pas-cher-paris/": [
-"2c1799c67a9200cc",
-"2026-10-18"
+"a6078aa66b8e9d15",
+"2026-10-19"
 ],
 "/hotel-pas-cher-tunis/": [
-"7eae65642c38fa32",
-"2026-10-18"
+"492c2cba5d892a73",
+"2026-10-19"
 ],
 "/mentions-legales/": [
 "7ef2eb0379418aac",
 "2026-10-18"
 ],
 "/pt/": [
-"7db4c5c2a2d7a4bf",
-"2026-10-18"
+"bebc72e7c3f901d3",
+"2026-10-19"
 ],
 "/pt/guias/": [
 "c21dca22f025c43f",
@@ -2724,68 +2740,72 @@
 "2026-10-18"
 ],
 "/pt/hoteis-baratos-abidjan/": [
-"4375fd89faf4c853",
-"2026-10-18"
+"e69d54574233e0ae",
+"2026-10-19"
+],
+"/pt/hoteis-baratos-acra/": [
+"ac733bd7cf90fa16",
+"2026-10-19"
 ],
 "/pt/hoteis-baratos-argel/": [
-"965ca53c4061443a",
-"2026-10-18"
+"a91ba15c0dcbaea4",
+"2026-10-19"
 ],
 "/pt/hoteis-baratos-bamako/": [
-"9c22d78ee9e72b15",
-"2026-10-18"
+"3dcfff533a519746",
+"2026-10-19"
 ],
 "/pt/hoteis-baratos-casablanca/": [
-"d911ab7dce3b04f4",
-"2026-10-18"
+"05e9f1b7fb30d91a",
+"2026-10-19"
 ],
 "/pt/hoteis-baratos-conacri/": [
-"24dead84cae9900b",
-"2026-10-18"
+"5470b197d86a55fd",
+"2026-10-19"
 ],
 "/pt/hoteis-baratos-cotonou/": [
-"4f0de28ac0db4486",
-"2026-10-18"
+"99ad567ede5e46d7",
+"2026-10-19"
 ],
 "/pt/hoteis-baratos-dacar/": [
-"dbbbe238f2c75e41",
-"2026-10-18"
+"0a5cdd303f69a595",
+"2026-10-19"
 ],
 "/pt/hoteis-baratos-douala/": [
-"c2791b740080dc87",
-"2026-10-18"
+"239be15823b7799c",
+"2026-10-19"
 ],
 "/pt/hoteis-baratos-dubai/": [
-"ccd077042e90af1b",
-"2026-10-18"
+"4095da3e73419a44",
+"2026-10-19"
 ],
 "/pt/hoteis-baratos-istambul/": [
-"e1c353e308973232",
-"2026-10-18"
+"e0683016b8e57853",
+"2026-10-19"
 ],
 "/pt/hoteis-baratos-kinshasa/": [
-"260a0a510c51b2e2",
-"2026-10-18"
+"aa7b39bec149cac3",
+"2026-10-19"
 ],
 "/pt/hoteis-baratos-lome/": [
-"6d5e2c1fd8fa5af2",
-"2026-10-18"
+"5c4c66c868ff71ae",
+"2026-10-19"
 ],
 "/pt/hoteis-baratos-marraquexe/": [
-"bb84f62259842cb1",
-"2026-10-18"
+"94a6cf8094653484",
+"2026-10-19"
 ],
 "/pt/hoteis-baratos-montreal/": [
-"2c02113e424189f4",
-"2026-10-18"
+"ebbe9b1e3f5b1540",
+"2026-10-19"
 ],
 "/pt/hoteis-baratos-paris/": [
-"db34cfd0c74df082",
-"2026-10-18"
+"39f958078e91a044",
+"2026-10-19"
 ],
 "/pt/hoteis-baratos-tunis/": [
-"4071b9852b197869",
-"2026-10-18"
+"e9c40075e9d0df4f",
+"2026-10-19"
 ],
 "/pt/promocoes/": [
 "3280f9a75a6d040e",
@@ -2816,8 +2836,8 @@
 "2026-10-18"
 ],
 "/pt/voos-bruxelas-acra/": [
-"e5fcc56a86a80282",
-"2026-10-18"
+"6c317171fbfe773a",
+"2026-10-19"
 ],
 "/pt/voos-bruxelas-argel/": [
 "3a3026b7aed07683",
@@ -2968,8 +2988,8 @@
 "2026-10-18"
 ],
 "/pt/voos-lisboa-acra/": [
-"9c90d305728b5c9c",
-"2026-10-18"
+"84dc947e75c3b228",
+"2026-10-19"
 ],
 "/pt/voos-lisboa-bissau/": [
 "1be9601efa94646c",
@@ -3004,8 +3024,8 @@
 "2026-10-18"
 ],
 "/pt/voos-londres-acra/": [
-"db31b6c767918838",
-"2026-10-18"
+"ca62bf6959ec90b5",
+"2026-10-19"
 ],
 "/pt/voos-londres-adis-abeba/": [
 "c54826c0a11b2813",
@@ -3276,8 +3296,8 @@
 "2026-10-18"
 ],
 "/pt/voos-nova-iorque-acra/": [
-"111604be45d93ccd",
-"2026-10-18"
+"eb9460869c1b6e06",
+"2026-10-19"
 ],
 "/pt/voos-nova-iorque-adis-abeba/": [
 "903d32f3a2e93061",
@@ -3308,8 +3328,8 @@
 "2026-10-18"
 ],
 "/pt/voos-paris-acra/": [
-"c863b02f67cbcde5",
-"2026-10-18"
+"c1c0fbcb8b257a21",
+"2026-10-19"
 ],
 "/pt/voos-paris-adis-abeba/": [
 "4458700321e38156",
@@ -3584,8 +3604,8 @@
 "2026-10-18"
 ],
 "/vol-bruxelles-accra/": [
-"9dc365f2e10b8601",
-"2026-10-18"
+"1a417b5bb8c3080d",
+"2026-10-19"
 ],
 "/vol-bruxelles-alger/": [
 "7d9a373be785c4cf",
@@ -3724,8 +3744,8 @@
 "2026-10-18"
 ],
 "/vol-lisbonne-accra/": [
-"0608a8d858162ea7",
-"2026-10-18"
+"10d9cfd4439230b7",
+"2026-10-19"
 ],
 "/vol-lisbonne-bissau/": [
 "9eca783ab0e1f0a5",
@@ -3760,8 +3780,8 @@
 "2026-10-18"
 ],
 "/vol-londres-accra/": [
-"8530ffbba858ab31",
-"2026-10-18"
+"e95921d27acc7d79",
+"2026-10-19"
 ],
 "/vol-londres-addis-abeba/": [
 "ef4e1d56e02cad23",
@@ -4012,8 +4032,8 @@
 "2026-10-18"
 ],
 "/vol-new-york-accra/": [
-"769876d8dd8b0e9f",
-"2026-10-18"
+"5b961f466022bdd2",
+"2026-10-19"
 ],
 "/vol-new-york-addis-abeba/": [
 "99c0bd5bd7700529",
@@ -4060,8 +4080,8 @@
 "2026-10-18"
 ],
 "/vol-paris-accra/": [
-"5690ce75d81a6be8",
-"2026-10-18"
+"1862a2c7f445ad29",
+"2026-10-19"
 ],
 "/vol-paris-addis-abeba/": [
 "37fc3f04aab67f68",
@@ -4332,7 +4352,7 @@
 "2026-10-18"
 ],
 "/widget/": [
-"74b2e7bb5512c988",
-"2026-10-18"
+"fa980e23143b2ac6",
+"2026-10-19"
 ]
 }

@@ -354,6 +354,11 @@ HOTEL_TIPS = {
         "El invierno (enero-marzo) es la temporada más barata para los hoteles, salvo durante los festivales.",
         "O inverno (janeiro-março) é a época mais barata para hotéis, exceto durante os festivais.",
         "الشتاء (يناير–مارس) أرخص موسم للفنادق، إلا خلال المهرجانات."),
+    "Accra": (
+        "Kotoka airport is inside the city: a hotel in Osu or near the airport keeps journeys short, as traffic jams often slow them down.",
+        "El aeropuerto de Kotoka está dentro de la ciudad: un hotel en Osu o cerca del aeropuerto acorta los trayectos, a menudo frenados por los atascos.",
+        "O aeroporto de Kotoka fica dentro da cidade: um hotel em Osu ou perto do aeroporto encurta as deslocações, muitas vezes atrasadas pelo trânsito.",
+        "مطار كوتوكا داخل المدينة: الإقامة في أوسو أو قرب المطار تختصر التنقلات التي تبطئها الاختناقات المرورية غالبًا."),
 }
 
 AREAS = {
@@ -404,4 +409,5 @@ AREAS = {
     "proche de tout, métro": ("close to everything, metro", "cerca de todo, metro", "perto de tudo, metro", "قريب من كل شيء، مترو"),
     "quartier vivant, appartements": ("lively area, apartments", "barrio animado, apartamentos", "bairro animado, apartamentos", "حي حيوي، شقق"),
     "charme historique, plus cher": ("historic charm, more expensive", "encanto histórico, más caro", "charme histórico, mais caro", "طابع تاريخي، أغلى"),
+    "animé, restaurants et commerces": ("lively, restaurants and shops", "animado, restaurantes y comercios", "animado, restaurantes e comércio", "حيوي، مطاعم ومتاجر"),
 }
