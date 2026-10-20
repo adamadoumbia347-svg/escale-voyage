@@ -15,10 +15,16 @@
 </script>
 <script src="/consent.js" defer></script>
 <!-- TRAVELPAYOUTS:END -->
-<title>Escale Comparateur</title>
+<title>Escale | Comparateur de vols pas chers, hôtels et voitures</title>
 <meta name="description" content="Vols les moins chers, hôtels et locations de voitures en une seule recherche : Skyscanner, Kayak, Booking, Agoda et plus. Gratuit, sans inscription.">
 <meta name="keywords" content="vol pas cher, billet d'avion, comparateur de vols, hôtel pas cher, location voiture, Paris Bamako, Paris Dakar, Paris Abidjan">
 <link rel="canonical" href="https://escale.live/">
+<link rel="alternate" hreflang="fr" href="https://escale.live/">
+<link rel="alternate" hreflang="en" href="https://escale.live/en/">
+<link rel="alternate" hreflang="es" href="https://escale.live/es/">
+<link rel="alternate" hreflang="pt" href="https://escale.live/pt/">
+<link rel="alternate" hreflang="ar" href="https://escale.live/ar/">
+<link rel="alternate" hreflang="x-default" href="https://escale.live/">
 <meta property="og:url" content="https://escale.live/">
 <meta name="theme-color" content="#18202c">
 <script>try{var t=localStorage.getItem("escale.theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}</script>
@@ -43,6 +49,11 @@
 <link rel="preload" href="/fonts/bricolage-grotesque-latin-40c2cb.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/fonts/fonts.css">
 <style>
+/* Polices de secours calibrées (mêmes largeurs et hauteurs que les polices du site) : rien ne bouge quand les polices arrivent */
+@font-face { font-family: "Instrument Fallback"; font-weight: 100 500; src: local("Arial"), local("ArialMT"), local("Helvetica"), local("Roboto"), local("Liberation Sans"); size-adjust: 101.5%; ascent-override: 95.6%; descent-override: 24.6%; line-gap-override: 0%; }
+@font-face { font-family: "Instrument Fallback"; font-weight: 600 900; src: local("Arial Bold"), local("Arial-BoldMT"), local("Helvetica Bold"), local("Helvetica-Bold"), local("Roboto Bold"), local("Roboto-Bold"), local("Liberation Sans Bold"); size-adjust: 98%; ascent-override: 99%; descent-override: 25.5%; line-gap-override: 0%; }
+@font-face { font-family: "Bricolage Fallback"; font-weight: 100 600; src: local("Arial"), local("ArialMT"), local("Helvetica"), local("Roboto"), local("Liberation Sans"); size-adjust: 106%; ascent-override: 87.7%; descent-override: 25.5%; line-gap-override: 0%; }
+@font-face { font-family: "Bricolage Fallback"; font-weight: 700 900; src: local("Arial Bold"), local("Arial-BoldMT"), local("Helvetica Bold"), local("Helvetica-Bold"), local("Roboto Bold"), local("Roboto-Bold"), local("Liberation Sans Bold"); size-adjust: 100.5%; ascent-override: 92.5%; descent-override: 26.9%; line-gap-override: 0%; }
 /* Layout: signage band (departure-board header) over a single working column; form card, then result rows like a ticket list. */
 :root {
   --bg: #f3f5f8;
@@ -59,8 +70,8 @@
   --ok: #146c45;
   --warn: #9a5b00;
   --focus: #0b5cd6;
-  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  --f-body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --f-display: "Bricolage Grotesque", "Bricolage Fallback", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Instrument Sans", "Instrument Fallback", "Segoe UI", system-ui, sans-serif;
   --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --r: 10px;
 }
@@ -91,7 +102,7 @@ a { color: var(--accent); }
 .brand { display: flex; align-items: center; gap: 12px; }
 .brand-mark { background: var(--sign); color: var(--sign-ink); font: 800 20px/1 var(--f-display); padding: 8px 10px; border-radius: 6px; letter-spacing: .02em; }
 .brand-name { font: 700 22px/1 var(--f-display); letter-spacing: .01em; }
-.board h1 { font: 800 clamp(30px, 6vw, 52px)/1.05 var(--f-display); margin: 28px 0 10px; text-wrap: balance; max-width: 18ch; }
+.board h1 { font: 800 clamp(30px, 6vw, 52px)/1.05 var(--f-display); margin: 28px 0 10px; text-wrap: balance; max-width: 11.85em; }
 .board h1 em { font-style: normal; color: var(--sign); }
 .board p { color: color-mix(in srgb, var(--board-ink) 75%, transparent); max-width: 60ch; margin: 0; }
 .ticker { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 22px; font: 700 13px/1 var(--f-mono); }
@@ -215,7 +226,7 @@ section.block h2 { font: 700 24px/1.2 var(--f-display); margin: 0 0 14px; text-w
 /* Panneau d'affichage façon aéroport (lettres qui basculent) */
 .flap-board { display: inline-flex; align-items: center; gap: 12px; margin-top: 22px; background: color-mix(in srgb, #000 35%, var(--board)); border-radius: 8px; padding: 8px 12px; max-width: 100%; overflow: hidden; }
 .flap-label { font: 600 11px/1 var(--f-body); text-transform: uppercase; letter-spacing: .12em; color: var(--sign); }
-.flap { display: inline-flex; gap: 2px; font: 700 clamp(14px, 3.2vw, 18px)/1 var(--f-mono); }
+.flap { display: inline-flex; gap: 2px; font: 700 clamp(14px, 3.2vw, 18px)/1 var(--f-mono); min-height: calc(1em + 10px); }
 .flap i { font-style: normal; display: inline-block; min-width: .78em; text-align: center; padding: 5px 1px; border-radius: 3px; background: color-mix(in srgb, var(--board-ink) 9%, transparent); color: var(--board-ink); }
 .flap i.sp { background: transparent; }
 .flap i.hl { color: var(--sign); }

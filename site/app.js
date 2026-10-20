@@ -81,8 +81,17 @@
     SN: "XOF", ML: "XOF", CI: "XOF", BF: "XOF", NE: "XOF", TG: "XOF", BJ: "XOF", GW: "XOF" };
   let CUR = store.get("escale.cur") || "EUR";
   if (!CURRENCIES.includes(CUR)) CUR = "EUR";
+  // Les formateurs Intl coûtent cher à créer : on les garde en mémoire (par langue et options)
+  const intlCache = new Map();
+  const intl = (Kind, loc, opts) => {
+    const k = Kind.name + loc + JSON.stringify(opts);
+    let f = intlCache.get(k);
+    if (!f) intlCache.set(k, (f = new Kind(loc, opts)));
+    return f;
+  };
+  const dateFmt = (d, opts) => intl(Intl.DateTimeFormat, locale(), opts).format(d);
   const money = (n, cur) => {
-    try { return new Intl.NumberFormat(locale(), { style: "currency", currency: cur || CUR, currencyDisplay: "narrowSymbol", maximumFractionDigits: 0 }).format(n); }
+    try { return intl(Intl.NumberFormat, locale(), { style: "currency", currency: cur || CUR, currencyDisplay: "narrowSymbol", maximumFractionDigits: 0 }).format(n); }
     catch (e) { return Math.round(n) + " " + (cur || CUR); }
   };
 
@@ -240,8 +249,8 @@
   const addDays = (s, n) => { const d = parse(s); d.setDate(d.getDate() + n); return iso(d); };
   const today = iso(new Date());
   const nights = (a, b) => Math.round((parse(b) - parse(a)) / 86400000);
-  const human = (s) => parse(s).toLocaleDateString(locale(), { weekday: "short", day: "numeric", month: "short" });
-  const short = (s) => parse(s).toLocaleDateString(locale(), { day: "numeric", month: "short" });
+  const human = (s) => dateFmt(parse(s), { weekday: "short", day: "numeric", month: "short" });
+  const short = (s) => dateFmt(parse(s), { day: "numeric", month: "short" });
   const yymmdd = (s) => s.slice(2).replace(/-/g, "");
 
   [["f-dep", 21], ["f-ret", 28], ["h-in", 21], ["h-out", 25], ["c-d1", 21], ["c-d2", 28]].forEach(([id, n]) => {
@@ -251,7 +260,7 @@
   function paintMonthOptions() {
     const keep = $("f-month").value, keepStay = $("f-stay").value || "7";
     $("f-month").innerHTML = Array.from({ length: 12 }, (_, i) => { const d = new Date(); d.setDate(1); d.setMonth(d.getMonth() + i); return iso(d).slice(0, 7); })
-      .map((m) => `<option value="${m}">${esc(parse(m + "-01").toLocaleDateString(locale(), { month: "long", year: "numeric" }))}</option>`).join("");
+      .map((m) => `<option value="${m}">${esc(dateFmt(parse(m + "-01"), { month: "long", year: "numeric" }))}</option>`).join("");
     if (keep) $("f-month").value = keep; else $("f-month").selectedIndex = 1;
     $("f-stay").innerHTML = [3, 5, 7, 10, 14, 21, 28].map((n) => `<option value="${n}">${esc(fmt(T("{n} nuits", "{n} nights"), { n }))}</option>`).join("");
     $("f-stay").value = keepStay;
@@ -629,7 +638,7 @@
   let monthReq = 0;
   function renderMonth(s) {
     const d = D(), [y, mo] = s.month.split("-").map(Number);
-    const monthName = parse(s.month + "-01").toLocaleDateString(locale(), { month: "long", year: "numeric" });
+    const monthName = dateFmt(parse(s.month + "-01"), { month: "long", year: "numeric" });
     const yymm = s.month.slice(2).replace("-", "");
     const retMonth = (() => { const x = new Date(y, mo - 1, 1); x.setDate(x.getDate() + 32); return iso(x).slice(2, 7).replace("-", ""); })();
     const sky = `https://${d.sky}/${s.from.code.toLowerCase()}/${s.to.code.toLowerCase()}/${yymm}/` + (s.ow ? "" : `${s.stay > 20 ? retMonth : yymm}/`) + "?" + q({ adultsv2: s.adults, rtn: s.ow ? 0 : 1 });
@@ -649,7 +658,7 @@
       const prices = keys.map((k) => days[k].price), min = Math.min(...prices), max = Math.max(...prices);
       const first = new Date(y, mo - 1, 1), nDays = new Date(y, mo, 0).getDate(), offset = (first.getDay() + 6) % 7;
       const cells = [];
-      for (let i = 0; i < 7; i++) cells.push(`<span class="cal-head" aria-hidden="true">${esc(new Date(2024, 0, 1 + i).toLocaleDateString(locale(), { weekday: "narrow" }))}</span>`);
+      for (let i = 0; i < 7; i++) cells.push(`<span class="cal-head" aria-hidden="true">${esc(dateFmt(new Date(2024, 0, 1 + i), { weekday: "narrow" }))}</span>`);
       for (let k = 0; k < offset; k++) cells.push("<span></span>");
       for (let dd = 1; dd <= nDays; dd++) {
         const day = `${s.month}-${String(dd).padStart(2, "0")}`, info = days[day];
@@ -763,7 +772,7 @@
   const monthsAhead = () => [0, 1, 2].map((i) => { const d = new Date(); d.setDate(1); d.setMonth(d.getMonth() + i); return iso(d).slice(0, 7); });
   let exploreFrom = null, exploreMonth = null;
   function paintExploreMonths() {
-    $("ex-months").innerHTML = monthsAhead().map((m) => `<button type="button" data-m="${m}" aria-pressed="${m === exploreMonth}">${esc(parse(m + "-01").toLocaleDateString(locale(), { month: "long" }))}</button>`).join("");
+    $("ex-months").innerHTML = monthsAhead().map((m) => `<button type="button" data-m="${m}" aria-pressed="${m === exploreMonth}">${esc(dateFmt(parse(m + "-01"), { month: "long" }))}</button>`).join("");
   }
   async function showHomeExplore(from) {
     if (!isLive || !from) return;
@@ -810,7 +819,7 @@
     const rows = items.slice(0, 8).map((it) => {
       // Panneau en caractères latins quelle que soit la langue
       let p;
-      try { p = new Intl.NumberFormat("en", { style: "currency", currency: CUR, currencyDisplay: "narrowSymbol", maximumFractionDigits: 0 }).format(it.price).replace(/\s/g, ""); }
+      try { p = intl(Intl.NumberFormat, "en", { style: "currency", currency: CUR, currencyDisplay: "narrowSymbol", maximumFractionDigits: 0 }).format(it.price).replace(/\s/g, ""); }
       catch (e) { p = Math.round(it.price) + CUR; }
       return `${from} → ${(byCode.get(it.to) || [it.to])[0]} ${p}`;
     });

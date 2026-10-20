@@ -1,10 +1,15 @@
+/* Polices de secours calibrées (mêmes largeurs et hauteurs que les polices du site) : rien ne bouge quand les polices arrivent */
+@font-face { font-family: "Instrument Fallback"; font-weight: 100 500; src: local("Arial"), local("ArialMT"), local("Helvetica"), local("Roboto"), local("Liberation Sans"); size-adjust: 101.5%; ascent-override: 95.6%; descent-override: 24.6%; line-gap-override: 0%; }
+@font-face { font-family: "Instrument Fallback"; font-weight: 600 900; src: local("Arial Bold"), local("Arial-BoldMT"), local("Helvetica Bold"), local("Helvetica-Bold"), local("Roboto Bold"), local("Roboto-Bold"), local("Liberation Sans Bold"); size-adjust: 98%; ascent-override: 99%; descent-override: 25.5%; line-gap-override: 0%; }
+@font-face { font-family: "Bricolage Fallback"; font-weight: 100 600; src: local("Arial"), local("ArialMT"), local("Helvetica"), local("Roboto"), local("Liberation Sans"); size-adjust: 106%; ascent-override: 87.7%; descent-override: 25.5%; line-gap-override: 0%; }
+@font-face { font-family: "Bricolage Fallback"; font-weight: 700 900; src: local("Arial Bold"), local("Arial-BoldMT"), local("Helvetica Bold"), local("Helvetica-Bold"), local("Roboto Bold"), local("Roboto-Bold"), local("Liberation Sans Bold"); size-adjust: 100.5%; ascent-override: 92.5%; descent-override: 26.9%; line-gap-override: 0%; }
 /* Pages de contenu (trajets, mentions légales) : mêmes couleurs et polices que l'accueil */
 :root {
   --bg: #f3f5f8; --surface: #ffffff; --ink: #141a24; --muted: #5a6474; --line: #d9dee6;
   --sign: #ffcc1a; --sign-ink: #141a24; --board: #18202c; --board-ink: #f3f5f8;
   --accent: #0b5cd6; --accent-ink: #ffffff; --focus: #0b5cd6;
-  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  --f-body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --f-display: "Bricolage Grotesque", "Bricolage Fallback", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Instrument Sans", "Instrument Fallback", "Segoe UI", system-ui, sans-serif;
   --f-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
 }
 @media (prefers-color-scheme: dark) {
@@ -125,6 +130,10 @@ a.cal-day { color: var(--ink); }
 .deal-price { font: 700 19px/1.1 var(--f-mono); color: #18794e; }
 .deal-share { border-top: 1px solid var(--line); padding: 9px 14px; font-size: 13px; font-weight: 600; text-decoration: none; color: var(--accent); }
 .ex-skel { height: 120px; border-radius: 12px; background: var(--line); }
+/* Place réservée pendant le chargement des bons plans : la page ne saute pas quand les offres arrivent */
+.deal-origins:empty { min-height: 29px; }
+.deal-grid .ex-skel { height: 174px; }
+.deal-updated:empty::before { content: "\a0"; }
 .deal-updated { color: color-mix(in srgb, var(--board-ink) 70%, transparent); margin: 0; }
 @media (prefers-reduced-motion: no-preference) { .deal { animation: rise .35s ease-out both; animation-delay: calc(var(--i, 0) * 40ms); } @keyframes rise { from { opacity: 0; transform: translateY(6px); } } }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .deal-price { color: #4cc38a; } }

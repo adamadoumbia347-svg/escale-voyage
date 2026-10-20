@@ -556,7 +556,7 @@ def build_deals(site, ctx):
         hero = (f'<h1>{d["h1"]}</h1><p class="hero-lead">{E(d["lead"])}</p>'
                 f'<p class="small deal-updated" id="deal-updated"></p>')
         body = ('<section id="deals"><div class="chips deal-origins" id="deal-origins" role="group"></div>'
-                '<div class="deal-grid" id="deal-grid"><div class="ex-skel"></div><div class="ex-skel"></div><div class="ex-skel"></div></div></section>'
+                '<div class="deal-grid" id="deal-grid">' + '<div class="ex-skel"></div>' * 12 + '</div></section>'
                 '<script src="/deals.js" defer></script>'
                 '<section class="nl-block">' + NEWSLETTER[lang] + '</section><script src="/newsletter.js" defer></script>')
         urls.append(write(site, d["path"], lang, d["title"] + " | Escale", d["desc"], hero, body, "", paths, ctx))
