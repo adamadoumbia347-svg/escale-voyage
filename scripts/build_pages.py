@@ -488,6 +488,7 @@ def main():
                                         '<li><a href="/guides/quand-reserver/">Quand réserver son billet</a></li>',
                                         '<li><a href="/guides/voyager-avec-enfants/">Voyager avec des enfants</a></li>',
                                         '<li><a href="/guides/check-list-depart/">Check-list avant de partir</a></li>',
+                                        '<li><a href="/guides/argent-en-voyage/">Argent en voyage : carte, change, Mobile Money</a></li>',
                                         '<li><a href="/vols-fetes/">Vols pour les fêtes : Noël, Ramadan, Tabaski, été</a></li>',
                                         '<li><a href="/widget/">Widget gratuit « Prix des vols » pour votre site</a></li>'])
     links += '<p class="lead guides-langs">Guides in English, en español, em português, بالعربية : ' + " · ".join(

@@ -522,6 +522,139 @@ GUIDES = [
             ],
             note="تتغير قواعد الدخول والصحة والأمتعة: تحقّق دائمًا لدى السلطات الرسمية وشركة الطيران قبل السفر."),
     },
+    {
+        "key": "argent",
+        "fr": dict(
+            slug="guides/argent-en-voyage", title="Argent en voyage : carte, change et Mobile Money",
+            desc="Payer et retirer de l’argent en Afrique, au Maghreb ou ailleurs sans frais inutiles : carte bancaire, espèces, bureaux de change et paiement mobile.",
+            intro="Les frais bancaires et les mauvais taux de change peuvent coûter cher sur un séjour. Quelques réflexes suffisent souvent à les limiter.",
+            sections=[
+                ("Avant de partir", [
+                    "- Regardez les frais de votre banque pour les paiements et retraits à l’étranger : ils varient beaucoup d’une banque et d’une carte à l’autre.",
+                    "- Vérifiez les plafonds de paiement et de retrait de votre carte, et prévenez votre banque de votre voyage.",
+                    "- Emportez si possible deux cartes, rangées séparément, au cas où l’une serait perdue ou refusée.",
+                    "- Notez le numéro d’opposition de votre banque ailleurs que dans votre téléphone.",
+                ]),
+                ("Payer et retirer sur place", [
+                    "- Quand un terminal ou un distributeur propose de payer « dans votre devise », choisissez plutôt la monnaie locale : la conversion proposée est souvent moins avantageuse.",
+                    "- Préférez les distributeurs situés dans les banques ou les centres commerciaux, plus sûrs, et retirez des montants raisonnables pour limiter les frais fixes.",
+                    "- Gardez un peu d’espèces : dans beaucoup de pays, les taxis, marchés et petits commerces ne prennent pas la carte.",
+                ]),
+                ("Le change", [
+                    "Comparez le taux affiché et la commission avant de changer de l’argent. Les bureaux de change des aéroports sont souvent moins intéressants : n’y changez que le nécessaire pour les premiers trajets.",
+                    "Certaines monnaies ne s’échangent pas facilement hors de leur pays, ou leur sortie est réglementée : renseignez-vous auprès des sources officielles avant le départ.",
+                ]),
+                ("Le paiement mobile (Mobile Money)", [
+                    "Dans plusieurs pays d’Afrique, on paie et on envoie de l’argent avec son téléphone (Orange Money, Wave, M-Pesa, MTN MoMo…). Sur place, l’ouverture d’un compte demande en général une carte SIM locale et une pièce d’identité.",
+                    "Pour envoyer de l’argent à vos proches avant ou pendant le voyage, comparez les frais et le taux de change de plusieurs services de transfert : les écarts peuvent être importants.",
+                ]),
+            ],
+            note="Les frais, plafonds et règles de change dépendent de votre banque et du pays : vérifiez auprès d’eux avant de partir."),
+        "en": dict(
+            slug="en/guides/money-abroad", title="Money abroad: cards, cash, exchange and mobile money",
+            desc="Paying and withdrawing money in Africa, North Africa or elsewhere without unnecessary fees: bank cards, cash, exchange offices and mobile payments.",
+            intro="Bank fees and poor exchange rates can add up over a trip. A few simple habits are often enough to keep them down.",
+            sections=[
+                ("Before you leave", [
+                    "- Check your bank’s fees for payments and withdrawals abroad: they vary a lot between banks and cards.",
+                    "- Check your card’s payment and withdrawal limits, and tell your bank about your trip.",
+                    "- If you can, take two cards and keep them in different places, in case one is lost or declined.",
+                    "- Write down your bank’s card-blocking number somewhere other than your phone.",
+                ]),
+                ("Paying and withdrawing on the spot", [
+                    "- When a card machine or ATM offers to charge you “in your currency”, choose the local currency instead: the conversion offered is often worse.",
+                    "- Prefer ATMs inside banks or shopping centres, which are safer, and withdraw reasonable amounts to limit fixed fees.",
+                    "- Keep some cash: in many countries, taxis, markets and small shops do not take cards.",
+                ]),
+                ("Exchanging money", [
+                    "Compare the displayed rate and the commission before exchanging money. Airport exchange offices are often less competitive: only change what you need for your first journeys.",
+                    "Some currencies are hard to exchange outside their country, or taking them out is regulated: check official sources before you leave.",
+                ]),
+                ("Mobile money", [
+                    "In several African countries, people pay and send money with their phone (Orange Money, Wave, M-Pesa, MTN MoMo…). Opening an account locally usually requires a local SIM card and an ID.",
+                    "To send money to family before or during your trip, compare the fees and exchange rate of several transfer services: the differences can be large.",
+                ]),
+            ],
+            note="Fees, limits and exchange rules depend on your bank and the country: check with them before you travel."),
+        "es": dict(
+            slug="es/guias/dinero-en-viaje", title="Dinero en el viaje: tarjeta, cambio y pago móvil",
+            desc="Pagar y sacar dinero en África, el Magreb u otros destinos sin gastos inútiles: tarjeta bancaria, efectivo, casas de cambio y pago móvil.",
+            intro="Las comisiones bancarias y los malos tipos de cambio pueden salir caros en un viaje. Unos pocos hábitos suelen bastar para reducirlos.",
+            sections=[
+                ("Antes de salir", [
+                    "- Revisa las comisiones de tu banco por pagos y retiradas en el extranjero: varían mucho de un banco y una tarjeta a otra.",
+                    "- Comprueba los límites de pago y de retirada de tu tarjeta y avisa a tu banco del viaje.",
+                    "- Si puedes, lleva dos tarjetas guardadas por separado, por si una se pierde o es rechazada.",
+                    "- Apunta el número de bloqueo de tu banco en otro sitio que no sea el móvil.",
+                ]),
+                ("Pagar y sacar dinero allí", [
+                    "- Cuando un datáfono o un cajero te proponga cobrar «en tu moneda», elige mejor la moneda local: la conversión propuesta suele ser menos ventajosa.",
+                    "- Usa preferentemente cajeros dentro de bancos o centros comerciales, más seguros, y saca importes razonables para limitar las comisiones fijas.",
+                    "- Lleva algo de efectivo: en muchos países, taxis, mercados y pequeños comercios no aceptan tarjeta.",
+                ]),
+                ("El cambio de divisas", [
+                    "Compara el tipo de cambio y la comisión antes de cambiar dinero. Las casas de cambio de los aeropuertos suelen ser menos interesantes: cambia allí solo lo necesario para los primeros trayectos.",
+                    "Algunas monedas no se cambian fácilmente fuera de su país, o su salida está regulada: infórmate en fuentes oficiales antes de salir.",
+                ]),
+                ("El pago móvil (Mobile Money)", [
+                    "En varios países de África se paga y se envía dinero con el móvil (Orange Money, Wave, M-Pesa, MTN MoMo…). Abrir una cuenta allí suele requerir una tarjeta SIM local y un documento de identidad.",
+                    "Para enviar dinero a tu familia antes o durante el viaje, compara las comisiones y el tipo de cambio de varios servicios de envío: las diferencias pueden ser grandes.",
+                ]),
+            ],
+            note="Las comisiones, los límites y las normas de cambio dependen de tu banco y del país: consúltalos antes de viajar."),
+        "pt": dict(
+            slug="pt/guias/dinheiro-em-viagem", title="Dinheiro em viagem: cartão, câmbio e pagamento móvel",
+            desc="Pagar e levantar dinheiro em África, no Magrebe ou noutro destino sem custos inúteis: cartão bancário, numerário, casas de câmbio e pagamento móvel.",
+            intro="As comissões bancárias e as más taxas de câmbio podem sair caras numa viagem. Alguns hábitos simples costumam bastar para as reduzir.",
+            sections=[
+                ("Antes de partir", [
+                    "- Veja as comissões do seu banco para pagamentos e levantamentos no estrangeiro: variam muito de banco para banco e de cartão para cartão.",
+                    "- Verifique os limites de pagamento e de levantamento do cartão e avise o banco da viagem.",
+                    "- Se possível, leve dois cartões guardados em sítios diferentes, caso um se perca ou seja recusado.",
+                    "- Anote o número de cancelamento do cartão noutro sítio que não o telemóvel.",
+                ]),
+                ("Pagar e levantar no local", [
+                    "- Quando um terminal ou uma caixa automática propuser cobrar «na sua moeda», escolha antes a moeda local: a conversão proposta é muitas vezes menos vantajosa.",
+                    "- Prefira caixas automáticas dentro de bancos ou centros comerciais, mais seguras, e levante montantes razoáveis para limitar as comissões fixas.",
+                    "- Tenha algum numerário: em muitos países, táxis, mercados e pequenas lojas não aceitam cartão.",
+                ]),
+                ("O câmbio", [
+                    "Compare a taxa afixada e a comissão antes de trocar dinheiro. As casas de câmbio dos aeroportos são muitas vezes menos vantajosas: troque lá apenas o necessário para as primeiras deslocações.",
+                    "Algumas moedas não se trocam facilmente fora do seu país, ou a sua saída é regulamentada: informe-se junto das fontes oficiais antes de partir.",
+                ]),
+                ("O pagamento móvel (Mobile Money)", [
+                    "Em vários países africanos paga-se e envia-se dinheiro com o telemóvel (Orange Money, Wave, M-Pesa, MTN MoMo…). Abrir uma conta no local exige em geral um cartão SIM local e um documento de identificação.",
+                    "Para enviar dinheiro à família antes ou durante a viagem, compare as comissões e a taxa de câmbio de vários serviços de transferência: as diferenças podem ser grandes.",
+                ]),
+            ],
+            note="As comissões, os limites e as regras de câmbio dependem do seu banco e do país: confirme junto deles antes de viajar."),
+        "ar": dict(
+            slug="ar/guides/money-abroad", title="المال في السفر: البطاقة والنقد والصرف والدفع عبر الهاتف",
+            desc="الدفع وسحب المال في أفريقيا أو المغرب العربي أو غيرها دون رسوم غير ضرورية: البطاقة المصرفية والنقد ومكاتب الصرف والدفع عبر الهاتف.",
+            intro="قد تكلّفك الرسوم المصرفية وأسعار الصرف السيئة الكثير خلال الرحلة. بعض العادات البسيطة تكفي غالبًا للحد منها.",
+            sections=[
+                ("قبل السفر", [
+                    "- اطّلع على رسوم مصرفك للدفع والسحب في الخارج: تختلف كثيرًا من مصرف لآخر ومن بطاقة لأخرى.",
+                    "- تحقّق من حدود الدفع والسحب لبطاقتك وأبلغ مصرفك بسفرك.",
+                    "- إن أمكن، خذ بطاقتين واحفظهما في مكانين مختلفين تحسّبًا لضياع إحداهما أو رفضها.",
+                    "- دوّن رقم إيقاف البطاقة لدى مصرفك في مكان آخر غير هاتفك.",
+                ]),
+                ("الدفع والسحب في البلد", [
+                    "- عندما يعرض عليك جهاز الدفع أو الصراف الآلي الدفع «بعملتك»، اختر العملة المحلية: التحويل المقترح أقل فائدة غالبًا.",
+                    "- فضّل الصرافات الموجودة داخل المصارف أو المراكز التجارية لأنها أكثر أمانًا، واسحب مبالغ معقولة للحد من الرسوم الثابتة.",
+                    "- احتفظ ببعض النقود: في دول كثيرة لا تقبل سيارات الأجرة والأسواق والمحلات الصغيرة البطاقات.",
+                ]),
+                ("صرف العملات", [
+                    "قارن سعر الصرف المعروض والعمولة قبل تبديل المال. مكاتب الصرف في المطارات أقل فائدة غالبًا: لا تبدّل فيها إلا ما تحتاجه لتنقلاتك الأولى.",
+                    "بعض العملات يصعب تبديلها خارج بلدها، أو يخضع إخراجها لقواعد: استعلم من المصادر الرسمية قبل السفر.",
+                ]),
+                ("الدفع عبر الهاتف (Mobile Money)", [
+                    "في عدة دول أفريقية يُدفع المال ويُرسل عبر الهاتف (Orange Money وWave وM-Pesa وMTN MoMo…). فتح حساب محليًا يتطلب عادةً شريحة هاتف محلية ووثيقة هوية.",
+                    "لإرسال المال إلى عائلتك قبل الرحلة أو خلالها، قارن رسوم عدة خدمات تحويل وأسعار صرفها: الفروق قد تكون كبيرة.",
+                ]),
+            ],
+            note="تعتمد الرسوم والحدود وقواعد الصرف على مصرفك وعلى البلد: تحقّق منها قبل السفر."),
+    },
 ]
 
 INDEX = {

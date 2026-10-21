@@ -10,8 +10,8 @@ Une tâche planifiée de Claude ajoute une nouveauté au site tous les 2 jours, 
 - Toujours lancer `python3 scripts/build_pages.py` (et `node scripts/make_og.js` si de nouveaux trajets) avant d'envoyer.
 
 ## Idées en réserve
-- Guides : visa et passeport (généralités), escales longues, voyager pendant le ramadan / la Tabaski, argent sur place
-  (cartes, Mobile Money, change), assurance voyage, voyager enceinte, vol de nuit,
+- Guides : visa et passeport (généralités), escales longues, voyager pendant le ramadan / la Tabaski,
+  assurance voyage, voyager enceinte, vol de nuit,
   droits en cas de retard (règlement européen 261/2004), envoyer des colis au pays.
 - Trajets : nouvelles villes de départ (Rennes, Strasbourg, Montpellier, Milan, Francfort…) vers l'Afrique et le Maghreb.
 - Hôtels : Lagos, Nairobi, Addis-Abeba, Libreville, Yaoundé, Niamey, Ouagadougou, Nouakchott.
@@ -23,3 +23,4 @@ Une tâche planifiée de Claude ajoute une nouveauté au site tous les 2 jours, 
 | 2026-10-15 | Guide « Check-list avant de partir » en 5 langues (`/guides/check-list-depart/`) — prochain : nouveaux trajets |
 | 2026-10-17 | 14 trajets depuis Lille et Nantes (Alger, Oran, Casablanca, Marrakech, Oujda/Agadir, Tunis, Dakar) en 5 langues, avec images de partage — prochain : page hôtels |
 | 2026-10-19 | Page « Hôtel pas cher à Accra » en 5 langues (`/hotel-pas-cher-accra/`) — prochain : guide pratique |
+| 2026-10-21 | Guide « Argent en voyage : carte, change et Mobile Money » en 5 langues (`/guides/argent-en-voyage/`) — prochain : nouveaux trajets |

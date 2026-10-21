@@ -1,7 +1,7 @@
 {
 "/": [
-"9b4d783514783b66",
-"2026-10-20"
+"b1894356d746c087",
+"2026-10-21"
 ],
 "/a-propos/": [
 "acfc699a7c1dbdd6",
@@ -784,24 +784,28 @@
 "2026-10-18"
 ],
 "/ar/guides/": [
-"087c555112eee481",
-"2026-10-18"
+"9014f9a95ba08568",
+"2026-10-21"
 ],
 "/ar/guides/baggage/": [
-"0de88a328af433f8",
-"2026-10-18"
+"59c96c44def29895",
+"2026-10-21"
+],
+"/ar/guides/money-abroad/": [
+"53745e673907d319",
+"2026-10-21"
 ],
 "/ar/guides/travel-checklist/": [
-"11a6f3f9ab7df15d",
-"2026-10-18"
+"717a00ba84866321",
+"2026-10-21"
 ],
 "/ar/guides/travelling-with-children/": [
-"4c47ecd3afe276b0",
-"2026-10-18"
+"1ec4ea5d8621ac3e",
+"2026-10-21"
 ],
 "/ar/guides/when-to-book/": [
-"d99dfa308a9dd8ec",
-"2026-10-18"
+"fdde3f65d1605ef0",
+"2026-10-21"
 ],
 "/ar/holiday-flights/": [
 "0e6e51792710c79e",
@@ -1732,24 +1736,28 @@
 "2026-10-18"
 ],
 "/en/guides/": [
-"41b28680ba2ac9ba",
-"2026-10-18"
+"aa69ca0be05875c9",
+"2026-10-21"
 ],
 "/en/guides/baggage/": [
-"3070cc0bd7ac7849",
-"2026-10-18"
+"1e1461baf5864890",
+"2026-10-21"
+],
+"/en/guides/money-abroad/": [
+"4cbb83b351feff8f",
+"2026-10-21"
 ],
 "/en/guides/travel-checklist/": [
-"a8a9b6c5493b11a2",
-"2026-10-18"
+"e8fa17c211a14714",
+"2026-10-21"
 ],
 "/en/guides/travelling-with-children/": [
-"705475702b94e060",
-"2026-10-18"
+"2702ffcb573492a0",
+"2026-10-21"
 ],
 "/en/guides/when-to-book/": [
-"cf0d33634edf9a12",
-"2026-10-18"
+"7870bb0f124f71b7",
+"2026-10-21"
 ],
 "/en/holiday-flights/": [
 "c3e20ff34e680b90",
@@ -1764,24 +1772,28 @@
 "2026-10-18"
 ],
 "/es/guias/": [
-"ca2277c3faeb0e6b",
-"2026-10-18"
+"cd2a607985fe8a7c",
+"2026-10-21"
 ],
 "/es/guias/cuando-reservar/": [
-"4242968a1d83e7a1",
-"2026-10-18"
+"1dc7b56d82149021",
+"2026-10-21"
+],
+"/es/guias/dinero-en-viaje/": [
+"2ecf23f27046ef8e",
+"2026-10-21"
 ],
 "/es/guias/equipaje/": [
-"ee4d3b780ed2686f",
-"2026-10-18"
+"0c3b266777cc855c",
+"2026-10-21"
 ],
 "/es/guias/lista-antes-de-viajar/": [
-"e8078b1471fd1c79",
-"2026-10-18"
+"99bc731f68d4d029",
+"2026-10-21"
 ],
 "/es/guias/viajar-con-ninos/": [
-"e70ea6e4cdfa1ada",
-"2026-10-18"
+"1c9a54dce354cccf",
+"2026-10-21"
 ],
 "/es/hoteles-baratos-abiyan/": [
 "afd93dd912c82c28",
@@ -2624,24 +2636,28 @@
 "2026-10-18"
 ],
 "/guides/": [
-"1f9bd14d498405bc",
-"2026-10-18"
+"ef90f6c5cb7272a5",
+"2026-10-21"
+],
+"/guides/argent-en-voyage/": [
+"132cf343cfb87d4f",
+"2026-10-21"
 ],
 "/guides/bagages-avion/": [
-"a1cf937c2418e7ee",
-"2026-10-18"
+"3842a48ee0410ac7",
+"2026-10-21"
 ],
 "/guides/check-list-depart/": [
-"9777e6c8bd40bfbb",
-"2026-10-18"
+"bda0bf2727b4caae",
+"2026-10-21"
 ],
 "/guides/quand-reserver/": [
-"5531bb467d4998ff",
-"2026-10-18"
+"21812fc4c5aca27a",
+"2026-10-21"
 ],
 "/guides/voyager-avec-enfants/": [
-"bdb103399c16c502",
-"2026-10-18"
+"e489f1e97ea1196f",
+"2026-10-21"
 ],
 "/hotel-pas-cher-abidjan/": [
 "e227a93a41ed6d57",
@@ -2720,24 +2736,28 @@
 "2026-10-19"
 ],
 "/pt/guias/": [
-"c21dca22f025c43f",
-"2026-10-18"
+"82a7f72e4fd3901a",
+"2026-10-21"
 ],
 "/pt/guias/bagagem/": [
-"d916c513d74102a1",
-"2026-10-18"
+"080e2af9fc89bf73",
+"2026-10-21"
+],
+"/pt/guias/dinheiro-em-viagem/": [
+"9894ca1c83cdbae8",
+"2026-10-21"
 ],
 "/pt/guias/lista-antes-de-viajar/": [
-"683398e65835cd02",
-"2026-10-18"
+"b90292fbf959ad57",
+"2026-10-21"
 ],
 "/pt/guias/quando-reservar/": [
-"f297495b8a94018a",
-"2026-10-18"
+"b0653181087ead38",
+"2026-10-21"
 ],
 "/pt/guias/viajar-com-criancas/": [
-"b7d54464e8a786bf",
-"2026-10-18"
+"e74b8413a4ba4a6b",
+"2026-10-21"
 ],
 "/pt/hoteis-baratos-abidjan/": [
 "e69d54574233e0ae",
