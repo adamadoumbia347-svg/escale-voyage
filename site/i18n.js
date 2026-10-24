@@ -374,4 +374,16 @@ window.ESCALE_I18N = {
   "Save": ["Favorito", "Favorito", "المفضلة"],
   "No idea where to go?": ["¿No sabes adónde ir?", "Sem ideia de destino?", "لا تعرف إلى أين تسافر؟"],
   "See prices everywhere in the world on a map, from your city.": ["Mira los precios en todo el mundo en un mapa, desde tu ciudad.", "Veja os preços no mundo inteiro num mapa, a partir da sua cidade.", "شاهد الأسعار في كل أنحاء العالم على خريطة، انطلاقًا من مدينتك."],
+  // Accueil : tuiles et cartes photo des villes
+  "Quick access": ["Acceso rápido", "Acesso rápido", "وصول سريع"],
+  "Explore the whole world": ["Explora el mundo entero", "Explore o mundo inteiro", "استكشف العالم كله"],
+  "This week’s deals": ["Ofertas de la semana", "Promoções da semana", "عروض الأسبوع"],
+  "The whole world, at the best price": ["El mundo entero, al mejor precio", "O mundo inteiro, ao melhor preço", "العالم كله بأفضل سعر"],
+  "The cheapest destinations from your city, on a map.": ["Los destinos más baratos desde tu ciudad, en un mapa.", "Os destinos mais baratos a partir da sua cidade, num mapa.", "أرخص الوجهات انطلاقًا من مدينتك، على خريطة."],
+  "Explore the map →": ["Explorar el mapa →", "Explorar o mapa →", "استكشف الخريطة ←"],
+  "Explore the world": ["Explora el mundo", "Explore o mundo", "استكشف العالم"],
+  "Where to go next? Prices from your city, updated every day.": ["¿Adónde ir? Precios desde tu ciudad, actualizados cada día.", "Para onde ir? Preços a partir da sua cidade, atualizados todos os dias.", "إلى أين تسافر؟ الأسعار من مدينتك، محدّثة كل يوم."],
+  "Photos: Wikimedia Commons, free licences.": ["Fotos: Wikimedia Commons, licencias libres.", "Fotos: Wikimedia Commons, licenças livres.", "الصور: ويكيميديا كومنز، تراخيص حرة."],
+  "Photo credits": ["Créditos de las fotos", "Créditos das fotos", "حقوق الصور"],
+  "{a} · from {p}": ["{a} · desde {p}", "{a} · desde {p}", "{a} · من {p}"],
 };

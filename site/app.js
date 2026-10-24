@@ -76,6 +76,12 @@
     document.querySelectorAll(".guides-href").forEach((a) => { a.href = { fr: "/guides/", en: "/en/guides/", es: "/es/guias/", pt: "/pt/guias/", ar: "/ar/guides/" }[LANG]; });
     countryNames = null;
     if (window.EscaleFavs) window.EscaleFavs.sync();
+    document.querySelectorAll("[data-names]").forEach((el) => {
+      if (el.dataset.fr == null) el.dataset.fr = el.textContent;
+      try { el.textContent = LANG === "fr" ? el.dataset.fr : JSON.parse(el.dataset.names)[LANG] || el.dataset.fr; } catch (e) {}
+    });
+    document.querySelectorAll("[data-hrefs]").forEach((a) => { try { a.href = JSON.parse(a.dataset.hrefs)[LANG] || a.href; } catch (e) {} });
+    document.querySelectorAll(".city-country[data-cc]").forEach((el) => { if (el.dataset.cc) el.textContent = countryName(el.dataset.cc); });
   }
 
   // ---------- Devise ----------
@@ -891,6 +897,8 @@
     return `<span>${T("Voir les prix", "See prices")} →</span>`;
   }
   let destSeen = false;
+  let DEST_PHOTOS = {};
+  try { DEST_PHOTOS = JSON.parse($("dests").dataset.photos || "{}"); } catch (e) {}
   function paintDests() {
     $("dests").innerHTML = DESTS.map(([a, b, dfr, den], i) => {
       const dsc = T(dfr, den);
@@ -899,8 +907,9 @@
       const [c1, c2] = DEST_COLORS[b] || ["#0b5cd6", "#18202c"];
       const known = destPrices.get(destKey(a, b));
       const loading = isLive && (known === undefined || known === null);
+      const photo = DEST_PHOTOS[b];
       return `<button type="button" class="dest" data-i="${i}" style="--c1:${c1};--c2:${c2}">
-        <span class="dest-art" aria-hidden="true">
+        <span class="dest-art${photo ? " photo" : ""}" aria-hidden="true"${photo ? ` style="background-image:linear-gradient(180deg, rgb(0 0 0 / .05), rgb(0 0 0 / .45)), url(${photo})"` : ""}>
           <svg viewBox="0 0 200 104" preserveAspectRatio="none"><path class="arc" d="M18 92 C 60 18, 140 10, 184 50"/><circle class="pin" cx="18" cy="92" r="3"/><circle class="pin" cx="184" cy="50" r="3"/></svg>
           <span class="dest-flag">${flag(B ? B[3] : "")}</span><span class="dest-code">${esc(b)}</span>
         </span>
@@ -930,6 +939,28 @@
           if (el) { el.classList.remove("loading"); el.innerHTML = destPriceHtml(v); }
         });
     });
+  }
+  // Prix « dès » sur les cartes photo des villes, depuis l'aéroport de départ choisi (chargés à l'approche de la section)
+  let cityFrom = null;
+  function loadCityPrices() {
+    if (!isLive) return;
+    const from = place($("f-from").value);
+    if (!from || !from.code || from.code + CUR === cityFrom) return;
+    cityFrom = from.code + CUR;
+    const dep = addDays(today, 21), ret = addDays(today, 35);
+    document.querySelectorAll(".city-price[data-to]").forEach((el) => {
+      const to = el.dataset.to;
+      el.textContent = "";
+      if (to === from.code) return;
+      fetch("/api/prix?" + q({ from: from.code, to, dep, ret, currency: CUR })).then((r) => (r.ok ? r.json() : null)).catch(() => null).then((d) => {
+        if (cityFrom !== from.code + CUR || !d || !d.available || !d.price) return;
+        el.textContent = fmt(T("{a} · dès {p}", "{a} · from {p}"), { a: from.code, p: money(d.price, d.currency) });
+      });
+    });
+  }
+  if ("IntersectionObserver" in window && $("world")) {
+    const wo = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { loadCityPrices(); wo.disconnect(); } }, { rootMargin: "300px" });
+    wo.observe($("world"));
   }
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { destSeen = true; loadDestPrices(); io.disconnect(); } }, { rootMargin: "200px" });
@@ -1162,7 +1193,7 @@
 
   // ---------- Bouton flottant « Nouvelle recherche » ----------
   if ("IntersectionObserver" in window) {
-    const card = document.querySelector("main > .card");
+    const card = document.querySelector(".card");
     new IntersectionObserver(([e]) => { $("fab").hidden = e.isIntersecting || e.boundingClientRect.top > 0; }).observe(card);
     $("fab").addEventListener("click", () => {
       card.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
@@ -1199,7 +1230,7 @@
     rerender();
   }
   document.querySelector(".tabs").addEventListener("click", (ev) => { const b = ev.target.closest(".tab"); if (b) selectTab(b.dataset.tab); });
-  document.querySelectorAll(".main-nav a[data-tab]").forEach((a) => a.addEventListener("click", (ev) => {
+  document.querySelectorAll("a[data-tab]").forEach((a) => a.addEventListener("click", (ev) => {
     ev.preventDefault();
     selectTab(a.dataset.tab);
     $("panel-" + a.dataset.tab).scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });

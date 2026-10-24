@@ -17,6 +17,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import build_i18n  # noqa: E402
 import explore_pages  # noqa: E402
 import hubs  # noqa: E402
+import villes  # noqa: E402
 import routes_extra  # noqa: E402
 import translations  # noqa: E402
 
@@ -479,6 +480,8 @@ def main():
     urls += hub_urls
     urls += i18n_urls + build_i18n.build_indexes(SITE, ctx, route_paths, hotel_paths) + build_i18n.build_deals(SITE, ctx) + build_i18n.build_guides(SITE, ctx) + build_i18n.build_about(SITE, ctx) + build_i18n.build_fetes(SITE, ctx) + explore_pages.build_anywhere(SITE, ctx)
     urls += legal_pages()
+    urls.append(page("credits-photos", "Crédits des photos | Escale", "Auteurs et licences des photos de villes utilisées sur Escale (Wikimedia Commons).",
+                     "<h1>Crédits des photos</h1>", villes.credits_body(SITE)))
 
     # Liste des guides sur la page d'accueil
     idx = SITE / "index.html"
@@ -509,6 +512,10 @@ def main():
                lambda m: "<!-- TRAVELPAYOUTS:START -->\n" + TRAVELPAYOUTS + "\n<!-- TRAVELPAYOUTS:END -->", s, flags=re.S)
     s = re.sub(r"<!-- ROUTES:START -->.*?<!-- ROUTES:END -->",
                lambda m: "<!-- ROUTES:START -->\n    " + links + "\n    <!-- ROUTES:END -->", s, flags=re.S)
+    # « Explorer le monde » : cartes photo des villes ; photos aussi sur les cartes « Destinations populaires »
+    grid = villes.cards(SITE, HUBS, airports)
+    s = re.sub(r"<!-- VILLES:START -->.*?<!-- VILLES:END -->", lambda m: "<!-- VILLES:START -->\n    " + grid + "\n    <!-- VILLES:END -->", s, flags=re.S)
+    s = re.sub(r'<div class="dests" id="dests"[^>]*>', lambda m: '<div class="dests" id="dests" data-photos="' + E(json.dumps(villes.dest_photos(SITE))) + '">', s)
     idx.write_text(s, encoding="utf-8")
 
     urls.append(f"{DOMAIN}/widget/")  # page statique (site/widget/index.html)

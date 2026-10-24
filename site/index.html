@@ -47,6 +47,12 @@
 <!-- Polices hébergées sur le site (site/fonts) : pas de Google Fonts, affichage plus rapide -->
 <link rel="preload" href="/fonts/instrument-sans-latin-f587e7.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/fonts/fonts.css">
+<script>
+/* Langue et sens d'écriture fixés avant l'affichage (même règle que app.js) : la page ne se retourne pas après coup en arabe */
+(function () { try { var L = ["fr", "en", "es", "pt", "ar"], u = new URLSearchParams(location.search).get("lang"), s = localStorage.getItem("escale.lang"),
+  n = (navigator.language || "fr").slice(0, 2).toLowerCase(), l = L.indexOf(u) >= 0 ? u : s || (L.indexOf(n) >= 0 ? n : "en");
+  if (L.indexOf(l) < 0) l = "fr"; document.documentElement.lang = l; if (l === "ar") document.documentElement.dir = "rtl"; } catch (e) {} })();
+</script>
 <style>
 /* Polices de secours calibrées (mêmes largeurs et hauteurs que les polices du site) : rien ne bouge quand les polices arrivent */
 @font-face { font-family: "Instrument Fallback"; font-weight: 100 500; src: local("Arial"), local("ArialMT"), local("Helvetica"), local("Roboto"), local("Liberation Sans"); size-adjust: 101.5%; ascent-override: 95.6%; descent-override: 24.6%; line-gap-override: 0%; }
@@ -573,7 +579,6 @@ section.block h2 { font: 700 26px/1.2 var(--f-body); letter-spacing: -.02em; }
 .tool-body { padding: 0 20px 20px; }
 .tool .ck-head { display: block; }
 footer { margin-top: 72px; }
-.anywhere-teaser { margin-top: 28px; }
 .res-actions { display: flex; gap: 8px; align-items: center; }
 .fav-btn { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font: 700 14px/1 var(--f-body); padding: 10px 14px; }
 .fav-btn svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; }
@@ -585,6 +590,92 @@ footer { margin-top: 72px; }
 .teaser-card strong { color: var(--ink); font-size: 17px; }
 .teaser-card b { font-size: 22px; color: var(--accent); }
 [dir="rtl"] .teaser-card b { transform: scaleX(-1); }
+
+/* ===== Style « comparateur » : bandeau bleu nuit avec la recherche, tuiles, cartes photo des villes ===== */
+:root { --navy: #05203c; --navy-2: #0b2d55; --sky: #0062e3; --sky-ink: #ffffff; --on-navy: rgb(255 255 255 / .78); --navy-line: rgb(255 255 255 / .32); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --navy: #0a1a30; --navy-2: #13294a; } }
+:root[data-theme="dark"] { --navy: #0a1a30; --navy-2: #13294a; }
+.site-head { background: var(--navy); border-bottom-color: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
+.site-head .brand { color: #fff; }
+.site-head .brand-icon { color: #5aa9ff; }
+.main-nav a { color: var(--on-navy); }
+.main-nav a:hover { color: #fff; background: rgb(255 255 255 / .1); }
+.main-nav a[aria-current="page"] { color: #fff; background: rgb(255 255 255 / .16); }
+.site-head .cur-select, .site-head .theme-btn { background: transparent; color: #fff; border-color: var(--navy-line); }
+.site-head .cur-select option { color: #0f172a; background: #fff; }
+.band { background: var(--navy); color: #fff; padding-bottom: 30px; }
+.band .hero { padding: 30px 0 20px; }
+.band .hero h1 { color: #fff; }
+.band .hero h1 em { color: #6cb6ff; }
+.band .hero-lead, .band .perks, .band .cur-quick { color: var(--on-navy); }
+.band .perks li::before { color: #5ee08f; }
+.band .cur-quick button { background: transparent; color: #fff; border-color: var(--navy-line); }
+.band .cur-quick button[aria-pressed="true"] { background: #fff; color: var(--navy); border-color: #fff; }
+.band .card { background: transparent; border: 0; box-shadow: none; border-radius: 0; }
+.band .tabs { border-bottom: 0; padding: 0 0 16px; gap: 8px; overflow-x: auto; }
+.band .tab { border: 1px solid var(--navy-line); border-radius: 999px; color: #fff; padding: 11px 18px; }
+.band .tab[aria-selected="true"] { background: var(--sky); border-color: var(--sky); color: var(--sky-ink); }
+.band .tab:hover:not([aria-selected="true"]) { background: rgb(255 255 255 / .1); color: #fff; }
+.band form { padding: 0; }
+.band .seg { background: transparent; border-color: var(--navy-line); }
+.band .seg label { color: var(--on-navy); }
+.band .seg input:checked + label { background: #fff; color: var(--navy); }
+.band .pax summary, .band select.chip-select { background: transparent; color: #fff; border-color: var(--navy-line); }
+.band .pax summary svg, .band .pax .caret { color: #fff; }
+.band select.chip-select option { color: #0f172a; background: #fff; }
+.band .opt-chip, .band .check { background: transparent; color: #fff; border-color: var(--navy-line); }
+.band .opt-chip:has(input:checked) { border-color: #6cb6ff; background: rgb(0 98 227 / .28); }
+.band .swap { background: #fff; color: var(--navy); border-color: #fff; }
+.band .actions { justify-content: stretch; }
+.band .actions .btn, .band .btn-search { width: 100%; justify-content: center; min-height: 56px; border-radius: 12px; background: var(--sky); color: var(--sky-ink); font-size: 18px; box-shadow: none; }
+.band .error { color: #ffb4ab; }
+.band .ac-list, .band .pax-pop { color: var(--ink); }
+@media (max-width: 600px) { .band .hero { padding: 18px 0 14px; } .band { padding-bottom: 22px; }
+  /* Une seule ligne d'atouts sur téléphone, quelle que soit la langue (sinon le formulaire bouge à la traduction) */
+  .band .perks { flex-wrap: nowrap; overflow: hidden; white-space: nowrap; } .band .perks li:nth-child(n+4) { display: none; }
+  .band .gf-opts { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: -16px; padding-inline: 16px; }
+  .band .gf-opts::-webkit-scrollbar { display: none; }
+  .band .gf-opts .opt-chip { flex: none; white-space: nowrap; } }
+
+/* Tuiles d'accès rapide */
+.tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 24px; }
+.tile { display: flex; flex-direction: column; justify-content: space-between; gap: 22px; min-height: 124px; padding: 18px; border-radius: 14px;
+  background: var(--navy); color: #fff; text-decoration: none; font: 700 17px/1.2 var(--f-body); }
+.tile svg { width: 28px; height: 28px; }
+.tile:hover { background: var(--navy-2); }
+@media (max-width: 700px) {
+  .tiles { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 44%; overflow-x: auto; margin-inline: -16px; padding: 0 16px 4px; scroll-padding-inline: 16px; scrollbar-width: none; scroll-snap-type: x mandatory; }
+  .tiles::-webkit-scrollbar { display: none; }
+  .tile { scroll-snap-align: start; min-height: 108px; font-size: 16px; }
+}
+
+/* Grande carte photo « Le monde entier » et villes à explorer */
+.world-card { position: relative; display: block; overflow: hidden; border-radius: 20px; aspect-ratio: 16 / 7; min-height: 280px; margin-bottom: 44px; color: #fff; text-decoration: none; background: var(--navy); }
+.world-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 25%; }
+.world-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, rgb(5 32 60 / .78) 0%, rgb(5 32 60 / .35) 45%, rgb(5 32 60 / 0) 70%); }
+.world-text { position: absolute; z-index: 1; inset: 0 auto auto 0; padding: clamp(20px, 4vw, 40px); display: grid; gap: 10px; max-width: 30em; }
+.world-text strong { font: 700 clamp(26px, 4.2vw, 42px)/1.08 var(--f-body); letter-spacing: -.02em; }
+.world-text > span { font-size: 16px; color: rgb(255 255 255 / .9); }
+.world-text b { justify-self: start; margin-top: 8px; background: #fff; color: var(--navy); padding: 11px 18px; border-radius: 999px; font-size: 15px; }
+.world-card:hover b { background: var(--sky); color: #fff; }
+[dir="rtl"] .world-text { inset: 0 0 auto auto; }
+[dir="rtl"] .world-card::after { transform: scaleX(-1); }
+@media (max-width: 600px) { .world-card { aspect-ratio: 4 / 5; min-height: 0; } .world-card::after { background: linear-gradient(180deg, rgb(5 32 60 / .8) 0%, rgb(5 32 60 / .2) 55%, rgb(5 32 60 / 0) 80%); } }
+.city-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; }
+.city-card { position: relative; display: block; overflow: hidden; border-radius: 16px; aspect-ratio: 4 / 3; color: #fff; text-decoration: none; background: var(--navy); }
+.city-card img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease; }
+.city-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgb(0 0 0 / .72) 0%, rgb(0 0 0 / .15) 45%, rgb(0 0 0 / 0) 65%); }
+.city-card:hover img, .city-card:focus-visible img { transform: scale(1.05); }
+.city-info { position: absolute; z-index: 1; inset: auto 14px 12px 14px; display: grid; gap: 1px; }
+.city-info strong { font: 700 19px/1.15 var(--f-body); }
+.city-info small { font-size: 12px; opacity: .88; }
+.city-price { font: 700 14px/1.3 var(--f-body); margin-top: 3px; }
+.city-price:empty { display: none; }
+@media (max-width: 600px) { .city-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .city-info strong { font-size: 16px; } }
+#world .credits { margin-top: 14px; color: var(--muted); }
+/* Destinations populaires : photo de la ville quand elle existe */
+.dest-art.photo { background-size: cover; background-position: center; }
+.dest-art.photo svg { display: none; }
 </style>
 </head>
 <body>
@@ -620,7 +711,8 @@ footer { margin-top: 72px; }
   </div>
 </header>
 
-<main class="wrap">
+<main>
+<div class="band"><div class="wrap">
 <section class="hero">
     <h1 data-en-html="Flights, hotels and cars <em>at the best price</em>">Vols, hôtels et voitures <em>au meilleur prix</em></h1>
     <p class="hero-lead" data-en="One search, every major comparison site, worldwide. Escale opens your search on Skyscanner, Kayak, Aviasales, Booking and more, sorted from cheapest to most expensive.">Une seule recherche, tous les grands comparateurs, partout dans le monde. Escale prépare vos recherches sur Skyscanner, Kayak, Aviasales, Booking et d’autres, triées du moins cher au plus cher.</p>
@@ -755,6 +847,16 @@ footer { margin-top: 72px; }
     </div>
   </div>
 
+</div></div>
+
+<div class="wrap">
+  <nav class="tiles" aria-label="Accès rapide" data-en-aria="Quick access">
+    <a class="tile" href="/#hotels" data-tab="hotels"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9a4 4 0 0 0-4-4z" fill="currentColor"/></svg><span data-en="Hotels">Hôtels</span></a>
+    <a class="tile" href="/#voitures" data-tab="voitures"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 6a1.5 1.5 0 0 0-1.4-1h-11a1.5 1.5 0 0 0-1.4 1L3 12v8a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h12v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-8zM6.5 16a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm11 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM5 11l1.5-4.5h11L19 11z" fill="currentColor"/></svg><span data-en="Cars">Voitures</span></a>
+    <a class="tile anywhere-href" href="/partout/"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 11h15M11 3.5c2 2 3 4.5 3 7.5s-1 5.5-3 7.5c-2-2-3-4.5-3-7.5s1-5.5 3-7.5zM16.5 16.5l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-en="Explore the whole world">Explorez le monde entier</span></a>
+    <a class="tile deals-href" href="/bons-plans/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8zM7.5 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" fill="currentColor"/></svg><span data-en="This week’s deals">Bons plans de la semaine</span></a>
+  </nav>
+
   <div id="results" class="results" aria-live="polite"></div>
 
   <section class="block" id="explore">
@@ -777,19 +879,25 @@ footer { margin-top: 72px; }
     <div class="recent" id="recent"></div>
   </section>
 
+  <section class="block world" id="world">
+    <a class="world-card anywhere-href" href="/partout/">
+      <img src="/img/villes/marrakech-1280.webp" srcset="/img/villes/marrakech-480.webp 480w, /img/villes/marrakech-1280.webp 1280w" sizes="(max-width: 1000px) 100vw, 948px" width="1280" height="960" alt="" loading="lazy" decoding="async">
+      <span class="world-text"><strong data-en="The whole world, at the best price">Le monde entier, au meilleur prix</strong>
+        <span data-en="The cheapest destinations from your city, on a map.">Les destinations les moins chères depuis votre ville, sur une carte.</span>
+        <b data-en="Explore the map →">Explorer la carte →</b></span>
+    </a>
+    <h2 data-en="Explore the world">Explorer le monde</h2>
+    <p class="lead" data-en="Where to go next? Prices from your city, updated every day.">Où partir ? Les prix depuis votre ville, mis à jour chaque jour.</p>
+    <!-- VILLES:START -->
+    <div class="city-grid"><a class="city-card" href="/vols-pour-dakar/" data-hrefs="{&quot;fr&quot;: &quot;/vols-pour-dakar/&quot;, &quot;en&quot;: &quot;/en/flights-to-dakar/&quot;, &quot;es&quot;: &quot;/es/vuelos-a-dakar/&quot;, &quot;pt&quot;: &quot;/pt/voos-para-dacar/&quot;, &quot;ar&quot;: &quot;/ar/flights-to-dakar/&quot;}"><img src="/img/villes/dakar-480.webp" srcset="/img/villes/dakar-480.webp 480w, /img/villes/dakar.webp 800w" sizes="(max-width: 600px) 46vw, 230px" width="480" height="360" alt="" loading="lazy" decoding="async"><span class="city-info"><strong data-names="{&quot;en&quot;: &quot;Dakar&quot;, &quot;es&quot;: &quot;Dakar&quot;, &quot;pt&quot;: &quot;Dacar&quot;, &quot;ar&quot;: &quot;داكار&quot;}">Dakar</strong><small class="city-country" data-cc="SN">Sénégal</small><b class="city-price" data-to="DSS"></b></span></a><a class="city-card" href="/vols-pour-marrakech/" data-hrefs="{&quot;fr&quot;: &quot;/vols-pour-marrakech/&quot;, &quot;en&quot;: &quot;/en/flights-to-marrakesh/&quot;, &quot;es&quot;: &quot;/es/vuelos-a-marrakech/&quot;, &quot;pt&quot;: &quot;/pt/voos-para-marraquexe/&quot;, &quot;ar&quot;: &quot;/ar/flights-to-marrakesh/&quot;}"><img src="/img/villes/marrakech-480.webp" srcset="/img/villes/marrakech-480.webp 480w, /img/villes/marrakech.webp 800w" sizes="(max-width: 600px) 46vw, 230px" width="480" height="360" alt="" loading="lazy" decoding="async"><span class="city-info"><strong data-names="{&quot;en&quot;: &quot;Marrakesh&quot;, &quot;es&quot;: &quot;Marrakech&quot;, &quot;pt&quot;: &quot;Marraquexe&quot;, &quot;ar&quot;: &quot;مراكش&quot;}">Marrakech</strong><small class="city-country" data-cc="MA">Maroc</small><b class="city-price" data-to="RAK"></b></span></a><a class="city-card" href="/vols-pour-casablanca/" data-hrefs="{&quot;fr&quot;: &quot;/vols-pour-casablanca/&quot;, &quot;en&quot;: &quot;/en/flights-to-casablanca/&quot;, &quot;es&quot;: &quot;/es/vuelos-a-casablanca/&quot;, &quot;pt&quot;: &quot;/pt/voos-para-casablanca/&quot;, &quot;ar&quot;: &quot;/ar/flights-to-casablanca/&quot;}"><img src="/img/villes/casablanca-480.webp" srcset="/img/villes/casablanca-480.webp 480w, /img/villes/casablanca.webp 800w" sizes="(max-width: 600px) 46vw, 230px" width="480" height="360" alt="" loading="lazy" decoding="async"><span class="city-info"><strong data-names="{&quot;en&quot;: &quot;Casablanca&quot;, &quot;es&quot;: &quot;Casablanca&quot;, &quot;pt&quot;: &quot;Casablanca&quot;, &quot;ar&quot;: &quot;الدار البيضاء&quot;}">Casablanca</strong><small class="city-country" data-cc="MA">Maroc</small><b class="city-price" data-to="CMN"></b></span></a><a class="city-card" href="/vols-pour-abidjan/" data-hrefs="{&quot;fr&quot;: &quot;/vols-pour-abidjan/&quot;, &quot;en&quot;: &quot;/en/flights-to-abidjan/&quot;, &quot;es&quot;: &quot;/es/vuelos-a-abiyan/&quot;, &quot;pt&quot;: &quot;/pt/voos-para-abidjan/&quot;, &quot;ar&quot;: &quot;/ar/flights-to-abidjan/&quot;}"><img src="/img/villes/abidjan-480.webp" srcset="/img/villes/abidjan-480.webp 480w, /img/villes/abidjan.webp 800w" sizes="(max-width: 600px) 46vw, 230px" width="480" height="360" alt="" loading="lazy" decoding="async"><span class="city-info"><strong data-names="{&quot;en&quot;: &quot;Abidjan&quot;, &quot;es&quot;: &quot;Abiyán&quot;, &quot;pt&quot;: &quot;Abidjan&quot;, &quot;ar&quot;: &quot;أبيدجان&quot;}">Abidjan</strong><small class="city-country" data-cc="CI">Côte d’Ivoire</small><b class="city-price" data-to="ABJ"></b></span></a><a class="city-card" href="/vols-pour-tunis/" data-hrefs="{&quot;fr&quot;: &quot;/vols-pour-tunis/&quot;, &quot;en&quot;: &quot;/en/flights-to-tunis/&quot;, &quot;es&quot;: &quot;/es/vuelos-a-tunez/&quot;, &quot;pt&quot;: &quot;/pt/voos-para-tunis/&quot;, &quot;ar&quot;: &quot;/ar/flights-to-tunis/&quot;}"><img src="/img/villes/tunis-480.webp" srcset="/img/villes/tunis-480.webp 480w, /img/villes/tunis.webp 800w" sizes="(max-width: 600px) 46vw, 230px" width="480" height="360" alt="" loading="lazy" decoding="async"><span class="city-info"><strong data-names="{&quot;en&quot;: &quot;Tunis&quot;, &quot;es&quot;: &quot;Túnez&quot;, &quot;pt&quot;: &quot;Túnis&quot;, &quot;ar&quot;: &quot;تونس العاصمة&quot;}">Tunis</strong><small class="city-country" data-cc="TN">Tunisie</small><b class="city-price" data-to="TUN"></b></span></a><a class="city-card" href="/vols-pour-alger/" data-hrefs="{&quot;fr&quot;: &quot;/vols-pour-alger/&quot;, &quot;en&quot;: &quot;/en/flights-to-algiers/&quot;, &quot;es&quot;: &quot;/es/vuelos-a-argel/&quot;, &quot;pt&quot;: &quot;/pt/voos-para-argel/&quot;, &quot;ar&quot;: &quot;/ar/flights-to-algiers/&quot;}"><img src="/img/villes/alger-480.webp" srcset="/img/villes/alger-480.webp 480w, /img/villes/alger.webp 800w" sizes="(max-width: 600px) 46vw, 230px" width="480" height="360" alt="" loading="lazy" decoding="async"><span class="city-info"><strong data-names="{&quot;en&quot;: &quot;Algiers&quot;, &quot;es&quot;: &quot;Argel&quot;, &quot;pt&quot;: &quot;Argel&quot;, &quot;ar&quot;: &quot;الجزائر العاصمة&quot;}">Alger</strong><small class="city-country" data-cc="DZ">Algérie</small><b class="city-price" data-to="ALG"></b></span></a><a class="city-card" href="/vols-pour-istanbul/" data-hrefs="{&quot;fr&quot;: &quot;/vols-pour-istanbul/&quot;, &quot;en&quot;: &quot;/en/flights-to-istanbul/&quot;, &quot;es&quot;: &quot;/es/vuelos-a-estambul/&quot;, &quot;pt&quot;: &quot;/pt/voos-para-istambul/&quot;, &quot;ar&quot;: &quot;/ar/flights-to-istanbul/&quot;}"><img src="/img/villes/istanbul-480.webp" srcset="/img/villes/istanbul-480.webp 480w, /img/villes/istanbul.webp 800w" sizes="(max-width: 600px) 46vw, 230px" width="480" height="360" alt="" loading="lazy" decoding="async"><span class="city-info"><strong data-names="{&quot;en&quot;: &quot;Istanbul&quot;, &quot;es&quot;: &quot;Estambul&quot;, &quot;pt&quot;: &quot;Istambul&quot;, &quot;ar&quot;: &quot;إسطنبول&quot;}">Istanbul</strong><small class="city-country" data-cc="TR">Turquie</small><b class="city-price" data-to="IST"></b></span></a><a class="city-card" href="/vols-pour-dubai/" data-hrefs="{&quot;fr&quot;: &quot;/vols-pour-dubai/&quot;, &quot;en&quot;: &quot;/en/flights-to-dubai/&quot;, &quot;es&quot;: &quot;/es/vuelos-a-dubai/&quot;, &quot;pt&quot;: &quot;/pt/voos-para-dubai/&quot;, &quot;ar&quot;: &quot;/ar/flights-to-dubai/&quot;}"><img src="/img/villes/dubai-480.webp" srcset="/img/villes/dubai-480.webp 480w, /img/villes/dubai.webp 800w" sizes="(max-width: 600px) 46vw, 230px" width="480" height="360" alt="" loading="lazy" decoding="async"><span class="city-info"><strong data-names="{&quot;en&quot;: &quot;Dubai&quot;, &quot;es&quot;: &quot;Dubái&quot;, &quot;pt&quot;: &quot;Dubai&quot;, &quot;ar&quot;: &quot;دبي&quot;}">Dubaï</strong><small class="city-country" data-cc="AE">Émirats arabes unis</small><b class="city-price" data-to="DXB"></b></span></a><a class="city-card" href="/?type=vols&amp;to=LIS" data-hrefs="{&quot;fr&quot;: &quot;/?type=vols&amp;to=LIS&quot;, &quot;en&quot;: &quot;/?type=vols&amp;to=LIS&amp;lang=en&quot;, &quot;es&quot;: &quot;/?type=vols&amp;to=LIS&amp;lang=es&quot;, &quot;pt&quot;: &quot;/?type=vols&amp;to=LIS&amp;lang=pt&quot;, &quot;ar&quot;: &quot;/?type=vols&amp;to=LIS&amp;lang=ar&quot;}"><img src="/img/villes/lisbonne-480.webp" srcset="/img/villes/lisbonne-480.webp 480w, /img/villes/lisbonne.webp 800w" sizes="(max-width: 600px) 46vw, 230px" width="480" height="360" alt="" loading="lazy" decoding="async"><span class="city-info"><strong data-names="{&quot;en&quot;: &quot;Lisbon&quot;, &quot;es&quot;: &quot;Lisboa&quot;, &quot;pt&quot;: &quot;Lisboa&quot;, &quot;ar&quot;: &quot;لشبونة&quot;}">Lisbonne</strong><small class="city-country" data-cc="PT">Portugal</small><b class="city-price" data-to="LIS"></b></span></a><a class="city-card" href="/?type=vols&amp;to=BCN" data-hrefs="{&quot;fr&quot;: &quot;/?type=vols&amp;to=BCN&quot;, &quot;en&quot;: &quot;/?type=vols&amp;to=BCN&amp;lang=en&quot;, &quot;es&quot;: &quot;/?type=vols&amp;to=BCN&amp;lang=es&quot;, &quot;pt&quot;: &quot;/?type=vols&amp;to=BCN&amp;lang=pt&quot;, &quot;ar&quot;: &quot;/?type=vols&amp;to=BCN&amp;lang=ar&quot;}"><img src="/img/villes/barcelone-480.webp" srcset="/img/villes/barcelone-480.webp 480w, /img/villes/barcelone.webp 800w" sizes="(max-width: 600px) 46vw, 230px" width="480" height="360" alt="" loading="lazy" decoding="async"><span class="city-info"><strong data-names="{&quot;en&quot;: &quot;Barcelona&quot;, &quot;es&quot;: &quot;Barcelona&quot;, &quot;pt&quot;: &quot;Barcelona&quot;, &quot;ar&quot;: &quot;برشلونة&quot;}">Barcelone</strong><small class="city-country" data-cc="ES">Espagne</small><b class="city-price" data-to="BCN"></b></span></a><a class="city-card" href="/?type=vols&amp;to=JFK" data-hrefs="{&quot;fr&quot;: &quot;/?type=vols&amp;to=JFK&quot;, &quot;en&quot;: &quot;/?type=vols&amp;to=JFK&amp;lang=en&quot;, &quot;es&quot;: &quot;/?type=vols&amp;to=JFK&amp;lang=es&quot;, &quot;pt&quot;: &quot;/?type=vols&amp;to=JFK&amp;lang=pt&quot;, &quot;ar&quot;: &quot;/?type=vols&amp;to=JFK&amp;lang=ar&quot;}"><img src="/img/villes/new-york-480.webp" srcset="/img/villes/new-york-480.webp 480w, /img/villes/new-york.webp 800w" sizes="(max-width: 600px) 46vw, 230px" width="480" height="360" alt="" loading="lazy" decoding="async"><span class="city-info"><strong data-names="{&quot;en&quot;: &quot;New York&quot;, &quot;es&quot;: &quot;Nueva York&quot;, &quot;pt&quot;: &quot;Nova Iorque&quot;, &quot;ar&quot;: &quot;نيويورك&quot;}">New York</strong><small class="city-country" data-cc="US">États-Unis</small><b class="city-price" data-to="JFK"></b></span></a><a class="city-card" href="/vols-pour-le-caire/" data-hrefs="{&quot;fr&quot;: &quot;/vols-pour-le-caire/&quot;, &quot;en&quot;: &quot;/en/flights-to-cairo/&quot;, &quot;es&quot;: &quot;/es/vuelos-a-el-cairo/&quot;, &quot;pt&quot;: &quot;/pt/voos-para-cairo/&quot;, &quot;ar&quot;: &quot;/ar/flights-to-cairo/&quot;}"><img src="/img/villes/le-caire-480.webp" srcset="/img/villes/le-caire-480.webp 480w, /img/villes/le-caire.webp 800w" sizes="(max-width: 600px) 46vw, 230px" width="480" height="360" alt="" loading="lazy" decoding="async"><span class="city-info"><strong data-names="{&quot;en&quot;: &quot;Cairo&quot;, &quot;es&quot;: &quot;El Cairo&quot;, &quot;pt&quot;: &quot;Cairo&quot;, &quot;ar&quot;: &quot;القاهرة&quot;}">Le Caire</strong><small class="city-country" data-cc="EG">Égypte</small><b class="city-price" data-to="CAI"></b></span></a><a class="city-card" href="/vols-pour-bamako/" data-hrefs="{&quot;fr&quot;: &quot;/vols-pour-bamako/&quot;, &quot;en&quot;: &quot;/en/flights-to-bamako/&quot;, &quot;es&quot;: &quot;/es/vuelos-a-bamako/&quot;, &quot;pt&quot;: &quot;/pt/voos-para-bamako/&quot;, &quot;ar&quot;: &quot;/ar/flights-to-bamako/&quot;}"><img src="/img/villes/bamako-480.webp" srcset="/img/villes/bamako-480.webp 480w, /img/villes/bamako.webp 800w" sizes="(max-width: 600px) 46vw, 230px" width="480" height="360" alt="" loading="lazy" decoding="async"><span class="city-info"><strong data-names="{&quot;en&quot;: &quot;Bamako&quot;, &quot;es&quot;: &quot;Bamako&quot;, &quot;pt&quot;: &quot;Bamako&quot;, &quot;ar&quot;: &quot;باماكو&quot;}">Bamako</strong><small class="city-country" data-cc="ML">Mali</small><b class="city-price" data-to="BKO"></b></span></a><a class="city-card" href="/vols-pour-djerba/" data-hrefs="{&quot;fr&quot;: &quot;/vols-pour-djerba/&quot;, &quot;en&quot;: &quot;/en/flights-to-djerba/&quot;, &quot;es&quot;: &quot;/es/vuelos-a-yerba/&quot;, &quot;pt&quot;: &quot;/pt/voos-para-djerba/&quot;, &quot;ar&quot;: &quot;/ar/flights-to-djerba/&quot;}"><img src="/img/villes/djerba-480.webp" srcset="/img/villes/djerba-480.webp 480w, /img/villes/djerba.webp 800w" sizes="(max-width: 600px) 46vw, 230px" width="480" height="360" alt="" loading="lazy" decoding="async"><span class="city-info"><strong data-names="{&quot;en&quot;: &quot;Djerba&quot;, &quot;es&quot;: &quot;Yerba&quot;, &quot;pt&quot;: &quot;Djerba&quot;, &quot;ar&quot;: &quot;جربة&quot;}">Djerba</strong><small class="city-country" data-cc="TN">Tunisie</small><b class="city-price" data-to="DJE"></b></span></a><a class="city-card" href="/vols-pour-tanger/" data-hrefs="{&quot;fr&quot;: &quot;/vols-pour-tanger/&quot;, &quot;en&quot;: &quot;/en/flights-to-tangier/&quot;, &quot;es&quot;: &quot;/es/vuelos-a-tanger/&quot;, &quot;pt&quot;: &quot;/pt/voos-para-tanger/&quot;, &quot;ar&quot;: &quot;/ar/flights-to-tangier/&quot;}"><img src="/img/villes/tanger-480.webp" srcset="/img/villes/tanger-480.webp 480w, /img/villes/tanger.webp 800w" sizes="(max-width: 600px) 46vw, 230px" width="480" height="360" alt="" loading="lazy" decoding="async"><span class="city-info"><strong data-names="{&quot;en&quot;: &quot;Tangier&quot;, &quot;es&quot;: &quot;Tánger&quot;, &quot;pt&quot;: &quot;Tânger&quot;, &quot;ar&quot;: &quot;طنجة&quot;}">Tanger</strong><small class="city-country" data-cc="MA">Maroc</small><b class="city-price" data-to="TNG"></b></span></a><a class="city-card" href="/vols-pour-accra/" data-hrefs="{&quot;fr&quot;: &quot;/vols-pour-accra/&quot;, &quot;en&quot;: &quot;/en/flights-to-accra/&quot;, &quot;es&quot;: &quot;/es/vuelos-a-acra/&quot;, &quot;pt&quot;: &quot;/pt/voos-para-acra/&quot;, &quot;ar&quot;: &quot;/ar/flights-to-accra/&quot;}"><img src="/img/villes/accra-480.webp" srcset="/img/villes/accra-480.webp 480w, /img/villes/accra.webp 800w" sizes="(max-width: 600px) 46vw, 230px" width="480" height="360" alt="" loading="lazy" decoding="async"><span class="city-info"><strong data-names="{&quot;en&quot;: &quot;Accra&quot;, &quot;es&quot;: &quot;Acra&quot;, &quot;pt&quot;: &quot;Acra&quot;, &quot;ar&quot;: &quot;أكرا&quot;}">Accra</strong><small class="city-country" data-cc="GH">Ghana</small><b class="city-price" data-to="ACC"></b></span></a></div>
+    <!-- VILLES:END -->
+    <p class="credits"><span data-en="Photos: Wikimedia Commons, free licences.">Photos : Wikimedia Commons, licences libres.</span> <a href="/credits-photos/" data-en="Photo credits">Crédits des photos</a></p>
+  </section>
+
   <section class="block" id="destinations">
     <h2 data-en="Popular routes">Destinations populaires</h2>
     <p class="lead" data-en="One click fills in the search with dates three weeks from now. Change them if needed.">Un clic remplit la recherche avec des dates dans trois semaines. Modifiez-les ensuite si besoin.</p>
-    <div class="dests" id="dests"></div>
-  </section>
-
-  <section class="block anywhere-teaser">
-    <a class="teaser-card anywhere-href" href="/partout/">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M2.5 12h19M12 2.5c2.6 2.6 3.9 5.8 3.9 9.5s-1.3 6.9-3.9 9.5c-2.6-2.6-3.9-5.8-3.9-9.5S9.4 5.1 12 2.5z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
-      <span><strong data-en="No idea where to go?">Pas d’idée de destination ?</strong>
-      <span data-en="See prices everywhere in the world on a map, from your city.">Voyez les prix partout dans le monde sur une carte, depuis votre ville.</span></span>
-      <b aria-hidden="true">→</b>
-    </a>
+    <div class="dests" id="dests" data-photos="{&quot;DSS&quot;: &quot;/img/villes/dakar-480.webp&quot;, &quot;RAK&quot;: &quot;/img/villes/marrakech-480.webp&quot;, &quot;CMN&quot;: &quot;/img/villes/casablanca-480.webp&quot;, &quot;ABJ&quot;: &quot;/img/villes/abidjan-480.webp&quot;, &quot;TUN&quot;: &quot;/img/villes/tunis-480.webp&quot;, &quot;ALG&quot;: &quot;/img/villes/alger-480.webp&quot;, &quot;IST&quot;: &quot;/img/villes/istanbul-480.webp&quot;, &quot;DXB&quot;: &quot;/img/villes/dubai-480.webp&quot;, &quot;LIS&quot;: &quot;/img/villes/lisbonne-480.webp&quot;, &quot;BCN&quot;: &quot;/img/villes/barcelone-480.webp&quot;, &quot;JFK&quot;: &quot;/img/villes/new-york-480.webp&quot;, &quot;CAI&quot;: &quot;/img/villes/le-caire-480.webp&quot;, &quot;BKO&quot;: &quot;/img/villes/bamako-480.webp&quot;, &quot;DJE&quot;: &quot;/img/villes/djerba-480.webp&quot;, &quot;TNG&quot;: &quot;/img/villes/tanger-480.webp&quot;, &quot;ACC&quot;: &quot;/img/villes/accra-480.webp&quot;}"></div>
   </section>
 
   <section class="block">
@@ -877,6 +985,7 @@ footer { margin-top: 72px; }
     <p data-en="Prices and availability change constantly: always check the final fare, including baggage and fees, before paying.">Les prix et disponibilités changent en permanence : vérifiez toujours le tarif final, bagages et frais inclus, avant de payer.</p>
     <p class="credits" data-en="Airport data: OurAirports (public domain). Prices: Aviasales via Travelpayouts.">Données des aéroports : OurAirports (domaine public). Prix : Aviasales via Travelpayouts.</p>
   </footer>
+</div>
 </main>
 
 <button type="button" class="fab" id="fab" hidden>
