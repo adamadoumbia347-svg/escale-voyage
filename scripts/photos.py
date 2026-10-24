@@ -25,27 +25,28 @@ DATA = ROOT / "site" / "data" / "photos.json"
 API = "https://commons.wikimedia.org/w/api.php"
 UA = "EscalePhotos/1.0 (https://escale.live; comparateur de vols)"
 
-# code aéroport, nom (fr), recherches Commons (de la plus précise à la plus large), fichier imposé (facultatif)
+# code aéroport, nom (fr), recherches Commons (de la plus précise à la plus large),
+# mots obligatoires dans le titre de la photo (évite les photos d'un autre lieu), fichier imposé (facultatif)
 CITIES = [
-    ("DSS", "Dakar", ["Dakar Corniche", "Dakar Senegal city"], ""),
-    ("RAK", "Marrakech", ["Koutoubia Marrakech", "Jemaa el-Fnaa"], ""),
-    ("CMN", "Casablanca", ["Hassan II Mosque Casablanca", "Casablanca Morocco"], ""),
-    ("ABJ", "Abidjan", ["Abidjan Plateau", "Abidjan lagoon"], ""),
-    ("TUN", "Tunis", ["Sidi Bou Said", "Tunis medina"], ""),
-    ("ALG", "Alger", ["Algiers bay", "Notre-Dame d'Afrique Algiers"], ""),
-    ("IST", "Istanbul", ["Istanbul Bosphorus", "Hagia Sophia Istanbul"], ""),
-    ("DXB", "Dubaï", ["Dubai skyline", "Burj Khalifa"], ""),
-    ("LIS", "Lisbonne", ["Lisbon Alfama", "Lisbon tram"], ""),
-    ("BCN", "Barcelone", ["Sagrada Familia", "Barcelona skyline"], ""),
-    ("JFK", "New York", ["Manhattan skyline", "New York City skyline"], ""),
-    ("CAI", "Le Caire", ["Giza pyramids", "Cairo skyline"], ""),
-    ("BKO", "Bamako", ["Bamako Niger river", "Bamako Mali"], ""),
-    ("DJE", "Djerba", ["Djerba beach", "Djerba Houmt Souk"], ""),
-    ("TNG", "Tanger", ["Tangier medina", "Tangier Morocco"], ""),
-    ("ACC", "Accra", ["Accra Independence Square", "Accra Ghana city"], ""),
+    ("DSS", "Dakar", ["Dakar Corniche", "Dakar Senegal city"], "dakar|gor[ée]e", ""),
+    ("RAK", "Marrakech", ["Koutoubia Marrakech", "Jemaa el-Fnaa"], "marrak|koutoubia|jemaa", ""),
+    ("CMN", "Casablanca", ["Hassan II Mosque", "Mosquée Hassan II Casablanca", "Casablanca corniche"], "hassan|casablanca", ""),
+    ("ABJ", "Abidjan", ["Abidjan Plateau skyline", "Cathédrale Saint-Paul Abidjan", "Abidjan lagune Ebrié"], "abidjan|plateau|saint-paul", ""),
+    ("TUN", "Tunis", ["Sidi Bou Said view", "Sidi Bou Said blue", "Tunis medina"], "sidi.?bou|tunis", ""),
+    ("ALG", "Alger", ["Algiers bay", "Notre-Dame d'Afrique Algiers"], "alg|afrique", ""),
+    ("IST", "Istanbul", ["Hagia Sophia exterior", "Blue Mosque Istanbul", "Galata Tower Istanbul", "Istanbul skyline"], "hagia|sophia|ayasofya|blue mosque|sultan ahmed|galata|istanbul", ""),
+    ("DXB", "Dubaï", ["Burj Khalifa", "Dubai Marina skyline", "Dubai skyline"], "burj|dubai", ""),
+    ("LIS", "Lisbonne", ["Lisbon Alfama", "Lisbon tram"], "lisbo|alfama", ""),
+    ("BCN", "Barcelone", ["Sagrada Familia exterior", "Barcelona panorama", "Park Güell"], "sagrada|barcelon|g[uü]ell", ""),
+    ("JFK", "New York", ["Manhattan skyline", "New York City skyline"], "manhattan|new york", ""),
+    ("CAI", "Le Caire", ["Giza pyramids", "Cairo skyline"], "giza|pyramid|cairo", ""),
+    ("BKO", "Bamako", ["Bamako skyline", "Pont des Martyrs Bamako", "Grande Mosquée de Bamako", "Bamako Niger"], "bamako", ""),
+    ("DJE", "Djerba", ["Djerba beach", "Djerba plage", "Houmt Souk Djerba", "Djerba mosque"], "djerba|jerba|houmt", ""),
+    ("TNG", "Tanger", ["Tangier kasbah", "Tanger médina vue", "Tangier bay", "Cap Spartel"], "tang[ie]|spartel|kasbah", ""),
+    ("ACC", "Accra", ["Accra Independence Square", "Accra Ghana city"], "accra|independence", ""),
 ]
 OK_LICENSE = re.compile(r"^(public domain|pd|cc0|cc by(-sa)?( \d\.\d)?)", re.I)
-BAD_WORDS = re.compile(r"map|flag|logo|plan|coat of arms|diagram|stamp|banknote|poster|\.svg|\.png|\.gif|\.tif", re.I)
+BAD_WORDS = re.compile(r"map|flag|logo|plan|coat of arms|diagram|stamp|banknote|poster|interior|inside|ceiling|vault|nave|portrait|ferry|ship|boat|bateau|autoroute|motorway|highway|night|nuit|\\.svg|\\.png|\\.gif|\\.tif", re.I)
 
 
 def api(params):
@@ -78,10 +79,10 @@ def info(titles):
     return sorted(out, key=lambda x: order.get(x["title"], 99))
 
 
-def acceptable(x):
+def acceptable(x, must):
     ratio = x["width"] / max(1, x["height"])
     return (x["mime"] == "image/jpeg" and x["width"] >= 1600 and 1.25 <= ratio <= 2.2
-            and OK_LICENSE.match(x["license"] or "") and not BAD_WORDS.search(x["title"]))
+            and OK_LICENSE.match(x["license"] or "") and not BAD_WORDS.search(x["title"]) and re.search(must, x["title"], re.I))
 
 
 def search(q, quality):
@@ -90,7 +91,7 @@ def search(q, quality):
     return [r["title"] for r in d.get("query", {}).get("search", [])]
 
 
-def pick(queries, pinned):
+def pick(queries, must, pinned):
     if pinned:
         got = info(["File:" + pinned])
         if got and OK_LICENSE.match(got[0]["license"] or ""):
@@ -101,7 +102,7 @@ def pick(queries, pinned):
             titles = search(q, quality)
             if titles:
                 for x in info(titles):
-                    if acceptable(x):
+                    if acceptable(x, must):
                         return x
             time.sleep(0.5)
     return None
@@ -132,11 +133,11 @@ def main():
     only = set(sys.argv[1:])
     old = {p["code"]: p for p in json.loads(DATA.read_text(encoding="utf-8"))} if DATA.exists() else {}
     res = dict(old)
-    for code, city, queries, pinned in CITIES:
+    for code, city, queries, must, pinned in CITIES:
         if only and code not in only:
             continue
         try:
-            x = pick(queries, pinned)
+            x = pick(queries, must, pinned)
         except Exception as e:  # noqa: BLE001
             print(f"{code} {city} : erreur {e}")
             continue
