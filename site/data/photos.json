@@ -48,11 +48,11 @@
   "city": "Tunis",
   "img": "/img/villes/tunis.webp",
   "img_small": "/img/villes/tunis-480.webp",
-  "file": "File:Sidi Bou Said Roundabout Fountain 2010.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Sidi_Bou_Said_Roundabout_Fountain_2010.jpg",
-  "author": "Cayambe",
-  "license": "CC BY-SA 3.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/3.0"
+  "file": "File:Super moon over Medina of Tunis.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Super_moon_over_Medina_of_Tunis.jpg",
+  "author": "IssamBarhoumi",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
  },
  {
   "code": "ALG",
@@ -81,11 +81,11 @@
   "city": "Dubaï",
   "img": "/img/villes/dubai.webp",
   "img_small": "/img/villes/dubai-480.webp",
-  "file": "File:Jaddaf Skyline View Dubai Jul23 A7C 05226.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Jaddaf_Skyline_View_Dubai_Jul23_A7C_05226.jpg",
-  "author": "This Photo was taken by Timothy A. Gonsalves . Feel free to use my photos, but please mention me as the author. I would ",
-  "license": "CC BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  "file": "File:Burj Khalifa (16260269606).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Burj_Khalifa_(16260269606).jpg",
+  "author": "Laika ac",
+  "license": "CC BY-SA 2.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/2.0"
  },
  {
   "code": "LIS",
@@ -103,9 +103,9 @@
   "city": "Barcelone",
   "img": "/img/villes/barcelone.webp",
   "img_small": "/img/villes/barcelone-480.webp",
-  "file": "File:Estadi Olímpic Lluís Companys - Barcelona, Spain - Jan 2007.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Estadi_Ol%C3%ADmpic_Llu%C3%ADs_Companys_-_Barcelona,_Spain_-_Jan_2007.jpg",
-  "author": "Diliff",
+  "file": "File:Sagrada Família 2010.JPG",
+  "page": "https://commons.wikimedia.org/wiki/File:Sagrada_Fam%C3%ADlia_2010.JPG",
+  "author": "Jopparn",
   "license": "CC BY-SA 3.0",
   "license_url": "https://creativecommons.org/licenses/by-sa/3.0"
  },
