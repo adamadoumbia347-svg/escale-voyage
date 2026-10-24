@@ -278,9 +278,8 @@
   paintMonthOptions();
   const DEFAULT_FROM = "Paris (CDG)";
   $("f-from").value = store.get("escale.from") || DEFAULT_FROM;
-  $("f-to").value = "Bamako (BKO)";
-  $("h-dest").value = "Dakar";
-  $("c-pick").value = "Casablanca (CMN)";
+  // Pas de destination imposée : le départ est l'aéroport le plus proche du visiteur, il écrit lui-même où il va
+  $("c-pick").value = $("f-from").value;
   const link = (a, b, gap) => $(a).addEventListener("change", () => {
     $(b).min = $(a).value;
     if (!$(b).value || $(b).value <= $(a).value) $(b).value = addDays($(a).value, gap);
@@ -1317,6 +1316,7 @@
       const userChose = urlHadParams || store.get("escale.from");
       if (near && !userChose && $("f-from").value === DEFAULT_FROM) {
         $("f-from").value = labelOf(near[0]);
+        if ($("c-pick").value === DEFAULT_FROM) $("c-pick").value = labelOf(near[0]);
         if (currentTab === "vols") rerender();
       }
       const from = place($("f-from").value);

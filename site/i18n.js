@@ -386,4 +386,5 @@ window.ESCALE_I18N = {
   "Photos: Wikimedia Commons, free licences.": ["Fotos: Wikimedia Commons, licencias libres.", "Fotos: Wikimedia Commons, licenças livres.", "الصور: ويكيميديا كومنز، تراخيص حرة."],
   "Photo credits": ["Créditos de las fotos", "Créditos das fotos", "حقوق الصور"],
   "{a} · from {p}": ["{a} · desde {p}", "{a} · desde {p}", "{a} · من {p}"],
+  "Where to?": ["¿Adónde vas?", "Para onde vai?", "إلى أين تسافر؟"],
 };
