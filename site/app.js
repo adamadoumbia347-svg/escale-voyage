@@ -81,7 +81,8 @@
       try { el.textContent = LANG === "fr" ? el.dataset.fr : JSON.parse(el.dataset.names)[LANG] || el.dataset.fr; } catch (e) {}
     });
     document.querySelectorAll("[data-hrefs]").forEach((a) => { try { a.href = JSON.parse(a.dataset.hrefs)[LANG] || a.href; } catch (e) {} });
-    document.querySelectorAll(".city-country[data-cc]").forEach((el) => { if (el.dataset.cc) el.textContent = countryName(el.dataset.cc); });
+    // Noms des pays déjà écrits en français dans la page : traduction seulement pour les autres langues
+    if (LANG !== "fr" || document.querySelector(".city-country[data-tr]")) document.querySelectorAll(".city-country[data-cc]").forEach((el) => { if (el.dataset.cc) { el.textContent = countryName(el.dataset.cc); el.dataset.tr = "1"; } });
   }
 
   // ---------- Devise ----------
@@ -1213,6 +1214,8 @@
   const TABS = ["vols", "hotels", "voitures"];
   let currentTab = "vols";
   function rerender() {
+    // Rien à recalculer tant qu'aucune recherche n'a été lancée (les résultats ne sont pas affichés)
+    if (!searched) return;
     const was = booting; booting = true;
     $("form-" + currentTab).dispatchEvent(new Event("submit", { cancelable: true }));
     booting = was;
@@ -1292,7 +1295,9 @@
   // ---------- Démarrage ----------
   $("cur").value = CUR;
   syncCurQuick();
-  applyLang(); paintDests(); paintFaq(); paintChecklist(); paintThemeBtn();
+  applyLang(); paintDests(); paintThemeBtn();
+  // Questions fréquentes et check-list (bas de page) : préparées quand le navigateur est libre
+  (window.requestIdleCallback || ((f) => setTimeout(f, 200)))(() => { paintFaq(); paintChecklist(); });
   let start = applyUrl() || (location.hash || "").slice(1);
   if (urlHadParams) searched = true;
   if (!TABS.includes(start)) start = store.get("escale.tab") || "vols";

@@ -97,6 +97,8 @@
     if (c === "accept") activate();
     else if (c === null) show();
   }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
-  else start();
+  // Script chargé en « defer » : la page est déjà lue, on affiche le bandeau tout de suite, sans attendre les autres scripts
+  // (sinon il apparaît tard et Google le compte comme le plus gros élément affiché, ce qui pénalise la vitesse mesurée)
+  if (document.body) start();
+  else document.addEventListener("DOMContentLoaded", start);
 })();

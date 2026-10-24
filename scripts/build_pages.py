@@ -510,6 +510,12 @@ def main():
         f'<a href="/{l}/" hreflang="{l}" lang="{l}">{build_i18n.NAMES[l]}</a>' for l in build_i18n.LANGS) + "</p>"
     s = re.sub(r"<!-- TRAVELPAYOUTS:START -->.*?<!-- TRAVELPAYOUTS:END -->",
                lambda m: "<!-- TRAVELPAYOUTS:START -->\n" + TRAVELPAYOUTS + "\n<!-- TRAVELPAYOUTS:END -->", s, flags=re.S)
+    # Accueil : bandeau des cookies écrit dans la page (fin du <body>) au lieu de /consent.js chargé à part,
+    # pour qu'il s'affiche avec le reste de la page (sinon il arrive tard et ralentit la vitesse mesurée par Google)
+    s = s.replace('<script src="/consent.js" defer></script>', "")
+    consent = (SITE / "consent.js").read_text(encoding="utf-8").strip()
+    s = re.sub(r"\n?<!-- CONSENT:START -->.*?<!-- CONSENT:END -->", "", s, flags=re.S)
+    s = s.replace("</body>", "<!-- CONSENT:START -->\n<script>\n" + consent + "\n</script>\n<!-- CONSENT:END -->\n</body>", 1)
     s = re.sub(r"<!-- ROUTES:START -->.*?<!-- ROUTES:END -->",
                lambda m: "<!-- ROUTES:START -->\n    " + links + "\n    <!-- ROUTES:END -->", s, flags=re.S)
     # « Explorer le monde » : cartes photo des villes ; photos aussi sur les cartes « Destinations populaires »
