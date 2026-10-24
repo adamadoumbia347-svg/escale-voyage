@@ -46,7 +46,7 @@ CITIES = [
     ("ACC", "Accra", ["Accra Independence Square", "Accra Ghana city"], "accra|independence", ""),
 ]
 OK_LICENSE = re.compile(r"^(public domain|pd|cc0|cc by(-sa)?( \d\.\d)?)", re.I)
-BAD_WORDS = re.compile(r"map|flag|logo|plan|coat of arms|diagram|stamp|banknote|poster|interior|inside|ceiling|vault|nave|portrait|ferry|ship|boat|bateau|autoroute|motorway|highway|night|nuit|\\.svg|\\.png|\\.gif|\\.tif", re.I)
+BAD_WORDS = re.compile(r"map|flag|logo|plan|coat of arms|diagram|stamp|banknote|poster|interior|inside|ceiling|vault|nave|portrait|ferry|ship|boat|bateau|autoroute|motorway|highway|night|nuit|\.svg|\.png|\.gif|\.tif", re.I)
 
 
 def api(params):
