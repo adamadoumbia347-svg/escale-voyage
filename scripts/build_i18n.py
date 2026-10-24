@@ -250,6 +250,7 @@ STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.8
 PLANE = '<svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" fill="currentColor"/></svg>'
 
 
+HUB_LINK = {'en': 'All flights to {b}', 'es': 'Todos los vuelos a {b}', 'pt': 'Todos os voos para {b}', 'ar': 'كل الرحلات إلى {b}'}
 FAV_LABEL = {"fr": "Ajouter aux favoris", "en": "Add to favorites", "es": "Añadir a favoritos", "pt": "Adicionar aos favoritos", "ar": "أضف إلى المفضلة"}
 
 
@@ -431,7 +432,7 @@ def build(site, ctx):
 <ul class="links">
   <li><a href="{E(sky)}" target="_blank" rel="noopener noreferrer">{E(u["sky"])}</a></li>
   <li><a href="{E(hotels_l)}">{E(u["hotels_in"].format(b=b))}</a></li>
-  <li><a href="{E(cars_l)}">{E(u["cars_in"].format(b=b))}</a></li>
+  <li><a href="{E(cars_l)}">{E(u["cars_in"].format(b=b))}</a></li>{f'<li><a href="/{ctx["hubs"][ct][lang]}/">{E(HUB_LINK[lang].format(b=b))}</a></li>' if ct in ctx.get("hubs", {}) else ''}
 </ul></section>
 {extras_html(site, lang, b, city(ct, "en"), to)}
 <section class="faq"><h2>{E(u["faq_h"])}</h2>

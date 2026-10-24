@@ -263,3 +263,22 @@ a.cal-day { color: var(--ink); }
 .fav-remove:hover { color: #c0362c; border-color: #c0362c; }
 .fav-empty { color: var(--muted); border: 1px dashed var(--line); border-radius: 14px; padding: 28px 20px; text-align: center; max-width: none; }
 .fav-btn { font: 700 15px/1 var(--f-body); }
+
+/* Pages « destination » : tous les vols vers une ville */
+.hub-table { width: 100%; border-collapse: collapse; font-size: 15px; margin-top: 12px; }
+.hub-table th, .hub-table td { padding: 12px 8px; border-bottom: 1px solid var(--line); text-align: start; vertical-align: middle; }
+.hub-table thead th { font: 600 13px/1.2 var(--f-body); color: var(--muted); }
+.hub-table tbody th a { font-weight: 700; color: var(--ink); text-decoration: none; }
+.hub-table tbody th a:hover { color: var(--accent); }
+.hub-code { color: var(--muted); font-size: 12px; font-weight: 600; margin-inline-start: 4px; }
+.hub-price { white-space: nowrap; min-width: 6em; }
+.hub-price strong { color: var(--ok); font-size: 17px; }
+.hub-table td:last-child { text-align: end; }
+@media (max-width: 600px) {
+  .hub-table thead { display: none; }
+  .hub-table tr { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .hub-table th, .hub-table td { border: 0; padding: 0; }
+  .hub-table td:nth-child(2) { grid-column: 1; color: var(--muted); font-size: 14px; }
+  .hub-table .hub-price { grid-row: 1; grid-column: 2; text-align: end; }
+  .hub-table td:last-child { grid-column: 2; grid-row: 2; }
+}

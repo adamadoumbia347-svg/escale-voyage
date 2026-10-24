@@ -16,6 +16,7 @@ import urllib.parse
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import build_i18n  # noqa: E402
 import explore_pages  # noqa: E402
+import hubs  # noqa: E402
 import routes_extra  # noqa: E402
 import translations  # noqa: E402
 
@@ -310,7 +311,7 @@ def route_page(r):
 <ul class="links">
   <li><a href="{E(sky)}" target="_blank" rel="noopener noreferrer">Prix du mois sur Skyscanner</a></li>
   <li><a href="{E(hotels)}">Hôtels à {E(ct)}</a></li>
-  <li><a href="{E(cars)}">Location de voiture à {E(ct)}</a></li>
+  <li><a href="{E(cars)}">Location de voiture à {E(ct)}</a></li>{f'<li><a href="/{HUBS[ct]["fr"]}/">Tous les vols pour {E(ct)}</a></li>' if ct in HUBS else ''}
 </ul></section>
 {build_i18n.extras_html(SITE, "fr", ct, build_i18n.city(ct, "en"), to)}
 <section class="faq"><h2>Questions fréquentes</h2>
@@ -320,6 +321,10 @@ def route_page(r):
     paths = {"fr": s, **{l: build_i18n.route_path(r, l) for l in build_i18n.LANGS}}
     og = f"og/{fr}-{to}.jpg" if (SITE / "og" / f"{fr}-{to}.jpg").exists() else "og-image.png"
     return page(s, title, desc, hero, body, ld, paths, og)
+
+# Pages « destination » (scripts/hubs.py) : {ville d'arrivée : {langue : chemin}}
+HUBS = {}
+
 
 def related(r, n=9):
     """Trajets proches : même destination, même pays ou même ville de départ, puis le reste."""
@@ -458,6 +463,7 @@ def main():
     airports_all = {a[0]: a for a in __import__("json").loads((SITE / "data" / "airports.json").read_text(encoding="utf-8"))}
     _, dist = routes_extra.extend(ROUTES, translations, airports_all)
     DISTANCES.update(dist)
+    HUBS.update(hubs.hub_paths(ROUTES))
     urls = [f"{DOMAIN}/"]
     # Liste des trajets (utilisée par scripts/make_og.js pour les images de partage)
     (SITE / "data" / "routes.json").write_text(__import__("json").dumps(
@@ -466,9 +472,11 @@ def main():
     urls += [hotel_page(h) for h in HOTELS]
     airports = {a[0]: a for a in __import__("json").loads((SITE / "data" / "airports.json").read_text(encoding="utf-8"))}
     ctx = dict(domain=DOMAIN, tp=TRAVELPAYOUTS, routes=ROUTES, hotels=HOTELS, route_slug=route_slug, hotel_slug=hotel_slug,
-               airports=airports, related=related, distances=DISTANCES)
+               airports=airports, related=related, distances=DISTANCES, hubs=HUBS)
     i18n_urls, route_paths, hotel_paths = build_i18n.build(SITE, ctx)
     explore_pages.build_favs(SITE, ctx)  # pages personnelles : hors du plan du site
+    hub_urls, _ = hubs.build_hubs(SITE, ctx, route_paths, hotel_paths)
+    urls += hub_urls
     urls += i18n_urls + build_i18n.build_indexes(SITE, ctx, route_paths, hotel_paths) + build_i18n.build_deals(SITE, ctx) + build_i18n.build_guides(SITE, ctx) + build_i18n.build_about(SITE, ctx) + build_i18n.build_fetes(SITE, ctx) + explore_pages.build_anywhere(SITE, ctx)
     urls += legal_pages()
 

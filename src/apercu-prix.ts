@@ -6,7 +6,7 @@ import { Ctx, esc, pricesForDates } from "./_lib/common"
 // - section « Prix repérés récemment » : le prix le plus bas pour chacun des 6 prochains mois, avec une phrase de résumé
 // Les prix (Travelpayouts) sont gardés 6 heures dans le cache de Cloudflare. Sans réponse rapide, la page part telle quelle
 // et route-prices.js prend le relais dans le navigateur. Les chemins concernés sont listés dans wrangler.jsonc (run_worker_first).
-const PAGES = /^\/(vol-|en\/flights-|es\/vuelos-|pt\/voos-|ar\/flights-)/
+const PAGES = /^\/(vol-|vols-pour-|en\/flights-|es\/vuelos-|pt\/voos-|ar\/flights-)/
 const MONTHS = 6
 const WAIT_MS = 2500
 const CACHE_S = 6 * 3600
@@ -29,9 +29,11 @@ const L: Record<string, { loc: string; from: string; hero: string; direct: strin
 
 // Prix le plus bas par mois de départ (6 prochains mois), depuis le cache Cloudflare ou Travelpayouts.
 // null = service indisponible (rien n'est gardé en cache) ; [] = aucun prix connu pour ce trajet.
+const cacheKey = (from: string, to: string) => new Request(`https://escale.live/__prix-trajet/${from}-${to}`)
+
 async function routeMonths(ctx: Ctx, from: string, to: string): Promise<Month[] | null> {
   const cache = (globalThis as any).caches?.default
-  const key = new Request(`https://escale.live/__prix-trajet/${from}-${to}`)
+  const key = cacheKey(from, to)
   if (cache) {
     const hit = await cache.match(key)
     if (hit) return hit.json()
@@ -82,6 +84,26 @@ function render(html: string, from: string, to: string, rows: Month[]) {
     .replace(/<ul class="price-list"><\/ul>/, `<p class="price-summary">${esc(summary)}</p><ul class="price-list">${items}</ul>`)
 }
 
+// Pages « destination » (tous les vols vers une ville) : chaque ligne reçoit le prix déjà connu du trajet (cache des pages trajets).
+// Les trajets pas encore en cache sont préparés en arrière-plan (3 par visite) ; hub.js complète dans le navigateur.
+async function fillHub(ctx: Ctx, html: string) {
+  const cache = (globalThis as any).caches?.default
+  const cells = [...html.matchAll(/<td class="hub-price" data-from="([A-Z]{3})" data-to="([A-Z]{3})" data-label="([^"]*)"><\/td>/g)]
+  if (!cells.length || !cache) return html
+  const lang = (html.match(/<html lang="([a-z]{2})"/) || [])[1] || "fr"
+  const t = L[lang] || L.fr
+  const money = (n: number) => { try { return new Intl.NumberFormat(t.loc, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n) } catch { return Math.round(n) + " €" } }
+  const found = await Promise.all(cells.map(async (m) => { const hit = await cache.match(cacheKey(m[1], m[2])); return hit ? (await hit.json()) as Month[] : null }))
+  const missing = cells.filter((_, i) => found[i] === null).slice(0, 3)
+  if (missing.length) ctx.waitUntil(Promise.all(missing.map((m) => routeMonths(ctx, m[1], m[2]).catch(() => null))))
+  let i = 0
+  return html.replace(/<td class="hub-price" data-from="([A-Z]{3})" data-to="([A-Z]{3})" data-label="([^"]*)"><\/td>/g, (all, _f, _t, label) => {
+    const rows = found[i++]
+    if (!rows || !rows.length) return all
+    return all.replace('"></td>', `" data-ssr="1">${label} <strong>${esc(money(Math.min(...rows.map((r) => r.price))))}</strong></td>`)
+  })
+}
+
 export const onRequest = async (ctx: Ctx) => {
   const { request, env } = ctx
   const path = new URL(request.url).pathname
@@ -93,7 +115,7 @@ export const onRequest = async (ctx: Ctx) => {
     const headers = new Headers(response.headers)
     headers.delete("content-length")
     const route = html.match(/id="route-prices" data-from="([A-Z]{3})" data-to="([A-Z]{3})"/)
-    if (!route) return new Response(html, { status: response.status, headers })
+    if (!route) return new Response(await fillHub(ctx, html), { status: response.status, headers })
     const job = routeMonths(ctx, route[1], route[2]).catch(() => null)
     const rows = await Promise.race([job, new Promise<undefined>((ok) => setTimeout(() => ok(undefined), WAIT_MS))])
     if (rows === undefined) ctx.waitUntil(job) // trop lent : la page part sans les prix, le cache se remplit pour la visite suivante
