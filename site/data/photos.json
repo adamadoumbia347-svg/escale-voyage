@@ -1,0 +1,178 @@
+[
+ {
+  "code": "DSS",
+  "city": "Dakar",
+  "img": "/img/villes/dakar.webp",
+  "img_small": "/img/villes/dakar-480.webp",
+  "file": "File:Gorée 2024 - coucher de soleil sur Dakar - 25.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Gor%C3%A9e_2024_-_coucher_de_soleil_sur_Dakar_-_25.jpg",
+  "author": "Fawaz.tairou",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0"
+ },
+ {
+  "code": "RAK",
+  "city": "Marrakech",
+  "img": "/img/villes/marrakech.webp",
+  "img_small": "/img/villes/marrakech-480.webp",
+  "file": "File:Mosquée de la Koutoubia - marakesh.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Mosqu%C3%A9e_de_la_Koutoubia_-_marakesh.jpg",
+  "author": "Baca12",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ {
+  "code": "CMN",
+  "city": "Casablanca",
+  "img": "/img/villes/casablanca.webp",
+  "img_small": "/img/villes/casablanca-480.webp",
+  "file": "File:South Casablanca Agadir Autoroute Timlilt Oct25 A7CR 08362.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:South_Casablanca_Agadir_Autoroute_Timlilt_Oct25_A7CR_08362.jpg",
+  "author": "This Photo was taken by Timothy A. Gonsalves . Feel free to use my photos, but please mention me as the author. I would ",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ {
+  "code": "ABJ",
+  "city": "Abidjan",
+  "img": "/img/villes/abidjan.webp",
+  "img_small": "/img/villes/abidjan-480.webp",
+  "file": "File:Tad Hang waterfalls at sunset, Tad Lo village, Bolaven Plateau, Laos.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Tad_Hang_waterfalls_at_sunset,_Tad_Lo_village,_Bolaven_Plateau,_Laos.jpg",
+  "author": "Basile Morin",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ {
+  "code": "TUN",
+  "city": "Tunis",
+  "img": "/img/villes/tunis.webp",
+  "img_small": "/img/villes/tunis-480.webp",
+  "file": "File:Sidi Bou Said Roundabout Fountain 2010.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Sidi_Bou_Said_Roundabout_Fountain_2010.jpg",
+  "author": "Cayambe",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ {
+  "code": "ALG",
+  "city": "Alger",
+  "img": "/img/villes/alger.webp",
+  "img_small": "/img/villes/alger-480.webp",
+  "file": "File:Notre Dame d'Afrique2.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Notre_Dame_d%27Afrique2.jpg",
+  "author": "Chettouh Nabil",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ {
+  "code": "IST",
+  "city": "Istanbul",
+  "img": "/img/villes/istanbul.webp",
+  "img_small": "/img/villes/istanbul-480.webp",
+  "file": "File:Sultanahmet, Istanbul (P1100256).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Sultanahmet,_Istanbul_(P1100256).jpg",
+  "author": "Matti Blume",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+ },
+ {
+  "code": "DXB",
+  "city": "Dubaï",
+  "img": "/img/villes/dubai.webp",
+  "img_small": "/img/villes/dubai-480.webp",
+  "file": "File:Jaddaf Skyline View Dubai Jul23 A7C 05226.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Jaddaf_Skyline_View_Dubai_Jul23_A7C_05226.jpg",
+  "author": "This Photo was taken by Timothy A. Gonsalves . Feel free to use my photos, but please mention me as the author. I would ",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ {
+  "code": "LIS",
+  "city": "Lisbonne",
+  "img": "/img/villes/lisbonne.webp",
+  "img_small": "/img/villes/lisbonne-480.webp",
+  "file": "File:Alfama, Lisbon (DSC03367).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Alfama,_Lisbon_(DSC03367).jpg",
+  "author": "Matti Blume",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+ },
+ {
+  "code": "BCN",
+  "city": "Barcelone",
+  "img": "/img/villes/barcelone.webp",
+  "img_small": "/img/villes/barcelone-480.webp",
+  "file": "File:Sagrada Familia March 2015-10a.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Sagrada_Familia_March_2015-10a.jpg",
+  "author": "Alvesgaspar",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ {
+  "code": "JFK",
+  "city": "New York",
+  "img": "/img/villes/new-york.webp",
+  "img_small": "/img/villes/new-york-480.webp",
+  "file": "File:Lower Manhattan from Jersey City September 2020 panorama.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Lower_Manhattan_from_Jersey_City_September_2020_panorama.jpg",
+  "author": "King of Hearts",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ {
+  "code": "CAI",
+  "city": "Le Caire",
+  "img": "/img/villes/le-caire.webp",
+  "img_small": "/img/villes/le-caire-480.webp",
+  "file": "File:All Gizah Pyramids.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:All_Gizah_Pyramids.jpg",
+  "author": "Ricardo Liberato",
+  "license": "CC BY-SA 2.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/2.0"
+ },
+ {
+  "code": "BKO",
+  "city": "Bamako",
+  "img": "/img/villes/bamako.webp",
+  "img_small": "/img/villes/bamako-480.webp",
+  "file": "File:Un fabricant de fourneau.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Un_fabricant_de_fourneau.jpg",
+  "author": "Moussa Kalapo",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ {
+  "code": "DJE",
+  "city": "Djerba",
+  "img": "/img/villes/djerba.webp",
+  "img_small": "/img/villes/djerba-480.webp",
+  "file": "File:Un groupe de grand cormoran sur un bateau échoué - Djerba - Tunisie.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Un_groupe_de_grand_cormoran_sur_un_bateau_%C3%A9chou%C3%A9_-_Djerba_-_Tunisie.jpg",
+  "author": "Skander zarrad",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ {
+  "code": "TNG",
+  "city": "Tanger",
+  "img": "/img/villes/tanger.webp",
+  "img_small": "/img/villes/tanger-480.webp",
+  "file": "File:Tangier 2 Morocco.JPG",
+  "page": "https://commons.wikimedia.org/wiki/File:Tangier_2_Morocco.JPG",
+  "author": "Ilyas akalay",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ {
+  "code": "ACC",
+  "city": "Accra",
+  "img": "/img/villes/accra.webp",
+  "img_small": "/img/villes/accra-480.webp",
+  "file": "File:Independence Square, Korle-Klottey (IMG 20230201 124359 1).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Independence_Square,_Korle-Klottey_(IMG_20230201_124359_1).jpg",
+  "author": "Matti Blume",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+ }
+]
