@@ -1,6 +1,6 @@
 // Point d'entrée du Worker Cloudflare d'Escale.
 // - /api/* : fonctions serveur (prix, calendrier, bons plans, position, alertes, formulaires, admin, tâches)
-// - pages trajets : prix ajouté à l'aperçu des liens partagés pour les robots des réseaux sociaux
+// - pages trajets : prix réels écrits dans la page (titre, haut de page, prix par mois), pour les visiteurs et Google
 // - tout le reste : fichiers du dossier site/ (servis directement par Cloudflare, sans passer par ce code)
 import { Ctx, Env, json } from "./_lib/common"
 import * as prix from "./api/prix"

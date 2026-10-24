@@ -3,7 +3,8 @@
 (function () {
   "use strict";
   var box = document.getElementById("route-prices");
-  if (!box) return;
+  // Prix déjà écrits dans la page par le serveur (src/apercu-prix.ts) : rien à faire
+  if (!box || box.hasAttribute("data-ssr")) return;
   var from = box.getAttribute("data-from"), to = box.getAttribute("data-to");
   var heroPrice = document.getElementById("hero-price");
   var lang = (document.documentElement.lang || "fr").slice(0, 2);
