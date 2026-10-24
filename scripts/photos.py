@@ -32,12 +32,12 @@ CITIES = [
     ("RAK", "Marrakech", ["Koutoubia Marrakech", "Jemaa el-Fnaa"], "marrak|koutoubia|jemaa", ""),
     ("CMN", "Casablanca", ["Hassan II Mosque", "Mosquée Hassan II Casablanca", "Casablanca corniche"], "hassan|casablanca", ""),
     ("ABJ", "Abidjan", ["Abidjan Plateau skyline", "Cathédrale Saint-Paul Abidjan", "Abidjan lagune Ebrié"], "abidjan|plateau|saint-paul", ""),
-    ("TUN", "Tunis", ["Sidi Bou Said view", "Sidi Bou Said blue", "Tunis medina"], "sidi.?bou|tunis", ""),
+    ("TUN", "Tunis", ["Sidi Bou Said", "Sidi Bou Saïd village", "Medina of Tunis"], "sidi.?bou|medina of tunis|zitouna", ""),
     ("ALG", "Alger", ["Algiers bay", "Notre-Dame d'Afrique Algiers"], "alg|afrique", ""),
     ("IST", "Istanbul", ["Hagia Sophia exterior", "Blue Mosque Istanbul", "Galata Tower Istanbul", "Istanbul skyline"], "hagia|sophia|ayasofya|blue mosque|sultan ahmed|galata|istanbul", ""),
-    ("DXB", "Dubaï", ["Burj Khalifa", "Dubai Marina skyline", "Dubai skyline"], "burj|dubai", ""),
+    ("DXB", "Dubaï", ["Burj Khalifa", "Downtown Dubai", "Dubai Marina"], "burj khalifa|downtown dubai|dubai marina", ""),
     ("LIS", "Lisbonne", ["Lisbon Alfama", "Lisbon tram"], "lisbo|alfama", ""),
-    ("BCN", "Barcelone", ["Sagrada Familia exterior", "Barcelona panorama", "Park Güell"], "sagrada|barcelon|g[uü]ell", ""),
+    ("BCN", "Barcelone", ["Sagrada Família", "Basílica de la Sagrada Família", "Park Güell"], "sagrada|g[uü]ell", ""),
     ("JFK", "New York", ["Manhattan skyline", "New York City skyline"], "manhattan|new york", ""),
     ("CAI", "Le Caire", ["Giza pyramids", "Cairo skyline"], "giza|pyramid|cairo", ""),
     ("BKO", "Bamako", ["Bamako skyline", "Pont des Martyrs Bamako", "Grande Mosquée de Bamako", "Bamako Niger"], "bamako", ""),
@@ -46,7 +46,7 @@ CITIES = [
     ("ACC", "Accra", ["Accra Independence Square", "Accra Ghana city"], "accra|independence", ""),
 ]
 OK_LICENSE = re.compile(r"^(public domain|pd|cc0|cc by(-sa)?( \d\.\d)?)", re.I)
-BAD_WORDS = re.compile(r"map|flag|logo|plan|coat of arms|diagram|stamp|banknote|poster|interior|inside|ceiling|vault|nave|portrait|ferry|ship|boat|bateau|autoroute|motorway|highway|night|nuit|\.svg|\.png|\.gif|\.tif", re.I)
+BAD_WORDS = re.compile(r"map|flag|logo|plan|coat of arms|diagram|stamp|banknote|poster|interior|inside|ceiling|vault|nave|portrait|ferry|ship|boat|bateau|autoroute|motorway|highway|night|nuit|roundabout|fountain|stadium|estadi|\.svg|\.png|\.gif|\.tif", re.I)
 
 
 def api(params):
@@ -112,13 +112,14 @@ def save(x, slug):
     req = urllib.request.Request(x["thumb"], headers={"User-Agent": UA})
     with urllib.request.urlopen(req, timeout=60) as r:
         im = Image.open(io.BytesIO(r.read())).convert("RGB")
+    # 1280 px : grande carte de l'accueil ; 800 et 480 px : vignettes
     w, h = im.size
     tw = min(w, int(h * 4 / 3))
     th = int(tw * 3 / 4)
     left, top = (w - tw) // 2, (h - th) // 2
     im = im.crop((left, top, left + tw, top + th))
     OUT.mkdir(parents=True, exist_ok=True)
-    for size, suffix, q in ((800, "", 70), (480, "-480", 68)):
+    for size, suffix, q in ((1280, "-1280", 66), (800, "", 70), (480, "-480", 68)):
         im.resize((size, size * 3 // 4), Image.LANCZOS).save(OUT / f"{slug}{suffix}.webp", "WEBP", quality=q, method=6)
 
 
