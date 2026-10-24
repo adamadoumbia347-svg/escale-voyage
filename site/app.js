@@ -71,8 +71,11 @@
     const dealsPath = { fr: "/bons-plans/", en: "/en/deals/", es: "/es/ofertas/", pt: "/pt/promocoes/", ar: "/ar/deals/" }[LANG];
     document.querySelectorAll("#deals-link, .deals-href").forEach((a) => { a.href = dealsPath; });
     document.querySelectorAll(".about-href").forEach((a) => { a.href = { fr: "/a-propos/", en: "/en/about/", es: "/es/acerca-de/", pt: "/pt/sobre/", ar: "/ar/about/" }[LANG]; });
+    document.querySelectorAll(".anywhere-href").forEach((a) => { a.href = { fr: "/partout/", en: "/en/anywhere/", es: "/es/explorar/", pt: "/pt/explorar/", ar: "/ar/anywhere/" }[LANG]; });
+    document.querySelectorAll(".favs-href").forEach((a) => { a.href = { fr: "/favoris/", en: "/en/favorites/", es: "/es/favoritos/", pt: "/pt/favoritos/", ar: "/ar/favorites/" }[LANG]; });
     document.querySelectorAll(".guides-href").forEach((a) => { a.href = { fr: "/guides/", en: "/en/guides/", es: "/es/guias/", pt: "/pt/guias/", ar: "/ar/guides/" }[LANG]; });
     countryNames = null;
+    if (window.EscaleFavs) window.EscaleFavs.sync();
   }
 
   // ---------- Devise ----------
@@ -389,8 +392,12 @@
       <div class="pass-stub"><b>${esc(stubBig)}</b>${esc(stubSmall)}</div></div>`;
   }
   let booting = true;
+  // Les résultats restent cachés tant que le visiteur n'a pas lancé de recherche (ou ouvert un lien de recherche)
+  let searched = false;
+  ["form-vols", "form-hotels", "form-voitures"].forEach((id) => $(id).addEventListener("submit", () => { if (!booting) searched = true; }, true));
   function show(html) {
     const r = $("results"); r.innerHTML = html;
+    r.hidden = !searched;
     if (!booting) r.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
   }
   const stopsText = (n) => n === 0 ? T("vol direct", "direct") : n === 1 ? T("1 escale", "1 stop") : fmt(T("{n} escales", "{n} stops"), { n });
@@ -429,7 +436,7 @@
     const dates = s.ret ? `${human(s.dep)} – ${human(s.ret)}` : `${human(s.dep)} · ${T("aller simple", "one way")}`;
     const head = `<div class="results-head res-bar"><div><h2><bdi dir="ltr">${esc(s.from.name)} → ${esc(s.to ? s.to.name : T("Partout", "Anywhere"))}</bdi></h2>
       <span class="summary">${esc(dates)} · ${esc(travellers)}</span></div>
-      <button type="button" class="go edit-search" id="edit-search">${T("Modifier", "Edit")}</button></div>`;
+      <div class="res-actions">${favButton(`${s.from.name} → ${s.to ? s.to.name : T("Partout", "Anywhere")}`, dates)}<button type="button" class="go edit-search" id="edit-search">${T("Modifier", "Edit")}</button></div></div>`;
     const share = shareBar("vols", fmt(T("Vols {a} → {b}", "Flights {a} → {b}"), { a: s.from.name, b: s.to ? s.to.name : T("partout", "anywhere") }));
     const links = flightLinks(s);
     if (!s.to || !s.to.code) {
@@ -467,7 +474,16 @@
     renderStrip(s, null);
     loadOffers(s);
   }
+  // Étoile « favori » : la recherche est gardée sur cet appareil (favs.js), sans compte
+  function favButton(title, sub) {
+    let u = "";
+    try { const x = new URL(shareUrl("vols")); if (LANG !== "fr") x.searchParams.set("lang", LANG); u = x.pathname + x.search; } catch (e) { return ""; }
+    return `<button type="button" class="go fav-btn" data-fav="${esc(u)}" data-fav-title="${esc(title)}" data-fav-sub="${esc(sub)}" data-fav-kind="vol" aria-pressed="false">` +
+      `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.8 6.6 19.7l1.1-6.1L3.2 9.4l6.1-.8z"/></svg>` +
+      `<span>${T("Favori", "Save")}</span></button>`;
+  }
   function bindEdit() {
+    if (window.EscaleFavs) window.EscaleFavs.sync();
     const b = $("edit-search");
     if (b) b.addEventListener("click", () => { $("panel-vols").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" }); $("f-to").focus({ preventScroll: true }); });
   }
@@ -483,7 +499,7 @@
       const d = addDays(s.dep, o);
       if (d < today) return "";
       const p = best[d];
-      return `<button type="button" class="day${o === 0 ? " cur" : ""}${p && p === min ? " low" : ""}" data-day="${d}"${o === 0 ? ' aria-current="date"' : ""}>
+      return `<button type="button" class="day${o === 0 ? " cur" : ""}${p && p === min ? " low" : ""}" data-day="${d}" data-p="${p || ""}"${o === 0 ? ' aria-current="date"' : ""}>
         <small>${esc(human(d))}</small><strong>${p ? esc(money(p, flightState && flightState.cur)) : offers ? "—" : "·"}</strong></button>`;
     }).join("");
     const cur = box.querySelector(".day.cur");
@@ -495,6 +511,31 @@
       if (s.ret) $("f-ret").value = addDays(d, len);
       $("form-vols").requestSubmit();
     }));
+    fillStrip(s);
+  }
+  // Dates flexibles (±3 jours) : les jours sans offre affichée prennent le prix du calendrier,
+  // c'est-à-dire l'aller-retour le moins cher repéré pour un départ ce jour-là
+  const calCache = new Map();
+  function calMonth(from, to, month) {
+    const k = [from, to, month, CUR].join("|");
+    if (!calCache.has(k)) calCache.set(k, fetch("/api/calendar?" + q({ from, to, month, currency: CUR })).then((r) => (r.ok ? r.json() : null)).catch(() => null));
+    return calCache.get(k);
+  }
+  async function fillStrip(s) {
+    const box = $("day-strip");
+    if (!box || !isLive || !s.flex || !s.ret || !s.to || !s.to.code) return;
+    const months = [...new Set([-3, 3].map((o) => addDays(s.dep, o).slice(0, 7)))];
+    const res = await Promise.all(months.map((m) => calMonth(s.from.code, s.to.code, m)));
+    if ($("day-strip") !== box) return;
+    const cal = {};
+    res.forEach((d) => { if (d && d.available) Object.entries(d.days || {}).forEach(([day, v]) => { cal[day] = { p: v.price, c: d.currency }; }); });
+    const btns = [...box.querySelectorAll("button[data-day]")];
+    btns.forEach((b) => {
+      const v = cal[b.dataset.day];
+      if (v && !b.dataset.p) { b.dataset.p = v.p; b.querySelector("strong").textContent = money(v.p, v.c); }
+    });
+    const vals = btns.map((b) => +b.dataset.p || Infinity), min = Math.min(...vals);
+    btns.forEach((b, i) => b.classList.toggle("low", min < Infinity && vals[i] === min));
   }
   let priceReq = 0;
   async function loadOffers(s) {
@@ -687,6 +728,7 @@
     if (!items.length) { box.hidden = true; return; }
     const prices = items.map((it) => Math.round(it.price)), min = Math.min(...prices), max = Math.max(...prices);
     if (max <= min) { box.hidden = true; return; }
+    box.hidden = false; range.disabled = false;
     range.min = String(min); range.max = String(max); range.step = "1";
     range.value = String(max);
     const apply = () => {
@@ -811,6 +853,7 @@
     });
   }
   function startFlap() {
+    if (!$("flap")) return;
     setFlap(flapRows[0]);
     clearInterval(flapTimer);
     flapTimer = setInterval(() => { if (document.hidden) return; flapIdx = (flapIdx + 1) % flapRows.length; setFlap(flapRows[flapIdx]); }, 3600);
@@ -1152,9 +1195,16 @@
       $("panel-" + t).hidden = t !== name;
     });
     store.set("escale.tab", name);
+    document.querySelectorAll(".main-nav a[data-tab]").forEach((a) => { if (a.dataset.tab === name) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
     rerender();
   }
   document.querySelector(".tabs").addEventListener("click", (ev) => { const b = ev.target.closest(".tab"); if (b) selectTab(b.dataset.tab); });
+  document.querySelectorAll(".main-nav a[data-tab]").forEach((a) => a.addEventListener("click", (ev) => {
+    ev.preventDefault();
+    selectTab(a.dataset.tab);
+    $("panel-" + a.dataset.tab).scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+  }));
+  window.addEventListener("hashchange", () => { const h = location.hash.slice(1); if (TABS.includes(h)) selectTab(h); });
   document.querySelector(".tabs").addEventListener("keydown", (ev) => {
     if (ev.key !== "ArrowRight" && ev.key !== "ArrowLeft") return;
     const cur = TABS.indexOf(currentTab);
@@ -1213,9 +1263,15 @@
   syncCurQuick();
   applyLang(); paintDests(); paintFaq(); paintChecklist(); paintThemeBtn();
   let start = applyUrl() || (location.hash || "").slice(1);
+  if (urlHadParams) searched = true;
   if (!TABS.includes(start)) start = store.get("escale.tab") || "vols";
   selectTab(start);
   syncTrip(); syncDrop(); paintRecent();
+  // Idées de voyage : la section est affichée dès le départ avec des squelettes (index.html), pour que la page ne saute pas
+  if (isLive) {
+    exploreMonth = monthsAhead()[1]; paintExploreMonths();
+    $("ex-city").textContent = $("f-from").value.replace(/\s*\([A-Z]{3}\)$/, "");
+  } else $("explore").hidden = true;
   booting = false;
   startFlap();
 

@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Administration | Escale</title>
+<link rel="preload" href="/fonts/instrument-sans-latin-f587e7.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
 <link rel="stylesheet" href="/pages.css">
 <style>
   .ad-form { display: flex; flex-wrap: wrap; gap: 8px; align-items: end; margin: 16px 0; }
@@ -21,8 +23,12 @@
 </style>
 </head>
 <body>
-<header class="board"><div class="wrap"><a class="brand" href="/"><span class="brand-mark">ESC</span><span class="brand-name">Escale</span></a><h1>Administration</h1><p class="small" style="color:inherit;opacity:.8">Messages du formulaire de contact et inscriptions aux bons plans. Page privée, non référencée.</p></div></header>
-<main class="wrap">
+<header class="site-head"><div class="wrap head-row"><a class="brand" href="/" aria-label="Escale, accueil"><svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" fill="currentColor"/></svg><span>escale</span></a><nav class="main-nav" aria-label="Menu principal"><a href="/">Vols</a><a href="/#hotels">Hôtels</a><a href="/#voitures">Voitures</a><a href="/bons-plans/">Bons plans</a><a href="/partout/">Partout</a><a href="/guides/">Guides</a><a class="nav-fav" href="/favoris/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.8 6.6 19.7l1.1-6.1L3.2 9.4l6.1-.8z" fill="currentColor"/></svg><span>Favoris</span><b class="fav-count" data-fav-count hidden></b></a></nav></div></header>
+<main>
+<div class="board"><div class="wrap">
+  <h1>Administration</h1><p class="small" style="color:inherit;opacity:.8">Messages du formulaire de contact et inscriptions aux bons plans. Page privée, non référencée.</p>
+</div></div>
+<div class="wrap">
   <form class="ad-form" id="f">
     <label>Clé d’accès<br><input id="key" type="password" autocomplete="current-password" required></label>
     <label>Afficher<br><select id="form"><option value="bons-plans">Inscriptions aux bons plans</option><option value="contact">Messages de contact</option></select></label>
@@ -34,6 +40,7 @@
     <ul class="ad-list" id="list"></ul>
   </div>
   <p class="small">Les statistiques de visites sont dans Cloudflare : Workers &amp; Pages › escale-voyage › Metrics › Web Analytics.</p>
+</div>
 </main>
 <script>
 (function () {
@@ -96,5 +103,6 @@
   if ($("key").value) load();
 })();
 </script>
+<script src="/favs.js" defer></script>
 </body>
 </html>

@@ -366,4 +366,12 @@ window.ESCALE_I18N = {
   "To have data as soon as you land, without roaming fees.": ["Para tener internet nada más aterrizar, sin costes de roaming.", "Para ter internet logo ao aterrar, sem custos de roaming.", "لتحصل على الإنترنت فور الهبوط، دون رسوم تجوال."],
   "Some cash": ["Algo de efectivo", "Algum dinheiro vivo", "بعض النقود"],
   "For the taxi or first purchases, plus a card with no foreign fees.": ["Para el taxi o las primeras compras, y una tarjeta sin comisiones en el extranjero.", "Para o táxi ou as primeiras compras, e um cartão sem taxas no estrangeiro.", "لسيارة الأجرة أو المشتريات الأولى، مع بطاقة بلا رسوم في الخارج."],
+  // Nouveau menu du haut et carte « Partout »
+  "Guides": ["Guías", "Guias", "أدلة"],
+  "Favorites": ["Favoritos", "Favoritos", "المفضلة"],
+  "Main menu": ["Menú principal", "Menu principal", "القائمة الرئيسية"],
+  "Escale, home": ["Escale, inicio", "Escale, início", "Escale، الرئيسية"],
+  "Save": ["Favorito", "Favorito", "المفضلة"],
+  "No idea where to go?": ["¿No sabes adónde ir?", "Sem ideia de destino?", "لا تعرف إلى أين تسافر؟"],
+  "See prices everywhere in the world on a map, from your city.": ["Mira los precios en todo el mundo en un mapa, desde tu ciudad.", "Veja os preços no mundo inteiro num mapa, a partir da sua cidade.", "شاهد الأسعار في كل أنحاء العالم على خريطة، انطلاقًا من مدينتك."],
 };

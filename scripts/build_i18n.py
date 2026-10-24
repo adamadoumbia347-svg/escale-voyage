@@ -227,9 +227,52 @@ def alternates(paths, domain):
 def switcher(paths, current):
     cur = ' aria-current="page"'
     items = "".join(
-        f'<a href="/{p + "/" if p else ""}" hreflang="{l}" lang="{l}"{cur if l == current else ""}>{NAMES[l]}</a>'
+        f'<a href="/{p + "/" if p else ""}" hreflang="{l}" lang="{l}" title="{NAMES[l]}"{cur if l == current else ""}>{l.upper()}</a>'
         for l, p in paths.items())
     return f'<nav class="lang-nav" aria-label="Langue / Language">{items}</nav>'
+
+
+# Menu du haut, identique sur toutes les pages (Vols · Hôtels · Voitures · Bons plans · Partout · Guides · Favoris)
+SECTION_PATHS = {
+    "deals": {"fr": "bons-plans", "en": "en/deals", "es": "es/ofertas", "pt": "pt/promocoes", "ar": "ar/deals"},
+    "anywhere": {"fr": "partout", "en": "en/anywhere", "es": "es/explorar", "pt": "pt/explorar", "ar": "ar/anywhere"},
+    "guides": {"fr": "guides", "en": "en/guides", "es": "es/guias", "pt": "pt/guias", "ar": "ar/guides"},
+    "favs": {"fr": "favoris", "en": "en/favorites", "es": "es/favoritos", "pt": "pt/favoritos", "ar": "ar/favorites"},
+}
+NAV_LABELS = {
+    "fr": ("Vols", "Hôtels", "Voitures", "Bons plans", "Partout", "Guides", "Favoris", "Menu principal", "Escale, accueil"),
+    "en": ("Flights", "Hotels", "Cars", "Deals", "Anywhere", "Guides", "Favorites", "Main menu", "Escale, home"),
+    "es": ("Vuelos", "Hoteles", "Coches", "Ofertas", "Explorar", "Guías", "Favoritos", "Menú principal", "Escale, inicio"),
+    "pt": ("Voos", "Hotéis", "Carros", "Promoções", "Explorar", "Guias", "Favoritos", "Menu principal", "Escale, início"),
+    "ar": ("رحلات", "فنادق", "سيارات", "العروض", "استكشف", "أدلة", "المفضلة", "القائمة الرئيسية", "Escale، الرئيسية"),
+}
+STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.8 6.6 19.7l1.1-6.1L3.2 9.4l6.1-.8z" fill="currentColor"/></svg>'
+PLANE = '<svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" fill="currentColor"/></svg>'
+
+
+FAV_LABEL = {"fr": "Ajouter aux favoris", "en": "Add to favorites", "es": "Añadir a favoritos", "pt": "Adicionar aos favoritos", "ar": "أضف إلى المفضلة"}
+
+
+def fav_btn(lang, path, title, sub, kind):
+    """Étoile « favori » (favs.js garde la page dans ce navigateur)."""
+    star = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.8 6.6 19.7l1.1-6.1L3.2 9.4l6.1-.8z"/></svg>'
+    return (f'<button type="button" class="btn ghost fav-btn" data-fav="/{E(path)}/" data-fav-title="{E(title)}" data-fav-sub="{E(sub)}" '
+            f'data-fav-kind="{kind}" aria-pressed="false">{star}<span>{E(FAV_LABEL[lang])}</span></button>')
+
+
+def site_header(lang, path, switch):
+    """En-tête commun : logo, menu principal (la rubrique en cours est signalée) et choix de la langue."""
+    n = NAV_LABELS[lang]
+    q = "" if lang == "fr" else "?lang=" + {"fr": "fr", "en": "en", "es": "es", "pt": "pt", "ar": "ar"}[lang]
+    cur = lambda key: ' aria-current="page"' if path and (path == SECTION_PATHS[key][lang] or path.startswith(SECTION_PATHS[key][lang] + "/")) else ""
+    sec = lambda key: "/" + SECTION_PATHS[key][lang] + "/"
+    links = (f'<a href="/{q}">{n[0]}</a><a href="/{q}#hotels">{n[1]}</a><a href="/{q}#voitures">{n[2]}</a>'
+             f'<a href="{sec("deals")}"{cur("deals")}>{E(n[3])}</a><a href="{sec("anywhere")}"{cur("anywhere")}>{E(n[4])}</a>'
+             f'<a href="{sec("guides")}"{cur("guides")}>{E(n[5])}</a>'
+             f'<a class="nav-fav" href="{sec("favs")}"{cur("favs")}>{STAR}<span>{E(n[6])}</span><b class="fav-count" data-fav-count hidden></b></a>')
+    return (f'<header class="site-head"><div class="wrap head-row">'
+            f'<a class="brand" href="/{q}" aria-label="{E(n[8])}">{PLANE}<span>escale</span></a>'
+            f'<nav class="main-nav" aria-label="{E(n[7])}">{links}</nav>{switch}</div></header>')
 
 
 HEAD = """<!doctype html>
@@ -242,7 +285,7 @@ HEAD = """<!doctype html>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{url}">
 {alts}
-<meta name="theme-color" content="#18202c">
+<meta name="theme-color" content="#ffffff">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
 <link rel="manifest" href="/manifest.webmanifest">
 <meta property="og:type" content="article">
@@ -256,23 +299,25 @@ HEAD = """<!doctype html>
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="/fonts/instrument-sans-latin-f587e7.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/bricolage-grotesque-latin-40c2cb.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/fonts/fonts.css">{arpreload}
 <link rel="stylesheet" href="/pages.css">
 {ld}
 </head>
 <body>
-<header class="board"><div class="wrap">
-  <div class="page-top"><a class="brand" href="/{homeq}"><span class="brand-mark">ESC</span><span class="brand-name">Escale</span></a>{switch}</div>
+{header}
+<main>
+<div class="board"><div class="wrap">
   {hero}
-</div></header>
-<main class="wrap">
+</div></div>
+<div class="wrap">
 {body}
+</div>
 </main>
 <footer class="wrap">
   <nav class="foot-nav"><a href="/{homeq}">{home}</a><a href="/mentions-legales/">{legal}</a><a href="/confidentialite/">{privacy}</a><a href="/contact/">Contact</a><a href="/{aboutp}/">{aboutl}</a><a href="/{guidesp}/">Guides</a><a href="/{fetesp}/">{fetesl}</a><a href="/{dealsp}/">{dealsl}</a><a href="#cookies" data-open-consent>{cookies}</a></nav>
   <p>{disclaimer}</p>
 </footer>
+<script src="/favs.js" defer></script>
 </body>
 </html>
 """
@@ -321,7 +366,7 @@ def write(site, path, lang, title, desc, hero, body, ld, paths, ctx, og="og-imag
         fetesp={"fr": "vols-fetes", "en": "en/holiday-flights", "es": "es/vuelos-fiestas", "pt": "pt/voos-festas", "ar": "ar/holiday-flights"}[lang],
         fetesl={"fr": "Vols pour les fêtes", "en": "Holiday flights", "es": "Vuelos para las fiestas", "pt": "Voos para as festas", "ar": "رحلات الأعياد"}[lang],
         guidesp={"fr": "guides", "en": "en/guides", "es": "es/guias", "pt": "pt/guias", "ar": "ar/guides"}[lang],
-        switch=switcher(paths, lang), hero=hero, body=body, home=E(u["home"]), legal=E(u["legal"]), privacy=E(u["privacy"]),
+        header=site_header(lang, path, switcher(paths, lang)), hero=hero, body=body, home=E(u["home"]), legal=E(u["legal"]), privacy=E(u["privacy"]),
         cookies=E(u["cookies"]), disclaimer=E(u["disclaimer"]))
     d = site / path
     d.mkdir(parents=True, exist_ok=True)
@@ -364,7 +409,7 @@ def build(site, ctx):
   <h1>{u["h1_route"].format(a=E(a), b=E(b))}</h1>
   <p class="codes" dir="ltr">{fr_} → {to}</p>
   <p class="hero-price" id="hero-price" hidden></p>
-  <div class="cta-row"><a class="btn" href="{E(app)}">{E(u["cta"])}</a><a class="btn ghost" href="{E(backl)}">{E(u["back"].format(a=a, b=b))}</a></div>"""
+  <div class="cta-row"><a class="btn" href="{E(app)}">{E(u["cta"])}</a><a class="btn ghost" href="{E(backl)}">{E(u["back"].format(a=a, b=b))}</a>{fav_btn(lang, route_paths[r][lang], f"{a} → {b}", f"{fr_} → {to}", "route")}</div>"""
             others = "".join(f'<li><a href="/{route_paths[o][lang]}/">{E(city(o[2], lang))} {u["arrow"]} {E(city(o[3], lang))}</a></li>'
                              for o in ctx["related"](r))
             body = f"""<dl class="facts">
@@ -413,7 +458,7 @@ def build(site, ctx):
             hero = f"""<p class="eyebrow">{E(cn)}</p>
   <h1>{u["h1_hotel"].format(c=E(c))}</h1>
   <p class="codes"><span dir="ltr">{code}</span> · {E(u["hotel_codes"])}</p>
-  <div class="cta-row"><a class="btn" href="{E(app)}">{E(u["hotel_cta"])}</a>{f'<a class="btn ghost" href="/{route_paths[flights[0]][lang]}/">{E(u["flights_to"].format(c=c))}</a>' if flights else ''}</div>"""
+  <div class="cta-row"><a class="btn" href="{E(app)}">{E(u["hotel_cta"])}</a>{f'<a class="btn ghost" href="/{route_paths[flights[0]][lang]}/">{E(u["flights_to"].format(c=c))}</a>' if flights else ''}{fav_btn(lang, hotel_paths[h[0]][lang], u["h1_hotel"].format(c=c), cn, "hotel")}</div>"""
             areas_html = "".join(f"<div><dt>{E(n)}</dt><dd>{E(d[0].upper() + d[1:])}</dd></div>" for n, d in area_items)
             fl_html = ""
             if flights:

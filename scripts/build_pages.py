@@ -15,6 +15,7 @@ import urllib.parse
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import build_i18n  # noqa: E402
+import explore_pages  # noqa: E402
 import routes_extra  # noqa: E402
 import translations  # noqa: E402
 
@@ -201,7 +202,7 @@ HEAD = """<!doctype html>
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{url}">
-<meta name="theme-color" content="#18202c">
+<meta name="theme-color" content="#ffffff">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
 <link rel="manifest" href="/manifest.webmanifest">
 <meta property="og:type" content="article">
@@ -215,23 +216,25 @@ HEAD = """<!doctype html>
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="/fonts/instrument-sans-latin-f587e7.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/bricolage-grotesque-latin-40c2cb.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/fonts/fonts.css">
 <link rel="stylesheet" href="/pages.css">
 {ld}
 </head>
 <body>
-<header class="board"><div class="wrap">
-  <div class="page-top"><a class="brand" href="/"><span class="brand-mark">ESC</span><span class="brand-name">Escale</span></a>{switch}</div>
+{header}
+<main>
+<div class="board"><div class="wrap">
   {hero}
-</div></header>
-<main class="wrap">
+</div></div>
+<div class="wrap">
 {body}
+</div>
 </main>
 <footer class="wrap">
   <nav class="foot-nav" aria-label="Pages du site"><a href="/">Comparer vols, hôtels et voitures</a><a href="/#guides">Guides des trajets</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/contact/">Contact</a><a href="/a-propos/">À propos</a><a href="/guides/">Guides</a><a href="/vols-fetes/">Vols pour les fêtes</a><a href="/bons-plans/">Bons plans</a><a href="#cookies" data-open-consent>Gérer les cookies</a></nav>
   <p>Escale ne vend pas de billets et ne fixe aucun prix. Les durées et informations sont indicatives : les programmes des compagnies changent, vérifiez toujours sur le site de réservation.</p>
 </footer>
+<script src="/favs.js" defer></script>
 </body>
 </html>
 """
@@ -242,7 +245,7 @@ def page(path, title, desc, hero, body, ld="", paths=None, og="og-image.png"):
         ld = build_i18n.alternates(paths, DOMAIN) + "\n" + ld
     switch = build_i18n.switcher(paths, "fr") if paths else ""
     ld = (ld + "\n" + build_i18n.breadcrumb_ld(DOMAIN, path, "fr", hero)).strip()
-    out = HEAD.format(tp=TRAVELPAYOUTS, title=E(title), desc=E(desc), url=url, domain=DOMAIN, hero=hero, body=body, ld=ld, switch=switch, ogimg=og)
+    out = HEAD.format(tp=TRAVELPAYOUTS, title=E(title), desc=E(desc), url=url, domain=DOMAIN, hero=hero, body=body, ld=ld, header=build_i18n.site_header("fr", path, switch), ogimg=og)
     d = SITE / path
     d.mkdir(parents=True, exist_ok=True)
     (d / "index.html").write_text(out, encoding="utf-8")
@@ -281,7 +284,7 @@ def route_page(r):
   <h1>Vol pas cher {E(cf)} <span>→</span> {E(ct)}</h1>
   <p class="codes">{fr} → {to}</p>
   <p class="hero-price" id="hero-price" hidden></p>
-  <div class="cta-row"><a class="btn" href="{E(app)}">Comparer les prix maintenant</a><a class="btn ghost" href="{E(back)}">Trajet retour {E(ct)} → {E(cf)}</a></div>"""
+  <div class="cta-row"><a class="btn" href="{E(app)}">Comparer les prix maintenant</a><a class="btn ghost" href="{E(back)}">Trajet retour {E(ct)} → {E(cf)}</a>{build_i18n.fav_btn("fr", s, f"{cf} → {ct}", f"{fr} → {to}", "route")}</div>"""
     facts = f"""<dl class="facts">
   <div><dt>Durée</dt><dd>{E(dur_txt[0].upper() + dur_txt[1:])}</dd></div>
   <div><dt>Arrivée</dt><dd>{E(airport)} ({to})</dd></div>
@@ -348,7 +351,7 @@ def hotel_page(h):
     hero = f"""<p class="eyebrow">{E(country)}</p>
   <h1>Hôtel pas cher à <span>{E(city)}</span></h1>
   <p class="codes">{code} · {"hôtels, riads, appartements" if country == "Maroc" else "hôtels et appartements"}</p>
-  <div class="cta-row"><a class="btn" href="{E(app)}">Comparer les prix des hôtels</a>{f'<a class="btn ghost" href="/{route_slug(flights[0])}/">Vols vers {E(city)}</a>' if flights else ''}</div>"""
+  <div class="cta-row"><a class="btn" href="{E(app)}">Comparer les prix des hôtels</a>{f'<a class="btn ghost" href="/{route_slug(flights[0])}/">Vols vers {E(city)}</a>' if flights else ''}{build_i18n.fav_btn("fr", s, f"Hôtels à {city}", country, "hotel")}</div>"""
     areas_html = "".join(f"<div><dt>{E(a)}</dt><dd>{E(b[0].upper() + b[1:])}</dd></div>" for a, b in areas)
     body = f"""<section><h2>Où dormir à {E(city)}</h2><dl class="facts">{areas_html}</dl></section>
 <section><h2>Notre conseil</h2><p>{E(tip)}</p></section>
@@ -465,14 +468,15 @@ def main():
     ctx = dict(domain=DOMAIN, tp=TRAVELPAYOUTS, routes=ROUTES, hotels=HOTELS, route_slug=route_slug, hotel_slug=hotel_slug,
                airports=airports, related=related, distances=DISTANCES)
     i18n_urls, route_paths, hotel_paths = build_i18n.build(SITE, ctx)
-    urls += i18n_urls + build_i18n.build_indexes(SITE, ctx, route_paths, hotel_paths) + build_i18n.build_deals(SITE, ctx) + build_i18n.build_guides(SITE, ctx) + build_i18n.build_about(SITE, ctx) + build_i18n.build_fetes(SITE, ctx)
+    explore_pages.build_favs(SITE, ctx)  # pages personnelles : hors du plan du site
+    urls += i18n_urls + build_i18n.build_indexes(SITE, ctx, route_paths, hotel_paths) + build_i18n.build_deals(SITE, ctx) + build_i18n.build_guides(SITE, ctx) + build_i18n.build_about(SITE, ctx) + build_i18n.build_fetes(SITE, ctx) + explore_pages.build_anywhere(SITE, ctx)
     urls += legal_pages()
 
     # Liste des guides sur la page d'accueil
     idx = SITE / "index.html"
     s = idx.read_text(encoding="utf-8")
     s = s.replace(DEFAULT_DOMAIN, DOMAIN)
-    opened = [True]
+    opened = [False]
     def group(title, items):
         # Groupes repliables : la page reste courte, et le contenu reste lisible par Google
         op = " open" if opened[0] else ""

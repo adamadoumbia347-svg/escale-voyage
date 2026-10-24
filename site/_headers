@@ -30,3 +30,21 @@
 /widget/prix
   Cache-Control: public, max-age=600
   X-Robots-Tag: noindex
+
+/favoris/
+  X-Robots-Tag: noindex
+
+/en/favorites/
+  X-Robots-Tag: noindex
+
+/es/favoritos/
+  X-Robots-Tag: noindex
+
+/pt/favoritos/
+  X-Robots-Tag: noindex
+
+/ar/favorites/
+  X-Robots-Tag: noindex
+
+/img/*
+  Cache-Control: public, max-age=604800
