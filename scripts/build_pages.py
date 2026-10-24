@@ -519,6 +519,18 @@ def main():
     s = re.sub(r"<!-- ROUTES:START -->.*?<!-- ROUTES:END -->",
                lambda m: "<!-- ROUTES:START -->\n    " + links + "\n    <!-- ROUTES:END -->", s, flags=re.S)
     # « Explorer le monde » : cartes photo des villes ; photos aussi sur les cartes « Destinations populaires »
+    # « Partir pour les fêtes » : une carte photo par fête, titre et dates dans la langue du visiteur
+    import fetes as FT
+    fcards = []
+    for f in FT.FETES:
+        img, lab = FT.CARDS[f["key"]]
+        hrefs = {l: "/" + f[l]["slug"] + "/" for l in ["fr"] + build_i18n.LANGS}
+        fcards.append(
+            f'<a class="city-card" href="{hrefs["fr"]}" data-hrefs="{E(json.dumps(hrefs))}">'
+            f'<img src="/img/villes/{img}-480.webp" srcset="/img/villes/{img}-480.webp 480w, /img/villes/{img}.webp 800w" sizes="(max-width: 600px) 46vw, 300px" width="480" height="360" alt="" loading="lazy" decoding="async">'
+            f'<span class="city-info"><strong data-names="{E(json.dumps({l: lab[l][0] for l in build_i18n.LANGS}, ensure_ascii=False))}">{E(lab["fr"][0])}</strong>'
+            f'<small data-names="{E(json.dumps({l: lab[l][1] for l in build_i18n.LANGS}, ensure_ascii=False))}">{E(lab["fr"][1])}</small></span></a>')
+    s = re.sub(r"<!-- FETES:START -->.*?<!-- FETES:END -->", lambda m: '<!-- FETES:START -->\n    <div class="city-grid fete-grid">' + "".join(fcards) + '</div>\n    <!-- FETES:END -->', s, flags=re.S)
     grid = villes.cards(SITE, HUBS, airports)
     s = re.sub(r"<!-- VILLES:START -->.*?<!-- VILLES:END -->", lambda m: "<!-- VILLES:START -->\n    " + grid + "\n    <!-- VILLES:END -->", s, flags=re.S)
     s = re.sub(r'<div class="dests" id="dests"[^>]*>', lambda m: '<div class="dests" id="dests" data-photos="' + E(json.dumps(villes.dest_photos(SITE))) + '">', s)

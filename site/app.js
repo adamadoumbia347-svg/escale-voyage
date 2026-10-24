@@ -71,6 +71,7 @@
     const dealsPath = { fr: "/bons-plans/", en: "/en/deals/", es: "/es/ofertas/", pt: "/pt/promocoes/", ar: "/ar/deals/" }[LANG];
     document.querySelectorAll("#deals-link, .deals-href").forEach((a) => { a.href = dealsPath; });
     document.querySelectorAll(".about-href").forEach((a) => { a.href = { fr: "/a-propos/", en: "/en/about/", es: "/es/acerca-de/", pt: "/pt/sobre/", ar: "/ar/about/" }[LANG]; });
+    document.querySelectorAll(".fetes-href").forEach((a) => { a.href = { fr: "/vols-fetes/", en: "/en/holiday-flights/", es: "/es/vuelos-fiestas/", pt: "/pt/voos-festas/", ar: "/ar/holiday-flights/" }[LANG]; });
     document.querySelectorAll(".anywhere-href").forEach((a) => { a.href = { fr: "/partout/", en: "/en/anywhere/", es: "/es/explorar/", pt: "/pt/explorar/", ar: "/ar/anywhere/" }[LANG]; });
     document.querySelectorAll(".favs-href").forEach((a) => { a.href = { fr: "/favoris/", en: "/en/favorites/", es: "/es/favoritos/", pt: "/pt/favoritos/", ar: "/ar/favorites/" }[LANG]; });
     document.querySelectorAll(".guides-href").forEach((a) => { a.href = { fr: "/guides/", en: "/en/guides/", es: "/es/guias/", pt: "/pt/guias/", ar: "/ar/guides/" }[LANG]; });

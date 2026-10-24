@@ -235,10 +235,12 @@ def switcher(paths, current):
 # Menu du haut, identique sur toutes les pages (Vols · Hôtels · Voitures · Bons plans · Partout · Guides · Favoris)
 SECTION_PATHS = {
     "deals": {"fr": "bons-plans", "en": "en/deals", "es": "es/ofertas", "pt": "pt/promocoes", "ar": "ar/deals"},
+    "fetes": {"fr": "vols-fetes", "en": "en/holiday-flights", "es": "es/vuelos-fiestas", "pt": "pt/voos-festas", "ar": "ar/holiday-flights"},
     "anywhere": {"fr": "partout", "en": "en/anywhere", "es": "es/explorar", "pt": "pt/explorar", "ar": "ar/anywhere"},
     "guides": {"fr": "guides", "en": "en/guides", "es": "es/guias", "pt": "pt/guias", "ar": "ar/guides"},
     "favs": {"fr": "favoris", "en": "en/favorites", "es": "es/favoritos", "pt": "pt/favoritos", "ar": "ar/favorites"},
 }
+FETES_LABEL = {"fr": "Fêtes", "en": "Holidays", "es": "Fiestas", "pt": "Festas", "ar": "الأعياد"}
 NAV_LABELS = {
     "fr": ("Vols", "Hôtels", "Voitures", "Bons plans", "Partout", "Guides", "Favoris", "Menu principal", "Escale, accueil"),
     "en": ("Flights", "Hotels", "Cars", "Deals", "Anywhere", "Guides", "Favorites", "Main menu", "Escale, home"),
@@ -268,7 +270,8 @@ def site_header(lang, path, switch):
     cur = lambda key: ' aria-current="page"' if path and (path == SECTION_PATHS[key][lang] or path.startswith(SECTION_PATHS[key][lang] + "/")) else ""
     sec = lambda key: "/" + SECTION_PATHS[key][lang] + "/"
     links = (f'<a href="/{q}">{n[0]}</a><a href="/{q}#hotels">{n[1]}</a><a href="/{q}#voitures">{n[2]}</a>'
-             f'<a href="{sec("deals")}"{cur("deals")}>{E(n[3])}</a><a href="{sec("anywhere")}"{cur("anywhere")}>{E(n[4])}</a>'
+             f'<a href="{sec("deals")}"{cur("deals")}>{E(n[3])}</a><a href="{sec("fetes")}"{cur("fetes")}>{E(FETES_LABEL[lang])}</a>'
+             f'<a href="{sec("anywhere")}"{cur("anywhere")}>{E(n[4])}</a>'
              f'<a href="{sec("guides")}"{cur("guides")}>{E(n[5])}</a>'
              f'<a class="nav-fav" href="{sec("favs")}"{cur("favs")}>{STAR}<span>{E(n[6])}</span><b class="fav-count" data-fav-count hidden></b></a>')
     return (f'<header class="site-head"><div class="wrap head-row">'

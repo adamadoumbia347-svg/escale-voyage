@@ -387,4 +387,8 @@ window.ESCALE_I18N = {
   "Photo credits": ["Créditos de las fotos", "Créditos das fotos", "حقوق الصور"],
   "{a} · from {p}": ["{a} · desde {p}", "{a} · desde {p}", "{a} · من {p}"],
   "Where to?": ["¿Adónde vas?", "Para onde vai?", "إلى أين تسافر؟"],
+  "Holidays": ["Fiestas", "Festas", "الأعياد"],
+  "Flights for the holidays": ["Viajar en fiestas", "Viajar nas festas", "السفر في الأعياد"],
+  "All holidays →": ["Todas las fiestas →", "Todas as festas →", "كل الأعياد ←"],
+  "Dates, real prices and the right time to book, holiday by holiday.": ["Fechas, precios reales y el mejor momento para reservar, fiesta por fiesta.", "Datas, preços reais e a melhor altura para reservar, festa a festa.", "التواريخ والأسعار الحقيقية وأفضل وقت للحجز، عيدًا بعيد."],
 };
