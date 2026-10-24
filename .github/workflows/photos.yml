@@ -1,0 +1,33 @@
+# Photos des villes pour l'accueil (« Explorer le monde ») : téléchargées sur Wikimedia Commons (licences libres),
+# optimisées en WebP puis ajoutées au dépôt. Lancement à la main : Actions > Photos des villes > Run workflow.
+name: Photos des villes
+on:
+  workflow_dispatch:
+    inputs:
+      villes:
+        description: "Codes des villes à refaire, séparés par des espaces (vide = toutes)"
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  photos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Télécharger et optimiser les photos
+        run: |
+          pip install --quiet pillow
+          python3 scripts/photos.py ${{ inputs.villes }}
+      - name: Enregistrer dans le dépôt
+        run: |
+          git config user.name "escale-photos"
+          git config user.email "escale-photos@users.noreply.github.com"
+          git add site/img/villes site/data/photos.json
+          git diff --cached --quiet && echo "Rien de nouveau" && exit 0
+          git commit -m "Photos des villes (Wikimedia Commons, licences libres)"
+          git push
