@@ -287,6 +287,256 @@ TRAJETS = {
     ),
 }
 
+# Phrases pour les départs de Belgique et de Suisse
+SANS_VISA_UE = "Pas de visa pour les ressortissants de l'Union européenne et de la Suisse pour un séjour de moins de 90 jours ; passeport valide demandé."
+BAG_MAGHREB = ("Les compagnies à bas prix font payer la valise en soute ; les compagnies nationales l'incluent souvent selon le tarif. "
+               "En été, beaucoup de voyageurs partent chargés : comparez le prix total avec le nombre de valises dont vous avez besoin.")
+
+TRAJETS.update({
+    ("BRU", "FIH"): dict(
+        natio="belge ou française",
+        intro=("Bruxelles – Kinshasa est la ligne historique entre l'Europe et la RD Congo : la Belgique accueille une importante diaspora congolaise "
+               "et Brussels Airlines dessert Kinshasa depuis des décennies. Depuis le nord de la France, un départ de Bruxelles est souvent "
+               "une bonne alternative à Paris, même en ajoutant le train."),
+        direct=("Brussels Airlines vole en direct en 8 h environ. Air Congo a ouvert une ligne Kinshasa – Bruxelles en 2026 : "
+                "vérifiez ses jours de vol et ses conditions de bagages."),
+        escales="Avec escale : Addis-Abeba (Ethiopian Airlines), Istanbul (Turkish Airlines), Casablanca (Royal Air Maroc) ou Paris (Air France).",
+        saison=("La saison sèche, de juin à septembre, est la plus fraîche. Il pleut beaucoup d'octobre à mai. "
+                "Les prix montent en juillet-août et pour les fêtes de fin d'année."),
+        bagages=BAG_AFRIQUE,
+        formalites="Un visa est exigé pour les voyageurs de nationalité belge ou française. " + FJ_OBLIG + " " + PALU,
+        faq=[("Bruxelles ou Paris pour aller à Kinshasa ?", "Comparez les deux : Brussels Airlines (Bruxelles) et Air France (Paris) volent en direct. Le train entre Paris et Bruxelles prend environ 1 h 25."),
+             ("Combien de temps dure le vol Bruxelles – Kinshasa ?", "Environ 8 heures sans escale.")],
+    ),
+    ("BRU", "DSS"): dict(
+        natio="belge ou française",
+        intro=("Bruxelles – Dakar sert la diaspora sénégalaise de Belgique et du nord de la France, ainsi que les touristes vers la Petite-Côte. "
+               "Les vols arrivent à l'aéroport Blaise-Diagne (AIBD), à 45 minutes à 1 heure de Dakar."),
+        direct=("Brussels Airlines assure l'essentiel des vols directs (environ 6 h). Air Sénégal a ouvert une ligne Dakar – Bruxelles fin 2025, "
+                "avec quelques vols par semaine."),
+        escales="Avec escale : Lisbonne (TAP), Casablanca (Royal Air Maroc), Madrid (Iberia) ou Paris (Air France).",
+        saison=("La saison sèche, de novembre à juin, est la plus agréable. Juillet-août, les fêtes de fin d'année, la Tabaski et le Magal "
+                "sont les périodes les plus chères."),
+        bagages=BAG_AFRIQUE,
+        formalites=SANS_VISA_UE + " " + FJ_RECO + " " + PALU,
+        faq=[("Quelles compagnies volent en direct entre Bruxelles et Dakar ?", "Brussels Airlines, et Air Sénégal depuis fin 2025 avec quelques vols par semaine."),
+             ("Faut-il un visa pour le Sénégal depuis la Belgique ?", "Pas pour les ressortissants de l'Union européenne pour moins de 90 jours. Les autres nationalités doivent vérifier les règles avant de partir.")],
+    ),
+    ("BRU", "ABJ"): dict(
+        natio="belge ou française",
+        intro=("Bruxelles – Abidjan est une alternative à Paris pour la diaspora ivoirienne de Belgique et du nord de la France. "
+               "L'offre directe est plus limitée qu'au départ de Paris : comparez toujours les deux villes."),
+        direct="Brussels Airlines assure quelques vols directs par semaine (7 h environ, certains vols faisant un arrêt en route).",
+        escales="Avec escale : Paris (Air France, Air Côte d'Ivoire), Casablanca (Royal Air Maroc), Istanbul (Turkish Airlines) ou Addis-Abeba (Ethiopian Airlines).",
+        saison=("Abidjan est chaude et humide toute l'année ; la grande saison des pluies dure de mai à juillet. "
+                "Prix les plus hauts en juillet-août et pour les fêtes de fin d'année."),
+        bagages=BAG_AFRIQUE,
+        formalites="Un visa est exigé pour les voyageurs de nationalité belge ou française (demande en ligne). " + FJ_OBLIG + " " + PALU,
+        faq=[("Le vol Bruxelles – Abidjan est-il direct ?", "Brussels Airlines propose quelques vols par semaine, parfois avec un arrêt en route. Sinon, passez par Paris, Casablanca ou Istanbul."),
+             ("Vaut-il mieux partir de Paris pour Abidjan ?", "Paris a beaucoup plus de vols directs (Air France, Air Côte d'Ivoire, Corsair). Comparez en ajoutant le prix du train.")],
+    ),
+    ("BRU", "DLA"): dict(
+        natio="belge ou française",
+        intro=("Bruxelles – Douala est l'une des lignes phares de Brussels Airlines vers l'Afrique centrale, très utilisée par la diaspora camerounaise "
+               "de Belgique, mais aussi depuis la France par ceux qui cherchent une alternative à Air France."),
+        direct="Brussels Airlines dessert Douala quelques fois par semaine ; certains vols s'arrêtent à Yaoundé (ou inversement).",
+        escales="Avec escale : Paris (Air France), Casablanca (Royal Air Maroc), Istanbul (Turkish Airlines) ou Addis-Abeba (Ethiopian Airlines).",
+        saison="Décembre à février est la période la plus sèche. Il pleut beaucoup de juillet à septembre. Prix les plus hauts en juillet-août et pour les fêtes.",
+        bagages=BAG_AFRIQUE,
+        formalites="Un visa est exigé pour les voyageurs de nationalité belge ou française. " + FJ_OBLIG + " " + PALU,
+        faq=[("Le vol Bruxelles – Douala fait-il un arrêt ?", "Certains vols de Brussels Airlines passent par Yaoundé. Regardez le détail du vol : la durée totale change."),
+             ("Douala ou Yaoundé depuis Bruxelles ?", "Brussels Airlines dessert les deux villes. Choisissez selon votre destination finale, la route entre les deux prend plusieurs heures.")],
+    ),
+    ("MRS", "ALG"): dict(
+        intro=("Marseille – Alger est l'une des lignes les plus chargées de Provence, portée par la diaspora algérienne du sud de la France. "
+               "Le vol ne dure qu'environ 1 h 30 : c'est souvent la façon la plus rapide de rejoindre l'Algérie depuis le Sud."),
+        direct="Air Algérie et des compagnies françaises (dont Transavia, selon les saisons) proposent des vols directs d'environ 1 h 30.",
+        escales="Le direct est la norme. Si les prix sont trop hauts, comparez avec Oran, Constantine ou Béjaïa, ou un départ de Lyon ou Montpellier.",
+        saison=("Juillet-août, le Ramadan, l'Aïd et les vacances scolaires concentrent les prix les plus élevés. "
+                "Pour l'été, réservez dès le début de l'année : les vols se remplissent très vite."),
+        bagages=BAG_MAGHREB,
+        formalites="Un visa est exigé pour les voyageurs de nationalité française (demande auprès des consulats d'Algérie).",
+        faq=[("Combien de temps dure le vol Marseille – Alger ?", "Environ 1 h 30 sans escale."),
+             ("Quand réserver un Marseille – Alger pour l'été ?", "Dès janvier-février si possible : juillet-août est la période la plus demandée de l'année.")],
+    ),
+    ("MRS", "TUN"): dict(
+        intro=("Marseille – Tunis est un vol court (environ 1 h 30) très utilisé par la diaspora tunisienne et les vacanciers du sud de la France."),
+        direct="Tunisair, Transavia et Nouvelair proposent des vols directs, plus nombreux en été.",
+        escales="Le direct est la norme. Pour la plage, comparez avec Djerba, Monastir ou Enfidha, souvent desservis depuis Marseille en été.",
+        saison="Mai-juin et septembre-octobre sont idéaux. Juillet-août et l'Aïd sont les périodes les plus chères.",
+        bagages=BAG_MAGHREB,
+        formalites="Pas de visa pour les voyageurs de nationalité française pour un séjour de moins de 90 jours ; passeport valide demandé.",
+        faq=[("Quelles compagnies relient Marseille à Tunis ?", "En général Tunisair, Transavia et Nouvelair, en vols directs d'environ 1 h 30."),
+             ("Quand partir en Tunisie depuis Marseille ?", "En mai-juin ou en septembre-octobre : il fait beau et les prix sont plus doux qu'en été.")],
+    ),
+    ("MRS", "DSS"): dict(
+        intro=("Marseille – Dakar évite de monter à Paris pour la diaspora sénégalaise du sud de la France. "
+               "L'offre directe est limitée à quelques vols par semaine, avec des tarifs parfois très bas hors saison."),
+        direct="Transavia assure quelques vols directs par semaine (environ 5 h), avec une offre qui varie selon les saisons.",
+        escales="Avec escale : Paris (Air France), Casablanca (Royal Air Maroc), Lisbonne (TAP) ou Madrid (Iberia).",
+        saison=("La saison sèche, de novembre à juin, est la plus agréable. Juillet-août, les fêtes et la Tabaski sont les périodes les plus chères."),
+        bagages=("Transavia fait payer la valise en soute : ajoutez son prix pour comparer avec un vol via Paris ou Casablanca, "
+                 "qui inclut souvent une ou deux valises."),
+        formalites="Pas de visa pour les voyageurs de nationalité française pour moins de 90 jours. " + FJ_RECO + " " + PALU,
+        faq=[("Y a-t-il des vols directs Marseille – Dakar ?", "Oui, Transavia propose quelques vols par semaine, plus ou moins nombreux selon la saison."),
+             ("Low cost direct ou vol avec escale pour Dakar ?", "Avec beaucoup de bagages, un vol avec escale incluant les valises peut revenir moins cher. Comparez le prix total.")],
+    ),
+    ("LYS", "CMN"): dict(
+        intro=("Lyon – Casablanca relie la deuxième agglomération française au cœur économique du Maroc, en un peu moins de 3 heures. "
+               "Casablanca est aussi une escale pratique vers l'Afrique de l'Ouest avec Royal Air Maroc."),
+        direct="Royal Air Maroc et des compagnies à bas prix proposent des vols directs d'environ 2 h 45.",
+        escales="Le direct est la norme. Pour d'autres villes du Maroc (Marrakech, Agadir, Oujda, Fès), Lyon a aussi des vols directs.",
+        saison="Climat doux toute l'année. Les prix flambent en juillet-août, pendant les vacances scolaires et autour de l'Aïd.",
+        bagages=BAG_MAGHREB,
+        formalites="Pas de visa pour les voyageurs de nationalité française pour un séjour de moins de 90 jours ; passeport valide demandé.",
+        faq=[("Combien de temps dure un vol Lyon – Casablanca ?", "Environ 2 h 45 sans escale."),
+             ("Peut-on aller en Afrique de l'Ouest via Casablanca depuis Lyon ?", "Oui : Royal Air Maroc relie Casablanca à de nombreuses capitales africaines, souvent à bon prix.")],
+    ),
+    ("LYS", "DSS"): dict(
+        intro=("Lyon – Dakar permet à la diaspora sénégalaise de Rhône-Alpes de partir sans passer par Paris. "
+               "L'offre directe reste limitée : surveillez les prix tôt pour les vacances."),
+        direct="Transavia assure quelques vols directs par semaine (environ 5 h 15), selon les saisons.",
+        escales="Avec escale : Paris (Air France), Casablanca (Royal Air Maroc), Lisbonne (TAP) ou Madrid (Iberia).",
+        saison="La saison sèche, de novembre à juin, est la plus agréable. Juillet-août, les fêtes et la Tabaski sont les plus chers.",
+        bagages="Transavia fait payer la valise en soute : ajoutez son prix avant de comparer avec un vol via Paris ou Casablanca.",
+        formalites="Pas de visa pour les voyageurs de nationalité française pour moins de 90 jours. " + FJ_RECO + " " + PALU,
+        faq=[("Y a-t-il des vols directs Lyon – Dakar ?", "Oui, Transavia propose quelques vols par semaine selon la saison."),
+             ("Comment payer moins cher un Lyon – Dakar ?", "Comparez le direct avec un vol via Casablanca ou Paris, en comptant les valises, et activez les dates flexibles.")],
+    ),
+    ("LYS", "ALG"): dict(
+        intro=("Lyon – Alger est très fréquentée par la diaspora algérienne de la région lyonnaise. Le vol dure environ 2 heures."),
+        direct="Air Algérie et des compagnies françaises (dont Transavia, selon les saisons) proposent des vols directs.",
+        escales="Le direct est la norme. Lyon dessert aussi Oran et Constantine : comparez selon votre destination finale.",
+        saison="Juillet-août, le Ramadan, l'Aïd et les vacances scolaires sont les périodes les plus chères : réservez tôt pour l'été.",
+        bagages=BAG_MAGHREB,
+        formalites="Un visa est exigé pour les voyageurs de nationalité française (demande auprès des consulats d'Algérie).",
+        faq=[("Combien de temps dure le vol Lyon – Alger ?", "Environ 2 heures sans escale."),
+             ("Lyon dessert-elle d'autres villes d'Algérie ?", "Oui, notamment Oran et Constantine. Comparez selon la ville où vous allez.")],
+    ),
+    ("GVA", "DSS"): dict(
+        natio="suisse ou française",
+        intro=("Genève – Dakar concerne la diaspora sénégalaise de Suisse romande et de Haute-Savoie. "
+               "Il n'y a pas toujours de vol direct : la comparaison des escales est essentielle."),
+        direct="Les vols directs sont rares ou saisonniers sur cette ligne : vérifiez s'il en existe à vos dates.",
+        escales=("La plupart des trajets passent par Paris (Air France), Lisbonne (TAP), Casablanca (Royal Air Maroc), Bruxelles (Brussels Airlines) "
+                 "ou Madrid (Iberia). Pensez aussi à partir de Lyon, à 1 h 45 de route, qui a des vols directs."),
+        saison="La saison sèche, de novembre à juin, est la plus agréable. Juillet-août, les fêtes et la Tabaski sont les plus chers.",
+        bagages=BAG_AFRIQUE,
+        formalites=SANS_VISA_UE + " " + FJ_RECO + " " + PALU,
+        faq=[("Y a-t-il un vol direct Genève – Dakar ?", "Pas de façon régulière. Passez par Paris, Lisbonne, Casablanca ou Bruxelles, ou partez de Lyon."),
+             ("Faut-il un visa pour le Sénégal depuis la Suisse ?", "Pas pour les ressortissants suisses et européens pour moins de 90 jours.")],
+    ),
+    ("GVA", "CMN"): dict(
+        natio="suisse ou française",
+        intro=("Genève – Casablanca relie la Suisse romande et le Genevois français au Maroc en un peu plus de 2 h 30."),
+        direct="Royal Air Maroc et des compagnies à bas prix proposent des vols directs, plus nombreux en été.",
+        escales="Le direct est la norme. Genève dessert aussi Marrakech et d'autres villes marocaines selon les saisons.",
+        saison="Climat doux toute l'année. Prix les plus hauts en juillet-août, pendant les vacances scolaires et autour de l'Aïd.",
+        bagages=BAG_MAGHREB,
+        formalites=SANS_VISA_UE,
+        faq=[("Combien de temps dure le vol Genève – Casablanca ?", "Environ 2 h 30 à 2 h 45 sans escale."),
+             ("Faut-il un visa pour le Maroc depuis la Suisse ?", "Non pour les ressortissants suisses et européens pour un séjour de moins de 90 jours.")],
+    ),
+    ("CDG", "PTP"): dict(
+        intro=("Paris – Pointe-à-Pitre relie la métropole à la Guadeloupe en 8 h 30 environ. L'aéroport Pôle Caraïbes est aux Abymes, "
+               "tout près de Pointe-à-Pitre. Les vols partent surtout d'Orly."),
+        direct="Air France, Air Caraïbes et Corsair proposent des vols directs, principalement depuis Orly.",
+        escales="Le direct est la norme. Pensez à comparer avec Fort-de-France pour un voyage combiné entre les deux îles.",
+        saison=("La saison sèche (le « carême »), de décembre à avril, est la plus agréable mais aussi la plus chère. "
+                "De juin à novembre, c'est la saison des pluies et des cyclones. Les prix sont les plus hauts à Noël, en février et en juillet-août."),
+        bagages="Les compagnies incluent souvent une valise en soute, mais certains tarifs économiques n'en ont pas : vérifiez avant de payer.",
+        formalites="La Guadeloupe est un département français : la carte d'identité ou le passeport suffit pour les voyageurs français.",
+        faq=[("Depuis quel aéroport partent les vols pour la Guadeloupe ?", "Surtout depuis Orly (Air France, Air Caraïbes, Corsair)."),
+             ("Quand partir en Guadeloupe pas cher ?", "En mai-juin ou en septembre-octobre, hors vacances scolaires, en acceptant la saison des pluies.")],
+    ),
+    ("CDG", "FDF"): dict(
+        intro=("Paris – Fort-de-France relie la métropole à la Martinique en 8 h 30 environ. L'aéroport Aimé-Césaire est au Lamentin, "
+               "à une quinzaine de minutes de Fort-de-France."),
+        direct="Air France, Air Caraïbes et Corsair proposent des vols directs, principalement depuis Orly.",
+        escales="Le direct est la norme. Comparez avec Pointe-à-Pitre pour un voyage combiné Martinique-Guadeloupe.",
+        saison=("Le carême, de décembre à avril, est la saison sèche et la plus demandée. Juin à novembre correspond à la saison des pluies et des cyclones. "
+                "Les prix montent à Noël, au Carnaval (février-mars) et en juillet-août."),
+        bagages="Les compagnies incluent souvent une valise en soute, mais certains tarifs économiques n'en ont pas : vérifiez avant de payer.",
+        formalites="La Martinique est un département français : la carte d'identité ou le passeport suffit pour les voyageurs français.",
+        faq=[("Combien de temps dure le vol Paris – Martinique ?", "Environ 8 h 30 à l'aller, un peu moins au retour."),
+             ("Faut-il un passeport pour la Martinique ?", "Non pour les voyageurs français : la carte d'identité suffit.")],
+    ),
+    ("CDG", "ORN"): dict(
+        intro=("Paris – Oran relie la capitale à la deuxième ville d'Algérie, porte d'entrée de l'Ouest algérien. "
+               "L'aéroport Ahmed-Ben-Bella est à une dizaine de kilomètres du centre."),
+        direct="Air Algérie et des compagnies françaises (dont Transavia) proposent des vols directs d'environ 2 h 15, depuis Orly et Roissy.",
+        escales="Le direct est la norme. Comparez avec Alger ou Tlemcen selon votre destination finale.",
+        saison="Juillet-août, le Ramadan, l'Aïd et les vacances scolaires concentrent les prix les plus élevés. Réservez tôt pour l'été.",
+        bagages=BAG_MAGHREB,
+        formalites="Un visa est exigé pour les voyageurs de nationalité française (demande auprès des consulats d'Algérie).",
+        faq=[("Combien de temps dure le vol Paris – Oran ?", "Environ 2 h 15 sans escale."),
+             ("Quelles compagnies desservent Oran depuis Paris ?", "En général Air Algérie et Transavia, avec d'autres compagnies selon la saison.")],
+    ),
+    ("CDG", "DJE"): dict(
+        intro=("Paris – Djerba est une ligne à la fois touristique (plages, hôtels-clubs) et familiale pour la diaspora du sud tunisien. "
+               "Le vol dure environ 2 h 45."),
+        direct="Tunisair, Transavia, Nouvelair et d'autres compagnies proposent des vols directs, beaucoup plus nombreux en été.",
+        escales="Le direct est la norme. En hiver, certains trajets passent par Tunis.",
+        saison=("Djerba est agréable presque toute l'année ; la baignade est idéale de juin à octobre. "
+                "Juillet-août et l'Aïd sont les périodes les plus chères."),
+        bagages=BAG_MAGHREB,
+        formalites="Pas de visa pour les voyageurs de nationalité française pour un séjour de moins de 90 jours ; passeport valide demandé.",
+        faq=[("Quand partir à Djerba pas cher ?", "En mai, juin ou septembre-octobre : il fait beau et les prix sont plus doux qu'en juillet-août."),
+             ("Combien de temps dure le vol Paris – Djerba ?", "Environ 2 h 45 sans escale.")],
+    ),
+    ("CDG", "BZV"): dict(
+        intro=("Paris – Brazzaville relie la France à la capitale du Congo, face à Kinshasa de l'autre côté du fleuve. "
+               "Les billets y sont parmi les plus chers d'Afrique centrale : la comparaison des escales est souvent payante."),
+        direct="Air France relie Roissy à Brazzaville (environ 7 h à 8 h selon les vols).",
+        escales=("Avec escale : Casablanca (Royal Air Maroc), Addis-Abeba (Ethiopian Airlines), Istanbul (Turkish Airlines) ou Lomé (ASKY). "
+                 "Pointe-Noire, la capitale économique, a aussi ses propres vols."),
+        saison="La saison sèche, de juin à septembre, est la plus fraîche. Il pleut beaucoup d'octobre à mai. Prix les plus hauts en juillet-août et pour les fêtes.",
+        bagages=BAG_AFRIQUE,
+        formalites="Un visa est exigé pour les voyageurs de nationalité française. " + FJ_OBLIG + " " + PALU,
+        faq=[("Pourquoi les billets Paris – Brazzaville sont-ils chers ?", "La concurrence est faible sur le direct. Les vols via Casablanca, Addis-Abeba ou Istanbul sont parfois nettement moins chers."),
+             ("Brazzaville ou Pointe-Noire ?", "Choisissez selon votre destination finale : les deux villes sont éloignées et ont chacune leurs vols.")],
+    ),
+    ("CDG", "NDJ"): dict(
+        intro=("Paris – N'Djamena est utilisée par la diaspora tchadienne, les ONG et les voyageurs d'affaires. "
+               "L'offre est limitée et les billets sont chers : réservez tôt et comparez les escales."),
+        direct="Air France relie Roissy à N'Djamena, avec quelques vols par semaine.",
+        escales="Avec escale : Addis-Abeba (Ethiopian Airlines), Istanbul (Turkish Airlines), Casablanca (Royal Air Maroc) ou Alger (Air Algérie).",
+        saison=("De novembre à février, il fait plus frais et sec. Mars à juin est très chaud, et les pluies tombent de juillet à septembre."),
+        bagages=BAG_AFRIQUE,
+        formalites=("Un visa est exigé pour les voyageurs de nationalité française. " + FJ_RECO + " " + PALU +
+                    " Consultez les conseils aux voyageurs de France Diplomatie : la situation sécuritaire évolue."),
+        faq=[("Y a-t-il des vols directs Paris – N'Djamena ?", "Air France propose quelques vols par semaine. Sinon, passez par Addis-Abeba, Istanbul ou Casablanca."),
+             ("Quand partir au Tchad ?", "De novembre à février, pendant la saison sèche et plus fraîche.")],
+    ),
+    ("CDG", "TNR"): dict(
+        intro=("Paris – Antananarivo est un long-courrier de 10 h 45 environ vers la capitale de Madagascar, très utilisé par la diaspora malgache de France. "
+               "L'aéroport d'Ivato est à une quinzaine de kilomètres du centre de « Tana »."),
+        direct="Air France et Madagascar Airlines (ex-Air Madagascar) proposent des vols directs, depuis Roissy et parfois Orly.",
+        escales=("Avec escale : La Réunion (Air Austral), Maurice (Air Mauritius), Addis-Abeba (Ethiopian Airlines), Nairobi (Kenya Airways) "
+                 "ou Istanbul (Turkish Airlines). Un stop à La Réunion ou à Maurice permet de combiner deux séjours."),
+        saison=("La saison sèche, d'avril à novembre, est la meilleure pour voyager. De janvier à mars, c'est la saison des pluies et des cyclones. "
+                "Prix les plus hauts en juillet-août et pour les fêtes."),
+        bagages="Les vols directs incluent souvent une ou deux valises selon le tarif. Sur les trajets avec escale, vérifiez la franchise de chaque compagnie.",
+        formalites="Un visa est exigé pour les voyageurs de nationalité française (en ligne ou à l'arrivée, payant). " + PALU,
+        faq=[("Combien de temps dure le vol Paris – Antananarivo ?", "Environ 10 h 45 sans escale."),
+             ("Peut-on faire escale à La Réunion ou à Maurice ?", "Oui, avec Air Austral ou Air Mauritius : c'est parfois moins cher et permet de combiner deux destinations.")],
+    ),
+    ("CDG", "JED"): dict(
+        intro=("Paris – Djeddah est la principale porte d'entrée pour la Omra, et pour le Hajj depuis la France. "
+               "L'aéroport King Abdulaziz est à environ 1 h 15 de route de La Mecque, aussi reliée par le train à grande vitesse Haramain."),
+        direct="Saudia assure des vols directs depuis Roissy (environ 5 h 45). Air France ne dessert pas Djeddah.",
+        escales="Avec escale : Istanbul (Turkish Airlines), Le Caire (EgyptAir), Dubaï (Emirates), Doha (Qatar Airways) ou Abou Dabi (Etihad).",
+        saison=("Les prix flambent pendant le Ramadan (surtout les dix derniers jours) et autour du Hajj. "
+                "Pour une Omra moins chère, visez les mois hors Ramadan et hors vacances scolaires. L'été est extrêmement chaud."),
+        bagages=("Saudia inclut en général des valises en soute. Au retour, l'eau de Zamzam est soumise à des règles particulières "
+                 "(bidons de 5 litres, souvent hors franchise) : vérifiez auprès de la compagnie."),
+        formalites=("Un visa est exigé : le visa touristique électronique permet la Omra hors saison du Hajj. "
+                    "Le Hajj nécessite un visa spécifique, obtenu via une agence agréée. Le vaccin contre la méningite (ACYW) est exigé pour les pèlerins."),
+        faq=[("Quel visa pour la Omra depuis la France ?", "Le visa touristique électronique saoudien permet d'effectuer la Omra hors période du Hajj. Vérifiez les conditions à jour avant de réserver."),
+             ("Y a-t-il des vols directs Paris – Djeddah ?", "Oui, avec Saudia depuis Roissy, en 5 h 45 environ. Sinon, passez par Istanbul, Le Caire ou le Golfe.")],
+    ),
+})
+
 
 def get(fr, to):
     return TRAJETS.get((fr, to))

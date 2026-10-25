@@ -338,7 +338,7 @@ def trajet_html(tj, cf, ct):
             + '<p><a href="/guides/quand-reserver/">Quand réserver pour payer moins cher</a></p></section>'
             + f'<section><h2>Bagages</h2><p>{E(tj["bagages"])}</p><p><a href="/guides/bagages-avion/">Le guide des bagages en avion</a></p></section>'
             + f'<section><h2>Formalités d\'entrée</h2><p>{E(tj["formalites"])}</p>'
-            + f'<p class="small">Informations pour les voyageurs de nationalité française, vérifiées en {trajets.VERIFIE}. Elles peuvent changer et diffèrent selon la nationalité : '
+            + f'<p class="small">Informations pour les voyageurs de nationalité {tj.get('natio', 'française')}, vérifiées en {trajets.VERIFIE}. Elles peuvent changer et diffèrent selon la nationalité : '
             + f'consultez les <a href="{trajets.DIPLO}" rel="noopener" target="_blank">conseils aux voyageurs de France Diplomatie</a> avant de partir. '
             + 'Les compagnies et les fréquences de vol changent aussi selon les saisons : vérifiez sur le site de réservation.</p></section>')
 
