@@ -359,6 +359,11 @@ HOTEL_TIPS = {
         "El aeropuerto de Kotoka está dentro de la ciudad: un hotel en Osu o cerca del aeropuerto acorta los trayectos, a menudo frenados por los atascos.",
         "O aeroporto de Kotoka fica dentro da cidade: um hotel em Osu ou perto do aeroporto encurta as deslocações, muitas vezes atrasadas pelo trânsito.",
         "مطار كوتوكا داخل المدينة: الإقامة في أوسو أو قرب المطار تختصر التنقلات التي تبطئها الاختناقات المرورية غالبًا."),
+    "Lagos": (
+        "Traffic between the mainland and the islands can be very slow: for a late arrival or an early departure, a night in Ikeja, near the airport, is often more practical.",
+        "Los atascos entre el continente y las islas pueden ser muy largos: si llegas tarde o sales temprano, una noche en Ikeja, cerca del aeropuerto, suele ser más práctica.",
+        "O trânsito entre o continente e as ilhas pode ser muito lento: para uma chegada tardia ou uma partida cedo, uma noite em Ikeja, perto do aeroporto, costuma ser mais prática.",
+        "قد تطول الاختناقات المرورية كثيرًا بين البر والجزر: عند الوصول متأخرًا أو المغادرة باكرًا، تكون ليلة في إيكيجا قرب المطار أكثر عملية غالبًا."),
 }
 
 AREAS = {
@@ -410,4 +415,7 @@ AREAS = {
     "quartier vivant, appartements": ("lively area, apartments", "barrio animado, apartamentos", "bairro animado, apartamentos", "حي حيوي، شقق"),
     "charme historique, plus cher": ("historic charm, more expensive", "encanto histórico, más caro", "charme histórico, mais caro", "طابع تاريخي، أغلى"),
     "animé, restaurants et commerces": ("lively, restaurants and shops", "animado, restaurantes y comercios", "animado, restaurantes e comércio", "حيوي، مطاعم ومتاجر"),
+    "quartier des affaires, hôtels et restaurants": ("business district, hotels and restaurants", "distrito de negocios, hoteles y restaurantes", "bairro de negócios, hotéis e restaurantes", "حي الأعمال، فنادق ومطاعم"),
+    "résidentiel et chic, plus calme": ("upmarket residential, quieter", "residencial y elegante, más tranquilo", "residencial e requintado, mais calmo", "سكني راقٍ، أهدأ"),
+    "proche de l'aéroport, sur le continent": ("close to the airport, on the mainland", "cerca del aeropuerto, en el continente", "perto do aeroporto, no continente", "قريب من المطار، على البر الرئيسي"),
 }

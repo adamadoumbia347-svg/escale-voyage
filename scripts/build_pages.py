@@ -174,6 +174,8 @@ HOTELS = [
      "L'hiver (janvier-mars) est la saison la moins chère pour les hôtels, sauf pendant les festivals.", "YUL"),
     ("Accra", "Ghana", [("Osu", "animé, restaurants et commerces"), ("Airport Residential Area", "proche de l'aéroport, hôtels d'affaires"), ("East Legon", "résidentiel, plus calme")],
      "L'aéroport de Kotoka est en ville : un hôtel à Osu ou près de l'aéroport limite les trajets, souvent ralentis par les embouteillages.", "ACC"),
+    ("Lagos", "Nigeria", [("Victoria Island", "quartier des affaires, hôtels et restaurants"), ("Ikoyi", "résidentiel et chic, plus calme"), ("Ikeja", "proche de l'aéroport, sur le continent")],
+     "Les embouteillages entre le continent et les îles peuvent être très longs : pour une arrivée tardive ou un départ tôt, une nuit à Ikeja, près de l'aéroport, est souvent plus pratique.", "LOS"),
 ]
 
 def hotel_slug(h):
