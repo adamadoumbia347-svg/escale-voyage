@@ -14,7 +14,8 @@ import sys
 import urllib.parse
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-import build_i18n  # noqa: E402
+import build_i18n
+import trajets  # noqa: E402
 import explore_pages  # noqa: E402
 import hubs  # noqa: E402
 import villes  # noqa: E402
@@ -278,6 +279,9 @@ def route_page(r):
          else f"Les vols arrivent à {airport} (code {to})."),
         ("Les bagages sont-ils inclus ?", "Pas toujours. Les tarifs les plus bas n'incluent parfois qu'un petit sac. Vérifiez la franchise bagage en soute avant de payer, surtout si vous voyagez avec des valises."),
     ]
+    tj = trajets.get(fr, to)
+    if tj:
+        faq = tj["faq"] + faq
     ld = '<script type="application/ld+json">' + __import__("json").dumps({
         "@context": "https://schema.org", "@type": "FAQPage",
         "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]
@@ -298,7 +302,7 @@ def route_page(r):
 <ul class="price-list"></ul></section>
 <script src="/route-prices.js" defer></script>
 {build_i18n.calendar_html("fr", fr, to)}
-<section><h2>Notre conseil pour ce trajet</h2><p>{E(note)}</p></section>
+{trajet_html(tj, cf, ct) if tj else ''}<section><h2>Notre conseil pour ce trajet</h2><p>{E(note)}</p></section>
 <section><h2>Comment payer moins cher</h2>
 <ol class="steps">
   <li><strong>Activez les dates flexibles.</strong> Décaler le départ d'un ou deux jours change souvent plus le prix que le choix du site.</li>
@@ -322,6 +326,20 @@ def route_page(r):
     paths = {"fr": s, **{l: build_i18n.route_path(r, l) for l in build_i18n.LANGS}}
     og = f"og/{fr}-{to}.jpg" if (SITE / "og" / f"{fr}-{to}.jpg").exists() else "og-image.png"
     return page(s, title, desc, hero, body, ld, paths, og)
+
+def trajet_html(tj, cf, ct):
+    """Sections propres aux grands trajets (scripts/trajets.py)."""
+    part = lambda t, x: f"<h3>{E(t)}</h3><p>{E(x)}</p>"
+    return (f'<section class="trajet"><h2>Le trajet {E(cf)} – {E(ct)} en bref</h2><p>{E(tj["intro"])}</p>'
+            + part("Vols directs", tj["direct"]) + part("Vols avec escale", tj["escales"]) + "</section>"
+            + f'<section><h2>Quand partir à {E(ct)} ?</h2><p>{E(tj["saison"])}</p>'
+            + '<p><a href="/guides/quand-reserver/">Quand réserver pour payer moins cher</a></p></section>'
+            + f'<section><h2>Bagages</h2><p>{E(tj["bagages"])}</p><p><a href="/guides/bagages-avion/">Le guide des bagages en avion</a></p></section>'
+            + f'<section><h2>Formalités d\'entrée</h2><p>{E(tj["formalites"])}</p>'
+            + f'<p class="small">Informations pour les voyageurs de nationalité française, vérifiées en {trajets.VERIFIE}. Elles peuvent changer et diffèrent selon la nationalité : '
+            + f'consultez les <a href="{trajets.DIPLO}" rel="noopener" target="_blank">conseils aux voyageurs de France Diplomatie</a> avant de partir. '
+            + 'Les compagnies et les fréquences de vol changent aussi selon les saisons : vérifiez sur le site de réservation.</p></section>')
+
 
 # Pages « destination » (scripts/hubs.py) : {ville d'arrivée : {langue : chemin}}
 HUBS = {}
