@@ -293,3 +293,11 @@ a.cal-day { color: var(--ink); }
 .main-nav a, .lang-nav a { color: var(--on-navy); }
 .main-nav a:hover, .lang-nav a:hover { color: #fff; background: rgb(255 255 255 / .1); }
 .main-nav a[aria-current="page"], .lang-nav a[aria-current="page"] { color: #fff; background: rgb(255 255 255 / .16); }
+
+/* Blog */
+.post h2 { margin-top: 1.6em; }
+.post ul.plain { padding-left: 1.2em; }
+.post ul.plain li { margin: .35em 0; }
+.post .tip { background: #eef5ff; border-left: 4px solid #0062e3; border-radius: 8px; padding: .8em 1em; }
+.blog-list li { margin: 0 0 1em; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .post .tip { background: rgb(0 98 227 / .15); } }
