@@ -333,7 +333,11 @@ def route_page(r):
 def trajet_html(tj, cf, ct):
     """Sections propres aux grands trajets (scripts/trajets.py)."""
     part = lambda t, x: f"<h3>{E(t)}</h3><p>{E(x)}</p>"
+    sp = {p["key"]: p for p in build_i18n.partners(SITE)}
+    arrive = " · ".join(f'<a href="{E(sp[k]["url"])}" target="_blank" rel="sponsored noopener noreferrer">{t}</a>'
+                        for k, t in (("esim", "internet dès l'atterrissage (eSIM)"), ("transfer", "transfert depuis l'aéroport réservé à l'avance")) if k in sp)
     return (f'<section class="trajet"><h2>Le trajet {E(cf)} – {E(ct)} en bref</h2><p>{E(tj["intro"])}</p>'
+            + (f'<p class="small">Pour l\'arrivée à {E(ct)} : {arrive}.</p>' if arrive else '')
             + part("Vols directs", tj["direct"]) + part("Vols avec escale", tj["escales"]) + "</section>"
             + f'<section><h2>Quand partir à {E(ct)} ?</h2><p>{E(tj["saison"])}</p>'
             + '<p><a href="/guides/quand-reserver/">Quand réserver pour payer moins cher</a></p></section>'
@@ -501,7 +505,7 @@ def main():
     urls += hub_urls
     urls += i18n_urls + build_i18n.build_indexes(SITE, ctx, route_paths, hotel_paths) + build_i18n.build_deals(SITE, ctx) + build_i18n.build_guides(SITE, ctx) + build_i18n.build_about(SITE, ctx) + build_i18n.build_fetes(SITE, ctx) + explore_pages.build_anywhere(SITE, ctx)
     urls += legal_pages()
-    urls += blog.build(page, E, DOMAIN)
+    urls += blog.build(page, E, DOMAIN, build_i18n.extras_html(SITE, "fr", "destination", "", ""))
     urls.append(page("credits-photos", "Crédits des photos | Escale", "Auteurs et licences des photos de villes utilisées sur Escale (Wikimedia Commons).",
                      "<h1>Crédits des photos</h1>", villes.credits_body(SITE)))
 

@@ -227,7 +227,7 @@ def _date_fr(d):
     return f"{int(j)} {mois[int(m) - 1]} {y}"
 
 
-def build(page, E, domain):
+def build(page, E, domain, extras=""):
     """Écrit le blog (index + articles) avec la fonction page() de build_pages. Renvoie les URL pour le sitemap."""
     urls = []
     for a in ARTICLES:
@@ -245,6 +245,7 @@ def build(page, E, domain):
         others = [o for o in ARTICLES if o is not a][:3]
         body = (f'<article class="post">{_blocks(a["blocks"])}</article>'
                 '<section><p><a class="btn" href="/?type=vols">Comparer les prix des vols</a></p></section>'
+                + extras +
                 '<section><h2>Pages utiles</h2><ul class="route-links">'
                 + "".join(f'<li><a href="/{s}/">{E(t)}</a></li>' for s, t in a["links"]) + "</ul></section>"
                 '<section><h2>À lire aussi</h2><ul class="links">'
