@@ -12,9 +12,10 @@ import * as alert from "./api/alert"
 import * as form from "./api/form"
 import * as admin from "./api/admin"
 import * as cron from "./api/cron"
+import * as populaires from "./api/populaires"
 import * as apercu from "./apercu-prix"
 
-const API: Record<string, any> = { prix, explore, calendar, deals, geo, alert, form, admin, cron }
+const API: Record<string, any> = { prix, explore, calendar, deals, geo, alert, form, admin, cron, populaires }
 
 export default {
   async fetch(request: Request, env: Env & { ASSETS: { fetch: (r: Request) => Promise<Response> } }, ctx: { waitUntil: (p: Promise<any>) => void }) {

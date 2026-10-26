@@ -72,6 +72,7 @@ jobs:
           echo "Alertes : $(curl -s $SITE_URL/api/alert?action=status)"
           echo "Prix CDG-DSS : $(curl -s "$SITE_URL/api/prix?from=CDG&to=DSS&dep=$D&ret=$R&list=1" | jq -c '{available, price, currency, offres: (.offers // [] | length)}')"
           echo "Bons plans : $(curl -s "$SITE_URL/api/deals" | jq -c '{available, villes: (.origins // {} | to_entries | map({(.key): (.value|length)}) | add)}')"
+          for O in CDG BRU LYS; do echo "Populaires depuis $O : $(curl -s "$SITE_URL/api/populaires?from=$O" | jq -c '{available, reason, trajets: [.routes[]? | "\(.to) \(.price)"]}')"; done
           echo "Calendrier : $(curl -s "$SITE_URL/api/calendar?from=CDG&to=BKO&month=${D:0:7}" | jq -c '{available, jours: (.days // {} | length)}')"
           echo "Aperçu WhatsApp : $(curl -s -A 'WhatsApp/2.23' $SITE_URL/vol-paris-dakar/ | grep -o '<meta property=\"og:title\" content=\"[^\"]*\"')"
           if [ "${{ inputs.essai_alerte }}" = "oui" ]; then

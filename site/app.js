@@ -877,7 +877,8 @@
   }
 
   // ---------- Destinations populaires ----------
-  const DESTS = [
+  // Liste de départ (diaspora), remplacée dès que possible par les trajets les plus recherchés depuis l'aéroport du visiteur (/api/populaires)
+  let DESTS = [
     ["CDG", "BKO", "Souvent avec une escale, environ 8 à 12 h", "Usually with a stop, about 8–12 h"],
     ["CDG", "DSS", "Vols directs, environ 5 h 30", "Direct flights, about 5 h 30"],
     ["CDG", "ABJ", "Vols directs, environ 6 h 30", "Direct flights, about 6 h 30"],
@@ -920,9 +921,34 @@
     }).join("");
     if (destSeen) loadDestPrices();
   }
+  // Trajets les plus recherchés par les voyageurs depuis l'aéroport de départ (classement Aviasales), avec leur prix
+  let popFrom = null, popPending = false;
+  function loadPopular() {
+    if (!isLive) return;
+    const from = place($("f-from").value);
+    if (!from || !from.code || from.code + CUR === popFrom) return;
+    popFrom = from.code + CUR; popPending = true;
+    Promise.all([fetch("/api/populaires?" + q({ from: from.code, currency: CUR })).then((r) => (r.ok ? r.json() : null)).catch(() => null), loadDB()]).then(([d]) => {
+      if (popFrom !== from.code + CUR) return;
+      popPending = false;
+      const routes = d && d.available && d.routes ? d.routes.filter((r) => byCode.has(r.to)) : [];
+      if (routes.length < 4) { loadDestPrices(); return; } // pas assez de données : on garde la liste de départ
+      DESTS = routes.map((r) => [from.code, r.to,
+        r.transfers === 0 ? "Vol direct possible" : "Avec escale",
+        r.transfers === 0 ? "Direct flight available" : "With a stop"]);
+      routes.forEach((r) => destPrices.set(destKey(from.code, r.to), { price: r.price, currency: d.currency }));
+      const lead = $("dests-lead");
+      if (lead) lead.textContent = fmt(T("Les destinations les plus recherchées par les voyageurs au départ de {c}, avec le prix aller-retour le plus bas repéré le mois prochain.",
+        "The destinations travellers search most from {c}, with the lowest return price found for next month."), { c: from.name });
+      paintDests();
+    });
+  }
+  $("f-from").addEventListener("change", () => { if (destSeen) loadPopular(); });
   // Prix « dès » chargés seulement quand la section devient visible (moins d'appels)
   function loadDestPrices() {
     if (!isLive) return;
+    loadPopular();
+    if (popPending) return; // les prix arrivent avec les destinations populaires
     // La devise a pu changer (position du visiteur) depuis l'affichage : on redessine avec les bonnes clés
     const first = document.querySelector(".dest-price");
     if (first && first.dataset.k !== destKey(DESTS[0][0], DESTS[0][1])) { paintDests(); return; }
