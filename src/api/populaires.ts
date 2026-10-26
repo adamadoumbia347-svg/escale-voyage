@@ -14,7 +14,7 @@ export const onRequestGet = (ctx: Ctx) => edgeCached(ctx, 3600, async () => {
   const q = new URL(ctx.request.url).searchParams
   const from = (q.get("from") || "").toUpperCase(), currency = currencyOf(q.get("currency"))
   if (!IATA.test(from)) return json({ error: "Paramètres invalides" }, { status: 400 })
-  const kv = ctx.env.ESCALE, key = `cache:pop:${from}:${currency}`
+  const kv = ctx.env.ESCALE, key = `cache:pop2:${from}:${currency}`
   if (kv) {
     const saved = await kv.get(key, "json")
     if (saved) return json(saved)
