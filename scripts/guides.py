@@ -655,6 +655,154 @@ GUIDES = [
             ],
             note="تعتمد الرسوم والحدود وقواعد الصرف على مصرفك وعلى البلد: تحقّق منها قبل السفر."),
     },
+    {
+        "key": "escales",
+        "fr": dict(
+            slug="guides/correspondances-escales", title="Correspondances et longues escales : bien les choisir",
+            desc="Vol avec escale vers l’Afrique ou le Maghreb : temps de correspondance, billet unique ou séparé, bagages, visa de transit et longues attentes à l’aéroport.",
+            intro="Un vol avec escale est souvent moins cher qu’un vol direct. Encore faut-il que la correspondance se passe bien : voici les points à vérifier avant de réserver.",
+            sections=[
+                ("Billet unique ou billets séparés", [
+                    "Avec un seul billet (une seule réservation), la compagnie doit en général vous trouver une solution si le premier vol est en retard et que vous ratez le second.",
+                    "Avec deux billets achetés séparément, ce n’est souvent pas le cas : si vous ratez le second vol, il peut être perdu. Prévoyez alors beaucoup plus de marge, ou préférez un billet unique.",
+                ]),
+                ("Le bon temps de correspondance", [
+                    "- Une correspondance trop courte est risquée, surtout dans un grand aéroport ou s’il faut changer de terminal.",
+                    "- Chaque aéroport fixe un temps minimum : les comparateurs ne proposent normalement pas moins sur un billet unique, mais un peu de marge rassure.",
+                    "- Avec des enfants ou une personne à mobilité réduite, choisissez une escale plus longue.",
+                ]),
+                ("Bagages et contrôles", [
+                    "- Demandez à l’enregistrement si vos valises vont directement jusqu’à la destination finale ou s’il faut les récupérer pendant l’escale.",
+                    "- Dans certains pays, il faut repasser la douane ou un contrôle de sécurité à l’escale, même en transit : comptez ce temps.",
+                    "- Les liquides achetés en zone duty free peuvent être retirés à un nouveau contrôle : gardez-les dans leur sac scellé avec le ticket.",
+                ]),
+                ("Visa de transit", [
+                    "Selon votre nationalité et le pays de l’escale, un visa de transit peut être exigé, même sans sortir de l’aéroport. Vérifiez auprès de l’ambassade ou du site officiel du pays de l’escale avant de réserver.",
+                ]),
+                ("Longue escale : en profiter ou se reposer", [
+                    "- Certains aéroports proposent des salons accessibles à la journée, des hôtels de transit ou des zones de repos.",
+                    "- Sortir visiter la ville demande de pouvoir entrer dans le pays (passeport, visa éventuel) et de revenir largement à l’avance pour les contrôles.",
+                    "- Gardez dans le bagage cabine un chargeur, des médicaments et de quoi vous changer.",
+                ]),
+            ],
+            note="Les règles de transit, de visa et de bagages dépendent de la compagnie et des pays : vérifiez toujours auprès d’eux avant de partir."),
+        "en": dict(
+            slug="en/guides/connections-layovers", title="Connections and long layovers: choose them well",
+            desc="Flights with a stop to Africa or North Africa: connection time, single or separate tickets, baggage, transit visas and long waits at the airport.",
+            intro="A flight with a stop is often cheaper than a direct one. The connection still has to go smoothly: here is what to check before you book.",
+            sections=[
+                ("Single ticket or separate tickets", [
+                    "With a single ticket (one booking), the airline generally has to find you a solution if the first flight is late and you miss the second.",
+                    "With two tickets bought separately, that is often not the case: if you miss the second flight, it may be lost. Allow much more time, or prefer a single ticket.",
+                ]),
+                ("The right connection time", [
+                    "- A connection that is too short is risky, especially at a large airport or if you have to change terminals.",
+                    "- Each airport sets a minimum time: comparison sites should not offer less on a single ticket, but a little extra margin is reassuring.",
+                    "- With children or a person with reduced mobility, choose a longer layover.",
+                ]),
+                ("Baggage and checks", [
+                    "- Ask at check-in whether your bags go straight to your final destination or whether you must collect them during the layover.",
+                    "- In some countries you have to go through customs or security again at the stopover, even in transit: allow for it.",
+                    "- Liquids bought in duty free may be taken away at a new security check: keep them in their sealed bag with the receipt.",
+                ]),
+                ("Transit visas", [
+                    "Depending on your nationality and the stopover country, a transit visa may be required, even if you do not leave the airport. Check with the embassy or the official website of the stopover country before booking.",
+                ]),
+                ("Long layover: make the most of it or rest", [
+                    "- Some airports offer day-pass lounges, transit hotels or rest areas.",
+                    "- Going into town requires being allowed to enter the country (passport, possible visa) and coming back well ahead of time for the checks.",
+                    "- Keep a charger, medication and a change of clothes in your cabin bag.",
+                ]),
+            ],
+            note="Transit, visa and baggage rules depend on the airline and the countries: always check with them before you travel."),
+        "es": dict(
+            slug="es/guias/conexiones-escalas", title="Conexiones y escalas largas: cómo elegirlas bien",
+            desc="Vuelos con escala a África o el Magreb: tiempo de conexión, billete único o separado, equipaje, visado de tránsito y esperas largas en el aeropuerto.",
+            intro="Un vuelo con escala suele ser más barato que uno directo. Pero la conexión tiene que salir bien: esto es lo que conviene revisar antes de reservar.",
+            sections=[
+                ("Billete único o billetes separados", [
+                    "Con un solo billete (una sola reserva), la aerolínea en general debe buscarte una solución si el primer vuelo se retrasa y pierdes el segundo.",
+                    "Con dos billetes comprados por separado, a menudo no es así: si pierdes el segundo vuelo, puede perderse. Deja entonces mucho más margen o elige un billete único.",
+                ]),
+                ("El tiempo de conexión adecuado", [
+                    "- Una conexión demasiado corta es arriesgada, sobre todo en un aeropuerto grande o si hay que cambiar de terminal.",
+                    "- Cada aeropuerto fija un tiempo mínimo: los comparadores no deberían ofrecer menos con un billete único, pero algo de margen da tranquilidad.",
+                    "- Con niños o con una persona con movilidad reducida, elige una escala más larga.",
+                ]),
+                ("Equipaje y controles", [
+                    "- Pregunta al facturar si tus maletas van directas al destino final o si hay que recogerlas durante la escala.",
+                    "- En algunos países hay que volver a pasar la aduana o un control de seguridad en la escala, incluso en tránsito: tenlo en cuenta.",
+                    "- Los líquidos comprados en el duty free pueden retirarse en un nuevo control: guárdalos en su bolsa sellada con el tique.",
+                ]),
+                ("Visado de tránsito", [
+                    "Según tu nacionalidad y el país de la escala, puede exigirse un visado de tránsito aunque no salgas del aeropuerto. Consulta la embajada o la web oficial del país de la escala antes de reservar.",
+                ]),
+                ("Escala larga: aprovecharla o descansar", [
+                    "- Algunos aeropuertos ofrecen salas VIP de pago por día, hoteles de tránsito o zonas de descanso.",
+                    "- Salir a visitar la ciudad exige poder entrar en el país (pasaporte, posible visado) y volver con mucha antelación para los controles.",
+                    "- Lleva en el equipaje de mano un cargador, medicamentos y una muda de ropa.",
+                ]),
+            ],
+            note="Las normas de tránsito, visado y equipaje dependen de la aerolínea y de los países: consúltalas siempre antes de viajar."),
+        "pt": dict(
+            slug="pt/guias/ligacoes-escalas", title="Ligações e escalas longas: como escolhê-las bem",
+            desc="Voos com escala para África ou o Magrebe: tempo de ligação, bilhete único ou separado, bagagem, visto de trânsito e esperas longas no aeroporto.",
+            intro="Um voo com escala é muitas vezes mais barato do que um direto. Mas a ligação tem de correr bem: eis o que verificar antes de reservar.",
+            sections=[
+                ("Bilhete único ou bilhetes separados", [
+                    "Com um só bilhete (uma só reserva), a companhia deve em geral encontrar-lhe uma solução se o primeiro voo atrasar e perder o segundo.",
+                    "Com dois bilhetes comprados separadamente, muitas vezes não é assim: se perder o segundo voo, ele pode ficar perdido. Preveja muito mais margem ou prefira um bilhete único.",
+                ]),
+                ("O tempo de ligação certo", [
+                    "- Uma ligação demasiado curta é arriscada, sobretudo num grande aeroporto ou se for preciso mudar de terminal.",
+                    "- Cada aeroporto fixa um tempo mínimo: os comparadores não devem propor menos num bilhete único, mas alguma margem dá tranquilidade.",
+                    "- Com crianças ou uma pessoa com mobilidade reduzida, escolha uma escala mais longa.",
+                ]),
+                ("Bagagem e controlos", [
+                    "- Pergunte no check-in se as malas seguem diretamente até ao destino final ou se é preciso recolhê-las durante a escala.",
+                    "- Em alguns países é preciso voltar a passar pela alfândega ou por um controlo de segurança na escala, mesmo em trânsito: conte com esse tempo.",
+                    "- Os líquidos comprados no duty free podem ser retirados num novo controlo: guarde-os no saco selado com o talão.",
+                ]),
+                ("Visto de trânsito", [
+                    "Conforme a sua nacionalidade e o país da escala, pode ser exigido um visto de trânsito, mesmo sem sair do aeroporto. Confirme junto da embaixada ou do site oficial do país da escala antes de reservar.",
+                ]),
+                ("Escala longa: aproveitar ou descansar", [
+                    "- Alguns aeroportos têm salas acessíveis por um dia, hotéis de trânsito ou zonas de descanso.",
+                    "- Sair para visitar a cidade exige poder entrar no país (passaporte, eventual visto) e voltar com muita antecedência para os controlos.",
+                    "- Leve na bagagem de mão um carregador, medicamentos e uma muda de roupa.",
+                ]),
+            ],
+            note="As regras de trânsito, visto e bagagem dependem da companhia e dos países: confirme sempre junto deles antes de viajar."),
+        "ar": dict(
+            slug="ar/guides/connections-layovers", title="الرحلات مع توقف والترانزيت الطويل: كيف تختار جيدًا",
+            desc="رحلات مع توقف إلى أفريقيا أو المغرب العربي: مدة الترانزيت، تذكرة واحدة أم منفصلة، الأمتعة، تأشيرة العبور والانتظار الطويل في المطار.",
+            intro="الرحلة مع توقف أرخص غالبًا من الرحلة المباشرة، لكن يجب أن يمر الترانزيت بسلام: إليك ما يجب التحقق منه قبل الحجز.",
+            sections=[
+                ("تذكرة واحدة أم تذاكر منفصلة", [
+                    "مع تذكرة واحدة (حجز واحد)، على شركة الطيران عمومًا أن تجد لك حلًا إذا تأخرت الرحلة الأولى وفاتتك الثانية.",
+                    "مع تذكرتين اشتُريتا منفصلتين، لا يكون الأمر كذلك غالبًا: إذا فاتتك الرحلة الثانية فقد تخسرها. اترك هامشًا أكبر بكثير أو فضّل التذكرة الواحدة.",
+                ]),
+                ("مدة الترانزيت المناسبة", [
+                    "- الترانزيت القصير جدًا محفوف بالمخاطر، خاصة في المطارات الكبيرة أو عند تغيير المبنى.",
+                    "- لكل مطار حد أدنى للوقت: لا يُفترض أن تعرض مواقع المقارنة أقل منه في التذكرة الواحدة، لكن بعض الهامش يطمئن.",
+                    "- مع الأطفال أو شخص ذي حركة محدودة، اختر توقفًا أطول.",
+                ]),
+                ("الأمتعة والتفتيش", [
+                    "- اسأل عند تسجيل الدخول هل تُنقل حقائبك مباشرة إلى الوجهة النهائية أم يجب استلامها أثناء التوقف.",
+                    "- في بعض الدول يجب المرور مجددًا بالجمارك أو بتفتيش أمني في بلد التوقف حتى أثناء العبور: احسب هذا الوقت.",
+                    "- قد تُصادر السوائل المشتراة من السوق الحرة عند تفتيش جديد: احتفظ بها في كيسها المختوم مع الإيصال.",
+                ]),
+                ("تأشيرة العبور", [
+                    "بحسب جنسيتك وبلد التوقف، قد تُطلب تأشيرة عبور حتى دون مغادرة المطار. تحقّق لدى السفارة أو الموقع الرسمي لبلد التوقف قبل الحجز.",
+                ]),
+                ("الترانزيت الطويل: استغلاله أو الراحة", [
+                    "- تقدّم بعض المطارات صالات بدخول يومي أو فنادق عبور أو مناطق للراحة.",
+                    "- الخروج لزيارة المدينة يتطلب السماح لك بدخول البلد (جواز سفر وتأشيرة محتملة) والعودة قبل الموعد بوقت كافٍ للتفتيش.",
+                    "- ضع في حقيبة اليد شاحنًا وأدويتك وملابس احتياطية.",
+                ]),
+            ],
+            note="قواعد العبور والتأشيرات والأمتعة تعتمد على شركة الطيران والدول: تحقّق منها دائمًا قبل السفر."),
+    },
 ]
 
 INDEX = {
