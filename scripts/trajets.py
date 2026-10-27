@@ -734,6 +734,79 @@ TRAJETS.update({
     ),
 })
 
+# Lille, Genève, Paris et Bordeaux : autres trajets qui ressortent dans la Search Console (octobre 2026)
+TRAJETS.update({
+    ("LIL", "ALG"): dict(
+        intro=("Lille – Alger évite de descendre à Paris pour la diaspora algérienne des Hauts-de-France et de Belgique. "
+               "L'aéroport de Lille-Lesquin est à une vingtaine de minutes du centre."),
+        direct="ASL Airlines France et Air Algérie proposent des vols directs (environ 2 h 30) ; ASL a renforcé son offre au départ de Lille.",
+        escales="Le direct est la norme. Si les prix sont trop hauts, comparez avec un départ de Bruxelles ou de Paris.",
+        saison=SAISON_DZ, bagages=BAG_MAGHREB, formalites=VISA_DZ,
+        faq=[("Quelles compagnies volent entre Lille et Alger ?", "En général ASL Airlines France et Air Algérie, en vols directs d'environ 2 h 30."),
+             ("Lille, Bruxelles ou Paris pour aller à Alger ?", "Lille est souvent le plus pratique depuis le Nord. Comparez quand même avec Bruxelles et Paris, en ajoutant le trajet jusqu'à l'aéroport.")],
+    ),
+    ("LIL", "ORN"): dict(
+        intro="Lille – Oran relie le Nord à l'ouest algérien. L'offre directe est limitée à quelques vols par semaine : en été, les places partent vite.",
+        direct="Air Algérie assure quelques vols directs par semaine (environ 2 h 30).",
+        escales="Hors des jours de vol direct, comparez avec un départ de Paris ou de Bruxelles, mieux desservis vers Oran.",
+        saison=SAISON_DZ, bagages=BAG_MAGHREB, formalites=VISA_DZ,
+        faq=[("Y a-t-il des vols directs Lille – Oran ?", "Oui, quelques vols par semaine avec Air Algérie. Réservez tôt pour l'été."),
+             ("Que faire si le vol direct est complet ?", "Comparez avec un départ de Paris (Orly) ou de Bruxelles, qui ont plus de vols vers Oran.")],
+    ),
+    ("LIL", "TUN"): dict(
+        intro="Lille – Tunis permet à la diaspora tunisienne du Nord de partir sans passer par Paris. Les vols directs sont surtout saisonniers.",
+        direct="Nouvelair a proposé des vols directs, surtout en été : vérifiez s'il en existe à vos dates.",
+        escales="Le reste de l'année, comparez avec Paris (Tunisair, Transavia, Air France) ou Bruxelles. Pour la plage, ASL Airlines relie aussi Lille à Djerba en saison.",
+        saison="Mai-juin et septembre-octobre sont idéaux. Juillet-août et l'Aïd sont les périodes les plus chères.",
+        bagages=BAG_MAGHREB, formalites=SANS_VISA_FR,
+        faq=[("Y a-t-il des vols directs Lille – Tunis toute l'année ?", "Non, ils sont surtout saisonniers. Le reste de l'année, partez de Paris ou de Bruxelles."),
+             ("Lille dessert-elle Djerba ?", "Oui, ASL Airlines propose un vol par semaine en saison (d'avril à fin octobre en 2026).")],
+    ),
+    ("LIL", "OUD"): dict(
+        intro="Lille – Oujda concerne surtout la diaspora de l'Oriental marocain installée dans le Nord et en Belgique. Les vols directs sont rares.",
+        direct="Quelques vols directs par mois ont été proposés (notamment par TUI), avec une offre qui varie beaucoup selon les saisons : vérifiez vos dates.",
+        escales="Sinon, comparez avec Bruxelles, Charleroi ou Paris, ou avec Nador, à environ 2 heures de route d'Oujda.",
+        saison="L'été et les fêtes religieuses sont les périodes les plus demandées : réservez tôt, car les places directes sont rares.",
+        bagages=BAG_MAGHREB, formalites=SANS_VISA_FR,
+        faq=[("Y a-t-il des vols directs Lille – Oujda ?", "Seulement quelques-uns par mois et pas toute l'année. Comparez avec Bruxelles, Charleroi, Paris ou un vol vers Nador."),
+             ("Nador est-il une bonne alternative pour Oujda ?", "Oui : Nador est à environ 2 heures de route et a souvent plus de vols depuis le Nord et la Belgique.")],
+    ),
+    ("GVA", "ABJ"): dict(
+        natio="suisse ou française",
+        intro="Genève – Abidjan concerne la diaspora ivoirienne de Suisse romande et de Haute-Savoie. Il n'y a pas de vol direct : tout se joue sur le choix de l'escale.",
+        direct="Pas de vol direct entre Genève et Abidjan.",
+        escales=("Les trajets passent par Paris (Air France, puis vol direct vers Abidjan), Casablanca (Royal Air Maroc), Bruxelles (Brussels Airlines), "
+                 "Istanbul (Turkish Airlines) ou Addis-Abeba (Ethiopian Airlines). Casablanca est souvent l'une des options les moins chères."),
+        saison="Abidjan est chaude et humide toute l'année ; la grande saison des pluies dure de mai à juillet. Prix les plus hauts en juillet-août et pour les fêtes.",
+        bagages=BAG_AFRIQUE + " Vérifiez que la valise est enregistrée jusqu'à Abidjan.",
+        formalites="Un visa est exigé pour les voyageurs suisses et français (demande en ligne). " + FJ_OBLIG + " " + PALU,
+        faq=[("Y a-t-il un vol direct Genève – Abidjan ?", "Non. Les trajets passent par Paris, Casablanca, Bruxelles, Istanbul ou Addis-Abeba."),
+             ("Quelle escale choisir entre Genève et Abidjan ?", "Casablanca (Royal Air Maroc) est souvent parmi les moins chères ; Paris permet de prendre un vol direct pour la seconde partie.")],
+    ),
+    ("CDG", "MPM"): dict(
+        intro="Paris – Maputo relie la France à la capitale du Mozambique, au bord de l'océan Indien. Il n'y a pas de vol direct : comptez au moins une escale.",
+        direct="Pas de vol direct entre Paris et Maputo.",
+        escales=("Les trajets passent en général par Johannesburg (South African Airways, Air France via Johannesburg), Lisbonne (TAP), "
+                 "Addis-Abeba (Ethiopian Airlines), Doha (Qatar Airways), Dubaï (Emirates) ou Istanbul (Turkish Airlines)."),
+        saison="La saison sèche, de mai à octobre, est la plus agréable et la meilleure pour les plages du sud. De décembre à mars, il fait chaud et humide, avec un risque de cyclones.",
+        bagages="Les compagnies long-courriers incluent souvent une valise en soute. Avec une escale, vérifiez la franchise de chaque compagnie.",
+        formalites=("Les règles d'entrée au Mozambique ont évolué ces dernières années (exemption ou visa selon la nationalité et la durée) : vérifiez avant de partir. "
+                    + FJ_RECO + " " + PALU),
+        faq=[("Y a-t-il un vol direct Paris – Maputo ?", "Non. Les trajets passent en général par Johannesburg, Lisbonne, Addis-Abeba, Doha, Dubaï ou Istanbul."),
+             ("Quelle est la meilleure saison pour le Mozambique ?", "La saison sèche, de mai à octobre.")],
+    ),
+    ("BOD", "RAK"): dict(
+        intro="Bordeaux – Marrakech est l'une des lignes les plus demandées au départ de Bordeaux, pour un week-end comme pour des vacances, en 2 h 30 environ.",
+        direct="Plusieurs compagnies, surtout à bas prix, proposent des vols directs, plus nombreux pendant les vacances scolaires.",
+        escales="Le direct est la norme. Si les prix sont trop hauts, comparez avec Agadir ou Casablanca, aussi desservies depuis Bordeaux.",
+        saison="Le printemps et l'automne sont idéaux ; l'été est très chaud. Les prix montent pendant les vacances scolaires, surtout à la Toussaint, à Noël et à Pâques.",
+        bagages="Les compagnies à bas prix font payer la valise en soute, et parfois le bagage cabine : comparez le prix total.",
+        formalites=SANS_VISA_FR,
+        faq=[("Y a-t-il des vols directs Bordeaux – Marrakech ?", "Oui, plusieurs compagnies relient les deux villes, avec plus de vols pendant les vacances scolaires."),
+             ("Quand partir à Marrakech depuis Bordeaux pas cher ?", "Hors vacances scolaires : fin janvier, mars, mai-juin et novembre sont souvent les mois les plus abordables.")],
+    ),
+})
+
 
 def get(fr, to):
     return TRAJETS.get((fr, to))

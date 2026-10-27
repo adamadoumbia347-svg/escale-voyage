@@ -3,6 +3,7 @@
 Appelé par build_pages.py. Chaque page a ses équivalents dans toutes les langues (balises hreflang)
 et un sélecteur de langue. Les textes propres à chaque page viennent de translations.py.
 """
+import trajets_en as TEN
 import html
 import json
 import re
@@ -409,6 +410,9 @@ def build(site, ctx):
             sky = f"https://www.skyscanner.net/transport/flights/{fr_.lower()}/{to.lower()}/"
             f = dict(a=a, b=b, fa=fr_, ta=to, peak=peak_t, airport=airport, dur_long=dur_long)
             faq = [(q.format(**f), ans.format(**f)) for q, ans in u["faq"]]
+            ten = TEN.ROUTES.get((fr_, to)) if lang == "en" else None  # contenu unique en anglais (grands trajets)
+            if ten:
+                faq = ten["faq"] + faq
             hero = f"""<p class="eyebrow">{E(tr(TR.COUNTRIES, country, lang))}</p>
   <h1>{u["h1_route"].format(a=E(a), b=E(b))}</h1>
   <p class="codes" dir="ltr">{fr_} → {to}</p>
@@ -426,7 +430,7 @@ def build(site, ctx):
 <ul class="price-list"></ul></section>
 <script src="/route-prices.js" defer></script>
 {calendar_html(lang, fr_, to)}
-<section><h2>{E(u["tip_h"])}</h2><p>{E(note)}</p></section>
+{TEN.route_html(ten, a, b, {p["key"]: p for p in partners(site)}) if ten else ""}<section><h2>{E(u["tip_h"])}</h2><p>{E(note)}</p></section>
 <section><h2>{E(u["cheap_h"])}</h2>
 <ol class="steps">{"".join(f"<li>{s}</li>" for s in u["steps"])}</ol>
 <p><a class="btn" href="{E(app)}">{E(u["launch"].format(a=a, b=b))}</a></p>
@@ -459,6 +463,9 @@ def build(site, ctx):
             aname = lambda n: u["area_names"].get(n, n.replace(" et ", u["conj"]))
             area_items = [(aname(n), tr(TR.AREAS, d, lang)) for n, d in areas]
             faq = [(q.format(c=c), ans.format(c=c, areas=" ; ".join(f"{n}: {d}" for n, d in area_items))) for q, ans in u["hfaq"]]
+            hen = TEN.HOTELS.get(cname) if lang == "en" else None
+            if hen:
+                faq = hen["faq"] + faq
             hero = f"""<p class="eyebrow">{E(cn)}</p>
   <h1>{u["h1_hotel"].format(c=E(c))}</h1>
   <p class="codes"><span dir="ltr">{code}</span> · {E(u["hotel_codes"])}</p>
@@ -468,7 +475,7 @@ def build(site, ctx):
             if flights:
                 fl_html = f'<section><h2>{E(u["flights_to"].format(c=c))}</h2><ul class="route-links">' + "".join(
                     f'<li><a href="/{route_paths[r][lang]}/">{E(city(r[2], lang))} {u["arrow"]} {E(city(r[3], lang))}</a></li>' for r in flights) + "</ul></section>"
-            body = f"""<section><h2>{E(u["where_h"].format(c=c))}</h2><dl class="facts">{areas_html}</dl></section>
+            body = f"""<section><h2>{E(u["where_h"].format(c=c))}</h2><dl class="facts">{areas_html}</dl></section>{TEN.hotel_html(hen, c, {p["key"]: p for p in partners(site)}) if hen else ""}
 <section><h2>{E(u["our_tip"])}</h2><p>{E(TR.HOTEL_TIPS[cname][COL[lang]])}</p></section>
 <section><h2>{E(u["cheap_h"])}</h2>
 <ol class="steps">{"".join(f"<li>{s}</li>" for s in u["hsteps"])}</ol>
