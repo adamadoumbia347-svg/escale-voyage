@@ -14,7 +14,7 @@ MIN_ORIGINS = 3
 
 H = {
     "fr": dict(path="vols-pour-{s}", title="Vols pas chers pour {b} : comparer depuis {n} villes",
-               desc="Vols pas chers pour {b} ({code}) au départ de {some} et d’autres villes : durée du vol, prix repérés récemment et meilleure période pour réserver.",
+               desc="Vols pas chers pour {b} ({code}) au départ de {some} et d’autres villes : durée du vol, prix récents et meilleure période pour réserver.",
                h1="Vols pas chers pour <span>{b}</span>",
                lead="Comparez les vols vers {b} depuis {n} villes d’Europe et d’Amérique du Nord : durée, prix repérés récemment et conseils pour payer moins cher.",
                th=("Départ de", "Durée du vol", "Prix repéré"), see="Voir le trajet", direct="vol direct", est="estimation", stops="avec escale",
@@ -120,7 +120,7 @@ def build_hubs(site, ctx, route_paths, hotel_paths):
             h = H[lang]
             b = loc(TR.CITIES, ct, lang)
             cities = [loc(TR.CITIES, r[2], lang) for r in rs]
-            some = SEP[lang].join(cities[:4])
+            some = SEP[lang].join(cities[:2])
             peak = loc(TR.PEAKS, peak_fr, lang)
             airport = (ap[2] if ap else code) if lang != "fr" else rs[0][5]
             q = "" if lang == "fr" else "&lang=" + lang

@@ -12,7 +12,7 @@ R = lambda slug, txt: f'<a href="/{slug}/">{txt}</a>'
 ARTICLES = [
     dict(
         slug="tabaski-2027-quand-acheter-billet",
-        title="Tabaski 2027 : quand acheter son billet d'avion pour rentrer au pays ?",
+        title="Tabaski 2027 : quand acheter son billet pour rentrer au pays ?",
         h1="Tabaski 2027 : quand acheter son billet d'avion ?",
         desc="Tabaski 2027 prévue vers le 16-17 mai : quand réserver, quels jours partir et comment payer moins cher son vol vers Dakar, Bamako, Abidjan ou Conakry.",
         date="2026-10-25", maj="2026-10-25",
@@ -45,7 +45,7 @@ ARTICLES = [
         slug="ramadan-aid-2027-billet-avion",
         title="Ramadan et Aïd el-Fitr 2027 : réserver son vol au bon moment",
         h1="Ramadan et Aïd el-Fitr 2027 : réserver son vol au bon moment",
-        desc="Ramadan 2027 prévu vers le 8 février, Aïd el-Fitr vers le 9-10 mars : quand réserver son vol vers le Maghreb ou l'Afrique de l'Ouest, et les pièges des vacances d'hiver.",
+        desc="Ramadan 2027 prévu vers le 8 février, Aïd el-Fitr vers le 9-10 mars : quand réserver son vol vers le Maghreb ou l'Afrique de l'Ouest.",
         date="2026-10-25", maj="2026-10-25",
         lead="En 2027, le Ramadan commence pendant les vacances d'hiver françaises. Les vols vers le Maghreb et l'Afrique de l'Ouest vont être très demandés en février, puis à nouveau autour de l'Aïd. Voici le calendrier et nos conseils.",
         blocks=[
@@ -126,7 +126,7 @@ ARTICLES = [
     ),
     dict(
         slug="partir-au-pays-beaucoup-de-valises",
-        title="Partir au pays avec beaucoup de valises : comment payer moins cher",
+        title="Partir au pays avec beaucoup de valises : payer moins cher",
         h1="Partir au pays avec beaucoup de valises sans exploser son budget",
         desc="Deux valises, des cadeaux, un carton : comment comparer les franchises bagages, éviter l'excédent et choisir le bon billet pour un voyage chargé vers l'Afrique.",
         date="2026-10-25", maj="2026-10-25",
@@ -153,7 +153,7 @@ ARTICLES = [
     ),
     dict(
         slug="quel-aeroport-depart-afrique",
-        title="Paris, Bruxelles, Lyon ou Genève : quel aéroport de départ pour l'Afrique ?",
+        title="Paris, Bruxelles, Lyon ou Genève : d'où partir pour l'Afrique ?",
         h1="Paris, Bruxelles, Lyon ou Genève : d'où partir pour l'Afrique ?",
         desc="Roissy, Orly, Bruxelles, Lyon, Marseille, Genève : comparer les aéroports de départ pour trouver un vol moins cher vers l'Afrique et le Maghreb.",
         date="2026-10-25", maj="2026-10-25",
@@ -181,7 +181,7 @@ ARTICLES = [
         slug="choisir-compagnie-aerienne-afrique",
         title="Quelle compagnie aérienne choisir pour aller en Afrique ?",
         h1="Quelle compagnie aérienne choisir pour aller en Afrique ?",
-        desc="Air France, Air Sénégal, Royal Air Maroc, Turkish Airlines, Brussels Airlines, Ethiopian… Les critères pour choisir sa compagnie vers l'Afrique, au-delà du prix.",
+        desc="Air France, Air Sénégal, Royal Air Maroc, Turkish Airlines, Ethiopian… Les critères pour choisir sa compagnie vers l'Afrique, au-delà du prix.",
         date="2026-10-25", maj="2026-10-25",
         lead="Vers l'Afrique, le choix de la compagnie compte autant que le prix : direct ou escale, bagages inclus, horaires, programme de fidélité. Voici les critères qui font vraiment la différence.",
         blocks=[

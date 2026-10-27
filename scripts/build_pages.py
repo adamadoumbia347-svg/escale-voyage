@@ -247,6 +247,7 @@ HEAD = """<!doctype html>
 
 def page(path, title, desc, hero, body, ld="", paths=None, og="og-image.png"):
     url = f"{DOMAIN}/{path}/" if path else f"{DOMAIN}/"
+    title, desc = build_i18n.fit(title, desc)
     if paths:
         ld = build_i18n.alternates(paths, DOMAIN) + "\n" + ld
     switch = build_i18n.switcher(paths, "fr") if paths else ""
@@ -338,7 +339,8 @@ def trajet_html(tj, cf, ct):
                         for k, t in (("esim", "internet dès l'atterrissage (eSIM)"), ("transfer", "transfert depuis l'aéroport réservé à l'avance")) if k in sp)
     return (f'<section class="trajet"><h2>Le trajet {E(cf)} – {E(ct)} en bref</h2><p>{E(tj["intro"])}</p>'
             + (f'<p class="small">Pour l\'arrivée à {E(ct)} : {arrive}.</p>' if arrive else '')
-            + part("Vols directs", tj["direct"]) + part("Vols avec escale", tj["escales"]) + "</section>"
+            + part("Vols directs", tj["direct"]) + part("Vols avec escale", tj["escales"])
+            + '<p><a href="/guides/correspondances-escales/">Bien choisir sa correspondance</a></p></section>'
             + f'<section><h2>Quand partir à {E(ct)} ?</h2><p>{E(tj["saison"])}</p>'
             + '<p><a href="/guides/quand-reserver/">Quand réserver pour payer moins cher</a></p></section>'
             + f'<section><h2>Bagages</h2><p>{E(tj["bagages"])}</p><p><a href="/guides/bagages-avion/">Le guide des bagages en avion</a></p></section>'

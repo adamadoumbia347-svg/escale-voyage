@@ -48,3 +48,6 @@
 
 /img/*
   Cache-Control: public, max-age=604800
+
+/contact/merci/
+  X-Robots-Tag: noindex

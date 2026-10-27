@@ -357,8 +357,20 @@ def faq_ld(faq):
     }, ensure_ascii=False) + "</script>"
 
 
+def fit(title, desc):
+    """Garde titre et description dans ce que Google affiche (~65 et ~160 caractères), pour toutes les pages."""
+    if len(title) > 65 and title.endswith(" | Escale"):
+        title = title[: -len(" | Escale")]
+    if len(desc) > 160:
+        cut = desc[:158]
+        cut = cut[: cut.rfind(" ")] if " " in cut else cut
+        desc = cut.rstrip(" ,;:–-") + "…"
+    return title, desc
+
+
 def write(site, path, lang, title, desc, hero, body, ld, paths, ctx, og="og-image.png"):
     u = UI[lang]
+    title, desc = fit(title, desc)
     ld = (ld + "\n" + breadcrumb_ld(ctx["domain"], path, lang, hero)).strip()
     out = HEAD.format(
         lang=lang, dir="rtl" if lang == "ar" else "ltr", tp=ctx["tp"], title=E(title), desc=E(desc),
