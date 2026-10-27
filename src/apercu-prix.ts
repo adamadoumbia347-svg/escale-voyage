@@ -18,7 +18,8 @@ type Month = { month: string; price: number; dep: string; ret: string; transfers
 // Il sert à dire si le prix du moment est bas, normal ou élevé par rapport aux semaines précédentes.
 const TRACKED = new Set(("CDG-DSS CDG-BKO CDG-ABJ CDG-CKY CDG-DLA CDG-NSI CDG-LFW CDG-COO CDG-OUA CDG-FIH CDG-LBV CDG-NKC ORY-CMN CDG-RAK " +
   "CDG-ALG CDG-TUN CDG-YUL CDG-DXB CDG-IST CDG-RUN BRU-FIH BRU-DSS BRU-ABJ BRU-DLA MRS-ALG MRS-TUN MRS-DSS LYS-CMN LYS-DSS LYS-ALG " +
-  "GVA-DSS GVA-CMN CDG-PTP CDG-FDF CDG-ORN CDG-DJE CDG-BZV CDG-NDJ CDG-TNR CDG-JED").split(" "))
+  "GVA-DSS GVA-CMN CDG-PTP CDG-FDF CDG-ORN CDG-DJE CDG-BZV CDG-NDJ CDG-TNR CDG-JED " +
+  "LYS-TUN LYS-DJE LYS-AGA LYS-RAK LYS-OUD LYS-FEZ LYS-ORN LYS-CZL LYS-IST LYS-DXB LYS-ABJ LYS-BKO MRS-ORN MRS-CZL MRS-CMN MRS-RAK MRS-DJE MRS-IST MRS-BKO MRS-ABJ").split(" "))
 const HIST_DAYS = 120, HIST_MIN = 7, HIST_WINDOW = 60
 type Point = [string, number] // [date, prix le plus bas des 6 prochains mois]
 

@@ -537,6 +537,203 @@ TRAJETS.update({
     ),
 })
 
+# Lyon et Marseille : trajets qui ressortent déjà dans Google (Search Console, octobre 2026)
+VIA_AFRIQUE = ("La plupart des trajets passent par Casablanca (Royal Air Maroc), Tunis (Tunisair), Alger (Air Algérie), "
+               "Istanbul (Turkish Airlines) ou Paris (Air France). Comparez aussi avec un départ de Paris, qui a des vols directs.")
+SANS_VISA_FR = "Pas de visa pour les voyageurs de nationalité française pour un séjour de moins de 90 jours ; passeport valide demandé."
+VISA_DZ = "Un visa est exigé pour les voyageurs de nationalité française (demande auprès des consulats d'Algérie)."
+SAISON_DZ = ("Juillet-août, le Ramadan, l'Aïd et les vacances scolaires concentrent les prix les plus élevés : pour l'été, réservez dès le début de l'année. "
+             "Le printemps et l'automne sont les saisons les plus agréables et souvent les moins chères.")
+SAISON_MA = "Climat doux une grande partie de l'année. Les prix montent en juillet-août, pendant les vacances scolaires et autour de l'Aïd."
+
+TRAJETS.update({
+    ("LYS", "TUN"): dict(
+        intro="Lyon – Tunis est une ligne courte (environ 2 heures) très utilisée par la diaspora tunisienne de la région lyonnaise et par les vacanciers.",
+        direct="Tunisair, Transavia et Nouvelair proposent des vols directs, plus nombreux en été.",
+        escales="Le direct est la norme. Pour la plage, comparez avec Djerba et Monastir, aussi desservies depuis Lyon.",
+        saison="Mai-juin et septembre-octobre sont idéaux : beau temps et prix plus doux. Juillet-août et l'Aïd sont les périodes les plus chères.",
+        bagages=BAG_MAGHREB, formalites=SANS_VISA_FR,
+        faq=[("Quelles compagnies volent entre Lyon et Tunis ?", "En général Tunisair, Transavia et Nouvelair, en vols directs d'environ 2 heures."),
+             ("Quand partir à Tunis depuis Lyon pas cher ?", "Hors été et hors Aïd : mai-juin et septembre-octobre offrent souvent le meilleur rapport prix-météo.")],
+    ),
+    ("LYS", "DJE"): dict(
+        intro="Lyon – Djerba relie la région lyonnaise à l'île tunisienne en 2 h 15 environ, pour les vacances comme pour les familles du sud tunisien.",
+        direct="Tunisair, Transavia et Nouvelair proposent des vols directs, beaucoup plus nombreux en été.",
+        escales="Le direct est la norme. En hiver, certains trajets passent par Tunis.",
+        saison="La baignade est agréable de juin à octobre. Mai et septembre-octobre sont souvent moins chers que juillet-août.",
+        bagages=BAG_MAGHREB, formalites=SANS_VISA_FR,
+        faq=[("Combien de temps dure le vol Lyon – Djerba ?", "Environ 2 h 15 sans escale."),
+             ("Y a-t-il des vols Lyon – Djerba toute l'année ?", "Les vols sont nombreux en été et plus rares en hiver : vérifiez vos dates, ou passez par Tunis.")],
+    ),
+    ("LYS", "AGA"): dict(
+        intro="Lyon – Agadir est une ligne de soleil d'hiver et de vacances au bord de l'océan, à environ 3 h 15 de vol.",
+        direct="Transavia et easyJet proposent quelques vols directs par semaine, selon les saisons.",
+        escales="Hors des jours de vol direct, passez par Casablanca (Royal Air Maroc) ou par Marrakech, à environ 3 heures de route.",
+        saison="Agadir est ensoleillée presque toute l'année : idéale pour fuir l'hiver. Les prix montent pendant les vacances scolaires, surtout à Noël et en février.",
+        bagages=BAG_MAGHREB, formalites=SANS_VISA_FR,
+        faq=[("Quelles compagnies volent en direct de Lyon à Agadir ?", "Transavia et easyJet, avec seulement quelques vols par semaine selon les saisons."),
+             ("Agadir ou Marrakech depuis Lyon ?", "Marrakech a plus de vols directs depuis Lyon. Si les prix vers Agadir sont trop hauts, comparez avec Marrakech, à environ 3 heures de route.")],
+    ),
+    ("LYS", "RAK"): dict(
+        intro="Lyon – Marrakech est l'une des lignes les plus fréquentées au départ de Lyon, pour un week-end comme pour des vacances.",
+        direct="Transavia, easyJet, Royal Air Maroc et Volotea proposent des vols directs (environ 3 heures), avec des départs presque tous les jours.",
+        escales="Le direct est la norme et souvent le moins cher.",
+        saison="Le printemps et l'automne sont idéaux ; l'été est très chaud. Les prix montent pendant les vacances scolaires, surtout à la Toussaint, à Noël et à Pâques.",
+        bagages=BAG_MAGHREB, formalites=SANS_VISA_FR,
+        faq=[("Combien de compagnies volent entre Lyon et Marrakech ?", "En général quatre : Transavia, easyJet, Royal Air Maroc et Volotea. La concurrence fait souvent baisser les prix hors vacances."),
+             ("Combien de temps dure un vol Lyon – Marrakech ?", "Environ 3 heures sans escale.")],
+    ),
+    ("LYS", "OUD"): dict(
+        intro="Lyon – Oujda concerne surtout la diaspora de l'Oriental marocain. L'offre directe est très limitée et varie selon les saisons.",
+        direct="Transavia a proposé des vols directs, parfois seulement quelques-uns par mois et pas toute l'année : vérifiez s'il en existe à vos dates.",
+        escales="Sinon, passez par Casablanca (Royal Air Maroc), ou comparez avec Nador ou Fès, puis la route.",
+        saison="L'été et les fêtes religieuses sont les périodes les plus demandées : réservez tôt, car les places directes sont rares.",
+        bagages=BAG_MAGHREB, formalites=SANS_VISA_FR,
+        faq=[("Y a-t-il des vols directs Lyon – Oujda ?", "Seulement par périodes, avec Transavia. Le reste de l'année, passez par Casablanca ou comparez avec Nador et Fès."),
+             ("Quel aéroport près d'Oujda en plus ?", "Nador est à environ 2 heures de route et a souvent plus de vols depuis la France.")],
+    ),
+    ("LYS", "FEZ"): dict(
+        intro="Lyon – Fès relie la région lyonnaise à la capitale spirituelle du Maroc. Les vols directs sont peu nombreux et saisonniers.",
+        direct="Les vols directs sont rares ou saisonniers sur cette ligne : vérifiez s'il en existe à vos dates.",
+        escales="Passez par Casablanca (Royal Air Maroc) ou comparez avec un vol direct vers Marrakech ou Casablanca, puis le train (le réseau ferré marocain relie bien ces villes).",
+        saison="Le printemps et l'automne sont les plus agréables ; l'été est très chaud à Fès. " + SAISON_MA,
+        bagages=BAG_MAGHREB, formalites=SANS_VISA_FR,
+        faq=[("Comment aller de Lyon à Fès ?", "Avec un vol direct quand il y en a, sinon via Casablanca, ou un vol direct vers une autre ville marocaine puis le train."),
+             ("Le train est-il pratique au Maroc ?", "Oui : Casablanca, Rabat, Fès et Marrakech sont reliées par des trains réguliers.")],
+    ),
+    ("LYS", "ORN"): dict(
+        intro="Lyon – Oran relie la région lyonnaise à la deuxième ville d'Algérie, en 2 heures environ. La ligne est très chargée l'été.",
+        direct="Transavia et Air Algérie proposent des vols directs, plus nombreux en été.",
+        escales="Le direct est la norme. Comparez avec Alger, Tlemcen ou un départ de Marseille selon votre destination finale.",
+        saison=SAISON_DZ, bagages=BAG_MAGHREB, formalites=VISA_DZ,
+        faq=[("Quelles compagnies volent entre Lyon et Oran ?", "En général Transavia et Air Algérie, en vols directs d'environ 2 heures."),
+             ("Quand réserver un Lyon – Oran pour l'été ?", "Dès janvier-février si possible : les vols de juillet-août se remplissent très vite.")],
+    ),
+    ("LYS", "CZL"): dict(
+        intro="Lyon – Constantine relie la région lyonnaise à l'est algérien, en un peu plus de 2 heures.",
+        direct="Transavia et Air Algérie proposent des vols directs, avec une offre qui varie selon les saisons.",
+        escales="Si les prix sont trop hauts, comparez avec Alger ou Béjaïa, ou avec un départ de Marseille, très bien relié à Constantine.",
+        saison=SAISON_DZ, bagages=BAG_MAGHREB, formalites=VISA_DZ,
+        faq=[("Y a-t-il des vols directs Lyon – Constantine ?", "Oui, en général avec Transavia et Air Algérie, avec des fréquences qui varient selon les saisons."),
+             ("Lyon ou Marseille pour Constantine ?", "Marseille a souvent plus de vols (Air Algérie, Volotea). Comparez les deux, en ajoutant le trajet jusqu'à l'aéroport.")],
+    ),
+    ("LYS", "IST"): dict(
+        intro="Lyon – Istanbul est à la fois une destination de city-break et une escale très utilisée vers l'Afrique et l'Asie avec Turkish Airlines.",
+        direct="Turkish Airlines et la compagnie à bas prix Pegasus proposent des vols directs, en 3 h 15 environ.",
+        escales="Le direct est la norme. Vérifiez l'aéroport d'arrivée : IST côté européen, Sabiha-Gökçen (SAW) côté asiatique.",
+        saison="Avril-juin et septembre-octobre sont idéaux. L'hiver est frais mais souvent bon marché.",
+        bagages="Turkish Airlines inclut souvent une valise selon le tarif ; Pegasus la fait payer. Comparez le prix total.",
+        formalites="Pas de visa pour les voyageurs de nationalité française pour un séjour touristique de moins de 90 jours.",
+        faq=[("Quel aéroport à Istanbul depuis Lyon ?", "Turkish Airlines arrive en général à IST (côté européen), Pegasus à Sabiha-Gökçen (côté asiatique), plus loin du centre historique."),
+             ("Istanbul est-elle une bonne escale vers l'Afrique depuis Lyon ?", "Oui : Turkish Airlines dessert de nombreuses villes africaines depuis Istanbul, souvent à bon prix.")],
+    ),
+    ("LYS", "DXB"): dict(
+        intro="Lyon – Dubaï est desservie sans passer par Paris, ce qui en fait aussi une porte d'entrée vers l'Asie et l'océan Indien depuis la région lyonnaise.",
+        direct="Emirates relie Lyon à Dubaï en vol direct (environ 6 h 30).",
+        escales="Le direct est la norme. Un stop de quelques jours à Dubaï sur un billet vers l'Asie ne coûte parfois rien de plus.",
+        saison="De novembre à mars, il fait chaud sans excès : c'est la haute saison. L'été est très chaud mais moins cher.",
+        bagages="Emirates inclut généralement une valise en soute en classe économique, selon le tarif choisi.",
+        formalites="Pas de visa préalable pour les voyageurs de nationalité française pour un séjour touristique court ; passeport valide au moins 6 mois.",
+        faq=[("Y a-t-il un vol direct Lyon – Dubaï ?", "Oui, avec Emirates, en 6 h 30 environ."),
+             ("Quand partir à Dubaï depuis Lyon ?", "De novembre à mars pour le climat ; fin octobre ou mars pour un bon compromis prix-météo.")],
+    ),
+    ("LYS", "ABJ"): dict(
+        intro="Lyon – Abidjan concerne la diaspora ivoirienne de la région Rhône-Alpes. Il n'y a pas de vol direct : tout se joue sur le choix de l'escale.",
+        direct="Pas de vol direct régulier entre Lyon et Abidjan.",
+        escales=VIA_AFRIQUE,
+        saison="Abidjan est chaude et humide toute l'année ; la grande saison des pluies dure de mai à juillet. Prix les plus hauts en juillet-août et pour les fêtes.",
+        bagages=BAG_AFRIQUE + " Sur un trajet avec escale, vérifiez que la valise est enregistrée jusqu'à Abidjan.",
+        formalites="Un visa est exigé pour les voyageurs de nationalité française (demande en ligne). " + FJ_OBLIG + " " + PALU,
+        faq=[("Quelle escale choisir entre Lyon et Abidjan ?", "Casablanca, Tunis et Istanbul offrent souvent de bons prix ; Paris permet de prendre un vol direct pour la seconde partie."),
+             ("Vaut-il mieux partir de Paris pour Abidjan ?", "Paris a des vols directs (Air France, Air Côte d'Ivoire, Corsair). Comparez en ajoutant le TGV Lyon–Paris.")],
+    ),
+    ("LYS", "BKO"): dict(
+        intro="Lyon – Bamako concerne la diaspora malienne de la région lyonnaise. Il n'y a pas de vol direct et l'offre vers le Mali s'est réduite depuis 2023.",
+        direct="Pas de vol direct entre Lyon et Bamako.",
+        escales="Les trajets les plus courants passent par Casablanca (Royal Air Maroc), Alger (Air Algérie), Tunis (Tunisair) ou Istanbul (Turkish Airlines).",
+        saison="La période la plus agréable va de novembre à février. Mars à mai est très chaud et la saison des pluies dure de juin à septembre.",
+        bagages=BAG_AFRIQUE + " Vérifiez que la valise est enregistrée jusqu'à Bamako.",
+        formalites=("Un visa est exigé pour les voyageurs de nationalité française. " + FJ_OBLIG + " " + PALU +
+                    " Consultez les conseils aux voyageurs de France Diplomatie : la situation sécuritaire évolue."),
+        faq=[("Quelle est la meilleure escale entre Lyon et Bamako ?", "Casablanca, Alger et Tunis offrent souvent les trajets les plus courts depuis Lyon. Comparez la durée totale."),
+             ("Y a-t-il un vol direct Lyon – Bamako ?", "Non. Tous les trajets passent par une escale.")],
+    ),
+    ("MRS", "ORN"): dict(
+        intro="Marseille – Oran est l'une des lignes les plus fréquentées entre la France et l'ouest algérien, en 1 h 30 environ.",
+        direct="Air Algérie, Transavia et Volotea proposent des vols directs, avec plus de rotations en été.",
+        escales="Le direct est la norme. Comparez avec Tlemcen ou Alger selon votre destination finale.",
+        saison=SAISON_DZ, bagages=BAG_MAGHREB, formalites=VISA_DZ,
+        faq=[("Quelles compagnies relient Marseille à Oran ?", "En général Air Algérie, Transavia et Volotea, en vols directs d'environ 1 h 30."),
+             ("Combien de temps dure le vol Marseille – Oran ?", "Environ 1 h 30 sans escale.")],
+    ),
+    ("MRS", "CZL"): dict(
+        intro="Marseille – Constantine relie Marseille à l'est algérien en 1 h 45 environ ; la ligne est très utilisée par la diaspora constantinoise.",
+        direct="Air Algérie et Volotea proposent des vols directs ; Volotea a augmenté ses fréquences sur cette ligne en 2026.",
+        escales="Le direct est la norme. Comparez avec Béjaïa ou Alger si les prix sont trop hauts.",
+        saison=SAISON_DZ, bagages=BAG_MAGHREB, formalites=VISA_DZ,
+        faq=[("Quelles compagnies volent entre Marseille et Constantine ?", "Air Algérie et Volotea, en vols directs."),
+             ("Volotea inclut-elle les bagages ?", "Pas toujours : le tarif de base n'inclut souvent qu'un petit bagage. Ajoutez la valise avant de comparer avec Air Algérie.")],
+    ),
+    ("MRS", "CMN"): dict(
+        intro="Marseille – Casablanca relie la Provence au cœur économique du Maroc en 2 h 30 environ ; Casablanca est aussi une escale pratique vers l'Afrique de l'Ouest.",
+        direct="Royal Air Maroc assure des vols directs.",
+        escales="Le direct est la norme. Pour Marrakech, Marseille a aussi plusieurs vols directs.",
+        saison=SAISON_MA, bagages=BAG_MAGHREB, formalites=SANS_VISA_FR,
+        faq=[("Quelle compagnie relie Marseille à Casablanca ?", "Royal Air Maroc, en vol direct d'environ 2 h 30."),
+             ("Peut-on aller en Afrique de l'Ouest via Casablanca depuis Marseille ?", "Oui, Royal Air Maroc relie Casablanca à Dakar, Abidjan, Bamako et beaucoup d'autres villes africaines.")],
+    ),
+    ("MRS", "RAK"): dict(
+        intro="Marseille – Marrakech est une ligne très demandée, en 2 h 45 environ, avec des départs presque tous les jours.",
+        direct="Ryanair, Transavia et Royal Air Maroc proposent des vols directs.",
+        escales="Le direct est la norme et souvent le moins cher.",
+        saison="Le printemps et l'automne sont idéaux ; l'été est très chaud. Les prix montent pendant les vacances scolaires.",
+        bagages="Ryanair et Transavia font payer la valise en soute (et parfois le bagage cabine) : comparez le prix total avec Royal Air Maroc.",
+        formalites=SANS_VISA_FR,
+        faq=[("Quelles compagnies volent entre Marseille et Marrakech ?", "En général Ryanair, Transavia et Royal Air Maroc, en vols directs."),
+             ("Comment payer moins cher un Marseille – Marrakech ?", "Partez hors vacances scolaires, activez les dates flexibles et comparez le prix avec bagages.")],
+    ),
+    ("MRS", "DJE"): dict(
+        intro="Marseille – Djerba est une ligne courte (moins de 2 heures) très utilisée l'été par les vacanciers et la diaspora du sud tunisien.",
+        direct="Tunisair, Nouvelair et Transavia proposent des vols directs, surtout en été.",
+        escales="Le direct est la norme en été ; en hiver, certains trajets passent par Tunis.",
+        saison="La baignade est agréable de juin à octobre. Mai et septembre-octobre sont souvent moins chers que juillet-août.",
+        bagages=BAG_MAGHREB, formalites=SANS_VISA_FR,
+        faq=[("Combien de temps dure le vol Marseille – Djerba ?", "Un peu moins de 2 heures sans escale."),
+             ("Quand partir à Djerba depuis Marseille pas cher ?", "En mai, juin ou septembre-octobre, hors vacances scolaires.")],
+    ),
+    ("MRS", "IST"): dict(
+        intro="Marseille – Istanbul permet un city-break comme une escale vers l'Afrique, le Moyen-Orient et l'Asie avec Turkish Airlines.",
+        direct="Turkish Airlines et Pegasus proposent des vols directs, en 3 heures environ.",
+        escales="Le direct est la norme. Vérifiez l'aéroport d'arrivée : IST ou Sabiha-Gökçen (SAW).",
+        saison="Avril-juin et septembre-octobre sont idéaux ; l'hiver est souvent bon marché.",
+        bagages="Turkish Airlines inclut souvent une valise selon le tarif ; Pegasus la fait payer.",
+        formalites="Pas de visa pour les voyageurs de nationalité française pour un séjour touristique de moins de 90 jours.",
+        faq=[("Combien de temps dure le vol Marseille – Istanbul ?", "Environ 3 heures sans escale."),
+             ("Quel aéroport choisir à Istanbul ?", "IST est plus pratique pour le centre historique ; Sabiha-Gökçen (SAW), côté asiatique, est plus éloigné.")],
+    ),
+    ("MRS", "BKO"): dict(
+        intro="Marseille – Bamako concerne la diaspora malienne du sud de la France. Il n'y a pas de vol direct : la clé est de bien choisir l'escale.",
+        direct="Pas de vol direct entre Marseille et Bamako.",
+        escales="Les trajets les plus courants passent par Alger (Air Algérie), Casablanca (Royal Air Maroc), Tunis (Tunisair) ou Istanbul (Turkish Airlines). Depuis Marseille, ces escales sont proches.",
+        saison="La période la plus agréable va de novembre à février. Mars à mai est très chaud et la saison des pluies dure de juin à septembre.",
+        bagages=BAG_AFRIQUE + " Vérifiez que la valise est enregistrée jusqu'à Bamako.",
+        formalites=("Un visa est exigé pour les voyageurs de nationalité française. " + FJ_OBLIG + " " + PALU +
+                    " Consultez les conseils aux voyageurs de France Diplomatie : la situation sécuritaire évolue."),
+        faq=[("Quelle escale entre Marseille et Bamako ?", "Alger, Casablanca et Tunis sont proches de Marseille et offrent souvent les trajets les plus courts."),
+             ("Y a-t-il un vol direct Marseille – Bamako ?", "Non. Tous les trajets passent par une escale.")],
+    ),
+    ("MRS", "ABJ"): dict(
+        intro="Marseille – Abidjan concerne la diaspora ivoirienne du sud de la France. Sans vol direct régulier, il faut comparer les escales.",
+        direct="Pas de vol direct régulier entre Marseille et Abidjan : vérifiez s'il en existe à vos dates.",
+        escales=VIA_AFRIQUE,
+        saison="Abidjan est chaude et humide toute l'année ; la grande saison des pluies dure de mai à juillet. Prix les plus hauts en juillet-août et pour les fêtes.",
+        bagages=BAG_AFRIQUE,
+        formalites="Un visa est exigé pour les voyageurs de nationalité française (demande en ligne). " + FJ_OBLIG + " " + PALU,
+        faq=[("Quelle escale entre Marseille et Abidjan ?", "Casablanca, Tunis et Istanbul sont souvent les moins chères ; Paris permet un vol direct pour la seconde partie."),
+             ("Vaut-il mieux partir de Paris pour Abidjan ?", "Paris a des vols directs. Comparez le prix total, train ou vol Marseille–Paris compris.")],
+    ),
+})
+
 
 def get(fr, to):
     return TRAJETS.get((fr, to))
