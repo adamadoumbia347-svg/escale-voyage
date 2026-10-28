@@ -512,7 +512,7 @@ def build(site, ctx):
 
 
 INDEX = {
-    "en": ("Flight and hotel guides", "Flight time, airports, best time to book and where to stay: our tips route by route.", "Flights from {c}", "Cheap hotels"),
+    "en": ("Cheap flights to Africa, the Maghreb and worldwide", "Route guides with flight times, airlines, the best time to book and where to stay, plus real fares found recently.", "Flights from {c}", "Cheap hotels"),
     "es": ("Guías de vuelos y hoteles", "Duración, aeropuertos, mejor época para reservar y dónde alojarse: nuestros consejos ruta por ruta.", "Vuelos desde {c}", "Hoteles baratos"),
     "pt": ("Guias de voos e hotéis", "Duração, aeroportos, melhor época para reservar e onde ficar: as nossas dicas rota a rota.", "Voos a partir de {c}", "Hotéis baratos"),
     "ar": ("أدلة الرحلات والفنادق", "مدة الرحلة والمطارات وأفضل وقت للحجز وأين تقيم: نصائحنا خطًا بخط.", "رحلات من {c}", "فنادق رخيصة"),
