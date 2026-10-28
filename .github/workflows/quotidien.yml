@@ -74,7 +74,12 @@ jobs:
           echo "Bons plans : $(curl -s "$SITE_URL/api/deals" | jq -c '{available, villes: (.origins // {} | to_entries | map({(.key): (.value|length)}) | add)}')"
           for O in CDG BRU LYS; do echo "Populaires depuis $O : $(curl -s "$SITE_URL/api/populaires?from=$O" | jq -c '{available, reason, trajets: [.routes[]? | "\(.to) \(.price)"]}')"; done
           echo "Calendrier : $(curl -s "$SITE_URL/api/calendar?from=CDG&to=BKO&month=${D:0:7}" | jq -c '{available, jours: (.days // {} | length)}')"
-          echo "Aperçu WhatsApp : $(curl -s -A 'WhatsApp/2.23' $SITE_URL/vol-paris-dakar/ | grep -o '<meta property=\"og:title\" content=\"[^\"]*\"')"
+          echo "Gains - script Stay22 (accueil, page trajet) : $(curl -s $SITE_URL/ | grep -c 6ae25f05e6203f3951eee2bb) $(curl -s $SITE_URL/vol-paris-dakar/ | grep -c 6ae25f05e6203f3951eee2bb)"
+          echo "Gains - identifiant Aviasales dans app.js : $(curl -s $SITE_URL/app.js | grep -o 'travelpayouts_marker: "[0-9]*"')"
+          echo "Gains - liens partenaires sur la page trajet : $(curl -s $SITE_URL/vol-paris-dakar/ | grep -o 'href="https://[^/"]*' | sed 's#href="https://##' | sort | uniq -c | tr -s ' ' | tr '\n' ',')"
+          echo "Gains - lien Stay22 : $(curl -s -o /dev/null -w '%{http_code} -> %{redirect_url}' 'https://www.stay22.com/allez/roam?aid=escalelive&address=Dakar&campaign=verif' | cut -c1-160)"
+          for L in airalo.tpm.lv/FrG2grmd kiwitaxi.tpm.lv/hWfXu1nw economybookings.tpm.lv/XjcDFT4f tiqets.tpm.lv/lGv8HrSM compensair.tpm.lv/9rTXzlp7 bikesbooking.tpm.lv/gqG6Vv6B; do echo "Gains - $L : $(curl -s -o /dev/null -w '%{http_code} -> %{redirect_url}' https://$L | cut -c1-120)"; done
+          echo "Aperçu WhatsApp : $(curl -s -A 'WhatsApp/2.23' $SITE_URL/vol-paris-dakar/ | grep -o '<meta property="og:title" content="[^"]*"')"
           if [ "${{ inputs.essai_alerte }}" = "oui" ]; then
             echo "Essai d'alerte : $(curl -s -w ' (HTTP %{http_code})' -X POST -H 'Content-Type: application/json' -d '{"email":"delivered@resend.dev","from":"CDG","to":"DSS","max":400,"lang":"fr","currency":"EUR","consent":true}' $SITE_URL/api/alert)"
           fi
