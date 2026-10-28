@@ -407,7 +407,8 @@ html[lang="ar"] label, html[lang="ar"] .label, html[lang="ar"] .pill { letter-sp
 .trip-kit { margin: 14px 0 6px; padding: 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
 .kit-h { margin: 0 0 10px; font-weight: 600; }
 .kit-row { display: grid; grid-template-columns: 1fr; gap: 6px; }
-@media (min-width: 640px) { .kit-row { grid-template-columns: repeat(3, 1fr); gap: 8px; } }
+@media (min-width: 640px) { .kit-row { grid-template-columns: repeat(2, 1fr); gap: 8px; } }
+@media (min-width: 960px) { .kit-row { grid-template-columns: repeat(4, 1fr); } }
 .kit { display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 10px; align-items: center; padding: 8px 12px; border: 1px solid var(--line); border-radius: 12px; text-decoration: none; color: inherit; background: var(--bg); }
 .kit:hover { border-color: var(--accent, #0062e3); }
 .kit .logo { grid-row: span 2; }

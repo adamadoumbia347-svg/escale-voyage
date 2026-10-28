@@ -495,6 +495,7 @@ def build(site, ctx):
 </section>
 <section><h2>{E(u["direct_h"])}</h2>
 <ul class="links">
+  <li><a href="{E(stay22(f"{city(cname, 'en')}, {tr(TR.COUNTRIES, country, 'en')}", "page-hotels-" + lang))}" target="_blank" rel="sponsored noopener noreferrer"><strong>{E(STAY22_L[lang].format(c=c))}</strong></a></li>
   <li><a href="{E(booking)}" target="_blank" rel="noopener noreferrer">{E(u["booking_l"].format(c=c))}</a></li>
   <li><a href="{E(google)}" target="_blank" rel="noopener noreferrer">{E(u["google_l"])}</a></li>
   <li><a href="{E(airbnb)}" target="_blank" rel="noopener noreferrer">{E(u["airbnb_l"].format(c=c))}</a></li>
@@ -578,10 +579,22 @@ def calendar_html(lang, fr_, to):
             f'<script src="/alerts.js" defer></script>')
 
 
+STAY22_L = {"fr": "Hôtels à {c} au meilleur prix (Booking, Expedia, Agoda…)", "en": "Hotels in {c} at the best price (Booking, Expedia, Agoda…)",
+            "es": "Hoteles en {c} al mejor precio (Booking, Expedia, Agoda…)", "pt": "Hotéis em {c} ao melhor preço (Booking, Expedia, Agoda…)",
+            "ar": "فنادق {c} بأفضل سعر (بوكينغ، إكسبيديا، أغودا…)"}
+
+
+def stay22(address, campaign):
+    """Lien Stay22 « roam » (partenaire rémunéré) : envoie vers le site d'hôtels le moins cher pour cette destination."""
+    return "https://www.stay22.com/allez/roam?" + urllib.parse.urlencode({"aid": "escalelive", "address": address, "campaign": campaign})
+
+
 def extras_html(site, lang, city_label, city_en, code):
     b = BLOCKS[lang]
     cards = []
     for p in partners(site):
+        if "{city}" in p["url"] and not city_en:
+            continue  # lien qui a besoin de la ville (hôtels) : rien à proposer sans destination
         url = p["url"].replace("{city}", urllib.parse.quote(city_en)).replace("{code}", code)
         cards.append(f'<li class="extra"><span class="logo" style="background:{p["color"]}" aria-hidden="true">{E(p["name"][0])}</span>'
                      f'<div><strong>{E(p["title"][lang])}</strong><span>{E(p["desc"][lang])}</span></div>'

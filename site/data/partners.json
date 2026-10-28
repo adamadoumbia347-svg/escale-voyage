@@ -2,6 +2,27 @@
   "_comment": "Services « Avant de partir ». Remplacez chaque « url » par votre lien partenaire (Travelpayouts ou autre) pour gagner une commission. {city} est remplacé par la ville de destination (en anglais), {code} par le code de l'aéroport.",
   "services": [
     {
+      "key": "hotel",
+      "name": "Stay22",
+      "color": "#2a3ff6",
+      "url": "https://www.stay22.com/allez/roam?aid=escalelive&address={city}&campaign=avant-de-partir",
+      "affiliate": true,
+      "title": {
+        "fr": "Hôtels au meilleur prix",
+        "en": "Hotels at the best price",
+        "es": "Hoteles al mejor precio",
+        "pt": "Hotéis ao melhor preço",
+        "ar": "فنادق بأفضل سعر"
+      },
+      "desc": {
+        "fr": "Booking, Expedia, Agoda… : vous êtes envoyé vers le site le moins cher pour votre destination.",
+        "en": "Booking, Expedia, Agoda…: you are sent to the cheapest site for your destination.",
+        "es": "Booking, Expedia, Agoda…: te enviamos al sitio más barato para tu destino.",
+        "pt": "Booking, Expedia, Agoda…: é enviado para o site mais barato para o seu destino.",
+        "ar": "بوكينغ وإكسبيديا وأغودا…: نوجّهك إلى أرخص موقع لوجهتك."
+      }
+    },
+    {
       "key": "esim",
       "name": "Airalo",
       "color": "#0b8a6e",

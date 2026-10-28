@@ -399,6 +399,7 @@ def hotel_page(h):
 </section>
 <section><h2>Accès direct aux comparateurs</h2>
 <ul class="links">
+  <li><a href="{E(build_i18n.stay22(f"{build_i18n.city(city, 'en')}, {translations.COUNTRIES.get(country, [country])[0] if isinstance(translations.COUNTRIES.get(country), (list, tuple)) else country}", "page-hotels-fr"))}" target="_blank" rel="sponsored noopener noreferrer"><strong>{E(build_i18n.STAY22_L["fr"].format(c=city))}</strong></a></li>
   <li><a href="{E(booking)}" target="_blank" rel="noopener noreferrer">Hôtels à {E(city)} sur Booking.com, du moins cher au plus cher</a></li>
   <li><a href="{E(google)}" target="_blank" rel="noopener noreferrer">Comparer les prix sur Google Hôtels</a></li>
   <li><a href="{E(airbnb)}" target="_blank" rel="noopener noreferrer">Appartements à {E(city)} sur Airbnb</a></li>

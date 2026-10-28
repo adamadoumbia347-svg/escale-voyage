@@ -289,7 +289,7 @@
 
   // ---------- Sites comparés ----------
   const COLORS = { google: "#1a73e8", sky: "#0062e3", kayak: "#ff690f", momondo: "#d1006e", booking: "#003580",
-    hotels: "#d32f2f", agoda: "#5c2d91", airbnb: "#e0475b", rental: "#00897b", discover: "#2e7d32", aviasales: "#0c73fe", economy: "#f26b21", bike: "#ff8a00" };
+    hotels: "#d32f2f", agoda: "#5c2d91", airbnb: "#e0475b", rental: "#00897b", discover: "#2e7d32", aviasales: "#0c73fe", economy: "#f26b21", bike: "#ff8a00", stay22: "#2a3ff6" };
   const SITES = {
     fr: { kayak: "www.kayak.fr", momondo: "www.momondo.fr", sky: "www.skyscanner.fr/transport/vols", booking: "searchresults.fr.html",
           hotels: "fr.hotels.com", agoda: "fr-fr", airbnb: "www.airbnb.fr", rental: "fr", discover: "fr" },
@@ -342,6 +342,9 @@
   function hotelLinks(s) {
     const d = D(), x = s.dest;
     return [
+      // Partenaire Stay22 (lien rémunéré) : envoie vers le site d'hôtels le moins cher pour ces dates (Booking, Expedia, Agoda…)
+      { k: "stay22", name: T("Meilleur prix du moment", "Best price right now"), desc: T("Booking, Expedia, Agoda… : vous êtes envoyé vers le site le moins cher pour ces dates.", "Booking, Expedia, Agoda…: you are sent to the cheapest site for these dates."), best: true, sponsored: true,
+        url: `https://www.stay22.com/allez/roam?${q({ aid: "escalelive", address: x, checkin: s.in, checkout: s.out, adults: s.adults, campaign: "recherche-hotels" })}` },
       { k: "booking", name: "Booking.com", desc: T("Le plus grand choix d’hébergements, souvent annulables gratuitement.", "The widest choice of stays, often with free cancellation."), best: true,
         url: `https://www.booking.com/${d.booking}?${q({ ss: x, checkin: s.in, checkout: s.out, group_adults: s.adults, no_rooms: s.rooms, group_children: 0, order: "price", selected_currency: CUR })}` },
       { k: "google", name: T("Google Hôtels", "Google Hotels"), desc: T("Compare les prix de plusieurs agences pour le même hôtel.", "Compares prices from several agencies for the same hotel."), best: true,
@@ -668,7 +671,7 @@
   let partnersP = null;
   // « Pour votre arrivée » : les 3 services les plus utiles juste après un vol (internet, transfert, voiture),
   // sous la liste des vols et dans une carte qui s'affiche quand le visiteur ouvre un vol
-  const KIT = [["esim", "Internet dès l’atterrissage", "Data as soon as you land"], ["transfer", "Transfert depuis l’aéroport", "Airport transfer"], ["car", "Voiture sur place", "Car on arrival"]];
+  const KIT = [["hotel", "Hôtel au meilleur prix", "Hotel at the best price"], ["esim", "Internet dès l’atterrissage", "Data as soon as you land"], ["transfer", "Transfert depuis l’aéroport", "Airport transfer"], ["car", "Voiture sur place", "Car on arrival"]];
   let kitCity = "", kitShown = false;
   function kitLinks(cfg, city, code) {
     const by = Object.fromEntries(cfg.services.map((p) => [p.key, p]));
