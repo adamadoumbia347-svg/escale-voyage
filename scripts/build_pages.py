@@ -197,6 +197,9 @@ E = html.escape
 # Il reste bloqué (type="text/plain") tant que le visiteur n'a pas accepté les cookies : site/consent.js l'active.
 TRAVELPAYOUTS = (ROOT / "scripts" / "travelpayouts-snippet.html").read_text(encoding="utf-8").strip()
 TRAVELPAYOUTS = TRAVELPAYOUTS.replace("<script ", '<script type="text/plain" data-consent="marketing" ', 1)
+# Script Stay22 (LinkSwap : liens d'hôtels Booking, Agoda, Expedia… rémunérés), bloqué lui aussi jusqu'à l'accord du visiteur
+STAY22 = (ROOT / "scripts" / "stay22-snippet.html").read_text(encoding="utf-8").strip()
+TRAVELPAYOUTS += "\n" + STAY22.replace("<script>", '<script type="text/plain" data-consent="marketing">', 1)
 TRAVELPAYOUTS += '\n<script src="/consent.js" defer></script>'
 
 HEAD = """<!doctype html>
@@ -459,6 +462,8 @@ def legal_pages():
 <p>Avec votre accord seulement, le site charge un script de notre partenaire d'affiliation Travelpayouts. Il sert à attribuer à Escale les réservations faites après un clic sur un lien partenaire, et peut pour cela déposer des cookies ou utiliser des identifiants techniques sur votre navigateur. Travelpayouts applique sa propre politique de confidentialité, disponible sur travelpayouts.com.</p>
 <p>Votre choix (accepter ou refuser) est demandé à votre première visite, gardé 6 mois dans votre navigateur, puis redemandé. Vous pouvez le changer à tout moment avec le lien <a href="#cookies" data-open-consent>Gérer les cookies</a>, aussi présent en bas de chaque page. Refuser ne change rien au fonctionnement des recherches.</p>
 </section>
+<section><h2>Liens d'hôtels (Stay22)</h2>
+<p>Avec votre accord seulement, le site charge aussi un script de notre partenaire Stay22. Il transforme les liens vers les sites d'hôtels (Booking.com, Agoda, Expedia…) en liens partenaires, pour attribuer à Escale les réservations faites après un clic, et peut pour cela déposer des cookies. Certains liens d'hôtels passent par stay22.com, qui vous redirige vers le site de réservation le moins cher. Stay22 applique sa propre politique de confidentialité, disponible sur stay22.com.</p></section>
 <section><h2>Hébergement</h2>
 <p>Comme tout hébergeur, Cloudflare enregistre des journaux techniques (adresse IP, page demandée, date) nécessaires au fonctionnement et à la sécurité du site.</p>
 </section>
