@@ -322,18 +322,19 @@
         url: `https://${d.kayak}/explore/${s.from.code}-anywhere` });
       return list;
     }
-    list.push({ k: "sky", name: "Skyscanner", desc: T("Très bon sur les compagnies low-cost et les agences en ligne.", "Great for low-cost airlines and online agencies."), best: true,
+    // Partenaire Travelpayouts (lien rémunéré) : proposé en premier
+    if (AFFILIATE.travelpayouts_marker) {
+      const ddmm = (x) => x.slice(8, 10) + x.slice(5, 7);
+      const paxAv = String(s.adults) + (s.children ? String(s.children) : "");
+      list.push({ k: "aviasales", name: "Aviasales", best: true, sponsored: true, desc: T("Compare des centaines de compagnies et d’agences, souvent très bon sur les vols avec escale.", "Compares hundreds of airlines and agencies, often great for flights with stops."),
+        url: `https://www.aviasales.com/search/${s.from.code}${ddmm(s.dep)}${s.to.code}${s.ret ? ddmm(s.ret) : ""}${paxAv}?` + q({ marker: AFFILIATE.travelpayouts_marker, currency: CUR.toLowerCase() }) });
+    }
+    list.push({ k: "sky", name: "Skyscanner", desc: T("Très bon sur les compagnies low-cost et les agences en ligne.", "Great for low-cost airlines and online agencies."),
       url: `https://${d.sky}/${F}/${Tt}/${yymmdd(s.dep)}/` + (s.ret ? `${yymmdd(s.ret)}/` : "") + "?" +
         q({ adultsv2: s.adults, childrenv2: s.children ? Array(s.children).fill(8).join("|") : "", cabinclass: cabinSky,
             rtn: s.ret ? 1 : 0, preferdirects: s.direct ? "true" : "", sortby: "cheapest" }) });
     list.push({ k: "kayak", name: "Kayak", desc: s.flex ? T("Recherche ±3 jours autour de vos dates, triée par prix.", "Searches ±3 days around your dates, sorted by price.") : T("Compare des centaines de sites, tri par prix.", "Compares hundreds of sites, sorted by price."),
       url: `https://${d.kayak}/flights/${s.from.code}-${s.to.code}${kDates}${cabinKayak}${pax}${kids}${kParams}` });
-    if (AFFILIATE.travelpayouts_marker) {
-      const ddmm = (x) => x.slice(8, 10) + x.slice(5, 7);
-      const paxAv = String(s.adults) + (s.children ? String(s.children) : "");
-      list.push({ k: "aviasales", name: "Aviasales", desc: T("Compare des centaines de compagnies et d’agences, souvent très bon sur les vols avec escale.", "Compares hundreds of airlines and agencies, often great for flights with stops."),
-        url: `https://www.aviasales.com/search/${s.from.code}${ddmm(s.dep)}${s.to.code}${s.ret ? ddmm(s.ret) : ""}${paxAv}?` + q({ marker: AFFILIATE.travelpayouts_marker, currency: CUR.toLowerCase() }) });
-    }
     list.push({ k: "momondo", name: "momondo", desc: T("Souvent des tarifs d’agences que les autres n’affichent pas.", "Often shows agency fares others don’t."),
       url: `https://${d.momondo}/flight-search/${s.from.code}-${s.to.code}${kDates}${cabinKayak}${pax}${kids}${kParams}` });
     return list;

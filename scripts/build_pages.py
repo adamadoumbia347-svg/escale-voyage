@@ -272,7 +272,6 @@ def route_page(r):
     hp = next((h for h in HOTELS if h[0] == ct), None)
     hotels = f"/{hotel_slug(hp)}/" if hp else "/?" + urllib.parse.urlencode({"type": "hotels", "dest": ct})
     cars = "/?" + urllib.parse.urlencode({"type": "voitures", "pick": to})
-    sky = f"https://www.skyscanner.fr/transport/vols/{fr.lower()}/{to.lower()}/"
     km = DISTANCES.get((fr, to))
     if dur and dur.startswith("~"):
         kms = f"{km:,}".replace(",", " ")
@@ -322,7 +321,7 @@ def route_page(r):
 </section>
 <section><h2>Accès direct aux comparateurs</h2>
 <ul class="links">
-  <li><a href="{E(sky)}" target="_blank" rel="noopener noreferrer">Prix du mois sur Skyscanner</a></li>
+  <li><a href="{E(build_i18n.av_link(fr, to))}" data-av="{fr}-{to}" target="_blank" rel="sponsored noopener">Prix et dates sur Aviasales</a></li>
   <li><a href="{E(hotels)}">Hôtels à {E(ct)}</a></li>
   <li><a href="{E(cars)}">Location de voiture à {E(ct)}</a></li>{f'<li><a href="/{HUBS[ct]["fr"]}/">Tous les vols pour {E(ct)}</a></li>' if ct in HUBS else ''}
 </ul></section>

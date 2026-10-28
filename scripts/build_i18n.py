@@ -32,7 +32,7 @@ UI = {
                "<strong>Check the baggage allowance.</strong> Add the price of a suitcase before comparing two fares.",
                "<strong>Set a price alert</strong> on Kayak or Skyscanner if you are travelling in several months."],
         launch="Search {a} → {b}", direct_h="Go straight to the comparison sites",
-        sky="Monthly prices on Skyscanner", hotels_in="Hotels in {b}", cars_in="Car rental in {b}",
+        sky="Prices and dates on Aviasales", hotels_in="Hotels in {b}", cars_in="Car rental in {b}",
         faq_h="Frequently asked questions", other_routes="Other routes",
         faq=[("How long is a flight from {a} to {b}?", "{dur_long}. With a stop, the total trip often takes several hours more depending on the connection."),
              ("When should I book a cheap flight from {a} to {b}?", "Usually two to three months before departure. Prices rise sharply during {peak}: book earlier for those periods."),
@@ -69,7 +69,7 @@ UI = {
                "<strong>Revisa el equipaje.</strong> Suma el precio de la maleta antes de comparar dos tarifas.",
                "<strong>Crea una alerta de precio</strong> en Kayak o Skyscanner si viajas dentro de varios meses."],
         launch="Buscar {a} → {b}", direct_h="Acceso directo a los comparadores",
-        sky="Precios del mes en Skyscanner", hotels_in="Hoteles en {b}", cars_in="Alquiler de coches en {b}",
+        sky="Precios y fechas en Aviasales", hotels_in="Hoteles en {b}", cars_in="Alquiler de coches en {b}",
         faq_h="Preguntas frecuentes", other_routes="Otras rutas",
         faq=[("¿Cuánto dura un vuelo {a} – {b}?", "{dur_long}. Con escala, el viaje total suele durar varias horas más según la conexión."),
              ("¿Cuándo reservar un vuelo barato {a} – {b}?", "En general, dos o tres meses antes de la salida. Los precios suben mucho durante {peak}: reserva antes para esas fechas."),
@@ -106,7 +106,7 @@ UI = {
                "<strong>Verifique a bagagem.</strong> Some o preço da mala antes de comparar duas tarifas.",
                "<strong>Crie um alerta de preço</strong> no Kayak ou Skyscanner se viajar daqui a alguns meses."],
         launch="Pesquisar {a} → {b}", direct_h="Acesso direto aos comparadores",
-        sky="Preços do mês no Skyscanner", hotels_in="Hotéis em {b}", cars_in="Aluguer de carros em {b}",
+        sky="Preços e datas na Aviasales", hotels_in="Hotéis em {b}", cars_in="Aluguer de carros em {b}",
         faq_h="Perguntas frequentes", other_routes="Outras rotas",
         faq=[("Quanto tempo dura um voo {a} – {b}?", "{dur_long}. Com escala, a viagem total costuma demorar várias horas a mais, conforme a ligação."),
              ("Quando reservar um voo barato {a} – {b}?", "Em geral, dois a três meses antes da partida. Os preços sobem muito durante {peak}: reserve mais cedo nessas alturas."),
@@ -143,7 +143,7 @@ UI = {
                "<strong>تحقّق من الأمتعة.</strong> أضف ثمن الحقيبة قبل المقارنة بين سعرين.",
                "<strong>فعّل تنبيه الأسعار</strong> على Kayak أو Skyscanner إذا كان سفرك بعد عدة أشهر."],
         launch="ابحث {a} ← {b}", direct_h="روابط مباشرة إلى مواقع المقارنة",
-        sky="أسعار الشهر على Skyscanner", hotels_in="فنادق في {b}", cars_in="تأجير سيارات في {b}",
+        sky="الأسعار والتواريخ على Aviasales", hotels_in="فنادق في {b}", cars_in="تأجير سيارات في {b}",
         faq_h="أسئلة شائعة", other_routes="خطوط أخرى",
         faq=[("كم تستغرق الرحلة من {a} إلى {b}؟", "{dur_long}. مع التوقف، تطول الرحلة غالبًا عدة ساعات حسب مدة الانتظار."),
              ("متى أحجز رحلة رخيصة من {a} إلى {b}؟", "عادةً قبل شهرين إلى ثلاثة أشهر من السفر. ترتفع الأسعار كثيرًا خلال: {peak}. احجز مبكرًا لهذه الفترات."),
@@ -175,6 +175,14 @@ EST = {
     "pt": "Cerca de {d} sem escalas (estimativa pela distância de {km} km)",
     "ar": "حوالي {d} دون توقف (تقدير حسب المسافة {km} كم)",
 }
+
+
+# Lien Aviasales rémunéré (identifiant Travelpayouts) ; route-prices.js y ajoute des dates à l'ouverture de la page
+AV_MARKER = "789659"
+
+
+def av_link(fr, to):
+    return f"https://www.aviasales.com/?marker={AV_MARKER}&origin={fr}&destination={to}"
 
 
 def slugify(t):
@@ -419,7 +427,6 @@ def build(site, ctx):
             hp = next((h for h in hotels if h[0] == ct), None)
             hotels_l = f"/{hotel_paths[hp[0]][lang]}/" if hp else "/?" + urllib.parse.urlencode({"type": "hotels", "dest": b, "lang": u["app_lang"]})
             cars_l = "/?" + urllib.parse.urlencode({"type": "voitures", "pick": to, "lang": u["app_lang"]})
-            sky = f"https://www.skyscanner.net/transport/flights/{fr_.lower()}/{to.lower()}/"
             f = dict(a=a, b=b, fa=fr_, ta=to, peak=peak_t, airport=airport, dur_long=dur_long)
             faq = [(q.format(**f), ans.format(**f)) for q, ans in u["faq"]]
             ten = TEN.ROUTES.get((fr_, to)) if lang == "en" else None  # contenu unique en anglais (grands trajets)
@@ -450,7 +457,7 @@ def build(site, ctx):
 </section>
 <section><h2>{E(u["direct_h"])}</h2>
 <ul class="links">
-  <li><a href="{E(sky)}" target="_blank" rel="noopener noreferrer">{E(u["sky"])}</a></li>
+  <li><a href="{E(av_link(fr_, to))}" data-av="{fr_}-{to}" target="_blank" rel="sponsored noopener">{E(u["sky"])}</a></li>
   <li><a href="{E(hotels_l)}">{E(u["hotels_in"].format(b=b))}</a></li>
   <li><a href="{E(cars_l)}">{E(u["cars_in"].format(b=b))}</a></li>{f'<li><a href="/{ctx["hubs"][ct][lang]}/">{E(HUB_LINK[lang].format(b=b))}</a></li>' if ct in ctx.get("hubs", {}) else ''}
 </ul></section>

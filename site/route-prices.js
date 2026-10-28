@@ -2,6 +2,15 @@
 // Les données viennent de /api/prix (Travelpayouts). Sans réponse, la section reste masquée.
 (function () {
   "use strict";
+  // Lien Aviasales (partenaire rémunéré) : ouvre directement une recherche datée, départ dans 45 jours, retour 7 jours après
+  var pad2 = function (n) { return String(n).padStart(2, "0"); };
+  var ddmm = function (dt) { return pad2(dt.getDate()) + pad2(dt.getMonth() + 1); };
+  Array.prototype.forEach.call(document.querySelectorAll("a[data-av]"), function (a) {
+    var p = a.getAttribute("data-av").split("-"), m = (a.href.match(/marker=(\d+)/) || [])[1];
+    if (!m || p.length !== 2) return;
+    var dep = new Date(Date.now() + 45 * 864e5), ret = new Date(dep.getTime() + 7 * 864e5);
+    a.href = "https://www.aviasales.com/search/" + p[0] + ddmm(dep) + p[1] + ddmm(ret) + "1?marker=" + m + "&currency=eur";
+  });
   var box = document.getElementById("route-prices");
   // Prix déjà écrits dans la page par le serveur (src/apercu-prix.ts) : rien à faire
   if (!box || box.hasAttribute("data-ssr")) return;
