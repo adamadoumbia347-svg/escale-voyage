@@ -474,8 +474,10 @@
       <div class="fl-insight" id="fl-insight" hidden></div>
       <p class="summary" id="fl-note" aria-live="polite">${esc(T("Recherche des meilleurs prix…", "Looking for the best prices…"))}</p>
       <ul class="fl-list" id="fl-list">${skel}</ul>
+      <div id="trip-kit" class="trip-kit" hidden></div>
       <div id="cmp-wrap"><h3 class="sub-h">${T("Comparer aussi sur", "Also compare on")}</h3>${compareRow(links)}</div>` + share + extrasSlot(s.to.name));
     fillExtras(s.to.name, s.to.code);
+    fillTripKit(s.to.name, s.to.code);
     bindEdit();
     flightState = { s, offers: [], sort: "cheap", stops: s.direct ? "0" : "any", airline: "" };
     renderStrip(s, null);
@@ -664,6 +666,53 @@
 
   // ---------- Avant de partir (eSIM, assurance, transfert, activités) : liens réglés dans /data/partners.json ----------
   let partnersP = null;
+  // « Pour votre arrivée » : les 3 services les plus utiles juste après un vol (internet, transfert, voiture),
+  // sous la liste des vols et dans une carte qui s'affiche quand le visiteur ouvre un vol
+  const KIT = [["esim", "Internet dès l’atterrissage", "Data as soon as you land"], ["transfer", "Transfert depuis l’aéroport", "Airport transfer"], ["car", "Voiture sur place", "Car on arrival"]];
+  let kitCity = "", kitShown = false;
+  function kitLinks(cfg, city, code) {
+    const by = Object.fromEntries(cfg.services.map((p) => [p.key, p]));
+    return KIT.filter(([k]) => by[k]).map(([k, fr, en]) => {
+      const p = by[k], url = p.url.replace("{city}", enc(city)).replace("{code}", code || "");
+      return `<a class="kit" href="${esc(url)}" target="_blank" rel="sponsored noopener noreferrer"><span class="logo sm" style="background:${esc(p.color)}" aria-hidden="true">${esc(p.name[0])}</span><span>${esc(T(fr, en))}</span><small>${esc(p.name)} ↗</small></a>`;
+    }).join("");
+  }
+  function fillTripKit(city, code) {
+    kitCity = city; kitShown = false;
+    if (!partnersP) partnersP = fetch("/data/partners.json").then((r) => (r.ok ? r.json() : null)).catch(() => null);
+    Promise.all([partnersP, loadDB()]).then(([cfg]) => {
+      const box = $("trip-kit");
+      if (!box || !cfg) return;
+      const a = code && byCode.get(code);
+      if (a && /^[A-Z]{3}$/.test(city)) city = kitCity = a[1]; // nom de la ville plutôt que le code (base complète chargée)
+      const links = kitLinks(cfg, city, code);
+      if (!links) return;
+      box.innerHTML = `<p class="kit-h">${esc(fmt(T("Pour votre arrivée à {c}", "For your arrival in {c}"), { c: city }))}</p><div class="kit-row">${links}</div>`;
+      box.hidden = false;
+      box.dataset.code = code || "";
+    });
+  }
+  // Après l'ouverture d'un vol (nouvel onglet), une seule fois par recherche
+  function showKitCard() {
+    if (kitShown || !partnersP) return;
+    kitShown = true;
+    partnersP.then((cfg) => {
+      if (!cfg) return;
+      const box = $("trip-kit"), links = kitLinks(cfg, kitCity, box ? box.dataset.code : "");
+      if (!links) return;
+      const old = $("kit-card"); if (old) old.remove();
+      const card = document.createElement("div");
+      card.id = "kit-card"; card.className = "kit-card"; card.setAttribute("role", "dialog"); card.setAttribute("aria-label", T("Pour votre arrivée", "For your arrival"));
+      card.innerHTML = `<button type="button" class="kit-x" aria-label="${esc(T("Fermer", "Close"))}">×</button>
+        <p class="kit-h">${esc(fmt(T("Bon voyage ! Pour votre arrivée à {c} :", "Have a good trip! For your arrival in {c}:"), { c: kitCity }))}</p><div class="kit-row">${links}</div>`;
+      const bar = document.querySelector(".cc-bar"); // bandeau des cookies encore ouvert : la carte se place au-dessus
+      if (bar && bar.offsetHeight) card.style.bottom = bar.offsetHeight + 12 + "px";
+      document.body.appendChild(card);
+      card.querySelector(".kit-x").addEventListener("click", () => card.remove());
+      card.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setTimeout(() => card.remove(), 300)));
+    });
+  }
+  $("results").addEventListener("click", (ev) => { if (ev.target.closest("#fl-list a.buy, #cmp-wrap a.cmp")) setTimeout(showKitCard, 600); });
   const extrasSlot = (city) => `<div id="res-extras-wrap"><h3 class="sub-h">${esc(T("Avant de partir", "Before you go"))}</h3>
     <p class="summary">${esc(fmt(T("Les services utiles pour votre voyage à {c}.", "Useful services for your trip to {c}."), { c: city }))}</p>
     <ul class="extras-res providers" id="res-extras"></ul></div>`;

@@ -306,6 +306,7 @@ def route_page(r):
 <ul class="price-list"></ul></section>
 <script src="/route-prices.js" defer></script>
 {build_i18n.calendar_html("fr", fr, to)}
+{build_i18n.extras_html(SITE, "fr", ct, build_i18n.city(ct, "en"), to)}
 {trajet_html(tj, cf, ct) if tj else ''}<section><h2>Notre conseil pour ce trajet</h2><p>{E(note)}</p></section>
 <section><h2>Comment payer moins cher</h2>
 <ol class="steps">
@@ -322,7 +323,6 @@ def route_page(r):
   <li><a href="{E(hotels)}">Hôtels à {E(ct)}</a></li>
   <li><a href="{E(cars)}">Location de voiture à {E(ct)}</a></li>{f'<li><a href="/{HUBS[ct]["fr"]}/">Tous les vols pour {E(ct)}</a></li>' if ct in HUBS else ''}
 </ul></section>
-{build_i18n.extras_html(SITE, "fr", ct, build_i18n.city(ct, "en"), to)}
 <section class="faq"><h2>Questions fréquentes</h2>
 {''.join(f'<details><summary>{E(q)}</summary><p>{E(a)}</p></details>' for q, a in faq)}
 </section>

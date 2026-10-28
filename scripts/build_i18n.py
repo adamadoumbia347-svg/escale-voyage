@@ -442,6 +442,7 @@ def build(site, ctx):
 <ul class="price-list"></ul></section>
 <script src="/route-prices.js" defer></script>
 {calendar_html(lang, fr_, to)}
+{extras_html(site, lang, b, city(ct, "en"), to)}
 {TEN.route_html(ten, a, b, {p["key"]: p for p in partners(site)}) if ten else ""}<section><h2>{E(u["tip_h"])}</h2><p>{E(note)}</p></section>
 <section><h2>{E(u["cheap_h"])}</h2>
 <ol class="steps">{"".join(f"<li>{s}</li>" for s in u["steps"])}</ol>
@@ -453,7 +454,6 @@ def build(site, ctx):
   <li><a href="{E(hotels_l)}">{E(u["hotels_in"].format(b=b))}</a></li>
   <li><a href="{E(cars_l)}">{E(u["cars_in"].format(b=b))}</a></li>{f'<li><a href="/{ctx["hubs"][ct][lang]}/">{E(HUB_LINK[lang].format(b=b))}</a></li>' if ct in ctx.get("hubs", {}) else ''}
 </ul></section>
-{extras_html(site, lang, b, city(ct, "en"), to)}
 <section class="faq"><h2>{E(u["faq_h"])}</h2>
 {"".join(f"<details><summary>{E(q)}</summary><p>{E(ans)}</p></details>" for q, ans in faq)}
 </section>
