@@ -569,6 +569,8 @@ select.chip-select { width: auto; min-height: 40px; padding: 8px 30px 8px 12px; 
 .fl-tools .chip-toggle { display: inline-flex; align-self: center; min-height: 0; line-height: 1.2; }
 .chip-toggle input { width: 18px; height: 18px; min-height: 0; padding: 0; margin: 0; accent-color: var(--accent); }
 .fl-air .al-name { font: 600 13px/1.2 var(--f-body); color: var(--ink); }
+.wl-home { min-height: 260px; }
+.wl-loading { color: var(--muted); padding: 24px 4px; margin: 0; }
 .av-head { display: flex; align-items: center; gap: 10px; margin: 14px 0 2px; }
 .av-head > div { display: grid; gap: 2px; }
 .av-head small { color: var(--muted); font-size: 13px; }
@@ -873,7 +875,6 @@ footer { margin-top: 72px; }
     <a class="brand" href="/" aria-label="Escale, accueil" data-en-aria="Escale, home"><svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" fill="currentColor"/></svg><span>escale</span></a>
     <nav class="main-nav" aria-label="Menu principal" data-en-aria="Main menu">
       <a href="/#vols" data-tab="vols" data-en="Flights">Vols</a>
-      <a href="/recherche/" data-en="Live prices">En direct</a>
       <a href="/#hotels" data-tab="hotels" data-en="Hotels">Hôtels</a>
       <a href="/#voitures" data-tab="voitures" data-en="Cars">Voitures</a>
       <a href="/bons-plans/" class="deals-href" data-en="Deals">Bons plans</a>
@@ -935,7 +936,9 @@ footer { margin-top: 72px; }
 
     <!-- VOLS -->
     <div id="panel-vols" role="tabpanel" aria-labelledby="tab-vols">
-<form id="form-vols" class="gf" novalidate>
+<!-- Moteur de recherche de vols en direct (White Label Travelpayouts n° 24006) ; l'ancien formulaire revient s'il ne se charge pas -->
+<div class="wl-home"><div id="tpwl-search"><p class="wl-loading" data-en="Loading live prices…">Chargement des prix en direct…</p></div><div id="tpwl-tickets"></div></div>
+<form id="form-vols" class="gf" novalidate hidden>
       <div class="gf-top">
         <div class="seg" role="radiogroup" aria-label="Type de trajet" data-en-aria="Trip type">
           <input type="radio" name="trip" id="trip-rt" value="rt" checked><label for="trip-rt" data-en="Round trip">Aller-retour</label>
@@ -1195,6 +1198,17 @@ footer { margin-top: 72px; }
 <script src="/app.js" defer></script>
 <script src="/newsletter.js" defer></script>
 <script src="/favs.js" defer></script>
+<script>
+(function () {
+  var s = document.createElement("script"); s.async = 1; s.type = "module";
+  s.src = "https://tpemb.com/wl_web/main.js?wl_id=24006"; document.head.appendChild(s);
+  // Si le moteur ne s'affiche pas (bloqué, hors ligne), on remet le formulaire d'Escale
+  setTimeout(function () {
+    var w = document.getElementById("tpwl-search");
+    if (w && !w.shadowRoot) { document.getElementById("form-vols").hidden = false; document.querySelector(".wl-home").hidden = true; }
+  }, 9000);
+})();
+</script>
 <!-- CONSENT:START -->
 <script>
 // Bandeau de consentement aux cookies (Escale).

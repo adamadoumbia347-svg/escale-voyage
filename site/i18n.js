@@ -1,6 +1,7 @@
 // Traductions de l'accueil : clé = texte anglais, valeur = [espagnol, portugais, arabe].
 // Le français et l'anglais sont directement dans index.html (data-en) et app.js (T("fr", "en")).
 window.ESCALE_I18N = {
+  "Loading live prices…": ["Cargando precios en directo…", "A carregar preços ao vivo…", "جارٍ تحميل الأسعار المباشرة…"],
   "Compare all agencies live": ["Comparar en directo todas las agencias", "Comparar ao vivo todas as agências", "قارن كل الوكالات مباشرة"],
   "Live prices": ["En directo", "Ao vivo", "أسعار مباشرة"],
   "Aviasales prices": ["Precios de Aviasales", "Preços da Aviasales", "أسعار Aviasales"],

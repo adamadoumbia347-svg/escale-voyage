@@ -345,7 +345,7 @@ def route_page(r):
   <h1>Vol pas cher {E(cf)} <span>→</span> {E(ct)}</h1>
   <p class="codes">{fr} → {to}</p>
   <p class="hero-price" id="hero-price" hidden></p>
-  <div class="cta-row"><a class="btn" href="{E(app)}">Comparer les prix maintenant</a><a class="btn ghost" href="{E(back)}">Trajet retour {E(ct)} → {E(cf)}</a>{build_i18n.fav_btn("fr", s, f"{cf} → {ct}", f"{fr} → {to}", "route")}{build_i18n.alert_btn("fr")}</div>"""
+  <div class="cta-row"><a class="btn" href="/recherche/" data-wl="{fr}-{to}">Comparer les prix maintenant</a><a class="btn ghost" href="/recherche/" data-wl="{to}-{fr}">Trajet retour {E(ct)} → {E(cf)}</a>{build_i18n.fav_btn("fr", s, f"{cf} → {ct}", f"{fr} → {to}", "route")}{build_i18n.alert_btn("fr")}</div>"""
     facts = f"""<dl class="facts">
   <div><dt>Durée</dt><dd>{E(dur_txt[0].upper() + dur_txt[1:])}</dd></div>
   <div><dt>Arrivée</dt><dd>{E(airport)} ({to})</dd></div>
@@ -366,7 +366,7 @@ def route_page(r):
   <li><strong>Vérifiez les bagages.</strong> Ajoutez le prix de la valise avant de comparer deux tarifs.</li>
   <li><strong>Créez une alerte prix</strong> sur Kayak ou Skyscanner si vous partez dans plusieurs mois.</li>
 </ol>
-<p><a class="btn" href="{E(app)}">Lancer la recherche {E(cf)} → {E(ct)}</a></p>
+<p><a class="btn" href="/recherche/" data-wl="{fr}-{to}">Lancer la recherche {E(cf)} → {E(ct)}</a></p>
 </section>
 <section><h2>Accès direct aux comparateurs</h2>
 <ul class="links">

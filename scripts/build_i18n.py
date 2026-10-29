@@ -313,7 +313,7 @@ def site_header(lang, path, switch):
     q = "" if lang == "fr" else "?lang=" + UI[lang]["app_lang"]
     cur = lambda key: ' aria-current="page"' if path and (path == SECTION_PATHS[key][lang] or path.startswith(SECTION_PATHS[key][lang] + "/")) else ""
     sec = lambda key: "/" + SECTION_PATHS[key][lang] + "/"
-    links = (f'<a href="/{q}">{n[0]}</a><a href="/recherche/"{' aria-current="page"' if path == "recherche" else ""}>{E(LIVE_LABEL[lang])}</a><a href="/{q}#hotels">{n[1]}</a><a href="/{q}#voitures">{n[2]}</a>'
+    links = (f'<a href="/{q}">{n[0]}</a><a href="/{q}#hotels">{n[1]}</a><a href="/{q}#voitures">{n[2]}</a>'
              f'<a href="{sec("deals")}"{cur("deals")}>{E(n[3])}</a><a href="{sec("fetes")}"{cur("fetes")}>{E(FETES_LABEL[lang])}</a>'
              f'<a href="{sec("anywhere")}"{cur("anywhere")}>{E(n[4])}</a>'
              f'<a href="{sec("guides")}"{cur("guides")}>{E(n[5])}</a>'
@@ -472,7 +472,7 @@ def build(site, ctx):
   <h1>{u["h1_route"].format(a=E(a), b=E(b))}</h1>
   <p class="codes" dir="ltr">{fr_} → {to}</p>
   <p class="hero-price" id="hero-price" hidden></p>
-  <div class="cta-row"><a class="btn" href="{E(app)}">{E(u["cta"])}</a><a class="btn ghost" href="{E(backl)}">{E(u["back"].format(a=a, b=b))}</a>{fav_btn(lang, route_paths[r][lang], f"{a} → {b}", f"{fr_} → {to}", "route")}{alert_btn(lang)}</div>"""
+  <div class="cta-row"><a class="btn" href="/recherche/" data-wl="{fr_}-{to}">{E(u["cta"])}</a><a class="btn ghost" href="/recherche/" data-wl="{to}-{fr_}">{E(u["back"].format(a=a, b=b))}</a>{fav_btn(lang, route_paths[r][lang], f"{a} → {b}", f"{fr_} → {to}", "route")}{alert_btn(lang)}</div>"""
             others = "".join(f'<li><a href="/{route_paths[o][lang]}/">{E(city(o[2], lang))} {u["arrow"]} {E(city(o[3], lang))}</a></li>'
                              for o in ctx["related"](r))
             body = f"""<dl class="facts">
@@ -489,7 +489,7 @@ def build(site, ctx):
 {TEN.route_html(ten, a, b, {p["key"]: p for p in partners(site)}) if ten else ""}<section><h2>{E(u["tip_h"])}</h2><p>{E(note)}</p></section>
 <section><h2>{E(u["cheap_h"])}</h2>
 <ol class="steps">{"".join(f"<li>{s}</li>" for s in u["steps"])}</ol>
-<p><a class="btn" href="{E(app)}">{E(u["launch"].format(a=a, b=b))}</a></p>
+<p><a class="btn" href="/recherche/" data-wl="{fr_}-{to}">{E(u["launch"].format(a=a, b=b))}</a></p>
 </section>
 <section><h2>{E(u["direct_h"])}</h2>
 <ul class="links">

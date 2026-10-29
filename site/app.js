@@ -446,6 +446,11 @@
 
   let flightState = null;
   function renderFlights(s) {
+    // Recherche avec une destination et des dates : elle se fait dans le moteur en direct (/recherche/, prérempli)
+    if (s.to && s.to.code && /^\d{4}-\d{2}-\d{2}$/.test(s.dep || "") && (!s.ret || /^\d{4}-\d{2}-\d{2}$/.test(s.ret))) {
+      if (booting) location.replace(liveUrl(s)); else location.href = liveUrl(s);
+      return;
+    }
     paxCount(); $("pax").open = false;
     const pax = s.adults + s.children;
     const travellers = `${pax} ${pax > 1 ? T("voyageurs", "travellers") : T("voyageur", "traveller")} · ${$("f-cabin").selectedOptions[0].text}`;
