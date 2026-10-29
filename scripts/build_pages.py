@@ -269,10 +269,13 @@ WL_SCRIPT = '<link rel="preconnect" href="https://tpemb.com" crossorigin><script
 
 
 def recherche_page():
-    hero = ('<p class="eyebrow">Prix en direct</p><h1>Recherche de vols en direct</h1>'
+    # Recherche déjà lancée (lien prérempli) : barre compacte à la place du titre et du formulaire, comme Skyscanner (recherche-barre.js)
+    hero = ('<script>if(/[?&]flightSearch=[A-Z]{3}\\d{4}[A-Z]{3}/.test(location.search))document.documentElement.classList.add("rs-q")</script>'
+            '<p class="eyebrow">Prix en direct</p><h1>Recherche de vols en direct</h1>'
             '<p class="hero-lead">Les prix en temps réel de dizaines de compagnies et d\'agences, comparés pour vous. '
-            'Choisissez votre vol puis réservez directement sur le site de la compagnie ou de l\'agence.</p>')
-    body = ('<section class="wl-box"><div id="tpwl-search"></div></section>'
+            'Choisissez votre vol puis réservez directement sur le site de la compagnie ou de l\'agence.</p>'
+            '<div id="rs-bar" class="rs-bar"></div><script src="/recherche-barre.js" defer></script>')
+    body = ('<section class="wl-box wl-form"><div id="tpwl-search"></div></section>'
             '<section class="wl-box"><div id="tpwl-tickets"></div></section>' + WL_SCRIPT +
             '<section id="wl-hotels" class="wl-box" hidden><h2></h2><p class="small"></p></section><script src="/carte-hotels.js" defer></script>' +
             '<section><p class="small">Moteur fourni par notre partenaire Travelpayouts (Aviasales). Escale ne vend pas de billets : '

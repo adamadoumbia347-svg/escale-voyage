@@ -371,6 +371,26 @@ main .btn.wa-btn, .btn.wa-btn { background: #0f7a40; color: #fff; }
 .inst-x { flex: none; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; }
 
 /* Carte des hôtels Stay22 (site/carte-hotels.js) */
+/* Recherche en direct déjà lancée : bandeau compact comme Skyscanner (recherche-barre.js) */
+.rs-bar { display: none; }
+.rs-q .board { background: var(--navy); color: #fff; padding: 12px 0 14px; }
+.rs-q .board .eyebrow, .rs-q .board .hero-lead { display: none; }
+.rs-q .board h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.rs-q .rs-bar { display: block; min-height: 112px; }
+.rs-sum { display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px 12px; border: 0; border-radius: 12px; background: rgb(255 255 255 / .1); color: #fff; font: inherit; text-align: left; cursor: pointer; }
+.rs-ico { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; background: #1a56db; }
+.rs-ico svg { width: 22px; height: 22px; }
+.rs-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.rs-txt strong { font-size: 16px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rs-txt small { font-size: 14px; opacity: .85; }
+.rs-edit { flex: none; font-size: 13px; font-weight: 600; text-decoration: underline; opacity: .9; }
+.rs-dates { display: flex; gap: 10px; margin-top: 10px; }
+.rs-date { flex: 1; display: flex; align-items: center; gap: 4px; }
+.rs-date span:not(.rs-arr) { flex: 1; text-align: center; font-size: 15px; white-space: nowrap; }
+.rs-arr { flex: none; display: grid; place-items: center; width: 36px; height: 40px; border-radius: 10px; background: rgb(255 255 255 / .1); color: #fff; font-size: 22px; line-height: 1; text-decoration: none; }
+span.rs-arr { opacity: .35; }
+.rs-q .wl-form:not(.open) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); margin: 0; }
+.rs-q .wl-box { margin-top: 8px; }
 .s22-frame { display: block; width: 100%; height: 460px; border: 0; border-radius: 14px; background: var(--soft, #f5f7fa); }
 .s22-ph { display: grid; place-items: center; height: 180px; border: 1px dashed var(--line); border-radius: 14px; background: var(--soft, #f5f7fa); }
 .s22-ph .btn { border: 0; cursor: pointer; font: 700 15px/1 var(--f-body, system-ui); }
