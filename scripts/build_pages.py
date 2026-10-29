@@ -286,7 +286,9 @@ def recherche_page():
 def hotels_live_page():
     """Recherche d'hôtels en direct (Stay22, identifiant escalelive) : la recherche d'hôtels de l'accueil arrive ici,
     comme la recherche de vols arrive sur /recherche/. Ville, dates et voyageurs sont lus dans l'adresse (carte-hotels.js)."""
-    hero = ('<p class="eyebrow" data-h="eyebrow">Prix en direct</p><h1 data-h="title">Hôtels en direct</h1>'
+    # Avec une ville dans l'adresse, la place des résultats est réservée dès le premier affichage (la page ne « saute » pas)
+    hero = ('<script>if(/[?&]ville=[^&]/.test(location.search))document.documentElement.classList.add("hl-q")</script>'
+            '<p class="eyebrow" data-h="eyebrow">Prix en direct</p><h1 data-h="title">Hôtels en direct</h1>'
             '<p class="hero-lead" data-h="lead">Les prix en temps réel de Booking, Expedia, Agoda, Hotels.com et d\'autres, sur une carte. '
             'Cliquez sur un hôtel pour voir l\'offre et réserver sur le site du partenaire.</p>')
     body = ('<form id="hl-form" class="hl-form" action="/hotels-en-direct/" method="get">'
@@ -296,8 +298,8 @@ def hotels_live_page():
             '<div class="field"><label for="hl-ad" data-h="adults">Adultes</label><select id="hl-ad" name="adultes">'
             + "".join(f'<option{" selected" if n == 2 else ""}>{n}</option>' for n in range(1, 9)) +
             '</select></div><button class="btn" type="submit" data-h="go">Rechercher</button><input type="hidden" name="lang" id="hl-lang"></form>'
-            '<section id="hl-live" class="wl-box" hidden><p class="small" id="hl-sum"></p></section>'
-            '<section id="hl-cmp" hidden><h2 data-h="cmp_h">Comparer aussi sur</h2><p><a class="btn ghost" id="hl-cmp-a" href="/?type=hotels" data-h="cmp">Booking, Google Hôtels, Agoda, Airbnb…</a></p></section>'
+            '<section id="hl-live" class="wl-box"><p class="small" id="hl-sum"></p></section>'
+            '<section id="hl-cmp"><h2 data-h="cmp_h">Comparer aussi sur</h2><p><a class="btn ghost" id="hl-cmp-a" href="/?type=hotels" data-h="cmp">Booking, Google Hôtels, Agoda, Airbnb…</a></p></section>'
             '<script src="/carte-hotels.js" defer></script>'
             '<section><p class="small" data-h="note">Carte fournie par notre partenaire Stay22. Escale ne vend pas de nuits d\'hôtel : '
             'le prix final et les conditions (annulation, taxes de séjour) s\'affichent sur le site de réservation. '

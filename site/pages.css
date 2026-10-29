@@ -383,4 +383,8 @@ main .btn.wa-btn, .btn.wa-btn { background: #0f7a40; color: #fff; }
 .hl-switch { display: inline-flex; gap: 4px; padding: 4px; margin: 0 0 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface, #fff); }
 .hl-switch button { border: 0; background: none; padding: 9px 16px; min-height: 40px; border-radius: 999px; font: 600 15px/1 var(--f-body, system-ui); color: inherit; cursor: pointer; }
 .hl-switch button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.hl-q .hero-lead { display: none; }
+#hl-live, #hl-cmp { display: none; }
+.hl-q #hl-live, .hl-q #hl-cmp { display: block; }
+.hl-q #hl-live { min-height: calc(max(520px, min(78vh, 780px)) + 110px); }
 .s22-frame.big { height: min(78vh, 780px); min-height: 520px; }

@@ -3,10 +3,11 @@ import { Month, Point, cacheKey, readHistory } from "./apercu-prix"
 // Accueil : les boutons « Trajets populaires » (sous le moteur) reçoivent le prix aller-retour le plus bas déjà connu
 // (cache des pages trajets, sinon dernier relevé de l'historique KV, mis à jour chaque matin par releve-prix.yml)
 // et une flèche de tendance sur 7 jours (↓ baisse, ↑ hausse, à partir de 3 %).
-// Rien n'est demandé à Travelpayouts ici : la page reste rapide. Prix gardés 1 heure dans le cache de Cloudflare.
+// Rien n'est demandé à Travelpayouts ici : la page reste rapide (jamais plus de 400 ms d'attente). Prix gardés 1 heure dans le cache de Cloudflare.
 // GET /api/connus?r=CDG-DSS,ORY-CMN : mêmes prix, pour le bloc « Vos trajets » (trajets consultés, gardés dans le navigateur).
 const CHIP = /<b class="pr" data-r="([A-Z]{3})-([A-Z]{3})"><\/b>/g
 const CACHE_S = 3600
+const WAIT_MS = 400
 type Known = { price: number; d7: number | null }
 
 const money = (n: number) => new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n)
@@ -45,9 +46,13 @@ async function homePrices(ctx: Ctx, pairs: [string, string][]) {
   const key = new Request("https://escale.live/__accueil-prix/v2/" + new Date().toISOString().slice(0, 13))
   const hit = cache ? await cache.match(key) : null
   if (hit) return (await hit.json()) as Record<string, Known>
-  const out = await knownPrices(ctx, pairs)
-  if (cache && Object.keys(out).length) ctx.waitUntil(cache.put(key, new Response(JSON.stringify(out), { headers: { "Cache-Control": `public, max-age=${CACHE_S}` } })))
-  return out
+  const job = knownPrices(ctx, pairs).then((out) => {
+    if (cache && Object.keys(out).length) return cache.put(key, new Response(JSON.stringify(out), { headers: { "Cache-Control": `public, max-age=${CACHE_S}` } })).then(() => out)
+    return out
+  })
+  ctx.waitUntil(job.catch(() => {}))
+  // La page part au plus tard après WAIT_MS : sans prix cette fois, avec prix pour les visiteurs suivants (cache rempli en arrière-plan)
+  return (await Promise.race([job, new Promise<null>((ok) => setTimeout(() => ok(null), WAIT_MS))])) || {}
 }
 
 const arrow = (d: number | null) => d === null || Math.abs(d) < 3 ? "" : d < 0 ? ` <i class="tr dn" title="${-d} % en 7 jours">↓</i>` : ` <i class="tr up" title="+${d} % en 7 jours">↑</i>`

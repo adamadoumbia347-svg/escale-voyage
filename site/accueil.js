@@ -32,16 +32,21 @@
       .then(function (j) { paint((j && j.prix) || {}); });
   }
 
-  // 2. Photo de destination derrière le titre (chargée après la page, une ville différente à chaque visite)
+  // 2. Photo de destination derrière le titre (une ville différente à chaque visite), chargée au premier geste du visiteur
+  // (défilement, toucher, clic, clavier) : elle ne retarde jamais l'affichage de la page ni du moteur de recherche.
   var PHOTOS = ["dakar", "marrakech", "abidjan", "casablanca", "tunis", "djerba", "alger", "le-caire", "tanger", "accra", "lisbonne", "istanbul"];
-  addEventListener("load", function () {
+  var EV = ["scroll", "pointerdown", "touchstart", "keydown"], photoDone = false;
+  var photo = function () {
+    if (photoDone) return; photoDone = true;
+    EV.forEach(function (e) { removeEventListener(e, photo, { passive: true }); });
     var band = document.querySelector(".band");
     if (!band || matchMedia("(prefers-reduced-data: reduce)").matches) return;
     var n = (+(get("escale.photo") || 0) + 1) % PHOTOS.length; set("escale.photo", String(n));
     var img = new Image();
     img.onload = function () { band.style.setProperty("--hero-img", "url(" + img.src + ")"); band.classList.add("has-photo"); };
     img.src = "/img/villes/" + PHOTOS[n] + (innerWidth > 700 ? ".webp" : "-480.webp");
-  });
+  };
+  EV.forEach(function (e) { addEventListener(e, photo, { passive: true }); });
 
   // 3. Partez ce mois-ci : chargé quand la section approche de l'écran
   var sec = document.getElementById("partez"), grid = document.getElementById("partez-grid");

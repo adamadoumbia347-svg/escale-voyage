@@ -8,7 +8,7 @@ import { Ctx, esc, pricesForDates } from "./_lib/common"
 // et route-prices.js prend le relais dans le navigateur. Les chemins concernés sont listés dans wrangler.jsonc (run_worker_first).
 const PAGES = /^\/(vol-|vols-pour-|en\/flights-|es\/vuelos-|pt\/voos-|ar\/flights-|it\/voli-)/
 const MONTHS = 6
-const WAIT_MS = 2500
+const WAIT_MS = 1200
 const CACHE_S = 6 * 3600
 
 export type Month = { month: string; price: number; dep: string; ret: string; transfers: number }
