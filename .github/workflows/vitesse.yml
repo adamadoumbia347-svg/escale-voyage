@@ -1,0 +1,36 @@
+# Mesure de vitesse (Lighthouse, même outil que PageSpeed Insights, profil mobile) sur les pages principales.
+# Lancé à la main ; affiche les scores, les temps de chargement et les pistes d'amélioration.
+name: Mesurer la vitesse
+on:
+  workflow_dispatch:
+    inputs:
+      pages:
+        description: "Chemins à mesurer, séparés par des espaces"
+        required: false
+        default: "/ /vol-paris-dakar/ /recherche/ /en/flights-paris-dakar/ /vols-ete-2027-dakar/"
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mesurer
+        env:
+          PAGES: ${{ inputs.pages || '/ /vol-paris-dakar/ /recherche/ /en/flights-paris-dakar/ /vols-ete-2027-dakar/' }}
+        run: |
+          for P in $PAGES; do
+            N=$(echo "$P" | tr '/' '_')
+            npx -y lighthouse@12.2.1 "https://escale.live$P" --only-categories=performance,accessibility,best-practices,seo --form-factor=mobile \
+              --output=json --output-path="lh$N.json" --quiet --chrome-flags="--headless=new --no-sandbox" >/dev/null 2>&1 || { echo "$P : échec"; continue; }
+            echo "================ $P"
+            jq -r '"Scores : performance \(.categories.performance.score*100|round) · accessibilité \(.categories.accessibility.score*100|round) · bonnes pratiques \(.categories["best-practices"].score*100|round) · SEO \(.categories.seo.score*100|round)"' "lh$N.json"
+            jq -r '.audits | "FCP \(."first-contentful-paint".displayValue) · LCP \(."largest-contentful-paint".displayValue) · TBT \(."total-blocking-time".displayValue) · CLS \(."cumulative-layout-shift".displayValue) · Speed Index \(."speed-index".displayValue) · Poids total \(."total-byte-weight".displayValue)"' "lh$N.json"
+            echo "Élément LCP : $(jq -r '.audits["largest-contentful-paint-element"].details.items[0].items[0].node.snippet // "?"' "lh$N.json" | cut -c1-160)"
+            echo "Pistes :"; jq -r '.audits | to_entries[] | select(.value.details.type=="opportunity" and (.value.details.overallSavingsMs // 0) > 50) | "  - \(.value.title) : \(.value.details.overallSavingsMs|round) ms"' "lh$N.json"
+            echo "Bloquants :"; jq -r '.audits["render-blocking-resources"].details.items[]? | "  - \(.url) (\(.wastedMs|round) ms)"' "lh$N.json"
+            echo "Plus gros fichiers :"; jq -r '[.audits["network-requests"].details.items[] | select(.transferSize > 15000)] | sort_by(-.transferSize) | .[:10][] | "  - \(.transferSize/1024|round) Ko \(.url[0:110])"' "lh$N.json"
+            echo "Travail du processeur (scripts) :"; jq -r '.audits["bootup-time"].details.items[:6][]? | "  - \(.total|round) ms \(.url[0:100])"' "lh$N.json"
+            echo "Problèmes d'accessibilité / SEO :"; jq -r '.audits | to_entries[] | select(.value.score==0 and (.value.scoreDisplayMode=="binary")) | "  - \(.value.title)"' "lh$N.json" | head -12
+          done
