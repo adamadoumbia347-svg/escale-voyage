@@ -22,9 +22,15 @@ jobs:
         run: |
           for P in $PAGES; do
             N=$(echo "$P" | tr '/' '_')
-            npx -y lighthouse@12.2.1 "https://escale.live$P" --only-categories=performance,accessibility,best-practices,seo --form-factor=mobile \
-              --output=json --output-path="lh$N.json" --quiet --chrome-flags="--headless=new --no-sandbox" >/dev/null 2>&1 || { echo "$P : échec"; continue; }
-            echo "================ $P"
+            for i in 1 2 3; do
+              npx -y lighthouse@12.2.1 "https://escale.live$P" --only-categories=performance,accessibility,best-practices,seo --form-factor=mobile \
+                --output=json --output-path="lh$N-$i.json" --quiet --chrome-flags="--headless=new --no-sandbox" >/dev/null 2>&1 || true
+            done
+            # Garder la mesure médiane (performance) parmi les 3
+            M=$(for f in lh$N-*.json; do [ -s "$f" ] && echo "$(jq '.categories.performance.score' "$f") $f"; done | sort -n | awk '{a[NR]=$2} END {print a[int((NR+1)/2)]}')
+            [ -n "$M" ] || { echo "$P : échec"; continue; }
+            cp "$M" "lh$N.json"
+            echo "================ $P (médiane de 3 mesures : $(for f in lh$N-*.json; do jq -r '.categories.performance.score*100|round' "$f"; done | tr '\n' ' '))"
             jq -r '"Scores : performance \(.categories.performance.score*100|round) · accessibilité \(.categories.accessibility.score*100|round) · bonnes pratiques \(.categories["best-practices"].score*100|round) · SEO \(.categories.seo.score*100|round)"' "lh$N.json"
             jq -r '.audits | "FCP \(."first-contentful-paint".displayValue) · LCP \(."largest-contentful-paint".displayValue) · TBT \(."total-blocking-time".displayValue) · CLS \(."cumulative-layout-shift".displayValue) · Speed Index \(."speed-index".displayValue) · Poids total \(."total-byte-weight".displayValue)"' "lh$N.json"
             echo "Élément LCP : $(jq -r '.audits["largest-contentful-paint-element"].details.items[0].items[0].node.snippet // "?"' "lh$N.json" | cut -c1-160)"
