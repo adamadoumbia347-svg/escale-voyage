@@ -290,10 +290,11 @@ def hotels_live_page():
     """Recherche d'hôtels en direct (Stay22, identifiant escalelive) : la recherche d'hôtels de l'accueil arrive ici,
     comme la recherche de vols arrive sur /recherche/. Ville, dates et voyageurs sont lus dans l'adresse (carte-hotels.js)."""
     # Avec une ville dans l'adresse, la place des résultats est réservée dès le premier affichage (la page ne « saute » pas)
-    hero = ('<script>if(/[?&]ville=[^&]/.test(location.search))document.documentElement.classList.add("hl-q")</script>'
+    hero = ('<script>if(/[?&]ville=[^&]/.test(location.search))document.documentElement.classList.add("hl-q","rs-q")</script>'
             '<p class="eyebrow" data-h="eyebrow">Prix en direct</p><h1 data-h="title">Hôtels en direct</h1>'
             '<p class="hero-lead" data-h="lead">Les prix en temps réel de Booking, Expedia, Agoda, Hotels.com et d\'autres, sur une carte. '
-            'Cliquez sur un hôtel pour voir l\'offre et réserver sur le site du partenaire.</p>')
+            'Cliquez sur un hôtel pour voir l\'offre et réserver sur le site du partenaire.</p>'
+            '<div id="rs-bar" class="rs-bar"></div>')  # barre compacte (ville, nuits, dates ‹ ›) comme la recherche de vols
     body = ('<form id="hl-form" class="hl-form" action="/hotels-en-direct/" method="get">'
             '<div class="field hl-city"><label for="hl-ville" data-h="city">Destination</label><input id="hl-ville" name="ville" required autocomplete="off" placeholder="Ville, quartier ou hôtel"></div>'
             '<div class="field"><label for="hl-in" data-h="in">Arrivée</label><input type="date" id="hl-in" name="arrivee" required></div>'

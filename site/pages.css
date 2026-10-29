@@ -406,5 +406,6 @@ span.rs-arr { opacity: .35; }
 .hl-q .hero-lead { display: none; }
 #hl-live, #hl-cmp { display: none; }
 .hl-q #hl-live, .hl-q #hl-cmp { display: block; }
-.hl-q #hl-live { min-height: calc(max(520px, min(78vh, 780px)) + 110px); }
+.hl-q #hl-live { min-height: calc(max(520px, min(78vh, 780px)) + 64px); }
+.hl-q #hl-form:not(.open), .hl-q #hl-sum { display: none; }
 .s22-frame.big { height: min(78vh, 780px); min-height: 520px; }
