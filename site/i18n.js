@@ -1,6 +1,10 @@
 // Traductions de l'accueil : clé = texte anglais, valeur = [espagnol, portugais, arabe].
 // Le français et l'anglais sont directement dans index.html (data-en) et app.js (T("fr", "en")).
 window.ESCALE_I18N = {
+  "Aviasales prices": ["Precios de Aviasales", "Preços da Aviasales", "أسعار Aviasales"],
+  "Flights found on Aviasales, our partner: click a flight to book it.": ["Vuelos encontrados en Aviasales, nuestro socio: haz clic en un vuelo para reservarlo.", "Voos encontrados na Aviasales, o nosso parceiro: clique num voo para o reservar.", "رحلات وُجدت على Aviasales، شريكنا: انقر على رحلة لحجزها."],
+  "See all flights on Aviasales": ["Ver todos los vuelos en Aviasales", "Ver todos os voos na Aviasales", "عرض كل الرحلات على Aviasales"],
+  "View on Aviasales": ["Ver en Aviasales", "Ver na Aviasales", "عرض على Aviasales"],
   "Join our WhatsApp deals channel": ["Únete al canal de ofertas en WhatsApp", "Junte-se ao canal de promoções no WhatsApp", "انضم إلى قناة العروض على واتساب"],
   "WhatsApp channel": ["Canal de WhatsApp", "Canal no WhatsApp", "قناة واتساب"],
   // Alerte prix dans les résultats

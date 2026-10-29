@@ -476,11 +476,13 @@
         </div>
       </div>
       <div class="fl-insight" id="fl-insight" hidden></div>
+      <div class="av-head"><span class="logo" style="background:#0074c7" aria-hidden="true">A</span><div><strong>${T("Prix Aviasales", "Aviasales prices")}</strong><small>${T("Vols repérés sur Aviasales, notre partenaire : cliquez sur un vol pour le réserver.", "Flights found on Aviasales, our partner: click a flight to book it.")}</small></div></div>
       <p class="summary" id="fl-note" aria-live="polite">${esc(T("Recherche des meilleurs prix…", "Looking for the best prices…"))}</p>
       <ul class="fl-list" id="fl-list">${skel}</ul>
+      ${AFFILIATE.travelpayouts_marker ? `<p class="av-all"><a class="btn" href="${esc(aviasalesUrl(s, s.dep, s.ret))}" target="_blank" rel="sponsored noopener noreferrer">${T("Voir tous les vols sur Aviasales", "See all flights on Aviasales")} →</a></p>` : ""}
       <div id="app-alert" class="app-alert" hidden></div>
       <div id="trip-kit" class="trip-kit" hidden></div>
-      <div id="cmp-wrap"><h3 class="sub-h">${T("Comparer aussi sur", "Also compare on")}</h3>${compareRow(links)}</div>` + share + extrasSlot(s.to.name));
+      <div id="cmp-wrap"><h3 class="sub-h">${T("Comparer aussi sur", "Also compare on")}</h3>${compareRow(links.filter((l) => l.k !== "aviasales"))}</div>` + share + extrasSlot(s.to.name));
     fillExtras(s.to.name, s.to.code);
     fillTripKit(s.to.name, s.to.code);
     bindEdit();
@@ -681,7 +683,7 @@
           ${badge ? `<span class="pill best">${esc(badge)}</span>` : ""}</div>
         <div class="fl-legs">${leg(T("Aller", "Out"), o.departure_at, o.duration_to, o.transfers)}${s.ret ? leg(T("Retour", "Back"), o.return_at, o.duration_back, o.return_transfers) : ""}</div>
         <div class="fl-buy"><strong>${esc(money(o.price, cur))}</strong><small>${esc(T("par personne", "per person"))}</small>
-          <a class="go buy" href="${esc(url)}" target="_blank" rel="sponsored noopener noreferrer">${T("Voir le vol", "View deal")} →</a></div>
+          <a class="go buy" href="${esc(url)}" target="_blank" rel="sponsored noopener noreferrer">${T("Voir sur Aviasales", "View on Aviasales")} →</a></div>
       </li>`;
     }).join("") : `<li class="fl-empty">${esc(T("Aucun vol ne correspond à ces filtres : élargissez les escales ou la compagnie.", "No flight matches these filters: widen the stops or airline."))}</li>`;
   }
