@@ -263,6 +263,25 @@ def page(path, title, desc, hero, body, ld="", paths=None, og="og-image.png"):
     (d / "index.html").write_text(out, encoding="utf-8")
     return url
 
+# Moteur de recherche en direct (White Label Travelpayouts, type « Widget », identifiant 24006) : formulaire + résultats
+WL_SCRIPT = ('<script>(function () { var s = document.createElement("script"); s.async = 1; s.type = "module"; '
+             's.src = "https://tpemb.com/wl_web/main.js?wl_id=24006"; document.head.appendChild(s); })();</script>')
+
+
+def recherche_page():
+    hero = ('<p class="eyebrow">Prix en direct</p><h1>Recherche de vols en direct</h1>'
+            '<p class="hero-lead">Les prix en temps réel de dizaines de compagnies et d\'agences, comparés pour vous. '
+            'Choisissez votre vol puis réservez directement sur le site de la compagnie ou de l\'agence.</p>')
+    body = ('<section class="wl-box"><div id="tpwl-search"></div></section>'
+            '<section class="wl-box"><div id="tpwl-tickets"></div></section>' + WL_SCRIPT +
+            '<section><p class="small">Moteur fourni par notre partenaire Travelpayouts (Aviasales). Escale ne vend pas de billets : '
+            'le prix final et les conditions (bagages, modification) s\'affichent sur le site de réservation. '
+            'Escale peut toucher une commission si vous réservez, sans frais pour vous.</p></section>')
+    return page("recherche", "Recherche de vols en direct : prix en temps réel | Escale",
+                "Comparez en direct les prix des vols de dizaines de compagnies et d'agences, vers l'Afrique, le Maghreb et le monde entier.",
+                hero, body)
+
+
 def barometre_page():
     """Baromètre des prix : le tableau est écrit par le serveur (src/barometre.ts) ; ici, la page et sa méthode."""
     src = (ROOT / "src" / "barometre.ts").read_text(encoding="utf-8")
@@ -491,6 +510,8 @@ def legal_pages():
 <p>Avec votre accord seulement, le site charge un script de notre partenaire d'affiliation Travelpayouts. Il sert à attribuer à Escale les réservations faites après un clic sur un lien partenaire, et peut pour cela déposer des cookies ou utiliser des identifiants techniques sur votre navigateur. Travelpayouts applique sa propre politique de confidentialité, disponible sur travelpayouts.com.</p>
 <p>Votre choix (accepter ou refuser) est demandé à votre première visite, gardé 6 mois dans votre navigateur, puis redemandé. Vous pouvez le changer à tout moment avec le lien <a href="#cookies" data-open-consent>Gérer les cookies</a>, aussi présent en bas de chaque page. Refuser ne change rien au fonctionnement des recherches.</p>
 </section>
+<section><h2>Recherche de vols en direct</h2>
+<p>La page « Recherche de vols en direct » utilise le moteur de notre partenaire Travelpayouts (Aviasales). Quand vous l'utilisez, votre recherche (villes, dates, nombre de voyageurs) est envoyée à ce partenaire pour obtenir les prix, et les liens vers les sites de réservation contiennent l'identifiant d'Escale. Travelpayouts applique sa propre politique de confidentialité, disponible sur travelpayouts.com.</p></section>
 <section><h2>Liens d'hôtels (Stay22)</h2>
 <p>Avec votre accord seulement, le site charge aussi un script de notre partenaire Stay22. Il transforme les liens vers les sites d'hôtels (Booking.com, Agoda, Expedia…) en liens partenaires, pour attribuer à Escale les réservations faites après un clic, et peut pour cela déposer des cookies. Certains liens d'hôtels passent par stay22.com, qui vous redirige vers le site de réservation le moins cher. Stay22 applique sa propre politique de confidentialité, disponible sur stay22.com.</p></section>
 <section><h2>Hébergement</h2>
@@ -544,6 +565,7 @@ def main():
     urls += legal_pages()
     urls += blog.build(page, E, DOMAIN, build_i18n.extras_html(SITE, "fr", "destination", "", ""))
     urls.append(barometre_page())
+    urls.append(recherche_page())
     urls += italia.build(SITE, ctx)  # test : trajets au départ de l'Italie, en italien
     urls += ete.build(page, E, lambda lang, c, c_en, code: build_i18n.extras_html(SITE, lang, c, c_en, code), build_i18n.alert_btn, DOMAIN,
                       lambda p: (SITE / p / "index.html").exists(), lambda p: (SITE / p / "index.html").exists(), build_i18n.wa_btn)

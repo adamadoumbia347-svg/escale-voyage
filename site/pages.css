@@ -339,3 +339,7 @@ a.cal-day { color: var(--ink); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .bt-down { color: #4fd18b; } :root:not([data-theme="light"]) .bt-up { color: #ff7b6b; } }
 main .btn.wa-btn, .btn.wa-btn { background: #128c4a; color: #fff; }
 .wa-p { margin: 0 0 16px; }
+/* Recherche en direct (White Label Travelpayouts) */
+.wl-box { margin: 16px 0; }
+#tpwl-search { min-height: 120px; }
+#tpwl-tickets { min-height: 40px; }
