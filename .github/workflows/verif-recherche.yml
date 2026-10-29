@@ -46,18 +46,25 @@ jobs:
             const dd = (n) => { const d = new Date(Date.now() + n * 864e5); return String(d.getUTCDate()).padStart(2, '0') + String(d.getUTCMonth() + 1).padStart(2, '0'); };
             await p.goto(base + '?flightSearch=CDG' + dd(45) + 'DSS' + dd(52) + '1', { waitUntil: 'networkidle' }); await p.waitForTimeout(6000);
             console.log('Formulaire :', await vals());
-            await p.locator('#tpwl-search a:has-text("Recherche de vols")').first().click().catch(e => console.log('clic', e.message));
-            await p.waitForTimeout(25000);
+            const txt = (sel) => p.evaluate((sel) => { const r = document.querySelector(sel)?.shadowRoot; if (!r) return '';
+              return [...r.querySelectorAll('*')].filter(e => !['STYLE', 'SCRIPT'].includes(e.tagName) && !e.children.length).map(e => e.textContent.trim()).filter(Boolean).join(' | ').slice(0, 900); }, sel);
+            await p.keyboard.press('Escape').catch(() => {}); await p.waitForTimeout(1000);
+            const modal = await p.evaluate(() => { const m = document.querySelector('#tpwl-modals'); return m ? (m.shadowRoot || m).textContent.replace(/\s+/g, ' ').slice(0, 200) : ''; });
+            console.log('Fenêtre ouverte :', modal || '(aucune)');
+            console.log('Résultats sans clic :', await txt('#tpwl-tickets'));
+            // Clic sur « Recherche de vols » en JavaScript (la fenêtre du moteur intercepte les clics de souris)
+            await p.evaluate(() => { const r = document.querySelector('#tpwl-search').shadowRoot; const a = [...r.querySelectorAll('a')].find(x => /Recherche de vols/.test(x.textContent)); if (a) a.click(); });
+            await p.waitForTimeout(30000);
             console.log('Adresse après recherche :', p.url());
-            const res = await p.evaluate(() => { const r = document.querySelector('#tpwl-tickets').shadowRoot;
-              const txt = r.textContent.replace(/\.[A-Za-z][^{}]*\{[^}]*\}/g, ' ').replace(/\s+/g, ' ');
-              const links = [...r.querySelectorAll('a')].map(a => a.href).filter(h => h.startsWith('http')).slice(0, 4);
-              return { links, prix: (txt.match(/\d[\d\s\u202f]{1,6}\s?€/g) || []).slice(0, 8), boutons: [...r.querySelectorAll('button')].map(x => x.textContent.trim()).filter(Boolean).slice(0, 8), taille: r.innerHTML.length }; });
-            console.log('Résultats :', JSON.stringify(res));
-            // 3. Clic sur le premier bouton d'achat : quelle adresse s'ouvre (identifiant partenaire ?)
-            const [pop] = await Promise.all([p.waitForEvent('popup', { timeout: 15000 }).catch(() => null),
-              p.locator('#tpwl-tickets button:has-text("Acheter"), #tpwl-tickets button:has-text("Voir"), #tpwl-tickets a:has-text("Acheter")').first().click().catch(e => console.log('clic achat', e.message))]);
-            if (pop) { await pop.waitForTimeout(6000); console.log('Page de réservation :', pop.url().slice(0, 300)); }
+            console.log('Résultats :', await txt('#tpwl-tickets'));
+            const ctas = await p.evaluate(() => { const r = document.querySelector('#tpwl-tickets').shadowRoot;
+              return [...r.querySelectorAll('a, button')].map(e => e.tagName + '|' + e.textContent.trim().slice(0, 40) + '|' + (e.href || '')).filter(x => /€|Achet|Voir|Réserv|Book|http/.test(x)).slice(0, 8); });
+            console.log('Boutons / liens des résultats :', JSON.stringify(ctas));
+            // Ouvrir le premier résultat : quelle adresse de réservation (identifiant partenaire 789659 ?)
+            const [pop] = await Promise.all([p.context().waitForEvent('page', { timeout: 20000 }).catch(() => null),
+              p.evaluate(() => { const r = document.querySelector('#tpwl-tickets').shadowRoot; const el = [...r.querySelectorAll('a, button')].find(e => /€|Achet|Voir|Réserv/.test(e.textContent)); if (el) el.click(); return !!el; })]);
+            if (pop) { await pop.waitForTimeout(8000); console.log('Page de réservation :', pop.url().slice(0, 400)); }
+            else console.log('Aucune page de réservation ouverte ; adresse actuelle :', p.url());
             console.log('Erreurs :', errs.slice(0, 5));
             await b.close();
           })();
