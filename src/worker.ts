@@ -16,6 +16,7 @@ import * as cron from "./api/cron"
 import * as populaires from "./api/populaires"
 import * as apercu from "./apercu-prix"
 import * as barometre from "./barometre"
+import { sendDigest } from "./digest"
 
 const API: Record<string, any> = { prix, explore, calendar, deals, geo, alert, form, admin, cron, populaires }
 
@@ -34,8 +35,10 @@ export default {
     if (path === "/barometre-prix/" || path === "/barometre-prix") return barometre.onRequest(c)
     return apercu.onRequest(c)
   },
-  // Chaque matin (voir « triggers » dans wrangler.jsonc) : vérification des alertes prix
+  // Chaque matin (voir « triggers » dans wrangler.jsonc) : vérification des alertes prix ; le lundi, message WhatsApp de la semaine
   async scheduled(_event: unknown, env: Env, ctx: { waitUntil: (p: Promise<any>) => void }) {
     ctx.waitUntil(cron.checkAlerts(env).then((r) => console.log("alertes", JSON.stringify(r))))
+    // Le lundi : e-mail avec le message WhatsApp des bons plans de la semaine (src/digest.ts)
+    if (new Date().getUTCDay() === 1) ctx.waitUntil(sendDigest(env).then((r) => console.log("message WhatsApp", JSON.stringify(r))))
   },
 }

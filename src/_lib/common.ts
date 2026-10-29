@@ -5,9 +5,10 @@
 //   RESEND_API_KEY ou BREVO_API_KEY + ALERT_FROM   envoi des alertes prix par e-mail
 //   CRON_KEY             appel quotidien de /api/cron (vérification des alertes)
 //   SITE_URL             adresse publique du site (par défaut https://escale.live)
+//   DIGEST_TO            adresse qui reçoit chaque lundi le message WhatsApp des bons plans (src/digest.ts)
 // Stockage : espace KV « escale », relié sous le nom ESCALE dans wrangler.jsonc (formulaires, alertes, cache des bons plans).
 export type Env = {
-  TRAVELPAYOUTS_TOKEN?: string; ADMIN_KEY?: string; CRON_KEY?: string; SITE_URL?: string
+  TRAVELPAYOUTS_TOKEN?: string; ADMIN_KEY?: string; CRON_KEY?: string; SITE_URL?: string; DIGEST_TO?: string
   RESEND_API_KEY?: string; BREVO_API_KEY?: string; ALERT_FROM?: string
   ESCALE?: any // KVNamespace
 }
