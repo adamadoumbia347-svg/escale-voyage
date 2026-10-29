@@ -57,7 +57,7 @@
 <script type="application/ld+json" id="faq-ld"></script>
 <!-- Polices hébergées sur le site (site/fonts) : pas de Google Fonts, affichage plus rapide -->
 <link rel="preload" href="/fonts/instrument-sans-latin-f587e7.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preconnect" href="https://tpemb.com" crossorigin><link rel="dns-prefetch" href="https://api.apistp.com">
+
 <style>
 /* Polices du site écrites ici (copie des règles utiles de /fonts/fonts.css) : une requête bloquante en moins */
 @font-face{font-family:'Instrument Sans';font-style:normal;font-weight:400 600;font-display:swap;src:url(/fonts/instrument-sans-latin-ext-40fe78.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
@@ -442,7 +442,6 @@ select.chip-select { width: auto; min-height: 40px; padding: 8px 30px 8px 12px; 
 .fl-tools .chip-toggle { display: inline-flex; align-self: center; min-height: 0; line-height: 1.2; }
 .chip-toggle input { width: 18px; height: 18px; min-height: 0; padding: 0; margin: 0; accent-color: var(--accent); }
 .fl-air .al-name { font: 600 13px/1.2 var(--f-body); color: var(--ink); }
-.wl-home { min-height: 470px; }
 /* Bulle « Bons plans sur WhatsApp » (site/clics.js) */
 .wa-float { position: fixed; right: 14px; bottom: 14px; z-index: 40; display: flex; align-items: center; gap: 4px; }
 .wa-float a { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 999px; background: #0f7a40; color: #fff; text-decoration: none; font: 700 14px/1 var(--f-body, system-ui); box-shadow: 0 6px 18px rgba(0,0,0,.18); }
@@ -476,8 +475,6 @@ select.chip-select { width: auto; min-height: 40px; padding: 8px 30px 8px 12px; 
 .season:hover { text-decoration: underline; }
 :root[data-theme="dark"] .season { background: #2b1d0e; color: #ffcf99; border-color: #5c3b17; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .season { background: #2b1d0e; color: #ffcf99; border-color: #5c3b17; } }
-@media (min-width: 900px) { .wl-home { min-height: 230px; } }
-.wl-loading { color: var(--muted); padding: 24px 4px; margin: 0; }
 .av-head { display: flex; align-items: center; gap: 10px; margin: 14px 0 2px; }
 .av-head > div { display: grid; gap: 2px; }
 .av-head small { color: var(--muted); font-size: 13px; }
@@ -846,11 +843,8 @@ footer { margin-top: 72px; }
 
     <!-- VOLS -->
     <div id="panel-vols" role="tabpanel" aria-labelledby="tab-vols">
-<!-- Moteur de recherche de vols en direct (White Label Travelpayouts n° 24006) ; l'ancien formulaire revient s'il ne se charge pas -->
-<div class="wl-home"><div id="tpwl-search"><p class="wl-loading" data-en="Loading live prices…">Chargement des prix en direct…</p></div><div id="tpwl-tickets"></div></div>
-<div class="pop-routes my-routes" id="my-routes" hidden><p class="pop-h" data-en="Your routes (price now)">Vos trajets (prix actuel)</p><div class="pop-row" id="my-row"></div></div>
-<div class="pop-routes"><p class="pop-h" data-en="Popular routes, round trip from">Trajets populaires, aller-retour dès</p><div class="pop-row"><a class="pop-chip" href="/recherche/" data-wl="CDG-DSS"><span>Paris → Dakar</span><b class="pr" data-r="CDG-DSS"></b></a><a class="pop-chip" href="/recherche/" data-wl="CDG-ALG"><span>Paris → Alger</span><b class="pr" data-r="CDG-ALG"></b></a><a class="pop-chip" href="/recherche/" data-wl="ORY-CMN"><span>Paris → Casablanca</span><b class="pr" data-r="ORY-CMN"></b></a><a class="pop-chip" href="/recherche/" data-wl="CDG-ABJ"><span>Paris → Abidjan</span><b class="pr" data-r="CDG-ABJ"></b></a><a class="pop-chip" href="/recherche/" data-wl="CDG-BKO"><span>Paris → Bamako</span><b class="pr" data-r="CDG-BKO"></b></a><a class="pop-chip" href="/recherche/" data-wl="CDG-TUN"><span>Paris → Tunis</span><b class="pr" data-r="CDG-TUN"></b></a><a class="pop-chip" href="/recherche/" data-wl="CDG-FIH"><span>Paris → Kinshasa</span><b class="pr" data-r="CDG-FIH"></b></a><a class="pop-chip" href="/recherche/" data-wl="CDG-CKY"><span>Paris → Conakry</span><b class="pr" data-r="CDG-CKY"></b></a><a class="pop-chip" href="/recherche/" data-wl="LYS-ALG"><span>Lyon → Alger</span><b class="pr" data-r="LYS-ALG"></b></a><a class="pop-chip" href="/recherche/" data-wl="MRS-ALG"><span>Marseille → Alger</span><b class="pr" data-r="MRS-ALG"></b></a><a class="pop-chip" href="/recherche/" data-wl="BRU-FIH"><span>Bruxelles → Kinshasa</span><b class="pr" data-r="BRU-FIH"></b></a><a class="pop-chip" href="/recherche/" data-wl="BRU-DSS"><span>Bruxelles → Dakar</span><b class="pr" data-r="BRU-DSS"></b></a></div></div>
-<form id="form-vols" class="gf" novalidate hidden>
+<!-- Formulaire léger d'Escale : une recherche avec destination et dates ouvre le moteur en direct (/recherche/, prérempli) -->
+<form id="form-vols" class="gf" novalidate>
       <div class="gf-top">
         <div class="seg" role="radiogroup" aria-label="Type de trajet" data-en-aria="Trip type">
           <input type="radio" name="trip" id="trip-rt" value="rt" checked><label for="trip-rt" data-en="Round trip">Aller-retour</label>
@@ -900,6 +894,8 @@ footer { margin-top: 72px; }
         <button class="btn btn-search" type="submit"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M10.5 3a7.5 7.5 0 0 1 5.9 12.1l4.8 4.8-1.4 1.4-4.8-4.8A7.5 7.5 0 1 1 10.5 3zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11z" fill="currentColor"/></svg><span data-en="Search">Rechercher</span></button>
       </div>
     </form>
+<div class="pop-routes my-routes" id="my-routes" hidden><p class="pop-h" data-en="Your routes (price now)">Vos trajets (prix actuel)</p><div class="pop-row" id="my-row"></div></div>
+<div class="pop-routes"><p class="pop-h" data-en="Popular routes, round trip from">Trajets populaires, aller-retour dès</p><div class="pop-row"><a class="pop-chip" href="/recherche/" data-wl="CDG-DSS"><span>Paris → Dakar</span><b class="pr" data-r="CDG-DSS"></b></a><a class="pop-chip" href="/recherche/" data-wl="CDG-ALG"><span>Paris → Alger</span><b class="pr" data-r="CDG-ALG"></b></a><a class="pop-chip" href="/recherche/" data-wl="ORY-CMN"><span>Paris → Casablanca</span><b class="pr" data-r="ORY-CMN"></b></a><a class="pop-chip" href="/recherche/" data-wl="CDG-ABJ"><span>Paris → Abidjan</span><b class="pr" data-r="CDG-ABJ"></b></a><a class="pop-chip" href="/recherche/" data-wl="CDG-BKO"><span>Paris → Bamako</span><b class="pr" data-r="CDG-BKO"></b></a><a class="pop-chip" href="/recherche/" data-wl="CDG-TUN"><span>Paris → Tunis</span><b class="pr" data-r="CDG-TUN"></b></a><a class="pop-chip" href="/recherche/" data-wl="CDG-FIH"><span>Paris → Kinshasa</span><b class="pr" data-r="CDG-FIH"></b></a><a class="pop-chip" href="/recherche/" data-wl="CDG-CKY"><span>Paris → Conakry</span><b class="pr" data-r="CDG-CKY"></b></a><a class="pop-chip" href="/recherche/" data-wl="LYS-ALG"><span>Lyon → Alger</span><b class="pr" data-r="LYS-ALG"></b></a><a class="pop-chip" href="/recherche/" data-wl="MRS-ALG"><span>Marseille → Alger</span><b class="pr" data-r="MRS-ALG"></b></a><a class="pop-chip" href="/recherche/" data-wl="BRU-FIH"><span>Bruxelles → Kinshasa</span><b class="pr" data-r="BRU-FIH"></b></a><a class="pop-chip" href="/recherche/" data-wl="BRU-DSS"><span>Bruxelles → Dakar</span><b class="pr" data-r="BRU-DSS"></b></a></div></div>
     </div>
 
     <!-- HOTELS -->
@@ -1128,16 +1124,6 @@ footer { margin-top: 72px; }
 <script src="/favs.js" defer></script>
 <script src="/clics.js" defer></script>
 <script src="/accueil.js" defer></script>
-<script>
-(function () {
-  var s = document.createElement("script"); s.src = "/wl.js"; s.defer = true; document.head.appendChild(s);
-  // Si le moteur ne s'affiche pas (bloqué, hors ligne), on remet le formulaire d'Escale
-  setTimeout(function () {
-    var w = document.getElementById("tpwl-search");
-    if (w && !w.shadowRoot) { document.getElementById("form-vols").hidden = false; document.querySelector(".wl-home").hidden = true; }
-  }, 9000);
-})();
-</script>
 <script>
 (function () {
   var dd = function (n) { var d = new Date(Date.now() + n * 864e5); return String(d.getDate()).padStart(2, "0") + String(d.getMonth() + 1).padStart(2, "0"); };
