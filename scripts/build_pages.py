@@ -264,7 +264,7 @@ def page(path, title, desc, hero, body, ld="", paths=None, og="og-image.png"):
     return url
 
 # Moteur de recherche en direct (White Label Travelpayouts, type « Widget », identifiant 24006) : formulaire + résultats
-WL_SCRIPT = '<script src="/wl.js" defer></script>'  # aéroport de départ le plus proche, puis chargement du moteur
+WL_SCRIPT = '<link rel="preconnect" href="https://tpemb.com" crossorigin><script src="/wl.js" defer></script>'  # aéroport de départ le plus proche, puis chargement du moteur
 
 
 def recherche_page():

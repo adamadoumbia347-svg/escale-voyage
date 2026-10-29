@@ -341,5 +341,6 @@ main .btn.wa-btn, .btn.wa-btn { background: #128c4a; color: #fff; }
 .wa-p { margin: 0 0 16px; }
 /* Recherche en direct (White Label Travelpayouts) */
 .wl-box { margin: 16px 0; }
-#tpwl-search { min-height: 120px; }
+#tpwl-search { min-height: 470px; } /* place réservée au formulaire du moteur : la page ne « saute » pas à son arrivée */
+@media (min-width: 900px) { #tpwl-search { min-height: 230px; } }
 #tpwl-tickets { min-height: 40px; }

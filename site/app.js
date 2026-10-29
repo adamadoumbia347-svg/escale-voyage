@@ -1439,8 +1439,10 @@
   booting = false;
   startFlap();
 
-  if (isLive) {
-    (window.requestIdleCallback || ((f) => setTimeout(f, 300)))(() => loadDB());
+  // Position du visiteur et liste des aéroports : seulement après le chargement de la page (sections du bas, autocomplétion)
+  const afterLoad = (f) => { const go = () => (window.requestIdleCallback || ((g) => setTimeout(g, 300)))(f, { timeout: 3000 });
+    if (document.readyState === "complete") go(); else addEventListener("load", go, { once: true }); };
+  if (isLive) afterLoad(() => {
     useGeo().then((near) => {
       const userChose = urlHadParams || store.get("escale.from");
       if (near && !userChose && $("f-from").value === DEFAULT_FROM) {
@@ -1452,5 +1454,5 @@
       showHomeExplore(from && from.code ? from.code : "CDG");
       if (CUR !== "EUR" && currentTab !== "vols") rerender();
     });
-  }
+  });
 })();
