@@ -571,6 +571,24 @@ select.chip-select { width: auto; min-height: 40px; padding: 8px 30px 8px 12px; 
 .chip-toggle input { width: 18px; height: 18px; min-height: 0; padding: 0; margin: 0; accent-color: var(--accent); }
 .fl-air .al-name { font: 600 13px/1.2 var(--f-body); color: var(--ink); }
 .wl-home { min-height: 470px; }
+/* Bulle « Bons plans sur WhatsApp » (site/clics.js) */
+.wa-float { position: fixed; right: 14px; bottom: 14px; z-index: 40; display: flex; align-items: center; gap: 4px; }
+.wa-float a { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 999px; background: #0f7a40; color: #fff; text-decoration: none; font: 700 14px/1 var(--f-body, system-ui); box-shadow: 0 6px 18px rgba(0,0,0,.18); }
+.wa-float a svg { width: 20px; height: 20px; }
+.wa-float button { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line); background: var(--bg); color: var(--muted); cursor: pointer; font: 600 15px/1 system-ui; padding: 0; }
+@media (max-width: 520px) { .wa-float a span { display: none; } .wa-float a { padding: 12px; } }
+@media print { .wa-float { display: none; } }
+.pop-routes { margin: 6px 0 4px; }
+.pop-h { margin: 0 0 8px; font: 600 13px/1.3 var(--f-body); color: var(--muted); }
+.pop-row { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: thin; }
+.pop-chip { flex: none; display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); color: var(--ink); text-decoration: none; font: 600 14px/1.2 var(--f-body); white-space: nowrap; }
+.pop-chip:hover { border-color: var(--accent); }
+.pop-chip .pr { color: var(--ok); font-family: var(--f-mono); }
+.pop-chip .pr:empty { display: none; }
+.season { display: block; margin: 0 0 12px; padding: 12px 16px; border-radius: 14px; background: #fff4e5; color: #7a3e00; font: 600 15px/1.35 var(--f-body); text-decoration: none; border: 1px solid #ffd8a8; }
+.season:hover { text-decoration: underline; }
+:root[data-theme="dark"] .season { background: #2b1d0e; color: #ffcf99; border-color: #5c3b17; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .season { background: #2b1d0e; color: #ffcf99; border-color: #5c3b17; } }
 @media (min-width: 900px) { .wl-home { min-height: 230px; } }
 .wl-loading { color: var(--muted); padding: 24px 4px; margin: 0; }
 .av-head { display: flex; align-items: center; gap: 10px; margin: 14px 0 2px; }
@@ -822,6 +840,7 @@ footer { margin-top: 72px; }
 @media (max-width: 600px) { .band .hero { padding: 18px 0 14px; } .band { padding-bottom: 22px; }
   /* Une seule ligne d'atouts sur téléphone, quelle que soit la langue (sinon le formulaire bouge à la traduction) */
   .band .perks { flex-wrap: nowrap; overflow: hidden; white-space: nowrap; } .band .perks li:nth-child(n+4) { display: none; }
+  .band .perks.trust { flex-direction: column; flex-wrap: nowrap; white-space: normal; gap: 3px; } .band .perks.trust li:nth-child(n+4) { display: none; }
   .band .gf-opts { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: -16px; padding-inline: 16px; }
   .band .gf-opts::-webkit-scrollbar { display: none; }
   .band .gf-opts .opt-chip { flex: none; white-space: nowrap; } }
@@ -908,13 +927,13 @@ footer { margin-top: 72px; }
 <div class="band"><div class="wrap">
 <section class="hero">
     <h1 data-en-html="Flights, hotels and cars <em>at the best price</em>">Vols, hôtels et voitures <em>au meilleur prix</em></h1>
-    <p class="hero-lead" data-en="One search, every major comparison site, worldwide. Escale opens your search on Skyscanner, Kayak, Aviasales, Booking and more, sorted from cheapest to most expensive.">Une seule recherche, tous les grands comparateurs, partout dans le monde. Escale prépare vos recherches sur Skyscanner, Kayak, Aviasales, Booking et d’autres, triées du moins cher au plus cher.</p>
+    <p class="hero-lead" data-en="Live prices from dozens of airlines and travel agencies, compared for you. You book directly on their website, with no fees added by Escale.">Les prix en direct de dizaines de compagnies et d’agences, comparés pour vous. Vous réservez directement sur leur site, sans frais ajoutés par Escale.</p>
     <div class="hero-meta">
-      <ul class="perks">
-        <li data-en="Free">Gratuit</li>
-        <li data-en="No sign-up">Sans inscription</li>
-        <li data-en="3,200+ airports">+3 200 aéroports</li>
-        <li data-en="Real prices">Prix réels</li>
+      <ul class="perks trust">
+        <li data-en="Live prices from dozens of airlines and agencies">Prix en direct de dizaines de compagnies et d’agences</li>
+        <li data-en="No fees added by Escale">Aucun frais ajouté par Escale</li>
+        <li data-en="You pay on the airline’s or agency’s website">Vous payez sur le site de la compagnie ou de l’agence</li>
+        <li data-en="Free, no sign-up">Gratuit, sans inscription</li>
       </ul>
       <div class="cur-quick" role="group" aria-label="Devise des prix" data-en-aria="Price currency">
         <span data-en="Prices in">Prix en</span>
@@ -926,6 +945,8 @@ footer { margin-top: 72px; }
       </div>
     </div>
 </section>
+  <a class="season" id="season" href="/vols-fetes/" hidden></a>
+  <!-- SAISON:START --><script type="application/json" id="season-data">[{"dep": "2026-12-19", "txt": {"fr": "🎄 Noël et Nouvel An (19 déc. → 3 janv.) : les prix montent à l’approche des dates. Voir les vols →", "en": "🎄 Christmas & New Year (19 Dec → 3 Jan): prices rise as the dates get closer. See flights →", "es": "🎄 Navidad y Año Nuevo (19 dic. → 3 ene.): los precios suben a medida que se acercan las fechas. Ver vuelos →", "pt": "🎄 Natal e Ano Novo (19 dez. → 3 jan.): os preços sobem à medida que as datas se aproximam. Ver voos →", "ar": "🎄 عيد الميلاد ورأس السنة (19 ديسمبر – 3 يناير): ترتفع الأسعار مع اقتراب المواعيد. اعرض الرحلات ←"}, "href": {"fr": "/vols-noel/", "en": "/en/flights-christmas/", "es": "/es/vuelos-navidad/", "pt": "/pt/voos-natal/", "ar": "/ar/flights-christmas/"}}, {"dep": "2027-02-13", "txt": {"fr": "☀️ Vacances d’hiver au soleil (13 → 27 févr.) : les prix montent à l’approche des dates. Voir les vols →", "en": "☀️ Winter sun holidays (13 → 27 Feb): prices rise as the dates get closer. See flights →", "es": "☀️ Vacaciones de invierno al sol (13 → 27 feb.): los precios suben a medida que se acercan las fechas. Ver vuelos →", "pt": "☀️ Férias de inverno ao sol (13 → 27 fev.): os preços sobem à medida que as datas se aproximam. Ver voos →", "ar": "☀️ عطلة الشتاء في الشمس (13 – 27 فبراير): ترتفع الأسعار مع اقتراب المواعيد. اعرض الرحلات ←"}, "href": {"fr": "/vols-vacances-hiver/", "en": "/en/flights-winter-holidays/", "es": "/es/vuelos-vacaciones-invierno/", "pt": "/pt/voos-ferias-inverno/", "ar": "/ar/flights-winter-holidays/"}}, {"dep": "2027-03-04", "txt": {"fr": "🌙 Ramadan et Aïd el-Fitr (4 → 18 mars) : les prix montent à l’approche des dates. Voir les vols →", "en": "🌙 Ramadan & Eid al-Fitr (4 → 18 Mar): prices rise as the dates get closer. See flights →", "es": "🌙 Ramadán y Eid al-Fitr (4 → 18 mar.): los precios suben a medida que se acercan las fechas. Ver vuelos →", "pt": "🌙 Ramadão e Eid al-Fitr (4 → 18 mar.): os preços sobem à medida que as datas se aproximam. Ver voos →", "ar": "🌙 رمضان وعيد الفطر (4 – 18 مارس): ترتفع الأسعار مع اقتراب المواعيد. اعرض الرحلات ←"}, "href": {"fr": "/vols-ramadan-aid-el-fitr/", "en": "/en/flights-eid-al-fitr/", "es": "/es/vuelos-eid-al-fitr/", "pt": "/pt/voos-eid-al-fitr/", "ar": "/ar/flights-eid-al-fitr/"}}, {"dep": "2027-04-10", "txt": {"fr": "🌸 Vacances de Pâques (10 → 24 avril) : les prix montent à l’approche des dates. Voir les vols →", "en": "🌸 Easter holidays (10 → 24 Apr): prices rise as the dates get closer. See flights →", "es": "🌸 Vacaciones de primavera (10 → 24 abr.): los precios suben a medida que se acercan las fechas. Ver vuelos →", "pt": "🌸 Férias da Páscoa (10 → 24 abr.): os preços sobem à medida que as datas se aproximam. Ver voos →", "ar": "🌸 عطلة الربيع (10 – 24 أبريل): ترتفع الأسعار مع اقتراب المواعيد. اعرض الرحلات ←"}, "href": {"fr": "/vols-vacances-paques/", "en": "/en/flights-easter-holidays/", "es": "/es/vuelos-vacaciones-primavera/", "pt": "/pt/voos-ferias-pascoa/", "ar": "/ar/flights-easter-holidays/"}}, {"dep": "2027-05-12", "txt": {"fr": "🐑 Tabaski (Aïd el-Kébir) (12 → 24 mai) : les prix montent à l’approche des dates. Voir les vols →", "en": "🐑 Tabaski (Eid al-Adha) (12 → 24 May): prices rise as the dates get closer. See flights →", "es": "🐑 Tabaski (Eid al-Adha) (12 → 24 may.): los precios suben a medida que se acercan las fechas. Ver vuelos →", "pt": "🐑 Tabaski (Eid al-Adha) (12 → 24 mai.): os preços sobem à medida que as datas se aproximam. Ver voos →", "ar": "🐑 عيد الأضحى (تاباسكي) (12 – 24 مايو): ترتفع الأسعار مع اقتراب المواعيد. اعرض الرحلات ←"}, "href": {"fr": "/vols-tabaski/", "en": "/en/flights-tabaski-eid-al-adha/", "es": "/es/vuelos-tabaski/", "pt": "/pt/voos-tabaski/", "ar": "/ar/flights-eid-al-adha/"}}, {"dep": "2027-07-04", "txt": {"fr": "☀️ Vacances d’été (4 juil. → 1er août) : les prix montent à l’approche des dates. Voir les vols →", "en": "☀️ Summer holidays (4 Jul → 1 Aug): prices rise as the dates get closer. See flights →", "es": "☀️ Vacaciones de verano (4 jul. → 1 ago.): los precios suben a medida que se acercan las fechas. Ver vuelos →", "pt": "☀️ Férias de verão (4 jul. → 1 ago.): os preços sobem à medida que as datas se aproximam. Ver voos →", "ar": "☀️ العطلة الصيفية (4 يوليو – 1 أغسطس): ترتفع الأسعار مع اقتراب المواعيد. اعرض الرحلات ←"}, "href": {"fr": "/vols-vacances-ete/", "en": "/en/flights-summer-holidays/", "es": "/es/vuelos-verano/", "pt": "/pt/voos-ferias-verao/", "ar": "/ar/flights-summer/"}}]</script><!-- SAISON:END -->
   <div class="card">
     <div class="tabs" role="tablist" aria-label="Type de recherche" data-en-aria="Search type">
       <button class="tab" role="tab" id="tab-vols" aria-controls="panel-vols" aria-selected="true" data-tab="vols">
@@ -940,6 +961,7 @@ footer { margin-top: 72px; }
     <div id="panel-vols" role="tabpanel" aria-labelledby="tab-vols">
 <!-- Moteur de recherche de vols en direct (White Label Travelpayouts n° 24006) ; l'ancien formulaire revient s'il ne se charge pas -->
 <div class="wl-home"><div id="tpwl-search"><p class="wl-loading" data-en="Loading live prices…">Chargement des prix en direct…</p></div><div id="tpwl-tickets"></div></div>
+<div class="pop-routes"><p class="pop-h" data-en="Popular routes, round trip from">Trajets populaires, aller-retour dès</p><div class="pop-row"><a class="pop-chip" href="/recherche/" data-wl="CDG-DSS"><span>Paris → Dakar</span><b class="pr" data-r="CDG-DSS"></b></a><a class="pop-chip" href="/recherche/" data-wl="CDG-ALG"><span>Paris → Alger</span><b class="pr" data-r="CDG-ALG"></b></a><a class="pop-chip" href="/recherche/" data-wl="ORY-CMN"><span>Paris → Casablanca</span><b class="pr" data-r="ORY-CMN"></b></a><a class="pop-chip" href="/recherche/" data-wl="CDG-ABJ"><span>Paris → Abidjan</span><b class="pr" data-r="CDG-ABJ"></b></a><a class="pop-chip" href="/recherche/" data-wl="CDG-BKO"><span>Paris → Bamako</span><b class="pr" data-r="CDG-BKO"></b></a><a class="pop-chip" href="/recherche/" data-wl="CDG-TUN"><span>Paris → Tunis</span><b class="pr" data-r="CDG-TUN"></b></a><a class="pop-chip" href="/recherche/" data-wl="CDG-FIH"><span>Paris → Kinshasa</span><b class="pr" data-r="CDG-FIH"></b></a><a class="pop-chip" href="/recherche/" data-wl="CDG-CKY"><span>Paris → Conakry</span><b class="pr" data-r="CDG-CKY"></b></a><a class="pop-chip" href="/recherche/" data-wl="LYS-ALG"><span>Lyon → Alger</span><b class="pr" data-r="LYS-ALG"></b></a><a class="pop-chip" href="/recherche/" data-wl="MRS-ALG"><span>Marseille → Alger</span><b class="pr" data-r="MRS-ALG"></b></a><a class="pop-chip" href="/recherche/" data-wl="BRU-FIH"><span>Bruxelles → Kinshasa</span><b class="pr" data-r="BRU-FIH"></b></a><a class="pop-chip" href="/recherche/" data-wl="BRU-DSS"><span>Bruxelles → Dakar</span><b class="pr" data-r="BRU-DSS"></b></a></div></div>
 <form id="form-vols" class="gf" novalidate hidden>
       <div class="gf-top">
         <div class="seg" role="radiogroup" aria-label="Type de trajet" data-en-aria="Trip type">
@@ -1062,6 +1084,30 @@ footer { margin-top: 72px; }
     <!-- FETES:END -->
   </section>
 
+  
+
+  
+
+  
+
+  <section class="block" id="destinations">
+    <h2 data-en="Popular routes">Destinations populaires</h2>
+    <p class="lead" id="dests-lead" data-en="One click fills in the search with dates three weeks from now. Change them if needed.">Un clic remplit la recherche avec des dates dans trois semaines. Modifiez-les ensuite si besoin.</p>
+    <div class="dests" id="dests" data-photos="{&quot;DSS&quot;: &quot;/img/villes/dakar-480.webp&quot;, &quot;RAK&quot;: &quot;/img/villes/marrakech-480.webp&quot;, &quot;CMN&quot;: &quot;/img/villes/casablanca-480.webp&quot;, &quot;ABJ&quot;: &quot;/img/villes/abidjan-480.webp&quot;, &quot;TUN&quot;: &quot;/img/villes/tunis-480.webp&quot;, &quot;ALG&quot;: &quot;/img/villes/alger-480.webp&quot;, &quot;IST&quot;: &quot;/img/villes/istanbul-480.webp&quot;, &quot;DXB&quot;: &quot;/img/villes/dubai-480.webp&quot;, &quot;LIS&quot;: &quot;/img/villes/lisbonne-480.webp&quot;, &quot;BCN&quot;: &quot;/img/villes/barcelone-480.webp&quot;, &quot;JFK&quot;: &quot;/img/villes/new-york-480.webp&quot;, &quot;CAI&quot;: &quot;/img/villes/le-caire-480.webp&quot;, &quot;BKO&quot;: &quot;/img/villes/bamako-480.webp&quot;, &quot;DJE&quot;: &quot;/img/villes/djerba-480.webp&quot;, &quot;TNG&quot;: &quot;/img/villes/tanger-480.webp&quot;, &quot;ACC&quot;: &quot;/img/villes/accra-480.webp&quot;}"></div>
+  </section>
+
+  <section class="block nl-block" id="newsletter">
+<form class="nl" name="bons-plans" method="POST" action="/api/form" novalidate>
+  <input type="hidden" name="form-name" value="bons-plans"><input type="hidden" name="langue" value="fr">
+  <p class="hp" hidden><label>Ne pas remplir <input name="site-web" tabindex="-1" autocomplete="off"></label></p>
+  <h2 data-en="Get the deals">Recevez les bons plans</h2><p class="wa-p"><a class="btn wa-btn" href="https://whatsapp.com/channel/0029VbE28kB0LKZN7ypnGj0d" target="_blank" rel="noopener" data-en="Join our WhatsApp deals channel">Rejoindre la chaîne WhatsApp des bons plans</a></p><p class="small nl-lead" data-en="A selection of the best prices, once or twice a month, by email or on WhatsApp. Free, unsubscribe anytime.">Une sélection des meilleurs prix, une à deux fois par mois, par e-mail ou sur WhatsApp. Gratuit, désinscription à tout moment.</p>
+  <div class="nl-row"><label><span data-en="Email">E-mail</span><input type="email" name="email" autocomplete="email"></label>
+  <label><span data-en="WhatsApp (optional)">WhatsApp (facultatif)</span><input type="tel" name="whatsapp" autocomplete="tel" placeholder="+33 6 12 34 56 78"></label></div>
+  <label class="nl-consent"><input type="checkbox" name="consent" value="oui"> <span data-en="I agree to receive Escale deals. My details are used only for this; I can unsubscribe at any time.">J’accepte de recevoir les bons plans d’Escale. Mes coordonnées servent uniquement à cela ; je peux me désinscrire à tout moment.</span></label>
+  <button class="btn" type="submit" data-en="Sign me up">Je m’inscris</button><p class="small nl-msg" role="status"></p>
+</form>
+  </section>
+
   <section class="block" id="explore">
     <div class="explore-head">
       <h2><span data-en="Cheap trip ideas from">Idées de voyage pas chères depuis</span> <span id="ex-city" class="ex-city">Paris</span></h2>
@@ -1082,6 +1128,18 @@ footer { margin-top: 72px; }
     <div class="recent" id="recent"></div>
   </section>
 
+  <section class="block">
+    <h2 data-en="Pay less: what really works">Payer moins cher : ce qui marche vraiment</h2>
+    <div class="tips">
+      <div class="tip"><span class="k">±3 J</span><h3 data-en="Move your dates">Bougez vos dates</h3><p data-en="Shifting your departure by a day or two often changes the price more than the choice of site. Tuesdays, Wednesdays and Saturdays are usually cheaper.">Décaler le départ de un ou deux jours change souvent le prix plus que le choix du site. Les mardis, mercredis et samedis sont en général moins chers.</p></div>
+      <div class="tip"><span class="k">CMP</span><h3 data-en="Compare at least three sites">Comparez au moins trois sites</h3><p data-en="Each comparison site has its own partners. Open Skyscanner, Kayak and momondo: the gap can be tens of euros.">Chaque comparateur a ses partenaires. Ouvrez Skyscanner, Kayak et momondo : l’écart atteint parfois plusieurs dizaines d’euros.</p></div>
+      <div class="tip"><span class="k">AÉRO</span><h3 data-en="Try the nearby airport">Essayez l’aéroport voisin</h3><p data-en="Paris: CDG, ORY and BVA. London: LHR, LGW, STN. Secondary airports are often served by low-cost airlines.">Paris : CDG, ORY et BVA. Bruxelles : BRU et CRL. Un aéroport secondaire est souvent desservi par les compagnies low-cost.</p></div>
+      <div class="tip"><span class="k">BAG</span><h3 data-en="Check the baggage">Vérifiez les bagages</h3><p data-en="The lowest fare sometimes only includes an under-seat bag. Add the price of a suitcase before comparing.">Le tarif le plus bas n’inclut parfois qu’un sac sous le siège. Ajoutez le prix de la valise avant de comparer.</p></div>
+      <div class="tip"><span class="k">ALERT</span><h3 data-en="Set a price alert">Activez une alerte prix</h3><p data-en="Skyscanner, Kayak and Aviasales email you when the price drops on your route.">Skyscanner, Kayak et Aviasales vous préviennent par e-mail quand le prix baisse sur votre trajet.</p></div>
+      <div class="tip"><span class="k">CAR</span><h3 data-en="Cars: excess and fuel">Voiture : franchise et carburant</h3><p data-en="Choose a full-to-full fuel policy and check the excess amount. Picking up in town is often cheaper than at the airport.">Préférez la politique « plein/plein » et vérifiez le montant de la franchise. Une prise en charge en ville coûte souvent moins cher qu’à l’aéroport.</p></div>
+    </div>
+  </section>
+
   <section class="block world" id="world">
     <a class="world-card anywhere-href" href="/partout/">
       <img src="/img/villes/marrakech-1280.webp" srcset="/img/villes/marrakech-480.webp 480w, /img/villes/marrakech.webp 800w, /img/villes/marrakech-1280.webp 1280w" sizes="(max-width: 1000px) 100vw, 948px" width="1280" height="960" alt="" loading="lazy" decoding="async">
@@ -1097,35 +1155,10 @@ footer { margin-top: 72px; }
     <p class="credits"><span data-en="Photos: Wikimedia Commons, free licences.">Photos : Wikimedia Commons, licences libres.</span> <a href="/credits-photos/" data-en="Photo credits">Crédits des photos</a></p>
   </section>
 
-  <section class="block" id="destinations">
-    <h2 data-en="Popular routes">Destinations populaires</h2>
-    <p class="lead" id="dests-lead" data-en="One click fills in the search with dates three weeks from now. Change them if needed.">Un clic remplit la recherche avec des dates dans trois semaines. Modifiez-les ensuite si besoin.</p>
-    <div class="dests" id="dests" data-photos="{&quot;DSS&quot;: &quot;/img/villes/dakar-480.webp&quot;, &quot;RAK&quot;: &quot;/img/villes/marrakech-480.webp&quot;, &quot;CMN&quot;: &quot;/img/villes/casablanca-480.webp&quot;, &quot;ABJ&quot;: &quot;/img/villes/abidjan-480.webp&quot;, &quot;TUN&quot;: &quot;/img/villes/tunis-480.webp&quot;, &quot;ALG&quot;: &quot;/img/villes/alger-480.webp&quot;, &quot;IST&quot;: &quot;/img/villes/istanbul-480.webp&quot;, &quot;DXB&quot;: &quot;/img/villes/dubai-480.webp&quot;, &quot;LIS&quot;: &quot;/img/villes/lisbonne-480.webp&quot;, &quot;BCN&quot;: &quot;/img/villes/barcelone-480.webp&quot;, &quot;JFK&quot;: &quot;/img/villes/new-york-480.webp&quot;, &quot;CAI&quot;: &quot;/img/villes/le-caire-480.webp&quot;, &quot;BKO&quot;: &quot;/img/villes/bamako-480.webp&quot;, &quot;DJE&quot;: &quot;/img/villes/djerba-480.webp&quot;, &quot;TNG&quot;: &quot;/img/villes/tanger-480.webp&quot;, &quot;ACC&quot;: &quot;/img/villes/accra-480.webp&quot;}"></div>
-  </section>
 
-  <section class="block">
-    <h2 data-en="Pay less: what really works">Payer moins cher : ce qui marche vraiment</h2>
-    <div class="tips">
-      <div class="tip"><span class="k">±3 J</span><h3 data-en="Move your dates">Bougez vos dates</h3><p data-en="Shifting your departure by a day or two often changes the price more than the choice of site. Tuesdays, Wednesdays and Saturdays are usually cheaper.">Décaler le départ de un ou deux jours change souvent le prix plus que le choix du site. Les mardis, mercredis et samedis sont en général moins chers.</p></div>
-      <div class="tip"><span class="k">CMP</span><h3 data-en="Compare at least three sites">Comparez au moins trois sites</h3><p data-en="Each comparison site has its own partners. Open Skyscanner, Kayak and momondo: the gap can be tens of euros.">Chaque comparateur a ses partenaires. Ouvrez Skyscanner, Kayak et momondo : l’écart atteint parfois plusieurs dizaines d’euros.</p></div>
-      <div class="tip"><span class="k">AÉRO</span><h3 data-en="Try the nearby airport">Essayez l’aéroport voisin</h3><p data-en="Paris: CDG, ORY and BVA. London: LHR, LGW, STN. Secondary airports are often served by low-cost airlines.">Paris : CDG, ORY et BVA. Bruxelles : BRU et CRL. Un aéroport secondaire est souvent desservi par les compagnies low-cost.</p></div>
-      <div class="tip"><span class="k">BAG</span><h3 data-en="Check the baggage">Vérifiez les bagages</h3><p data-en="The lowest fare sometimes only includes an under-seat bag. Add the price of a suitcase before comparing.">Le tarif le plus bas n’inclut parfois qu’un sac sous le siège. Ajoutez le prix de la valise avant de comparer.</p></div>
-      <div class="tip"><span class="k">ALERT</span><h3 data-en="Set a price alert">Activez une alerte prix</h3><p data-en="Skyscanner, Kayak and Aviasales email you when the price drops on your route.">Skyscanner, Kayak et Aviasales vous préviennent par e-mail quand le prix baisse sur votre trajet.</p></div>
-      <div class="tip"><span class="k">CAR</span><h3 data-en="Cars: excess and fuel">Voiture : franchise et carburant</h3><p data-en="Choose a full-to-full fuel policy and check the excess amount. Picking up in town is often cheaper than at the airport.">Préférez la politique « plein/plein » et vérifiez le montant de la franchise. Une prise en charge en ville coûte souvent moins cher qu’à l’aéroport.</p></div>
-    </div>
-  </section>
+  
 
-  <section class="block nl-block" id="newsletter">
-<form class="nl" name="bons-plans" method="POST" action="/api/form" novalidate>
-  <input type="hidden" name="form-name" value="bons-plans"><input type="hidden" name="langue" value="fr">
-  <p class="hp" hidden><label>Ne pas remplir <input name="site-web" tabindex="-1" autocomplete="off"></label></p>
-  <h2 data-en="Get the deals">Recevez les bons plans</h2><p class="wa-p"><a class="btn wa-btn" href="https://whatsapp.com/channel/0029VbE28kB0LKZN7ypnGj0d" target="_blank" rel="noopener" data-en="Join our WhatsApp deals channel">Rejoindre la chaîne WhatsApp des bons plans</a></p><p class="small nl-lead" data-en="A selection of the best prices, once or twice a month, by email or on WhatsApp. Free, unsubscribe anytime.">Une sélection des meilleurs prix, une à deux fois par mois, par e-mail ou sur WhatsApp. Gratuit, désinscription à tout moment.</p>
-  <div class="nl-row"><label><span data-en="Email">E-mail</span><input type="email" name="email" autocomplete="email"></label>
-  <label><span data-en="WhatsApp (optional)">WhatsApp (facultatif)</span><input type="tel" name="whatsapp" autocomplete="tel" placeholder="+33 6 12 34 56 78"></label></div>
-  <label class="nl-consent"><input type="checkbox" name="consent" value="oui"> <span data-en="I agree to receive Escale deals. My details are used only for this; I can unsubscribe at any time.">J’accepte de recevoir les bons plans d’Escale. Mes coordonnées servent uniquement à cela ; je peux me désinscrire à tout moment.</span></label>
-  <button class="btn" type="submit" data-en="Sign me up">Je m’inscris</button><p class="small nl-msg" role="status"></p>
-</form>
-  </section>
+  
 
   <section class="block tool" id="checklist">
     <details>
@@ -1200,6 +1233,7 @@ footer { margin-top: 72px; }
 <script src="/app.js" defer></script>
 <script src="/newsletter.js" defer></script>
 <script src="/favs.js" defer></script>
+<script src="/clics.js" defer></script>
 <script>
 (function () {
   var s = document.createElement("script"); s.src = "/wl.js"; s.defer = true; document.head.appendChild(s);
@@ -1208,6 +1242,20 @@ footer { margin-top: 72px; }
     var w = document.getElementById("tpwl-search");
     if (w && !w.shadowRoot) { document.getElementById("form-vols").hidden = false; document.querySelector(".wl-home").hidden = true; }
   }, 9000);
+})();
+</script>
+<script>
+(function () {
+  var dd = function (n) { var d = new Date(Date.now() + n * 864e5); return String(d.getDate()).padStart(2, "0") + String(d.getMonth() + 1).padStart(2, "0"); };
+  document.querySelectorAll(".pop-chip[data-wl]").forEach(function (a) { var p = a.getAttribute("data-wl").split("-"); a.href = "/recherche/?flightSearch=" + p[0] + dd(45) + p[1] + dd(52) + "1"; });
+  // Bandeau de saison : la prochaine fête (départ dans 7 à 150 jours), dans la langue de la page
+  try {
+    var data = JSON.parse(document.getElementById("season-data").textContent), el = document.getElementById("season");
+    var lang = (document.documentElement.lang || "fr").slice(0, 2), today = new Date().toISOString().slice(0, 10);
+    var soon = function (d) { var n = (Date.parse(d) - Date.now()) / 864e5; return n >= 7 && n <= 150; };
+    var f = data.filter(function (x) { return x.dep > today && soon(x.dep); })[0];
+    if (f && el) { var t = f.txt[lang] || f.txt.fr; el.textContent = t; el.href = f.href[lang] || f.href.fr; el.hidden = false; }
+  } catch (e) {}
 })();
 </script>
 <!-- CONSENT:START -->

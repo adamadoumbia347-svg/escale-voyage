@@ -20,6 +20,7 @@
   .ad-list .msg { white-space: pre-wrap; word-break: break-word; }
   .ad-list button { justify-self: start; font: inherit; font-size: 13px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); cursor: pointer; }
   .small { color: var(--muted); font-size: 14px; }
+  .ad-table { width: 100%; border-collapse: collapse; margin: 8px 0 16px; font-size: 14px; } .ad-table th, .ad-table td { text-align: start; padding: 6px 8px; border-bottom: 1px solid var(--line); }
 </style>
 </head>
 <body>
@@ -39,6 +40,8 @@
     <div class="ad-tools"><strong id="count"></strong><button type="button" class="ghost" id="copy-emails">Copier les e-mails</button><button type="button" class="ghost" id="copy-wa">Copier les numéros WhatsApp</button><button type="button" class="ghost" id="csv">Télécharger (CSV)</button></div>
     <ul class="ad-list" id="list"></ul>
   </div>
+  <div class="ad-tools" style="margin-top:20px"><strong>Clics sur les liens</strong><button type="button" class="ghost" id="clics">Voir les clics (30 jours)</button></div>
+  <div id="clics-out"></div>
   <div class="ad-tools" style="margin-top:20px"><strong>Chaîne WhatsApp</strong><button type="button" class="ghost" id="digest">Recevoir le message WhatsApp maintenant</button></div>
   <p class="small">Le message des bons plans est envoyé automatiquement chaque lundi matin à l’adresse de la variable DIGEST_TO (Cloudflare › Variables et secrets).</p>
   <p class="small">Les statistiques de visites sont dans Cloudflare : Workers &amp; Pages › escale-voyage › Metrics › Web Analytics.</p>
@@ -80,6 +83,20 @@
     }).catch(function (e) { $("msg").textContent = e.message || "Erreur."; });
   }
   $("f").addEventListener("submit", function (ev) { ev.preventDefault(); load(); });
+  $("clics").addEventListener("click", function () {
+    var key = $("key").value.trim();
+    if (!key) { $("msg").textContent = "Entrez d’abord la clé d’accès."; return; }
+    fetch("/api/admin?action=clics", { headers: { "x-admin-key": key } }).then(function (r) {
+      if (r.status === 401) throw new Error("Clé incorrecte."); return r.json();
+    }).then(function (j) {
+      var rows = Object.entries(j.clics || {}).sort(function (a, b) { return b[1].j30 - a[1].j30; });
+      var esc = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+      $("clics-out").innerHTML = rows.length ? '<table class="ad-table"><thead><tr><th>Lien</th><th>7 jours</th><th>30 jours</th><th>Pages</th></tr></thead><tbody>' +
+        rows.map(function (r) { return "<tr><td>" + esc(r[0]) + "</td><td>" + r[1].j7 + "</td><td>" + r[1].j30 + "</td><td>" +
+          esc(Object.entries(r[1].pages).sort(function (a, b) { return b[1] - a[1]; }).map(function (p) { return p[0] + " " + p[1]; }).join(", ")) + "</td></tr>"; }).join("") +
+        "</tbody></table>" : "<p>Pas encore de clics enregistrés.</p>";
+    }).catch(function (e) { $("msg").textContent = e.message || "Erreur."; });
+  });
   $("digest").addEventListener("click", function () {
     var key = $("key").value.trim();
     if (!key) { $("msg").textContent = "Entrez d’abord la clé d’accès."; return; }

@@ -246,6 +246,7 @@ HEAD = """<!doctype html>
   <p>Escale ne vend pas de billets et ne fixe aucun prix. Les durées et informations sont indicatives : les programmes des compagnies changent, vérifiez toujours sur le site de réservation.</p>
 </footer>
 <script src="/favs.js" defer></script>
+<script src="/clics.js" defer></script>
 </body>
 </html>
 """
@@ -491,6 +492,8 @@ def legal_pages():
 <section><h2>Mesure d'audience anonyme</h2>
 <p>Pour savoir combien de personnes visitent le site et quelles pages sont utiles, nous utilisons Cloudflare Web Analytics, l'outil de mesure de notre hébergeur. Il ne dépose aucun cookie, n'utilise aucun identifiant et ne suit pas les visiteurs d'un site à l'autre : il compte les pages vues, les pays et les sites d'origine (par exemple google.com) de façon agrégée.</p>
 </section>
+<section><h2>Compteur de clics anonyme</h2>
+<p>Pour savoir quels liens sont utiles (moteur de recherche, sites partenaires, chaîne WhatsApp…), le site compte les clics sur ces liens. Seuls sont enregistrés le type de lien, le type de page et le jour : aucun cookie, aucune adresse IP, aucun identifiant. Ces totaux sont gardés au plus 400 jours.</p></section>
 <section><h2>Bons plans par e-mail ou WhatsApp</h2>
 <p>Si vous vous inscrivez, nous conservons votre e-mail et/ou votre numéro WhatsApp et la langue de la page, uniquement pour vous envoyer nos bons plans. Votre inscription est enregistrée chez notre hébergeur Cloudflare. Vous pouvez vous désinscrire à tout moment en répondant « STOP » ou via la page Contact ; vos coordonnées sont alors supprimées.</p>
 </section>
@@ -623,6 +626,18 @@ def main():
             f'<img src="/img/villes/{img}-480.webp" srcset="/img/villes/{img}-480.webp 480w, /img/villes/{img}.webp 800w" sizes="(max-width: 600px) 46vw, 300px" width="480" height="360" alt="" loading="lazy" decoding="async">'
             f'<span class="city-info"><strong data-names="{E(json.dumps({l: lab[l][0] for l in build_i18n.LANGS}, ensure_ascii=False))}">{E(lab["fr"][0])}</strong>'
             f'<small data-names="{E(json.dumps({l: lab[l][1] for l in build_i18n.LANGS}, ensure_ascii=False))}">{E(lab["fr"][1])}</small></span></a>')
+    # Bandeau de saison de l'accueil : la prochaine fête (le choix se fait dans le navigateur, selon la date du jour)
+    EMO = {"noel": "🎄", "hiver": "☀️", "ramadan": "🌙", "printemps": "🌸", "tabaski": "🐑", "ete": "☀️"}
+    MSG = {"fr": "{e} {t} ({d}) : les prix montent à l’approche des dates. Voir les vols →",
+           "en": "{e} {t} ({d}): prices rise as the dates get closer. See flights →",
+           "es": "{e} {t} ({d}): los precios suben a medida que se acercan las fechas. Ver vuelos →",
+           "pt": "{e} {t} ({d}): os preços sobem à medida que as datas se aproximam. Ver voos →",
+           "ar": "{e} {t} ({d}): ترتفع الأسعار مع اقتراب المواعيد. اعرض الرحلات ←"}
+    season = [{"dep": f["dep"],
+               "txt": {l: MSG[l].format(e=EMO.get(f["key"], "✈️"), t=FT.CARDS[f["key"]][1][l][0], d=FT.CARDS[f["key"]][1][l][1]) for l in MSG},
+               "href": {l: "/" + f[l]["slug"] + "/" for l in MSG}} for f in sorted(FT.FETES, key=lambda x: x["dep"])]
+    s = re.sub(r"<!-- SAISON:START -->.*?<!-- SAISON:END -->", lambda m: '<!-- SAISON:START --><script type="application/json" id="season-data">'
+               + __import__("json").dumps(season, ensure_ascii=False).replace("</", "<\\/") + '</script><!-- SAISON:END -->', s, flags=re.S)
     s = re.sub(r"<!-- FETES:START -->.*?<!-- FETES:END -->", lambda m: '<!-- FETES:START -->\n    <div class="city-grid fete-grid">' + "".join(fcards) + '</div>\n    <!-- FETES:END -->', s, flags=re.S)
     grid = villes.cards(SITE, HUBS, airports)
     s = re.sub(r"<!-- VILLES:START -->.*?<!-- VILLES:END -->", lambda m: "<!-- VILLES:START -->\n    " + grid + "\n    <!-- VILLES:END -->", s, flags=re.S)

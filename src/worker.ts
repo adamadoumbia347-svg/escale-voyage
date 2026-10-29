@@ -2,6 +2,7 @@
 // - /api/* : fonctions serveur (prix, calendrier, bons plans, position, alertes, formulaires, admin, tâches)
 // - pages trajets : prix réels écrits dans la page (titre, haut de page, prix par mois), pour les visiteurs et Google
 // - /barometre-prix/ : tableau des prix et de leur évolution, écrit dans la page
+// - / (accueil) : prix des boutons « Trajets populaires »
 // - tout le reste : fichiers du dossier site/ (servis directement par Cloudflare, sans passer par ce code)
 import { Ctx, Env, json } from "./_lib/common"
 import * as prix from "./api/prix"
@@ -14,11 +15,13 @@ import * as form from "./api/form"
 import * as admin from "./api/admin"
 import * as cron from "./api/cron"
 import * as populaires from "./api/populaires"
+import * as clic from "./api/clic"
 import * as apercu from "./apercu-prix"
 import * as barometre from "./barometre"
+import * as accueil from "./accueil"
 import { sendDigest } from "./digest"
 
-const API: Record<string, any> = { prix, explore, calendar, deals, geo, alert, form, admin, cron, populaires }
+const API: Record<string, any> = { prix, explore, calendar, deals, geo, alert, form, admin, cron, populaires, clic }
 
 export default {
   async fetch(request: Request, env: Env & { ASSETS: { fetch: (r: Request) => Promise<Response> } }, ctx: { waitUntil: (p: Promise<any>) => void }) {
@@ -33,6 +36,7 @@ export default {
       return handler(c)
     }
     if (path === "/barometre-prix/" || path === "/barometre-prix") return barometre.onRequest(c)
+    if (path === "/") return accueil.onRequest(c)
     return apercu.onRequest(c)
   },
   // Chaque matin (voir « triggers » dans wrangler.jsonc) : vérification des alertes prix ; le lundi, message WhatsApp de la semaine

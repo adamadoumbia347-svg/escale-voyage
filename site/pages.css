@@ -344,3 +344,11 @@ main .btn.wa-btn, .btn.wa-btn { background: #0f7a40; color: #fff; }
 #tpwl-search { min-height: 470px; } /* place réservée au formulaire du moteur : la page ne « saute » pas à son arrivée */
 @media (min-width: 900px) { #tpwl-search { min-height: 230px; } }
 #tpwl-tickets { min-height: 40px; }
+
+/* Bulle « Bons plans sur WhatsApp » (site/clics.js) */
+.wa-float { position: fixed; right: 14px; bottom: 14px; z-index: 40; display: flex; align-items: center; gap: 4px; }
+.wa-float a { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 999px; background: #0f7a40; color: #fff; text-decoration: none; font: 700 14px/1 var(--f-body, system-ui); box-shadow: 0 6px 18px rgba(0,0,0,.18); }
+.wa-float a svg { width: 20px; height: 20px; }
+.wa-float button { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line); background: var(--bg); color: var(--muted); cursor: pointer; font: 600 15px/1 system-ui; padding: 0; }
+@media (max-width: 520px) { .wa-float a span { display: none; } .wa-float a { padding: 12px; } }
+@media print { .wa-float { display: none; } }

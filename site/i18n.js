@@ -1,6 +1,12 @@
 // Traductions de l'accueil : clé = texte anglais, valeur = [espagnol, portugais, arabe].
 // Le français et l'anglais sont directement dans index.html (data-en) et app.js (T("fr", "en")).
 window.ESCALE_I18N = {
+  "Live prices from dozens of airlines and travel agencies, compared for you. You book directly on their website, with no fees added by Escale.": ["Precios en directo de decenas de aerolíneas y agencias, comparados para ti. Reservas directamente en su web, sin cargos añadidos por Escale.", "Preços ao vivo de dezenas de companhias e agências, comparados para si. Reserva diretamente no site delas, sem taxas da Escale.", "أسعار مباشرة من عشرات شركات الطيران والوكالات، مقارنة لك. تحجز مباشرة على موقعها، دون أي رسوم من Escale."],
+  "Live prices from dozens of airlines and agencies": ["Precios en directo de decenas de aerolíneas y agencias", "Preços ao vivo de dezenas de companhias e agências", "أسعار مباشرة من عشرات الشركات والوكالات"],
+  "No fees added by Escale": ["Sin cargos añadidos por Escale", "Sem taxas da Escale", "لا رسوم من Escale"],
+  "You pay on the airline’s or agency’s website": ["Pagas en la web de la aerolínea o agencia", "Paga no site da companhia ou agência", "تدفع على موقع شركة الطيران أو الوكالة"],
+  "Free, no sign-up": ["Gratis, sin registro", "Grátis, sem registo", "مجاني، بلا تسجيل"],
+  "Popular routes, round trip from": ["Rutas populares, ida y vuelta desde", "Rotas populares, ida e volta desde", "مسارات شائعة، ذهاب وعودة من"],
   "Loading live prices…": ["Cargando precios en directo…", "A carregar preços ao vivo…", "جارٍ تحميل الأسعار المباشرة…"],
   "Compare all agencies live": ["Comparar en directo todas las agencias", "Comparar ao vivo todas as agências", "قارن كل الوكالات مباشرة"],
   "Live prices": ["En directo", "Ao vivo", "أسعار مباشرة"],

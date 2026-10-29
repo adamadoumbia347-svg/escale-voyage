@@ -366,6 +366,7 @@ HEAD = """<!doctype html>
   <p>{disclaimer}</p>
 </footer>
 <script src="/favs.js" defer></script>
+<script src="/clics.js" defer></script>
 </body>
 </html>
 """
