@@ -42,25 +42,22 @@ jobs:
               await p.waitForTimeout(6000);
               console.log('ESSAI', t || '(aucun)', '=>', await vals(), '| adresse :', p.url());
             }
-            // 2. Recherche manuelle : destination, dates, bouton
-            await p.goto(base, { waitUntil: 'networkidle' }); await p.waitForTimeout(6000);
-            const dest = p.locator('#tpwl-search input[name=destination]');
-            await dest.click(); await dest.fill('Dakar'); await p.waitForTimeout(2500);
-            await p.keyboard.press('ArrowDown').catch(() => {}); await p.keyboard.press('Enter').catch(() => {}); await p.waitForTimeout(1500);
-            console.log('Après destination :', await vals());
-            const sub = await p.evaluate(() => { const r = document.querySelector('#tpwl-search').shadowRoot;
-              return [...r.querySelectorAll('button, [type=submit], [role=button], a')].map(e => e.tagName + '|' + (e.getAttribute('type') || '') + '|' + (e.getAttribute('aria-label') || '') + '|' + e.className.toString().slice(0, 60) + '|' + e.textContent.trim().slice(0, 30)); });
-            console.log('Éléments cliquables :', JSON.stringify(sub));
-            const go = p.locator('#tpwl-search button[type=submit], #tpwl-search form button').last();
-            if (await go.count()) { await go.click().catch(e => console.log('clic', e.message)); }
-            else { await dest.press('Enter').catch(() => {}); }
-            await p.waitForTimeout(15000);
+            // 2. Recherche préremplie (Paris → Dakar dans 45 jours, retour 7 jours après) puis clic sur « Recherche de vols »
+            const dd = (n) => { const d = new Date(Date.now() + n * 864e5); return String(d.getUTCDate()).padStart(2, '0') + String(d.getUTCMonth() + 1).padStart(2, '0'); };
+            await p.goto(base + '?flightSearch=CDG' + dd(45) + 'DSS' + dd(52) + '1', { waitUntil: 'networkidle' }); await p.waitForTimeout(6000);
+            console.log('Formulaire :', await vals());
+            await p.locator('#tpwl-search a:has-text("Recherche de vols")').first().click().catch(e => console.log('clic', e.message));
+            await p.waitForTimeout(25000);
             console.log('Adresse après recherche :', p.url());
             const res = await p.evaluate(() => { const r = document.querySelector('#tpwl-tickets').shadowRoot;
+              const txt = r.textContent.replace(/\.[A-Za-z][^{}]*\{[^}]*\}/g, ' ').replace(/\s+/g, ' ');
               const links = [...r.querySelectorAll('a')].map(a => a.href).filter(h => h.startsWith('http')).slice(0, 4);
-              const prices = (r.textContent.match(/\d[\d\s\u202f]*\s?€/g) || []).slice(0, 6);
-              return { links, prices, boutons: [...r.querySelectorAll('button')].map(x => x.textContent.trim()).filter(Boolean).slice(0, 6) }; });
+              return { links, prix: (txt.match(/\d[\d\s\u202f]{1,6}\s?€/g) || []).slice(0, 8), boutons: [...r.querySelectorAll('button')].map(x => x.textContent.trim()).filter(Boolean).slice(0, 8), taille: r.innerHTML.length }; });
             console.log('Résultats :', JSON.stringify(res));
+            // 3. Clic sur le premier bouton d'achat : quelle adresse s'ouvre (identifiant partenaire ?)
+            const [pop] = await Promise.all([p.waitForEvent('popup', { timeout: 15000 }).catch(() => null),
+              p.locator('#tpwl-tickets button:has-text("Acheter"), #tpwl-tickets button:has-text("Voir"), #tpwl-tickets a:has-text("Acheter")').first().click().catch(e => console.log('clic achat', e.message))]);
+            if (pop) { await pop.waitForTimeout(6000); console.log('Page de réservation :', pop.url().slice(0, 300)); }
             console.log('Erreurs :', errs.slice(0, 5));
             await b.close();
           })();
