@@ -352,3 +352,10 @@ main .btn.wa-btn, .btn.wa-btn { background: #0f7a40; color: #fff; }
 .wa-float button { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line); background: var(--bg); color: var(--muted); cursor: pointer; font: 600 15px/1 system-ui; padding: 0; }
 @media (max-width: 520px) { .wa-float a span { display: none; } .wa-float a { padding: 12px; } }
 @media print { .wa-float { display: none; } }
+
+/* Message « Installer Escale » (site/clics.js) */
+.inst-bar { position: fixed; left: 12px; right: 12px; bottom: 76px; z-index: 45; display: flex; align-items: center; gap: 10px; max-width: 520px; margin: 0 auto; padding: 10px 12px; border-radius: 14px; background: var(--bg); color: var(--ink); border: 1px solid var(--line); box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+.inst-bar img { border-radius: 9px; flex: none; }
+.inst-bar p { margin: 0; flex: 1; font: 500 14px/1.35 var(--f-body, system-ui); }
+.inst-go { flex: none; border: 0; border-radius: 999px; padding: 9px 14px; background: var(--accent); color: var(--accent-ink, #fff); font: 700 14px/1 var(--f-body, system-ui); cursor: pointer; }
+.inst-x { flex: none; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; }

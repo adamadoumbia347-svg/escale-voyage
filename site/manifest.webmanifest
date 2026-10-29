@@ -1,9 +1,11 @@
 {
-  "name": "Escale : vols, hôtels et voitures au meilleur prix",
+  "name": "Escale : vols pas chers en direct",
   "short_name": "Escale",
   "description": "Comparez en une recherche les vols les moins chers, les hôtels et les locations de voitures.",
   "lang": "fr",
-  "start_url": "./",
+  "start_url": "/?source=appli",
+  "scope": "/",
+  "id": "/",
   "display": "standalone",
   "background_color": "#18202c",
   "theme_color": "#18202c",

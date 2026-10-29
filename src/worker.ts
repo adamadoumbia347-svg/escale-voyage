@@ -19,9 +19,9 @@ import * as clic from "./api/clic"
 import * as apercu from "./apercu-prix"
 import * as barometre from "./barometre"
 import * as accueil from "./accueil"
-import { sendDigest } from "./digest"
+import { sendDigest, sendNewsletter } from "./digest"
 
-const API: Record<string, any> = { prix, explore, calendar, deals, geo, alert, form, admin, cron, populaires, clic }
+const API: Record<string, any> = { prix, explore, calendar, deals, geo, alert, form, admin, cron, populaires, clic, connus: accueil }
 
 export default {
   async fetch(request: Request, env: Env & { ASSETS: { fetch: (r: Request) => Promise<Response> } }, ctx: { waitUntil: (p: Promise<any>) => void }) {
@@ -43,6 +43,9 @@ export default {
   async scheduled(_event: unknown, env: Env, ctx: { waitUntil: (p: Promise<any>) => void }) {
     ctx.waitUntil(cron.checkAlerts(env).then((r) => console.log("alertes", JSON.stringify(r))))
     // Le lundi : e-mail avec le message WhatsApp des bons plans de la semaine (src/digest.ts)
-    if (new Date().getUTCDay() === 1) ctx.waitUntil(sendDigest(env).then((r) => console.log("message WhatsApp", JSON.stringify(r))))
+    if (new Date().getUTCDay() === 1) {
+      ctx.waitUntil(sendDigest(env).then((r) => console.log("message WhatsApp", JSON.stringify(r))))
+      ctx.waitUntil(sendNewsletter(env).then((r) => console.log("bons plans par e-mail", JSON.stringify(r))))
+    }
   },
 }

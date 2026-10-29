@@ -1,6 +1,9 @@
 // Traductions de l'accueil : clé = texte anglais, valeur = [espagnol, portugais, arabe].
 // Le français et l'anglais sont directement dans index.html (data-en) et app.js (T("fr", "en")).
 window.ESCALE_I18N = {
+  "Your routes (price now)": ["Tus rutas (precio actual)", "As suas rotas (preço atual)", "مساراتك (السعر الحالي)"],
+  "Go this month: cheapest from Paris": ["Viaja este mes: lo más barato desde París", "Parta este mês: o mais barato a partir de Paris", "سافر هذا الشهر: الأرخص من باريس"],
+  "All deals →": ["Todas las ofertas →", "Todas as promoções →", "كل العروض ←"],
   "Live prices from dozens of airlines and travel agencies, compared for you. You book directly on their website, with no fees added by Escale.": ["Precios en directo de decenas de aerolíneas y agencias, comparados para ti. Reservas directamente en su web, sin cargos añadidos por Escale.", "Preços ao vivo de dezenas de companhias e agências, comparados para si. Reserva diretamente no site delas, sem taxas da Escale.", "أسعار مباشرة من عشرات شركات الطيران والوكالات، مقارنة لك. تحجز مباشرة على موقعها، دون أي رسوم من Escale."],
   "Live prices from dozens of airlines and agencies": ["Precios en directo de decenas de aerolíneas y agencias", "Preços ao vivo de dezenas de companhias e agências", "أسعار مباشرة من عشرات الشركات والوكالات"],
   "No fees added by Escale": ["Sin cargos añadidos por Escale", "Sem taxas da Escale", "لا رسوم من Escale"],
