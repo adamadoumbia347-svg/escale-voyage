@@ -133,7 +133,7 @@
     if (dbPromise) return dbPromise;
     dbPromise = fetch("/data/airports.json").then((r) => (r.ok ? r.json() : null)).then((list) => {
       if (!Array.isArray(list) || !list.length) return;
-      DB = list; byCode = new Map(list.map((a) => [a[0], a])); dbLoaded = true; buildIndex();
+      DB = list; byCode = new Map(list.map((a) => [a[0], a])); dbLoaded = true; index = null; // index de recherche refait à la première saisie
       // Remplace les codes nus (ex. « BKO » venu d'un lien) par « Bamako (BKO) »
       document.querySelectorAll('input[data-ac="airport"]').forEach((el) => {
         if (/^[A-Z]{3}$/.test(el.value.trim()) && byCode.has(el.value.trim())) el.value = labelOf(el.value.trim());
@@ -148,6 +148,7 @@
   function searchAirports(text, max) {
     const t = norm(text);
     if (!t) return [];
+    if (!index) buildIndex();
     const up = text.trim().toUpperCase();
     const out = [];
     for (const [a, city, name] of index) {
