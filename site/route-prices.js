@@ -22,7 +22,8 @@
     en: { loc: "en-GB", hero: "Round trip found from", from: "from", direct: "direct", one: "1 stop", many: " stops", best: "Cheapest", go: "See these dates", app: "en" },
     es: { loc: "es-ES", hero: "Ida y vuelta desde", from: "desde", direct: "vuelo directo", one: "1 escala", many: " escalas", best: "El más barato", go: "Ver estas fechas", app: "es" },
     pt: { loc: "pt-PT", hero: "Ida e volta desde", from: "desde", direct: "voo direto", one: "1 escala", many: " escalas", best: "O mais barato", go: "Ver estas datas", app: "pt" },
-    ar: { loc: "ar", hero: "ذهاب وعودة ابتداءً من", from: "من", direct: "رحلة مباشرة", one: "توقف واحد", many: " توقفات", best: "الأرخص", go: "اعرض هذه التواريخ", app: "ar" }
+    ar: { loc: "ar", hero: "ذهاب وعودة ابتداءً من", from: "من", direct: "رحلة مباشرة", one: "توقف واحد", many: " توقفات", best: "الأرخص", go: "اعرض هذه التواريخ", app: "ar" },
+    it: { loc: "it-IT", hero: "Andata e ritorno trovato da", from: "da", direct: "volo diretto", one: "1 scalo", many: " scali", best: "Il più economico", go: "Vedi queste date", app: "en" }
   }[lang] || null;
   if (!L) return;
   var money = function (n) {

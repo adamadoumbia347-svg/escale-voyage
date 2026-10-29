@@ -6,7 +6,7 @@ import { Ctx, esc, pricesForDates } from "./_lib/common"
 // - section « Prix repérés récemment » : le prix le plus bas pour chacun des 6 prochains mois, avec une phrase de résumé
 // Les prix (Travelpayouts) sont gardés 6 heures dans le cache de Cloudflare. Sans réponse rapide, la page part telle quelle
 // et route-prices.js prend le relais dans le navigateur. Les chemins concernés sont listés dans wrangler.jsonc (run_worker_first).
-const PAGES = /^\/(vol-|vols-pour-|en\/flights-|es\/vuelos-|pt\/voos-|ar\/flights-)/
+const PAGES = /^\/(vol-|vols-pour-|en\/flights-|es\/vuelos-|pt\/voos-|ar\/flights-|it\/voli-)/
 const MONTHS = 6
 const WAIT_MS = 2500
 const CACHE_S = 6 * 3600
@@ -86,6 +86,13 @@ const L: Record<string, { loc: string; from: string; hero: string; direct: strin
     midTxt: "{p}، قريب من السعر المعتاد ({avg}، الوسيط خلال آخر {n} يومًا مسجلًا).",
     highTxt: "{p}، أي أعلى من المعتاد بنسبة {x}٪ ({avg}، الوسيط خلال آخر {n} يومًا مسجلًا). إن استطعت الانتظار، أنشئ تنبيهًا بالسعر.",
     chart: "أدنى سعر حسب شهر المغادرة" },
+  it: { loc: "it-IT", from: "da", hero: "Andata e ritorno trovato da", direct: "volo diretto", one: "1 scalo", many: " scali", best: "Il più economico", go: "Vedi queste date",
+    summary: "Mese più economico al momento: {m}, da {p} andata e ritorno. Nei prossimi {n} mesi, i prezzi trovati vanno da {p} a {max}.", updated: "Prezzi aggiornati il {d}.",
+    low: "Buon prezzo al momento", mid: "Prezzo nella media", high: "Prezzo piuttosto alto al momento",
+    lowTxt: "{p}, cioè il {x} % in meno del solito (prezzo mediano di {avg} negli ultimi {n} giorni rilevati).",
+    midTxt: "{p}, vicino al prezzo abituale ({avg}, mediana degli ultimi {n} giorni rilevati).",
+    highTxt: "{p}, cioè il {x} % in più del solito ({avg}, mediana degli ultimi {n} giorni rilevati). Se puoi aspettare, crea un avviso prezzo.",
+    chart: "Prezzo più basso per mese di partenza" },
 }
 
 // Prix le plus bas par mois de départ (6 prochains mois), depuis le cache Cloudflare ou Travelpayouts.
@@ -124,7 +131,7 @@ function render(html: string, from: string, to: string, rows: Month[], hist: Poi
   const bestRow = rows.find((r) => r.price === best)!
   const label = `${t.from} ${money(best)}`
   const lead = label.charAt(0).toUpperCase() + label.slice(1)
-  const app = lang === "fr" ? "" : "&lang=" + lang
+  const app = lang === "fr" ? "" : "&lang=" + (lang === "it" ? "en" : lang)
   const items = rows.map((r) => {
     const stops = r.transfers === 0 ? t.direct : r.transfers === 1 ? t.one : r.transfers + t.many
     const when = date(r.dep, { day: "numeric", month: "short" }) + (r.ret ? " → " + date(r.ret, { day: "numeric", month: "short" }) : "")

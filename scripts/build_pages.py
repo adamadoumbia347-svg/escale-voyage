@@ -18,6 +18,7 @@ import build_i18n
 import trajets
 import blog  # noqa: E402
 import ete  # noqa: E402
+import italia  # noqa: E402
 import explore_pages  # noqa: E402
 import hubs  # noqa: E402
 import villes  # noqa: E402
@@ -543,6 +544,7 @@ def main():
     urls += legal_pages()
     urls += blog.build(page, E, DOMAIN, build_i18n.extras_html(SITE, "fr", "destination", "", ""))
     urls.append(barometre_page())
+    urls += italia.build(SITE, ctx)  # test : trajets au départ de l'Italie, en italien
     urls += ete.build(page, E, lambda lang, c, c_en, code: build_i18n.extras_html(SITE, lang, c, c_en, code), build_i18n.alert_btn, DOMAIN,
                       lambda p: (SITE / p / "index.html").exists(), lambda p: (SITE / p / "index.html").exists(), build_i18n.wa_btn)
     urls.append(page("credits-photos", "Crédits des photos | Escale", "Auteurs et licences des photos de villes utilisées sur Escale (Wikimedia Commons).",
@@ -575,8 +577,8 @@ def main():
                                         '<li><a href="/vols-ete-2027/">Vacances d’été 2027 au pays : prix par destination</a></li>',
                                         '<li><a href="/barometre-prix/">Baromètre des prix des vols</a></li>',
                                         '<li><a href="/widget/">Widget gratuit « Prix des vols » pour votre site</a></li>'])
-    links += '<p class="lead guides-langs">Guides in English, en español, em português, بالعربية : ' + " · ".join(
-        f'<a href="/{l}/" hreflang="{l}" lang="{l}">{build_i18n.NAMES[l]}</a>' for l in build_i18n.LANGS) + "</p>"
+    links += '<p class="lead guides-langs">Guides in English, en español, em português, بالعربية, in italiano : ' + " · ".join(
+        f'<a href="/{l}/" hreflang="{l}" lang="{l}">{build_i18n.NAMES[l]}</a>' for l in build_i18n.LANGS + ["it"]) + "</p>"
     s = re.sub(r"<!-- TRAVELPAYOUTS:START -->.*?<!-- TRAVELPAYOUTS:END -->",
                lambda m: "<!-- TRAVELPAYOUTS:START -->\n" + TRAVELPAYOUTS + "\n<!-- TRAVELPAYOUTS:END -->", s, flags=re.S)
     # Accueil : bandeau des cookies écrit dans la page (fin du <body>) au lieu de /consent.js chargé à part,

@@ -14,8 +14,8 @@ import translations as TR
 E = html.escape
 LANGS = ["en", "es", "pt", "ar"]
 COL = {"en": 0, "es": 1, "pt": 2, "ar": 3}
-NAMES = {"fr": "Français", "en": "English", "es": "Español", "pt": "Português", "ar": "العربية"}
-LOCALE = {"fr": "fr_FR", "en": "en_GB", "es": "es_ES", "pt": "pt_PT", "ar": "ar"}
+NAMES = {"fr": "Français", "en": "English", "es": "Español", "pt": "Português", "ar": "العربية", "it": "Italiano"}
+LOCALE = {"fr": "fr_FR", "en": "en_GB", "es": "es_ES", "pt": "pt_PT", "ar": "ar", "it": "it_IT"}
 
 UI = {
     "en": dict(
@@ -229,7 +229,8 @@ def alternates(paths, domain):
     """paths : {"fr": "vol-paris-dakar", "en": "en/flights-paris-dakar", ...}"""
     full = lambda p: f"{domain}/{p}/" if p else f"{domain}/"
     out = [f'<link rel="alternate" hreflang="{l}" href="{full(p)}">' for l, p in paths.items()]
-    out.append(f'<link rel="alternate" hreflang="x-default" href="{full(paths["fr"])}">')
+    if "fr" in paths:
+        out.append(f'<link rel="alternate" hreflang="x-default" href="{full(paths["fr"])}">')
     return "\n".join(out)
 
 
@@ -249,34 +250,38 @@ SECTION_PATHS = {
     "guides": {"fr": "guides", "en": "en/guides", "es": "es/guias", "pt": "pt/guias", "ar": "ar/guides"},
     "favs": {"fr": "favoris", "en": "en/favorites", "es": "es/favoritos", "pt": "pt/favoritos", "ar": "ar/favorites"},
 }
-FETES_LABEL = {"fr": "Fêtes", "en": "Holidays", "es": "Fiestas", "pt": "Festas", "ar": "الأعياد"}
+# Italien (pages de test, scripts/italia.py) : les rubriques renvoient vers les pages en anglais
+for _k, _v in SECTION_PATHS.items():
+    _v["it"] = _v["en"]
+FETES_LABEL = {"fr": "Fêtes", "en": "Holidays", "es": "Fiestas", "pt": "Festas", "ar": "الأعياد", "it": "Feste"}
 NAV_LABELS = {
     "fr": ("Vols", "Hôtels", "Voitures", "Bons plans", "Partout", "Guides", "Favoris", "Menu principal", "Escale, accueil"),
     "en": ("Flights", "Hotels", "Cars", "Deals", "Anywhere", "Guides", "Favorites", "Main menu", "Escale, home"),
     "es": ("Vuelos", "Hoteles", "Coches", "Ofertas", "Explorar", "Guías", "Favoritos", "Menú principal", "Escale, inicio"),
     "pt": ("Voos", "Hotéis", "Carros", "Promoções", "Explorar", "Guias", "Favoritos", "Menu principal", "Escale, início"),
     "ar": ("رحلات", "فنادق", "سيارات", "العروض", "استكشف", "أدلة", "المفضلة", "القائمة الرئيسية", "Escale، الرئيسية"),
+    "it": ("Voli", "Hotel", "Auto", "Offerte", "Ovunque", "Guide", "Preferiti", "Menu principale", "Escale, home"),
 }
 STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.8 6.6 19.7l1.1-6.1L3.2 9.4l6.1-.8z" fill="currentColor"/></svg>'
 PLANE = '<svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" fill="currentColor"/></svg>'
 
 
 HUB_LINK = {'en': 'All flights to {b}', 'es': 'Todos los vuelos a {b}', 'pt': 'Todos os voos para {b}', 'ar': 'كل الرحلات إلى {b}'}
-FAV_LABEL = {"fr": "Ajouter aux favoris", "en": "Add to favorites", "es": "Añadir a favoritos", "pt": "Adicionar aos favoritos", "ar": "أضف إلى المفضلة"}
+FAV_LABEL = {"fr": "Ajouter aux favoris", "en": "Add to favorites", "es": "Añadir a favoritos", "pt": "Adicionar aos favoritos", "ar": "أضف إلى المفضلة", "it": "Aggiungi ai preferiti"}
 
 
 # Chaîne WhatsApp « Escale – Bons plans vols »
 WA_CHANNEL = "https://whatsapp.com/channel/0029VbE28kB0LKZN7ypnGj0d"
-WA_LABEL = {"fr": "Chaîne WhatsApp", "en": "WhatsApp channel", "es": "Canal de WhatsApp", "pt": "Canal no WhatsApp", "ar": "قناة واتساب"}
+WA_LABEL = {"fr": "Chaîne WhatsApp", "en": "WhatsApp channel", "es": "Canal de WhatsApp", "pt": "Canal no WhatsApp", "ar": "قناة واتساب", "it": "Canale WhatsApp"}
 WA_JOIN = {"fr": "Rejoindre la chaîne WhatsApp des bons plans", "en": "Join our WhatsApp deals channel", "es": "Únete al canal de ofertas en WhatsApp",
-           "pt": "Junte-se ao canal de promoções no WhatsApp", "ar": "انضم إلى قناة العروض على واتساب"}
+           "pt": "Junte-se ao canal de promoções no WhatsApp", "ar": "انضم إلى قناة العروض على واتساب", "it": "Unisciti al canale WhatsApp delle offerte"}
 
 
 def wa_btn(lang):
     return f'<p class="wa-p"><a class="btn wa-btn" href="{WA_CHANNEL}" target="_blank" rel="noopener">{E(WA_JOIN[lang])}</a></p>'
 
 
-ALERT_LABEL = {"fr": "Alerte prix", "en": "Price alert", "es": "Alerta de precio", "pt": "Alerta de preço", "ar": "تنبيه السعر"}
+ALERT_LABEL = {"fr": "Alerte prix", "en": "Price alert", "es": "Alerta de precio", "pt": "Alerta de preço", "ar": "تنبيه السعر", "it": "Avviso prezzo"}
 
 
 def alert_btn(lang):
@@ -294,7 +299,7 @@ def fav_btn(lang, path, title, sub, kind):
 def site_header(lang, path, switch):
     """En-tête commun : logo, menu principal (la rubrique en cours est signalée) et choix de la langue."""
     n = NAV_LABELS[lang]
-    q = "" if lang == "fr" else "?lang=" + {"fr": "fr", "en": "en", "es": "es", "pt": "pt", "ar": "ar"}[lang]
+    q = "" if lang == "fr" else "?lang=" + UI[lang]["app_lang"]
     cur = lambda key: ' aria-current="page"' if path and (path == SECTION_PATHS[key][lang] or path.startswith(SECTION_PATHS[key][lang] + "/")) else ""
     sec = lambda key: "/" + SECTION_PATHS[key][lang] + "/"
     links = (f'<a href="/{q}">{n[0]}</a><a href="/{q}#hotels">{n[1]}</a><a href="/{q}#voitures">{n[2]}</a>'
@@ -355,8 +360,8 @@ HEAD = """<!doctype html>
 """
 
 
-HOME_NAME = {"fr": "Accueil", "en": "Home", "es": "Inicio", "pt": "Início", "ar": "الرئيسية"}
-GUIDES_DIR = {"fr": "guides", "en": "en/guides", "es": "es/guias", "pt": "pt/guias", "ar": "ar/guides"}
+HOME_NAME = {"fr": "Accueil", "en": "Home", "es": "Inicio", "pt": "Início", "ar": "الرئيسية", "it": "Home"}
+GUIDES_DIR = {"fr": "guides", "en": "en/guides", "es": "es/guias", "pt": "pt/guias", "ar": "ar/guides", "it": "en/guides"}
 
 
 def breadcrumb_ld(domain, path, lang, hero):
@@ -403,14 +408,14 @@ def write(site, path, lang, title, desc, hero, body, ld, paths, ctx, og="og-imag
         lang=lang, dir="rtl" if lang == "ar" else "ltr", tp=ctx["tp"], title=E(title), desc=E(desc),
         url=f"{ctx['domain']}/{path}/", alts=alternates(paths, ctx["domain"]), oglocale=LOCALE[lang], domain=ctx["domain"],
         ogimg=og, arpreload=('\n<link rel="preload" href="/fonts/noto-sans-arabic-arabic-378a89.woff2" as="font" type="font/woff2" crossorigin>' if lang == "ar" else ""), ld=ld, homeq="" if lang == "fr" else "?lang=" + u["app_lang"],
-        dealsp={"fr": "bons-plans", "en": "en/deals", "es": "es/ofertas", "pt": "pt/promocoes", "ar": "ar/deals"}[lang],
-        dealsl={"fr": "Bons plans", "en": "Deals", "es": "Ofertas", "pt": "Promoções", "ar": "العروض"}[lang],
-        aboutp={"fr": "a-propos", "en": "en/about", "es": "es/acerca-de", "pt": "pt/sobre", "ar": "ar/about"}[lang],
-        aboutl={"fr": "À propos", "en": "About", "es": "Acerca de", "pt": "Sobre", "ar": "عن Escale"}[lang],
-        fetesp={"fr": "vols-fetes", "en": "en/holiday-flights", "es": "es/vuelos-fiestas", "pt": "pt/voos-festas", "ar": "ar/holiday-flights"}[lang],
+        dealsp={"fr": "bons-plans", "en": "en/deals", "es": "es/ofertas", "pt": "pt/promocoes", "ar": "ar/deals", "it": "en/deals"}[lang],
+        dealsl={"fr": "Bons plans", "en": "Deals", "es": "Ofertas", "pt": "Promoções", "ar": "العروض", "it": "Offerte"}[lang],
+        aboutp={"fr": "a-propos", "en": "en/about", "es": "es/acerca-de", "pt": "pt/sobre", "ar": "ar/about", "it": "en/about"}[lang],
+        aboutl={"fr": "À propos", "en": "About", "es": "Acerca de", "pt": "Sobre", "ar": "عن Escale", "it": "Chi siamo"}[lang],
+        fetesp={"fr": "vols-fetes", "en": "en/holiday-flights", "es": "es/vuelos-fiestas", "pt": "pt/voos-festas", "ar": "ar/holiday-flights", "it": "en/holiday-flights"}[lang],
         wa=WA_CHANNEL, wal=WA_LABEL[lang],
-        fetesl={"fr": "Vols pour les fêtes", "en": "Holiday flights", "es": "Vuelos para las fiestas", "pt": "Voos para as festas", "ar": "رحلات الأعياد"}[lang],
-        guidesp={"fr": "guides", "en": "en/guides", "es": "es/guias", "pt": "pt/guias", "ar": "ar/guides"}[lang],
+        fetesl={"fr": "Vols pour les fêtes", "en": "Holiday flights", "es": "Vuelos para las fiestas", "pt": "Voos para as festas", "ar": "رحلات الأعياد", "it": "Voli per le feste"}[lang],
+        guidesp={"fr": "guides", "en": "en/guides", "es": "es/guias", "pt": "pt/guias", "ar": "ar/guides", "it": "en/guides"}[lang],
         header=site_header(lang, path, switcher(paths, lang)), hero=hero, body=body, home=E(u["home"]), legal=E(u["legal"]), privacy=E(u["privacy"]),
         cookies=E(u["cookies"]), disclaimer=E(u["disclaimer"]))
     d = site / path
@@ -591,6 +596,8 @@ BLOCKS = {
                go_h="Antes de salir", go_p="Servicios útiles para tu viaje a {c}.", go_btn="Ver oferta"),
     "pt": dict(cal_h="Calendário de preços", cal_p="Preço de ida e volta mais baixo encontrado para cada dia de partida. Clique num dia para pesquisar.",
                go_h="Antes de partir", go_p="Serviços úteis para a sua viagem a {c}.", go_btn="Ver oferta"),
+    "it": dict(cal_h="Calendario dei prezzi", cal_p="Prezzo andata e ritorno più basso trovato per ogni giorno di partenza. Clicca su un giorno per avviare la ricerca.",
+               go_h="Prima di partire", go_p="Servizi utili per il tuo viaggio a {c}.", go_btn="Vedi l’offerta"),
     "ar": dict(cal_h="تقويم الأسعار", cal_p="أقل سعر ذهاب وعودة وُجد لكل يوم مغادرة. انقر على يوم لبدء البحث.",
                go_h="قبل السفر", go_p="خدمات مفيدة لرحلتك إلى {c}.", go_btn="اعرض العرض"),
 }

@@ -12,14 +12,16 @@
         "en": "Hotels at the best price",
         "es": "Hoteles al mejor precio",
         "pt": "Hotéis ao melhor preço",
-        "ar": "فنادق بأفضل سعر"
+        "ar": "فنادق بأفضل سعر",
+        "it": "Hotel al miglior prezzo"
       },
       "desc": {
         "fr": "Booking, Expedia, Agoda… : vous êtes envoyé vers le site le moins cher pour votre destination.",
         "en": "Booking, Expedia, Agoda…: you are sent to the cheapest site for your destination.",
         "es": "Booking, Expedia, Agoda…: te enviamos al sitio más barato para tu destino.",
         "pt": "Booking, Expedia, Agoda…: é enviado para o site mais barato para o seu destino.",
-        "ar": "بوكينغ وإكسبيديا وأغودا…: نوجّهك إلى أرخص موقع لوجهتك."
+        "ar": "بوكينغ وإكسبيديا وأغودا…: نوجّهك إلى أرخص موقع لوجهتك.",
+        "it": "Booking, Expedia, Agoda…: ti inviamo al sito più economico per la tua destinazione."
       }
     },
     {
@@ -32,14 +34,16 @@
         "en": "International SIM (eSIM)",
         "es": "SIM internacional (eSIM)",
         "pt": "SIM internacional (eSIM)",
-        "ar": "شريحة دولية (eSIM)"
+        "ar": "شريحة دولية (eSIM)",
+        "it": "SIM internazionale (eSIM)"
       },
       "desc": {
         "fr": "Internet dès l’atterrissage, sans frais d’itinérance. S’installe en quelques minutes sur le téléphone.",
         "en": "Data as soon as you land, no roaming fees. Installs on your phone in minutes.",
         "es": "Internet nada más aterrizar, sin roaming. Se instala en el móvil en unos minutos.",
         "pt": "Internet assim que aterra, sem roaming. Instala-se no telemóvel em poucos minutos.",
-        "ar": "إنترنت فور الهبوط بلا رسوم تجوال. تُثبَّت على الهاتف في دقائق."
+        "ar": "إنترنت فور الهبوط بلا رسوم تجوال. تُثبَّت على الهاتف في دقائق.",
+        "it": "Internet appena atterri, senza costi di roaming. Si installa sul telefono in pochi minuti."
       },
       "affiliate": true
     },
@@ -53,14 +57,16 @@
         "en": "Car rental",
         "es": "Alquiler de coche",
         "pt": "Aluguer de carro",
-        "ar": "تأجير سيارة"
+        "ar": "تأجير سيارة",
+        "it": "Noleggio auto"
       },
       "desc": {
         "fr": "Comparez des centaines de loueurs sur place, souvent avec annulation gratuite.",
         "en": "Compare hundreds of local rental companies, often with free cancellation.",
         "es": "Compara cientos de empresas de alquiler locales, a menudo con cancelación gratuita.",
         "pt": "Compare centenas de empresas de aluguer locais, muitas vezes com cancelamento gratuito.",
-        "ar": "قارن مئات شركات التأجير المحلية، غالبًا مع إلغاء مجاني."
+        "ar": "قارن مئات شركات التأجير المحلية، غالبًا مع إلغاء مجاني.",
+        "it": "Confronta centinaia di noleggiatori sul posto, spesso con cancellazione gratuita."
       },
       "affiliate": true
     },
@@ -75,14 +81,16 @@
         "en": "Scooters, motorbikes and bikes",
         "es": "Scooters, motos y bicicletas",
         "pt": "Scooters, motas e bicicletas",
-        "ar": "دراجات نارية وسكوتر ودراجات"
+        "ar": "دراجات نارية وسكوتر ودراجات",
+        "it": "Scooter e moto"
       },
       "desc": {
         "fr": "Louez un deux-roues sur place pour vous déplacer librement, souvent moins cher qu’une voiture.",
         "en": "Rent a two-wheeler on arrival to get around freely, often cheaper than a car.",
         "es": "Alquila una moto o scooter allí para moverte libremente, a menudo más barato que un coche.",
         "pt": "Alugue uma mota ou scooter no destino para se deslocar à vontade, muitas vezes mais barato do que um carro.",
-        "ar": "استأجر دراجة نارية أو سكوتر عند الوصول للتنقل بحرية، وغالبًا أرخص من السيارة."
+        "ar": "استأجر دراجة نارية أو سكوتر عند الوصول للتنقل بحرية، وغالبًا أرخص من السيارة.",
+        "it": "Un mezzo a due ruote invece dell’auto: spesso più economico e comodo in città."
       }
     },
     {
@@ -95,14 +103,16 @@
         "en": "Travel insurance",
         "es": "Seguro de viaje",
         "pt": "Seguro de viagem",
-        "ar": "تأمين السفر"
+        "ar": "تأمين السفر",
+        "it": "Assicurazione di viaggio"
       },
       "desc": {
         "fr": "Frais médicaux, bagages, annulation : à comparer avant le départ, surtout hors d’Europe.",
         "en": "Medical costs, baggage, cancellation: compare before you leave, especially outside Europe.",
         "es": "Gastos médicos, equipaje, cancelación: compáralo antes de salir, sobre todo fuera de Europa.",
         "pt": "Despesas médicas, bagagem, cancelamento: compare antes de partir, sobretudo fora da Europa.",
-        "ar": "المصاريف الطبية والأمتعة والإلغاء: قارن قبل السفر، خاصة خارج أوروبا."
+        "ar": "المصاريف الطبية والأمتعة والإلغاء: قارن قبل السفر، خاصة خارج أوروبا.",
+        "it": "Spese mediche e imprevisti coperti durante il viaggio."
       }
     },
     {
@@ -115,14 +125,16 @@
         "en": "Airport – hotel transfer",
         "es": "Traslado aeropuerto – hotel",
         "pt": "Transfer aeroporto – hotel",
-        "ar": "التوصيل من المطار إلى الفندق"
+        "ar": "التوصيل من المطار إلى الفندق",
+        "it": "Transfer dall’aeroporto"
       },
       "desc": {
         "fr": "Un chauffeur vous attend à l’arrivée, prix fixé à l’avance. Pratique pour une arrivée de nuit.",
         "en": "A driver waits for you on arrival, price fixed in advance. Handy for a night arrival.",
         "es": "Un conductor te espera a la llegada, con precio cerrado. Práctico si llegas de noche.",
         "pt": "Um motorista espera por si à chegada, preço fixo. Prático para chegadas à noite.",
-        "ar": "سائق ينتظرك عند الوصول بسعر محدد مسبقًا. مناسب للوصول ليلًا."
+        "ar": "سائق ينتظرك عند الوصول بسعر محدد مسبقًا. مناسب للوصول ليلًا.",
+        "it": "Un autista ti aspetta all’arrivo, prezzo fisso prenotato in anticipo."
       },
       "affiliate": true
     },
@@ -136,14 +148,16 @@
         "en": "Attractions and museums",
         "es": "Atracciones y museos",
         "pt": "Atrações e museus",
-        "ar": "المعالم والمتاحف"
+        "ar": "المعالم والمتاحف",
+        "it": "Attività e biglietti"
       },
       "desc": {
         "fr": "Billets pour les musées, monuments et attractions, sur le téléphone, souvent sans faire la queue.",
         "en": "Tickets for museums, landmarks and attractions, on your phone, often skip-the-line.",
         "es": "Entradas para museos, monumentos y atracciones, en el móvil, a menudo sin colas.",
         "pt": "Bilhetes para museus, monumentos e atrações, no telemóvel, muitas vezes sem filas.",
-        "ar": "تذاكر المتاحف والمعالم والمعالم السياحية على هاتفك، وغالبًا دون انتظار في الطابور."
+        "ar": "تذاكر المتاحف والمعالم والمعالم السياحية على هاتفك، وغالبًا دون انتظار في الطابور.",
+        "it": "Musei, escursioni e visite guidate, da prenotare prima di partire."
       },
       "affiliate": true
     },
@@ -158,14 +172,16 @@
         "en": "Flight delayed or cancelled?",
         "es": "¿Vuelo retrasado o cancelado?",
         "pt": "Voo atrasado ou cancelado?",
-        "ar": "رحلة متأخرة أو ملغاة؟"
+        "ar": "رحلة متأخرة أو ملغاة؟",
+        "it": "Volo in ritardo o cancellato?"
       },
       "desc": {
         "fr": "Jusqu’à 600 € d’indemnisation selon le règlement européen (vols au départ de l’Europe ou sur une compagnie européenne). Vérification gratuite.",
         "en": "Up to €600 compensation under EU rules (flights from Europe or on a European airline). Free eligibility check.",
         "es": "Hasta 600 € de indemnización según la normativa europea (vuelos desde Europa o con aerolínea europea). Comprobación gratuita.",
         "pt": "Até 600 € de indemnização segundo as regras europeias (voos a partir da Europa ou em companhia europeia). Verificação gratuita.",
-        "ar": "تعويض يصل إلى 600 يورو وفق القواعد الأوروبية (رحلات من أوروبا أو على شركة طيران أوروبية). تحقق مجاني."
+        "ar": "تعويض يصل إلى 600 يورو وفق القواعد الأوروبية (رحلات من أوروبا أو على شركة طيران أوروبية). تحقق مجاني.",
+        "it": "Fino a 600 € di risarcimento: verifica gratuitamente il tuo diritto."
       }
     }
   ]

@@ -62,7 +62,8 @@
       en: ["Partner cookies", "With your consent, our partners Travelpayouts and Stay22 use cookies to know you came from Escale when you book. This keeps the site free. Declining changes nothing for your searches.", "Privacy policy", "Decline", "Accept"],
       es: ["Cookies de socios", "Con tu consentimiento, nuestros socios Travelpayouts y Stay22 usan cookies para saber que vienes de Escale cuando reservas. Así el sitio sigue siendo gratuito. Rechazar no cambia nada en tus búsquedas.", "Política de privacidad", "Rechazar", "Aceptar"],
       pt: ["Cookies de parceiros", "Com o seu consentimento, os nossos parceiros Travelpayouts e Stay22 usam cookies para saber que veio da Escale quando reserva. Isto mantém o site gratuito. Recusar não muda nada nas pesquisas.", "Saber mais", "Recusar", "Aceitar"],
-      ar: ["ملفات تعريف الارتباط للشركاء", "بموافقتك، يستخدم شريكانا Travelpayouts وStay22 ملفات تعريف الارتباط ليعرف أنك جئت من Escale عند الحجز. هذا ما يبقي الموقع مجانيًا. الرفض لا يغيّر شيئًا في عمليات البحث.", "سياسة الخصوصية", "رفض", "قبول"]
+      ar: ["ملفات تعريف الارتباط للشركاء", "بموافقتك، يستخدم شريكانا Travelpayouts وStay22 ملفات تعريف الارتباط ليعرف أنك جئت من Escale عند الحجز. هذا ما يبقي الموقع مجانيًا. الرفض لا يغيّر شيئًا في عمليات البحث.", "سياسة الخصوصية", "رفض", "قبول"],
+      it: ["Cookie dei partner", "Con il tuo consenso, i nostri partner Travelpayouts e Stay22 usano cookie per sapere che arrivi da Escale quando prenoti. Così il sito resta gratuito. Rifiutare non cambia nulla nelle ricerche.", "Informativa sulla privacy", "Rifiuta", "Accetta"]
     }[lang] || null;
     if (!M) M = ["Cookies partenaires", "Avec votre accord, nos partenaires Travelpayouts et Stay22 utilisent des cookies pour savoir que vous venez d’Escale quand vous réservez. Cela nous permet de rester gratuits. Refuser ne change rien aux recherches.", "Politique de confidentialité", "Refuser", "Accepter"];
     bar.setAttribute("aria-label", M[0]);
