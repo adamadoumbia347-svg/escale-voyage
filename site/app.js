@@ -698,14 +698,22 @@
       </li>`;
     }).join("") : `<li class="fl-empty">${esc(T("Aucun vol ne correspond à ces filtres : élargissez les escales ou la compagnie.", "No flight matches these filters: widen the stops or airline."))}</li>`;
   }
+  // Recherche d'hôtels en direct (/hotels-en-direct/, carte Stay22 en grand), comme les vols vont sur /recherche/.
+  // « Comparer aussi sur » de cette page revient ici avec cmp=1 : on affiche alors la liste des sites.
+  let hotelCmp = new URLSearchParams(location.search).get("cmp") === "1";
+  const hotelsLiveUrl = (s) => "/hotels-en-direct/?" + q({ ville: s.dest, arrivee: s.in, depart: s.out, adultes: s.adults, lang: LANG });
   function renderHotels(s) {
+    if (!hotelCmp) {
+      if (booting) location.replace(hotelsLiveUrl(s)); else location.href = hotelsLiveUrl(s);
+      return;
+    }
+    hotelCmp = false;
     const n = nights(s.in, s.out);
     show(`<div class="results-head"><h2>${T("Hôtels à", "Hotels in")} ${esc(s.dest)}</h2><span class="summary">${T("Tri du moins cher au plus cher", "Sorted from cheapest")}</span></div>` +
       pass(`${esc(s.dest.slice(0, 3).toUpperCase())}`, [[T("Arrivée", "Check-in"), human(s.in)], [T("Départ", "Check-out"), human(s.out)],
         [T("Voyageurs", "Guests"), `${s.adults} ${s.adults > 1 ? T("adultes", "adults") : T("adulte", "adult")} · ${s.rooms} ${T("ch.", "rm")}`]],
         `${n} ${T("N", "N")}`, n > 1 ? T("nuits", "nights") : T("nuit", "night")) +
-      `<h3 class="sub-h">${esc(fmt(T("Hôtels à {c} : prix en direct", "Hotels in {c}: live prices"), { c: s.dest }))}</h3>` +
-      `<iframe class="s22-frame" loading="lazy" title="${esc(fmt(T("Hôtels à {c}", "Hotels in {c}"), { c: s.dest }))}" src="${esc("https://www.stay22.com/embed/gm?" + q({ aid: "escalelive", address: s.dest, checkin: s.in, checkout: s.out, adults: s.adults, maincolor: "1A56DB", currency: CUR }))}"></iframe>` +
+      `<p><a class="go" href="${esc(hotelsLiveUrl(s))}">← ${esc(fmt(T("Hôtels à {c} : prix en direct", "Hotels in {c}: live prices"), { c: s.dest }))}</a></p>` +
       `<h3 class="sub-h">${T("Comparer aussi sur", "Also compare on")}</h3>` +
       shareBar("hotels", fmt(T("Hôtels à {c}", "Hotels in {c}"), { c: s.dest })) + providerList(hotelLinks(s)) + extrasSlot(s.dest));
     fillExtras(s.dest, "");

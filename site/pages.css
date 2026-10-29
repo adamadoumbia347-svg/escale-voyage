@@ -365,3 +365,9 @@ main .btn.wa-btn, .btn.wa-btn { background: #0f7a40; color: #fff; }
 .s22-ph { display: grid; place-items: center; height: 180px; border: 1px dashed var(--line); border-radius: 14px; background: var(--soft, #f5f7fa); }
 .s22-ph .btn { border: 0; cursor: pointer; font: 700 15px/1 var(--f-body, system-ui); }
 @media (max-width: 600px) { .s22-frame { height: 400px; } }
+.hl-form { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; margin: 8px 0 4px; }
+.hl-form .field { display: flex; flex-direction: column; gap: 4px; flex: 1 1 130px; }
+.hl-form .hl-city { flex: 2 1 220px; }
+.hl-form input, .hl-form select { font: inherit; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: #fff; min-height: 44px; }
+.hl-form .btn { border: 0; cursor: pointer; min-height: 44px; }
+.s22-frame.big { height: min(78vh, 780px); min-height: 520px; }

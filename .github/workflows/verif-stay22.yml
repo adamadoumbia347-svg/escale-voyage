@@ -22,16 +22,15 @@ jobs:
           cat > v.js <<JS
           const { chromium } = require('playwright');
           const urls = [
-            'https://www.stay22.com/embed/gm?aid=escalelive&address=Abidjan&checkin=$D1&checkout=$D2&maincolor=1A56DB&currency=EUR',
-            'https://escale.live/hotel-pas-cher-dakar/',
-            'https://escale.live/recherche/?flightSearch=CDG1012DSS20121',
+            'https://escale.live/?type=hotels&dest=Marrakech&in=$D1&out=$D2&ad=2',
+            'https://escale.live/hotels-en-direct/?ville=Dakar&arrivee=$D1&depart=$D2&adultes=2&lang=fr',
           ];
           (async () => {
             const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1000, height: 700 }, locale: 'fr-FR' });
             for (const u of urls) {
               const res = await p.goto(u, { waitUntil: 'networkidle', timeout: 60000 }).catch(e => null);
               const bt = await p.\$('.s22-map button'); if (bt) await bt.click();
-              await p.waitForTimeout(8000);
+              await p.waitForTimeout(12000);
               const fr = await p.\$\$eval('iframe[src*="stay22"]', l => l.map(f => f.src)).catch(() => []);
               console.log('iframes stay22 :', JSON.stringify(fr));
               for (const f of p.frames()) if (/stay22/.test(f.url())) {
