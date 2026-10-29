@@ -13,7 +13,7 @@ Une tâche planifiée de Claude ajoute une nouveauté au site tous les 2 jours, 
 - Guides : visa et passeport (généralités), voyager pendant le ramadan / la Tabaski,
   assurance voyage, voyager enceinte, vol de nuit,
   droits en cas de retard (règlement européen 261/2004), envoyer des colis au pays.
-- Trajets : nouvelles villes de départ (Rennes, Milan, Francfort, Bâle-Mulhouse, Barcelone…) vers l'Afrique et le Maghreb.
+- Trajets : nouvelles villes de départ (Milan, Francfort, Barcelone, Toulouse vers l'Afrique de l'Ouest, Clermont-Ferrand…) vers l'Afrique et le Maghreb.
 - Hôtels : Nairobi, Addis-Abeba, Libreville, Yaoundé, Niamey, Ouagadougou, Nouakchott.
 
 ## Journal
@@ -27,3 +27,4 @@ Une tâche planifiée de Claude ajoute une nouveauté au site tous les 2 jours, 
 | 2026-10-23 | 14 trajets depuis Montpellier (Alger, Oran, Constantine, Casablanca, Marrakech, Fès, Tunis) et Strasbourg (Alger, Oran, Casablanca, Marrakech, Tunis, Istanbul, Dakar) en 5 langues, avec images de partage — prochain : page hôtels |
 | 2026-10-25 | Page « Hôtel pas cher à Lagos » en 5 langues (`/hotel-pas-cher-lagos/`) — prochain : guide pratique |
 | 2026-10-27 | Guide « Correspondances et longues escales » en 5 langues (`/guides/correspondances-escales/`) — prochain : nouveaux trajets |
+| 2026-10-29 | 14 trajets depuis Rennes (Alger, Oran, Casablanca, Marrakech, Agadir, Tunis, Dakar) et Bâle-Mulhouse (Alger, Oran, Constantine, Casablanca, Marrakech, Tunis, Istanbul) en 5 langues, avec images de partage — prochain : page hôtels |
