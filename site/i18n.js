@@ -1,6 +1,8 @@
 // Traductions de l'accueil : clé = texte anglais, valeur = [espagnol, portugais, arabe].
 // Le français et l'anglais sont directement dans index.html (data-en) et app.js (T("fr", "en")).
 window.ESCALE_I18N = {
+  "Join our WhatsApp deals channel": ["Únete al canal de ofertas en WhatsApp", "Junte-se ao canal de promoções no WhatsApp", "انضم إلى قناة العروض على واتساب"],
+  "WhatsApp channel": ["Canal de WhatsApp", "Canal no WhatsApp", "قناة واتساب"],
   // Alerte prix dans les résultats
   "Tell me when {a} → {b} drops below my budget": ["Avísame cuando {a} → {b} baje de mi presupuesto", "Avise-me quando {a} → {b} descer abaixo do meu orçamento", "نبّهني عندما ينخفض {a} → {b} إلى أقل من ميزانيتي"],
   "Your email": ["Tu correo", "O seu e-mail", "بريدك الإلكتروني"],

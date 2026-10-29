@@ -241,7 +241,7 @@ HEAD = """<!doctype html>
 </div>
 </main>
 <footer class="wrap">
-  <nav class="foot-nav" aria-label="Pages du site"><a href="/">Comparer vols, hôtels et voitures</a><a href="/#guides">Guides des trajets</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/contact/">Contact</a><a href="/a-propos/">À propos</a><a href="/guides/">Guides</a><a href="/vols-fetes/">Vols pour les fêtes</a><a href="/bons-plans/">Bons plans</a><a href="/blog/">Blog</a><a href="/barometre-prix/">Baromètre des prix</a><a href="#cookies" data-open-consent>Gérer les cookies</a></nav>
+  <nav class="foot-nav" aria-label="Pages du site"><a href="/">Comparer vols, hôtels et voitures</a><a href="/#guides">Guides des trajets</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/contact/">Contact</a><a href="/a-propos/">À propos</a><a href="/guides/">Guides</a><a href="/vols-fetes/">Vols pour les fêtes</a><a href="/bons-plans/">Bons plans</a><a href="/blog/">Blog</a><a href="/barometre-prix/">Baromètre des prix</a><a href="https://whatsapp.com/channel/0029VbE28kB0LKZN7ypnGj0d" target="_blank" rel="noopener">Chaîne WhatsApp</a><a href="#cookies" data-open-consent>Gérer les cookies</a></nav>
   <p>Escale ne vend pas de billets et ne fixe aucun prix. Les durées et informations sont indicatives : les programmes des compagnies changent, vérifiez toujours sur le site de réservation.</p>
 </footer>
 <script src="/favs.js" defer></script>
@@ -279,7 +279,7 @@ def barometre_page():
             'Ils servent à repérer les tendances : le tarif exact dépend de vos dates et se confirme sur le site de réservation. '
             'Vous pouvez citer ce baromètre en mentionnant la source « Escale (escale.live) ».</p></section>'
             '<section><h2>Être prévenu quand un prix baisse</h2><p>Ouvrez la page de votre trajet dans le tableau et créez une alerte prix : vous recevez un e-mail dès qu\'un aller-retour passe sous votre budget.</p>'
-            '<p><a class="btn" href="/?type=vols">Comparer les prix des vols</a></p></section>')
+            '<p><a class="btn" href="/?type=vols">Comparer les prix des vols</a></p>' + build_i18n.wa_btn("fr") + '</section>')
     ld = '<script type="application/ld+json">' + __import__("json").dumps({
         "@context": "https://schema.org", "@type": "Dataset", "name": "Baromètre des prix des vols vers l'Afrique et le Maghreb",
         "description": "Prix aller-retour les plus bas repérés chaque jour sur les grands trajets entre l'Europe, l'Afrique et le Maghreb, avec leur évolution sur 7 et 30 jours.",
@@ -544,7 +544,7 @@ def main():
     urls += blog.build(page, E, DOMAIN, build_i18n.extras_html(SITE, "fr", "destination", "", ""))
     urls.append(barometre_page())
     urls += ete.build(page, E, lambda lang, c, c_en, code: build_i18n.extras_html(SITE, lang, c, c_en, code), build_i18n.alert_btn, DOMAIN,
-                      lambda p: (SITE / p / "index.html").exists(), lambda p: (SITE / p / "index.html").exists())
+                      lambda p: (SITE / p / "index.html").exists(), lambda p: (SITE / p / "index.html").exists(), build_i18n.wa_btn)
     urls.append(page("credits-photos", "Crédits des photos | Escale", "Auteurs et licences des photos de villes utilisées sur Escale (Wikimedia Commons).",
                      "<h1>Crédits des photos</h1>", villes.credits_body(SITE)))
 

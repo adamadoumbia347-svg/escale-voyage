@@ -337,3 +337,5 @@ a.cal-day { color: var(--ink); }
 .bt-up { color: #c0392b; font-weight: 700; }
 .bt-flat, .bt-na { color: var(--muted); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .bt-down { color: #4fd18b; } :root:not([data-theme="light"]) .bt-up { color: #ff7b6b; } }
+main .btn.wa-btn, .btn.wa-btn { background: #128c4a; color: #fff; }
+.wa-p { margin: 0 0 16px; }

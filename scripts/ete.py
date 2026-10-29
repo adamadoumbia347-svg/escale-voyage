@@ -147,7 +147,7 @@ def path(d):
     return f"{SLUG}-{d['slug']}"
 
 
-def build(page, E, extras_html, alert_btn, domain, route_exists, hub_exists):
+def build(page, E, extras_html, alert_btn, domain, route_exists, hub_exists, wa_btn):
     """Écrit les pages été (une par destination + la page d'ensemble). Renvoie les URL pour le sitemap."""
     urls = []
     for d in DEST:
@@ -176,6 +176,7 @@ def build(page, E, extras_html, alert_btn, domain, route_exists, hub_exists):
                 f'<section><h2>Depuis quel aéroport partir ?</h2>'
                 f'<table class="fete-table ete-table">{thead.format("Trajet (départ en juillet, retour en août)")}<tbody>{orig}</tbody></table></section>'
                 f'<section id="price-alert" class="price-alert" data-from="CDG" data-to="{code}" hidden></section>'
+                + f'<section><h2>Les bons plans chaque semaine</h2><p>Les prix les plus bas vers {E(v)} et l\'Afrique, chaque semaine sur WhatsApp, gratuitement.</p>{wa_btn("fr")}</section>'
                 f'<section><h2>Le temps à {E(v)} en juillet et en août</h2>' + "".join(f"<p>{E(x)}</p>" for x in d["climat"]) + "</section>"
                 f'<section><h2>À savoir pour l\'été {ANNEE}</h2><ul>' + "".join(f"<li>{E(x)}</li>" for x in d["conseils"]) + "</ul></section>"
                 '<section><h2>Quand réserver ?</h2><ul>'

@@ -479,6 +479,9 @@ button.cal-day:not(.off):hover { outline: 2px solid var(--accent); }
 .calc-table output.best { background: color-mix(in srgb, var(--ok) 14%, var(--surface)); border-color: var(--ok); color: var(--ok); }
 @media (max-width: 560px) { .calc-table { grid-template-columns: minmax(0, 1fr) repeat(3, minmax(0, 0.9fr)); gap: 6px; } .calc-table label, .calc-total-label { font-size: 12px; } .calc-table output { font-size: 13px; } }
 /* Inscription aux bons plans */
+.wa-p { margin: 0 0 16px; }
+.wa-btn { background: #128c4a; color: #fff; }
+.wa-btn:hover { background: #0f7a40; }
 .nl-block .nl { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: grid; gap: 12px; max-width: 760px; }
 .nl h2 { margin: 0; }
 .nl-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
@@ -1104,7 +1107,7 @@ footer { margin-top: 72px; }
 <form class="nl" name="bons-plans" method="POST" action="/api/form" novalidate>
   <input type="hidden" name="form-name" value="bons-plans"><input type="hidden" name="langue" value="fr">
   <p class="hp" hidden><label>Ne pas remplir <input name="site-web" tabindex="-1" autocomplete="off"></label></p>
-  <h2 data-en="Get the deals">Recevez les bons plans</h2><p class="small nl-lead" data-en="A selection of the best prices, once or twice a month, by email or on WhatsApp. Free, unsubscribe anytime.">Une sélection des meilleurs prix, une à deux fois par mois, par e-mail ou sur WhatsApp. Gratuit, désinscription à tout moment.</p>
+  <h2 data-en="Get the deals">Recevez les bons plans</h2><p class="wa-p"><a class="btn wa-btn" href="https://whatsapp.com/channel/0029VbE28kB0LKZN7ypnGj0d" target="_blank" rel="noopener" data-en="Join our WhatsApp deals channel">Rejoindre la chaîne WhatsApp des bons plans</a></p><p class="small nl-lead" data-en="A selection of the best prices, once or twice a month, by email or on WhatsApp. Free, unsubscribe anytime.">Une sélection des meilleurs prix, une à deux fois par mois, par e-mail ou sur WhatsApp. Gratuit, désinscription à tout moment.</p>
   <div class="nl-row"><label><span data-en="Email">E-mail</span><input type="email" name="email" autocomplete="email"></label>
   <label><span data-en="WhatsApp (optional)">WhatsApp (facultatif)</span><input type="tel" name="whatsapp" autocomplete="tel" placeholder="+33 6 12 34 56 78"></label></div>
   <label class="nl-consent"><input type="checkbox" name="consent" value="oui"> <span data-en="I agree to receive Escale deals. My details are used only for this; I can unsubscribe at any time.">J’accepte de recevoir les bons plans d’Escale. Mes coordonnées servent uniquement à cela ; je peux me désinscrire à tout moment.</span></label>
@@ -1167,7 +1170,7 @@ footer { margin-top: 72px; }
   </section>
 
   <footer>
-    <nav class="foot-nav" aria-label="Pages du site"><a href="/mentions-legales/" data-en="Legal notice">Mentions légales</a><a href="/confidentialite/" data-en="Privacy">Confidentialité</a><a href="/contact/">Contact</a><a href="/a-propos/" class="about-href" data-en="About">À propos</a><a href="/guides/" class="guides-href">Guides</a><a href="/bons-plans/" class="deals-href" data-en="Deals">Bons plans</a><a href="/#guides" data-en="Route guides">Guides des trajets</a><a href="#cookies" data-open-consent data-en="Cookie settings">Gérer les cookies</a></nav>
+    <nav class="foot-nav" aria-label="Pages du site"><a href="/mentions-legales/" data-en="Legal notice">Mentions légales</a><a href="/confidentialite/" data-en="Privacy">Confidentialité</a><a href="/contact/">Contact</a><a href="https://whatsapp.com/channel/0029VbE28kB0LKZN7ypnGj0d" target="_blank" rel="noopener" data-en="WhatsApp channel">Chaîne WhatsApp</a><a href="/a-propos/" class="about-href" data-en="About">À propos</a><a href="/guides/" class="guides-href">Guides</a><a href="/bons-plans/" class="deals-href" data-en="Deals">Bons plans</a><a href="/#guides" data-en="Route guides">Guides des trajets</a><a href="#cookies" data-open-consent data-en="Cookie settings">Gérer les cookies</a></nav>
     <p data-en="Escale does not sell tickets or set any prices. Each button opens the matching search on the partner site, where real prices are shown and where you book.">Escale ne vend pas de billets et ne fixe aucun prix. Chaque bouton ouvre la recherche correspondante sur le site partenaire, où s’affichent les prix réels et où se fait la réservation.</p>
     <p id="aff-note" data-en="Some links are partner links: if you book, Escale may earn a commission at no extra cost to you. That is what keeps the site free.">Certains liens sont des liens partenaires : si vous réservez, Escale peut toucher une commission, sans aucun surcoût pour vous. C’est ce qui permet au site de rester gratuit.</p>
     <p data-en="Prices and availability change constantly: always check the final fare, including baggage and fees, before paying.">Les prix et disponibilités changent en permanence : vérifiez toujours le tarif final, bagages et frais inclus, avant de payer.</p>

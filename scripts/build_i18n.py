@@ -265,6 +265,17 @@ HUB_LINK = {'en': 'All flights to {b}', 'es': 'Todos los vuelos a {b}', 'pt': 'T
 FAV_LABEL = {"fr": "Ajouter aux favoris", "en": "Add to favorites", "es": "Añadir a favoritos", "pt": "Adicionar aos favoritos", "ar": "أضف إلى المفضلة"}
 
 
+# Chaîne WhatsApp « Escale – Bons plans vols »
+WA_CHANNEL = "https://whatsapp.com/channel/0029VbE28kB0LKZN7ypnGj0d"
+WA_LABEL = {"fr": "Chaîne WhatsApp", "en": "WhatsApp channel", "es": "Canal de WhatsApp", "pt": "Canal no WhatsApp", "ar": "قناة واتساب"}
+WA_JOIN = {"fr": "Rejoindre la chaîne WhatsApp des bons plans", "en": "Join our WhatsApp deals channel", "es": "Únete al canal de ofertas en WhatsApp",
+           "pt": "Junte-se ao canal de promoções no WhatsApp", "ar": "انضم إلى قناة العروض على واتساب"}
+
+
+def wa_btn(lang):
+    return f'<p class="wa-p"><a class="btn wa-btn" href="{WA_CHANNEL}" target="_blank" rel="noopener">{E(WA_JOIN[lang])}</a></p>'
+
+
 ALERT_LABEL = {"fr": "Alerte prix", "en": "Price alert", "es": "Alerta de precio", "pt": "Alerta de preço", "ar": "تنبيه السعر"}
 
 
@@ -335,7 +346,7 @@ HEAD = """<!doctype html>
 </div>
 </main>
 <footer class="wrap">
-  <nav class="foot-nav"><a href="/{homeq}">{home}</a><a href="/mentions-legales/">{legal}</a><a href="/confidentialite/">{privacy}</a><a href="/contact/">Contact</a><a href="/{aboutp}/">{aboutl}</a><a href="/{guidesp}/">Guides</a><a href="/{fetesp}/">{fetesl}</a><a href="/{dealsp}/">{dealsl}</a><a href="#cookies" data-open-consent>{cookies}</a></nav>
+  <nav class="foot-nav"><a href="/{homeq}">{home}</a><a href="/mentions-legales/">{legal}</a><a href="/confidentialite/">{privacy}</a><a href="/contact/">Contact</a><a href="/{aboutp}/">{aboutl}</a><a href="/{guidesp}/">Guides</a><a href="/{fetesp}/">{fetesl}</a><a href="/{dealsp}/">{dealsl}</a><a href="{wa}" target="_blank" rel="noopener">{wal}</a><a href="#cookies" data-open-consent>{cookies}</a></nav>
   <p>{disclaimer}</p>
 </footer>
 <script src="/favs.js" defer></script>
@@ -397,6 +408,7 @@ def write(site, path, lang, title, desc, hero, body, ld, paths, ctx, og="og-imag
         aboutp={"fr": "a-propos", "en": "en/about", "es": "es/acerca-de", "pt": "pt/sobre", "ar": "ar/about"}[lang],
         aboutl={"fr": "À propos", "en": "About", "es": "Acerca de", "pt": "Sobre", "ar": "عن Escale"}[lang],
         fetesp={"fr": "vols-fetes", "en": "en/holiday-flights", "es": "es/vuelos-fiestas", "pt": "pt/voos-festas", "ar": "ar/holiday-flights"}[lang],
+        wa=WA_CHANNEL, wal=WA_LABEL[lang],
         fetesl={"fr": "Vols pour les fêtes", "en": "Holiday flights", "es": "Vuelos para las fiestas", "pt": "Voos para as festas", "ar": "رحلات الأعياد"}[lang],
         guidesp={"fr": "guides", "en": "en/guides", "es": "es/guias", "pt": "pt/guias", "ar": "ar/guides"}[lang],
         header=site_header(lang, path, switcher(paths, lang)), hero=hero, body=body, home=E(u["home"]), legal=E(u["legal"]), privacy=E(u["privacy"]),
@@ -654,7 +666,7 @@ def build_deals(site, ctx):
         body = ('<section id="deals"><div class="chips deal-origins" id="deal-origins" role="group"></div>'
                 '<div class="deal-grid" id="deal-grid">' + '<div class="ex-skel"></div>' * 12 + '</div></section>'
                 '<script src="/deals.js" defer></script>'
-                '<section class="nl-block">' + NEWSLETTER[lang] + '</section><script src="/newsletter.js" defer></script>')
+                '<section class="nl-block">' + wa_btn(lang) + NEWSLETTER[lang] + '</section><script src="/newsletter.js" defer></script>')
         urls.append(write(site, d["path"], lang, d["title"] + " | Escale", d["desc"], hero, body, "", paths, ctx))
     return urls
 
