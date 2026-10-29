@@ -34,7 +34,7 @@ jobs:
             const vals = async () => p.evaluate(() => { const r = document.querySelector('#tpwl-search')?.shadowRoot; if (!r) return null;
               return [...r.querySelectorAll('input')].map(i => (i.name || i.type) + '=' + i.value).join(' ; '); });
             // 1. Paramètres d'adresse possibles pour préremplir le formulaire
-            const tests = ['', '?origin=CDG&destination=DSS&depart_date=2026-12-10&return_date=2026-12-20&adults=1',
+            const tests = ['', '?origin=LYS', '?origin_iata=LYS', '?flightSearch=LYS', '?origin=BRU&adults=1', '?origin=CDG&destination=DSS&depart_date=2026-12-10&return_date=2026-12-20&adults=1',
               '?origin_iata=CDG&destination_iata=DSS&depart_date=2026-12-10&return_date=2026-12-20',
               '?flightSearch=CDG1012DSS20121', '?params=CDG1012DSS20121', '#/flights/CDG1012DSS20121', '?search=CDG1012DSS20121'];
             for (const t of tests) {
