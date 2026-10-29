@@ -46,19 +46,23 @@ jobs:
             const dd = (n) => { const d = new Date(Date.now() + n * 864e5); return String(d.getUTCDate()).padStart(2, '0') + String(d.getUTCMonth() + 1).padStart(2, '0'); };
             await p.goto(base + '?flightSearch=CDG' + dd(45) + 'DSS' + dd(52) + '1', { waitUntil: 'networkidle' }); await p.waitForTimeout(6000);
             console.log('Formulaire :', await vals());
-            const txt = (sel) => p.evaluate((sel) => { const r = document.querySelector(sel)?.shadowRoot; if (!r) return '';
-              return [...r.querySelectorAll('*')].filter(e => !['STYLE', 'SCRIPT'].includes(e.tagName) && !e.children.length).map(e => e.textContent.trim()).filter(Boolean).join(' | ').slice(0, 900); }, sel);
+            const txt = (sel) => p.evaluate((sel) => {
+              const out = []; const walk = (n) => { if (!n) return; if (n.nodeType === 3) { const t = n.textContent.trim(); if (t) out.push(t); return; }
+                if (n.tagName === 'STYLE' || n.tagName === 'SCRIPT') return; if (n.shadowRoot) walk(n.shadowRoot); n.childNodes && n.childNodes.forEach(walk); };
+              walk(document.querySelector(sel)); return out.join(' | ').slice(0, 1200); }, sel);
+            const api = []; p.on('response', (r) => { const u = r.url(); if (/apistp|aviasales|tpemb|travelpayouts/.test(u) && !/\.(js|css|woff2?|svg|png)(\?|$)/.test(u)) api.push(r.status() + ' ' + u.slice(0, 140)); });
             await p.keyboard.press('Escape').catch(() => {}); await p.waitForTimeout(1000);
             const modal = await p.evaluate(() => { const m = document.querySelector('#tpwl-modals'); return m ? (m.shadowRoot || m).textContent.replace(/\s+/g, ' ').slice(0, 200) : ''; });
             console.log('Fenêtre ouverte :', modal || '(aucune)');
             console.log('Résultats sans clic :', await txt('#tpwl-tickets'));
             // Case à cocher sous le formulaire : texte, puis on la décoche (elle ouvre Booking.com à la place du site)
             const cb = await p.evaluate(() => { const r = document.querySelector('#tpwl-search').shadowRoot; const c = r.querySelector('input[type=checkbox]');
-              if (!c) return null; const lab = (c.closest('label') || c.parentElement); const t = lab ? lab.textContent.trim() : ''; if (c.checked) c.click(); return t + ' | cochée après : ' + c.checked; });
+              if (!c) return null; const lab = (c.closest('label') || c.parentElement); const t = lab ? lab.textContent.trim() : ''; const avant = c.checked; if (c.checked) c.click(); return t + ' | cochée au chargement : ' + avant; });
             console.log('Case à cocher :', cb);
             const pages = []; p.context().on('page', (np) => pages.push(np));
             await p.evaluate(() => { const r = document.querySelector('#tpwl-search').shadowRoot; const a = [...r.querySelectorAll('a')].find(x => /Recherche de vols/.test(x.textContent)); if (a) a.click(); });
-            await p.waitForTimeout(30000);
+            await p.waitForTimeout(45000);
+            console.log('Requêtes du moteur :', JSON.stringify(api.slice(-15)));
             console.log('Adresse de la page Escale après recherche :', p.url());
             for (const np of pages) console.log('Nouvel onglet :', np.url().slice(0, 300));
             const host = p.url().includes('escale.live') ? p : null;
