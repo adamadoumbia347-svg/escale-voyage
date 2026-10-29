@@ -1200,8 +1200,7 @@ footer { margin-top: 72px; }
 <script src="/favs.js" defer></script>
 <script>
 (function () {
-  var s = document.createElement("script"); s.async = 1; s.type = "module";
-  s.src = "https://tpemb.com/wl_web/main.js?wl_id=24006"; document.head.appendChild(s);
+  var s = document.createElement("script"); s.src = "/wl.js"; s.defer = true; document.head.appendChild(s);
   // Si le moteur ne s'affiche pas (bloqué, hors ligne), on remet le formulaire d'Escale
   setTimeout(function () {
     var w = document.getElementById("tpwl-search");
