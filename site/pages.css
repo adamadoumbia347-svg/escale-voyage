@@ -395,11 +395,20 @@ span.rs-arr { opacity: .35; }
 .s22-ph { display: grid; place-items: center; height: 180px; border: 1px dashed var(--line); border-radius: 14px; background: var(--soft, #f5f7fa); }
 .s22-ph .btn { border: 0; cursor: pointer; font: 700 15px/1 var(--f-body, system-ui); }
 @media (max-width: 600px) { .s22-frame { height: 400px; } }
-.hl-form { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; margin: 8px 0 4px; }
-.hl-form .field { display: flex; flex-direction: column; gap: 4px; flex: 1 1 130px; }
-.hl-form .hl-city { flex: 2 1 220px; }
-.hl-form input, .hl-form select { font: inherit; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface, #fff); color: var(--ink); min-height: 44px; }
-.hl-form .btn { border: 0; cursor: pointer; min-height: 44px; }
+/* Formulaire de recherche d'hôtels façon Booking : cadre jaune, champs modifiables directement, gros bouton bleu */
+.hl-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); box-sizing: border-box; width: 100%; gap: 4px; padding: 4px; margin: 10px 0 14px; background: #febb02; border-radius: 10px; }
+.hl-form .field { position: relative; display: flex; flex-direction: column; justify-content: center; min-height: 56px; min-width: 0; box-sizing: border-box; padding: 6px 10px 6px 42px; background: var(--surface, #fff); border-radius: 6px; }
+.hl-form .hl-city, .hl-form .hl-ad, .hl-form .btn { grid-column: 1 / -1; }
+.hl-form .field::before { content: ""; position: absolute; left: 12px; top: 50%; width: 22px; height: 22px; margin-top: -11px; background: var(--muted); -webkit-mask: var(--ico) center / contain no-repeat; mask: var(--ico) center / contain no-repeat; }
+.hl-form .hl-city { --ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9a4 4 0 0 0-4-4z'/%3E%3C/svg%3E"); }
+.hl-form .hl-date { --ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 2h2v2h6V2h2v2h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3V2zm12 8H5v9h14v-9z'/%3E%3C/svg%3E"); }
+.hl-form .hl-ad { --ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9zm0 2c-4.4 0-8 2.2-8 5v2h16v-2c0-2.8-3.6-5-8-5z'/%3E%3C/svg%3E"); }
+.hl-form label { font-size: 12px; font-weight: 600; color: var(--muted); line-height: 1.2; }
+.hl-form input, .hl-form select { width: 100%; padding: 2px 0; border: 0; background: transparent; color: var(--ink); font: 600 16px/1.3 var(--f-body, system-ui); min-height: 26px; -webkit-appearance: none; appearance: none; }
+.hl-form input:focus, .hl-form select:focus { outline: none; }
+.hl-form .field:focus-within { box-shadow: 0 0 0 2px var(--accent) inset; }
+.hl-form .btn { display: flex; align-items: center; justify-content: center; width: 100%; box-sizing: border-box; margin: 0; min-height: 52px; border: 0; border-radius: 6px; background: #1a56db; color: #fff; font: 700 18px/1 var(--f-body, system-ui); cursor: pointer; }
+@media (min-width: 900px) { .hl-form { grid-template-columns: 2fr 1fr 1fr 1fr auto; } .hl-form .hl-city, .hl-form .hl-ad, .hl-form .btn { grid-column: auto; } .hl-form .btn { padding: 0 28px; width: auto; } .hl-form { grid-template-columns: minmax(0, 1.6fr) minmax(170px, 1fr) minmax(170px, 1fr) minmax(120px, .7fr) auto; } }
 .hl-switch { display: inline-flex; gap: 4px; padding: 4px; margin: 0 0 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface, #fff); }
 .hl-switch button { border: 0; background: none; padding: 9px 16px; min-height: 40px; border-radius: 999px; font: 600 15px/1 var(--f-body, system-ui); color: inherit; cursor: pointer; }
 .hl-switch button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
@@ -407,5 +416,5 @@ span.rs-arr { opacity: .35; }
 #hl-live, #hl-cmp { display: none; }
 .hl-q #hl-live, .hl-q #hl-cmp { display: block; }
 .hl-q #hl-live { min-height: calc(max(520px, min(78vh, 780px)) + 64px); }
-.hl-q #hl-form:not(.open), .hl-q #hl-sum { display: none; }
+.hl-q #hl-sum, .hl-q .eyebrow { display: none; }
 .s22-frame.big { height: min(78vh, 780px); min-height: 520px; }

@@ -101,32 +101,6 @@
       box.appendChild(sw); box.appendChild(fr); box.hidden = false;
       f("hl-cmp-a").href = "/?" + new URLSearchParams({ type: "hotels", dest: city, in: inD, out: outD, ad: String(ad), cmp: "1" }).toString();
       f("hl-cmp").hidden = false;
-      // Barre compacte comme la recherche de vols : ville, nuits et adultes, « Modifier » rouvre le formulaire ; dates avec ‹ ›
-      var B = { fr: ["{n} nuit(s) · {p} adulte(s)", "Modifier", "Arrivée", "Départ", "un jour plus tôt", "un jour plus tard"],
-        en: ["{n} night(s) · {p} adult(s)", "Edit", "Check-in", "Check-out", "one day earlier", "one day later"],
-        es: ["{n} noche(s) · {p} adulto(s)", "Modificar", "Llegada", "Salida", "un día antes", "un día después"],
-        pt: ["{n} noite(s) · {p} adulto(s)", "Alterar", "Entrada", "Saída", "um dia antes", "um dia depois"],
-        ar: ["{n} ليلة · {p} بالغ", "تعديل", "الوصول", "المغادرة", "يوم قبل", "يوم بعد"],
-        it: ["{n} notte/i · {p} adulto/i", "Modifica", "Arrivo", "Partenza", "un giorno prima", "un giorno dopo"] }[lg];
-      var bar = f("rs-bar"), formEl = f("hl-form");
-      var go = function (a, b) { return "/hotels-en-direct/?" + new URLSearchParams({ ville: city, arrivee: a, depart: b, adultes: String(ad), lang: lg }).toString(); };
-      var addD = function (x, n) { var d = new Date(x + "T12:00:00"); d.setDate(d.getDate() + n); return iso(d); };
-      var arr = function (href, label, txt, off) { return off ? '<span class="rs-arr" aria-hidden="true">' + txt + "</span>" : '<a class="rs-arr" href="' + href + '" aria-label="' + label + '">' + txt + "</a>"; };
-      var esc2 = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
-      var dayL = function (x) { try { return new Date(x + "T12:00:00").toLocaleDateString(lg, { weekday: "short", day: "numeric", month: "short" }); } catch (e) { return x; } };
-      var pIn = addD(inD, -1), nIn = addD(inD, 1), pOut = addD(outD, -1), nOut = addD(outD, 1);
-      bar.innerHTML = '<button type="button" class="rs-sum" aria-expanded="false" aria-controls="hl-form">' +
-        '<span class="rs-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M10 2a8 8 0 0 1 6.3 12.9l5.4 5.4-1.4 1.4-5.4-5.4A8 8 0 1 1 10 2zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"/></svg></span>' +
-        '<span class="rs-txt"><strong>' + esc2(city) + "</strong><small>" + esc2(B[0].replace("{n}", nights).replace("{p}", ad)) + "</small></span>" +
-        '<span class="rs-edit">' + B[1] + "</span></button>" +
-        '<div class="rs-dates"><div class="rs-date">' + arr(go(pIn, outD), B[2] + " " + B[4], "‹", pIn < iso(new Date())) + "<span>" + esc2(dayL(inD)) + "</span>" +
-        arr(go(nIn, nIn < outD ? outD : addD(nIn, 1)), B[2] + " " + B[5], "›", false) + '</div><div class="rs-date">' +
-        arr(go(inD, pOut), B[3] + " " + B[4], "‹", pOut <= inD) + "<span>" + esc2(dayL(outD)) + "</span>" + arr(go(inD, nOut), B[3] + " " + B[5], "›", false) + "</div></div>";
-      bar.querySelector(".rs-sum").addEventListener("click", function () {
-        var open = formEl.classList.toggle("open");
-        this.setAttribute("aria-expanded", open ? "true" : "false");
-        if (open) f("hl-ville").focus();
-      });
     } else f("hl-ville").focus();
     return;
   }
