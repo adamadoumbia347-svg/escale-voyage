@@ -368,6 +368,9 @@ main .btn.wa-btn, .btn.wa-btn { background: #0f7a40; color: #fff; }
 .hl-form { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; margin: 8px 0 4px; }
 .hl-form .field { display: flex; flex-direction: column; gap: 4px; flex: 1 1 130px; }
 .hl-form .hl-city { flex: 2 1 220px; }
-.hl-form input, .hl-form select { font: inherit; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: #fff; min-height: 44px; }
+.hl-form input, .hl-form select { font: inherit; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface, #fff); color: var(--ink); min-height: 44px; }
 .hl-form .btn { border: 0; cursor: pointer; min-height: 44px; }
+.hl-switch { display: inline-flex; gap: 4px; padding: 4px; margin: 0 0 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface, #fff); }
+.hl-switch button { border: 0; background: none; padding: 9px 16px; min-height: 40px; border-radius: 999px; font: 600 15px/1 var(--f-body, system-ui); color: inherit; cursor: pointer; }
+.hl-switch button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
 .s22-frame.big { height: min(78vh, 780px); min-height: 520px; }

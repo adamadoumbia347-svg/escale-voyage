@@ -38,27 +38,27 @@
     var P = new URLSearchParams(location.search), lg = P.get("lang") || "";
     if (!/^(fr|en|es|pt|ar|it)$/.test(lg)) lg = "fr";
     var H = {
-      fr: { title: "Hôtels à {c}", sum: "{a} → {b} · {n} nuit(s) · {p} adulte(s). Prix en direct de Booking, Expedia, Agoda, Hotels.com… Cliquez sur un hôtel pour voir l’offre ; « Afficher la liste » pour les voir du moins cher au plus cher." },
+      fr: { title: "Hôtels à {c}", sum: "{a} → {b} · {n} nuit(s) · {p} adulte(s). Prix en direct de Booking, Expedia, Agoda, Hotels.com… Cliquez sur un hôtel pour voir l’offre." },
       en: { eyebrow: "Live prices", title: "Hotels in {c}", lead: "Real-time prices from Booking, Expedia, Agoda, Hotels.com and more, on a map. Click a hotel to see the deal and book on the partner’s site.",
         city: "Destination", in: "Check-in", out: "Check-out", adults: "Adults", go: "Search", cmp_h: "Also compare on",
         note: "Map provided by our partner Stay22. Escale does not sell hotel nights: the final price and conditions are shown on the booking site. Escale may earn a commission if you book, at no cost to you.",
-        sum: "{a} → {b} · {n} night(s) · {p} adult(s). Live prices from Booking, Expedia, Agoda, Hotels.com… Click a hotel to see the deal; use the list view to sort by price." },
+        sum: "{a} → {b} · {n} night(s) · {p} adult(s). Live prices from Booking, Expedia, Agoda, Hotels.com… Click a hotel to see the deal.", list: "Hotel list", map: "View on map" },
       es: { eyebrow: "Precios en directo", title: "Hoteles en {c}", lead: "Precios en tiempo real de Booking, Expedia, Agoda, Hotels.com y otros, en un mapa. Haz clic en un hotel para ver la oferta.",
         city: "Destino", in: "Llegada", out: "Salida", adults: "Adultos", go: "Buscar", cmp_h: "Comparar también en",
         note: "Mapa de nuestro socio Stay22. Escale no vende noches de hotel: el precio final aparece en el sitio de reserva. Escale puede recibir una comisión, sin coste para ti.",
-        sum: "{a} → {b} · {n} noche(s) · {p} adulto(s). Precios en directo de Booking, Expedia, Agoda, Hotels.com… Haz clic en un hotel para ver la oferta." },
+        sum: "{a} → {b} · {n} noche(s) · {p} adulto(s). Precios en directo de Booking, Expedia, Agoda, Hotels.com… Haz clic en un hotel para ver la oferta.", list: "Lista de hoteles", map: "Ver en el mapa" },
       pt: { eyebrow: "Preços ao vivo", title: "Hotéis em {c}", lead: "Preços em tempo real da Booking, Expedia, Agoda, Hotels.com e outros, num mapa. Clique num hotel para ver a oferta.",
         city: "Destino", in: "Entrada", out: "Saída", adults: "Adultos", go: "Pesquisar", cmp_h: "Comparar também em",
         note: "Mapa do nosso parceiro Stay22. A Escale não vende noites de hotel: o preço final aparece no site de reserva. A Escale pode receber uma comissão, sem custo para si.",
-        sum: "{a} → {b} · {n} noite(s) · {p} adulto(s). Preços ao vivo da Booking, Expedia, Agoda, Hotels.com… Clique num hotel para ver a oferta." },
+        sum: "{a} → {b} · {n} noite(s) · {p} adulto(s). Preços ao vivo da Booking, Expedia, Agoda, Hotels.com… Clique num hotel para ver a oferta.", list: "Lista de hotéis", map: "Ver no mapa" },
       ar: { eyebrow: "أسعار مباشرة", title: "فنادق {c}", lead: "أسعار مباشرة من بوكينغ وإكسبيديا وأغودا وغيرها على خريطة. انقر على فندق لعرض العرض.",
         city: "الوجهة", in: "الوصول", out: "المغادرة", adults: "البالغون", go: "بحث", cmp_h: "قارن أيضاً على",
         note: "خريطة من شريكنا Stay22. لا تبيع Escale ليالي الفنادق: يظهر السعر النهائي على موقع الحجز. قد تحصل Escale على عمولة دون أي تكلفة عليك.",
-        sum: "{a} ← {b} · {n} ليلة · {p} بالغ. أسعار مباشرة من بوكينغ وإكسبيديا وأغودا… انقر على فندق لعرض العرض." },
+        sum: "{a} ← {b} · {n} ليلة · {p} بالغ. أسعار مباشرة من بوكينغ وإكسبيديا وأغودا… انقر على فندق لعرض العرض.", list: "قائمة الفنادق", map: "عرض على الخريطة" },
       it: { eyebrow: "Prezzi in diretta", title: "Hotel a {c}", lead: "Prezzi in tempo reale di Booking, Expedia, Agoda, Hotels.com e altri, su una mappa. Clicca su un hotel per vedere l’offerta.",
         city: "Destinazione", in: "Arrivo", out: "Partenza", adults: "Adulti", go: "Cerca", cmp_h: "Confronta anche su",
         note: "Mappa fornita dal nostro partner Stay22. Escale non vende notti d’hotel: il prezzo finale appare sul sito di prenotazione. Escale può ricevere una commissione, senza costi per te.",
-        sum: "{a} → {b} · {n} notte/i · {p} adulto/i. Prezzi in diretta di Booking, Expedia, Agoda, Hotels.com… Clicca su un hotel per vedere l’offerta." }
+        sum: "{a} → {b} · {n} notte/i · {p} adulto/i. Prezzi in diretta di Booking, Expedia, Agoda, Hotels.com… Clicca su un hotel per vedere l’offerta.", list: "Elenco degli hotel", map: "Vedi sulla mappa" }
     }[lg];
     if (lg !== "fr") {
       document.documentElement.lang = lg; if (lg === "ar") document.documentElement.dir = "rtl";
@@ -84,9 +84,21 @@
       document.title = title + " : prix en direct | Escale";
       var box = f("hl-live");
       f("hl-sum").textContent = H.sum.replace("{a}", fmtD(inD)).replace("{b}", fmtD(outD)).replace("{n}", nights).replace("{p}", ad);
-      var fr = frame(url(city, inD, outD) + "&adults=" + ad, title);
+      // Liste des hôtels d'abord (viewmode=listview), bouton pour passer à la carte (viewmode=map)
+      var base = url(city, inD, outD) + "&adults=" + ad, fr = frame(base + "&viewmode=listview", title);
       fr.loading = "eager"; fr.className += " big";
-      box.appendChild(fr); box.hidden = false;
+      var sw = document.createElement("div"); sw.className = "hl-switch"; sw.setAttribute("role", "group");
+      [["listview", H.list || "Liste des hôtels"], ["map", H.map || "Voir sur la carte"]].forEach(function (v, i) {
+        var b = document.createElement("button"); b.type = "button"; b.textContent = v[1];
+        b.setAttribute("aria-pressed", i === 0 ? "true" : "false");
+        b.addEventListener("click", function () {
+          if (b.getAttribute("aria-pressed") === "true") return;
+          Array.prototype.forEach.call(sw.children, function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+          fr.src = base + "&viewmode=" + v[0];
+        });
+        sw.appendChild(b);
+      });
+      box.appendChild(sw); box.appendChild(fr); box.hidden = false;
       f("hl-cmp-a").href = "/?" + new URLSearchParams({ type: "hotels", dest: city, in: inD, out: outD, ad: String(ad), cmp: "1" }).toString();
       f("hl-cmp").hidden = false;
     } else f("hl-ville").focus();
