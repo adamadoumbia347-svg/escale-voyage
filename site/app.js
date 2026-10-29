@@ -413,6 +413,11 @@
   }
   const stopsText = (n) => n === 0 ? T("vol direct", "direct") : n === 1 ? T("1 escale", "1 stop") : fmt(T("{n} escales", "{n} stops"), { n });
 
+  // Moteur de recherche en direct d'Escale (/recherche/, White Label Travelpayouts), prérempli : « CDG1012DSS20121 »
+  function liveUrl(s) {
+    const ddmm = (x) => x.slice(8, 10) + x.slice(5, 7);
+    return `/recherche/?flightSearch=${s.from.code}${ddmm(s.dep)}${s.to.code}${s.ret ? ddmm(s.ret) : ""}${s.adults}`;
+  }
   // Lien Aviasales (partenaire Travelpayouts) pour des dates précises
   function aviasalesUrl(s, dep, ret) {
     const ddmm = (x) => x.slice(8, 10) + x.slice(5, 7);
@@ -480,6 +485,7 @@
       <p class="summary" id="fl-note" aria-live="polite">${esc(T("Recherche des meilleurs prix…", "Looking for the best prices…"))}</p>
       <ul class="fl-list" id="fl-list">${skel}</ul>
       ${AFFILIATE.travelpayouts_marker ? `<p class="av-all"><a class="btn" href="${esc(aviasalesUrl(s, s.dep, s.ret))}" target="_blank" rel="sponsored noopener noreferrer">${T("Voir tous les vols sur Aviasales", "See all flights on Aviasales")} →</a></p>` : ""}
+      <p class="av-all"><a class="btn ghost" href="${esc(liveUrl(s))}">${T("Comparer en direct toutes les agences", "Compare all agencies live")} →</a></p>
       <div id="app-alert" class="app-alert" hidden></div>
       <div id="trip-kit" class="trip-kit" hidden></div>
       <div id="cmp-wrap"><h3 class="sub-h">${T("Comparer aussi sur", "Also compare on")}</h3>${compareRow(links.filter((l) => l.k !== "aviasales"))}</div>` + share + extrasSlot(s.to.name));

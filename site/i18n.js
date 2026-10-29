@@ -1,6 +1,8 @@
 // Traductions de l'accueil : clé = texte anglais, valeur = [espagnol, portugais, arabe].
 // Le français et l'anglais sont directement dans index.html (data-en) et app.js (T("fr", "en")).
 window.ESCALE_I18N = {
+  "Compare all agencies live": ["Comparar en directo todas las agencias", "Comparar ao vivo todas as agências", "قارن كل الوكالات مباشرة"],
+  "Live prices": ["En directo", "Ao vivo", "أسعار مباشرة"],
   "Aviasales prices": ["Precios de Aviasales", "Preços da Aviasales", "أسعار Aviasales"],
   "Flights found on Aviasales, our partner: click a flight to book it.": ["Vuelos encontrados en Aviasales, nuestro socio: haz clic en un vuelo para reservarlo.", "Voos encontrados na Aviasales, o nosso parceiro: clique num voo para o reservar.", "رحلات وُجدت على Aviasales، شريكنا: انقر على رحلة لحجزها."],
   "See all flights on Aviasales": ["Ver todos los vuelos en Aviasales", "Ver todos os voos na Aviasales", "عرض كل الرحلات على Aviasales"],

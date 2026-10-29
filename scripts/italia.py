@@ -93,7 +93,7 @@ def build(site, ctx):
   <h1>Voli economici {E(a)} <span>→</span> {E(b)}</h1>
   <p class="codes" dir="ltr">{fr_} → {to}</p>
   <p class="hero-price" id="hero-price" hidden></p>
-  <div class="cta-row"><a class="btn" href="{E(B.av_link(fr_, to))}" data-av="{fr_}-{to}" target="_blank" rel="sponsored noopener">Vedi i prezzi su Aviasales</a><a class="btn ghost" href="{E(app)}">Confronta i siti</a>{B.alert_btn("it")}</div>"""
+  <div class="cta-row"><a class="btn" href="{E(B.av_link(fr_, to))}" data-av="{fr_}-{to}" target="_blank" rel="sponsored noopener">Vedi i prezzi su Aviasales</a><a class="btn ghost" href="/recherche/" data-wl="{fr_}-{to}">Prezzi in diretta</a>{B.alert_btn("it")}</div>"""
         body = f"""<dl class="facts">
   <div><dt>Durata del volo</dt><dd>{E(dur[0].upper() + dur[1:])}</dd></div>
   <div><dt>Arrivo</dt><dd>{E(airport)} ({to})</dd></div>

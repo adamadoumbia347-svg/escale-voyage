@@ -11,6 +11,13 @@
     var dep = new Date(Date.now() + 45 * 864e5), ret = new Date(dep.getTime() + 7 * 864e5);
     a.href = "https://www.aviasales.com/search/" + p[0] + ddmm(dep) + p[1] + ddmm(ret) + "1?marker=" + m + "&currency=eur";
   });
+  // Lien vers le moteur en direct d'Escale (/recherche/), prérempli avec le trajet et les mêmes dates
+  Array.prototype.forEach.call(document.querySelectorAll("a[data-wl]"), function (a) {
+    var p = a.getAttribute("data-wl").split("-");
+    if (p.length !== 2) return;
+    var dep = new Date(Date.now() + 45 * 864e5), ret = new Date(dep.getTime() + 7 * 864e5);
+    a.href = "/recherche/?flightSearch=" + p[0] + ddmm(dep) + p[1] + ddmm(ret) + "1";
+  });
   var box = document.getElementById("route-prices");
   // Prix déjà écrits dans la page par le serveur (src/apercu-prix.ts) : rien à faire
   if (!box || box.hasAttribute("data-ssr")) return;

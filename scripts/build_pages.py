@@ -370,6 +370,7 @@ def route_page(r):
 </section>
 <section><h2>Accès direct aux comparateurs</h2>
 <ul class="links">
+  {build_i18n.live_link(fr, to, "fr")}
   <li><a href="{E(build_i18n.av_link(fr, to))}" data-av="{fr}-{to}" target="_blank" rel="sponsored noopener">Prix et dates sur Aviasales</a></li>
   <li><a href="{E(hotels)}">Hôtels à {E(ct)}</a></li>
   <li><a href="{E(cars)}">Location de voiture à {E(ct)}</a></li>{f'<li><a href="/{HUBS[ct]["fr"]}/">Tous les vols pour {E(ct)}</a></li>' if ct in HUBS else ''}

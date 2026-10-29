@@ -262,6 +262,17 @@ NAV_LABELS = {
     "ar": ("رحلات", "فنادق", "سيارات", "العروض", "استكشف", "أدلة", "المفضلة", "القائمة الرئيسية", "Escale، الرئيسية"),
     "it": ("Voli", "Hotel", "Auto", "Offerte", "Ovunque", "Guide", "Preferiti", "Menu principale", "Escale, home"),
 }
+# Recherche de vols en direct (/recherche/, White Label Travelpayouts) : lien du menu et lien des pages trajets
+LIVE_LABEL = {"fr": "En direct", "en": "Live prices", "es": "En directo", "pt": "Ao vivo", "ar": "أسعار مباشرة", "it": "In diretta"}
+LIVE_LINK = {"fr": "Prix en direct de toutes les agences", "en": "Live prices from all agencies", "es": "Precios en directo de todas las agencias",
+             "pt": "Preços ao vivo de todas as agências", "ar": "أسعار مباشرة من كل الوكالات", "it": "Prezzi in diretta di tutte le agenzie"}
+
+
+def live_link(fr, to, lang):
+    """Lien vers le moteur en direct, prérempli (route-prices.js ajoute des dates : départ dans 45 jours, retour 7 jours après)."""
+    return f'<li><a href="/recherche/" data-wl="{fr}-{to}"><strong>{E(LIVE_LINK[lang])}</strong></a></li>'
+
+
 STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.8 6.6 19.7l1.1-6.1L3.2 9.4l6.1-.8z" fill="currentColor"/></svg>'
 PLANE = '<svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" fill="currentColor"/></svg>'
 
@@ -302,7 +313,7 @@ def site_header(lang, path, switch):
     q = "" if lang == "fr" else "?lang=" + UI[lang]["app_lang"]
     cur = lambda key: ' aria-current="page"' if path and (path == SECTION_PATHS[key][lang] or path.startswith(SECTION_PATHS[key][lang] + "/")) else ""
     sec = lambda key: "/" + SECTION_PATHS[key][lang] + "/"
-    links = (f'<a href="/{q}">{n[0]}</a><a href="/{q}#hotels">{n[1]}</a><a href="/{q}#voitures">{n[2]}</a>'
+    links = (f'<a href="/{q}">{n[0]}</a><a href="/recherche/"{' aria-current="page"' if path == "recherche" else ""}>{E(LIVE_LABEL[lang])}</a><a href="/{q}#hotels">{n[1]}</a><a href="/{q}#voitures">{n[2]}</a>'
              f'<a href="{sec("deals")}"{cur("deals")}>{E(n[3])}</a><a href="{sec("fetes")}"{cur("fetes")}>{E(FETES_LABEL[lang])}</a>'
              f'<a href="{sec("anywhere")}"{cur("anywhere")}>{E(n[4])}</a>'
              f'<a href="{sec("guides")}"{cur("guides")}>{E(n[5])}</a>'
@@ -482,6 +493,7 @@ def build(site, ctx):
 </section>
 <section><h2>{E(u["direct_h"])}</h2>
 <ul class="links">
+  {live_link(fr_, to, lang)}
   <li><a href="{E(av_link(fr_, to))}" data-av="{fr_}-{to}" target="_blank" rel="sponsored noopener">{E(u["sky"])}</a></li>
   <li><a href="{E(hotels_l)}">{E(u["hotels_in"].format(b=b))}</a></li>
   <li><a href="{E(cars_l)}">{E(u["cars_in"].format(b=b))}</a></li>{f'<li><a href="/{ctx["hubs"][ct][lang]}/">{E(HUB_LINK[lang].format(b=b))}</a></li>' if ct in ctx.get("hubs", {}) else ''}

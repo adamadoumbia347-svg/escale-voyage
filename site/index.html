@@ -573,6 +573,7 @@ select.chip-select { width: auto; min-height: 40px; padding: 8px 30px 8px 12px; 
 .av-head > div { display: grid; gap: 2px; }
 .av-head small { color: var(--muted); font-size: 13px; }
 .av-all { margin: 4px 0 14px; }
+.av-all .btn.ghost { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
 .av-all .btn { text-decoration: none; width: 100%; justify-content: center; box-sizing: border-box; }
 .fl-list { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 10px; }
 .fl { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; display: grid; grid-template-columns: 120px 1fr auto; gap: 16px; align-items: center; padding: 14px 16px; transition: border-color .15s ease, box-shadow .15s ease; }
@@ -872,6 +873,7 @@ footer { margin-top: 72px; }
     <a class="brand" href="/" aria-label="Escale, accueil" data-en-aria="Escale, home"><svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" fill="currentColor"/></svg><span>escale</span></a>
     <nav class="main-nav" aria-label="Menu principal" data-en-aria="Main menu">
       <a href="/#vols" data-tab="vols" data-en="Flights">Vols</a>
+      <a href="/recherche/" data-en="Live prices">En direct</a>
       <a href="/#hotels" data-tab="hotels" data-en="Hotels">Hôtels</a>
       <a href="/#voitures" data-tab="voitures" data-en="Cars">Voitures</a>
       <a href="/bons-plans/" class="deals-href" data-en="Deals">Bons plans</a>
