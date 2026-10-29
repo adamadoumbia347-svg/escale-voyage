@@ -12,7 +12,8 @@ jobs:
         run: |
           curl -sL "https://tpemb.com/wl_web/main.js?wl_id=24006" -o main.js
           for f in $(grep -oE '[A-Za-z0-9_./-]+\.js' main.js | sort -u | head -40); do n=$(basename "$f"); curl -sL "https://tpemb.com/wl_web/$n" -o "c_$n"; done
-          ls -la
-          echo "=== tri / sort"; cat main.js c_*.js | grep -oiE '.{60}(sort(ing)?|fastest|cheapest|optimal|best_?price|bestOffer)[^;]{0,80}' | sort -u | head -80
-          echo "=== paramètres d'adresse"; cat main.js c_*.js | grep -oE '(searchParams\.get|URLSearchParams)[^;]{0,120}' | sort -u | head -40
-          echo "=== textes français"; cat main.js c_*.js | grep -oE '"(Le plus rapide|Le moins cher|Optimal|Le meilleur|Rapide|Moins cher)[^"]{0,40}"' | sort -u | head
+          echo "=== enum tri"; grep -oE '.{0,40}e\.Best = "best".{0,400}' c_*.js | head -3
+          echo "=== SortBy"; grep -oE 'SortBy[^"]{0,60}' c_*.js | sort -u | head -30
+          echo "=== usages sort_by / sortBy"; grep -oE '.{80}(sortBy|sort_by|setSort)[^;]{0,120}' c_*.js | sort -u | head -30
+          echo "=== traductions tri"; grep -oE '"(sort|sorting)[A-Za-z_.]*"\s*:\s*"[^"]{0,60}"' c_*.js main.js | sort -u | head -40
+          echo "=== textes fr"; grep -oE '"[^"]{0,30}(rapide|moins cher|Trier|Meilleur|meilleur)[^"]{0,30}"' c_*.js main.js | sort -u | head -40
