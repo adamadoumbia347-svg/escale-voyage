@@ -52,19 +52,26 @@ jobs:
             const modal = await p.evaluate(() => { const m = document.querySelector('#tpwl-modals'); return m ? (m.shadowRoot || m).textContent.replace(/\s+/g, ' ').slice(0, 200) : ''; });
             console.log('Fenêtre ouverte :', modal || '(aucune)');
             console.log('Résultats sans clic :', await txt('#tpwl-tickets'));
-            // Clic sur « Recherche de vols » en JavaScript (la fenêtre du moteur intercepte les clics de souris)
+            // Case à cocher sous le formulaire : texte, puis on la décoche (elle ouvre Booking.com à la place du site)
+            const cb = await p.evaluate(() => { const r = document.querySelector('#tpwl-search').shadowRoot; const c = r.querySelector('input[type=checkbox]');
+              if (!c) return null; const lab = (c.closest('label') || c.parentElement); const t = lab ? lab.textContent.trim() : ''; if (c.checked) c.click(); return t + ' | cochée après : ' + c.checked; });
+            console.log('Case à cocher :', cb);
+            const pages = []; p.context().on('page', (np) => pages.push(np));
             await p.evaluate(() => { const r = document.querySelector('#tpwl-search').shadowRoot; const a = [...r.querySelectorAll('a')].find(x => /Recherche de vols/.test(x.textContent)); if (a) a.click(); });
             await p.waitForTimeout(30000);
-            console.log('Adresse après recherche :', p.url());
-            console.log('Résultats :', await txt('#tpwl-tickets'));
-            const ctas = await p.evaluate(() => { const r = document.querySelector('#tpwl-tickets').shadowRoot;
-              return [...r.querySelectorAll('a, button')].map(e => e.tagName + '|' + e.textContent.trim().slice(0, 40) + '|' + (e.href || '')).filter(x => /€|Achet|Voir|Réserv|Book|http/.test(x)).slice(0, 8); });
-            console.log('Boutons / liens des résultats :', JSON.stringify(ctas));
-            // Ouvrir le premier résultat : quelle adresse de réservation (identifiant partenaire 789659 ?)
-            const [pop] = await Promise.all([p.context().waitForEvent('page', { timeout: 20000 }).catch(() => null),
-              p.evaluate(() => { const r = document.querySelector('#tpwl-tickets').shadowRoot; const el = [...r.querySelectorAll('a, button')].find(e => /€|Achet|Voir|Réserv/.test(e.textContent)); if (el) el.click(); return !!el; })]);
-            if (pop) { await pop.waitForTimeout(8000); console.log('Page de réservation :', pop.url().slice(0, 400)); }
-            else console.log('Aucune page de réservation ouverte ; adresse actuelle :', p.url());
+            console.log('Adresse de la page Escale après recherche :', p.url());
+            for (const np of pages) console.log('Nouvel onglet :', np.url().slice(0, 300));
+            const host = p.url().includes('escale.live') ? p : null;
+            if (host) {
+              console.log('Résultats :', await txt('#tpwl-tickets'));
+              const ctas = await p.evaluate(() => { const r = document.querySelector('#tpwl-tickets')?.shadowRoot; if (!r) return [];
+                return [...r.querySelectorAll('a, button')].map(e => e.tagName + '|' + e.textContent.trim().slice(0, 40) + '|' + (e.href || '')).filter(x => /€|Achet|Voir|Réserv|http/.test(x)).slice(0, 8); });
+              console.log('Boutons / liens des résultats :', JSON.stringify(ctas));
+              const [pop] = await Promise.all([p.context().waitForEvent('page', { timeout: 20000 }).catch(() => null),
+                p.evaluate(() => { const r = document.querySelector('#tpwl-tickets')?.shadowRoot; const el = r && [...r.querySelectorAll('a, button')].find(e => /€|Achet|Voir|Réserv/.test(e.textContent)); if (el) el.click(); return !!el; })]);
+              if (pop) { await pop.waitForTimeout(8000); console.log('Page de réservation :', pop.url().slice(0, 400)); }
+              else console.log('Aucune page de réservation ouverte ; adresse actuelle :', p.url().slice(0, 300));
+            }
             console.log('Erreurs :', errs.slice(0, 5));
             await b.close();
           })();
