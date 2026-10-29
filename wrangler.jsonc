@@ -13,7 +13,7 @@
     "binding": "ASSETS",
     "not_found_handling": "404-page",
     // Seules ces adresses passent par le code ; les autres fichiers sont servis directement (gratuit, illimité)
-    "run_worker_first": ["/api/*", "/vol-*", "/vols-pour-*", "/en/flights-*", "/es/vuelos-*", "/pt/voos-*", "/ar/flights-*"]
+    "run_worker_first": ["/api/*", "/vol-*", "/vols-pour-*", "/en/flights-*", "/es/vuelos-*", "/pt/voos-*", "/ar/flights-*", "/barometre-prix*"]
   },
   // Espace de stockage « escale » : formulaires (contact, bons plans), alertes prix, cache des bons plans
   "kv_namespaces": [{ "binding": "ESCALE", "id": "fb7a62181772457db6855d0ddf31d2c4" }],

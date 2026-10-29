@@ -478,6 +478,7 @@
       <div class="fl-insight" id="fl-insight" hidden></div>
       <p class="summary" id="fl-note" aria-live="polite">${esc(T("Recherche des meilleurs prix…", "Looking for the best prices…"))}</p>
       <ul class="fl-list" id="fl-list">${skel}</ul>
+      <div id="app-alert" class="app-alert" hidden></div>
       <div id="trip-kit" class="trip-kit" hidden></div>
       <div id="cmp-wrap"><h3 class="sub-h">${T("Comparer aussi sur", "Also compare on")}</h3>${compareRow(links)}</div>` + share + extrasSlot(s.to.name));
     fillExtras(s.to.name, s.to.code);
@@ -582,6 +583,41 @@
     $("fl-airline").addEventListener("change", (e) => { flightState.airline = e.target.value; paintOffers(); });
     insight(s, offers);
     paintOffers();
+    fillAlert(s, Math.min(...offers.map((o) => o.price)), flightState.cur || CUR);
+  }
+  // Alerte prix dans les résultats : un e-mail quand ce trajet passe sous le budget choisi (proposé à 90 % du prix le plus bas repéré)
+  let alertsOn = null;
+  async function fillAlert(s, low, cur) {
+    if (alertsOn === null) {
+      try { const r = await fetch("/api/alert?action=status"); alertsOn = r.ok && !!(await r.json()).enabled; } catch (e) { alertsOn = false; }
+    }
+    const box = $("app-alert");
+    if (!alertsOn || !box || !isFinite(low)) return;
+    const max = Math.max(1, Math.floor((low * 0.9) / 10) * 10);
+    box.innerHTML = `<p class="kit-h">🔔 ${esc(fmt(T("Prévenez-moi si {a} → {b} passe sous mon budget", "Tell me when {a} → {b} drops below my budget"), { a: s.from.name, b: s.to.name }))}</p>
+      <form class="aa-form" novalidate>
+        <label><span class="sr-only">${T("Votre e-mail", "Your email")}</span><input type="email" name="email" required autocomplete="email" placeholder="${esc(T("Votre e-mail", "Your email"))}"></label>
+        <label class="aa-max"><span>${T("Budget max.", "Max. budget")}</span><input type="number" name="max" min="1" inputmode="numeric" required value="${max}"><span>${esc(cur)}</span></label>
+        <button class="btn" type="submit">${T("Créer l’alerte", "Create alert")}</button>
+        <label class="aa-consent"><input type="checkbox" name="consent" required><span>${T("J’accepte de recevoir des e-mails pour cette alerte (désinscription en un clic).", "I agree to receive emails for this alert (one-click unsubscribe).")}</span></label>
+        <p class="small aa-msg" role="status"></p>
+      </form>`;
+    box.hidden = false;
+    const form = box.querySelector("form"), msg = box.querySelector(".aa-msg");
+    form.addEventListener("submit", async (ev) => {
+      ev.preventDefault();
+      const email = form.email.value.trim(), m = Number(form.max.value);
+      if (!/^\S+@\S+\.\S+$/.test(email) || !(m > 0) || !form.consent.checked) { msg.textContent = T("Vérifiez l’e-mail, le budget et la case de consentement.", "Check the email, the budget and the consent box."); return; }
+      form.querySelector("button").disabled = true;
+      let ok = false;
+      try {
+        const r = await fetch("/api/alert", { method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, max: m, from: s.from.code, to: s.to.code, lang: LANG, currency: cur, consent: true }) });
+        ok = r.ok;
+      } catch (e) { ok = false; }
+      if (ok) { form.reset(); form.max.value = m; msg.textContent = fmt(T("C’est presque fini : confirmez votre alerte avec le lien envoyé à {e}.", "Almost done: confirm your alert with the link sent to {e}."), { e: email }); }
+      else { msg.textContent = T("L’alerte n’a pas pu être créée. Réessayez plus tard.", "The alert could not be created. Please try again later."); form.querySelector("button").disabled = false; }
+    });
   }
   // Conseil de prix : vos dates sont-elles parmi les moins chères du mois ?
   function insight(s, offers) {

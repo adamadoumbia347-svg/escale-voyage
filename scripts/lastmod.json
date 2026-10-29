@@ -1,6 +1,6 @@
 {
 "/": [
-"730fc6115d3cd361",
+"bc76b4f47ac9d267",
 "2026-10-29"
 ],
 "/a-propos/": [
@@ -24,128 +24,128 @@
 "2026-10-28"
 ],
 "/ar/flights-basel-mulhouse-algiers/": [
-"016202b360939f3a",
+"11000c2273e06d6a",
 "2026-10-29"
 ],
 "/ar/flights-basel-mulhouse-casablanca/": [
-"6eb850b6463539fc",
+"9982d4cae83908d7",
 "2026-10-29"
 ],
 "/ar/flights-basel-mulhouse-constantine/": [
-"122ed9bdc63ad2e9",
+"81d560e6d5ad5c54",
 "2026-10-29"
 ],
 "/ar/flights-basel-mulhouse-istanbul/": [
-"1ae01678079a8f4c",
+"be3613113c84abc2",
 "2026-10-29"
 ],
 "/ar/flights-basel-mulhouse-marrakesh/": [
-"b89aab1b17857965",
+"d4bda3617d704799",
 "2026-10-29"
 ],
 "/ar/flights-basel-mulhouse-oran/": [
-"b23ca8c1baa60e93",
+"065f0a15b29a8c3c",
 "2026-10-29"
 ],
 "/ar/flights-basel-mulhouse-tunis/": [
-"c08c9bd9933cbb6f",
+"7ff64aba6891ce7a",
 "2026-10-29"
 ],
 "/ar/flights-bordeaux-algiers/": [
-"a7f3ce0ec6a8e231",
-"2026-10-28"
+"b9754d76c80cfe6f",
+"2026-10-29"
 ],
 "/ar/flights-bordeaux-casablanca/": [
-"ecc96919c2ea0da2",
-"2026-10-28"
+"89e217d9c2dea78a",
+"2026-10-29"
 ],
 "/ar/flights-bordeaux-dakar/": [
-"34b4b22a4a230777",
-"2026-10-28"
+"37f3d18838f66861",
+"2026-10-29"
 ],
 "/ar/flights-bordeaux-marrakesh/": [
-"eae5bc2bd52038d1",
-"2026-10-28"
+"d017cd0d70ede514",
+"2026-10-29"
 ],
 "/ar/flights-brussels-abidjan/": [
-"eb28382866856169",
-"2026-10-28"
+"b4b3d207a112aee2",
+"2026-10-29"
 ],
 "/ar/flights-brussels-accra/": [
-"91aad2e4e2b40099",
-"2026-10-28"
+"10fddfb54eef6dc7",
+"2026-10-29"
 ],
 "/ar/flights-brussels-algiers/": [
-"880a2914f8d83c7d",
-"2026-10-28"
+"11c062cfd6310f80",
+"2026-10-29"
 ],
 "/ar/flights-brussels-bamako/": [
-"06796f36c9c2c220",
-"2026-10-28"
+"1e66f5021754fa58",
+"2026-10-29"
 ],
 "/ar/flights-brussels-casablanca/": [
-"6983903285093915",
-"2026-10-28"
+"a6998653740b81d4",
+"2026-10-29"
 ],
 "/ar/flights-brussels-conakry/": [
-"aa874418fc7030aa",
-"2026-10-28"
+"2eb68573db346ca2",
+"2026-10-29"
 ],
 "/ar/flights-brussels-cotonou/": [
-"ec046b35462a3c5c",
-"2026-10-28"
+"bdb47dbb35243b19",
+"2026-10-29"
 ],
 "/ar/flights-brussels-dakar/": [
-"ce58cc2066947d58",
-"2026-10-28"
+"19b670e16b4434e6",
+"2026-10-29"
 ],
 "/ar/flights-brussels-douala/": [
-"9fbe7ea99d3301b2",
-"2026-10-28"
+"088e64090ecc621a",
+"2026-10-29"
 ],
 "/ar/flights-brussels-dubai/": [
-"11e52178b3b68fda",
-"2026-10-28"
+"4ec4d6b10d2c88cf",
+"2026-10-29"
 ],
 "/ar/flights-brussels-istanbul/": [
-"2c8401a357f0ed48",
+"f1e6b7f326e7cbdb",
 "2026-10-29"
 ],
 "/ar/flights-brussels-kigali/": [
-"83cb3028be55f693",
-"2026-10-28"
+"be28ecebae3f678e",
+"2026-10-29"
 ],
 "/ar/flights-brussels-kinshasa/": [
-"0fdef1359aa9053f",
-"2026-10-28"
+"ace2473ef99bd638",
+"2026-10-29"
 ],
 "/ar/flights-brussels-libreville/": [
-"7a2670c0475798ca",
-"2026-10-28"
+"202c92795c246641",
+"2026-10-29"
 ],
 "/ar/flights-brussels-lome/": [
-"bb52624bfdd17815",
-"2026-10-28"
+"191f574cfd607e2b",
+"2026-10-29"
 ],
 "/ar/flights-brussels-marrakesh/": [
-"27d289083a557ad9",
-"2026-10-28"
+"570c8dd1910af383",
+"2026-10-29"
 ],
 "/ar/flights-brussels-ouagadougou/": [
-"507e9df988bfa965",
-"2026-10-28"
+"f6cf61a949f90194",
+"2026-10-29"
 ],
 "/ar/flights-brussels-tangier/": [
-"8ec43b02f9fd3e49",
-"2026-10-28"
+"ae055bf4fa02fa23",
+"2026-10-29"
 ],
 "/ar/flights-brussels-tunis/": [
-"e6b12d072659c67a",
-"2026-10-28"
+"111d52578c9ddf72",
+"2026-10-29"
 ],
 "/ar/flights-brussels-yaounde/": [
-"71c35b323a178014",
-"2026-10-28"
+"294211967f6df055",
+"2026-10-29"
 ],
 "/ar/flights-christmas/": [
 "8adadc5d9448e340",
@@ -164,720 +164,720 @@
 "2026-10-28"
 ],
 "/ar/flights-geneva-abidjan/": [
-"de6d870f6d3d9de8",
-"2026-10-28"
+"15ef593ea9068fea",
+"2026-10-29"
 ],
 "/ar/flights-geneva-algiers/": [
-"70c4497a608f6470",
-"2026-10-28"
+"c1d52b452ef0cc32",
+"2026-10-29"
 ],
 "/ar/flights-geneva-casablanca/": [
-"b33f359f709c2c1c",
-"2026-10-28"
+"39664feda1be3eea",
+"2026-10-29"
 ],
 "/ar/flights-geneva-dakar/": [
-"ec178f12ae6fd76b",
-"2026-10-28"
+"ab578c7f806305e2",
+"2026-10-29"
 ],
 "/ar/flights-geneva-dubai/": [
-"8cb8611d903865c8",
-"2026-10-28"
+"c18baabd508448a1",
+"2026-10-29"
 ],
 "/ar/flights-geneva-istanbul/": [
-"03ab7c960e1918b1",
+"ba121329ccdc7d7c",
 "2026-10-29"
 ],
 "/ar/flights-geneva-marrakesh/": [
-"63fc8e3f442b15d2",
-"2026-10-28"
+"6db9a473f5aacd8c",
+"2026-10-29"
 ],
 "/ar/flights-geneva-tunis/": [
-"7b2830a19eacfed4",
-"2026-10-28"
+"2370d5915169656d",
+"2026-10-29"
 ],
 "/ar/flights-lille-algiers/": [
-"06579258d38c1ff9",
-"2026-10-28"
+"bc0efe543104419c",
+"2026-10-29"
 ],
 "/ar/flights-lille-casablanca/": [
-"23c488f31ad78e52",
-"2026-10-28"
+"151eed5467d8c1f3",
+"2026-10-29"
 ],
 "/ar/flights-lille-dakar/": [
-"0134ae1e2a2de691",
-"2026-10-28"
+"d7d648d244832979",
+"2026-10-29"
 ],
 "/ar/flights-lille-marrakesh/": [
-"adc1ae3c193edfe8",
-"2026-10-28"
+"e477ca1e971d223b",
+"2026-10-29"
 ],
 "/ar/flights-lille-oran/": [
-"d5e477d8ce150718",
+"79758ea7eef091f3",
 "2026-10-29"
 ],
 "/ar/flights-lille-oujda/": [
-"c406dcb78cd8c5c3",
-"2026-10-28"
+"4840e8f5ff7ff53a",
+"2026-10-29"
 ],
 "/ar/flights-lille-tunis/": [
-"f22f639153110fa2",
-"2026-10-28"
+"47ae50eed3708471",
+"2026-10-29"
 ],
 "/ar/flights-lisbon-abidjan/": [
-"68e5a6195b1fb96e",
-"2026-10-28"
+"646dfcf14820df25",
+"2026-10-29"
 ],
 "/ar/flights-lisbon-accra/": [
-"1948def6f49898dc",
-"2026-10-28"
+"633c9021f5414830",
+"2026-10-29"
 ],
 "/ar/flights-lisbon-bissau/": [
-"9c488afaf7fdcf10",
-"2026-10-28"
+"c0365ee679404264",
+"2026-10-29"
 ],
 "/ar/flights-lisbon-casablanca/": [
-"0356b55a11bc5a91",
-"2026-10-28"
+"ab6fd0c3940f79b3",
+"2026-10-29"
 ],
 "/ar/flights-lisbon-dakar/": [
-"e705bc1ed5ad50db",
-"2026-10-28"
+"0eef2c33dd07466a",
+"2026-10-29"
 ],
 "/ar/flights-lisbon-luanda/": [
-"ee6d66c621e567de",
-"2026-10-28"
+"67cd7d044dada11b",
+"2026-10-29"
 ],
 "/ar/flights-lisbon-maputo/": [
-"6ca47cea0e3af1c5",
-"2026-10-28"
+"b3cc49b87302705d",
+"2026-10-29"
 ],
 "/ar/flights-lisbon-praia/": [
-"5e6667228cfbe159",
-"2026-10-28"
+"a03fae7833682295",
+"2026-10-29"
 ],
 "/ar/flights-london-abidjan/": [
-"125331862eafd1c5",
-"2026-10-28"
+"0ace19a20f080a22",
+"2026-10-29"
 ],
 "/ar/flights-london-abuja/": [
-"70c0204ac54a9abc",
-"2026-10-28"
+"ffbabaf873ed2f5f",
+"2026-10-29"
 ],
 "/ar/flights-london-accra/": [
-"6ddb990012b0e4a4",
-"2026-10-28"
+"d9567de4d12ddc85",
+"2026-10-29"
 ],
 "/ar/flights-london-addis-ababa/": [
-"1a7e3aa2cd055741",
-"2026-10-28"
+"569e40c3e7bd648b",
+"2026-10-29"
 ],
 "/ar/flights-london-algiers/": [
-"523b3185714052d5",
-"2026-10-28"
+"7dfa7458a3fb9711",
+"2026-10-29"
 ],
 "/ar/flights-london-cairo/": [
-"6e0521e9269224f9",
-"2026-10-28"
+"49483454e6337e65",
+"2026-10-29"
 ],
 "/ar/flights-london-casablanca/": [
-"d69abacb1e4a7e95",
-"2026-10-28"
+"e90584efc21f39d9",
+"2026-10-29"
 ],
 "/ar/flights-london-dakar/": [
-"ee31b292c9cc2fdb",
-"2026-10-28"
+"5a5fce2f54ebb1af",
+"2026-10-29"
 ],
 "/ar/flights-london-dubai/": [
-"debd8e18c62d42c6",
-"2026-10-28"
+"a3db8aa44cb0b811",
+"2026-10-29"
 ],
 "/ar/flights-london-johannesburg/": [
-"2854d70eead319cb",
-"2026-10-28"
+"9c3d2701dded687d",
+"2026-10-29"
 ],
 "/ar/flights-london-kinshasa/": [
-"30238afc3a26a96a",
-"2026-10-28"
+"4adc25f4374938c1",
+"2026-10-29"
 ],
 "/ar/flights-london-lagos/": [
-"bc16123a984bf226",
-"2026-10-28"
+"c8ba7d8e19adb3ad",
+"2026-10-29"
 ],
 "/ar/flights-london-marrakesh/": [
-"48ad3d233bd7e2c8",
-"2026-10-28"
+"63405f1f75e0733f",
+"2026-10-29"
 ],
 "/ar/flights-london-nairobi/": [
-"a70555acff9167e6",
-"2026-10-28"
+"42b3628cef77c35d",
+"2026-10-29"
 ],
 "/ar/flights-lyon-abidjan/": [
-"248a4e7413117382",
-"2026-10-28"
+"a1d3e48d0dd0b0c9",
+"2026-10-29"
 ],
 "/ar/flights-lyon-agadir/": [
-"423868e36046d228",
+"41cbe2c2a30b2184",
 "2026-10-29"
 ],
 "/ar/flights-lyon-algiers/": [
-"26cc7447afa06d32",
-"2026-10-28"
+"d3fd786cbb941046",
+"2026-10-29"
 ],
 "/ar/flights-lyon-bamako/": [
-"e3c5465c98646a65",
-"2026-10-28"
+"4ac3b9c7302932ea",
+"2026-10-29"
 ],
 "/ar/flights-lyon-casablanca/": [
-"cb1247f382139b0f",
-"2026-10-28"
+"3fb74ab0b8ed186b",
+"2026-10-29"
 ],
 "/ar/flights-lyon-constantine/": [
-"5f6d9860a60a50d6",
+"6c26cfc87ca8cbaa",
 "2026-10-29"
 ],
 "/ar/flights-lyon-dakar/": [
-"d07596ee39eb9bad",
-"2026-10-28"
+"1dc6eac718d308c0",
+"2026-10-29"
 ],
 "/ar/flights-lyon-djerba/": [
-"317ab9b838019850",
-"2026-10-28"
+"acf0ef1e057f41f2",
+"2026-10-29"
 ],
 "/ar/flights-lyon-dubai/": [
-"97e13261647af83f",
-"2026-10-28"
+"64e029d5c7b47b8d",
+"2026-10-29"
 ],
 "/ar/flights-lyon-fez/": [
-"8e5a7be2a899661a",
-"2026-10-28"
+"9ea551f693a10582",
+"2026-10-29"
 ],
 "/ar/flights-lyon-istanbul/": [
-"70d07649c282532f",
+"0065465aa775783b",
 "2026-10-29"
 ],
 "/ar/flights-lyon-marrakesh/": [
-"08f95cfee9df401c",
-"2026-10-28"
+"1205fca1c6a5353d",
+"2026-10-29"
 ],
 "/ar/flights-lyon-oran/": [
-"2a9251310baf5a69",
+"b60d9457709b5da7",
 "2026-10-29"
 ],
 "/ar/flights-lyon-oujda/": [
-"d7fa957848268ad5",
-"2026-10-28"
+"b414d21ece6e6890",
+"2026-10-29"
 ],
 "/ar/flights-lyon-tunis/": [
-"0bcf733f8ac3d612",
-"2026-10-28"
+"d21b3703b53358e5",
+"2026-10-29"
 ],
 "/ar/flights-madrid-abidjan/": [
-"84ad603b1b2a598e",
-"2026-10-28"
+"d8d844f6e95a730b",
+"2026-10-29"
 ],
 "/ar/flights-madrid-algiers/": [
-"d69e3d2112e46931",
-"2026-10-28"
+"1070e7f5f52c1285",
+"2026-10-29"
 ],
 "/ar/flights-madrid-bamako/": [
-"26eceffc9bd3a56d",
-"2026-10-28"
+"1abd421b6ce94d56",
+"2026-10-29"
 ],
 "/ar/flights-madrid-casablanca/": [
-"f4d89cf11768d3a3",
-"2026-10-28"
+"2d3e42c503a269e4",
+"2026-10-29"
 ],
 "/ar/flights-madrid-dakar/": [
-"019079765b984d8f",
-"2026-10-28"
+"5e989cd4e09b59c2",
+"2026-10-29"
 ],
 "/ar/flights-madrid-lagos/": [
-"d56ba08d757449a4",
-"2026-10-28"
+"cf2df07110bda55e",
+"2026-10-29"
 ],
 "/ar/flights-madrid-marrakesh/": [
-"b69dfa5c8e9af496",
-"2026-10-28"
+"93b6b8a6c0fa1a17",
+"2026-10-29"
 ],
 "/ar/flights-madrid-tangier/": [
-"949629b18e1f6ba6",
-"2026-10-28"
+"64c99f2e0962675d",
+"2026-10-29"
 ],
 "/ar/flights-marseille-abidjan/": [
-"b2914cbbf239b423",
-"2026-10-28"
+"c6df8cf91b4bed65",
+"2026-10-29"
 ],
 "/ar/flights-marseille-algiers/": [
-"412428f473909833",
-"2026-10-28"
+"76de2cb1e282dc11",
+"2026-10-29"
 ],
 "/ar/flights-marseille-bamako/": [
-"727d3b8f60bd9c0b",
-"2026-10-28"
+"e2238935f9f05e2c",
+"2026-10-29"
 ],
 "/ar/flights-marseille-casablanca/": [
-"bba9e5c6522685a6",
-"2026-10-28"
+"1de938bd4676acbb",
+"2026-10-29"
 ],
 "/ar/flights-marseille-constantine/": [
-"32994271563431a1",
+"82eca38e2d7d8e68",
 "2026-10-29"
 ],
 "/ar/flights-marseille-dakar/": [
-"a0922e8c942e5162",
-"2026-10-28"
+"c7e8a5c9744be9de",
+"2026-10-29"
 ],
 "/ar/flights-marseille-djerba/": [
-"67f838a927463890",
-"2026-10-28"
+"fdcbc8edd96832fc",
+"2026-10-29"
 ],
 "/ar/flights-marseille-istanbul/": [
-"b3bec90e928443c2",
+"b06a5e3067b1897b",
 "2026-10-29"
 ],
 "/ar/flights-marseille-marrakesh/": [
-"b7fed16b7707d967",
-"2026-10-28"
+"b94a19e4fdaaadcf",
+"2026-10-29"
 ],
 "/ar/flights-marseille-monastir/": [
-"ab0b8be6a0581c94",
-"2026-10-28"
+"9c25840fa1b57916",
+"2026-10-29"
 ],
 "/ar/flights-marseille-oran/": [
-"9ff10b410bf660f6",
+"fb6dc8bd4b82558b",
 "2026-10-29"
 ],
 "/ar/flights-marseille-tunis/": [
-"26d3e86688f57866",
-"2026-10-28"
+"45bb12049cba1b55",
+"2026-10-29"
 ],
 "/ar/flights-montpellier-algiers/": [
-"6da808ab7b1258ac",
-"2026-10-28"
+"2bb3d3c482f054d8",
+"2026-10-29"
 ],
 "/ar/flights-montpellier-casablanca/": [
-"86132e6052cc84ec",
-"2026-10-28"
+"9a9250b8be472c26",
+"2026-10-29"
 ],
 "/ar/flights-montpellier-constantine/": [
-"4fd3685b17e44c8b",
+"3a0d809d52e69cc0",
 "2026-10-29"
 ],
 "/ar/flights-montpellier-fez/": [
-"bd5b2c9f6b85f160",
-"2026-10-28"
+"57166f98a4ded43b",
+"2026-10-29"
 ],
 "/ar/flights-montpellier-marrakesh/": [
-"465b01d5832e0b3e",
-"2026-10-28"
+"95520d5ef05fc789",
+"2026-10-29"
 ],
 "/ar/flights-montpellier-oran/": [
-"14a6bf4f870e5c5f",
+"636d3a379dcac55c",
 "2026-10-29"
 ],
 "/ar/flights-montpellier-tunis/": [
-"1ea36cab95163568",
-"2026-10-28"
+"a09821893059a16d",
+"2026-10-29"
 ],
 "/ar/flights-montreal-abidjan/": [
-"bfb4cf81ba4d1665",
-"2026-10-28"
+"ebc9210b77d66017",
+"2026-10-29"
 ],
 "/ar/flights-montreal-algiers/": [
-"9484a1d878e35ceb",
-"2026-10-28"
+"20a6d3203d763d17",
+"2026-10-29"
 ],
 "/ar/flights-montreal-casablanca/": [
-"c55d30a012bd6398",
-"2026-10-28"
+"0b22c8f8d5d7ae12",
+"2026-10-29"
 ],
 "/ar/flights-montreal-conakry/": [
-"49312ca954d68f4b",
-"2026-10-28"
+"7ad9c8b1cfa0a1bf",
+"2026-10-29"
 ],
 "/ar/flights-montreal-dakar/": [
-"6f3a677362f2d411",
-"2026-10-28"
+"cd504d7ffa01c051",
+"2026-10-29"
 ],
 "/ar/flights-montreal-douala/": [
-"e90cce91219d18b8",
-"2026-10-28"
+"e93fdcf93af62cea",
+"2026-10-29"
 ],
 "/ar/flights-montreal-port-au-prince/": [
-"771b7fb30bea453a",
-"2026-10-28"
+"34919afc2b1b3246",
+"2026-10-29"
 ],
 "/ar/flights-montreal-tunis/": [
-"0768d457e8fb3c37",
-"2026-10-28"
+"4ea734d27e40f101",
+"2026-10-29"
 ],
 "/ar/flights-nantes-agadir/": [
-"fbae6b1c90cfff1d",
+"e94b9a90e247f0b8",
 "2026-10-29"
 ],
 "/ar/flights-nantes-algiers/": [
-"72c6101cff06d7c5",
-"2026-10-28"
+"94df9ad72972845a",
+"2026-10-29"
 ],
 "/ar/flights-nantes-casablanca/": [
-"44ee6668fcd12ef3",
-"2026-10-28"
+"381a3d4552639142",
+"2026-10-29"
 ],
 "/ar/flights-nantes-dakar/": [
-"7a73e147579b0eb6",
-"2026-10-28"
+"d10e85d1b895e4fa",
+"2026-10-29"
 ],
 "/ar/flights-nantes-marrakesh/": [
-"4ccc884bb1b8b225",
-"2026-10-28"
+"6f9f79948940f05d",
+"2026-10-29"
 ],
 "/ar/flights-nantes-oran/": [
-"639e9b33d58e7a5a",
+"4aef59d4f9d9d511",
 "2026-10-29"
 ],
 "/ar/flights-nantes-tunis/": [
-"c27e4b68d708494d",
-"2026-10-28"
+"78e539a24666f80f",
+"2026-10-29"
 ],
 "/ar/flights-new-york-abidjan/": [
-"50f9037a614d043d",
-"2026-10-28"
+"a9cc83ff10a767f9",
+"2026-10-29"
 ],
 "/ar/flights-new-york-accra/": [
-"2474a57da5af38b6",
-"2026-10-28"
+"e2d4377e534e1fc8",
+"2026-10-29"
 ],
 "/ar/flights-new-york-addis-ababa/": [
-"c5748c6a2e51588f",
-"2026-10-28"
+"a1a3652e7ed16068",
+"2026-10-29"
 ],
 "/ar/flights-new-york-cairo/": [
-"387cd3a18745f3db",
-"2026-10-28"
+"89c6427f5b4b32ba",
+"2026-10-29"
 ],
 "/ar/flights-new-york-casablanca/": [
-"c0e96388806454d9",
-"2026-10-28"
+"11ca846aa7504b92",
+"2026-10-29"
 ],
 "/ar/flights-new-york-dakar/": [
-"28b677f0c77265f9",
-"2026-10-28"
+"bd89a9dd38257965",
+"2026-10-29"
 ],
 "/ar/flights-new-york-lagos/": [
-"1fff3701a2ddfd68",
-"2026-10-28"
+"5710149d11b5cec7",
+"2026-10-29"
 ],
 "/ar/flights-new-york-port-au-prince/": [
-"eb1fd2ec377a62e9",
-"2026-10-28"
+"a5cf0877abe0fb4e",
+"2026-10-29"
 ],
 "/ar/flights-nice-algiers/": [
-"84faf4643ca5f32d",
-"2026-10-28"
+"b6f36ec33343deeb",
+"2026-10-29"
 ],
 "/ar/flights-nice-casablanca/": [
-"515d889ba18018f8",
-"2026-10-28"
+"4ba54c6c101a717d",
+"2026-10-29"
 ],
 "/ar/flights-nice-dakar/": [
-"51d51be5940bae7b",
-"2026-10-28"
+"902c872568f6336d",
+"2026-10-29"
 ],
 "/ar/flights-nice-tunis/": [
-"89838ad324d958ee",
-"2026-10-28"
+"6a432e8411db2768",
+"2026-10-29"
 ],
 "/ar/flights-paris-abidjan/": [
-"81cd222fa08a5938",
-"2026-10-28"
+"fb41d8bbf288521b",
+"2026-10-29"
 ],
 "/ar/flights-paris-accra/": [
-"eb9751b1fdfc857b",
-"2026-10-28"
+"6b060734bff5bfd7",
+"2026-10-29"
 ],
 "/ar/flights-paris-addis-ababa/": [
-"07115729c649743a",
-"2026-10-28"
+"861b9321741436af",
+"2026-10-29"
 ],
 "/ar/flights-paris-agadir/": [
-"76fa28674fed9c52",
+"3530cce0de3356fa",
 "2026-10-29"
 ],
 "/ar/flights-paris-algiers/": [
-"725884cd7b331170",
-"2026-10-28"
+"01d8302d6ed66684",
+"2026-10-29"
 ],
 "/ar/flights-paris-amman/": [
-"05c7a77430674bb5",
-"2026-10-28"
+"fbaef068fb6ad7ce",
+"2026-10-29"
 ],
 "/ar/flights-paris-antananarivo/": [
-"78ebcc8ca21bae99",
-"2026-10-28"
+"89fc338544501057",
+"2026-10-29"
 ],
 "/ar/flights-paris-bamako/": [
-"32136dc094b07535",
-"2026-10-28"
+"5cf2065c219e53eb",
+"2026-10-29"
 ],
 "/ar/flights-paris-banjul/": [
-"a70c616586e1ef3d",
-"2026-10-28"
+"03b654bc17d51792",
+"2026-10-29"
 ],
 "/ar/flights-paris-beirut/": [
-"6c6bb17d0897884b",
-"2026-10-28"
+"c73df59b016fa6de",
+"2026-10-29"
 ],
 "/ar/flights-paris-bissau/": [
-"654ee553613c794f",
-"2026-10-28"
+"5322aaeb898fd9db",
+"2026-10-29"
 ],
 "/ar/flights-paris-brazzaville/": [
-"dd2fa8720847d711",
-"2026-10-28"
+"a5ffe78366661b00",
+"2026-10-29"
 ],
 "/ar/flights-paris-cairo/": [
-"2e1011762eefadf0",
-"2026-10-28"
+"355a750b59c0003b",
+"2026-10-29"
 ],
 "/ar/flights-paris-casablanca/": [
-"133f16f61e255546",
-"2026-10-28"
+"364924d5a10415da",
+"2026-10-29"
 ],
 "/ar/flights-paris-cayenne/": [
-"87a8269b97e9385b",
-"2026-10-28"
+"ff6c24e28a1176c8",
+"2026-10-29"
 ],
 "/ar/flights-paris-conakry/": [
-"25b2bcf999f9c8de",
-"2026-10-28"
+"264dc20e94a560c3",
+"2026-10-29"
 ],
 "/ar/flights-paris-constantine/": [
-"6f2038fd40db74f5",
+"ae49fc5f8e0ab675",
 "2026-10-29"
 ],
 "/ar/flights-paris-cotonou/": [
-"a6493e4b926574b0",
-"2026-10-28"
+"f4826bc464cd1dc8",
+"2026-10-29"
 ],
 "/ar/flights-paris-dakar/": [
-"9437bee05739a227",
-"2026-10-28"
+"92c966561d219922",
+"2026-10-29"
 ],
 "/ar/flights-paris-dar-es-salaam/": [
-"9a5bc5c61bc03677",
-"2026-10-28"
+"274db3acdb4a3df3",
+"2026-10-29"
 ],
 "/ar/flights-paris-djerba/": [
-"ce31363c825a3566",
-"2026-10-28"
+"658ee8dd0b74047d",
+"2026-10-29"
 ],
 "/ar/flights-paris-doha/": [
-"e665f4f79df2efa3",
-"2026-10-28"
+"571bdd66d261d7af",
+"2026-10-29"
 ],
 "/ar/flights-paris-douala/": [
-"9722b8b7ae64093d",
-"2026-10-28"
+"e1647e15ba4fa1ff",
+"2026-10-29"
 ],
 "/ar/flights-paris-dubai/": [
-"a3aa4dc6098d7a5d",
-"2026-10-28"
+"6235a522a49fa4dd",
+"2026-10-29"
 ],
 "/ar/flights-paris-fez/": [
-"45203a433bbfc840",
-"2026-10-28"
+"02277832f4e6f860",
+"2026-10-29"
 ],
 "/ar/flights-paris-fort-de-france/": [
-"4121bb4c04bf4ae2",
-"2026-10-28"
+"c75a3fc28463264f",
+"2026-10-29"
 ],
 "/ar/flights-paris-istanbul/": [
-"d296d1e76f495ba9",
+"54320e62eb2751fc",
 "2026-10-29"
 ],
 "/ar/flights-paris-jeddah/": [
-"360e4eb76c1e95cf",
-"2026-10-28"
+"e4990e1e99316e3e",
+"2026-10-29"
 ],
 "/ar/flights-paris-johannesburg/": [
-"8a6edbe69c6d239f",
-"2026-10-28"
+"bc6280ab36f6743f",
+"2026-10-29"
 ],
 "/ar/flights-paris-kigali/": [
-"0fda0c61c7d1fb34",
-"2026-10-28"
+"dbe83c0312704bf7",
+"2026-10-29"
 ],
 "/ar/flights-paris-kinshasa/": [
-"e3b75380bc753db5",
-"2026-10-28"
+"e9005ac5215080a1",
+"2026-10-29"
 ],
 "/ar/flights-paris-lagos/": [
-"d7c469bc7ce7cee1",
-"2026-10-28"
+"677d7876e48f4062",
+"2026-10-29"
 ],
 "/ar/flights-paris-libreville/": [
-"bc4c0877f18b5fee",
-"2026-10-28"
+"cee52495686079d3",
+"2026-10-29"
 ],
 "/ar/flights-paris-lome/": [
-"e5abdf26e57f7adf",
-"2026-10-28"
+"c7baccc254e44bfc",
+"2026-10-29"
 ],
 "/ar/flights-paris-luanda/": [
-"2d8a66970796afd4",
-"2026-10-28"
+"d33ed1319a68781b",
+"2026-10-29"
 ],
 "/ar/flights-paris-maputo/": [
-"a41c26767adb7cbd",
-"2026-10-28"
+"e6bab7dd59ed8d34",
+"2026-10-29"
 ],
 "/ar/flights-paris-marrakesh/": [
-"34426ec403a02f1d",
-"2026-10-28"
+"0921546d1eff0b26",
+"2026-10-29"
 ],
 "/ar/flights-paris-mauritius/": [
-"98365da309354883",
-"2026-10-28"
+"4cc9570b800c9b1a",
+"2026-10-29"
 ],
 "/ar/flights-paris-mayotte/": [
-"479a92dbaf50cbf7",
-"2026-10-28"
+"c947611def39a632",
+"2026-10-29"
 ],
 "/ar/flights-paris-medina/": [
-"2c50a401aaec34f5",
-"2026-10-28"
+"2aa8a52e9ff46c55",
+"2026-10-29"
 ],
 "/ar/flights-paris-monastir/": [
-"7a5c8b1aa7e8c1e7",
-"2026-10-28"
+"a0b46a6c5fcb0e20",
+"2026-10-29"
 ],
 "/ar/flights-paris-montreal/": [
-"da81050f5ab4cb5e",
-"2026-10-28"
+"16a54d56a31b2e3a",
+"2026-10-29"
 ],
 "/ar/flights-paris-n-djamena/": [
-"821789d2dfc614d8",
-"2026-10-28"
+"961556d985eaed9e",
+"2026-10-29"
 ],
 "/ar/flights-paris-nairobi/": [
-"bbef003200100c3d",
-"2026-10-28"
+"aa3a26c6d3e416f0",
+"2026-10-29"
 ],
 "/ar/flights-paris-niamey/": [
-"caf24b28f9a9c656",
-"2026-10-28"
+"1873256dd0361e7f",
+"2026-10-29"
 ],
 "/ar/flights-paris-nouakchott/": [
-"b7b9c7efc5c53119",
-"2026-10-28"
+"3216fa846869abba",
+"2026-10-29"
 ],
 "/ar/flights-paris-oran/": [
-"18423fb5eaeaa428",
+"fba42093e74f6332",
 "2026-10-29"
 ],
 "/ar/flights-paris-ouagadougou/": [
-"8ffec06d1930eced",
-"2026-10-28"
+"83532cfc14038764",
+"2026-10-29"
 ],
 "/ar/flights-paris-oujda/": [
-"96f7c8b60f98479f",
-"2026-10-28"
+"4b54b90f48434551",
+"2026-10-29"
 ],
 "/ar/flights-paris-pointe-a-pitre/": [
-"8d90044332d3feaf",
-"2026-10-28"
+"02161e1f6836c2df",
+"2026-10-29"
 ],
 "/ar/flights-paris-pointe-noire/": [
-"add7047eae65db63",
-"2026-10-28"
+"bb8cc9d454114a2c",
+"2026-10-29"
 ],
 "/ar/flights-paris-port-au-prince/": [
-"438f33c01f45083d",
-"2026-10-28"
+"3edf9b0c6189ed98",
+"2026-10-29"
 ],
 "/ar/flights-paris-praia/": [
-"cd27e95809c4cf26",
-"2026-10-28"
+"94037057e142203e",
+"2026-10-29"
 ],
 "/ar/flights-paris-rabat/": [
-"ab9e9a4934fb3c18",
-"2026-10-28"
+"27bc72a20b43b65a",
+"2026-10-29"
 ],
 "/ar/flights-paris-reunion/": [
-"81a7e601caef7a58",
-"2026-10-28"
+"c5441c19ce27a86e",
+"2026-10-29"
 ],
 "/ar/flights-paris-riyadh/": [
-"e5126c2a86f5de2c",
-"2026-10-28"
+"9bc242ad08adff05",
+"2026-10-29"
 ],
 "/ar/flights-paris-tangier/": [
-"19b4054f6bb0a751",
-"2026-10-28"
+"bd2b7f152bad477e",
+"2026-10-29"
 ],
 "/ar/flights-paris-tunis/": [
-"3a6907aba22e7445",
-"2026-10-28"
+"012a434ff16b27ae",
+"2026-10-29"
 ],
 "/ar/flights-paris-yaounde/": [
-"879ef4f4a767f060",
-"2026-10-28"
+"cccd5b8caf3179bd",
+"2026-10-29"
 ],
 "/ar/flights-rennes-agadir/": [
-"3a8f2164446bbe88",
+"e4f614d7ce0a8a41",
 "2026-10-29"
 ],
 "/ar/flights-rennes-algiers/": [
-"eaba2006ac49ec41",
+"c00f947a3ed7d678",
 "2026-10-29"
 ],
 "/ar/flights-rennes-casablanca/": [
-"f97540e6efa18e95",
+"e1effb69030dfba6",
 "2026-10-29"
 ],
 "/ar/flights-rennes-dakar/": [
-"a7964beda73e4d12",
+"e4b1e11af9288574",
 "2026-10-29"
 ],
 "/ar/flights-rennes-marrakesh/": [
-"9ec71f717152f404",
+"8084bb429f87ec14",
 "2026-10-29"
 ],
 "/ar/flights-rennes-oran/": [
-"6afa6976d434849e",
+"ca38d52ff9ad3a65",
 "2026-10-29"
 ],
 "/ar/flights-rennes-tunis/": [
-"c51a1de50a88b44a",
+"6eed488a186719ec",
 "2026-10-29"
 ],
 "/ar/flights-strasbourg-algiers/": [
-"fb4f52d11ebf7a29",
-"2026-10-28"
+"2c12a63f45f055f4",
+"2026-10-29"
 ],
 "/ar/flights-strasbourg-casablanca/": [
-"48f89ceb78b13c27",
-"2026-10-28"
+"4108fcddf289e6fb",
+"2026-10-29"
 ],
 "/ar/flights-strasbourg-dakar/": [
-"ad86fd3a92d652d0",
-"2026-10-28"
+"217075c2795e7447",
+"2026-10-29"
 ],
 "/ar/flights-strasbourg-istanbul/": [
-"415180e673714277",
+"b7b62f1158885542",
 "2026-10-29"
 ],
 "/ar/flights-strasbourg-marrakesh/": [
-"ad0a116d24b5a52d",
-"2026-10-28"
+"baa8716b711393f1",
+"2026-10-29"
 ],
 "/ar/flights-strasbourg-oran/": [
-"71a17c73a225e230",
+"66466ac20a646647",
 "2026-10-29"
 ],
 "/ar/flights-strasbourg-tunis/": [
-"97156029a9477822",
-"2026-10-28"
+"65374bd3c4ec3fc3",
+"2026-10-29"
 ],
 "/ar/flights-summer/": [
 "423825bdd5e2d089",
@@ -980,24 +980,24 @@
 "2026-10-29"
 ],
 "/ar/flights-toulouse-algiers/": [
-"d35e8e53f38dcd00",
-"2026-10-28"
+"ce7bcab8d92f1b72",
+"2026-10-29"
 ],
 "/ar/flights-toulouse-casablanca/": [
-"3db3108b854ad863",
-"2026-10-28"
+"d4578efd59525b7e",
+"2026-10-29"
 ],
 "/ar/flights-toulouse-marrakesh/": [
-"21e4e50e89701b96",
-"2026-10-28"
+"42c41a06c12df2e5",
+"2026-10-29"
 ],
 "/ar/flights-toulouse-oran/": [
-"a926cde19887044b",
+"e0cf458f6556a645",
 "2026-10-29"
 ],
 "/ar/flights-toulouse-tunis/": [
-"d0b42ead71cac83a",
-"2026-10-28"
+"67c6eb336efd16c3",
+"2026-10-29"
 ],
 "/ar/flights-winter-holidays/": [
 "0ec98a426cb1d572",
@@ -1107,53 +1107,57 @@
 "e4b9b0254a5a67f6",
 "2026-10-29"
 ],
+"/barometre-prix/": [
+"a1d4cb6dd2cca28e",
+"2026-10-29"
+],
 "/blog/": [
-"187cad9851054091",
-"2026-10-28"
+"5cda194cc9bbdff2",
+"2026-10-29"
 ],
 "/blog/billet-noel-afrique-encore-temps/": [
-"de97d3ec1cf6d59f",
-"2026-10-28"
+"e5e17255d7634320",
+"2026-10-29"
 ],
 "/blog/choisir-compagnie-aerienne-afrique/": [
-"5e3f000ffaf804c2",
-"2026-10-28"
+"26eb73bf9add0df7",
+"2026-10-29"
 ],
 "/blog/partir-au-pays-beaucoup-de-valises/": [
-"15e20ef1138fac11",
-"2026-10-28"
+"61ed226314a47aaf",
+"2026-10-29"
 ],
 "/blog/quel-aeroport-depart-afrique/": [
-"46b37d3761f1fb46",
-"2026-10-28"
+"d464c1ef9e25e084",
+"2026-10-29"
 ],
 "/blog/ramadan-aid-2027-billet-avion/": [
-"78c4a7d136550d32",
-"2026-10-28"
+"d27f246430310d2b",
+"2026-10-29"
 ],
 "/blog/tabaski-2027-quand-acheter-billet/": [
-"9ff90d630a40a164",
-"2026-10-28"
+"cc274716dd6c33ee",
+"2026-10-29"
 ],
 "/blog/vol-avec-escale-bien-choisir-correspondance/": [
-"c7193f8cd5f53f4e",
-"2026-10-28"
+"62186bd4de5f3475",
+"2026-10-29"
 ],
 "/bons-plans/": [
 "0d4cb2a40924beb2",
 "2026-10-28"
 ],
 "/confidentialite/": [
-"38ac74056fbc73fb",
-"2026-10-28"
+"7fa90a169a9fca2c",
+"2026-10-29"
 ],
 "/contact/": [
-"2c6ff7f296fe9c28",
-"2026-10-28"
+"e4a2b8932000424f",
+"2026-10-29"
 ],
 "/credits-photos/": [
-"5394604f412845e1",
-"2026-10-28"
+"1f5d28bca9edabf0",
+"2026-10-29"
 ],
 "/en/": [
 "d0431d45d81ae2b8",
@@ -1244,128 +1248,128 @@
 "2026-10-28"
 ],
 "/en/flights-basel-mulhouse-algiers/": [
-"94748f669e6b700d",
+"89166ca60cfb3283",
 "2026-10-29"
 ],
 "/en/flights-basel-mulhouse-casablanca/": [
-"9f674457aaee5189",
+"4b2d253daeb78ed7",
 "2026-10-29"
 ],
 "/en/flights-basel-mulhouse-constantine/": [
-"19f60e94683a1e54",
+"0e20f3f52081a6ff",
 "2026-10-29"
 ],
 "/en/flights-basel-mulhouse-istanbul/": [
-"a9c4b452fbd96c17",
+"56d92e21f530ecf7",
 "2026-10-29"
 ],
 "/en/flights-basel-mulhouse-marrakesh/": [
-"ce2c7ff6bfe460e4",
+"0663556a60027180",
 "2026-10-29"
 ],
 "/en/flights-basel-mulhouse-oran/": [
-"34b5f96c526634a5",
+"cbe732961c72cd91",
 "2026-10-29"
 ],
 "/en/flights-basel-mulhouse-tunis/": [
-"7fd8596bba7e969b",
+"e9fcd19a419af1b5",
 "2026-10-29"
 ],
 "/en/flights-bordeaux-algiers/": [
-"0a500ee8ebadea4d",
-"2026-10-28"
+"71a286672cc503bc",
+"2026-10-29"
 ],
 "/en/flights-bordeaux-casablanca/": [
-"640718d098c21674",
-"2026-10-28"
+"ae4f12e92ae24577",
+"2026-10-29"
 ],
 "/en/flights-bordeaux-dakar/": [
-"bdb3eeead17f3979",
-"2026-10-28"
+"da7b920675f76e76",
+"2026-10-29"
 ],
 "/en/flights-bordeaux-marrakesh/": [
-"50c440dbed0019e9",
-"2026-10-28"
+"3c90ac56a31e191e",
+"2026-10-29"
 ],
 "/en/flights-brussels-abidjan/": [
-"6d1d6ef0d433a7c5",
-"2026-10-28"
+"d721c62f18880fbe",
+"2026-10-29"
 ],
 "/en/flights-brussels-accra/": [
-"4f4feac759c85e27",
-"2026-10-28"
+"0e3cef124a681ed0",
+"2026-10-29"
 ],
 "/en/flights-brussels-algiers/": [
-"390ad6ecd2aaa643",
-"2026-10-28"
+"68472ad8307cae05",
+"2026-10-29"
 ],
 "/en/flights-brussels-bamako/": [
-"a8cb7ad4872c0d84",
-"2026-10-28"
+"9512bff92d2bad2a",
+"2026-10-29"
 ],
 "/en/flights-brussels-casablanca/": [
-"e8655bce7a67bf0f",
-"2026-10-28"
+"7e1984f3b1a757af",
+"2026-10-29"
 ],
 "/en/flights-brussels-conakry/": [
-"ee966da1664ab3bb",
-"2026-10-28"
+"454298a599038b05",
+"2026-10-29"
 ],
 "/en/flights-brussels-cotonou/": [
-"c277b1cc49daafa3",
-"2026-10-28"
+"8ecd83aa04ab5335",
+"2026-10-29"
 ],
 "/en/flights-brussels-dakar/": [
-"372ce6eca152fa37",
-"2026-10-28"
+"20f7fc12f520e116",
+"2026-10-29"
 ],
 "/en/flights-brussels-douala/": [
-"73a564f3f5061970",
-"2026-10-28"
+"abc9ba40533449a7",
+"2026-10-29"
 ],
 "/en/flights-brussels-dubai/": [
-"08d7d3f71df72dd1",
-"2026-10-28"
+"e487609a448e66ab",
+"2026-10-29"
 ],
 "/en/flights-brussels-istanbul/": [
-"65064ac8abf76a00",
+"fee0c9b395a0a155",
 "2026-10-29"
 ],
 "/en/flights-brussels-kigali/": [
-"ae527c95c1bba533",
-"2026-10-28"
+"7f1e695f831f6d66",
+"2026-10-29"
 ],
 "/en/flights-brussels-kinshasa/": [
-"5eb4d4ec71e0a18d",
-"2026-10-28"
+"6ca8546807c9fd31",
+"2026-10-29"
 ],
 "/en/flights-brussels-libreville/": [
-"237525b93c36cfde",
-"2026-10-28"
+"976b6f6b3460acf2",
+"2026-10-29"
 ],
 "/en/flights-brussels-lome/": [
-"432cac297c099bf1",
-"2026-10-28"
+"0fc472597f136abe",
+"2026-10-29"
 ],
 "/en/flights-brussels-marrakesh/": [
-"693b1dcab383b716",
-"2026-10-28"
+"40a96e2621376573",
+"2026-10-29"
 ],
 "/en/flights-brussels-ouagadougou/": [
-"8a83667ee66efc2d",
-"2026-10-28"
+"c8ad1c9fd0c6606e",
+"2026-10-29"
 ],
 "/en/flights-brussels-tangier/": [
-"f7a7bfcf7579f994",
-"2026-10-28"
+"35e1d52925235e23",
+"2026-10-29"
 ],
 "/en/flights-brussels-tunis/": [
-"0c7d91a5a5f533fe",
-"2026-10-28"
+"be9e79f51528370f",
+"2026-10-29"
 ],
 "/en/flights-brussels-yaounde/": [
-"e83ea5f7d6485589",
-"2026-10-28"
+"7387aee34456a6bf",
+"2026-10-29"
 ],
 "/en/flights-christmas/": [
 "426d1f187cbe4b73",
@@ -1380,720 +1384,720 @@
 "2026-10-28"
 ],
 "/en/flights-geneva-abidjan/": [
-"e2eccfa07dfeb7c9",
-"2026-10-28"
+"fc87b578b42abaac",
+"2026-10-29"
 ],
 "/en/flights-geneva-algiers/": [
-"5e71e4c64ddd5366",
-"2026-10-28"
+"b38a9e475b959929",
+"2026-10-29"
 ],
 "/en/flights-geneva-casablanca/": [
-"cde37e6d050b541c",
-"2026-10-28"
+"754c8f713fdbca2a",
+"2026-10-29"
 ],
 "/en/flights-geneva-dakar/": [
-"a82fb836f8114709",
-"2026-10-28"
+"4c6a572c91477b45",
+"2026-10-29"
 ],
 "/en/flights-geneva-dubai/": [
-"4cdfb421572e63c6",
-"2026-10-28"
+"9492478f1f4c0001",
+"2026-10-29"
 ],
 "/en/flights-geneva-istanbul/": [
-"0bce73894ff8f9fd",
+"f09f0918fb2a08e3",
 "2026-10-29"
 ],
 "/en/flights-geneva-marrakesh/": [
-"2e684d255c6ed116",
-"2026-10-28"
+"b67165069bb22efb",
+"2026-10-29"
 ],
 "/en/flights-geneva-tunis/": [
-"503d1477d3ce83bc",
-"2026-10-28"
+"f148708819afe571",
+"2026-10-29"
 ],
 "/en/flights-lille-algiers/": [
-"4736192c8176cc69",
-"2026-10-28"
+"6239d0080a972148",
+"2026-10-29"
 ],
 "/en/flights-lille-casablanca/": [
-"cdc60514bb665a3a",
-"2026-10-28"
+"cab6840e2e0fd55f",
+"2026-10-29"
 ],
 "/en/flights-lille-dakar/": [
-"4600e51cb727dd13",
-"2026-10-28"
+"0c865b5ec3f1edc3",
+"2026-10-29"
 ],
 "/en/flights-lille-marrakesh/": [
-"081cc60bcf57729f",
-"2026-10-28"
+"b1b2ce7980b9f8dd",
+"2026-10-29"
 ],
 "/en/flights-lille-oran/": [
-"3d8b5365b872734f",
+"986f7d208e60fdda",
 "2026-10-29"
 ],
 "/en/flights-lille-oujda/": [
-"a54448297763e2b6",
-"2026-10-28"
+"ecce11e7b0638a36",
+"2026-10-29"
 ],
 "/en/flights-lille-tunis/": [
-"588c0920f6cbc0f6",
-"2026-10-28"
+"169185db00c1add7",
+"2026-10-29"
 ],
 "/en/flights-lisbon-abidjan/": [
-"378230b25300f5f1",
-"2026-10-28"
+"8b88e2767586e15f",
+"2026-10-29"
 ],
 "/en/flights-lisbon-accra/": [
-"e3ced8c580410ebe",
-"2026-10-28"
+"b88eb7c9cfb65be1",
+"2026-10-29"
 ],
 "/en/flights-lisbon-bissau/": [
-"d9dd44fa566732f3",
-"2026-10-28"
+"ea907a74911d743c",
+"2026-10-29"
 ],
 "/en/flights-lisbon-casablanca/": [
-"82c156b589662f43",
-"2026-10-28"
+"9320cfe924999db9",
+"2026-10-29"
 ],
 "/en/flights-lisbon-dakar/": [
-"349c8eafdfa10054",
-"2026-10-28"
+"db545850a874f5c3",
+"2026-10-29"
 ],
 "/en/flights-lisbon-luanda/": [
-"555182180c29b283",
-"2026-10-28"
+"23ba77de8246b3fa",
+"2026-10-29"
 ],
 "/en/flights-lisbon-maputo/": [
-"ad17ae868c39f1d4",
-"2026-10-28"
+"9673156dec095e2f",
+"2026-10-29"
 ],
 "/en/flights-lisbon-praia/": [
-"252a95dadbe84e08",
-"2026-10-28"
+"a4085683957bbea9",
+"2026-10-29"
 ],
 "/en/flights-london-abidjan/": [
-"00c79e75c7e31497",
-"2026-10-28"
+"36bff02319be8b96",
+"2026-10-29"
 ],
 "/en/flights-london-abuja/": [
-"8d9845be7a533c0a",
-"2026-10-28"
+"d85699b77d5ec546",
+"2026-10-29"
 ],
 "/en/flights-london-accra/": [
-"52ffcd08863bc6cb",
-"2026-10-28"
+"31b566b146fd18be",
+"2026-10-29"
 ],
 "/en/flights-london-addis-ababa/": [
-"9fee25074919d3b3",
-"2026-10-28"
+"e8df0485c90c3baa",
+"2026-10-29"
 ],
 "/en/flights-london-algiers/": [
-"666cf77c451cff8e",
-"2026-10-28"
+"f99f5643ec2e8686",
+"2026-10-29"
 ],
 "/en/flights-london-cairo/": [
-"f9cb1a5246049552",
-"2026-10-28"
+"c693069ad7a12655",
+"2026-10-29"
 ],
 "/en/flights-london-casablanca/": [
-"bd603ebc715d4d62",
-"2026-10-28"
+"942dc47b23751388",
+"2026-10-29"
 ],
 "/en/flights-london-dakar/": [
-"8db59a0f9c322e9a",
-"2026-10-28"
+"384d7f1e2b6bf25c",
+"2026-10-29"
 ],
 "/en/flights-london-dubai/": [
-"50b4e4fc0d14b687",
-"2026-10-28"
+"27a2003787716c21",
+"2026-10-29"
 ],
 "/en/flights-london-johannesburg/": [
-"c759424681f95eab",
-"2026-10-28"
+"149951b30721ce9c",
+"2026-10-29"
 ],
 "/en/flights-london-kinshasa/": [
-"6a82903defe92eb9",
-"2026-10-28"
+"81241deec69697aa",
+"2026-10-29"
 ],
 "/en/flights-london-lagos/": [
-"e75dc4a304ee9a27",
-"2026-10-28"
+"027bdf3367069386",
+"2026-10-29"
 ],
 "/en/flights-london-marrakesh/": [
-"7cf3365a3db30212",
-"2026-10-28"
+"3d301556d3cb3877",
+"2026-10-29"
 ],
 "/en/flights-london-nairobi/": [
-"c56c3f80d29127d6",
-"2026-10-28"
+"cd824f8420a52d61",
+"2026-10-29"
 ],
 "/en/flights-lyon-abidjan/": [
-"b9e0616fa08b015e",
-"2026-10-28"
+"7b23a916b1a1c6ee",
+"2026-10-29"
 ],
 "/en/flights-lyon-agadir/": [
-"6e6911ca1680240b",
+"cd13d413dedcfdef",
 "2026-10-29"
 ],
 "/en/flights-lyon-algiers/": [
-"362c5c1c698ef06e",
-"2026-10-28"
+"568932d679fdee02",
+"2026-10-29"
 ],
 "/en/flights-lyon-bamako/": [
-"30a64d06f88dc6ec",
-"2026-10-28"
+"f62c32c3b4a5e71e",
+"2026-10-29"
 ],
 "/en/flights-lyon-casablanca/": [
-"5f81ca12c88da82d",
-"2026-10-28"
+"2be75bb3cd58a0a2",
+"2026-10-29"
 ],
 "/en/flights-lyon-constantine/": [
-"d744323beeaf13ac",
+"0d36c27146eb7ef6",
 "2026-10-29"
 ],
 "/en/flights-lyon-dakar/": [
-"91d12b5f982836a2",
-"2026-10-28"
+"fd228c1a4dada332",
+"2026-10-29"
 ],
 "/en/flights-lyon-djerba/": [
-"ab9e61edb4ad0a99",
-"2026-10-28"
+"1388c65a2a2b6cce",
+"2026-10-29"
 ],
 "/en/flights-lyon-dubai/": [
-"2b13a75b1595b197",
-"2026-10-28"
+"a6e8d92ed72a1d0e",
+"2026-10-29"
 ],
 "/en/flights-lyon-fez/": [
-"b985db93d3354ced",
-"2026-10-28"
+"a2fc4a026e4f4750",
+"2026-10-29"
 ],
 "/en/flights-lyon-istanbul/": [
-"cb4a38a592c5a491",
+"66688589feb2c130",
 "2026-10-29"
 ],
 "/en/flights-lyon-marrakesh/": [
-"a5615450aebf3b62",
-"2026-10-28"
+"6d410e03c373df19",
+"2026-10-29"
 ],
 "/en/flights-lyon-oran/": [
-"e415e5b25fdea21d",
+"9189a7c5a44562b4",
 "2026-10-29"
 ],
 "/en/flights-lyon-oujda/": [
-"6ff3597c9fa5d568",
-"2026-10-28"
+"7345c3fc86e4c1e7",
+"2026-10-29"
 ],
 "/en/flights-lyon-tunis/": [
-"ca174b766a05683e",
-"2026-10-28"
+"b467fa306c2afbed",
+"2026-10-29"
 ],
 "/en/flights-madrid-abidjan/": [
-"f6a5f83575a247a5",
-"2026-10-28"
+"5bc00e5b45ceffcf",
+"2026-10-29"
 ],
 "/en/flights-madrid-algiers/": [
-"81f6e14e7d744bbb",
-"2026-10-28"
+"678d4ae6b9ed0dad",
+"2026-10-29"
 ],
 "/en/flights-madrid-bamako/": [
-"465a31aa755afc5f",
-"2026-10-28"
+"370c20afd4047923",
+"2026-10-29"
 ],
 "/en/flights-madrid-casablanca/": [
-"010bf0087e13e19b",
-"2026-10-28"
+"3f3c57da7298f910",
+"2026-10-29"
 ],
 "/en/flights-madrid-dakar/": [
-"9c86b56fb16cbae0",
-"2026-10-28"
+"162dc6b93218c3b3",
+"2026-10-29"
 ],
 "/en/flights-madrid-lagos/": [
-"6d0857f88a8075c0",
-"2026-10-28"
+"76801fdd68fa26a5",
+"2026-10-29"
 ],
 "/en/flights-madrid-marrakesh/": [
-"8da1abc8a5949579",
-"2026-10-28"
+"85d93aa8396741cc",
+"2026-10-29"
 ],
 "/en/flights-madrid-tangier/": [
-"c2b80bc463140402",
-"2026-10-28"
+"e252e8fa1424a694",
+"2026-10-29"
 ],
 "/en/flights-marseille-abidjan/": [
-"ac8ac3edd4218c5f",
-"2026-10-28"
+"7374afb5f69bb78c",
+"2026-10-29"
 ],
 "/en/flights-marseille-algiers/": [
-"1dbf205a9f8756f9",
-"2026-10-28"
+"15dd5e13c8892429",
+"2026-10-29"
 ],
 "/en/flights-marseille-bamako/": [
-"db389361d3830027",
-"2026-10-28"
+"fb4249fa75a35622",
+"2026-10-29"
 ],
 "/en/flights-marseille-casablanca/": [
-"d27f99df9d7e3071",
-"2026-10-28"
+"85f8ae046769d68f",
+"2026-10-29"
 ],
 "/en/flights-marseille-constantine/": [
-"ba7534aa6be0cb63",
+"b0b6720e1c9dec9f",
 "2026-10-29"
 ],
 "/en/flights-marseille-dakar/": [
-"2fff320bb8682db3",
-"2026-10-28"
+"dff7ffd07f4ffdf8",
+"2026-10-29"
 ],
 "/en/flights-marseille-djerba/": [
-"29261dc9c70840a4",
-"2026-10-28"
+"fc0109d40a7ce8c5",
+"2026-10-29"
 ],
 "/en/flights-marseille-istanbul/": [
-"0e95ecddac9f2073",
+"f5dfce51a6683e4f",
 "2026-10-29"
 ],
 "/en/flights-marseille-marrakesh/": [
-"8f0192ba9d746ff7",
-"2026-10-28"
+"7374335ead1fd3f8",
+"2026-10-29"
 ],
 "/en/flights-marseille-monastir/": [
-"e8b6dcc9b0ff1254",
-"2026-10-28"
+"8aa3b17d5c30d28e",
+"2026-10-29"
 ],
 "/en/flights-marseille-oran/": [
-"73d5f19bd1983a79",
+"7fb9fa2bd50d2e84",
 "2026-10-29"
 ],
 "/en/flights-marseille-tunis/": [
-"e69f581f42d54ebe",
-"2026-10-28"
+"9b41ec179aa9acb5",
+"2026-10-29"
 ],
 "/en/flights-montpellier-algiers/": [
-"1b719e8b899f0bbc",
-"2026-10-28"
+"59717e520c9e500f",
+"2026-10-29"
 ],
 "/en/flights-montpellier-casablanca/": [
-"44b73f3c7e4da6c3",
-"2026-10-28"
+"431423bf60fe8b0e",
+"2026-10-29"
 ],
 "/en/flights-montpellier-constantine/": [
-"e4346cc2dc1a2a92",
+"f020cdab293eedec",
 "2026-10-29"
 ],
 "/en/flights-montpellier-fez/": [
-"7422a37958e3dca4",
-"2026-10-28"
+"4ec8c700375f5dd9",
+"2026-10-29"
 ],
 "/en/flights-montpellier-marrakesh/": [
-"3775d099b90721d6",
-"2026-10-28"
+"110b7ef00e5f0c54",
+"2026-10-29"
 ],
 "/en/flights-montpellier-oran/": [
-"6b5e382fb119104b",
+"98683b03b9e4f039",
 "2026-10-29"
 ],
 "/en/flights-montpellier-tunis/": [
-"4a58f66825e8e06f",
-"2026-10-28"
+"e8b872a00db06f26",
+"2026-10-29"
 ],
 "/en/flights-montreal-abidjan/": [
-"17145e8d896ce7c9",
-"2026-10-28"
+"beb560d8d8d85e60",
+"2026-10-29"
 ],
 "/en/flights-montreal-algiers/": [
-"e945b39f02725037",
-"2026-10-28"
+"cb638ddec2d810c5",
+"2026-10-29"
 ],
 "/en/flights-montreal-casablanca/": [
-"5fd0cf61e89eb4e3",
-"2026-10-28"
+"b8e8f7faea9f63d8",
+"2026-10-29"
 ],
 "/en/flights-montreal-conakry/": [
-"05d76392ce26f22b",
-"2026-10-28"
+"5d22bf1aacd457ae",
+"2026-10-29"
 ],
 "/en/flights-montreal-dakar/": [
-"46015d3d7881fe2f",
-"2026-10-28"
+"745abe28b3e305e3",
+"2026-10-29"
 ],
 "/en/flights-montreal-douala/": [
-"0c656b7e7e2ecf26",
-"2026-10-28"
+"6ee1af1ad2c9db8d",
+"2026-10-29"
 ],
 "/en/flights-montreal-port-au-prince/": [
-"57225fc8c02f97ec",
-"2026-10-28"
+"8fe79eb2de7612fd",
+"2026-10-29"
 ],
 "/en/flights-montreal-tunis/": [
-"bdf69c97d1965891",
-"2026-10-28"
+"0bb8af433a7d919c",
+"2026-10-29"
 ],
 "/en/flights-nantes-agadir/": [
-"5fe2336b54cc4582",
+"2f27282172aecf9a",
 "2026-10-29"
 ],
 "/en/flights-nantes-algiers/": [
-"93448c858c00f1a7",
-"2026-10-28"
+"80ca42c360165299",
+"2026-10-29"
 ],
 "/en/flights-nantes-casablanca/": [
-"8d827fd0d91f73a8",
-"2026-10-28"
+"d20b23d24cfdb811",
+"2026-10-29"
 ],
 "/en/flights-nantes-dakar/": [
-"3e4e0a9f9f616fd6",
-"2026-10-28"
+"bdf234a4dfba6d5d",
+"2026-10-29"
 ],
 "/en/flights-nantes-marrakesh/": [
-"dceb3206033cb89a",
-"2026-10-28"
+"dc659b48ee488103",
+"2026-10-29"
 ],
 "/en/flights-nantes-oran/": [
-"a9d1e4b88e86844d",
+"324d97de88783aeb",
 "2026-10-29"
 ],
 "/en/flights-nantes-tunis/": [
-"1c1a672d90413c92",
-"2026-10-28"
+"ca3ec3483309109c",
+"2026-10-29"
 ],
 "/en/flights-new-york-abidjan/": [
-"00779c2b6854301b",
-"2026-10-28"
+"7d35d27a242bf153",
+"2026-10-29"
 ],
 "/en/flights-new-york-accra/": [
-"d07049d8f5625a53",
-"2026-10-28"
+"5aafd8791bb00385",
+"2026-10-29"
 ],
 "/en/flights-new-york-addis-ababa/": [
-"47e8b8acc43054d2",
-"2026-10-28"
+"1c02cf0d1d02af40",
+"2026-10-29"
 ],
 "/en/flights-new-york-cairo/": [
-"63a58e1285bd5c12",
-"2026-10-28"
+"b6a079009e929de7",
+"2026-10-29"
 ],
 "/en/flights-new-york-casablanca/": [
-"d909d838223cfe0e",
-"2026-10-28"
+"d44430967438c8c1",
+"2026-10-29"
 ],
 "/en/flights-new-york-dakar/": [
-"0b0b8c9e769abc13",
-"2026-10-28"
+"fe60da9bfad80921",
+"2026-10-29"
 ],
 "/en/flights-new-york-lagos/": [
-"f98f23ebc5a44b58",
-"2026-10-28"
+"4e4c4ed2ebc65b1e",
+"2026-10-29"
 ],
 "/en/flights-new-york-port-au-prince/": [
-"5b3729e4d134fb4e",
-"2026-10-28"
+"4a663b5f91c1b0e3",
+"2026-10-29"
 ],
 "/en/flights-nice-algiers/": [
-"cc64042b7661cd5d",
-"2026-10-28"
+"afe085cde8b3b542",
+"2026-10-29"
 ],
 "/en/flights-nice-casablanca/": [
-"523f1986ee3d2689",
-"2026-10-28"
+"b90656c4ae7ca1d9",
+"2026-10-29"
 ],
 "/en/flights-nice-dakar/": [
-"0e168a3d0859499e",
-"2026-10-28"
+"23f3fab9ad2e4869",
+"2026-10-29"
 ],
 "/en/flights-nice-tunis/": [
-"4ee446922c3ca8cb",
-"2026-10-28"
+"1d4f077b20c0edd1",
+"2026-10-29"
 ],
 "/en/flights-paris-abidjan/": [
-"76569faad21daa8b",
-"2026-10-28"
+"00710d6344c839a5",
+"2026-10-29"
 ],
 "/en/flights-paris-accra/": [
-"289965dbf561f924",
-"2026-10-28"
+"7e39c376c832f3f7",
+"2026-10-29"
 ],
 "/en/flights-paris-addis-ababa/": [
-"65bc40b664bbba89",
-"2026-10-28"
+"f097de756cf2233e",
+"2026-10-29"
 ],
 "/en/flights-paris-agadir/": [
-"2685611a0f375d75",
+"dfc007a16665f282",
 "2026-10-29"
 ],
 "/en/flights-paris-algiers/": [
-"d64696223e5a12a0",
-"2026-10-28"
+"4480174e971a8a30",
+"2026-10-29"
 ],
 "/en/flights-paris-amman/": [
-"d19baa973c214911",
-"2026-10-28"
+"76be28fb7175ba7c",
+"2026-10-29"
 ],
 "/en/flights-paris-antananarivo/": [
-"1ee6591357958cd3",
-"2026-10-28"
+"e755f21bfe9cccba",
+"2026-10-29"
 ],
 "/en/flights-paris-bamako/": [
-"088a2e8e8ae6946b",
-"2026-10-28"
+"2536d21d1bf065fb",
+"2026-10-29"
 ],
 "/en/flights-paris-banjul/": [
-"4eb2963d5d88db46",
-"2026-10-28"
+"40d3e4bd05582f7a",
+"2026-10-29"
 ],
 "/en/flights-paris-beirut/": [
-"ade11f808f1116ab",
-"2026-10-28"
+"6951889188aea16e",
+"2026-10-29"
 ],
 "/en/flights-paris-bissau/": [
-"6a0778563834eb39",
-"2026-10-28"
+"cabb0a1cb4d01f6e",
+"2026-10-29"
 ],
 "/en/flights-paris-brazzaville/": [
-"d2729f20311b71f5",
-"2026-10-28"
+"84eb249f2ef3fe18",
+"2026-10-29"
 ],
 "/en/flights-paris-cairo/": [
-"fec5988722a912d9",
-"2026-10-28"
+"0203968b63800ea8",
+"2026-10-29"
 ],
 "/en/flights-paris-casablanca/": [
-"13efd61eda9325b4",
-"2026-10-28"
+"2c901fb2483c861a",
+"2026-10-29"
 ],
 "/en/flights-paris-cayenne/": [
-"7b5c62b44a125bd7",
-"2026-10-28"
+"0a3a22582004bfaf",
+"2026-10-29"
 ],
 "/en/flights-paris-conakry/": [
-"615596e0a4f649f8",
-"2026-10-28"
+"4884ee72fe517438",
+"2026-10-29"
 ],
 "/en/flights-paris-constantine/": [
-"48883c015df78bc7",
+"f0bade3e78fc41a7",
 "2026-10-29"
 ],
 "/en/flights-paris-cotonou/": [
-"bd9c908fba72f3ac",
-"2026-10-28"
+"f4cd7867466b4743",
+"2026-10-29"
 ],
 "/en/flights-paris-dakar/": [
-"1cd7205333df8e09",
-"2026-10-28"
+"34bc2f10743203df",
+"2026-10-29"
 ],
 "/en/flights-paris-dar-es-salaam/": [
-"e28981c917e9dde2",
-"2026-10-28"
+"534b677deb0d83b8",
+"2026-10-29"
 ],
 "/en/flights-paris-djerba/": [
-"f4a526db8b28373b",
-"2026-10-28"
+"acfd24b3c7ddef20",
+"2026-10-29"
 ],
 "/en/flights-paris-doha/": [
-"c6e140b152b8605f",
-"2026-10-28"
+"c4f9cc411d854362",
+"2026-10-29"
 ],
 "/en/flights-paris-douala/": [
-"cbfb024f2f4626e5",
-"2026-10-28"
+"4f448b646cdecd47",
+"2026-10-29"
 ],
 "/en/flights-paris-dubai/": [
-"841e161466d412f6",
-"2026-10-28"
+"f3411aa25b690bfb",
+"2026-10-29"
 ],
 "/en/flights-paris-fez/": [
-"186c8f8604dcde3f",
-"2026-10-28"
+"b1465204c7101ba4",
+"2026-10-29"
 ],
 "/en/flights-paris-fort-de-france/": [
-"b69653b3944c6984",
-"2026-10-28"
+"a348f5165130f830",
+"2026-10-29"
 ],
 "/en/flights-paris-istanbul/": [
-"ff217d364b93a503",
+"fab923a39909b4e1",
 "2026-10-29"
 ],
 "/en/flights-paris-jeddah/": [
-"a9a1caca78e646c8",
-"2026-10-28"
+"49e8fd73a98316b3",
+"2026-10-29"
 ],
 "/en/flights-paris-johannesburg/": [
-"852dd017c7f4e3b8",
-"2026-10-28"
+"2ab34c1b36b625a9",
+"2026-10-29"
 ],
 "/en/flights-paris-kigali/": [
-"d391cb1c232f9003",
-"2026-10-28"
+"d170a3b75e0a0adc",
+"2026-10-29"
 ],
 "/en/flights-paris-kinshasa/": [
-"c9e7204432308000",
-"2026-10-28"
+"5297d6a8613825e3",
+"2026-10-29"
 ],
 "/en/flights-paris-lagos/": [
-"845231dc7f09e287",
-"2026-10-28"
+"df1b8be7e9b1e85d",
+"2026-10-29"
 ],
 "/en/flights-paris-libreville/": [
-"a8f2a674737349d9",
-"2026-10-28"
+"436f60909c215f70",
+"2026-10-29"
 ],
 "/en/flights-paris-lome/": [
-"89bfbb18ca21b270",
-"2026-10-28"
+"a180de2a8d57a9ca",
+"2026-10-29"
 ],
 "/en/flights-paris-luanda/": [
-"ec376597a5c5b2e3",
-"2026-10-28"
+"edea08028ded3579",
+"2026-10-29"
 ],
 "/en/flights-paris-maputo/": [
-"a30534767c6aebf1",
-"2026-10-28"
+"f2ff249fd510c435",
+"2026-10-29"
 ],
 "/en/flights-paris-marrakesh/": [
-"22a1816dc7fcdb2a",
-"2026-10-28"
+"4cf0de38d46acca6",
+"2026-10-29"
 ],
 "/en/flights-paris-mauritius/": [
-"435bb8f3e6cf03f8",
-"2026-10-28"
+"053181eb16524256",
+"2026-10-29"
 ],
 "/en/flights-paris-mayotte/": [
-"9879a89c9ca14ec2",
-"2026-10-28"
+"5eb79ffbcc78d84d",
+"2026-10-29"
 ],
 "/en/flights-paris-medina/": [
-"b1db3b4800f67768",
-"2026-10-28"
+"2eb5ab01aa3ee2f3",
+"2026-10-29"
 ],
 "/en/flights-paris-monastir/": [
-"9a6a2ad8b6502b90",
-"2026-10-28"
+"333edf93c8ccb66a",
+"2026-10-29"
 ],
 "/en/flights-paris-montreal/": [
-"76655d94822d1bf8",
-"2026-10-28"
+"566072e391fe652b",
+"2026-10-29"
 ],
 "/en/flights-paris-n-djamena/": [
-"2b69618212b52323",
-"2026-10-28"
+"ad1331c57f144fad",
+"2026-10-29"
 ],
 "/en/flights-paris-nairobi/": [
-"4f2b51eaeb771802",
-"2026-10-28"
+"994eb4c57ce85341",
+"2026-10-29"
 ],
 "/en/flights-paris-niamey/": [
-"91557bfdc1d1e2cc",
-"2026-10-28"
+"30f520bcabfd7b09",
+"2026-10-29"
 ],
 "/en/flights-paris-nouakchott/": [
-"9d2fef122ba9493c",
-"2026-10-28"
+"5e065f0ee08b7ddb",
+"2026-10-29"
 ],
 "/en/flights-paris-oran/": [
-"deeeebe6b7c9d231",
+"eeb00450a19ebc19",
 "2026-10-29"
 ],
 "/en/flights-paris-ouagadougou/": [
-"5a1a51acb5dc827d",
-"2026-10-28"
+"17e48be1f1c642b3",
+"2026-10-29"
 ],
 "/en/flights-paris-oujda/": [
-"6087bf68431215bd",
-"2026-10-28"
+"ffb9b86621ed2496",
+"2026-10-29"
 ],
 "/en/flights-paris-pointe-a-pitre/": [
-"1e25000da958ccd1",
-"2026-10-28"
+"1958928709617c8f",
+"2026-10-29"
 ],
 "/en/flights-paris-pointe-noire/": [
-"594ff92a224bc981",
-"2026-10-28"
+"f1e1a5b4e55879be",
+"2026-10-29"
 ],
 "/en/flights-paris-port-au-prince/": [
-"38633e3a51c8eefe",
-"2026-10-28"
+"e531dba9150cb03b",
+"2026-10-29"
 ],
 "/en/flights-paris-praia/": [
-"0828e73ee4aa09de",
-"2026-10-28"
+"b3499529282ef0e0",
+"2026-10-29"
 ],
 "/en/flights-paris-rabat/": [
-"874026391deb6e50",
-"2026-10-28"
+"79ecadb8aa1ee9f4",
+"2026-10-29"
 ],
 "/en/flights-paris-reunion/": [
-"7f6201192a898314",
-"2026-10-28"
+"4bf9966147784ca0",
+"2026-10-29"
 ],
 "/en/flights-paris-riyadh/": [
-"e8d8e202ac1a90a7",
-"2026-10-28"
+"58ab46654a99a592",
+"2026-10-29"
 ],
 "/en/flights-paris-tangier/": [
-"a5025afff4fa9106",
-"2026-10-28"
+"1fb755576f5ecedd",
+"2026-10-29"
 ],
 "/en/flights-paris-tunis/": [
-"37b949382bbe3e40",
-"2026-10-28"
+"9be7c46b56c276bc",
+"2026-10-29"
 ],
 "/en/flights-paris-yaounde/": [
-"95f112eff50d4076",
-"2026-10-28"
+"5c7499356c5266f3",
+"2026-10-29"
 ],
 "/en/flights-rennes-agadir/": [
-"8328ec33a6d54c43",
+"c84ff8edee6d9113",
 "2026-10-29"
 ],
 "/en/flights-rennes-algiers/": [
-"530e8f0de37c1302",
+"c77a40cdb0b87f27",
 "2026-10-29"
 ],
 "/en/flights-rennes-casablanca/": [
-"b519cb506cb868e5",
+"0f3303a7bc2a6a27",
 "2026-10-29"
 ],
 "/en/flights-rennes-dakar/": [
-"43a150359c08ade9",
+"5f43a8dec140d9e3",
 "2026-10-29"
 ],
 "/en/flights-rennes-marrakesh/": [
-"a90b8e5b4eedbf69",
+"8b7ac200136eaff5",
 "2026-10-29"
 ],
 "/en/flights-rennes-oran/": [
-"1d58fb40a3851bd7",
+"55e2463fc6bc3567",
 "2026-10-29"
 ],
 "/en/flights-rennes-tunis/": [
-"0687298f1b8d15b6",
+"4f996bb68d79496a",
 "2026-10-29"
 ],
 "/en/flights-strasbourg-algiers/": [
-"35044618bbf26f20",
-"2026-10-28"
+"2b337ac4e8b87ce1",
+"2026-10-29"
 ],
 "/en/flights-strasbourg-casablanca/": [
-"cf85c0178d4caa8b",
-"2026-10-28"
+"056a448306a0ba0d",
+"2026-10-29"
 ],
 "/en/flights-strasbourg-dakar/": [
-"93ccec502424f7a4",
-"2026-10-28"
+"06e2a90f6577d354",
+"2026-10-29"
 ],
 "/en/flights-strasbourg-istanbul/": [
-"513dc79348abab1d",
+"c1197bdc2e494684",
 "2026-10-29"
 ],
 "/en/flights-strasbourg-marrakesh/": [
-"d42522fae416e82f",
-"2026-10-28"
+"7dc5fbf3af006063",
+"2026-10-29"
 ],
 "/en/flights-strasbourg-oran/": [
-"4a990d063e425fe9",
+"774af18af433142d",
 "2026-10-29"
 ],
 "/en/flights-strasbourg-tunis/": [
-"7af70c0cd5763be4",
-"2026-10-28"
+"0931a98876bc97ef",
+"2026-10-29"
 ],
 "/en/flights-summer-holidays/": [
 "755e5cdd6bd4ec16",
@@ -2200,24 +2204,24 @@
 "2026-10-29"
 ],
 "/en/flights-toulouse-algiers/": [
-"a584dd704048f6f1",
-"2026-10-28"
+"797ff45610f580fc",
+"2026-10-29"
 ],
 "/en/flights-toulouse-casablanca/": [
-"9d34c9012cdf8de3",
-"2026-10-28"
+"97f702eb0dc2d49c",
+"2026-10-29"
 ],
 "/en/flights-toulouse-marrakesh/": [
-"d439ba20416c18db",
-"2026-10-28"
+"2dff2ebaaff27f8b",
+"2026-10-29"
 ],
 "/en/flights-toulouse-oran/": [
-"46529f3530df005b",
+"a2ff2a9d94670556",
 "2026-10-29"
 ],
 "/en/flights-toulouse-tunis/": [
-"5305bb1bb45a1a42",
-"2026-10-28"
+"991a98ca283ad2cf",
+"2026-10-29"
 ],
 "/en/flights-winter-holidays/": [
 "79d2d112638d723e",
@@ -2468,855 +2472,855 @@
 "2026-10-28"
 ],
 "/es/vuelos-basilea-mulhouse-argel/": [
-"9af3087e43cb91d3",
+"eeaf8ab7d2430dbb",
 "2026-10-29"
 ],
 "/es/vuelos-basilea-mulhouse-casablanca/": [
-"2a4b00c6554741c9",
+"af1d9f5cdcf05a3d",
 "2026-10-29"
 ],
 "/es/vuelos-basilea-mulhouse-constantina/": [
-"92c242ec392104bd",
+"25fd8f91d01cb031",
 "2026-10-29"
 ],
 "/es/vuelos-basilea-mulhouse-estambul/": [
-"748d4eaed34c4662",
+"becd5432bc85e232",
 "2026-10-29"
 ],
 "/es/vuelos-basilea-mulhouse-marrakech/": [
-"858dac1c08f2124e",
+"e4faeb2f140b816b",
 "2026-10-29"
 ],
 "/es/vuelos-basilea-mulhouse-oran/": [
-"95f2475b2b187b33",
+"2223b7064c01f187",
 "2026-10-29"
 ],
 "/es/vuelos-basilea-mulhouse-tunez/": [
-"07eb748b6d20b637",
+"0a97cbda1a576a10",
 "2026-10-29"
 ],
 "/es/vuelos-bruselas-abiyan/": [
-"0fe80b285063b0cd",
-"2026-10-28"
+"2d4af496630189a6",
+"2026-10-29"
 ],
 "/es/vuelos-bruselas-acra/": [
-"fbab6f2c0388d561",
-"2026-10-28"
+"44b3dd57c3237b2a",
+"2026-10-29"
 ],
 "/es/vuelos-bruselas-argel/": [
-"4871ef9d25d3f5b9",
-"2026-10-28"
+"0c0a2872b5ed989e",
+"2026-10-29"
 ],
 "/es/vuelos-bruselas-bamako/": [
-"c7ec896dbe0c0502",
-"2026-10-28"
+"f64088a84c994e1a",
+"2026-10-29"
 ],
 "/es/vuelos-bruselas-casablanca/": [
-"b0dd5d0a3c9efd71",
-"2026-10-28"
+"10ce82a7af273e3e",
+"2026-10-29"
 ],
 "/es/vuelos-bruselas-conakri/": [
-"a7dc4e81b3c2aa74",
-"2026-10-28"
+"82a7234f0e1e09cb",
+"2026-10-29"
 ],
 "/es/vuelos-bruselas-cotonu/": [
-"4167d892abb6cdd3",
-"2026-10-28"
+"e9a915e0932edbde",
+"2026-10-29"
 ],
 "/es/vuelos-bruselas-dakar/": [
-"51ed5211c83a3ae1",
-"2026-10-28"
+"5e6a26788e909bc0",
+"2026-10-29"
 ],
 "/es/vuelos-bruselas-duala/": [
-"f699d68922012ba9",
-"2026-10-28"
+"fda7f29663fcacc5",
+"2026-10-29"
 ],
 "/es/vuelos-bruselas-dubai/": [
-"3ca1be860e5e04d5",
-"2026-10-28"
+"7bca2627b64c3909",
+"2026-10-29"
 ],
 "/es/vuelos-bruselas-estambul/": [
-"58970a6e830bd8e5",
+"462451402568b9b0",
 "2026-10-29"
 ],
 "/es/vuelos-bruselas-kigali/": [
-"3a7de81d12f255a5",
-"2026-10-28"
+"86e26a6cb8066f94",
+"2026-10-29"
 ],
 "/es/vuelos-bruselas-kinsasa/": [
-"8e4f60c59acf8d12",
-"2026-10-28"
+"1cb49eaf5612bc63",
+"2026-10-29"
 ],
 "/es/vuelos-bruselas-libreville/": [
-"c351b654f1ca26d4",
-"2026-10-28"
+"434999c77828fbdd",
+"2026-10-29"
 ],
 "/es/vuelos-bruselas-lome/": [
-"c8cc0eb93e4784b2",
-"2026-10-28"
+"646046b016464652",
+"2026-10-29"
 ],
 "/es/vuelos-bruselas-marrakech/": [
-"4d7e4680422aec5e",
-"2026-10-28"
+"581939a7594b479a",
+"2026-10-29"
 ],
 "/es/vuelos-bruselas-tanger/": [
-"82f6f7f81064f3b3",
-"2026-10-28"
+"a2e564330d8e9466",
+"2026-10-29"
 ],
 "/es/vuelos-bruselas-tunez/": [
-"81bf0f05266c220d",
-"2026-10-28"
+"2b4730cd56495b35",
+"2026-10-29"
 ],
 "/es/vuelos-bruselas-uagadugu/": [
-"ddb75e579668e0a5",
-"2026-10-28"
+"5ec1dc75e604dd0a",
+"2026-10-29"
 ],
 "/es/vuelos-bruselas-yaunde/": [
-"6240ee21174012c6",
-"2026-10-28"
+"bb42c848f133f235",
+"2026-10-29"
 ],
 "/es/vuelos-burdeos-argel/": [
-"21e7ed03eaa68369",
-"2026-10-28"
+"14039fa0d219ee11",
+"2026-10-29"
 ],
 "/es/vuelos-burdeos-casablanca/": [
-"7fb18dde8bf9f152",
-"2026-10-28"
+"5b34f73b9ced6275",
+"2026-10-29"
 ],
 "/es/vuelos-burdeos-dakar/": [
-"c3737870b1cb1b51",
-"2026-10-28"
+"f0823cec6d517c82",
+"2026-10-29"
 ],
 "/es/vuelos-burdeos-marrakech/": [
-"ab78078f4e5371dc",
-"2026-10-28"
+"f4b23f2c12ed232e",
+"2026-10-29"
 ],
 "/es/vuelos-eid-al-fitr/": [
 "3c23b868dc4ab2a3",
 "2026-10-28"
 ],
 "/es/vuelos-estrasburgo-argel/": [
-"054bd26eeace763a",
-"2026-10-28"
+"6aaa02801d927d64",
+"2026-10-29"
 ],
 "/es/vuelos-estrasburgo-casablanca/": [
-"3392bf203217ca90",
-"2026-10-28"
+"ecd3b655e8afc9e3",
+"2026-10-29"
 ],
 "/es/vuelos-estrasburgo-dakar/": [
-"89a3fc915e2723e8",
-"2026-10-28"
+"f90b82e1560709df",
+"2026-10-29"
 ],
 "/es/vuelos-estrasburgo-estambul/": [
-"cb5aa8bca28e4489",
+"935584933fcdef31",
 "2026-10-29"
 ],
 "/es/vuelos-estrasburgo-marrakech/": [
-"9f08fa36bb0d386f",
-"2026-10-28"
+"d953b08041f4c9e9",
+"2026-10-29"
 ],
 "/es/vuelos-estrasburgo-oran/": [
-"bc5d8ae7e599bf49",
+"34f0e515e1f47e5e",
 "2026-10-29"
 ],
 "/es/vuelos-estrasburgo-tunez/": [
-"c1b1b164884ba5aa",
-"2026-10-28"
+"12bf3c332b4d27a7",
+"2026-10-29"
 ],
 "/es/vuelos-fiestas/": [
 "a35c3cb8e63a1169",
 "2026-10-28"
 ],
 "/es/vuelos-ginebra-abiyan/": [
-"147de04c0a97fca2",
-"2026-10-28"
+"5b9f4f0e41c3682f",
+"2026-10-29"
 ],
 "/es/vuelos-ginebra-argel/": [
-"dc06de7b3361f030",
-"2026-10-28"
+"7fa47ed9f3463799",
+"2026-10-29"
 ],
 "/es/vuelos-ginebra-casablanca/": [
-"c7f0742484f4f33b",
-"2026-10-28"
+"cc1de2120d28f1f4",
+"2026-10-29"
 ],
 "/es/vuelos-ginebra-dakar/": [
-"d6f016ea5b545eac",
-"2026-10-28"
+"390a4f4ec96c1efb",
+"2026-10-29"
 ],
 "/es/vuelos-ginebra-dubai/": [
-"ba1f86a15d364afb",
-"2026-10-28"
+"2353af3b1bcf0e1e",
+"2026-10-29"
 ],
 "/es/vuelos-ginebra-estambul/": [
-"5d45d3fdfaeef27e",
+"72c4a55925c9a7e6",
 "2026-10-29"
 ],
 "/es/vuelos-ginebra-marrakech/": [
-"e567b085beabd0bb",
-"2026-10-28"
+"c870f5d91fa87b26",
+"2026-10-29"
 ],
 "/es/vuelos-ginebra-tunez/": [
-"369a692d13d2f171",
-"2026-10-28"
+"156c3c42d06ad4b8",
+"2026-10-29"
 ],
 "/es/vuelos-lille-argel/": [
-"87e42b761af240d5",
-"2026-10-28"
+"c836df9f665384fe",
+"2026-10-29"
 ],
 "/es/vuelos-lille-casablanca/": [
-"10477bd7b39c54f4",
-"2026-10-28"
+"88705d24e9512d34",
+"2026-10-29"
 ],
 "/es/vuelos-lille-dakar/": [
-"63aa764f036052d3",
-"2026-10-28"
+"d7d25ceae7304b01",
+"2026-10-29"
 ],
 "/es/vuelos-lille-marrakech/": [
-"ee2902504a23184c",
-"2026-10-28"
+"432539e7b979b00c",
+"2026-10-29"
 ],
 "/es/vuelos-lille-oran/": [
-"ceb90126828f722f",
+"cc33969ecd61bebf",
 "2026-10-29"
 ],
 "/es/vuelos-lille-tunez/": [
-"9484a7e8916350ca",
-"2026-10-28"
+"a197e177ad51fcda",
+"2026-10-29"
 ],
 "/es/vuelos-lille-uchda/": [
-"ff106c7e021c47d1",
-"2026-10-28"
+"f3e1c5ba3e099dce",
+"2026-10-29"
 ],
 "/es/vuelos-lisboa-abiyan/": [
-"dc18fb8069b18c2a",
-"2026-10-28"
+"138937d2c5f1b819",
+"2026-10-29"
 ],
 "/es/vuelos-lisboa-acra/": [
-"6424e4358b5ebb02",
-"2026-10-28"
+"2458a25f6955ec15",
+"2026-10-29"
 ],
 "/es/vuelos-lisboa-bisau/": [
-"f314d51b20f503d1",
-"2026-10-28"
+"d26271a698799855",
+"2026-10-29"
 ],
 "/es/vuelos-lisboa-casablanca/": [
-"c3e36ebca2ba1aaa",
-"2026-10-28"
+"4320fa0561d5a9ca",
+"2026-10-29"
 ],
 "/es/vuelos-lisboa-dakar/": [
-"f632dff190d19a1c",
-"2026-10-28"
+"06437fb5edc98d47",
+"2026-10-29"
 ],
 "/es/vuelos-lisboa-luanda/": [
-"048acac68e8e404b",
-"2026-10-28"
+"ea5d978536ddd87f",
+"2026-10-29"
 ],
 "/es/vuelos-lisboa-maputo/": [
-"15d80b72be0635d4",
-"2026-10-28"
+"85ac59f3b0b996ab",
+"2026-10-29"
 ],
 "/es/vuelos-lisboa-praia/": [
-"dc32c0a3b12a11a0",
-"2026-10-28"
+"ddb41e68467717f0",
+"2026-10-29"
 ],
 "/es/vuelos-londres-abiyan/": [
-"28b00b45e6bc0d3f",
-"2026-10-28"
+"49ecfde7af2ef3d9",
+"2026-10-29"
 ],
 "/es/vuelos-londres-abuya/": [
-"010a2fd06069d98c",
-"2026-10-28"
+"24d31678be98b064",
+"2026-10-29"
 ],
 "/es/vuelos-londres-acra/": [
-"1dfd37b32ee93e08",
-"2026-10-28"
+"355fe24069d58c29",
+"2026-10-29"
 ],
 "/es/vuelos-londres-adis-abeba/": [
-"c0dd4128f7c2cba6",
-"2026-10-28"
+"9dc9d55a92cdc5a7",
+"2026-10-29"
 ],
 "/es/vuelos-londres-argel/": [
-"2216ffc2beaaffb9",
-"2026-10-28"
+"a7c19c6ad0dba6fe",
+"2026-10-29"
 ],
 "/es/vuelos-londres-casablanca/": [
-"5e2aea63700a757b",
-"2026-10-28"
+"0c2ad0cdd999b2d8",
+"2026-10-29"
 ],
 "/es/vuelos-londres-dakar/": [
-"14ada0a9b128d462",
-"2026-10-28"
+"047332b0f6af3b4d",
+"2026-10-29"
 ],
 "/es/vuelos-londres-dubai/": [
-"a9417f3e0381f7aa",
-"2026-10-28"
+"7cc9ccbdae89e3ed",
+"2026-10-29"
 ],
 "/es/vuelos-londres-el-cairo/": [
-"45e8e720478694d4",
-"2026-10-28"
+"34b3b96d08596afd",
+"2026-10-29"
 ],
 "/es/vuelos-londres-johannesburgo/": [
-"6d6f853bec3eae75",
-"2026-10-28"
+"13631c0871639111",
+"2026-10-29"
 ],
 "/es/vuelos-londres-kinsasa/": [
-"8ebfd664c3aed5bf",
-"2026-10-28"
+"55881a55268dc0f1",
+"2026-10-29"
 ],
 "/es/vuelos-londres-lagos/": [
-"3234965804f91136",
-"2026-10-28"
+"f2f399022d9b8cba",
+"2026-10-29"
 ],
 "/es/vuelos-londres-marrakech/": [
-"808f421bbd0e36b4",
-"2026-10-28"
+"2fee390750e8af1e",
+"2026-10-29"
 ],
 "/es/vuelos-londres-nairobi/": [
-"343332271e6bea2b",
-"2026-10-28"
+"9d72b1d476cc89e8",
+"2026-10-29"
 ],
 "/es/vuelos-lyon-abiyan/": [
-"45fdb51d24fa1c04",
-"2026-10-28"
+"bc24b057dfd87e40",
+"2026-10-29"
 ],
 "/es/vuelos-lyon-agadir/": [
-"d3b51a9b716fd4f8",
+"9f81d488a42af9f6",
 "2026-10-29"
 ],
 "/es/vuelos-lyon-argel/": [
-"6a5f5b2718a04a71",
-"2026-10-28"
+"fecbdc07b0caa08f",
+"2026-10-29"
 ],
 "/es/vuelos-lyon-bamako/": [
-"0fc6498a0f347968",
-"2026-10-28"
+"c44ac5a18dbd40ba",
+"2026-10-29"
 ],
 "/es/vuelos-lyon-casablanca/": [
-"d9d85ff92a5a8e58",
-"2026-10-28"
+"ba764542db633c6a",
+"2026-10-29"
 ],
 "/es/vuelos-lyon-constantina/": [
-"cad7dc3bcfdb4c6b",
+"5e679949cb9bc084",
 "2026-10-29"
 ],
 "/es/vuelos-lyon-dakar/": [
-"4a30608fb00fbb22",
-"2026-10-28"
+"fcafca4ee98890d9",
+"2026-10-29"
 ],
 "/es/vuelos-lyon-dubai/": [
-"ce5866c4bf6f2eeb",
-"2026-10-28"
+"b4daf97d66b59310",
+"2026-10-29"
 ],
 "/es/vuelos-lyon-estambul/": [
-"bd49fe82905dff72",
+"11ccd8be37f3ec21",
 "2026-10-29"
 ],
 "/es/vuelos-lyon-fez/": [
-"efe4a7bbb1c728d1",
-"2026-10-28"
+"e9aebd419d70a768",
+"2026-10-29"
 ],
 "/es/vuelos-lyon-marrakech/": [
-"8f2df1f707e201bc",
-"2026-10-28"
+"cda97ee00abd73fe",
+"2026-10-29"
 ],
 "/es/vuelos-lyon-oran/": [
-"b49a896822473d81",
+"67ceb3da9b2f7cdf",
 "2026-10-29"
 ],
 "/es/vuelos-lyon-tunez/": [
-"7eedb4046e04060d",
-"2026-10-28"
+"a34bc7b3c8861816",
+"2026-10-29"
 ],
 "/es/vuelos-lyon-uchda/": [
-"92e7865086c964b2",
-"2026-10-28"
+"983c149bee107ee9",
+"2026-10-29"
 ],
 "/es/vuelos-lyon-yerba/": [
-"6e9d4a37ac0c01a9",
-"2026-10-28"
+"c927d5fad3458255",
+"2026-10-29"
 ],
 "/es/vuelos-madrid-abiyan/": [
-"2d1278136da3d5e5",
-"2026-10-28"
+"340d302b232b69e3",
+"2026-10-29"
 ],
 "/es/vuelos-madrid-argel/": [
-"3ac0227b52572ded",
-"2026-10-28"
+"56e91c461e95e485",
+"2026-10-29"
 ],
 "/es/vuelos-madrid-bamako/": [
-"51c40f1abb948d76",
-"2026-10-28"
+"4851c9e24bfe7614",
+"2026-10-29"
 ],
 "/es/vuelos-madrid-casablanca/": [
-"7c3e2b8e2ae548a4",
-"2026-10-28"
+"0e630d869fd430ec",
+"2026-10-29"
 ],
 "/es/vuelos-madrid-dakar/": [
-"8540cce9a425fc1f",
-"2026-10-28"
+"82fe51909fddbce0",
+"2026-10-29"
 ],
 "/es/vuelos-madrid-lagos/": [
-"475995464b12cc78",
-"2026-10-28"
+"07c64519aadf0aa6",
+"2026-10-29"
 ],
 "/es/vuelos-madrid-marrakech/": [
-"f1a6174d7a5e482a",
-"2026-10-28"
+"9621d9f34243c4c9",
+"2026-10-29"
 ],
 "/es/vuelos-madrid-tanger/": [
-"221103b8f7ed0642",
-"2026-10-28"
+"b5f2be7e6951387f",
+"2026-10-29"
 ],
 "/es/vuelos-marsella-abiyan/": [
-"a4743a48d4d46c6e",
-"2026-10-28"
+"ee30b6a3251c14b3",
+"2026-10-29"
 ],
 "/es/vuelos-marsella-argel/": [
-"61047ec82bb9b004",
-"2026-10-28"
+"a2b84fd80a8f8a69",
+"2026-10-29"
 ],
 "/es/vuelos-marsella-bamako/": [
-"76feb2934d6bbc5b",
-"2026-10-28"
+"94188f1541dc6262",
+"2026-10-29"
 ],
 "/es/vuelos-marsella-casablanca/": [
-"6ede9eacb9c39b53",
-"2026-10-28"
+"5272310a49ef9e0a",
+"2026-10-29"
 ],
 "/es/vuelos-marsella-constantina/": [
-"b4c6c53781f06410",
+"db1c269c1d6a468a",
 "2026-10-29"
 ],
 "/es/vuelos-marsella-dakar/": [
-"504671c5fbaee43a",
-"2026-10-28"
+"360a8abc12f91a8b",
+"2026-10-29"
 ],
 "/es/vuelos-marsella-estambul/": [
-"53fb451c61e4ed7c",
+"3c6ea88bf819819b",
 "2026-10-29"
 ],
 "/es/vuelos-marsella-marrakech/": [
-"4866a83dd0cdaaf3",
-"2026-10-28"
+"539b16990288ef9b",
+"2026-10-29"
 ],
 "/es/vuelos-marsella-monastir/": [
-"97254c63ed6a636f",
-"2026-10-28"
+"5a9458fcbb237b5e",
+"2026-10-29"
 ],
 "/es/vuelos-marsella-oran/": [
-"7ba24bc4a801ace6",
+"6f9cecb973618b75",
 "2026-10-29"
 ],
 "/es/vuelos-marsella-tunez/": [
-"32ca60d7a7d76f0e",
-"2026-10-28"
+"0ba65f5b34374e13",
+"2026-10-29"
 ],
 "/es/vuelos-marsella-yerba/": [
-"6e90ef40d26ba120",
-"2026-10-28"
+"bf49046635bcd734",
+"2026-10-29"
 ],
 "/es/vuelos-montpellier-argel/": [
-"fa821291b2c1813b",
-"2026-10-28"
+"1ce43a649cca245d",
+"2026-10-29"
 ],
 "/es/vuelos-montpellier-casablanca/": [
-"2a74b5fc2baa5e46",
-"2026-10-28"
+"efed8295f2990064",
+"2026-10-29"
 ],
 "/es/vuelos-montpellier-constantina/": [
-"1c9b3a20f9cafbac",
+"adaf9f4dce9665c8",
 "2026-10-29"
 ],
 "/es/vuelos-montpellier-fez/": [
-"533a08549f5598ee",
-"2026-10-28"
+"5409dcb5bae4e989",
+"2026-10-29"
 ],
 "/es/vuelos-montpellier-marrakech/": [
-"65d9f6d3ecb77bfe",
-"2026-10-28"
+"68e47c03c457148e",
+"2026-10-29"
 ],
 "/es/vuelos-montpellier-oran/": [
-"03cafa26f4e85498",
+"e7597f3d160f7812",
 "2026-10-29"
 ],
 "/es/vuelos-montpellier-tunez/": [
-"d325a3272bd523f9",
-"2026-10-28"
+"6cdb95301c2cc518",
+"2026-10-29"
 ],
 "/es/vuelos-montreal-abiyan/": [
-"f3ed872606195e70",
-"2026-10-28"
+"1765842723505f13",
+"2026-10-29"
 ],
 "/es/vuelos-montreal-argel/": [
-"ad2207848917f665",
-"2026-10-28"
+"b1eff3e3840eb831",
+"2026-10-29"
 ],
 "/es/vuelos-montreal-casablanca/": [
-"7dfca4ad27fb1cf7",
-"2026-10-28"
+"fdedf1a17268640a",
+"2026-10-29"
 ],
 "/es/vuelos-montreal-conakri/": [
-"66c3ff46370dc5f2",
-"2026-10-28"
+"f0fa057954e306fc",
+"2026-10-29"
 ],
 "/es/vuelos-montreal-dakar/": [
-"c3337cd5642d2b69",
-"2026-10-28"
+"846e2f0a9865a7f2",
+"2026-10-29"
 ],
 "/es/vuelos-montreal-duala/": [
-"36bc699f9ef9cf5f",
-"2026-10-28"
+"d1915b75e79f5242",
+"2026-10-29"
 ],
 "/es/vuelos-montreal-puerto-principe/": [
-"250034c1f8cad543",
-"2026-10-28"
+"29ea812d7b707c7e",
+"2026-10-29"
 ],
 "/es/vuelos-montreal-tunez/": [
-"3bfef500cccf97a9",
-"2026-10-28"
+"34539d4f222a1615",
+"2026-10-29"
 ],
 "/es/vuelos-nantes-agadir/": [
-"290428fb04172509",
+"f8868713457cd16f",
 "2026-10-29"
 ],
 "/es/vuelos-nantes-argel/": [
-"74d7685a58234210",
-"2026-10-28"
+"af49fcd54aed9e4e",
+"2026-10-29"
 ],
 "/es/vuelos-nantes-casablanca/": [
-"6032ae11ae6be862",
-"2026-10-28"
+"5159e036a1862148",
+"2026-10-29"
 ],
 "/es/vuelos-nantes-dakar/": [
-"c3934139a6b7adab",
-"2026-10-28"
+"012890cee655df65",
+"2026-10-29"
 ],
 "/es/vuelos-nantes-marrakech/": [
-"7be9bbaca03bc33c",
-"2026-10-28"
+"fa5fc89888f2c1a3",
+"2026-10-29"
 ],
 "/es/vuelos-nantes-oran/": [
-"377f8e2439e32439",
+"31a979e70ee6c1ad",
 "2026-10-29"
 ],
 "/es/vuelos-nantes-tunez/": [
-"64f9d381f2157fb5",
-"2026-10-28"
+"9c8cba7d74f30fb0",
+"2026-10-29"
 ],
 "/es/vuelos-navidad/": [
 "1ce61d2f3b76161b",
 "2026-10-28"
 ],
 "/es/vuelos-niza-argel/": [
-"665fa9352bf7b11e",
-"2026-10-28"
+"2af13fc45b52b7ba",
+"2026-10-29"
 ],
 "/es/vuelos-niza-casablanca/": [
-"56f35c3a57f88558",
-"2026-10-28"
+"eb5feb3827509d74",
+"2026-10-29"
 ],
 "/es/vuelos-niza-dakar/": [
-"d8f07551f040c2b3",
-"2026-10-28"
+"0ba5204e289098a2",
+"2026-10-29"
 ],
 "/es/vuelos-niza-tunez/": [
-"182ad168b34962e5",
-"2026-10-28"
+"f620db056d70d4c1",
+"2026-10-29"
 ],
 "/es/vuelos-nueva-york-abiyan/": [
-"864b0b0900358fd1",
-"2026-10-28"
+"b8caca864243d155",
+"2026-10-29"
 ],
 "/es/vuelos-nueva-york-acra/": [
-"0f195f88946aa20b",
-"2026-10-28"
+"8946a4c139ddb527",
+"2026-10-29"
 ],
 "/es/vuelos-nueva-york-adis-abeba/": [
-"95f529d8be8228dd",
-"2026-10-28"
+"5dfa2039fe3516a2",
+"2026-10-29"
 ],
 "/es/vuelos-nueva-york-casablanca/": [
-"54684c90523d1336",
-"2026-10-28"
+"75875aac31bcba5b",
+"2026-10-29"
 ],
 "/es/vuelos-nueva-york-dakar/": [
-"d0f3bc0b1e51d6ab",
-"2026-10-28"
+"55a09ff30b8a738a",
+"2026-10-29"
 ],
 "/es/vuelos-nueva-york-el-cairo/": [
-"3670d99f19351c4c",
-"2026-10-28"
+"77c7ffabcef70a00",
+"2026-10-29"
 ],
 "/es/vuelos-nueva-york-lagos/": [
-"10b53dff00ea2790",
-"2026-10-28"
+"47f2b1730f371f77",
+"2026-10-29"
 ],
 "/es/vuelos-nueva-york-puerto-principe/": [
-"d33a6070dd83fcab",
-"2026-10-28"
+"33e73600dca9b965",
+"2026-10-29"
 ],
 "/es/vuelos-paris-abiyan/": [
-"fdaf55d5c3787723",
-"2026-10-28"
+"dacda28e43348004",
+"2026-10-29"
 ],
 "/es/vuelos-paris-acra/": [
-"1e72d1cdcf133f4a",
-"2026-10-28"
+"bdbd23ce8ca031bc",
+"2026-10-29"
 ],
 "/es/vuelos-paris-adis-abeba/": [
-"e648f0b9fecff169",
-"2026-10-28"
+"ca802432be6c9683",
+"2026-10-29"
 ],
 "/es/vuelos-paris-agadir/": [
-"1017730a19372b30",
+"ccd70d5989b013ec",
 "2026-10-29"
 ],
 "/es/vuelos-paris-aman/": [
-"2f45d653833acbf0",
-"2026-10-28"
+"d186bc61ebcc8a75",
+"2026-10-29"
 ],
 "/es/vuelos-paris-antananarivo/": [
-"179c8767d79ee60c",
-"2026-10-28"
+"5944cb95fe05316d",
+"2026-10-29"
 ],
 "/es/vuelos-paris-argel/": [
-"eac044d41f650601",
-"2026-10-28"
+"389f223e2dfc879b",
+"2026-10-29"
 ],
 "/es/vuelos-paris-bamako/": [
-"8bff99506ad310db",
-"2026-10-28"
+"82fe9354a42ddc0e",
+"2026-10-29"
 ],
 "/es/vuelos-paris-banjul/": [
-"786f8128abe601ff",
-"2026-10-28"
+"f11a577fecd6b906",
+"2026-10-29"
 ],
 "/es/vuelos-paris-beirut/": [
-"a01de62e1764bac4",
-"2026-10-28"
+"f49c83a76f7754fc",
+"2026-10-29"
 ],
 "/es/vuelos-paris-bisau/": [
-"457bfe282af95515",
-"2026-10-28"
+"9b122c467f7a12ef",
+"2026-10-29"
 ],
 "/es/vuelos-paris-brazzaville/": [
-"7a228e29fe0b4874",
-"2026-10-28"
+"ae90d2f502b16526",
+"2026-10-29"
 ],
 "/es/vuelos-paris-casablanca/": [
-"bde02160877520f7",
-"2026-10-28"
+"00249b37204190b2",
+"2026-10-29"
 ],
 "/es/vuelos-paris-cayena/": [
-"2821590cb147a686",
-"2026-10-28"
+"a16f11e1894527f3",
+"2026-10-29"
 ],
 "/es/vuelos-paris-conakri/": [
-"b123ec587d0d6558",
-"2026-10-28"
+"7d3c74b1d4164407",
+"2026-10-29"
 ],
 "/es/vuelos-paris-constantina/": [
-"9a5e9b932582e43e",
+"0a0b4c1fb807465d",
 "2026-10-29"
 ],
 "/es/vuelos-paris-cotonu/": [
-"aba5b226e50fcd70",
-"2026-10-28"
+"21280927b0ec8983",
+"2026-10-29"
 ],
 "/es/vuelos-paris-dakar/": [
-"da24c369b28e2bb3",
-"2026-10-28"
+"4b4b50fd13a5e1ab",
+"2026-10-29"
 ],
 "/es/vuelos-paris-dar-es-salam/": [
-"4c942863a1c72de2",
-"2026-10-28"
+"e9664cf3d19f9e27",
+"2026-10-29"
 ],
 "/es/vuelos-paris-doha/": [
-"d2d1763e13fea162",
-"2026-10-28"
+"fa40912fc4f86491",
+"2026-10-29"
 ],
 "/es/vuelos-paris-duala/": [
-"b7e9c3006de11fe6",
-"2026-10-28"
+"c76138303a52dd72",
+"2026-10-29"
 ],
 "/es/vuelos-paris-dubai/": [
-"bce3cc1ef844f33a",
-"2026-10-28"
+"5e3c5c6576ef377f",
+"2026-10-29"
 ],
 "/es/vuelos-paris-el-cairo/": [
-"a681a72ddb4291c4",
-"2026-10-28"
+"6aa0ceaf8d269db3",
+"2026-10-29"
 ],
 "/es/vuelos-paris-estambul/": [
-"dc20b929aae4961b",
+"7f77377e026195f5",
 "2026-10-29"
 ],
 "/es/vuelos-paris-fez/": [
-"e29a6643704ce51d",
-"2026-10-28"
+"3daeaf9883146a06",
+"2026-10-29"
 ],
 "/es/vuelos-paris-fort-de-france/": [
-"acc38cdd23740c4d",
-"2026-10-28"
+"240f70a3980f9bb1",
+"2026-10-29"
 ],
 "/es/vuelos-paris-johannesburgo/": [
-"3dda6df12e5bb75e",
-"2026-10-28"
+"a8c9d06e4036d30e",
+"2026-10-29"
 ],
 "/es/vuelos-paris-kigali/": [
-"5054afe50c6659a5",
-"2026-10-28"
+"a7e436aad48d9f21",
+"2026-10-29"
 ],
 "/es/vuelos-paris-kinsasa/": [
-"b678d0c398521695",
-"2026-10-28"
+"f370484d919475c6",
+"2026-10-29"
 ],
 "/es/vuelos-paris-lagos/": [
-"be21118116885054",
-"2026-10-28"
+"f499d4b87b570b9b",
+"2026-10-29"
 ],
 "/es/vuelos-paris-libreville/": [
-"bd3e21f7b6a43940",
-"2026-10-28"
+"f1968f89778876ec",
+"2026-10-29"
 ],
 "/es/vuelos-paris-lome/": [
-"defc4e3de40cc344",
-"2026-10-28"
+"924ef02c4fec1cec",
+"2026-10-29"
 ],
 "/es/vuelos-paris-luanda/": [
-"4fd6f87eec8e4bf3",
-"2026-10-28"
+"554d9da38b312e3d",
+"2026-10-29"
 ],
 "/es/vuelos-paris-maputo/": [
-"cdd9ede79674bf93",
-"2026-10-28"
+"4a532a1a70aa4451",
+"2026-10-29"
 ],
 "/es/vuelos-paris-marrakech/": [
-"a1452759d22935a9",
-"2026-10-28"
+"d6b3c3753e1dfccd",
+"2026-10-29"
 ],
 "/es/vuelos-paris-mauricio/": [
-"eacef4494e273c01",
-"2026-10-28"
+"73788011181550c0",
+"2026-10-29"
 ],
 "/es/vuelos-paris-mayotte/": [
-"515567b1dd1cad9f",
-"2026-10-28"
+"2acb510132fa3d37",
+"2026-10-29"
 ],
 "/es/vuelos-paris-medina/": [
-"d318a27ab4aa95c5",
-"2026-10-28"
+"029da90087d17ce3",
+"2026-10-29"
 ],
 "/es/vuelos-paris-monastir/": [
-"9f990b730100b69b",
-"2026-10-28"
+"59f3050985d0b78e",
+"2026-10-29"
 ],
 "/es/vuelos-paris-montreal/": [
-"e4f8efa68f203c55",
-"2026-10-28"
+"bf9972e9c47a887a",
+"2026-10-29"
 ],
 "/es/vuelos-paris-nairobi/": [
-"93fbbab7f5f2a7c8",
-"2026-10-28"
+"1cc8e4991e51f902",
+"2026-10-29"
 ],
 "/es/vuelos-paris-niamey/": [
-"ba6db417710198fb",
-"2026-10-28"
+"62fcb01112cc14bc",
+"2026-10-29"
 ],
 "/es/vuelos-paris-nuakchot/": [
-"04f2e2cdbe94a281",
-"2026-10-28"
+"dab87ef7d06fb8af",
+"2026-10-29"
 ],
 "/es/vuelos-paris-oran/": [
-"25674d9fe36d5951",
+"595a24dfd056c1b8",
 "2026-10-29"
 ],
 "/es/vuelos-paris-pointe-a-pitre/": [
-"5e302e383779311e",
-"2026-10-28"
+"16b7a0ce52d54cd0",
+"2026-10-29"
 ],
 "/es/vuelos-paris-pointe-noire/": [
-"edfe8786b25518ef",
-"2026-10-28"
+"489fe65e65bd176c",
+"2026-10-29"
 ],
 "/es/vuelos-paris-praia/": [
-"287f47c852b881e8",
-"2026-10-28"
+"890d888f1486c86c",
+"2026-10-29"
 ],
 "/es/vuelos-paris-puerto-principe/": [
-"6f1f37657060bae9",
-"2026-10-28"
+"cbf164bcb43a9a71",
+"2026-10-29"
 ],
 "/es/vuelos-paris-rabat/": [
-"e6cf35492d9acd4e",
-"2026-10-28"
+"93e8a43153a8bf47",
+"2026-10-29"
 ],
 "/es/vuelos-paris-reunion/": [
-"dd4c629be96df0fb",
-"2026-10-28"
+"8c593889ddff6ee5",
+"2026-10-29"
 ],
 "/es/vuelos-paris-riad/": [
-"7c66f215aa380eb9",
-"2026-10-28"
+"7b1a4ac60ad9c5f0",
+"2026-10-29"
 ],
 "/es/vuelos-paris-tanger/": [
-"66177877192ac0ac",
-"2026-10-28"
+"bc2cae88ae5abcc2",
+"2026-10-29"
 ],
 "/es/vuelos-paris-tunez/": [
-"1a5110d329a4538d",
-"2026-10-28"
+"593e9e13c7d5235b",
+"2026-10-29"
 ],
 "/es/vuelos-paris-uagadugu/": [
-"ac5ef8366643fedd",
-"2026-10-28"
+"1b194fe8fe743a90",
+"2026-10-29"
 ],
 "/es/vuelos-paris-uchda/": [
-"6e6a65649c25ef36",
-"2026-10-28"
+"1c75d1b01f6edbfd",
+"2026-10-29"
 ],
 "/es/vuelos-paris-yamena/": [
-"c03902739c0e7e5e",
-"2026-10-28"
+"d0ce7db04a01728f",
+"2026-10-29"
 ],
 "/es/vuelos-paris-yaunde/": [
-"54535a44badb645a",
-"2026-10-28"
+"4ff6db73cf423f69",
+"2026-10-29"
 ],
 "/es/vuelos-paris-yeda/": [
-"1646ca6e60283973",
-"2026-10-28"
+"0da8bf49f906b7c2",
+"2026-10-29"
 ],
 "/es/vuelos-paris-yerba/": [
-"495670d67a62cf75",
-"2026-10-28"
+"d969796e04ea8524",
+"2026-10-29"
 ],
 "/es/vuelos-rennes-agadir/": [
-"9c8f01d43d2768b9",
+"8e44916e6f39c550",
 "2026-10-29"
 ],
 "/es/vuelos-rennes-argel/": [
-"da7a8295e524d782",
+"69074e991b77415e",
 "2026-10-29"
 ],
 "/es/vuelos-rennes-casablanca/": [
-"19d9a1b658ff729b",
+"26085d86d68c3a17",
 "2026-10-29"
 ],
 "/es/vuelos-rennes-dakar/": [
-"6b498211d306cb78",
+"57d5ac53472403da",
 "2026-10-29"
 ],
 "/es/vuelos-rennes-marrakech/": [
-"613dc3d7ea83e06d",
+"f6d1e53343fe9668",
 "2026-10-29"
 ],
 "/es/vuelos-rennes-oran/": [
-"3088e4e7eb56b05c",
+"7ede725e980ba4c9",
 "2026-10-29"
 ],
 "/es/vuelos-rennes-tunez/": [
-"82760fc32ce26274",
+"89ffe6157806ec3f",
 "2026-10-29"
 ],
 "/es/vuelos-tabaski/": [
@@ -3324,24 +3328,24 @@
 "2026-10-28"
 ],
 "/es/vuelos-toulouse-argel/": [
-"34e30c141eb35dd4",
-"2026-10-28"
+"238a1ca8733bb57d",
+"2026-10-29"
 ],
 "/es/vuelos-toulouse-casablanca/": [
-"9264e0a9c5ff8a71",
-"2026-10-28"
+"cc301e6aaad1f677",
+"2026-10-29"
 ],
 "/es/vuelos-toulouse-marrakech/": [
-"60c8b55518ec75ae",
-"2026-10-28"
+"dc8cbb754944afd3",
+"2026-10-29"
 ],
 "/es/vuelos-toulouse-oran/": [
-"39b8bbecdab7cf44",
+"c6942c8c55e301ad",
 "2026-10-29"
 ],
 "/es/vuelos-toulouse-tunez/": [
-"99d4e32d9ebba6de",
-"2026-10-28"
+"01e0b5515103656e",
+"2026-10-29"
 ],
 "/es/vuelos-vacaciones-invierno/": [
 "954eabdc5a3cfae0",
@@ -3384,80 +3388,80 @@
 "2026-10-28"
 ],
 "/hotel-pas-cher-abidjan/": [
-"96265b8456955130",
-"2026-10-28"
+"863f639528d92c28",
+"2026-10-29"
 ],
 "/hotel-pas-cher-accra/": [
-"bfaabe5eabe98518",
-"2026-10-28"
+"0e5ff22b4e337cef",
+"2026-10-29"
 ],
 "/hotel-pas-cher-alger/": [
-"4cb3d029193421d0",
+"e1c5d432e5fd5430",
 "2026-10-29"
 ],
 "/hotel-pas-cher-bamako/": [
-"7651f4dbbfa2e6a7",
-"2026-10-28"
+"e21d437d1d05a43b",
+"2026-10-29"
 ],
 "/hotel-pas-cher-casablanca/": [
-"9641362b67b26734",
+"2424953d5cefb1f9",
 "2026-10-29"
 ],
 "/hotel-pas-cher-conakry/": [
-"5866b3aad889165d",
-"2026-10-28"
+"4b9600975b5e6d99",
+"2026-10-29"
 ],
 "/hotel-pas-cher-cotonou/": [
-"7c877ccc139681ad",
-"2026-10-28"
+"d85d255e47fbdf57",
+"2026-10-29"
 ],
 "/hotel-pas-cher-dakar/": [
-"c1baccffaeda8573",
+"ba46abbc66174d9f",
 "2026-10-29"
 ],
 "/hotel-pas-cher-douala/": [
-"2c29ccb3a1fd2280",
-"2026-10-28"
+"40cd8c4262632d3b",
+"2026-10-29"
 ],
 "/hotel-pas-cher-dubai/": [
-"c46b3d9c34306961",
-"2026-10-28"
+"d0914fc96b2763e6",
+"2026-10-29"
 ],
 "/hotel-pas-cher-istanbul/": [
-"7b6ef1be013e0fbb",
+"84af70b510679fe2",
 "2026-10-29"
 ],
 "/hotel-pas-cher-kinshasa/": [
-"b0af02feea32c80f",
-"2026-10-28"
+"4d78b7ea3d1eb932",
+"2026-10-29"
 ],
 "/hotel-pas-cher-lagos/": [
-"b68021e6e9d06137",
-"2026-10-28"
+"3a99f0207b80d876",
+"2026-10-29"
 ],
 "/hotel-pas-cher-lome/": [
-"62d00df325b29d9a",
-"2026-10-28"
+"100c8c897e042057",
+"2026-10-29"
 ],
 "/hotel-pas-cher-marrakech/": [
-"6b4ec90daea9a8a0",
+"850e219fff6e5946",
 "2026-10-29"
 ],
 "/hotel-pas-cher-montreal/": [
-"fcf47c82150e2804",
-"2026-10-28"
+"1afd33935a7a8118",
+"2026-10-29"
 ],
 "/hotel-pas-cher-paris/": [
-"231bc207ea1ff2c8",
-"2026-10-28"
+"44030ad2d55e0d8c",
+"2026-10-29"
 ],
 "/hotel-pas-cher-tunis/": [
-"f28f21fc5f736704",
+"3bcf884ce2baa9fa",
 "2026-10-29"
 ],
 "/mentions-legales/": [
-"4a20d68530c274f4",
-"2026-10-28"
+"f8bcffe1d9eae9be",
+"2026-10-29"
 ],
 "/partout/": [
 "6714482d0e9fafc8",
@@ -3580,160 +3584,160 @@
 "2026-10-28"
 ],
 "/pt/voos-basileia-mulhouse-argel/": [
-"eb85ac8621e923ff",
+"341db0d872f332a2",
 "2026-10-29"
 ],
 "/pt/voos-basileia-mulhouse-casablanca/": [
-"8790d7801430ebb2",
+"00faaf60029f7986",
 "2026-10-29"
 ],
 "/pt/voos-basileia-mulhouse-constantina/": [
-"28fe20f022137668",
+"4b8db75dc4a42d1c",
 "2026-10-29"
 ],
 "/pt/voos-basileia-mulhouse-istambul/": [
-"ecfd2648e0dc7214",
+"212577a68e2a9010",
 "2026-10-29"
 ],
 "/pt/voos-basileia-mulhouse-marraquexe/": [
-"16b9920865ea1cf4",
+"516d10595e1bda7f",
 "2026-10-29"
 ],
 "/pt/voos-basileia-mulhouse-orao/": [
-"0a551edcd1e47564",
+"980da3911329d619",
 "2026-10-29"
 ],
 "/pt/voos-basileia-mulhouse-tunis/": [
-"bdac63f6f549257f",
+"d5baa70643070430",
 "2026-10-29"
 ],
 "/pt/voos-bordeus-argel/": [
-"e8f810296a24004a",
-"2026-10-28"
+"ebd9ced1baccbb45",
+"2026-10-29"
 ],
 "/pt/voos-bordeus-casablanca/": [
-"75b5e3ccd4d0f36a",
-"2026-10-28"
+"da24d9a2cc27cd17",
+"2026-10-29"
 ],
 "/pt/voos-bordeus-dacar/": [
-"107807e87eb3b711",
-"2026-10-28"
+"7d5244270ea42557",
+"2026-10-29"
 ],
 "/pt/voos-bordeus-marraquexe/": [
-"985c5a8a341e3380",
-"2026-10-28"
+"47b6c8a9c48c53ee",
+"2026-10-29"
 ],
 "/pt/voos-bruxelas-abidjan/": [
-"49602f7c6fda604f",
-"2026-10-28"
+"db247957e662d48b",
+"2026-10-29"
 ],
 "/pt/voos-bruxelas-acra/": [
-"b83947522d954151",
-"2026-10-28"
+"6945bb6219987674",
+"2026-10-29"
 ],
 "/pt/voos-bruxelas-argel/": [
-"12ab590654f039a1",
-"2026-10-28"
+"eff9bd572d48d1b2",
+"2026-10-29"
 ],
 "/pt/voos-bruxelas-bamako/": [
-"b50e0ea4cd68c79a",
-"2026-10-28"
+"1faa045038f80f83",
+"2026-10-29"
 ],
 "/pt/voos-bruxelas-casablanca/": [
-"b8fd73115d0b5fc4",
-"2026-10-28"
+"68d76ee4ab4f8b97",
+"2026-10-29"
 ],
 "/pt/voos-bruxelas-conacri/": [
-"15004688cbc6f2b5",
-"2026-10-28"
+"fe83fc12c34c52a6",
+"2026-10-29"
 ],
 "/pt/voos-bruxelas-cotonou/": [
-"ef822e7df01cd03b",
-"2026-10-28"
+"9eb90d9936a85cc8",
+"2026-10-29"
 ],
 "/pt/voos-bruxelas-dacar/": [
-"8d75955ae86241a3",
-"2026-10-28"
+"01d174b9f50e995d",
+"2026-10-29"
 ],
 "/pt/voos-bruxelas-douala/": [
-"d1d4a9b727d45bfc",
-"2026-10-28"
+"77442f24803a4667",
+"2026-10-29"
 ],
 "/pt/voos-bruxelas-dubai/": [
-"86943638a14912b1",
-"2026-10-28"
+"b1151b4f8add84fa",
+"2026-10-29"
 ],
 "/pt/voos-bruxelas-iaunde/": [
-"af6d84afa404fa9d",
-"2026-10-28"
+"d54781de563f7dac",
+"2026-10-29"
 ],
 "/pt/voos-bruxelas-istambul/": [
-"1e2feefd5838ba80",
+"21e4fafbaa30cd24",
 "2026-10-29"
 ],
 "/pt/voos-bruxelas-kigali/": [
-"e3da378d9e5b4ad9",
-"2026-10-28"
+"b454163889888bbd",
+"2026-10-29"
 ],
 "/pt/voos-bruxelas-kinshasa/": [
-"a97accc9491bc333",
-"2026-10-28"
+"8de4555b0ae4c459",
+"2026-10-29"
 ],
 "/pt/voos-bruxelas-libreville/": [
-"b7e1ddfbeacef29b",
-"2026-10-28"
+"5f264f1a4f7cdb4d",
+"2026-10-29"
 ],
 "/pt/voos-bruxelas-lome/": [
-"2f257c7f60d7754c",
-"2026-10-28"
+"735fcfd251a58f00",
+"2026-10-29"
 ],
 "/pt/voos-bruxelas-marraquexe/": [
-"182a2034e14c5b4a",
-"2026-10-28"
+"51336e4ed23dbe95",
+"2026-10-29"
 ],
 "/pt/voos-bruxelas-tanger/": [
-"5495a2015ca04dcb",
-"2026-10-28"
+"fa224c443623b568",
+"2026-10-29"
 ],
 "/pt/voos-bruxelas-tunis/": [
-"9b8af43e6bacbf88",
-"2026-10-28"
+"709e82067369d3a2",
+"2026-10-29"
 ],
 "/pt/voos-bruxelas-uagadugu/": [
-"6c2a187085a64437",
-"2026-10-28"
+"11db63915cd1feae",
+"2026-10-29"
 ],
 "/pt/voos-eid-al-fitr/": [
 "75d4c6a0142f611c",
 "2026-10-28"
 ],
 "/pt/voos-estrasburgo-argel/": [
-"ed2af810ca1edb0e",
-"2026-10-28"
+"0680c446f42f1ff5",
+"2026-10-29"
 ],
 "/pt/voos-estrasburgo-casablanca/": [
-"640a26b37e1b857d",
-"2026-10-28"
+"5e259eeeb766ebf1",
+"2026-10-29"
 ],
 "/pt/voos-estrasburgo-dacar/": [
-"a663f49a0d4bc482",
-"2026-10-28"
+"7590dc352acd773a",
+"2026-10-29"
 ],
 "/pt/voos-estrasburgo-istambul/": [
-"9defb48964f6d378",
+"d51a0060bcae7dfb",
 "2026-10-29"
 ],
 "/pt/voos-estrasburgo-marraquexe/": [
-"417b980741a8054b",
-"2026-10-28"
+"e9648b208077ada4",
+"2026-10-29"
 ],
 "/pt/voos-estrasburgo-orao/": [
-"817a14b7e0cdac61",
+"52affae542be4770",
 "2026-10-29"
 ],
 "/pt/voos-estrasburgo-tunis/": [
-"0c749c0d8b0ac530",
-"2026-10-28"
+"8cb71bb1a4d04ff6",
+"2026-10-29"
 ],
 "/pt/voos-ferias-inverno/": [
 "caef0e5568e52994",
@@ -3752,432 +3756,432 @@
 "2026-10-28"
 ],
 "/pt/voos-genebra-abidjan/": [
-"b8ef9ae6ab10204f",
-"2026-10-28"
+"c7129cd676e6adfa",
+"2026-10-29"
 ],
 "/pt/voos-genebra-argel/": [
-"6bef6330e50798d4",
-"2026-10-28"
+"3fa7022d5d31cf4e",
+"2026-10-29"
 ],
 "/pt/voos-genebra-casablanca/": [
-"748e9438fef79230",
-"2026-10-28"
+"40affd48740521df",
+"2026-10-29"
 ],
 "/pt/voos-genebra-dacar/": [
-"f876da1020b6bbae",
-"2026-10-28"
+"e190310815a83353",
+"2026-10-29"
 ],
 "/pt/voos-genebra-dubai/": [
-"21f953046fa6142f",
-"2026-10-28"
+"93f94e3996c0d22d",
+"2026-10-29"
 ],
 "/pt/voos-genebra-istambul/": [
-"c00947206584a0f9",
+"56b352e2c20513fd",
 "2026-10-29"
 ],
 "/pt/voos-genebra-marraquexe/": [
-"e667c2a77fb0de49",
-"2026-10-28"
+"71db572af938e039",
+"2026-10-29"
 ],
 "/pt/voos-genebra-tunis/": [
-"13b12f5f13197539",
-"2026-10-28"
+"adfa7bdc578fb27f",
+"2026-10-29"
 ],
 "/pt/voos-lille-argel/": [
-"ebb7b49f10a85d28",
-"2026-10-28"
+"3e164ba3e5dd10ab",
+"2026-10-29"
 ],
 "/pt/voos-lille-casablanca/": [
-"1d5c813091eeae92",
-"2026-10-28"
+"f05f1fa58f1db629",
+"2026-10-29"
 ],
 "/pt/voos-lille-dacar/": [
-"41d59abdf37db2c5",
-"2026-10-28"
+"e98754f80db500df",
+"2026-10-29"
 ],
 "/pt/voos-lille-marraquexe/": [
-"909815fe6c52f7a3",
-"2026-10-28"
+"9a738d4b4e3be862",
+"2026-10-29"
 ],
 "/pt/voos-lille-orao/": [
-"030ffbe25a9a058e",
+"02938b6f8f52c32f",
 "2026-10-29"
 ],
 "/pt/voos-lille-oujda/": [
-"3f38f6c0e34e5a98",
-"2026-10-28"
+"97e75c3bc43d9c90",
+"2026-10-29"
 ],
 "/pt/voos-lille-tunis/": [
-"d8f49512761b6d75",
-"2026-10-28"
+"db1991b89c3c3bee",
+"2026-10-29"
 ],
 "/pt/voos-lisboa-abidjan/": [
-"c4f5f0c2014d9558",
-"2026-10-28"
+"bad6e84faa7fd83c",
+"2026-10-29"
 ],
 "/pt/voos-lisboa-acra/": [
-"8a9cdb624d6a003b",
-"2026-10-28"
+"e0eb8de5afd44a60",
+"2026-10-29"
 ],
 "/pt/voos-lisboa-bissau/": [
-"f40f0f33cb5cdce7",
-"2026-10-28"
+"6fb70a4aa3d902ce",
+"2026-10-29"
 ],
 "/pt/voos-lisboa-casablanca/": [
-"de645c9fe820358e",
-"2026-10-28"
+"0f70e8c264560b6b",
+"2026-10-29"
 ],
 "/pt/voos-lisboa-dacar/": [
-"55692645c7f3920d",
-"2026-10-28"
+"9f0a04446ea85ad4",
+"2026-10-29"
 ],
 "/pt/voos-lisboa-luanda/": [
-"0d824e7ec02b2ebb",
-"2026-10-28"
+"3befdc70f3f5dd52",
+"2026-10-29"
 ],
 "/pt/voos-lisboa-maputo/": [
-"bc1f8485361c260a",
-"2026-10-28"
+"5b9408bf4afb5637",
+"2026-10-29"
 ],
 "/pt/voos-lisboa-praia/": [
-"ef2c643464b32b28",
-"2026-10-28"
+"f180c1d8ff974a21",
+"2026-10-29"
 ],
 "/pt/voos-londres-abidjan/": [
-"c3f98a48aedcefae",
-"2026-10-28"
+"d76d8826663ddc4f",
+"2026-10-29"
 ],
 "/pt/voos-londres-abuja/": [
-"cfcf755940d24ec7",
-"2026-10-28"
+"9bc4855e16a3ff02",
+"2026-10-29"
 ],
 "/pt/voos-londres-acra/": [
-"f649b432e71e4170",
-"2026-10-28"
+"100ab9c735bb0a3b",
+"2026-10-29"
 ],
 "/pt/voos-londres-adis-abeba/": [
-"de032dab80f1d285",
-"2026-10-28"
+"ec0468cd7c39c9de",
+"2026-10-29"
 ],
 "/pt/voos-londres-argel/": [
-"b73b5fa65b61f305",
-"2026-10-28"
+"5d56df23f6ec2a4a",
+"2026-10-29"
 ],
 "/pt/voos-londres-cairo/": [
-"0473351f1ed5f7e3",
-"2026-10-28"
+"e2324eb2920987b7",
+"2026-10-29"
 ],
 "/pt/voos-londres-casablanca/": [
-"4928e714d9ac24c7",
-"2026-10-28"
+"3723713dd22220a8",
+"2026-10-29"
 ],
 "/pt/voos-londres-dacar/": [
-"27637e373d2a721b",
-"2026-10-28"
+"97852cfce4ea0bda",
+"2026-10-29"
 ],
 "/pt/voos-londres-dubai/": [
-"fd6625bc4ac521a8",
-"2026-10-28"
+"b9610af9a8e67c4d",
+"2026-10-29"
 ],
 "/pt/voos-londres-joanesburgo/": [
-"9ff2d8409372ff8d",
-"2026-10-28"
+"36bd37693dac7d59",
+"2026-10-29"
 ],
 "/pt/voos-londres-kinshasa/": [
-"b5641dd0c4b63341",
-"2026-10-28"
+"2976c3da7425e117",
+"2026-10-29"
 ],
 "/pt/voos-londres-lagos/": [
-"52aa4e8ac883ec1b",
-"2026-10-28"
+"19e6235a58bd0cba",
+"2026-10-29"
 ],
 "/pt/voos-londres-marraquexe/": [
-"8c9e0e4c51af664d",
-"2026-10-28"
+"9df643b5d3955a66",
+"2026-10-29"
 ],
 "/pt/voos-londres-nairobi/": [
-"8c936121432d5c02",
-"2026-10-28"
+"f6dde37872aa47f2",
+"2026-10-29"
 ],
 "/pt/voos-lyon-abidjan/": [
-"f83c356f962ed0bd",
-"2026-10-28"
+"edd0334cdadbf0b9",
+"2026-10-29"
 ],
 "/pt/voos-lyon-agadir/": [
-"138f2635988adbd6",
+"90aa26b768b9fc24",
 "2026-10-29"
 ],
 "/pt/voos-lyon-argel/": [
-"986ea5056394049e",
-"2026-10-28"
+"adae43545c82d7e8",
+"2026-10-29"
 ],
 "/pt/voos-lyon-bamako/": [
-"156071630ca27abf",
-"2026-10-28"
+"c261d54e4aa971a0",
+"2026-10-29"
 ],
 "/pt/voos-lyon-casablanca/": [
-"680697d85c27c817",
-"2026-10-28"
+"0b7f1f7cd0def532",
+"2026-10-29"
 ],
 "/pt/voos-lyon-constantina/": [
-"4bc13a028e979b1c",
+"344f531b8310c280",
 "2026-10-29"
 ],
 "/pt/voos-lyon-dacar/": [
-"98105a2266fad496",
-"2026-10-28"
+"4c81119ea26dd2fd",
+"2026-10-29"
 ],
 "/pt/voos-lyon-djerba/": [
-"5242207d2d84bfee",
-"2026-10-28"
+"34edf39b3a27ff8f",
+"2026-10-29"
 ],
 "/pt/voos-lyon-dubai/": [
-"3d307e162ff4195d",
-"2026-10-28"
+"202ee7157c365880",
+"2026-10-29"
 ],
 "/pt/voos-lyon-fez/": [
-"e710d5cdaab9331e",
-"2026-10-28"
+"dac61bedde70f0b0",
+"2026-10-29"
 ],
 "/pt/voos-lyon-istambul/": [
-"521e75dc1c3f8f14",
+"86a5453bac238e09",
 "2026-10-29"
 ],
 "/pt/voos-lyon-marraquexe/": [
-"c759447a96d39ceb",
-"2026-10-28"
+"469cba7b20c875b5",
+"2026-10-29"
 ],
 "/pt/voos-lyon-orao/": [
-"b9be1a5fec3b8278",
+"f4a4128c6fcd974f",
 "2026-10-29"
 ],
 "/pt/voos-lyon-oujda/": [
-"a32c1b3f6d96ff06",
-"2026-10-28"
+"6e0cb57b93d94215",
+"2026-10-29"
 ],
 "/pt/voos-lyon-tunis/": [
-"12b1f00f6f768476",
-"2026-10-28"
+"839b89d05f2e675c",
+"2026-10-29"
 ],
 "/pt/voos-madrid-abidjan/": [
-"5f59dea3e999fd8d",
-"2026-10-28"
+"43ed156caeb31a9e",
+"2026-10-29"
 ],
 "/pt/voos-madrid-argel/": [
-"6b5c0eb39a3a6f0a",
-"2026-10-28"
+"e2ebb021c12f5ca6",
+"2026-10-29"
 ],
 "/pt/voos-madrid-bamako/": [
-"ab3348c761f4f419",
-"2026-10-28"
+"d25fcacd4bfd1104",
+"2026-10-29"
 ],
 "/pt/voos-madrid-casablanca/": [
-"710600167aa15794",
-"2026-10-28"
+"784885669a2c73a6",
+"2026-10-29"
 ],
 "/pt/voos-madrid-dacar/": [
-"785b014b5d030b2b",
-"2026-10-28"
+"d49ecff2d12897c7",
+"2026-10-29"
 ],
 "/pt/voos-madrid-lagos/": [
-"76914dc8c9fb2a62",
-"2026-10-28"
+"b2ecfeac93c716f1",
+"2026-10-29"
 ],
 "/pt/voos-madrid-marraquexe/": [
-"2363b72c983ce412",
-"2026-10-28"
+"5a7b44a23991aa9b",
+"2026-10-29"
 ],
 "/pt/voos-madrid-tanger/": [
-"2741041547f6d78c",
-"2026-10-28"
+"29eccae744e959a2",
+"2026-10-29"
 ],
 "/pt/voos-marselha-abidjan/": [
-"b2fc55639d9c83db",
-"2026-10-28"
+"2c79b67ef109dfe5",
+"2026-10-29"
 ],
 "/pt/voos-marselha-argel/": [
-"99db9197f8fef728",
-"2026-10-28"
+"d371dcca57880f97",
+"2026-10-29"
 ],
 "/pt/voos-marselha-bamako/": [
-"428abe99873be8e5",
-"2026-10-28"
+"d4a95765c9ccf1a4",
+"2026-10-29"
 ],
 "/pt/voos-marselha-casablanca/": [
-"7aaca06a2819a9a6",
-"2026-10-28"
+"aa37b8b1106af5dd",
+"2026-10-29"
 ],
 "/pt/voos-marselha-constantina/": [
-"0bc8d0c90f59b596",
+"ef7622c3e7248df8",
 "2026-10-29"
 ],
 "/pt/voos-marselha-dacar/": [
-"179eedc7214c82aa",
-"2026-10-28"
+"a1824bfd96abe0fd",
+"2026-10-29"
 ],
 "/pt/voos-marselha-djerba/": [
-"76c81053ee80bd6f",
-"2026-10-28"
+"f862c9a036881c05",
+"2026-10-29"
 ],
 "/pt/voos-marselha-istambul/": [
-"d2019a4e6dc77a99",
+"f25e9e760d750e1a",
 "2026-10-29"
 ],
 "/pt/voos-marselha-marraquexe/": [
-"1d9f190efffa6d0d",
-"2026-10-28"
+"aa7c11a300d43c8d",
+"2026-10-29"
 ],
 "/pt/voos-marselha-monastir/": [
-"ff26c4a789e1dc58",
-"2026-10-28"
+"d9d9df3e15bfba78",
+"2026-10-29"
 ],
 "/pt/voos-marselha-orao/": [
-"7ac63b406e553568",
+"73af18c64658148b",
 "2026-10-29"
 ],
 "/pt/voos-marselha-tunis/": [
-"9d521a599048007b",
-"2026-10-28"
+"8f4c9f3562a7f663",
+"2026-10-29"
 ],
 "/pt/voos-montpellier-argel/": [
-"d6772bbff349e01a",
-"2026-10-28"
+"db423ed389402777",
+"2026-10-29"
 ],
 "/pt/voos-montpellier-casablanca/": [
-"f75bc9b59fdcb677",
-"2026-10-28"
+"5a33d483b2b2e007",
+"2026-10-29"
 ],
 "/pt/voos-montpellier-constantina/": [
-"55af26ffcab77a03",
+"192aeec04cc63f10",
 "2026-10-29"
 ],
 "/pt/voos-montpellier-fez/": [
-"211924212254ff00",
-"2026-10-28"
+"d75665d3160655bf",
+"2026-10-29"
 ],
 "/pt/voos-montpellier-marraquexe/": [
-"96f8b1f6cd21a8c6",
-"2026-10-28"
+"e0717f236ccab31e",
+"2026-10-29"
 ],
 "/pt/voos-montpellier-orao/": [
-"9c5a6be4240129e5",
+"c0e72a9e0f1d684c",
 "2026-10-29"
 ],
 "/pt/voos-montpellier-tunis/": [
-"606db1ed3699fdce",
-"2026-10-28"
+"41e1e2c15d108510",
+"2026-10-29"
 ],
 "/pt/voos-montreal-abidjan/": [
-"09f131b4d2553df4",
-"2026-10-28"
+"c6e5b377a4162916",
+"2026-10-29"
 ],
 "/pt/voos-montreal-argel/": [
-"cadf99315565b83f",
-"2026-10-28"
+"92f93f0a6f1294ed",
+"2026-10-29"
 ],
 "/pt/voos-montreal-casablanca/": [
-"a7a81fee3a906efa",
-"2026-10-28"
+"361b4dc422fccec0",
+"2026-10-29"
 ],
 "/pt/voos-montreal-conacri/": [
-"a765cda9f288755c",
-"2026-10-28"
+"a0d36bcfa1aca45f",
+"2026-10-29"
 ],
 "/pt/voos-montreal-dacar/": [
-"40b6316f94c4fcbd",
-"2026-10-28"
+"b589e0b713d4aca5",
+"2026-10-29"
 ],
 "/pt/voos-montreal-douala/": [
-"213fbf1c31594da4",
-"2026-10-28"
+"a54fc7e620d4f48c",
+"2026-10-29"
 ],
 "/pt/voos-montreal-porto-principe/": [
-"6d400d2942b0486f",
-"2026-10-28"
+"80c5fa011aebaf49",
+"2026-10-29"
 ],
 "/pt/voos-montreal-tunis/": [
-"d384975f303d4d90",
-"2026-10-28"
+"bc314709ce39b30a",
+"2026-10-29"
 ],
 "/pt/voos-nantes-agadir/": [
-"15aed8315050b5b0",
+"2412017745f7da8c",
 "2026-10-29"
 ],
 "/pt/voos-nantes-argel/": [
-"59319dae6fc58cea",
-"2026-10-28"
+"a8ec18cf8e3f9cc6",
+"2026-10-29"
 ],
 "/pt/voos-nantes-casablanca/": [
-"8e334dfc02d06353",
-"2026-10-28"
+"9468e373567cbaeb",
+"2026-10-29"
 ],
 "/pt/voos-nantes-dacar/": [
-"64a346a4c6e9afaf",
-"2026-10-28"
+"3fe588faa9bb2a86",
+"2026-10-29"
 ],
 "/pt/voos-nantes-marraquexe/": [
-"61770fa532ff7af8",
-"2026-10-28"
+"b734c1fa59826b72",
+"2026-10-29"
 ],
 "/pt/voos-nantes-orao/": [
-"03b6949d77015865",
+"16e018ea1fd5278c",
 "2026-10-29"
 ],
 "/pt/voos-nantes-tunis/": [
-"a5f916bcb1ff54fb",
-"2026-10-28"
+"bae6508d74523ebd",
+"2026-10-29"
 ],
 "/pt/voos-natal/": [
 "889a8c675c8eee62",
 "2026-10-28"
 ],
 "/pt/voos-nice-argel/": [
-"44a6624a062c4507",
-"2026-10-28"
+"775438a4749c617c",
+"2026-10-29"
 ],
 "/pt/voos-nice-casablanca/": [
-"6783b95a6fc299c5",
-"2026-10-28"
+"5fdad83aa89152b1",
+"2026-10-29"
 ],
 "/pt/voos-nice-dacar/": [
-"054211d01fbbf581",
-"2026-10-28"
+"ca4519ba7dff7925",
+"2026-10-29"
 ],
 "/pt/voos-nice-tunis/": [
-"2e8194c0dd4b98aa",
-"2026-10-28"
+"5af34a2d88f65c6e",
+"2026-10-29"
 ],
 "/pt/voos-nova-iorque-abidjan/": [
-"77831ac84dd49d04",
-"2026-10-28"
+"93acc62b66d80ce6",
+"2026-10-29"
 ],
 "/pt/voos-nova-iorque-acra/": [
-"7e6db2e8f12fbb43",
-"2026-10-28"
+"0c96710008c8470b",
+"2026-10-29"
 ],
 "/pt/voos-nova-iorque-adis-abeba/": [
-"28be8e988080479c",
-"2026-10-28"
+"bbd00eb3ee5da6ff",
+"2026-10-29"
 ],
 "/pt/voos-nova-iorque-cairo/": [
-"f8b92dff5489f72a",
-"2026-10-28"
+"91a3eba74a94467c",
+"2026-10-29"
 ],
 "/pt/voos-nova-iorque-casablanca/": [
-"c63b573e71dbfc86",
-"2026-10-28"
+"04eaf8f228873a87",
+"2026-10-29"
 ],
 "/pt/voos-nova-iorque-dacar/": [
-"59edfa67267f282f",
-"2026-10-28"
+"2fe184d5663db250",
+"2026-10-29"
 ],
 "/pt/voos-nova-iorque-lagos/": [
-"73ec0bb9452a8f90",
-"2026-10-28"
+"9611c4d07006a203",
+"2026-10-29"
 ],
 "/pt/voos-nova-iorque-porto-principe/": [
-"199ecc0cb99acf2b",
-"2026-10-28"
+"6ba322e013ae5001",
+"2026-10-29"
 ],
 "/pt/voos-para-abidjan/": [
 "3516746d151c6bca",
@@ -4276,267 +4280,267 @@
 "2026-10-29"
 ],
 "/pt/voos-paris-abidjan/": [
-"e7c861a959088445",
-"2026-10-28"
+"9f3333ce09ac7886",
+"2026-10-29"
 ],
 "/pt/voos-paris-acra/": [
-"9fa1058c4424aba7",
-"2026-10-28"
+"f1e4babbf92e0113",
+"2026-10-29"
 ],
 "/pt/voos-paris-adis-abeba/": [
-"ef9c42f83b09f9ad",
-"2026-10-28"
+"07e5ea693bfade58",
+"2026-10-29"
 ],
 "/pt/voos-paris-agadir/": [
-"f366595f00a32dc8",
+"7b9c022038fd1a39",
 "2026-10-29"
 ],
 "/pt/voos-paris-ama/": [
-"c0536352001542f2",
-"2026-10-28"
+"1673084dd5ddfc5c",
+"2026-10-29"
 ],
 "/pt/voos-paris-antananarivo/": [
-"c2390053f21a101a",
-"2026-10-28"
+"a438f00c7f7d137a",
+"2026-10-29"
 ],
 "/pt/voos-paris-argel/": [
-"24b95a121102227b",
-"2026-10-28"
+"ab2e6bcf0205e60c",
+"2026-10-29"
 ],
 "/pt/voos-paris-bamako/": [
-"dd2212ac7778c6f2",
-"2026-10-28"
+"79c990e855955cca",
+"2026-10-29"
 ],
 "/pt/voos-paris-banjul/": [
-"bfac4280d34b32fc",
-"2026-10-28"
+"15520186945fd3af",
+"2026-10-29"
 ],
 "/pt/voos-paris-beirute/": [
-"08b8f87c6169c629",
-"2026-10-28"
+"9aa0b59c4ddd0dc3",
+"2026-10-29"
 ],
 "/pt/voos-paris-bissau/": [
-"1dd87a51ab70f36a",
-"2026-10-28"
+"7c537df373333246",
+"2026-10-29"
 ],
 "/pt/voos-paris-brazzaville/": [
-"f215c7c96b0d115d",
-"2026-10-28"
+"dc8f28085db75fe7",
+"2026-10-29"
 ],
 "/pt/voos-paris-caiena/": [
-"30c5742d3e54b85f",
-"2026-10-28"
+"213df032a2ee97a5",
+"2026-10-29"
 ],
 "/pt/voos-paris-cairo/": [
-"341a4faa6bb5dbaf",
-"2026-10-28"
+"6b4450a6ea4cdd85",
+"2026-10-29"
 ],
 "/pt/voos-paris-casablanca/": [
-"2a86b2774e4a53cd",
-"2026-10-28"
+"adf4c4b4de49e207",
+"2026-10-29"
 ],
 "/pt/voos-paris-conacri/": [
-"3f934a6e23e09c20",
-"2026-10-28"
+"27602235d758ec29",
+"2026-10-29"
 ],
 "/pt/voos-paris-constantina/": [
-"8b5b6462f970f6eb",
+"9e3845e838c6eccf",
 "2026-10-29"
 ],
 "/pt/voos-paris-cotonou/": [
-"93cf3e0cfbb16f59",
-"2026-10-28"
+"13988970a5c32b18",
+"2026-10-29"
 ],
 "/pt/voos-paris-dacar/": [
-"b3c214cac0d6a0ab",
-"2026-10-28"
+"67efce340ab150bc",
+"2026-10-29"
 ],
 "/pt/voos-paris-dar-es-salaam/": [
-"e88a16f536364f0f",
-"2026-10-28"
+"e5bd345744d7bb17",
+"2026-10-29"
 ],
 "/pt/voos-paris-djerba/": [
-"cd62ba8b28c1cee5",
-"2026-10-28"
+"82c69bbc245a456a",
+"2026-10-29"
 ],
 "/pt/voos-paris-doha/": [
-"44429445b406ac02",
-"2026-10-28"
+"49116abad2269ac2",
+"2026-10-29"
 ],
 "/pt/voos-paris-douala/": [
-"6fce0b57013bfb1f",
-"2026-10-28"
+"6e3f10caa09dae63",
+"2026-10-29"
 ],
 "/pt/voos-paris-dubai/": [
-"f2796f23dfa45150",
-"2026-10-28"
+"702fb7c3718d36a5",
+"2026-10-29"
 ],
 "/pt/voos-paris-fez/": [
-"5bd43dcbd6e60f22",
-"2026-10-28"
+"487b7410284ee8f8",
+"2026-10-29"
 ],
 "/pt/voos-paris-fort-de-france/": [
-"44e95f650e727efa",
-"2026-10-28"
+"f298e9551c6a2cb3",
+"2026-10-29"
 ],
 "/pt/voos-paris-iaunde/": [
-"0044e10b7e79c5a8",
-"2026-10-28"
+"771284d576be7f61",
+"2026-10-29"
 ],
 "/pt/voos-paris-istambul/": [
-"708d4529fc5ff80e",
+"9a0806a6054c49c5",
 "2026-10-29"
 ],
 "/pt/voos-paris-jida/": [
-"7dcdb1547f9da6db",
-"2026-10-28"
+"b6983d012c7c8e66",
+"2026-10-29"
 ],
 "/pt/voos-paris-joanesburgo/": [
-"758274cde5fe6f86",
-"2026-10-28"
+"b105093872774888",
+"2026-10-29"
 ],
 "/pt/voos-paris-kigali/": [
-"d546e1f8ea8565b5",
-"2026-10-28"
+"302418aabb5ebe21",
+"2026-10-29"
 ],
 "/pt/voos-paris-kinshasa/": [
-"27c52a87fb22145e",
-"2026-10-28"
+"8c6c582ece5e31ec",
+"2026-10-29"
 ],
 "/pt/voos-paris-lagos/": [
-"6ac09b2a77a4b3a0",
-"2026-10-28"
+"bc13a875aced856f",
+"2026-10-29"
 ],
 "/pt/voos-paris-libreville/": [
-"73a8cc1ea1bf3014",
-"2026-10-28"
+"e37c71aa846cda6a",
+"2026-10-29"
 ],
 "/pt/voos-paris-lome/": [
-"3755126b911547c4",
-"2026-10-28"
+"8f5b6eae36b83341",
+"2026-10-29"
 ],
 "/pt/voos-paris-luanda/": [
-"d74bf6e60c17274a",
-"2026-10-28"
+"01c8aa6599b7ee30",
+"2026-10-29"
 ],
 "/pt/voos-paris-maiote/": [
-"98a8b93a96f3b4aa",
-"2026-10-28"
+"39e4715d0718660e",
+"2026-10-29"
 ],
 "/pt/voos-paris-maputo/": [
-"6292d6a2ccba1831",
-"2026-10-28"
+"9eb46f603b5d67d4",
+"2026-10-29"
 ],
 "/pt/voos-paris-marraquexe/": [
-"c343d1f223549f68",
-"2026-10-28"
+"65bfa89825a97142",
+"2026-10-29"
 ],
 "/pt/voos-paris-mauricia/": [
-"660f99b2d9dc91a0",
-"2026-10-28"
+"07eea8944296ac0d",
+"2026-10-29"
 ],
 "/pt/voos-paris-medina/": [
-"96dff25465ceac62",
-"2026-10-28"
+"97c56b2e503ffc2b",
+"2026-10-29"
 ],
 "/pt/voos-paris-monastir/": [
-"11ea61a4740f538a",
-"2026-10-28"
+"a07148190425e8d2",
+"2026-10-29"
 ],
 "/pt/voos-paris-montreal/": [
-"8545ad7c0d4b378e",
-"2026-10-28"
+"b0746869d61e96fc",
+"2026-10-29"
 ],
 "/pt/voos-paris-n-djamena/": [
-"704ae75d5b977fff",
-"2026-10-28"
+"03e7ddfea4773c6b",
+"2026-10-29"
 ],
 "/pt/voos-paris-nairobi/": [
-"02461e42668d04fe",
-"2026-10-28"
+"6884ed75afd939a9",
+"2026-10-29"
 ],
 "/pt/voos-paris-niamey/": [
-"fcf4ccd539f3ba97",
-"2026-10-28"
+"75854c8eb8d73951",
+"2026-10-29"
 ],
 "/pt/voos-paris-nouakchott/": [
-"439c4b2d5a198160",
-"2026-10-28"
+"7956cb36c71c7c7e",
+"2026-10-29"
 ],
 "/pt/voos-paris-orao/": [
-"bd78d65a13c5378e",
+"7b462d5484b7fa9d",
 "2026-10-29"
 ],
 "/pt/voos-paris-oujda/": [
-"ce2233fc595e91ce",
-"2026-10-28"
+"d280f4d358ca1c6b",
+"2026-10-29"
 ],
 "/pt/voos-paris-pointe-a-pitre/": [
-"236dc46d340f9dd6",
-"2026-10-28"
+"567418aea74beccc",
+"2026-10-29"
 ],
 "/pt/voos-paris-pointe-noire/": [
-"b382d5f6c9a2e563",
-"2026-10-28"
+"b6a5ffdfd1ffb669",
+"2026-10-29"
 ],
 "/pt/voos-paris-porto-principe/": [
-"79f05a3f1c2c1645",
-"2026-10-28"
+"b0d0bdcfcc6feeae",
+"2026-10-29"
 ],
 "/pt/voos-paris-praia/": [
-"6d7d63f4582899ef",
-"2026-10-28"
+"221cfbe63e5fa780",
+"2026-10-29"
 ],
 "/pt/voos-paris-rabat/": [
-"0c4da8dcdb947d7e",
-"2026-10-28"
+"eadf6d21e8ec304f",
+"2026-10-29"
 ],
 "/pt/voos-paris-reuniao/": [
-"7d571c4dee419892",
-"2026-10-28"
+"43bcc965e582445a",
+"2026-10-29"
 ],
 "/pt/voos-paris-riade/": [
-"ec2dab5fc0111e75",
-"2026-10-28"
+"41d477020e8e5482",
+"2026-10-29"
 ],
 "/pt/voos-paris-tanger/": [
-"32a66381f30e3e77",
-"2026-10-28"
+"ad9fbcf60ec50e13",
+"2026-10-29"
 ],
 "/pt/voos-paris-tunis/": [
-"22f8ee11aabc87ba",
-"2026-10-28"
+"a6e2d65c912a679a",
+"2026-10-29"
 ],
 "/pt/voos-paris-uagadugu/": [
-"3bec92bbfeb30ce0",
-"2026-10-28"
+"35db9ea5602e6519",
+"2026-10-29"
 ],
 "/pt/voos-rennes-agadir/": [
-"f72b4eb27e929be9",
+"c863d4dd97447b95",
 "2026-10-29"
 ],
 "/pt/voos-rennes-argel/": [
-"c5be249e31b63aae",
+"43a0eda8f748fc34",
 "2026-10-29"
 ],
 "/pt/voos-rennes-casablanca/": [
-"d206de7d80b1c1f4",
+"d974da60b1ac9a66",
 "2026-10-29"
 ],
 "/pt/voos-rennes-dacar/": [
-"8d002268930b090d",
+"33212e756e16302b",
 "2026-10-29"
 ],
 "/pt/voos-rennes-marraquexe/": [
-"415b983f513b587e",
+"8d52d9437cfa70a3",
 "2026-10-29"
 ],
 "/pt/voos-rennes-orao/": [
-"df1c0873e0bc6d07",
+"f371defa59027799",
 "2026-10-29"
 ],
 "/pt/voos-rennes-tunis/": [
-"a57f79a41e2a5dc1",
+"38a16ff6d8ffcf7c",
 "2026-10-29"
 ],
 "/pt/voos-tabaski/": [
@@ -4544,884 +4548,952 @@
 "2026-10-28"
 ],
 "/pt/voos-toulouse-argel/": [
-"f6f2f21b6533791a",
-"2026-10-28"
+"396d0d419bb35545",
+"2026-10-29"
 ],
 "/pt/voos-toulouse-casablanca/": [
-"9284c86d30696631",
-"2026-10-28"
+"e86da83de5e42dad",
+"2026-10-29"
 ],
 "/pt/voos-toulouse-marraquexe/": [
-"a34cd8eb04e40c6e",
-"2026-10-28"
+"3059895adbf1ddac",
+"2026-10-29"
 ],
 "/pt/voos-toulouse-orao/": [
-"08f9c5cf38a5eaa1",
+"aed2da2dc6bbab4a",
 "2026-10-29"
 ],
 "/pt/voos-toulouse-tunis/": [
-"9bec0bf1a26c446f",
-"2026-10-28"
+"af11e209f3c7f002",
+"2026-10-29"
 ],
 "/vol-bale-mulhouse-alger/": [
-"646ebe84218dbdd8",
+"265d825db3a1f8c3",
 "2026-10-29"
 ],
 "/vol-bale-mulhouse-casablanca/": [
-"6214045755ccdc82",
+"76a97d55c129953a",
 "2026-10-29"
 ],
 "/vol-bale-mulhouse-constantine/": [
-"2ef6d1293d20d173",
+"c31c4e4201e008f0",
 "2026-10-29"
 ],
 "/vol-bale-mulhouse-istanbul/": [
-"49bd095d254db7e2",
+"49551f8af98528a6",
 "2026-10-29"
 ],
 "/vol-bale-mulhouse-marrakech/": [
-"48f6f1b1d25ff6e5",
+"1dba23feb5fa4f7f",
 "2026-10-29"
 ],
 "/vol-bale-mulhouse-oran/": [
-"30638697740a0c6c",
+"47a650c559350bc9",
 "2026-10-29"
 ],
 "/vol-bale-mulhouse-tunis/": [
-"46ca6782390d01a2",
+"c994f02ffc8876bb",
 "2026-10-29"
 ],
 "/vol-bordeaux-alger/": [
-"e6fee04f950bba32",
-"2026-10-28"
+"cb388a13be17b935",
+"2026-10-29"
 ],
 "/vol-bordeaux-casablanca/": [
-"341cbbb678e13c4c",
-"2026-10-28"
+"b76ffa86d037e0aa",
+"2026-10-29"
 ],
 "/vol-bordeaux-dakar/": [
-"8f8bad9ddf40e9d3",
-"2026-10-28"
+"91a65bf0d5893e72",
+"2026-10-29"
 ],
 "/vol-bordeaux-marrakech/": [
-"e931f1adfd1d5daf",
-"2026-10-28"
+"fd885031c6a0b707",
+"2026-10-29"
 ],
 "/vol-bruxelles-abidjan/": [
-"143b0f7e26e5ba31",
-"2026-10-28"
+"dc051dafcfeb50bc",
+"2026-10-29"
 ],
 "/vol-bruxelles-accra/": [
-"0e77605b959fbe90",
-"2026-10-28"
+"279664a6a8691e70",
+"2026-10-29"
 ],
 "/vol-bruxelles-alger/": [
-"a39f22eb58a8ec0a",
-"2026-10-28"
+"dc1bda60978970f5",
+"2026-10-29"
 ],
 "/vol-bruxelles-bamako/": [
-"c722dcaa5e7e0c00",
-"2026-10-28"
+"7e6bf0c5ccd9d61a",
+"2026-10-29"
 ],
 "/vol-bruxelles-casablanca/": [
-"880056966541c22d",
-"2026-10-28"
+"e75da9b2dbbcdb03",
+"2026-10-29"
 ],
 "/vol-bruxelles-conakry/": [
-"a3a3fef0197aa935",
-"2026-10-28"
+"a052ee5749c56386",
+"2026-10-29"
 ],
 "/vol-bruxelles-cotonou/": [
-"3f2a1f337ed57115",
-"2026-10-28"
+"46a1c86c6a397826",
+"2026-10-29"
 ],
 "/vol-bruxelles-dakar/": [
-"58306ed8e823707e",
-"2026-10-28"
+"e47d8ffa2f5ca2e8",
+"2026-10-29"
 ],
 "/vol-bruxelles-douala/": [
-"d4289ea51cb63129",
-"2026-10-28"
+"2c09716f90d68e7b",
+"2026-10-29"
 ],
 "/vol-bruxelles-dubai/": [
-"9898813e45c34cbe",
-"2026-10-28"
+"561e7a59302a90e1",
+"2026-10-29"
 ],
 "/vol-bruxelles-istanbul/": [
-"bba24b0eeeb4c1f1",
+"94af644b4c8b5309",
 "2026-10-29"
 ],
 "/vol-bruxelles-kigali/": [
-"d9c0d3cc78609dac",
-"2026-10-28"
+"d75bb968417d4d5c",
+"2026-10-29"
 ],
 "/vol-bruxelles-kinshasa/": [
-"aa53b1ad62ebcd07",
-"2026-10-28"
+"a2180c5049c3c3b3",
+"2026-10-29"
 ],
 "/vol-bruxelles-libreville/": [
-"36484eb2ec70d664",
-"2026-10-28"
+"3e6951fcc6d4b00b",
+"2026-10-29"
 ],
 "/vol-bruxelles-lome/": [
-"38192547cdbc5df4",
-"2026-10-28"
+"7aab59df156da5b3",
+"2026-10-29"
 ],
 "/vol-bruxelles-marrakech/": [
-"c4a8de1772376011",
-"2026-10-28"
+"5aa71d11694f6e0b",
+"2026-10-29"
 ],
 "/vol-bruxelles-ouagadougou/": [
-"6880b84f194e1f77",
-"2026-10-28"
+"3ea5adbb501123da",
+"2026-10-29"
 ],
 "/vol-bruxelles-tanger/": [
-"269d40a3353fdcf7",
-"2026-10-28"
+"a8cc8f8d28628f06",
+"2026-10-29"
 ],
 "/vol-bruxelles-tunis/": [
-"5b66068c2e7256d5",
-"2026-10-28"
+"779ab7fbf8519f8d",
+"2026-10-29"
 ],
 "/vol-bruxelles-yaounde/": [
-"70e8f902c6433236",
-"2026-10-28"
+"ddbb185b3c2cd7ee",
+"2026-10-29"
 ],
 "/vol-geneve-abidjan/": [
-"51487699bc9eeb48",
-"2026-10-28"
+"2240bb798bdbc96d",
+"2026-10-29"
 ],
 "/vol-geneve-alger/": [
-"d59ee8079aab036d",
-"2026-10-28"
+"b1f07f5e201a2e1a",
+"2026-10-29"
 ],
 "/vol-geneve-casablanca/": [
-"145b19328bf76476",
-"2026-10-28"
+"1737ad4f0bfc764c",
+"2026-10-29"
 ],
 "/vol-geneve-dakar/": [
-"af80a45c97e7cc74",
-"2026-10-28"
+"1ae5ffe8737d42af",
+"2026-10-29"
 ],
 "/vol-geneve-dubai/": [
-"f8dbd553bb1dd1f4",
-"2026-10-28"
+"18de6d7ce402ee42",
+"2026-10-29"
 ],
 "/vol-geneve-istanbul/": [
-"b64c78142c811dea",
+"1413fd065e818f3a",
 "2026-10-29"
 ],
 "/vol-geneve-marrakech/": [
-"544b7cc397668c14",
-"2026-10-28"
+"bcde71b163043063",
+"2026-10-29"
 ],
 "/vol-geneve-tunis/": [
-"1d29114b0e1913dc",
-"2026-10-28"
+"0383e198a4a9cdfe",
+"2026-10-29"
 ],
 "/vol-lille-alger/": [
-"6cbedcf1f169eff2",
-"2026-10-28"
+"b4c379eec7d94103",
+"2026-10-29"
 ],
 "/vol-lille-casablanca/": [
-"d6f3c8b46656dc1c",
-"2026-10-28"
+"ba7ba759958fac7e",
+"2026-10-29"
 ],
 "/vol-lille-dakar/": [
-"f606cbe4d88f943b",
-"2026-10-28"
+"b6806ccc32270868",
+"2026-10-29"
 ],
 "/vol-lille-marrakech/": [
-"f2034a56e0890989",
-"2026-10-28"
+"7b8e10cccad98d6a",
+"2026-10-29"
 ],
 "/vol-lille-oran/": [
-"4ee7522c622a0c30",
+"88609acbeac0e29c",
 "2026-10-29"
 ],
 "/vol-lille-oujda/": [
-"663eed37346a60b9",
-"2026-10-28"
+"7e44f2895aeddcf6",
+"2026-10-29"
 ],
 "/vol-lille-tunis/": [
-"cad62110a39d4329",
-"2026-10-28"
+"28e001aae7667de1",
+"2026-10-29"
 ],
 "/vol-lisbonne-abidjan/": [
-"a9f2c031aa3b74f0",
-"2026-10-28"
+"0ad5c5fb4078c057",
+"2026-10-29"
 ],
 "/vol-lisbonne-accra/": [
-"100bc0ac48a40087",
-"2026-10-28"
+"1aacb17e70281d3d",
+"2026-10-29"
 ],
 "/vol-lisbonne-bissau/": [
-"f5ecc047edf2afb5",
-"2026-10-28"
+"bf33070a39a91819",
+"2026-10-29"
 ],
 "/vol-lisbonne-casablanca/": [
-"3c37c82c63499337",
-"2026-10-28"
+"33c88546a972ef73",
+"2026-10-29"
 ],
 "/vol-lisbonne-dakar/": [
-"4c9274e32cf2dcbb",
-"2026-10-28"
+"c80d04a14af47837",
+"2026-10-29"
 ],
 "/vol-lisbonne-luanda/": [
-"7425bcecf5e005dd",
-"2026-10-28"
+"1180ce954aca058e",
+"2026-10-29"
 ],
 "/vol-lisbonne-maputo/": [
-"396738f45ce55acf",
-"2026-10-28"
+"3e355d7fb0996d48",
+"2026-10-29"
 ],
 "/vol-lisbonne-praia/": [
-"b9dfb6415b136c1e",
-"2026-10-28"
+"b64369fd13247d16",
+"2026-10-29"
 ],
 "/vol-londres-abidjan/": [
-"0462a3178a483c3d",
-"2026-10-28"
+"66d7de99020dca56",
+"2026-10-29"
 ],
 "/vol-londres-abuja/": [
-"dcf885e71e370c32",
-"2026-10-28"
+"e85e15d6777ec5c7",
+"2026-10-29"
 ],
 "/vol-londres-accra/": [
-"015b2b8e7cf5d572",
-"2026-10-28"
+"ef996ac79ecca03d",
+"2026-10-29"
 ],
 "/vol-londres-addis-abeba/": [
-"424bc47a9cde7bf7",
-"2026-10-28"
+"0a98b33c7d533f46",
+"2026-10-29"
 ],
 "/vol-londres-alger/": [
-"47b610e89edd6cee",
-"2026-10-28"
+"3cafd2cf92415e15",
+"2026-10-29"
 ],
 "/vol-londres-casablanca/": [
-"f25daf4c4551f4b9",
-"2026-10-28"
+"f1627a44b9ca0e41",
+"2026-10-29"
 ],
 "/vol-londres-dakar/": [
-"dca429c45d37eff3",
-"2026-10-28"
+"fe2ff1bf3fef334c",
+"2026-10-29"
 ],
 "/vol-londres-dubai/": [
-"157fdec856f237fc",
-"2026-10-28"
+"35bf14e95a0f153f",
+"2026-10-29"
 ],
 "/vol-londres-johannesburg/": [
-"addb46cffcbcad0f",
-"2026-10-28"
+"0391a68d9eb2cc4e",
+"2026-10-29"
 ],
 "/vol-londres-kinshasa/": [
-"18472520c218d674",
-"2026-10-28"
+"c5ab877ce12b79d8",
+"2026-10-29"
 ],
 "/vol-londres-lagos/": [
-"5cd5f40c1efe1191",
-"2026-10-28"
+"3ba0ed38ba89c455",
+"2026-10-29"
 ],
 "/vol-londres-le-caire/": [
-"1e90007c3aaae4e3",
-"2026-10-28"
+"7ef5094973dcb74d",
+"2026-10-29"
 ],
 "/vol-londres-marrakech/": [
-"c4d5f22d605201da",
-"2026-10-28"
+"d559d315cf57a918",
+"2026-10-29"
 ],
 "/vol-londres-nairobi/": [
-"b8e81eaa9073b987",
-"2026-10-28"
+"d55fb6fb4d6e2f83",
+"2026-10-29"
 ],
 "/vol-lyon-abidjan/": [
-"5d2e051ed9ebce32",
-"2026-10-28"
+"7c7241e02f81d5c1",
+"2026-10-29"
 ],
 "/vol-lyon-agadir/": [
-"f3f262d67b606e99",
+"fcc9edec228d8c16",
 "2026-10-29"
 ],
 "/vol-lyon-alger/": [
-"a729d44784bcd0fa",
-"2026-10-28"
+"3b9818be196f7ef6",
+"2026-10-29"
 ],
 "/vol-lyon-bamako/": [
-"ac55f08435df4c18",
-"2026-10-28"
+"c545695beebfadff",
+"2026-10-29"
 ],
 "/vol-lyon-casablanca/": [
-"0a3cf529fc8a993a",
-"2026-10-28"
+"7bff7b88fd550c27",
+"2026-10-29"
 ],
 "/vol-lyon-constantine/": [
-"95a4de0250ba22dd",
+"70e9b3be020186ec",
 "2026-10-29"
 ],
 "/vol-lyon-dakar/": [
-"0950d00df895c924",
-"2026-10-28"
+"caba723f4cfd08fc",
+"2026-10-29"
 ],
 "/vol-lyon-djerba/": [
-"8f78f13002228b2a",
-"2026-10-28"
+"1ac319196706731a",
+"2026-10-29"
 ],
 "/vol-lyon-dubai/": [
-"b155a833cebd5ee9",
-"2026-10-28"
+"a76ddb09a8fc9db3",
+"2026-10-29"
 ],
 "/vol-lyon-fes/": [
-"a49a7084cc81cc5f",
-"2026-10-28"
+"2794c61ffc1bb143",
+"2026-10-29"
 ],
 "/vol-lyon-istanbul/": [
-"ac31d57c47437db8",
+"59e4dddd55f1394a",
 "2026-10-29"
 ],
 "/vol-lyon-marrakech/": [
-"15f42a8f868d8025",
-"2026-10-28"
+"907585c880b4a8f1",
+"2026-10-29"
 ],
 "/vol-lyon-oran/": [
-"4b4a305c759e54ec",
+"5b1e648e0c20392b",
 "2026-10-29"
 ],
 "/vol-lyon-oujda/": [
-"ac40e66fbfc8887a",
-"2026-10-28"
+"30f108e9855bc261",
+"2026-10-29"
 ],
 "/vol-lyon-tunis/": [
-"c3ae3aca9ed7aa82",
-"2026-10-28"
+"c073fee5dff2e6a4",
+"2026-10-29"
 ],
 "/vol-madrid-abidjan/": [
-"1dd71387c8db8737",
-"2026-10-28"
+"5c49d9eec335cb3a",
+"2026-10-29"
 ],
 "/vol-madrid-alger/": [
-"33a71b5aa341a4cd",
-"2026-10-28"
+"7b015e547caad3a3",
+"2026-10-29"
 ],
 "/vol-madrid-bamako/": [
-"cab0556fe91c314b",
-"2026-10-28"
+"f73cb5f931115311",
+"2026-10-29"
 ],
 "/vol-madrid-casablanca/": [
-"3e30d5398407f3d1",
-"2026-10-28"
+"f57e1cc76de902bb",
+"2026-10-29"
 ],
 "/vol-madrid-dakar/": [
-"7080e9b1e9be40e6",
-"2026-10-28"
+"1e4fc1f1ee126ee4",
+"2026-10-29"
 ],
 "/vol-madrid-lagos/": [
-"8dd0fbd5d72eea14",
-"2026-10-28"
+"f523b84cef143ff3",
+"2026-10-29"
 ],
 "/vol-madrid-marrakech/": [
-"10f483534732ba8e",
-"2026-10-28"
+"fcc64f100d0b2b93",
+"2026-10-29"
 ],
 "/vol-madrid-tanger/": [
-"db8d3f591f73d458",
-"2026-10-28"
+"6695584915e5cbec",
+"2026-10-29"
 ],
 "/vol-marseille-abidjan/": [
-"28e8c94faedd2336",
-"2026-10-28"
+"c64a7e30730c8de1",
+"2026-10-29"
 ],
 "/vol-marseille-alger/": [
-"650c2bbea2de0afa",
-"2026-10-28"
+"ec92a3566aee755d",
+"2026-10-29"
 ],
 "/vol-marseille-bamako/": [
-"979d68965a2d595c",
-"2026-10-28"
+"8cce19bd86a75251",
+"2026-10-29"
 ],
 "/vol-marseille-casablanca/": [
-"5403295055f1c82b",
-"2026-10-28"
+"e309ea585eef70c0",
+"2026-10-29"
 ],
 "/vol-marseille-constantine/": [
-"430c2d29bb91f652",
+"2ec9c177403d33b5",
 "2026-10-29"
 ],
 "/vol-marseille-dakar/": [
-"00b9e5dbc5665535",
-"2026-10-28"
+"f253f4fbf5865556",
+"2026-10-29"
 ],
 "/vol-marseille-djerba/": [
-"06167d2ad9788462",
-"2026-10-28"
+"9ceb99ecf3421a08",
+"2026-10-29"
 ],
 "/vol-marseille-istanbul/": [
-"a7193c08e3027fb2",
+"fe375cdc0fbd249d",
 "2026-10-29"
 ],
 "/vol-marseille-marrakech/": [
-"cd38e215cd141b84",
-"2026-10-28"
+"150c01772ce7f619",
+"2026-10-29"
 ],
 "/vol-marseille-monastir/": [
-"f6a4e2df2cd37427",
-"2026-10-28"
+"7005cd827d637516",
+"2026-10-29"
 ],
 "/vol-marseille-oran/": [
-"b2c41245de6df8a9",
+"7a9d31e314604519",
 "2026-10-29"
 ],
 "/vol-marseille-tunis/": [
-"35bcbfd8a8e4410a",
-"2026-10-28"
+"89c28d4ab377af7b",
+"2026-10-29"
 ],
 "/vol-montpellier-alger/": [
-"921001464e1b2aaa",
-"2026-10-28"
+"65ddb2b83508a674",
+"2026-10-29"
 ],
 "/vol-montpellier-casablanca/": [
-"db517233cd1cbb23",
-"2026-10-28"
+"37e6f4de5adfc853",
+"2026-10-29"
 ],
 "/vol-montpellier-constantine/": [
-"4c214c9fa8a91648",
+"d4833cf2f1489d21",
 "2026-10-29"
 ],
 "/vol-montpellier-fes/": [
-"0f3ea5bd66d38dec",
-"2026-10-28"
+"b17524549d6c1b67",
+"2026-10-29"
 ],
 "/vol-montpellier-marrakech/": [
-"4dc377b6f8f60db7",
-"2026-10-28"
+"cc3e2ea757dcde3d",
+"2026-10-29"
 ],
 "/vol-montpellier-oran/": [
-"6f3a3935a88052ec",
+"a56e36e0f543f0fd",
 "2026-10-29"
 ],
 "/vol-montpellier-tunis/": [
-"0bea30e62b7c8c45",
-"2026-10-28"
+"16daa7c5e467438f",
+"2026-10-29"
 ],
 "/vol-montreal-abidjan/": [
-"dd55383cd77892e4",
-"2026-10-28"
+"bd6759904156d2b0",
+"2026-10-29"
 ],
 "/vol-montreal-alger/": [
-"a8944fabc2670a9e",
-"2026-10-28"
+"c6c702c9b82db8ad",
+"2026-10-29"
 ],
 "/vol-montreal-casablanca/": [
-"b0fbfdc8278d02e3",
-"2026-10-28"
+"a9b92f495a3a079a",
+"2026-10-29"
 ],
 "/vol-montreal-conakry/": [
-"a73058a063f6ff59",
-"2026-10-28"
+"a7142aa4d46df4f1",
+"2026-10-29"
 ],
 "/vol-montreal-dakar/": [
-"83fe78721a2d26b9",
-"2026-10-28"
+"e991b9e10432be65",
+"2026-10-29"
 ],
 "/vol-montreal-douala/": [
-"a22599b41b478173",
-"2026-10-28"
+"b8751b23b46a7032",
+"2026-10-29"
 ],
 "/vol-montreal-port-au-prince/": [
-"636ca95417d34a42",
-"2026-10-28"
+"1fa7d28789d9ea2e",
+"2026-10-29"
 ],
 "/vol-montreal-tunis/": [
-"b4ae55153e5e92b1",
-"2026-10-28"
+"df09086ce984e1c7",
+"2026-10-29"
 ],
 "/vol-nantes-agadir/": [
-"58e4ae8dd6a94f09",
+"864590f40eebb12b",
 "2026-10-29"
 ],
 "/vol-nantes-alger/": [
-"f3df31695247ea6e",
-"2026-10-28"
+"2fe1dcac0dc4249e",
+"2026-10-29"
 ],
 "/vol-nantes-casablanca/": [
-"3aed4098be3d6b4b",
-"2026-10-28"
+"66446a92ff737a00",
+"2026-10-29"
 ],
 "/vol-nantes-dakar/": [
-"5538b08f861b8dad",
-"2026-10-28"
+"693d3742a0bf6517",
+"2026-10-29"
 ],
 "/vol-nantes-marrakech/": [
-"b14d7ed9770be798",
-"2026-10-28"
+"8ce860745549f0b6",
+"2026-10-29"
 ],
 "/vol-nantes-oran/": [
-"45202087450c9780",
+"25bffb5bac9cb525",
 "2026-10-29"
 ],
 "/vol-nantes-tunis/": [
-"b33743a8a088c6f0",
-"2026-10-28"
+"379503059ced7532",
+"2026-10-29"
 ],
 "/vol-new-york-abidjan/": [
-"71dedadfdc451546",
-"2026-10-28"
+"3e86890b23b9a0c7",
+"2026-10-29"
 ],
 "/vol-new-york-accra/": [
-"8e8a0781c32f2873",
-"2026-10-28"
+"44bc32618eaebe61",
+"2026-10-29"
 ],
 "/vol-new-york-addis-abeba/": [
-"3d91e95b77655db7",
-"2026-10-28"
+"d95038418540fc75",
+"2026-10-29"
 ],
 "/vol-new-york-casablanca/": [
-"94c7c4fd3f4b8e26",
-"2026-10-28"
+"29d951f398f5798b",
+"2026-10-29"
 ],
 "/vol-new-york-dakar/": [
-"79c220c19450cec5",
-"2026-10-28"
+"03187a35f15b3f00",
+"2026-10-29"
 ],
 "/vol-new-york-lagos/": [
-"8584d16750218152",
-"2026-10-28"
+"038d2ffb9bec0477",
+"2026-10-29"
 ],
 "/vol-new-york-le-caire/": [
-"a2979de42fb55293",
-"2026-10-28"
+"5c123dfc4288a5fc",
+"2026-10-29"
 ],
 "/vol-new-york-port-au-prince/": [
-"4ffd7e8824965d77",
-"2026-10-28"
+"ef32f138f762f9ab",
+"2026-10-29"
 ],
 "/vol-nice-alger/": [
-"48b4e2912d91502a",
-"2026-10-28"
+"8bfc3bbf758dfa68",
+"2026-10-29"
 ],
 "/vol-nice-casablanca/": [
-"6b36a9844ad952e7",
-"2026-10-28"
+"c8d2fdf98e431736",
+"2026-10-29"
 ],
 "/vol-nice-dakar/": [
-"2206aa45964d3e2f",
-"2026-10-28"
+"114cb0a7589c11f8",
+"2026-10-29"
 ],
 "/vol-nice-tunis/": [
-"3d40207dad65e103",
-"2026-10-28"
+"d2497969f30d7ccb",
+"2026-10-29"
 ],
 "/vol-paris-abidjan/": [
-"636a67ed9058ec4c",
-"2026-10-28"
+"6398e0977b716a58",
+"2026-10-29"
 ],
 "/vol-paris-accra/": [
-"4551899c2f28092e",
-"2026-10-28"
+"baf1ebe2de231c3f",
+"2026-10-29"
 ],
 "/vol-paris-addis-abeba/": [
-"c9c4879780a76ea3",
-"2026-10-28"
+"446cce594ebe60ea",
+"2026-10-29"
 ],
 "/vol-paris-agadir/": [
-"6ac9008b27344c8c",
+"b203a98cdddfd31a",
 "2026-10-29"
 ],
 "/vol-paris-alger/": [
-"a21a588b0c8697af",
-"2026-10-28"
+"feea372c577f9988",
+"2026-10-29"
 ],
 "/vol-paris-amman/": [
-"3ccbd12f31ad5d8e",
-"2026-10-28"
+"5dc88766a76bf879",
+"2026-10-29"
 ],
 "/vol-paris-antananarivo/": [
-"500e91f9ff2f14b1",
-"2026-10-28"
+"3f67c48b2291faf5",
+"2026-10-29"
 ],
 "/vol-paris-bamako/": [
-"67a9dd3b6b091d85",
-"2026-10-28"
+"55e6d2db2e6b750d",
+"2026-10-29"
 ],
 "/vol-paris-banjul/": [
-"0435fe4b6ec48673",
-"2026-10-28"
+"af910ca8669e14a8",
+"2026-10-29"
 ],
 "/vol-paris-beyrouth/": [
-"d81f0afd3c723974",
-"2026-10-28"
+"b6ae4add65bd23f9",
+"2026-10-29"
 ],
 "/vol-paris-bissau/": [
-"00cda1bca3790cbc",
-"2026-10-28"
+"5907c9126a4a887f",
+"2026-10-29"
 ],
 "/vol-paris-brazzaville/": [
-"d730ee56c518ba97",
-"2026-10-28"
+"68bc8430a2832ac4",
+"2026-10-29"
 ],
 "/vol-paris-casablanca/": [
-"e5fe18ee03177daa",
-"2026-10-28"
+"fb34eb8684bbf058",
+"2026-10-29"
 ],
 "/vol-paris-cayenne/": [
-"f7950ef41dbb03e3",
-"2026-10-28"
+"5f8c1dfdcd736ed1",
+"2026-10-29"
 ],
 "/vol-paris-conakry/": [
-"3fdf469549faf911",
-"2026-10-28"
+"9dc655c5d9a91c15",
+"2026-10-29"
 ],
 "/vol-paris-constantine/": [
-"e9af82d50539be59",
+"8a4074a822dd193c",
 "2026-10-29"
 ],
 "/vol-paris-cotonou/": [
-"4267072743fe1b38",
-"2026-10-28"
+"be62df0395e270f5",
+"2026-10-29"
 ],
 "/vol-paris-dakar/": [
-"ff4cf621e1608e33",
-"2026-10-28"
+"326f4295baa6c4f1",
+"2026-10-29"
 ],
 "/vol-paris-dar-es-salaam/": [
-"c3c4edbd4011c1cc",
-"2026-10-28"
+"8f7044b37e4c0cca",
+"2026-10-29"
 ],
 "/vol-paris-djeddah/": [
-"99433d84846bece0",
-"2026-10-28"
+"174749bb4838aa1c",
+"2026-10-29"
 ],
 "/vol-paris-djerba/": [
-"259d9d39f089babe",
-"2026-10-28"
+"d90edd5834f0e7ca",
+"2026-10-29"
 ],
 "/vol-paris-doha/": [
-"36181a09ba6308be",
-"2026-10-28"
+"a3a1dc85fd2de716",
+"2026-10-29"
 ],
 "/vol-paris-douala/": [
-"e19ac5ea326f81f2",
-"2026-10-28"
+"1ba265b7e8177883",
+"2026-10-29"
 ],
 "/vol-paris-dubai/": [
-"beba75c06bf79d4d",
-"2026-10-28"
+"d294fab588d55909",
+"2026-10-29"
 ],
 "/vol-paris-fes/": [
-"68f34cd5eeac1148",
-"2026-10-28"
+"1b213eb18ad5ad79",
+"2026-10-29"
 ],
 "/vol-paris-fort-de-france/": [
-"14f79b39d97cd610",
-"2026-10-28"
+"f93de701949f8f7d",
+"2026-10-29"
 ],
 "/vol-paris-istanbul/": [
-"ecbd9a3aab274ef6",
+"ab6923ad7b0abfe0",
 "2026-10-29"
 ],
 "/vol-paris-johannesburg/": [
-"34440f942e732c02",
-"2026-10-28"
+"68b8ff35059fd1a4",
+"2026-10-29"
 ],
 "/vol-paris-kigali/": [
-"a3f0906efa831c57",
-"2026-10-28"
+"c4bd84492da114ae",
+"2026-10-29"
 ],
 "/vol-paris-kinshasa/": [
-"690cac8da7f1fbae",
-"2026-10-28"
+"44c9acb49dd4dd0a",
+"2026-10-29"
 ],
 "/vol-paris-la-reunion/": [
-"bbfce83e4a6a27dc",
-"2026-10-28"
+"8437000c10035102",
+"2026-10-29"
 ],
 "/vol-paris-lagos/": [
-"9e1ec4e1e70ffe8a",
-"2026-10-28"
+"252508814724b991",
+"2026-10-29"
 ],
 "/vol-paris-le-caire/": [
-"381569c49c73ee5e",
-"2026-10-28"
+"035459a5b9f92c79",
+"2026-10-29"
 ],
 "/vol-paris-libreville/": [
-"d0d9d6a0030794d2",
-"2026-10-28"
+"87454704de34c658",
+"2026-10-29"
 ],
 "/vol-paris-lome/": [
-"c39bee191b2be841",
-"2026-10-28"
+"7249ae649c756b79",
+"2026-10-29"
 ],
 "/vol-paris-luanda/": [
-"f1e9de502b4cb62a",
-"2026-10-28"
+"5d3344f23954b339",
+"2026-10-29"
 ],
 "/vol-paris-maputo/": [
-"b068f3eed8651894",
-"2026-10-28"
+"3c14e039bc052d8b",
+"2026-10-29"
 ],
 "/vol-paris-marrakech/": [
-"8b554368c303add3",
-"2026-10-28"
+"d681d1c6404dc801",
+"2026-10-29"
 ],
 "/vol-paris-maurice/": [
-"0606e07654edb48b",
-"2026-10-28"
+"aff219064b2879d7",
+"2026-10-29"
 ],
 "/vol-paris-mayotte/": [
-"f7a9f05da0c31454",
-"2026-10-28"
+"691d8370b5fd91c5",
+"2026-10-29"
 ],
 "/vol-paris-medine/": [
-"1df733b720848d7e",
-"2026-10-28"
+"ec97c57ad578eada",
+"2026-10-29"
 ],
 "/vol-paris-monastir/": [
-"7327560cc8810bf2",
-"2026-10-28"
+"5303da44fad3029c",
+"2026-10-29"
 ],
 "/vol-paris-montreal/": [
-"a75c7af080026111",
-"2026-10-28"
+"410888c228037aa7",
+"2026-10-29"
 ],
 "/vol-paris-n-djamena/": [
-"f0f5df9fa164d129",
-"2026-10-28"
+"7db700e786adf926",
+"2026-10-29"
 ],
 "/vol-paris-nairobi/": [
-"3356ad84a319c118",
-"2026-10-28"
+"b96d5bb2ae5c826c",
+"2026-10-29"
 ],
 "/vol-paris-niamey/": [
-"d44a930db4bfc609",
-"2026-10-28"
+"37edb76b51ee1aaf",
+"2026-10-29"
 ],
 "/vol-paris-nouakchott/": [
-"a9efe6e30910400c",
-"2026-10-28"
+"376c0f1422840113",
+"2026-10-29"
 ],
 "/vol-paris-oran/": [
-"74e05ef3ea3e2bb1",
+"57bea0e0fe9b1cb4",
 "2026-10-29"
 ],
 "/vol-paris-ouagadougou/": [
-"c9eaed051109e52c",
-"2026-10-28"
+"260a9b1c62e24720",
+"2026-10-29"
 ],
 "/vol-paris-oujda/": [
-"737b668940329798",
-"2026-10-28"
+"1bf35dfefc635732",
+"2026-10-29"
 ],
 "/vol-paris-pointe-a-pitre/": [
-"0568ad6aa5eae36b",
-"2026-10-28"
+"43c8c35ff4ed1b49",
+"2026-10-29"
 ],
 "/vol-paris-pointe-noire/": [
-"f3be29c5f9fd5213",
-"2026-10-28"
+"eea1e2ecf9865233",
+"2026-10-29"
 ],
 "/vol-paris-port-au-prince/": [
-"28c322da130e8e47",
-"2026-10-28"
+"4fde10e37ecd9359",
+"2026-10-29"
 ],
 "/vol-paris-praia/": [
-"3374e66aebc204d6",
-"2026-10-28"
+"8be4acbe4a6c752b",
+"2026-10-29"
 ],
 "/vol-paris-rabat/": [
-"909586eab0cdf5f1",
-"2026-10-28"
+"c0711326c0ef90e4",
+"2026-10-29"
 ],
 "/vol-paris-riyad/": [
-"8d17b02430e2c63f",
-"2026-10-28"
+"7cee8cce4a71370e",
+"2026-10-29"
 ],
 "/vol-paris-tanger/": [
-"194d6059d05b9674",
-"2026-10-28"
+"1219cbddb55bf841",
+"2026-10-29"
 ],
 "/vol-paris-tunis/": [
-"5948386980a16d68",
-"2026-10-28"
+"bfa10bd94be4eea5",
+"2026-10-29"
 ],
 "/vol-paris-yaounde/": [
-"57261863f6bda3e4",
-"2026-10-28"
+"84ccabe5f66182f1",
+"2026-10-29"
 ],
 "/vol-rennes-agadir/": [
-"ac1f562d9b8ecbab",
+"67805cf824072799",
 "2026-10-29"
 ],
 "/vol-rennes-alger/": [
-"640d730c1d356123",
+"a539b123c71c25c8",
 "2026-10-29"
 ],
 "/vol-rennes-casablanca/": [
-"ad56beb43aae8271",
+"43ccb2f1be5ca773",
 "2026-10-29"
 ],
 "/vol-rennes-dakar/": [
-"31f521b84997b1c2",
+"30d4fab9e5489143",
 "2026-10-29"
 ],
 "/vol-rennes-marrakech/": [
-"e89fa1e7c86b4c26",
+"07214d76d9d7f042",
 "2026-10-29"
 ],
 "/vol-rennes-oran/": [
-"dcb99e95b806a4ed",
+"30ea20fda562914d",
 "2026-10-29"
 ],
 "/vol-rennes-tunis/": [
-"9dbabbc9f12c840b",
+"dff3ce96cbdca4be",
 "2026-10-29"
 ],
 "/vol-strasbourg-alger/": [
-"041be9fce9fe3ba6",
-"2026-10-28"
+"b599d43b01ad3db3",
+"2026-10-29"
 ],
 "/vol-strasbourg-casablanca/": [
-"3e5690cf3443a837",
-"2026-10-28"
+"ed8ca14955ec1ba6",
+"2026-10-29"
 ],
 "/vol-strasbourg-dakar/": [
-"60bb22bee9961e7b",
-"2026-10-28"
+"ca938a6848ee888f",
+"2026-10-29"
 ],
 "/vol-strasbourg-istanbul/": [
-"3c425cb2d236c189",
+"32a9ade3c1bacf8b",
 "2026-10-29"
 ],
 "/vol-strasbourg-marrakech/": [
-"c1c5d87c10b39936",
-"2026-10-28"
+"23b4cdc55d56dabc",
+"2026-10-29"
 ],
 "/vol-strasbourg-oran/": [
-"f5d127820a7caa5a",
+"bc956d5e486763c5",
 "2026-10-29"
 ],
 "/vol-strasbourg-tunis/": [
-"96fc26be3aceaed3",
-"2026-10-28"
+"205e39d69005f840",
+"2026-10-29"
 ],
 "/vol-toulouse-alger/": [
-"dc42d0daaef4cf6f",
-"2026-10-28"
+"efa2084e77cf338b",
+"2026-10-29"
 ],
 "/vol-toulouse-casablanca/": [
-"565b7af3a92bfb57",
-"2026-10-28"
+"738155ade66e37c4",
+"2026-10-29"
 ],
 "/vol-toulouse-marrakech/": [
-"fcc8e9749b3db44e",
-"2026-10-28"
+"e6a5362e7a43bc1e",
+"2026-10-29"
 ],
 "/vol-toulouse-oran/": [
-"8d61bc37226210d9",
+"53e691841d210ece",
 "2026-10-29"
 ],
 "/vol-toulouse-tunis/": [
-"a84d954d33ed163b",
-"2026-10-28"
+"e69d957e7a45dab9",
+"2026-10-29"
+],
+"/vols-ete-2027-abidjan/": [
+"ed6f2e749827240f",
+"2026-10-29"
+],
+"/vols-ete-2027-alger/": [
+"5edc9b483f960bff",
+"2026-10-29"
+],
+"/vols-ete-2027-bamako/": [
+"3c8e963b4225bd63",
+"2026-10-29"
+],
+"/vols-ete-2027-casablanca/": [
+"af4803b8c2062bef",
+"2026-10-29"
+],
+"/vols-ete-2027-conakry/": [
+"d7227f1e2e49ac15",
+"2026-10-29"
+],
+"/vols-ete-2027-cotonou/": [
+"5babee871339b059",
+"2026-10-29"
+],
+"/vols-ete-2027-dakar/": [
+"0afc058d63da82bd",
+"2026-10-29"
+],
+"/vols-ete-2027-douala/": [
+"e879dd4e8faf567e",
+"2026-10-29"
+],
+"/vols-ete-2027-kinshasa/": [
+"d710d14560814372",
+"2026-10-29"
+],
+"/vols-ete-2027-lome/": [
+"d272f6ad77524738",
+"2026-10-29"
+],
+"/vols-ete-2027-niamey/": [
+"40fc833aa7d71843",
+"2026-10-29"
+],
+"/vols-ete-2027-nouakchott/": [
+"37106a108b619cc2",
+"2026-10-29"
+],
+"/vols-ete-2027-oran/": [
+"ad492927a650cbca",
+"2026-10-29"
+],
+"/vols-ete-2027-ouagadougou/": [
+"807f1eb122ef96a4",
+"2026-10-29"
+],
+"/vols-ete-2027-tunis/": [
+"b16dd9a522a46efb",
+"2026-10-29"
+],
+"/vols-ete-2027-yaounde/": [
+"703647199c65cffd",
+"2026-10-29"
+],
+"/vols-ete-2027/": [
+"b0f15f606aa0e0b6",
+"2026-10-29"
 ],
 "/vols-fetes/": [
 "c7a54717657d77f9",
@@ -5536,8 +5608,8 @@
 "2026-10-28"
 ],
 "/vols-vacances-ete/": [
-"7a26625f73ec4cb5",
-"2026-10-28"
+"76bedb14629a9bcc",
+"2026-10-29"
 ],
 "/vols-vacances-hiver/": [
 "801d1917fe49df14",

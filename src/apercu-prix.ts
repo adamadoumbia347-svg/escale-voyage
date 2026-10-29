@@ -11,7 +11,7 @@ const MONTHS = 6
 const WAIT_MS = 2500
 const CACHE_S = 6 * 3600
 
-type Month = { month: string; price: number; dep: string; ret: string; transfers: number }
+export type Month = { month: string; price: number; dep: string; ret: string; transfers: number }
 
 // Historique du prix le plus bas (grands trajets seulement, pour limiter les écritures KV) :
 // une valeur par jour au plus, enregistrée quand les prix sont rafraîchis (cache de 6 heures), 120 jours gardés.
@@ -22,9 +22,9 @@ const TRACKED = new Set(("CDG-DSS CDG-BKO CDG-ABJ CDG-CKY CDG-DLA CDG-NSI CDG-LF
   "LYS-TUN LYS-DJE LYS-AGA LYS-RAK LYS-OUD LYS-FEZ LYS-ORN LYS-CZL LYS-IST LYS-DXB LYS-ABJ LYS-BKO MRS-ORN MRS-CZL MRS-CMN MRS-RAK MRS-DJE MRS-IST MRS-BKO MRS-ABJ " +
   "LIL-ALG LIL-ORN LIL-TUN LIL-OUD GVA-ABJ CDG-MPM BOD-RAK").split(" "))
 const HIST_DAYS = 120, HIST_MIN = 7, HIST_WINDOW = 60
-type Point = [string, number] // [date, prix le plus bas des 6 prochains mois]
+export type Point = [string, number] // [date, prix le plus bas des 6 prochains mois]
 
-async function readHistory(ctx: Ctx, from: string, to: string): Promise<Point[]> {
+export async function readHistory(ctx: Ctx, from: string, to: string): Promise<Point[]> {
   if (!ctx.env.ESCALE || !TRACKED.has(`${from}-${to}`)) return []
   try { return ((await ctx.env.ESCALE.get(`hist:${from}-${to}`, "json")) as Point[]) || [] } catch { return [] }
 }
@@ -90,9 +90,9 @@ const L: Record<string, { loc: string; from: string; hero: string; direct: strin
 
 // Prix le plus bas par mois de départ (6 prochains mois), depuis le cache Cloudflare ou Travelpayouts.
 // null = service indisponible (rien n'est gardé en cache) ; [] = aucun prix connu pour ce trajet.
-const cacheKey = (from: string, to: string) => new Request(`https://escale.live/__prix-trajet/${from}-${to}`)
+export const cacheKey = (from: string, to: string) => new Request(`https://escale.live/__prix-trajet/${from}-${to}`)
 
-async function routeMonths(ctx: Ctx, from: string, to: string): Promise<Month[] | null> {
+export async function routeMonths(ctx: Ctx, from: string, to: string): Promise<Month[] | null> {
   const cache = (globalThis as any).caches?.default
   const key = cacheKey(from, to)
   if (cache) {

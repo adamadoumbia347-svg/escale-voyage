@@ -22,7 +22,15 @@
       '<label class="alert-consent"><input type="checkbox" name="consent" required> <span>' + esc(L.consent) + "</span></label>" +
       '<button class="btn" type="submit">' + esc(L.btn) + '</button><p class="small alert-msg" role="status"></p></form>';
     box.hidden = false;
+    Array.prototype.forEach.call(document.querySelectorAll(".alert-cta"), function (a) { a.hidden = false; });
     var form = box.querySelector("form"), msg = box.querySelector(".alert-msg");
+    // Budget proposé : 90 % du prix le plus bas affiché en haut de la page (s'il est connu)
+    var suggest = function () {
+      var st = document.querySelector("#hero-price strong"), n = st ? Number(st.textContent.replace(/[^0-9]/g, "")) : 0;
+      if (n > 0 && !form.max.value) form.max.value = Math.max(1, Math.floor(n * 0.9 / 10) * 10);
+      return n > 0;
+    };
+    if (!suggest()) setTimeout(suggest, 2500);
     form.addEventListener("submit", function (ev) {
       ev.preventDefault();
       var email = form.email.value.trim(), max = Number(form.max.value);

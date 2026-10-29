@@ -1,6 +1,15 @@
 // Traductions de l'accueil : clé = texte anglais, valeur = [espagnol, portugais, arabe].
 // Le français et l'anglais sont directement dans index.html (data-en) et app.js (T("fr", "en")).
 window.ESCALE_I18N = {
+  // Alerte prix dans les résultats
+  "Tell me when {a} → {b} drops below my budget": ["Avísame cuando {a} → {b} baje de mi presupuesto", "Avise-me quando {a} → {b} descer abaixo do meu orçamento", "نبّهني عندما ينخفض {a} → {b} إلى أقل من ميزانيتي"],
+  "Your email": ["Tu correo", "O seu e-mail", "بريدك الإلكتروني"],
+  "Max. budget": ["Presupuesto máx.", "Orçamento máx.", "الميزانية القصوى"],
+  "Create alert": ["Crear alerta", "Criar alerta", "أنشئ التنبيه"],
+  "I agree to receive emails for this alert (one-click unsubscribe).": ["Acepto recibir correos para esta alerta (baja en un clic).", "Aceito receber e-mails para este alerta (cancelamento num clique).", "أوافق على تلقي رسائل لهذا التنبيه (الإلغاء بنقرة)."],
+  "Check the email, the budget and the consent box.": ["Revisa el correo, el presupuesto y la casilla de consentimiento.", "Verifique o e-mail, o orçamento e a caixa de consentimento.", "تحقّق من البريد والميزانية وخانة الموافقة."],
+  "Almost done: confirm your alert with the link sent to {e}.": ["Casi listo: confirma tu alerta con el enlace enviado a {e}.", "Quase pronto: confirme o alerta com o link enviado para {e}.", "اقتربنا: أكّد التنبيه عبر الرابط المرسل إلى {e}."],
+  "The alert could not be created. Please try again later.": ["No se pudo crear la alerta. Inténtalo más tarde.", "Não foi possível criar o alerta. Tente mais tarde.", "تعذّر إنشاء التنبيه. حاول لاحقًا."],
   // Inscription aux bons plans
   "Get the deals": ["Recibe las ofertas", "Receba as promoções", "احصل على العروض"],
   "A selection of the best prices, once or twice a month, by email or on WhatsApp. Free, unsubscribe anytime.": ["Una selección de los mejores precios, una o dos veces al mes, por correo o por WhatsApp. Gratis, baja cuando quieras.", "Uma seleção dos melhores preços, uma ou duas vezes por mês, por e-mail ou WhatsApp. Grátis, cancele quando quiser.", "مختارات من أفضل الأسعار، مرة أو مرتين في الشهر، عبر البريد أو واتساب. مجانًا، ويمكنك الإلغاء في أي وقت."],

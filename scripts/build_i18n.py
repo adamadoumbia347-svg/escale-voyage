@@ -265,6 +265,14 @@ HUB_LINK = {'en': 'All flights to {b}', 'es': 'Todos los vuelos a {b}', 'pt': 'T
 FAV_LABEL = {"fr": "Ajouter aux favoris", "en": "Add to favorites", "es": "Añadir a favoritos", "pt": "Adicionar aos favoritos", "ar": "أضف إلى المفضلة"}
 
 
+ALERT_LABEL = {"fr": "Alerte prix", "en": "Price alert", "es": "Alerta de precio", "pt": "Alerta de preço", "ar": "تنبيه السعر"}
+
+
+def alert_btn(lang):
+    """Bouton « Alerte prix » du haut des pages trajets : visible seulement si les alertes sont actives (alerts.js)."""
+    return f'<a class="btn ghost alert-cta" href="#price-alert" hidden>🔔 {E(ALERT_LABEL[lang])}</a>'
+
+
 def fav_btn(lang, path, title, sub, kind):
     """Étoile « favori » (favs.js garde la page dans ce navigateur)."""
     star = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.8 6.6 19.7l1.1-6.1L3.2 9.4l6.1-.8z"/></svg>'
@@ -436,7 +444,7 @@ def build(site, ctx):
   <h1>{u["h1_route"].format(a=E(a), b=E(b))}</h1>
   <p class="codes" dir="ltr">{fr_} → {to}</p>
   <p class="hero-price" id="hero-price" hidden></p>
-  <div class="cta-row"><a class="btn" href="{E(app)}">{E(u["cta"])}</a><a class="btn ghost" href="{E(backl)}">{E(u["back"].format(a=a, b=b))}</a>{fav_btn(lang, route_paths[r][lang], f"{a} → {b}", f"{fr_} → {to}", "route")}</div>"""
+  <div class="cta-row"><a class="btn" href="{E(app)}">{E(u["cta"])}</a><a class="btn ghost" href="{E(backl)}">{E(u["back"].format(a=a, b=b))}</a>{fav_btn(lang, route_paths[r][lang], f"{a} → {b}", f"{fr_} → {to}", "route")}{alert_btn(lang)}</div>"""
             others = "".join(f'<li><a href="/{route_paths[o][lang]}/">{E(city(o[2], lang))} {u["arrow"]} {E(city(o[3], lang))}</a></li>'
                              for o in ctx["related"](r))
             body = f"""<dl class="facts">
@@ -759,6 +767,10 @@ def build_fetes(site, ctx):
                      f'<tbody>{"".join(rows)}</tbody></table><p class="small">{E(u["table_note"])}</p></section>')
             body += f'<section><h2>{E(u["book_h"])}</h2><ul>' + "".join(f"<li>{E(x)}</li>" for x in d["book"]) + "</ul></section>"
             body += f'<section><h2>{E(u["alert_h"])}</h2><p>{E(u["alert_p"])}</p></section>'
+            if f["key"] == "ete" and lang == "fr":
+                import ete as ETE
+                body += ('<section><h2>Par destination</h2><p>Prix par période, aéroport de départ, climat et conseils pour chaque pays :</p><ul class="route-links">' +
+                         "".join(f'<li><a href="/{ETE.path(x)}/">{E(x["ville"])} été {ETE.ANNEE}</a></li>' for x in ETE.DEST) + "</ul></section>")
             others = [o for o in F.FETES if o is not f]
             body += (f'<section><h2>{E(u["others"])}</h2><ul class="route-links">' +
                      "".join(f'<li><a href="/{o[lang]["slug"]}/">{E(o[lang]["title"])}</a></li>' for o in others) + "</ul></section>")

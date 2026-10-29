@@ -1,0 +1,31 @@
+# Relevé quotidien des prix (gratuit pour un dépôt public) : ouvre chaque page trajet du baromètre des prix.
+# Chaque ouverture rafraîchit les prix de la page (cache de 6 heures) et ajoute le prix du jour à l'historique
+# (espace KV ESCALE), qui sert au baromètre (/barometre-prix/) et au verdict « bon prix » des pages trajets.
+name: Relevé des prix
+on:
+  schedule:
+    - cron: "23 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  SITE_URL: ${{ vars.SITE_URL || 'https://escale.live' }}
+
+jobs:
+  releve:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ouvrir les pages trajets du baromètre
+        run: |
+          PAGES=$(curl -fsS "$SITE_URL/barometre-prix/" | grep -o 'href="/vol-[a-z-]*/"' | sed 's/href="//;s/"$//' | sort -u)
+          echo "$(echo "$PAGES" | wc -l) pages trajets"
+          for P in $PAGES; do
+            echo "$P : $(curl -s -o /dev/null -w '%{http_code}' "$SITE_URL$P")"
+            sleep 2
+          done
+      - name: Vérifier le baromètre
+        run: |
+          sleep 20
+          curl -fsS "$SITE_URL/barometre-prix/" | grep -o '<p class="bt-lead">[^<]*' | sed 's/<p class="bt-lead">//' || echo "Tableau pas encore rempli"

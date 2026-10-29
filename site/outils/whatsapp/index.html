@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Message WhatsApp des bons plans</title>
+<link rel="icon" href="/favicon.ico">
+<style>
+  :root { --bg: #f6f8fb; --card: #fff; --ink: #0d1b2e; --muted: #5b6b80; --line: #dde3ec; --accent: #0b5cd6; --ok: #0b8a6e; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #0d1420; --card: #152033; --ink: #e8eef7; --muted: #9fb0c6; --line: #24324a; --accent: #6aa5ff; --ok: #4fd1a8; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 24px; margin: 0 0 6px; }
+  p { color: var(--muted); margin: 0 0 16px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin-bottom: 16px; }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  select, button { font: inherit; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--ink); }
+  button.primary { background: var(--accent); color: #fff; border: 0; font-weight: 600; cursor: pointer; }
+  textarea { width: 100%; min-height: 420px; font: 15px/1.5 ui-monospace, Menlo, Consolas, monospace; padding: 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+  .ok { color: var(--ok); font-weight: 600; }
+  ol { color: var(--muted); padding-inline-start: 20px; margin: 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Message WhatsApp des bons plans</h1>
+  <p>Page privée (non référencée) : elle prépare le message de la semaine avec les vrais prix repérés, prêt à coller dans la chaîne WhatsApp Escale.</p>
+  <div class="card">
+    <div class="row">
+      <label>Départ <select id="from">
+        <option value="CDG|Paris">Paris</option><option value="LYS|Lyon">Lyon</option><option value="MRS|Marseille">Marseille</option>
+        <option value="BRU|Bruxelles">Bruxelles</option><option value="GVA|Genève">Genève</option>
+      </select></label>
+      <button class="primary" id="go" type="button">Préparer le message</button>
+      <button id="copy" type="button" disabled>Copier</button>
+      <span id="status" class="ok" role="status"></span>
+    </div>
+  </div>
+  <textarea id="out" aria-label="Message à copier" placeholder="Le message apparaît ici…"></textarea>
+  <div class="card" style="margin-top:16px">
+    <strong>Pour publier</strong>
+    <ol>
+      <li>Choisissez la ville de départ, puis « Préparer le message ».</li>
+      <li>Relisez le message (vous pouvez le modifier), puis « Copier ».</li>
+      <li>Dans WhatsApp : onglet Actualités → votre chaîne Escale → collez et envoyez.</li>
+    </ol>
+  </div>
+</main>
+<script>
+(function () {
+  "use strict";
+  // Destinations suivies (code, ville, drapeau, chemin de la page trajet depuis Paris)
+  var DEST = [["DSS", "Dakar", "🇸🇳", "dakar"], ["BKO", "Bamako", "🇲🇱", "bamako"], ["ABJ", "Abidjan", "🇨🇮", "abidjan"], ["CKY", "Conakry", "🇬🇳", "conakry"],
+    ["DLA", "Douala", "🇨🇲", "douala"], ["FIH", "Kinshasa", "🇨🇩", "kinshasa"], ["LFW", "Lomé", "🇹🇬", "lome"], ["COO", "Cotonou", "🇧🇯", "cotonou"],
+    ["ALG", "Alger", "🇩🇿", "alger"], ["ORN", "Oran", "🇩🇿", "oran"], ["CMN", "Casablanca", "🇲🇦", "casablanca"], ["RAK", "Marrakech", "🇲🇦", "marrakech"],
+    ["TUN", "Tunis", "🇹🇳", "tunis"], ["DJE", "Djerba", "🇹🇳", "djerba"]];
+  var $ = function (id) { return document.getElementById(id); };
+  var now = new Date(), today = now.toISOString().slice(0, 10);
+  var months = [1, 2].map(function (i) { var d = new Date(now.getFullYear(), now.getMonth() + i, 1); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-01"; });
+  var money = function (n) { return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n); };
+  var day = function (iso) { return new Date(iso + "T12:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "short" }); };
+  var get = function (from, to, m) {
+    return fetch("/api/prix?from=" + from + "&to=" + to + "&dep=" + m + "&rt=1&currency=EUR").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
+  };
+  $("go").addEventListener("click", function () {
+    var sel = $("from").value.split("|"), from = sel[0], city = sel[1];
+    $("status").textContent = "Recherche des prix…"; $("go").disabled = true;
+    Promise.all(DEST.map(function (d) {
+      return Promise.all(months.map(function (m) { return get(from, d[0], m); })).then(function (rs) {
+        var best = null;
+        rs.forEach(function (r) {
+          var dep = r && (r.departure_at || "").slice(0, 10);
+          if (r && r.available && r.price && dep >= today && (!best || r.price < best.price)) best = { price: r.price, dep: dep, ret: (r.return_at || "").slice(0, 10) };
+        });
+        return best ? { d: d, b: best } : null;
+      });
+    })).then(function (rows) {
+      rows = rows.filter(Boolean).sort(function (a, b) { return a.b.price - b.b.price; });
+      var week = now.toLocaleDateString("fr-FR", { day: "numeric", month: "long" });
+      var lines = ["✈️ *Bons plans Escale* · semaine du " + week, "", "Allers-retours les moins chers repérés au départ de *" + city + "* :", ""];
+      rows.forEach(function (x) {
+        var link = from === "CDG" ? "escale.live/vol-paris-" + x.d[3] + "/" : "escale.live/?type=vols&from=" + from + "&to=" + x.d[0];
+        lines.push(x.d[2] + " " + city + " → " + x.d[1] + " : *dès " + money(x.b.price) + "*" + (x.b.ret ? " (" + day(x.b.dep) + " → " + day(x.b.ret) + ")" : ""));
+        lines.push("   👉 " + link);
+      });
+      lines.push("", "☀️ Été 2027 : les premiers prix de juillet-août → escale.live/vols-ete-2027/",
+        "🔔 Alerte prix gratuite : choisissez votre trajet sur escale.live et recevez un e-mail quand le prix baisse.",
+        "", "_Prix repérés récemment, par personne. Le tarif exact s'affiche sur le site de réservation._");
+      $("out").value = rows.length ? lines.join("\n") : "Aucun prix trouvé pour le moment : réessayez dans quelques minutes.";
+      $("status").textContent = rows.length + " destinations trouvées";
+      $("copy").disabled = !rows.length; $("go").disabled = false;
+    });
+  });
+  $("copy").addEventListener("click", function () {
+    var done = function () { $("status").textContent = "Copié ✔"; };
+    if (navigator.clipboard) navigator.clipboard.writeText($("out").value).then(done, function () { $("out").select(); document.execCommand("copy"); done(); });
+    else { $("out").select(); document.execCommand("copy"); done(); }
+  });
+})();
+</script>
+</body>
+</html>

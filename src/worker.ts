@@ -1,6 +1,7 @@
 // Point d'entrée du Worker Cloudflare d'Escale.
 // - /api/* : fonctions serveur (prix, calendrier, bons plans, position, alertes, formulaires, admin, tâches)
 // - pages trajets : prix réels écrits dans la page (titre, haut de page, prix par mois), pour les visiteurs et Google
+// - /barometre-prix/ : tableau des prix et de leur évolution, écrit dans la page
 // - tout le reste : fichiers du dossier site/ (servis directement par Cloudflare, sans passer par ce code)
 import { Ctx, Env, json } from "./_lib/common"
 import * as prix from "./api/prix"
@@ -14,6 +15,7 @@ import * as admin from "./api/admin"
 import * as cron from "./api/cron"
 import * as populaires from "./api/populaires"
 import * as apercu from "./apercu-prix"
+import * as barometre from "./barometre"
 
 const API: Record<string, any> = { prix, explore, calendar, deals, geo, alert, form, admin, cron, populaires }
 
@@ -29,6 +31,7 @@ export default {
       if (!handler) return json({ error: "Méthode non autorisée" }, { status: 405 })
       return handler(c)
     }
+    if (path === "/barometre-prix/" || path === "/barometre-prix") return barometre.onRequest(c)
     return apercu.onRequest(c)
   },
   // Chaque matin (voir « triggers » dans wrangler.jsonc) : vérification des alertes prix

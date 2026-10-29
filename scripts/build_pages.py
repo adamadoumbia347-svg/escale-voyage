@@ -17,6 +17,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import build_i18n
 import trajets
 import blog  # noqa: E402
+import ete  # noqa: E402
 import explore_pages  # noqa: E402
 import hubs  # noqa: E402
 import villes  # noqa: E402
@@ -240,7 +241,7 @@ HEAD = """<!doctype html>
 </div>
 </main>
 <footer class="wrap">
-  <nav class="foot-nav" aria-label="Pages du site"><a href="/">Comparer vols, hôtels et voitures</a><a href="/#guides">Guides des trajets</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/contact/">Contact</a><a href="/a-propos/">À propos</a><a href="/guides/">Guides</a><a href="/vols-fetes/">Vols pour les fêtes</a><a href="/bons-plans/">Bons plans</a><a href="/blog/">Blog</a><a href="#cookies" data-open-consent>Gérer les cookies</a></nav>
+  <nav class="foot-nav" aria-label="Pages du site"><a href="/">Comparer vols, hôtels et voitures</a><a href="/#guides">Guides des trajets</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/contact/">Contact</a><a href="/a-propos/">À propos</a><a href="/guides/">Guides</a><a href="/vols-fetes/">Vols pour les fêtes</a><a href="/bons-plans/">Bons plans</a><a href="/blog/">Blog</a><a href="/barometre-prix/">Baromètre des prix</a><a href="#cookies" data-open-consent>Gérer les cookies</a></nav>
   <p>Escale ne vend pas de billets et ne fixe aucun prix. Les durées et informations sont indicatives : les programmes des compagnies changent, vérifiez toujours sur le site de réservation.</p>
 </footer>
 <script src="/favs.js" defer></script>
@@ -260,6 +261,34 @@ def page(path, title, desc, hero, body, ld="", paths=None, og="og-image.png"):
     d.mkdir(parents=True, exist_ok=True)
     (d / "index.html").write_text(out, encoding="utf-8")
     return url
+
+def barometre_page():
+    """Baromètre des prix : le tableau est écrit par le serveur (src/barometre.ts) ; ici, la page et sa méthode."""
+    src = (ROOT / "src" / "barometre.ts").read_text(encoding="utf-8")
+    routes = re.findall(r'\["[A-Z]{3}", "[A-Z]{3}", "([^"]+)", "(vol-[a-z-]+)"\]', src)
+    links = "".join(f'<li><a href="/{p}/">{E(l)}</a></li>' for l, p in routes)
+    hero = ('<p class="eyebrow">Mis à jour chaque jour</p><h1>Baromètre des prix des vols</h1>'
+            '<p class="hero-lead">Les prix aller-retour les plus bas repérés vers l\'Afrique et le Maghreb, et leur évolution sur 7 et 30 jours, pour les grands trajets de la diaspora.</p>')
+    body = (f'<section><h2>Les prix du moment</h2><div id="barometre"><p>Le tableau des prix se charge à chaque visite. Trajets suivis :</p>'
+            f'<ul class="route-links">{links}</ul></div><!-- /barometre --></section>'
+            '<section><h2>Comment lire le baromètre</h2><ul>'
+            '<li><strong>Aller-retour dès</strong> : le prix aller-retour le plus bas repéré pour un départ dans les 6 prochains mois, par personne, en classe économique.</li>'
+            '<li><strong>Sur 7 jours, sur 30 jours</strong> : l\'évolution de ce prix par rapport au relevé d\'il y a une semaine et d\'il y a un mois. En vert : baisse, en rouge : hausse.</li>'
+            '<li><strong>Mois le moins cher</strong> : le mois de départ où le prix le plus bas a été repéré.</li></ul></section>'
+            '<section><h2>D\'où viennent ces prix ?</h2><p>Ce sont des prix réels trouvés récemment par des voyageurs sur Aviasales (via Travelpayouts), relevés chaque jour par Escale. '
+            'Ils servent à repérer les tendances : le tarif exact dépend de vos dates et se confirme sur le site de réservation. '
+            'Vous pouvez citer ce baromètre en mentionnant la source « Escale (escale.live) ».</p></section>'
+            '<section><h2>Être prévenu quand un prix baisse</h2><p>Ouvrez la page de votre trajet dans le tableau et créez une alerte prix : vous recevez un e-mail dès qu\'un aller-retour passe sous votre budget.</p>'
+            '<p><a class="btn" href="/?type=vols">Comparer les prix des vols</a></p></section>')
+    ld = '<script type="application/ld+json">' + __import__("json").dumps({
+        "@context": "https://schema.org", "@type": "Dataset", "name": "Baromètre des prix des vols vers l'Afrique et le Maghreb",
+        "description": "Prix aller-retour les plus bas repérés chaque jour sur les grands trajets entre l'Europe, l'Afrique et le Maghreb, avec leur évolution sur 7 et 30 jours.",
+        "url": f"{DOMAIN}/barometre-prix/", "creator": {"@type": "Organization", "name": "Escale", "url": f"{DOMAIN}/"},
+        "isAccessibleForFree": True, "inLanguage": "fr"}, ensure_ascii=False) + "</script>"
+    return page("barometre-prix", "Baromètre des prix des vols vers l'Afrique et le Maghreb | Escale",
+                "Chaque jour, les prix aller-retour les plus bas vers Dakar, Bamako, Abidjan, Kinshasa, Alger, Casablanca, Tunis… et leur évolution sur 7 et 30 jours.",
+                hero, body, ld)
+
 
 def route_page(r):
     fr, to, cf, ct, country, airport, dur, peak, note = r
@@ -296,7 +325,7 @@ def route_page(r):
   <h1>Vol pas cher {E(cf)} <span>→</span> {E(ct)}</h1>
   <p class="codes">{fr} → {to}</p>
   <p class="hero-price" id="hero-price" hidden></p>
-  <div class="cta-row"><a class="btn" href="{E(app)}">Comparer les prix maintenant</a><a class="btn ghost" href="{E(back)}">Trajet retour {E(ct)} → {E(cf)}</a>{build_i18n.fav_btn("fr", s, f"{cf} → {ct}", f"{fr} → {to}", "route")}</div>"""
+  <div class="cta-row"><a class="btn" href="{E(app)}">Comparer les prix maintenant</a><a class="btn ghost" href="{E(back)}">Trajet retour {E(ct)} → {E(cf)}</a>{build_i18n.fav_btn("fr", s, f"{cf} → {ct}", f"{fr} → {to}", "route")}{build_i18n.alert_btn("fr")}</div>"""
     facts = f"""<dl class="facts">
   <div><dt>Durée</dt><dd>{E(dur_txt[0].upper() + dur_txt[1:])}</dd></div>
   <div><dt>Arrivée</dt><dd>{E(airport)} ({to})</dd></div>
@@ -513,6 +542,9 @@ def main():
     urls += i18n_urls + build_i18n.build_indexes(SITE, ctx, route_paths, hotel_paths) + build_i18n.build_deals(SITE, ctx) + build_i18n.build_guides(SITE, ctx) + build_i18n.build_about(SITE, ctx) + build_i18n.build_fetes(SITE, ctx) + explore_pages.build_anywhere(SITE, ctx)
     urls += legal_pages()
     urls += blog.build(page, E, DOMAIN, build_i18n.extras_html(SITE, "fr", "destination", "", ""))
+    urls.append(barometre_page())
+    urls += ete.build(page, E, lambda lang, c, c_en, code: build_i18n.extras_html(SITE, lang, c, c_en, code), build_i18n.alert_btn, DOMAIN,
+                      lambda p: (SITE / p / "index.html").exists(), lambda p: (SITE / p / "index.html").exists())
     urls.append(page("credits-photos", "Crédits des photos | Escale", "Auteurs et licences des photos de villes utilisées sur Escale (Wikimedia Commons).",
                      "<h1>Crédits des photos</h1>", villes.credits_body(SITE)))
 
@@ -540,6 +572,8 @@ def main():
                                         '<li><a href="/guides/argent-en-voyage/">Argent en voyage : carte, change, Mobile Money</a></li>',
                                         '<li><a href="/guides/correspondances-escales/">Correspondances et longues escales</a></li>',
                                         '<li><a href="/vols-fetes/">Vols pour les fêtes : Noël, Ramadan, Tabaski, été</a></li>',
+                                        '<li><a href="/vols-ete-2027/">Vacances d’été 2027 au pays : prix par destination</a></li>',
+                                        '<li><a href="/barometre-prix/">Baromètre des prix des vols</a></li>',
                                         '<li><a href="/widget/">Widget gratuit « Prix des vols » pour votre site</a></li>'])
     links += '<p class="lead guides-langs">Guides in English, en español, em português, بالعربية : ' + " · ".join(
         f'<a href="/{l}/" hreflang="{l}" lang="{l}">{build_i18n.NAMES[l]}</a>' for l in build_i18n.LANGS) + "</p>"
