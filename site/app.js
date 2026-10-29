@@ -704,6 +704,9 @@
       pass(`${esc(s.dest.slice(0, 3).toUpperCase())}`, [[T("Arrivée", "Check-in"), human(s.in)], [T("Départ", "Check-out"), human(s.out)],
         [T("Voyageurs", "Guests"), `${s.adults} ${s.adults > 1 ? T("adultes", "adults") : T("adulte", "adult")} · ${s.rooms} ${T("ch.", "rm")}`]],
         `${n} ${T("N", "N")}`, n > 1 ? T("nuits", "nights") : T("nuit", "night")) +
+      `<h3 class="sub-h">${esc(fmt(T("Hôtels à {c} : prix en direct", "Hotels in {c}: live prices"), { c: s.dest }))}</h3>` +
+      `<iframe class="s22-frame" loading="lazy" title="${esc(fmt(T("Hôtels à {c}", "Hotels in {c}"), { c: s.dest }))}" src="${esc("https://www.stay22.com/embed/gm?" + q({ aid: "escalelive", address: s.dest, checkin: s.in, checkout: s.out, adults: s.adults, maincolor: "1A56DB", currency: CUR }))}"></iframe>` +
+      `<h3 class="sub-h">${T("Comparer aussi sur", "Also compare on")}</h3>` +
       shareBar("hotels", fmt(T("Hôtels à {c}", "Hotels in {c}"), { c: s.dest })) + providerList(hotelLinks(s)) + extrasSlot(s.dest));
     fillExtras(s.dest, "");
   }

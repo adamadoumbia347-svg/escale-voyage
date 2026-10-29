@@ -1,6 +1,7 @@
 // Traductions de l'accueil : clé = texte anglais, valeur = [espagnol, portugais, arabe].
 // Le français et l'anglais sont directement dans index.html (data-en) et app.js (T("fr", "en")).
 window.ESCALE_I18N = {
+  "Hotels in {c}: live prices": ["Hoteles en {c}: precios en directo", "Hotéis em {c}: preços ao vivo", "فنادق {c}: أسعار مباشرة"],
   "Your routes (price now)": ["Tus rutas (precio actual)", "As suas rotas (preço atual)", "مساراتك (السعر الحالي)"],
   "Go this month: cheapest from Paris": ["Viaja este mes: lo más barato desde París", "Parta este mês: o mais barato a partir de Paris", "سافر هذا الشهر: الأرخص من باريس"],
   "All deals →": ["Todas las ofertas →", "Todas as promoções →", "كل العروض ←"],

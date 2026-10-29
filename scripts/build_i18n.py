@@ -532,7 +532,7 @@ def build(site, ctx):
             if flights:
                 fl_html = f'<section><h2>{E(u["flights_to"].format(c=c))}</h2><ul class="route-links">' + "".join(
                     f'<li><a href="/{route_paths[r][lang]}/">{E(city(r[2], lang))} {u["arrow"]} {E(city(r[3], lang))}</a></li>' for r in flights) + "</ul></section>"
-            body = f"""<section><h2>{E(u["where_h"].format(c=c))}</h2><dl class="facts">{areas_html}</dl></section>{TEN.hotel_html(hen, c, {p["key"]: p for p in partners(site)}) if hen else ""}
+            body = f"""<section><h2>{E(u["where_h"].format(c=c))}</h2><dl class="facts">{areas_html}</dl></section>{hotel_map(lang, c, f"{city(cname, 'en')}, {tr(TR.COUNTRIES, country, 'en')}")}{TEN.hotel_html(hen, c, {p["key"]: p for p in partners(site)}) if hen else ""}
 <section><h2>{E(u["our_tip"])}</h2><p>{E(TR.HOTEL_TIPS[cname][COL[lang]])}</p></section>
 <section><h2>{E(u["cheap_h"])}</h2>
 <ol class="steps">{"".join(f"<li>{s}</li>" for s in u["hsteps"])}</ol>
@@ -629,6 +629,21 @@ def calendar_html(lang, fr_, to):
 STAY22_L = {"fr": "Hôtels à {c} au meilleur prix (Booking, Expedia, Agoda…)", "en": "Hotels in {c} at the best price (Booking, Expedia, Agoda…)",
             "es": "Hoteles en {c} al mejor precio (Booking, Expedia, Agoda…)", "pt": "Hotéis em {c} ao melhor preço (Booking, Expedia, Agoda…)",
             "ar": "فنادق {c} بأفضل سعر (بوكينغ، إكسبيديا، أغودا…)"}
+
+
+MAP_L = {"fr": ("Carte des hôtels à {c} : prix en direct", "Booking, Expedia, Agoda, Hotels.com… sur une carte, avec les prix du moment. Choisissez vos dates sur la carte.", "Afficher la carte des hôtels"),
+         "en": ("Map of hotels in {c}: live prices", "Booking, Expedia, Agoda, Hotels.com… on a map, with current prices. Pick your dates on the map.", "Show the hotel map"),
+         "es": ("Mapa de hoteles en {c}: precios en directo", "Booking, Expedia, Agoda, Hotels.com… en un mapa, con los precios actuales. Elige tus fechas en el mapa.", "Mostrar el mapa de hoteles"),
+         "pt": ("Mapa de hotéis em {c}: preços ao vivo", "Booking, Expedia, Agoda, Hotels.com… num mapa, com os preços atuais. Escolha as datas no mapa.", "Mostrar o mapa de hotéis"),
+         "ar": ("خريطة فنادق {c}: أسعار مباشرة", "بوكينغ وإكسبيديا وأغودا… على خريطة مع الأسعار الحالية. اختر تواريخك على الخريطة.", "اعرض خريطة الفنادق")}
+
+
+def hotel_map(lang, city_label, address):
+    """Carte des hôtels Stay22 (chargée au clic, site/carte-hotels.js) : prix en direct de plusieurs sites, rémunérée (escalelive)."""
+    h, p, b = MAP_L[lang]
+    return (f'<section class="s22-map" data-address="{E(address)}" data-title="{E(h.format(c=city_label))}"><h2>{E(h.format(c=city_label))}</h2>'
+            f'<p class="small">{E(p)}</p><div class="s22-ph"><button type="button" class="btn">🗺️ {E(b)}</button></div></section>'
+            '<script src="/carte-hotels.js" defer></script>')
 
 
 def stay22(address, campaign):

@@ -274,6 +274,7 @@ def recherche_page():
             'Choisissez votre vol puis réservez directement sur le site de la compagnie ou de l\'agence.</p>')
     body = ('<section class="wl-box"><div id="tpwl-search"></div></section>'
             '<section class="wl-box"><div id="tpwl-tickets"></div></section>' + WL_SCRIPT +
+            '<section id="wl-hotels" class="wl-box" hidden><h2></h2><p class="small"></p></section><script src="/carte-hotels.js" defer></script>' +
             '<section><p class="small">Moteur fourni par notre partenaire Travelpayouts (Aviasales). Escale ne vend pas de billets : '
             'le prix final et les conditions (bagages, modification) s\'affichent sur le site de réservation. '
             'Escale peut toucher une commission si vous réservez, sans frais pour vous.</p></section>')
@@ -439,6 +440,7 @@ def hotel_page(h):
   <div class="cta-row"><a class="btn" href="{E(app)}">Comparer les prix des hôtels</a>{f'<a class="btn ghost" href="/{route_slug(flights[0])}/">Vols vers {E(city)}</a>' if flights else ''}{build_i18n.fav_btn("fr", s, f"Hôtels à {city}", country, "hotel")}</div>"""
     areas_html = "".join(f"<div><dt>{E(a)}</dt><dd>{E(b[0].upper() + b[1:])}</dd></div>" for a, b in areas)
     body = f"""<section><h2>Où dormir à {E(city)}</h2><dl class="facts">{areas_html}</dl></section>
+{build_i18n.hotel_map("fr", city, f"{build_i18n.city(city, 'en')}, {build_i18n.tr(build_i18n.TR.COUNTRIES, country, 'en')}")}
 <section><h2>Notre conseil</h2><p>{E(tip)}</p></section>
 <section><h2>Comment payer moins cher</h2>
 <ol class="steps">
@@ -520,7 +522,7 @@ def legal_pages():
 <section><h2>Recherche de vols en direct</h2>
 <p>La page « Recherche de vols en direct » utilise le moteur de notre partenaire Travelpayouts (Aviasales). Quand vous l'utilisez, votre recherche (villes, dates, nombre de voyageurs) est envoyée à ce partenaire pour obtenir les prix, et les liens vers les sites de réservation contiennent l'identifiant d'Escale. Travelpayouts applique sa propre politique de confidentialité, disponible sur travelpayouts.com.</p></section>
 <section><h2>Liens d'hôtels (Stay22)</h2>
-<p>Avec votre accord seulement, le site charge aussi un script de notre partenaire Stay22. Il transforme les liens vers les sites d'hôtels (Booking.com, Agoda, Expedia…) en liens partenaires, pour attribuer à Escale les réservations faites après un clic, et peut pour cela déposer des cookies. Certains liens d'hôtels passent par stay22.com, qui vous redirige vers le site de réservation le moins cher. Stay22 applique sa propre politique de confidentialité, disponible sur stay22.com.</p></section>
+<p>Avec votre accord seulement, le site charge aussi un script de notre partenaire Stay22. Il transforme les liens vers les sites d'hôtels (Booking.com, Agoda, Expedia…) en liens partenaires, pour attribuer à Escale les réservations faites après un clic, et peut pour cela déposer des cookies. Certains liens d'hôtels passent par stay22.com, qui vous redirige vers le site de réservation le moins cher. Stay22 applique sa propre politique de confidentialité, disponible sur stay22.com.</p> La carte des hôtels (pages hôtels et page de recherche en direct) est fournie par Stay22 : sur les pages hôtels, elle ne se charge que si vous cliquez sur « Afficher la carte des hôtels » ; sur la page de recherche en direct, elle s'affiche sous les vols pour la ville et les dates recherchées.</section>
 <section><h2>Hébergement</h2>
 <p>Comme tout hébergeur, Cloudflare enregistre des journaux techniques (adresse IP, page demandée, date) nécessaires au fonctionnement et à la sécurité du site.</p>
 </section>
