@@ -22,16 +22,22 @@ jobs:
           cat > v.js <<JS
           const { chromium } = require('playwright');
           const urls = [
-            'https://www.stay22.com/embed/6ae398f06a7ec7c28f42d842',
-            'https://www.stay22.com/embed/gm?aid=escalelive&address=Abidjan&checkin=$D1&checkout=$D2',
-            'https://www.stay22.com/embed/gm?aid=escalelive&lat=5.3364&lng=-4.0267&checkin=$D1&checkout=$D2&maincolor=1A56DB',
-            'https://www.stay22.com/embed/6ae398f06a7ec7c28f42d842?address=Abidjan&checkin=$D1&checkout=$D2',
+            'https://www.stay22.com/embed/gm?aid=escalelive&address=Abidjan&checkin=$D1&checkout=$D2&maincolor=1A56DB&currency=EUR',
+            'https://escale.live/hotel-pas-cher-dakar/',
+            'https://escale.live/recherche/?flightSearch=CDG1012DSS20121',
           ];
           (async () => {
             const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1000, height: 700 }, locale: 'fr-FR' });
             for (const u of urls) {
               const res = await p.goto(u, { waitUntil: 'networkidle', timeout: 60000 }).catch(e => null);
+              const bt = await p.\$('.s22-map button'); if (bt) await bt.click();
               await p.waitForTimeout(8000);
+              const fr = await p.\$\$eval('iframe[src*="stay22"]', l => l.map(f => f.src)).catch(() => []);
+              console.log('iframes stay22 :', JSON.stringify(fr));
+              for (const f of p.frames()) if (/stay22/.test(f.url())) {
+                const tt = await f.evaluate(() => document.body.innerText.replace(/\s+/g, ' ').slice(0, 300)).catch(() => '');
+                console.log('dans la carte :', tt, '| prix :', JSON.stringify((tt.match(/(€\s?\d+|\d+\s?€|\\\$\s?\d+)/g) || []).slice(0, 6)));
+              }
               const t = await p.evaluate(() => document.body ? document.body.innerText.replace(/\s+/g, ' ').slice(0, 400) : '');
               const prix = (t.match(/(€\s?\d[\d\s]*|\d[\d\s]*\s?€|\\\$\s?\d+)/g) || []).slice(0, 6);
               console.log('=====', u); console.log('statut', res && res.status(), '| adresse finale', p.url().slice(0, 160));
