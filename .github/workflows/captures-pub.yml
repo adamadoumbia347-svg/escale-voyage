@@ -1,0 +1,53 @@
+# Captures d'écran du site sur téléphone, pour fabriquer des vidéos de pub (lancé à la main)
+name: Captures pour la pub
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  captures:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Installer Chromium (Playwright)
+        run: |
+          npm init -y >/dev/null
+          npm i playwright@1.48.2 >/dev/null
+          npx playwright install --with-deps chromium >/dev/null
+      - name: Prendre les captures
+        run: |
+          D1=$(date -u -d '+40 days' +%d%m); D2=$(date -u -d '+47 days' +%d%m)
+          H1=$(date -u -d '+40 days' +%Y-%m-%d); H2=$(date -u -d '+44 days' +%Y-%m-%d)
+          mkdir -p cap
+          cat > c.js <<JS
+          const { chromium } = require('playwright');
+          const pages = [
+            ['accueil', 'https://escale.live/', 6000],
+            ['recherche', 'https://escale.live/recherche/?flightSearch=CDG${D1}DSS${D2}1', 35000],
+            ['hotels', 'https://escale.live/hotels-en-direct/?ville=Dakar&arrivee=${H1}&depart=${H2}&adultes=2&lang=fr', 18000],
+            ['trajet', 'https://escale.live/vol-paris-dakar/', 8000],
+            ['barometre', 'https://escale.live/barometre-prix/', 6000],
+          ];
+          (async () => {
+            const b = await chromium.launch();
+            const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, locale: 'fr-FR', isMobile: true, hasTouch: true,
+              userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1' });
+            await ctx.addInitScript(() => { try { sessionStorage.setItem('escale.wa', '0'); } catch (e) {} });
+            for (const [n, u, w] of pages) {
+              const p = await ctx.newPage();
+              await p.goto(u, { waitUntil: 'load', timeout: 60000 }).catch(() => {});
+              const no = await p.\$('.cc-bar button'); if (no) { const bs = await p.\$\$('.cc-bar button'); await bs[0].click().catch(() => {}); }
+              await p.waitForTimeout(w);
+              await p.screenshot({ path: 'cap/' + n + '-ecran.jpg', type: 'jpeg', quality: 82 });
+              await p.screenshot({ path: 'cap/' + n + '-page.jpg', type: 'jpeg', quality: 78, fullPage: true });
+              console.log(n, 'ok', await p.evaluate(() => document.documentElement.scrollHeight));
+              await p.close();
+            }
+            await b.close();
+          })();
+          JS
+          node c.js; ls -la cap
+      - uses: actions/upload-artifact@v4
+        with:
+          name: captures-pub
+          path: cap/
+          retention-days: 3
