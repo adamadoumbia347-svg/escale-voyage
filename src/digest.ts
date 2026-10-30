@@ -4,7 +4,7 @@ import { Month, Point, cacheKey } from "./apercu-prix"
 // Message WhatsApp de la semaine : chaque lundi matin (tâche quotidienne de wrangler.jsonc), un e-mail avec le message
 // des bons plans prêt à copier dans la chaîne WhatsApp. Destinataire : variable DIGEST_TO (Cloudflare > Variables et secrets).
 // Prix : relevé du jour (historique KV des pages trajets, mis à jour chaque matin par releve-prix.yml) et dates du cache.
-// Aussi envoyable à la demande depuis /admin/ (bouton « Recevoir le message WhatsApp maintenant »).
+// Aussi envoyable à la demande depuis /admin/ (bouton « Recevoir le message WhatsApp maintenant »). Suivi du bilan de la semaine (weeklyStats).
 const CHANNEL = "https://whatsapp.com/channel/0029VbE28kB0LKZN7ypnGj0d"
 const DEST: [string, string, string, string, string][] = [
   ["CDG", "DSS", "Dakar", "🇸🇳", "vol-paris-dakar"], ["CDG", "BKO", "Bamako", "🇲🇱", "vol-paris-bamako"],
@@ -50,19 +50,62 @@ export async function buildMessage(env: Env) {
   return { count: rows.length, text: lines.join("\n") }
 }
 
+// Bilan de la semaine (ajouté à l'e-mail du lundi) : clics des 7 derniers jours comparés aux 7 précédents (compteur anonyme
+// de site/clics.js, clés clics:AAAA-MM-JJ), pages d'où partent les clics, inscrits aux bons plans et alertes prix actives.
+const LINKS: Record<string, string> = { "moteur-resultat": "Vols choisis dans la recherche en direct", "moteur-lien": "Ouvertures de la recherche en direct",
+  "trajet-populaire": "Trajets populaires (accueil)", "bandeau-saison": "Bandeau de saison", aviasales: "Aviasales", stay22: "Hôtels (Stay22)",
+  whatsapp: "Chaîne WhatsApp", "whatsapp-bulle": "Bulle WhatsApp", "partage-whatsapp": "Partages sur WhatsApp", booking: "Booking", google: "Google Hôtels / Vols",
+  airbnb: "Airbnb", agoda: "Agoda", kayak: "Kayak", skyscanner: "Skyscanner", momondo: "momondo", "autre-site": "Autres sites" }
+const PAGES: Record<string, string> = { accueil: "Accueil", recherche: "Recherche en direct", trajet: "Pages trajets", destination: "Pages destinations", ete: "Pages été 2027", autre: "Autres pages" }
+
+async function countKeys(env: Env, prefix: string) {
+  let n = 0, cursor: string | undefined
+  do { const page: any = await env.ESCALE.list({ prefix, cursor, limit: 1000 }); n += page.keys.length; cursor = page.list_complete ? undefined : page.cursor } while (cursor && n < 50000)
+  return n
+}
+
+export async function weeklyStats(env: Env) {
+  if (!env.ESCALE) return null
+  const days = Array.from({ length: 14 }, (_, i) => new Date(Date.now() - (i + 1) * 864e5).toISOString().slice(0, 10))
+  const rows = await Promise.all(days.map((d) => env.ESCALE.get("clics:" + d, "json")))
+  const links: Record<string, [number, number]> = {}, pages: Record<string, number> = {}
+  let now = 0, before = 0
+  rows.forEach((r: any, i) => { for (const [id, n] of Object.entries(r || {})) {
+    const [k, p] = id.split("|"), v = n as number, o = links[k] || (links[k] = [0, 0])
+    if (i < 7) { o[0] += v; now += v; pages[p] = (pages[p] || 0) + v } else { o[1] += v; before += v }
+  } })
+  const [subs, alerts] = await Promise.all([countKeys(env, "form:bons-plans:"), countKeys(env, "alert:")])
+  return { now, before, links, pages, subs, alerts, from: days[6], to: days[0] }
+}
+
+function statsHtml(s: NonNullable<Awaited<ReturnType<typeof weeklyStats>>>) {
+  const evo = (a: number, b: number) => !b ? (a ? "nouveau" : "–") : `${a >= b ? "+" : ""}${Math.round((a / b - 1) * 100)} %`
+  const td = "padding:6px 10px;border-bottom:1px solid #e3e8ef"
+  const top = Object.entries(s.links).filter(([, v]) => v[0] || v[1]).sort((a, b) => b[1][0] - a[1][0]).slice(0, 10)
+  const pg = Object.entries(s.pages).sort((a, b) => b[1] - a[1]).slice(0, 5)
+  return `<h2 style="margin:28px 0 6px">Bilan de la semaine</h2><p style="color:#5b6b80;margin:0 0 10px">Du ${day(s.from)} au ${day(s.to)}, comparé aux 7 jours précédents.</p>` +
+    `<p style="font-size:17px"><strong>${s.now} clics</strong> vers les partenaires et la recherche (${evo(s.now, s.before)}) · <strong>${s.subs}</strong> inscrits aux bons plans · <strong>${s.alerts}</strong> alertes prix actives</p>` +
+    (top.length ? `<table style="border-collapse:collapse;width:100%;font-size:14px"><tr><th style="${td};text-align:left">Lien</th><th style="${td};text-align:right">7 jours</th><th style="${td};text-align:right">Évolution</th></tr>` +
+      top.map(([k, v]) => `<tr><td style="${td}">${esc(LINKS[k] || k)}</td><td style="${td};text-align:right">${v[0]}</td><td style="${td};text-align:right">${evo(v[0], v[1])}</td></tr>`).join("") + `</table>` : `<p>Aucun clic enregistré cette semaine.</p>`) +
+    (pg.length ? `<p style="margin-top:12px"><strong>Pages d'où partent les clics :</strong> ${pg.map(([p, n]) => `${esc(PAGES[p] || p)} (${n})`).join(" · ")}</p>` : "") +
+    `<p style="color:#5b6b80;font-size:13px">Visiteurs et pages vues : Cloudflare › Web Analytics. Ventes : Travelpayouts et Stay22.</p>`
+}
+
 export async function sendDigest(env: Env) {
   const to = ((env as any).DIGEST_TO || "").trim()
   if (!to) return { sent: false, reason: "DIGEST_TO absent" }
   if (!mailerReady(env)) return { sent: false, reason: "envoi d'e-mails non configuré" }
   const m = await buildMessage(env)
   if (!m.count) return { sent: false, reason: "aucun prix relevé" }
+  const st = await weeklyStats(env).catch(() => null)
   const html = `<div style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:640px;color:#0d1b2e">` +
     `<h2 style="margin:0 0 8px">Message WhatsApp de la semaine</h2>` +
     `<p>1. Sélectionnez le texte dans le cadre et copiez-le.<br>2. WhatsApp → Actualités → chaîne Escale → collez → envoyez.</p>` +
     `<pre style="white-space:pre-wrap;font:15px/1.5 system-ui,sans-serif;background:#f3f6fa;border:1px solid #dde3ec;border-radius:10px;padding:14px">${esc(m.text)}</pre>` +
     `<p><a href="${CHANNEL}">Ouvrir la chaîne WhatsApp</a> · <a href="${siteUrl(env)}/outils/whatsapp/">Préparer un autre message (Lyon, Marseille, Bruxelles…)</a></p>` +
+    (st ? statsHtml(st) : "") +
     `<p style="color:#5b6b80;font-size:13px">E-mail automatique d'Escale, envoyé chaque lundi à ${esc(to)}.</p></div>`
-  const ok = await sendMail(env, to, `Message WhatsApp de la semaine (${m.count} destinations)`, html)
+  const ok = await sendMail(env, to, `Message WhatsApp et bilan de la semaine${st ? ` (${st.now} clics)` : ""}`, html)
   return { sent: ok, to, count: m.count, ...(ok ? {} : { detail: lastMailError }) }
 }
 
