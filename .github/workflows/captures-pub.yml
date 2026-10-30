@@ -31,12 +31,18 @@ jobs:
             const b = await chromium.launch();
             const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, locale: 'fr-FR', isMobile: true, hasTouch: true,
               userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1' });
-            await ctx.addInitScript(() => { try { sessionStorage.setItem('escale.wa', '0'); } catch (e) {} });
+            await ctx.addInitScript(() => { try { sessionStorage.setItem('escale.wa', '0'); sessionStorage.setItem('escale.v', '1'); localStorage.setItem('escale.visites', '0'); localStorage.setItem('escale.lang', 'fr'); localStorage.setItem('escale.cur', 'EUR'); localStorage.setItem('escale.from', 'Paris (CDG)'); } catch (e) {} });
             for (const [n, u, w] of pages) {
               const p = await ctx.newPage();
               await p.goto(u, { waitUntil: 'load', timeout: 60000 }).catch(() => {});
               const no = await p.\$('.cc-bar button'); if (no) { const bs = await p.\$\$('.cc-bar button'); await bs[0].click().catch(() => {}); }
               await p.waitForTimeout(w);
+              if (n === 'accueil') {
+                await p.screenshot({ path: 'cap/accueil-vide.jpg', type: 'jpeg', quality: 75 });
+                await p.fill('#f-to', 'Dakar (DSS)').catch(() => {}); await p.keyboard.press('Escape').catch(() => {});
+                await p.evaluate(() => document.activeElement && document.activeElement.blur());
+                await p.waitForTimeout(500);
+              }
               await p.screenshot({ path: 'cap/' + n + '-ecran.jpg', type: 'jpeg', quality: 75 });
               await p.screenshot({ path: 'cap/' + n + '-page.jpg', type: 'jpeg', quality: 70, fullPage: true });
               console.log(n, 'ok', await p.evaluate(() => document.documentElement.scrollHeight));
