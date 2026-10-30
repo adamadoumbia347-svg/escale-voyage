@@ -343,9 +343,8 @@ def barometre_page():
 def route_page(r):
     fr, to, cf, ct, country, airport, dur, peak, note = r
     s = route_slug(r)
-    title = f"Vol pas cher {cf} {ct} : comparer les prix"
-    desc = (f"Billet d'avion pas cher {cf} – {ct} ({fr} → {to}) : durée du vol, meilleure période pour réserver "
-            f"et prix comparés sur Skyscanner, Kayak et momondo.")
+    title = f"Vol pas cher {cf} {ct} : comparer les prix des billets"
+    desc = f"Vol pas cher {cf} – {ct} ({fr} → {to}) : prix en direct de dizaines de compagnies, jours les moins chers et alerte prix gratuite."
     app = "/?" + urllib.parse.urlencode({"type": "vols", "from": fr, "to": to})
     back = "/?" + urllib.parse.urlencode({"type": "vols", "from": to, "to": fr})
     hp = next((h for h in HOTELS if h[0] == ct), None)
@@ -392,9 +391,9 @@ def route_page(r):
 <section><h2>Comment payer moins cher</h2>
 <ol class="steps">
   <li><strong>Activez les dates flexibles.</strong> Décaler le départ d'un ou deux jours change souvent plus le prix que le choix du site.</li>
-  <li><strong>Comparez au moins trois sites.</strong> Escale ouvre votre recherche déjà triée par prix sur Skyscanner, Kayak, momondo et Aviasales.</li>
+  <li><strong>Comparez les prix en direct.</strong> La recherche en direct d'Escale compare en temps réel des dizaines de compagnies et d'agences, triées par prix.</li>
   <li><strong>Vérifiez les bagages.</strong> Ajoutez le prix de la valise avant de comparer deux tarifs.</li>
-  <li><strong>Créez une alerte prix</strong> sur Kayak ou Skyscanner si vous partez dans plusieurs mois.</li>
+  <li><strong>Créez une alerte prix gratuite</strong> sur cette page si vous partez dans plusieurs mois : vous recevez un e-mail quand le prix baisse.</li>
 </ol>
 <p><a class="btn" href="/recherche/" data-wl="{fr}-{to}">Lancer la recherche {E(cf)} → {E(ct)}</a></p>
 </section>

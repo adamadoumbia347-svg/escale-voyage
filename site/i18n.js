@@ -148,6 +148,8 @@ window.ESCALE_I18N = {
     "Mudar a partida um ou dois dias costuma alterar o preço mais do que o site escolhido. Terças, quartas e sábados costumam ser mais baratos.",
     "تأخير المغادرة أو تقديمها يومًا أو يومين يغيّر السعر غالبًا أكثر من اختيار الموقع. أيام الثلاثاء والأربعاء والسبت أرخص عادةً."],
   "Compare at least three sites": ["Compara al menos tres sitios", "Compare pelo menos três sites", "قارن ثلاثة مواقع على الأقل"],
+  "Compare many sellers at once": ["Compara varios vendedores a la vez", "Compare vários vendedores de uma vez", "قارن عدة بائعين دفعة واحدة"],
+  "The same flight is sold by the airline and by several agencies: the gap can be tens of euros. Escale's live search shows them side by side.": ["El mismo vuelo lo venden la aerolínea y varias agencias: la diferencia puede ser de decenas de euros. El buscador en directo de Escale los muestra uno al lado del otro.", "O mesmo voo é vendido pela companhia e por várias agências: a diferença pode chegar a dezenas de euros. A pesquisa ao vivo da Escale mostra-os lado a lado.", "تبيع شركة الطيران وعدة وكالات الرحلة نفسها: قد يصل الفرق إلى عشرات اليوروهات. يعرضها بحث Escale المباشر جنبًا إلى جنب."],
   "Each comparison site has its own partners. Open Skyscanner, Kayak and momondo: the gap can be tens of euros.": [
     "Cada comparador tiene sus socios. Abre Skyscanner, Kayak y momondo: la diferencia puede ser de decenas de euros.",
     "Cada comparador tem os seus parceiros. Abra o Skyscanner, o Kayak e o momondo: a diferença pode chegar a dezenas de euros.",
