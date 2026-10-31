@@ -19,6 +19,7 @@ import trajets
 import blog  # noqa: E402
 import ete  # noqa: E402
 import fetes_dest  # noqa: E402
+import famille_pages  # noqa: E402
 import italia  # noqa: E402
 import explore_pages  # noqa: E402
 import hubs  # noqa: E402
@@ -245,7 +246,7 @@ HEAD = """<!doctype html>
 </div>
 </main>
 <footer class="wrap">
-  <nav class="foot-nav" aria-label="Pages du site"><a href="/">Comparer vols, hôtels et voitures</a><a href="/#guides">Guides des trajets</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/contact/">Contact</a><a href="/a-propos/">Qui sommes-nous</a><a href="/guides/">Guides</a><a href="/vols-fetes/">Vols pour les fêtes</a><a href="/bons-plans/">Bons plans</a><a href="/blog/">Blog</a><a href="/barometre-prix/">Baromètre des prix</a><a href="https://whatsapp.com/channel/0029VbE28kB0LKZN7ypnGj0d" target="_blank" rel="noopener">Chaîne WhatsApp</a><a href="#cookies" data-open-consent>Gérer les cookies</a></nav>
+  <nav class="foot-nav" aria-label="Pages du site"><a href="/">Comparer vols, hôtels et voitures</a><a href="/#guides">Guides des trajets</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/contact/">Contact</a><a href="/a-propos/">Qui sommes-nous</a><a href="/guides/">Guides</a><a href="/vols-fetes/">Vols pour les fêtes</a><a href="/faire-venir-sa-famille/">Faire venir sa famille</a><a href="/bons-plans/">Bons plans</a><a href="/blog/">Blog</a><a href="/barometre-prix/">Baromètre des prix</a><a href="https://whatsapp.com/channel/0029VbE28kB0LKZN7ypnGj0d" target="_blank" rel="noopener">Chaîne WhatsApp</a><a href="#cookies" data-open-consent>Gérer les cookies</a></nav>
   <p>Escale ne vend pas de billets et ne fixe aucun prix. Les durées et informations sont indicatives : les programmes des compagnies changent, vérifiez toujours sur le site de réservation.</p>
 </footer>
 <script src="/favs.js" defer></script>
@@ -615,6 +616,7 @@ def main():
                       lambda p: (SITE / p / "index.html").exists(), lambda p: (SITE / p / "index.html").exists(), build_i18n.wa_btn)
     urls += fetes_dest.build(page, E, lambda lang, c, c_en, code: build_i18n.extras_html(SITE, lang, c, c_en, code), build_i18n.alert_btn,
                              lambda p: (SITE / p / "index.html").exists(), lambda p: (SITE / p / "index.html").exists(), build_i18n.wa_btn)
+    urls += famille_pages.build(page, E, build_i18n.alert_btn, lambda p: (SITE / p / "index.html").exists(), build_i18n.wa_btn)
     urls.append(page("credits-photos", "Crédits des photos | Escale", "Auteurs et licences des photos de villes utilisées sur Escale (Wikimedia Commons).",
                      "<h1>Crédits des photos</h1>", villes.credits_body(SITE)))
 
