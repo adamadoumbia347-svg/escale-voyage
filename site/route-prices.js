@@ -2,6 +2,8 @@
 // Les données viennent de /api/prix (Travelpayouts). Sans réponse, la section reste masquée.
 (function () {
   "use strict";
+  // « Pour toute la famille » (estimation et partage WhatsApp) : site/famille.js
+  (function () { var f = document.createElement("script"); f.src = "/famille.js"; f.defer = true; document.head.appendChild(f); })();
   // Lien Aviasales (partenaire rémunéré) : ouvre directement une recherche datée, départ dans 45 jours, retour 7 jours après
   var pad2 = function (n) { return String(n).padStart(2, "0"); };
   var ddmm = function (dt) { return pad2(dt.getDate()) + pad2(dt.getMonth() + 1); };

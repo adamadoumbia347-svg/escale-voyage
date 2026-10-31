@@ -418,3 +418,13 @@ span.rs-arr { opacity: .35; }
 .hl-q #hl-live { min-height: calc(max(520px, min(78vh, 780px)) + 64px); }
 .hl-q #hl-sum, .hl-q .eyebrow { display: none; }
 .s22-frame.big { height: min(78vh, 780px); min-height: 520px; }
+
+/* « Pour toute la famille » sous le prix des pages trajets (famille.js) */
+.fam { margin: 10px 0 4px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface, #fff); max-width: 520px; }
+.fam-h { margin: 0 0 8px; font-weight: 700; }
+.fam-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.fam-row label { display: flex; align-items: center; gap: 6px; font-size: 15px; }
+.fam-row select { font: inherit; padding: 6px 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface, #fff); color: var(--ink); min-height: 40px; }
+.fam-t { font-size: 18px; color: var(--accent); }
+.fam-wa { display: inline-flex; align-items: center; margin-top: 10px; min-height: 40px; padding: 8px 14px; border-radius: 999px; background: #0f7a40; color: #fff; font-weight: 700; text-decoration: none; }
+.fam-n { margin: 8px 0 0; color: var(--muted); }

@@ -19,9 +19,12 @@ export const onRequest = async ({ request, env }: Ctx) => {
     const b: any = await request.json().catch(() => null)
     if (!b || typeof b.video !== "string" || b.video.length > 20e6 || !/^[\w.-]+\.mp4$/.test(b.filename || "")) return json({ error: "invalid" }, { status: 400 })
     const title = String(b.title || "Vidéo du jour").slice(0, 120), caption = String(b.caption || "").slice(0, 2200)
+    // Textes prêts à copier pour les autres réseaux (même vidéo) : YouTube Shorts (titre + description), Instagram et Facebook Reels
+    const extra: [string, string][] = Object.entries((b.platforms || {}) as Record<string, string>).slice(0, 4).map(([k, v]) => [String(k).slice(0, 40), String(v).slice(0, 2200)])
     const html = `<div style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:640px;color:#0d1b2e">` +
-      `<h2 style="margin:0 0 8px">🎬 ${esc(title)}</h2><p>La vidéo est en pièce jointe. Enregistre-la sur ton téléphone, puis TikTok › + › Importer, ajoute un son tendance et colle la légende :</p>` +
+      `<h2 style="margin:0 0 8px">🎬 ${esc(title)}</h2><p>La vidéo est en pièce jointe. Enregistre-la sur ton téléphone, puis TikTok › + › Importer, ajoute un son tendance et colle la légende. Publie aussi la même vidéo sur YouTube Shorts, Instagram et Facebook avec les textes plus bas.</p><h3 style="margin:18px 0 6px;font-size:16px">TikTok</h3>` +
       `<pre style="white-space:pre-wrap;font:15px/1.5 system-ui,sans-serif;background:#f3f6fa;border:1px solid #dde3ec;border-radius:10px;padding:14px">${esc(caption)}</pre>` +
+      extra.map(([k, v]) => `<h3 style="margin:18px 0 6px;font-size:16px">${esc(k)}</h3><pre style="white-space:pre-wrap;font:15px/1.5 system-ui,sans-serif;background:#f3f6fa;border:1px solid #dde3ec;border-radius:10px;padding:14px">${esc(v)}</pre>`).join("") +
       `<p style="color:#5b6b80;font-size:13px">Vidéo fabriquée automatiquement chaque jour avec les prix du baromètre d'Escale. Meilleure heure pour publier : 19 h – 21 h.</p></div>`
     const ok = await sendMail(env, to, `🎬 Vidéo TikTok du jour : ${title}`, html, [{ filename: b.filename, content: b.video }])
     return json({ sent: ok, ...(ok ? {} : { detail: lastMailError }) })

@@ -110,6 +110,17 @@ async function phoneScene(b, fmt, v) {
     sub: 'Calendrier des prix · alerte gratuite · prix en direct', shots };
 }
 
+// Textes pour publier la même vidéo ailleurs : YouTube Shorts (titre court + description), Instagram et Facebook Reels
+function platforms(v) {
+  const tags = (v.caption.match(/#\w+/g) || []).slice(0, 8).join(' '), text = v.caption.replace(/#\w+/g, '').replace(/\s+/g, ' ').trim();
+  const yt = (v.title.length > 80 ? v.title.slice(0, 77) + '…' : v.title) + ' #Shorts';
+  return {
+    'YouTube Shorts – titre': yt,
+    'YouTube Shorts – description': `${text}\n\nCompare gratuitement : https://escale.live\n${tags} #Shorts`,
+    'Instagram et Facebook Reels': `${text}\n\n👉 Lien : escale.live (gratuit, sans frais ajoutés)\n.\n${tags} #reels #voyage`,
+  };
+}
+
 (async () => {
   const rows = await prices();
   const week = ['quiz', 'top', 'focus', 'astuce', 'afrique', 'baisse', 'maghreb']; // dimanche → samedi
@@ -137,7 +148,7 @@ async function phoneScene(b, fmt, v) {
   console.log('Vidéo :', name, (fs.statSync(mp4).size / 1e6).toFixed(1), 'Mo,', end.toFixed(1), 's');
   if (process.env.NO_SEND) return;
   const r = await fetch(SITE + '/api/admin?action=video', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-admin-key': process.env.ADMIN_KEY || '' },
-    body: JSON.stringify({ title: v.title, caption: v.caption, filename: name, video: fs.readFileSync(mp4).toString('base64') }) });
+    body: JSON.stringify({ title: v.title, caption: v.caption, platforms: platforms(v), filename: name, video: fs.readFileSync(mp4).toString('base64') }) });
   const j = await r.text(); console.log('Envoi :', r.status, j.slice(0, 200));
   if (!r.ok || !/"sent":true/.test(j)) process.exit(1);
 })().catch((e) => { console.error(e); process.exit(1); });
