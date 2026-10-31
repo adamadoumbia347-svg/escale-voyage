@@ -78,6 +78,7 @@ window.ESCALE_I18N = {
   "Currency": ["Moneda", "Moeda", "العملة"],
   "Language": ["Idioma", "Idioma", "اللغة"],
   "Flights, hotels and cars <em>at the best price</em>": ["Vuelos, hoteles y coches <em>al mejor precio</em>", "Voos, hotéis e carros <em>ao melhor preço</em>", "رحلات وفنادق وسيارات <em>بأفضل سعر</em>"],
+  "Cheap flights <em>home to Africa and the Maghreb</em>": ["Billetes baratos <em>para volver a África y al Magreb</em>", "Voos baratos <em>para voltar a África e ao Magrebe</em>", "تذاكر طيران رخيصة <em>للعودة إلى أفريقيا والمغرب العربي</em>"],
   "One search, every major comparison site, worldwide. Escale opens your search on Skyscanner, Kayak, Aviasales, Booking and more, sorted from cheapest to most expensive.": [
     "Una sola búsqueda, todos los grandes comparadores, en todo el mundo. Escale abre tu búsqueda en Skyscanner, Kayak, Aviasales, Booking y otros, ordenada del más barato al más caro.",
     "Uma só pesquisa, todos os grandes comparadores, no mundo inteiro. A Escale abre a sua pesquisa no Skyscanner, Kayak, Aviasales, Booking e outros, ordenada do mais barato ao mais caro.",

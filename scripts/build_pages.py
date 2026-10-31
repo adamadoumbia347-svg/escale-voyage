@@ -18,6 +18,7 @@ import build_i18n
 import trajets
 import blog  # noqa: E402
 import ete  # noqa: E402
+import fetes_dest  # noqa: E402
 import italia  # noqa: E402
 import explore_pages  # noqa: E402
 import hubs  # noqa: E402
@@ -612,6 +613,8 @@ def main():
     urls += italia.build(SITE, ctx)  # test : trajets au départ de l'Italie, en italien
     urls += ete.build(page, E, lambda lang, c, c_en, code: build_i18n.extras_html(SITE, lang, c, c_en, code), build_i18n.alert_btn, DOMAIN,
                       lambda p: (SITE / p / "index.html").exists(), lambda p: (SITE / p / "index.html").exists(), build_i18n.wa_btn)
+    urls += fetes_dest.build(page, E, lambda lang, c, c_en, code: build_i18n.extras_html(SITE, lang, c, c_en, code), build_i18n.alert_btn,
+                             lambda p: (SITE / p / "index.html").exists(), lambda p: (SITE / p / "index.html").exists(), build_i18n.wa_btn)
     urls.append(page("credits-photos", "Crédits des photos | Escale", "Auteurs et licences des photos de villes utilisées sur Escale (Wikimedia Commons).",
                      "<h1>Crédits des photos</h1>", villes.credits_body(SITE)))
 
