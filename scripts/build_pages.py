@@ -179,6 +179,8 @@ HOTELS = [
      "L'aéroport de Kotoka est en ville : un hôtel à Osu ou près de l'aéroport limite les trajets, souvent ralentis par les embouteillages.", "ACC"),
     ("Lagos", "Nigeria", [("Victoria Island", "quartier des affaires, hôtels et restaurants"), ("Ikoyi", "résidentiel et chic, plus calme"), ("Ikeja", "proche de l'aéroport, sur le continent")],
      "Les embouteillages entre le continent et les îles peuvent être très longs : pour une arrivée tardive ou un départ tôt, une nuit à Ikeja, près de l'aéroport, est souvent plus pratique.", "LOS"),
+    ("Nairobi", "Kenya", [("Westlands", "animé, restaurants et centres commerciaux"), ("Upper Hill", "quartier des affaires, hôtels internationaux"), ("Kilimani et Kileleshwa", "résidentiel, appartements, plus calme")],
+     "L'aéroport Jomo-Kenyatta est à l'écart du centre et la circulation peut être dense aux heures de pointe : prévoyez de la marge, ou une nuit près de l'aéroport pour une correspondance.", "NBO"),
 ]
 
 def hotel_slug(h):
@@ -344,6 +346,8 @@ def route_page(r):
     fr, to, cf, ct, country, airport, dur, peak, note = r
     s = route_slug(r)
     title = f"Vol pas cher {cf} {ct} : comparer les prix des billets"
+    if len(title) > 65:  # noms de villes longs : version courte pour que Google affiche tout le titre
+        title = f"Vol pas cher {cf} {ct} : comparer les prix"
     desc = f"Vol pas cher {cf} – {ct} ({fr} → {to}) : prix en direct de dizaines de compagnies, jours les moins chers et alerte prix gratuite."
     app = "/?" + urllib.parse.urlencode({"type": "vols", "from": fr, "to": to})
     back = "/?" + urllib.parse.urlencode({"type": "vols", "from": to, "to": fr})

@@ -503,7 +503,7 @@ def build(site, ctx):
 {"".join(f"<details><summary>{E(q)}</summary><p>{E(ans)}</p></details>" for q, ans in faq)}
 </section>
 <section><h2>{E(u["other_routes"])}</h2><ul class="route-links">{others}</ul></section>"""
-            urls.append(write(site, route_paths[r][lang], lang, u["title_route"].format(a=a, b=b),
+            urls.append(write(site, route_paths[r][lang], lang, (u["title_route"].format(a=a, b=b) if len(u["title_route"].format(a=a, b=b)) <= 65 else u["title_route"].format(a=a, b=b).replace(" ticket prices", " prices")),
                               u["desc_route"].format(a=a, b=b, fa=fr_, ta=to), hero, body, faq_ld(faq), route_paths[r], ctx,
                               f"og/{fr_}-{to}.jpg" if (site / "og" / f"{fr_}-{to}.jpg").exists() else "og-image.png"))
 

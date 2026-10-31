@@ -1,15 +1,15 @@
 {
 "/": [
-"94dc767c89952f74",
-"2026-10-30"
+"34b9da3dcdb512cb",
+"2026-10-31"
 ],
 "/a-propos/": [
 "cd73f1251f87661d",
 "2026-10-30"
 ],
 "/ar/": [
-"596b56d366e477ba",
-"2026-10-30"
+"ead749aba6eecadb",
+"2026-10-31"
 ],
 "/ar/about/": [
 "23f07d87d4b98fd8",
@@ -308,8 +308,8 @@
 "2026-10-30"
 ],
 "/ar/flights-london-nairobi/": [
-"46f5b92a78918834",
-"2026-10-30"
+"00d7f34919b3efa9",
+"2026-10-31"
 ],
 "/ar/flights-lyon-abidjan/": [
 "e63fef62d9856f78",
@@ -760,8 +760,8 @@
 "2026-10-30"
 ],
 "/ar/flights-paris-nairobi/": [
-"0ee6dc5495331bdf",
-"2026-10-30"
+"9ce58c35eb40f475",
+"2026-10-31"
 ],
 "/ar/flights-paris-niamey/": [
 "723cd63a2f441109",
@@ -1036,76 +1036,80 @@
 "2026-10-30"
 ],
 "/ar/hotels-abidjan/": [
-"0fc907544bf71b9a",
-"2026-10-30"
+"00690e8ed2da6b45",
+"2026-10-31"
 ],
 "/ar/hotels-accra/": [
-"d8f52cc967530f19",
-"2026-10-30"
+"d7476c87f2f2f212",
+"2026-10-31"
 ],
 "/ar/hotels-algiers/": [
-"b6ae66e888066aa5",
-"2026-10-30"
+"fac6bcf4c80b9238",
+"2026-10-31"
 ],
 "/ar/hotels-bamako/": [
-"4c96ae647a82df29",
-"2026-10-30"
+"19dd77abb0d06ce3",
+"2026-10-31"
 ],
 "/ar/hotels-casablanca/": [
-"84b7f86301f46bb6",
-"2026-10-30"
+"a5ede1cd50e0273d",
+"2026-10-31"
 ],
 "/ar/hotels-conakry/": [
-"fd67d13a9da7bc41",
-"2026-10-30"
+"a6613740b5d78bb1",
+"2026-10-31"
 ],
 "/ar/hotels-cotonou/": [
-"830c68fc0e53d9d2",
-"2026-10-30"
+"cbba4796306fcc29",
+"2026-10-31"
 ],
 "/ar/hotels-dakar/": [
-"5ec657a056dedff2",
-"2026-10-30"
+"f29c7f05e1169ed7",
+"2026-10-31"
 ],
 "/ar/hotels-douala/": [
-"f59c1743e92e799c",
-"2026-10-30"
+"329df4ecf111469f",
+"2026-10-31"
 ],
 "/ar/hotels-dubai/": [
-"b215fff5e011db29",
-"2026-10-30"
+"4c75bcc585ccb9d0",
+"2026-10-31"
 ],
 "/ar/hotels-istanbul/": [
-"fc6d4554ca989887",
-"2026-10-30"
+"0e6e6b7fceec317e",
+"2026-10-31"
 ],
 "/ar/hotels-kinshasa/": [
-"05cad3eeed74a55d",
-"2026-10-30"
+"9080c31037c3050f",
+"2026-10-31"
 ],
 "/ar/hotels-lagos/": [
-"a2c6fa3ebc4bc63e",
-"2026-10-30"
+"944d8000de15f734",
+"2026-10-31"
 ],
 "/ar/hotels-lome/": [
-"b2ccb80fe6d7efa4",
-"2026-10-30"
+"c2de09bdce4cd661",
+"2026-10-31"
 ],
 "/ar/hotels-marrakesh/": [
-"72afc1ea23812ad1",
-"2026-10-30"
+"0127bf0f4fa2fa8d",
+"2026-10-31"
 ],
 "/ar/hotels-montreal/": [
-"1cbaceedc1828d43",
-"2026-10-30"
+"599aed7b704d64bd",
+"2026-10-31"
+],
+"/ar/hotels-nairobi/": [
+"369db39a9ef871f5",
+"2026-10-31"
 ],
 "/ar/hotels-paris/": [
-"1fc55c9c35b4fc96",
-"2026-10-30"
+"af664bacca522572",
+"2026-10-31"
 ],
 "/ar/hotels-tunis/": [
-"8b64f57c6cbe31d9",
-"2026-10-30"
+"7ec5baa2f4f41d6e",
+"2026-10-31"
 ],
 "/barometre-prix/": [
 "7a649bf2ef11587a",
@@ -1160,8 +1164,8 @@
 "2026-10-30"
 ],
 "/en/": [
-"9e4c9f59e4c0095a",
-"2026-10-30"
+"948a99fa5990b434",
+"2026-10-31"
 ],
 "/en/about/": [
 "3a11a97033fe81d5",
@@ -1172,76 +1176,80 @@
 "2026-10-30"
 ],
 "/en/cheap-hotels-abidjan/": [
-"e0fdc670db9b4158",
-"2026-10-30"
+"db0c87eab0090d52",
+"2026-10-31"
 ],
 "/en/cheap-hotels-accra/": [
-"5b1e6941da8e2239",
-"2026-10-30"
+"eb847e5447781a26",
+"2026-10-31"
 ],
 "/en/cheap-hotels-algiers/": [
-"1f103aa093f47167",
-"2026-10-30"
+"645e7127885e405a",
+"2026-10-31"
 ],
 "/en/cheap-hotels-bamako/": [
-"0e938c66909fa839",
-"2026-10-30"
+"e32265ba8ba4906a",
+"2026-10-31"
 ],
 "/en/cheap-hotels-casablanca/": [
-"fa385eac40d23249",
-"2026-10-30"
+"98d4e5a4baeb965f",
+"2026-10-31"
 ],
 "/en/cheap-hotels-conakry/": [
-"4c6ad18ca9c2ad8c",
-"2026-10-30"
+"0117aeefef60a628",
+"2026-10-31"
 ],
 "/en/cheap-hotels-cotonou/": [
-"5e244c4ae7beb64f",
-"2026-10-30"
+"8fc6a97441a62308",
+"2026-10-31"
 ],
 "/en/cheap-hotels-dakar/": [
-"7f0c7a56c1c17efe",
-"2026-10-30"
+"e46afa5196a0397f",
+"2026-10-31"
 ],
 "/en/cheap-hotels-douala/": [
-"d61e86384a558600",
-"2026-10-30"
+"234a0ec111784870",
+"2026-10-31"
 ],
 "/en/cheap-hotels-dubai/": [
-"56fac30fb8e8d147",
-"2026-10-30"
+"55e444648a7300ae",
+"2026-10-31"
 ],
 "/en/cheap-hotels-istanbul/": [
-"e64288d5b294cc21",
-"2026-10-30"
+"248ec44728d5f4a9",
+"2026-10-31"
 ],
 "/en/cheap-hotels-kinshasa/": [
-"b72eb33a594bb73c",
-"2026-10-30"
+"c64e3a7721feadbf",
+"2026-10-31"
 ],
 "/en/cheap-hotels-lagos/": [
-"8b0f3e25f7555f15",
-"2026-10-30"
+"652a8af0cefc9444",
+"2026-10-31"
 ],
 "/en/cheap-hotels-lome/": [
-"7fb23e2be02cd88a",
-"2026-10-30"
+"88399c34d299703e",
+"2026-10-31"
 ],
 "/en/cheap-hotels-marrakesh/": [
-"67be9c445220bb82",
-"2026-10-30"
+"304fe552dc419bab",
+"2026-10-31"
 ],
 "/en/cheap-hotels-montreal/": [
-"517778367b23f371",
-"2026-10-30"
+"c0a6fbdb881ac38b",
+"2026-10-31"
+],
+"/en/cheap-hotels-nairobi/": [
+"eb0263e06bcd0541",
+"2026-10-31"
 ],
 "/en/cheap-hotels-paris/": [
-"5c9d6220675d33b9",
-"2026-10-30"
+"c43712d054164e1d",
+"2026-10-31"
 ],
 "/en/cheap-hotels-tunis/": [
-"9864556415b3ee36",
-"2026-10-30"
+"665e57158bc2b07a",
+"2026-10-31"
 ],
 "/en/deals/": [
 "1b31e1515f93c33b",
@@ -1256,8 +1264,8 @@
 "2026-10-30"
 ],
 "/en/flights-basel-mulhouse-constantine/": [
-"6d946d19f1d71de4",
-"2026-10-30"
+"082f5da4e6f43bcb",
+"2026-10-31"
 ],
 "/en/flights-basel-mulhouse-istanbul/": [
 "dfa7b2d1fac5cc02",
@@ -1528,8 +1536,8 @@
 "2026-10-30"
 ],
 "/en/flights-london-nairobi/": [
-"f7cf2baa0dc7bace",
-"2026-10-30"
+"76b52d9c7b473e61",
+"2026-10-31"
 ],
 "/en/flights-lyon-abidjan/": [
 "a5d5318af716c8cb",
@@ -1980,8 +1988,8 @@
 "2026-10-30"
 ],
 "/en/flights-paris-nairobi/": [
-"8b7015d08279ebbd",
-"2026-10-30"
+"09ae6e37004b1998",
+"2026-10-31"
 ],
 "/en/flights-paris-niamey/": [
 "c0c91237367eeb23",
@@ -2260,8 +2268,8 @@
 "2026-10-30"
 ],
 "/es/": [
-"29f0350ab70790de",
-"2026-10-30"
+"06ff28eea57023b7",
+"2026-10-31"
 ],
 "/es/acerca-de/": [
 "04d46bf153dfc95e",
@@ -2300,76 +2308,80 @@
 "2026-10-30"
 ],
 "/es/hoteles-baratos-abiyan/": [
-"2f2704ec915fa5ba",
-"2026-10-30"
+"0514bf2b3f642a98",
+"2026-10-31"
 ],
 "/es/hoteles-baratos-acra/": [
-"c30e63322db447c9",
-"2026-10-30"
+"a803f3a602985823",
+"2026-10-31"
 ],
 "/es/hoteles-baratos-argel/": [
-"a1e7f692cadaec8e",
-"2026-10-30"
+"91b575e16121f563",
+"2026-10-31"
 ],
 "/es/hoteles-baratos-bamako/": [
-"e3df1fe1b653f513",
-"2026-10-30"
+"9ea05b1a675ffd27",
+"2026-10-31"
 ],
 "/es/hoteles-baratos-casablanca/": [
-"da16a8f51c8f78f3",
-"2026-10-30"
+"a1fb2899ce701c5d",
+"2026-10-31"
 ],
 "/es/hoteles-baratos-conakri/": [
-"ec4d357cdb36c8d7",
-"2026-10-30"
+"f91ce2a6573f61ae",
+"2026-10-31"
 ],
 "/es/hoteles-baratos-cotonu/": [
-"2c2bd653a96ef826",
-"2026-10-30"
+"c00461742aeae476",
+"2026-10-31"
 ],
 "/es/hoteles-baratos-dakar/": [
-"91319f509446ebac",
-"2026-10-30"
+"78a4f00ad7fe5655",
+"2026-10-31"
 ],
 "/es/hoteles-baratos-duala/": [
-"f312c4ab0fd06d75",
-"2026-10-30"
+"ddcbecf8789f9cc9",
+"2026-10-31"
 ],
 "/es/hoteles-baratos-dubai/": [
-"d92846c6941f89d9",
-"2026-10-30"
+"db8e228e1201221f",
+"2026-10-31"
 ],
 "/es/hoteles-baratos-estambul/": [
-"3f1303b74b93fa81",
-"2026-10-30"
+"4f23d538dafb3b64",
+"2026-10-31"
 ],
 "/es/hoteles-baratos-kinsasa/": [
-"ae68acc2ca72ed43",
-"2026-10-30"
+"1101bc9d79873eee",
+"2026-10-31"
 ],
 "/es/hoteles-baratos-lagos/": [
-"a0474338e0e0ba1c",
-"2026-10-30"
+"b5b33722cc534248",
+"2026-10-31"
 ],
 "/es/hoteles-baratos-lome/": [
-"857c63171c95d8f7",
-"2026-10-30"
+"ee37ddc215d93c48",
+"2026-10-31"
 ],
 "/es/hoteles-baratos-marrakech/": [
-"5825e302c7d964c0",
-"2026-10-30"
+"296da27fc07f955d",
+"2026-10-31"
 ],
 "/es/hoteles-baratos-montreal/": [
-"4d55449ca34cd537",
-"2026-10-30"
+"dd399d0306962aca",
+"2026-10-31"
+],
+"/es/hoteles-baratos-nairobi/": [
+"a7b69794ff3a70fa",
+"2026-10-31"
 ],
 "/es/hoteles-baratos-paris/": [
-"11dcb8b9598561d7",
-"2026-10-30"
+"9c90b73927414193",
+"2026-10-31"
 ],
 "/es/hoteles-baratos-tunez/": [
-"fcc7b76200cf843d",
-"2026-10-30"
+"ae0fd0d19a6d300c",
+"2026-10-31"
 ],
 "/es/ofertas/": [
 "3524fe222d461af5",
@@ -2776,8 +2788,8 @@
 "2026-10-30"
 ],
 "/es/vuelos-londres-nairobi/": [
-"ded2064c88e02e97",
-"2026-10-30"
+"1642a8722b23b47e",
+"2026-10-31"
 ],
 "/es/vuelos-lyon-abiyan/": [
 "8b720a42eca9edb5",
@@ -3220,8 +3232,8 @@
 "2026-10-30"
 ],
 "/es/vuelos-paris-nairobi/": [
-"2279ead11af5b209",
-"2026-10-30"
+"4fc41eab4487b0d6",
+"2026-10-31"
 ],
 "/es/vuelos-paris-niamey/": [
 "1cc0ec3fe2effbac",
@@ -3388,76 +3400,80 @@
 "2026-10-30"
 ],
 "/hotel-pas-cher-abidjan/": [
-"c734f045ae47a28c",
-"2026-10-30"
+"7ed98a3463647811",
+"2026-10-31"
 ],
 "/hotel-pas-cher-accra/": [
-"e1f883012939aa7b",
-"2026-10-30"
+"4ee5764b67d57f99",
+"2026-10-31"
 ],
 "/hotel-pas-cher-alger/": [
-"7c609f41ad84c04d",
-"2026-10-30"
+"28ba84111eb9d2a1",
+"2026-10-31"
 ],
 "/hotel-pas-cher-bamako/": [
-"bf9fc295b177ff98",
-"2026-10-30"
+"c2c5b1244ef1c059",
+"2026-10-31"
 ],
 "/hotel-pas-cher-casablanca/": [
-"18aac6ed89b2d6d0",
-"2026-10-30"
+"37ae2de501b86ff9",
+"2026-10-31"
 ],
 "/hotel-pas-cher-conakry/": [
-"d5bf0538f13eba98",
-"2026-10-30"
+"0ef358d09e171c78",
+"2026-10-31"
 ],
 "/hotel-pas-cher-cotonou/": [
-"83aeca1fc98e4380",
-"2026-10-30"
+"f548a041a91c9342",
+"2026-10-31"
 ],
 "/hotel-pas-cher-dakar/": [
-"5ec0151bf1e2b663",
-"2026-10-30"
+"e0e8f98cb07344a2",
+"2026-10-31"
 ],
 "/hotel-pas-cher-douala/": [
-"640b40255fccc695",
-"2026-10-30"
+"0eafd72b81859d37",
+"2026-10-31"
 ],
 "/hotel-pas-cher-dubai/": [
-"0a78deb8d9a166c9",
-"2026-10-30"
+"468a27b5d4d1f0ac",
+"2026-10-31"
 ],
 "/hotel-pas-cher-istanbul/": [
-"33fe17b7b50ff6fb",
-"2026-10-30"
+"226b41ed37fa7d4d",
+"2026-10-31"
 ],
 "/hotel-pas-cher-kinshasa/": [
-"db0412330c6c78d5",
-"2026-10-30"
+"620e1e0cf5b8dc68",
+"2026-10-31"
 ],
 "/hotel-pas-cher-lagos/": [
-"5238b28f555ccb6d",
-"2026-10-30"
+"5affd5c874acaacf",
+"2026-10-31"
 ],
 "/hotel-pas-cher-lome/": [
-"3ebaac739d012038",
-"2026-10-30"
+"a1ef7b7f5964f3b8",
+"2026-10-31"
 ],
 "/hotel-pas-cher-marrakech/": [
-"31535a9f66a21b9e",
-"2026-10-30"
+"8ebda6fc30640d6f",
+"2026-10-31"
 ],
 "/hotel-pas-cher-montreal/": [
-"8f5118ae631eb1af",
-"2026-10-30"
+"9a488953766ca8f4",
+"2026-10-31"
+],
+"/hotel-pas-cher-nairobi/": [
+"126612ce53fda5cd",
+"2026-10-31"
 ],
 "/hotel-pas-cher-paris/": [
-"36f5f741ab0bd3c7",
-"2026-10-30"
+"357a803e74de9086",
+"2026-10-31"
 ],
 "/hotel-pas-cher-tunis/": [
-"f43cfe841ac5bef1",
-"2026-10-30"
+"fe1efea3afd6c0a8",
+"2026-10-31"
 ],
 "/hotels-en-direct/": [
 "6a63079c73e899ad",
@@ -3548,8 +3564,8 @@
 "2026-10-30"
 ],
 "/pt/": [
-"f1d3fa80e6942151",
-"2026-10-30"
+"b12fc291b3937dfb",
+"2026-10-31"
 ],
 "/pt/explorar/": [
 "8e5a4cf840eb6743",
@@ -3584,76 +3600,80 @@
 "2026-10-30"
 ],
 "/pt/hoteis-baratos-abidjan/": [
-"4950d0d204b856d4",
-"2026-10-30"
+"274bfed52b69d216",
+"2026-10-31"
 ],
 "/pt/hoteis-baratos-acra/": [
-"16ac2a004f46a138",
-"2026-10-30"
+"10d46694c5eff7d4",
+"2026-10-31"
 ],
 "/pt/hoteis-baratos-argel/": [
-"4ae0d182e49715cf",
-"2026-10-30"
+"33aa9f9c79a6779a",
+"2026-10-31"
 ],
 "/pt/hoteis-baratos-bamako/": [
-"425d39b99d4ea5f4",
-"2026-10-30"
+"5a6f504c19a57798",
+"2026-10-31"
 ],
 "/pt/hoteis-baratos-casablanca/": [
-"69e3b4536e8a00ac",
-"2026-10-30"
+"33fd53a27fe3f7e2",
+"2026-10-31"
 ],
 "/pt/hoteis-baratos-conacri/": [
-"4ccaaf9b2580e8bb",
-"2026-10-30"
+"c008cfc688991d5d",
+"2026-10-31"
 ],
 "/pt/hoteis-baratos-cotonou/": [
-"1a58563548d7f957",
-"2026-10-30"
+"3fcdd22eccfbe030",
+"2026-10-31"
 ],
 "/pt/hoteis-baratos-dacar/": [
-"8e9bddd186633c7d",
-"2026-10-30"
+"02fa583b23becf1f",
+"2026-10-31"
 ],
 "/pt/hoteis-baratos-douala/": [
-"a917d8174dbe242d",
-"2026-10-30"
+"dad5d7c511fa93f0",
+"2026-10-31"
 ],
 "/pt/hoteis-baratos-dubai/": [
-"6660bb609f667f78",
-"2026-10-30"
+"c188d3c1f4ef9673",
+"2026-10-31"
 ],
 "/pt/hoteis-baratos-istambul/": [
-"b1547fc902378bfe",
-"2026-10-30"
+"5ebf17ac8391e678",
+"2026-10-31"
 ],
 "/pt/hoteis-baratos-kinshasa/": [
-"2a9d19e6ad1df765",
-"2026-10-30"
+"604b025cef22e34b",
+"2026-10-31"
 ],
 "/pt/hoteis-baratos-lagos/": [
-"786f84b8a16f1ca5",
-"2026-10-30"
+"5218ae96f8eabe6a",
+"2026-10-31"
 ],
 "/pt/hoteis-baratos-lome/": [
-"67f708dc743a65a1",
-"2026-10-30"
+"b4ae92c2525aea52",
+"2026-10-31"
 ],
 "/pt/hoteis-baratos-marraquexe/": [
-"92c8a83c7caf2a09",
-"2026-10-30"
+"d2323f2b15e90a52",
+"2026-10-31"
 ],
 "/pt/hoteis-baratos-montreal/": [
-"04ebc849860e4c53",
-"2026-10-30"
+"13dd32778c31fde7",
+"2026-10-31"
+],
+"/pt/hoteis-baratos-nairobi/": [
+"cfa1d007d1caf7fc",
+"2026-10-31"
 ],
 "/pt/hoteis-baratos-paris/": [
-"6b7332b1f0114930",
-"2026-10-30"
+"7b6bb6cf89e05476",
+"2026-10-31"
 ],
 "/pt/hoteis-baratos-tunis/": [
-"58b9c6809815e2b1",
-"2026-10-30"
+"5e620b84ca05a2ba",
+"2026-10-31"
 ],
 "/pt/promocoes/": [
 "9b99435611287cdf",
@@ -3980,8 +4000,8 @@
 "2026-10-30"
 ],
 "/pt/voos-londres-nairobi/": [
-"f0304f939f2c485a",
-"2026-10-30"
+"b5635e68efd3615b",
+"2026-10-31"
 ],
 "/pt/voos-lyon-abidjan/": [
 "e654fc030dd26e0b",
@@ -4536,8 +4556,8 @@
 "2026-10-30"
 ],
 "/pt/voos-paris-nairobi/": [
-"d76c6cd31eb91b4c",
-"2026-10-30"
+"c7929230be24f28e",
+"2026-10-31"
 ],
 "/pt/voos-paris-niamey/": [
 "411462dc7db4d322",
@@ -4656,20 +4676,20 @@
 "2026-10-30"
 ],
 "/vol-bale-mulhouse-casablanca/": [
-"e82f880c62b15ff4",
-"2026-10-30"
+"e2d7e7e5a212f279",
+"2026-10-31"
 ],
 "/vol-bale-mulhouse-constantine/": [
-"4b3424757483f3d3",
-"2026-10-30"
+"07542af7c3331bba",
+"2026-10-31"
 ],
 "/vol-bale-mulhouse-istanbul/": [
-"125b1397d4319e89",
-"2026-10-30"
+"3d0c4c71911f4ff4",
+"2026-10-31"
 ],
 "/vol-bale-mulhouse-marrakech/": [
-"576413d375388338",
-"2026-10-30"
+"9b8781ec8043f61b",
+"2026-10-31"
 ],
 "/vol-bale-mulhouse-oran/": [
 "db325cee76e65151",
@@ -4760,8 +4780,8 @@
 "2026-10-30"
 ],
 "/vol-bruxelles-ouagadougou/": [
-"f0210392314a108b",
-"2026-10-30"
+"09c272ec339e7a94",
+"2026-10-31"
 ],
 "/vol-bruxelles-tanger/": [
 "f42b2d77453688a9",
@@ -4920,8 +4940,8 @@
 "2026-10-30"
 ],
 "/vol-londres-nairobi/": [
-"e2514ce9233ae6b2",
-"2026-10-30"
+"292197c8808f7b6c",
+"2026-10-31"
 ],
 "/vol-lyon-abidjan/": [
 "c174926cd9e0ceee",
@@ -5032,8 +5052,8 @@
 "2026-10-30"
 ],
 "/vol-marseille-constantine/": [
-"ce26a35982825364",
-"2026-10-30"
+"415c7b398077afb8",
+"2026-10-31"
 ],
 "/vol-marseille-dakar/": [
 "b1cd3d836eeb59d2",
@@ -5068,20 +5088,20 @@
 "2026-10-30"
 ],
 "/vol-montpellier-casablanca/": [
-"faf4fff357e75221",
-"2026-10-30"
+"9554cc7db5bc94ea",
+"2026-10-31"
 ],
 "/vol-montpellier-constantine/": [
-"0c0a3d23446205f5",
-"2026-10-30"
+"b717d1ae4d54b25b",
+"2026-10-31"
 ],
 "/vol-montpellier-fes/": [
 "b7af747ed0c63a3f",
 "2026-10-30"
 ],
 "/vol-montpellier-marrakech/": [
-"ab2f159f4941f6e3",
-"2026-10-30"
+"c7b06c67c58f793f",
+"2026-10-31"
 ],
 "/vol-montpellier-oran/": [
 "c1323448a6d35a62",
@@ -5116,8 +5136,8 @@
 "2026-10-30"
 ],
 "/vol-montreal-port-au-prince/": [
-"d33ecf1eee28acd7",
-"2026-10-30"
+"62a90af9f136864b",
+"2026-10-31"
 ],
 "/vol-montreal-tunis/": [
 "87ba81e8faf02140",
@@ -5180,8 +5200,8 @@
 "2026-10-30"
 ],
 "/vol-new-york-port-au-prince/": [
-"18c5d4afc9e99009",
-"2026-10-30"
+"5ca59920f964c1a3",
+"2026-10-31"
 ],
 "/vol-nice-alger/": [
 "ec136556566e440f",
@@ -5376,8 +5396,8 @@
 "2026-10-30"
 ],
 "/vol-paris-nairobi/": [
-"d7a21313f5da1cac",
-"2026-10-30"
+"e136ff3b5b5f710b",
+"2026-10-31"
 ],
 "/vol-paris-niamey/": [
 "15104d92bf55a3e6",
@@ -5468,8 +5488,8 @@
 "2026-10-30"
 ],
 "/vol-strasbourg-casablanca/": [
-"f2c790671d688dd0",
-"2026-10-30"
+"3e323a30997b8e37",
+"2026-10-31"
 ],
 "/vol-strasbourg-dakar/": [
 "fe5c2af379824237",

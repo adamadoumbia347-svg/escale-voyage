@@ -364,6 +364,11 @@ HOTEL_TIPS = {
         "Los atascos entre el continente y las islas pueden ser muy largos: si llegas tarde o sales temprano, una noche en Ikeja, cerca del aeropuerto, suele ser más práctica.",
         "O trânsito entre o continente e as ilhas pode ser muito lento: para uma chegada tardia ou uma partida cedo, uma noite em Ikeja, perto do aeroporto, costuma ser mais prática.",
         "قد تطول الاختناقات المرورية كثيرًا بين البر والجزر: عند الوصول متأخرًا أو المغادرة باكرًا، تكون ليلة في إيكيجا قرب المطار أكثر عملية غالبًا."),
+    "Nairobi": (
+        "Jomo Kenyatta airport is away from the centre and traffic can be heavy at rush hour: allow extra time, or stay a night near the airport for a connection.",
+        "El aeropuerto Jomo Kenyatta está alejado del centro y el tráfico puede ser denso en hora punta: deja margen o pasa una noche cerca del aeropuerto si tienes una conexión.",
+        "O aeroporto Jomo Kenyatta fica afastado do centro e o trânsito pode ser intenso nas horas de ponta: preveja margem, ou uma noite perto do aeroporto numa ligação.",
+        "مطار جومو كينياتا بعيد عن وسط المدينة وقد تكون حركة السير كثيفة في أوقات الذروة: اترك هامشًا من الوقت، أو أمضِ ليلة قرب المطار عند وجود رحلة متصلة."),
 }
 
 AREAS = {
@@ -418,4 +423,7 @@ AREAS = {
     "quartier des affaires, hôtels et restaurants": ("business district, hotels and restaurants", "distrito de negocios, hoteles y restaurantes", "bairro de negócios, hotéis e restaurantes", "حي الأعمال، فنادق ومطاعم"),
     "résidentiel et chic, plus calme": ("upmarket residential, quieter", "residencial y elegante, más tranquilo", "residencial e requintado, mais calmo", "سكني راقٍ، أهدأ"),
     "proche de l'aéroport, sur le continent": ("close to the airport, on the mainland", "cerca del aeropuerto, en el continente", "perto do aeroporto, no continente", "قريب من المطار، على البر الرئيسي"),
+    "animé, restaurants et centres commerciaux": ("lively, restaurants and shopping malls", "animado, restaurantes y centros comerciales", "animado, restaurantes e centros comerciais", "حيوي، مطاعم ومراكز تسوق"),
+    "quartier des affaires, hôtels internationaux": ("business district, international hotels", "distrito de negocios, hoteles internacionales", "bairro de negócios, hotéis internacionais", "حي الأعمال، فنادق دولية"),
+    "résidentiel, appartements, plus calme": ("residential, apartments, quieter", "residencial, apartamentos, más tranquilo", "residencial, apartamentos, mais calmo", "سكني، شقق، أهدأ"),
 }
