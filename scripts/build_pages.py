@@ -281,7 +281,8 @@ def recherche_page():
             '<div id="rs-bar" class="rs-bar"></div><script src="/recherche-barre.js" defer></script>')
     body = ('<section class="wl-box wl-form"><div id="tpwl-search"></div></section>'
             '<section class="wl-box"><div id="tpwl-tickets"></div></section>' + WL_SCRIPT +
-            '<section id="wl-hotels" class="wl-box" hidden><h2></h2><p class="small"></p></section><script src="/carte-hotels.js" defer></script>' +
+            '<section id="wl-hotels" class="wl-box" hidden><h2></h2><p class="small"></p></section><script src="/carte-hotels.js" defer></script>'
+            '<section id="avant-partir" hidden></section><script src="/avant.js" defer></script>' +
             '<section><p class="small">Moteur fourni par notre partenaire Travelpayouts (Aviasales). Escale ne vend pas de billets : '
             'le prix final et les conditions (bagages, modification) s\'affichent sur le site de réservation. '
             'Escale peut toucher une commission si vous réservez, sans frais pour vous.</p></section>')
@@ -308,6 +309,7 @@ def hotels_live_page():
             '<section id="hl-live" class="wl-box"><p class="small" id="hl-sum"></p></section>'
             '<section id="hl-cmp"><h2 data-h="cmp_h">Comparer aussi sur</h2><p><a class="btn ghost" id="hl-cmp-a" href="/?type=hotels" data-h="cmp">Booking, Google Hôtels, Agoda, Airbnb…</a></p></section>'
             '<script src="/carte-hotels.js" defer></script>'
+            '<section id="avant-partir" hidden></section><script src="/avant.js" defer></script>'
             '<section><p class="small" data-h="note">Carte fournie par notre partenaire Stay22. Escale ne vend pas de nuits d\'hôtel : '
             'le prix final et les conditions (annulation, taxes de séjour) s\'affichent sur le site de réservation. '
             'Escale peut toucher une commission si vous réservez, sans frais pour vous.</p></section>')
