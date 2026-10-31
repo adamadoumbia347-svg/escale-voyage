@@ -1,0 +1,34 @@
+# Vidéo TikTok du jour : chaque après-midi, fabrique une vidéo avec les prix du baromètre (video/make.js)
+# et l'envoie par e-mail à DIGEST_TO (via /api/admin?action=video). Format selon le jour :
+# lundi top 3+3 · mardi prix d'un trajet · mercredi astuce · jeudi top 5 Afrique · vendredi baisses · samedi top 5 Maghreb · dimanche quiz.
+# Secret GitHub nécessaire : ADMIN_KEY (la même clé que l'administration du site).
+name: Vidéo TikTok du jour
+on:
+  schedule:
+    - cron: "23 14 * * *"
+  workflow_dispatch:
+    inputs:
+      format:
+        description: "Format à forcer (top, focus, astuce, afrique, baisse, maghreb, quiz) – vide = format du jour"
+        required: false
+        default: ""
+permissions:
+  contents: read
+jobs:
+  video:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Installer Chromium et ffmpeg
+        run: |
+          cd /tmp && npm init -y >/dev/null && npm i playwright@1.48.2 >/dev/null
+          cd /tmp && npx playwright install --with-deps chromium >/dev/null
+          command -v ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg >/dev/null)
+      - name: Fabriquer et envoyer la vidéo
+        env:
+          ADMIN_KEY: ${{ secrets.ADMIN_KEY }}
+          FORMAT: ${{ inputs.format }}
+        run: |
+          if [ -z "$ADMIN_KEY" ]; then echo "Secret ADMIN_KEY absent : GitHub › Settings › Secrets and variables › Actions"; exit 1; fi
+          NODE_PATH=/tmp/node_modules node video/make.js

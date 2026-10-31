@@ -1,7 +1,8 @@
-.netlify
-node_modules
-__pycache__/
 .dev.vars
+.netlify
 .wrangler/
+__pycache__/
+node_modules
 scripts/__pycache__/
 undefined/
+video/out/

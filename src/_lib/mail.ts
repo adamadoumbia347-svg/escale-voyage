@@ -6,7 +6,9 @@ export const mailerReady = (env: Env) => Boolean((env.RESEND_API_KEY || env.BREV
 
 // Dernière erreur d'envoi (sans la clé), renvoyée dans le champ « detail » pour faciliter le diagnostic
 export let lastMailError = ""
-export async function sendMail(env: Env, to: string, subject: string, html: string): Promise<boolean> {
+// Pièces jointes facultatives : [{ filename, content (base64) }] (vidéo du jour, voir src/api/admin.ts)
+export type Attachment = { filename: string; content: string }
+export async function sendMail(env: Env, to: string, subject: string, html: string, attachments: Attachment[] = []): Promise<boolean> {
   lastMailError = ""
   // Accepte « alertes@escale.live » comme « Escale <alertes@escale.live> »
   const raw = sender(env)
@@ -16,7 +18,7 @@ export async function sendMail(env: Env, to: string, subject: string, html: stri
       const r = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: { Authorization: `Bearer ${env.RESEND_API_KEY.trim()}`, "Content-Type": "application/json" },
-        body: JSON.stringify({ from: `Escale <${from}>`, to: [to], subject, html }),
+        body: JSON.stringify({ from: `Escale <${from}>`, to: [to], subject, html, ...(attachments.length ? { attachments } : {}) }),
       })
       if (!r.ok) lastMailError = `resend-${r.status}: ${(await r.text()).slice(0, 200)}`
       return r.ok
@@ -25,7 +27,7 @@ export async function sendMail(env: Env, to: string, subject: string, html: stri
       const r = await fetch("https://api.brevo.com/v3/smtp/email", {
         method: "POST",
         headers: { "api-key": env.BREVO_API_KEY, "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ sender: { name: "Escale", email: from }, to: [{ email: to }], subject, htmlContent: html }),
+        body: JSON.stringify({ sender: { name: "Escale", email: from }, to: [{ email: to }], subject, htmlContent: html, ...(attachments.length ? { attachment: attachments.map((a) => ({ name: a.filename, content: a.content })) } : {}) }),
       })
       return r.ok
     }

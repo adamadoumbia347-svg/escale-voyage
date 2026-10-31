@@ -1,0 +1,109 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8">
+<!-- Modèle de la vidéo TikTok du jour (1080 × 1920) : construit à partir de window.DATA (voir make.js), rendu image par image -->
+<style>
+@font-face{font-family:IS;src:url(font.woff2) format('woff2');font-weight:400 700}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:540px;height:960px;overflow:hidden;background:#05203c;font-family:IS,system-ui,sans-serif;color:#fff}
+.grid{position:absolute;inset:-60px;background-image:radial-gradient(rgb(255 255 255/.09) 1.5px,transparent 1.6px);background-size:30px 30px}
+.glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,#1a56db 0,transparent 65%);opacity:.6;left:-30px;top:200px}
+.o{position:absolute;opacity:0}
+.hook{left:30px;right:30px;top:220px;text-align:center}
+.hook .e{font-size:78px}
+.hook h1{font-size:48px;line-height:1.06;letter-spacing:-1.5px;margin-top:10px}
+.hook h1 b,.y{color:#febb02}
+.hook p{margin-top:22px;font-size:22px;color:#cfe0f5;font-weight:600}
+.chip{left:30px;top:120px;font-size:21px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#05203c;background:#febb02;padding:6px 14px;border-radius:999px}
+.st{left:30px;top:163px;font-size:28px;font-weight:700;letter-spacing:-1px;right:30px}
+.card{left:30px;right:30px;border-radius:22px;background:rgb(255 255 255/.08);border:1px solid rgb(255 255 255/.18);overflow:hidden}
+.card.one{background:linear-gradient(135deg,#febb02,#f59e0b);border:0;color:#05203c}
+.card .r{position:absolute;left:16px;font-weight:700;letter-spacing:-4px;line-height:1}
+.card .f{position:absolute;left:96px}
+.card .rt{position:absolute;left:146px;font-weight:700;letter-spacing:-.5px;white-space:nowrap}
+.card .x{position:absolute;left:98px;right:175px;font-weight:600;opacity:.82;line-height:1.2}
+.card .p{position:absolute;right:20px;font-weight:700;letter-spacing:-2px;line-height:1}
+.tipn{left:30px;top:150px;font-size:22px;font-weight:700;color:#05203c;background:#febb02;padding:6px 14px;border-radius:999px}
+.tipl{left:30px;right:30px;font-size:36px;font-weight:700;line-height:1.15;letter-spacing:-.8px}
+.tipl small{display:block;font-size:22px;color:#cfe0f5;font-weight:600;letter-spacing:0;margin-top:8px}
+.q{left:30px;right:30px;top:170px;text-align:center}
+.q .f{font-size:70px}.q h2{font-size:40px;letter-spacing:-1px;margin-top:6px}.q p{font-size:22px;color:#cfe0f5;margin-top:6px}
+.opt{left:60px;right:60px;height:86px;border-radius:20px;background:rgb(255 255 255/.1);border:2px solid rgb(255 255 255/.25);font-size:40px;font-weight:700;display:flex;align-items:center;gap:18px;padding:0 24px}
+.opt span{font-size:26px;width:44px;height:44px;border-radius:50%;background:#fff;color:#05203c;display:grid;place-items:center}
+.cd{left:0;right:0;top:770px;text-align:center;font-size:80px;font-weight:700;color:#febb02}
+.note{left:30px;right:30px;top:180px;text-align:center;font-size:17px;color:#cfe0f5;line-height:1.4}
+.ask{left:30px;right:30px;top:300px;text-align:center;font-size:33px;font-weight:700;line-height:1.12;letter-spacing:-1px}
+.logo{left:215px;top:480px;width:110px;height:110px}
+.url{left:0;right:0;top:605px;text-align:center;font-size:58px;font-weight:700;letter-spacing:-2px}
+.cta{left:50%;top:688px;white-space:nowrap;font-size:23px;font-weight:700;background:#febb02;color:#05203c;padding:13px 24px;border-radius:999px}
+.plane{width:46px;height:46px}
+</style></head><body>
+<div class="grid" id="grid"></div><div class="glow" id="glow"></div>
+<script>
+const D = window.DATA, MAX = 60, T = MAX * 1000, B = 'cubic-bezier(.2,1.4,.4,1)', ticks = [];
+const el = (cls, html, css) => { const e = document.createElement('div'); e.className = 'o ' + cls; if (html != null) e.innerHTML = html; if (css) e.style.cssText += css; document.body.appendChild(e); return e; };
+const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+function tl(e, frames, ease) {
+  const k = frames.map(([t, p]) => Object.assign({ offset: Math.min(1, Math.max(0, t * 1000 / T)), easing: ease || 'ease-in-out' }, p));
+  k.sort((a, b) => a.offset - b.offset);
+  if (k[0].offset > 0) k.unshift(Object.assign({}, k[0], { offset: 0 }));
+  if (k[k.length - 1].offset < 1) k.push(Object.assign({}, k[k.length - 1], { offset: 1 }));
+  e.animate(k, { duration: T, fill: 'both' });
+}
+const show = (e, a, b, from = 'translateY(24px)', to = 'none', out = 'none') => tl(e, [[a, { opacity: 0, transform: from }], [a + .45, { opacity: 1, transform: to }], [b, { opacity: 1, transform: to }], [b + .3, { opacity: 0, transform: out }]], B);
+tl(document.getElementById('grid'), [[0, { transform: 'translate(0,0)' }], [MAX, { transform: "translate(60px,-150px)" }]], 'linear');
+tl(document.getElementById('glow'), [[0, { transform: 'translate(-60px,-120px)' }], [MAX / 2, { transform: 'translate(80px,160px)' }], [MAX, { transform: "translate(-30px,0)" }]]);
+let t = 0;
+// accroche
+const h = el('hook', `<div class="e">${D.hook.emoji}</div><h1>${D.hook.title}</h1>${D.hook.sub ? `<p>${esc(D.hook.sub)}</p>` : ''}`);
+tl(h, [[0, { opacity: 0, transform: 'scale(.8)' }], [.5, { opacity: 1, transform: 'none' }], [3.0, { opacity: 1, transform: 'none' }], [3.4, { opacity: 0, transform: 'scale(1.15)' }]], B);
+t = 3.4;
+const plane = () => { const p = el('plane', '<svg viewBox="0 0 24 24"><path fill="#febb02" d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg>');
+  tl(p, [[t - .05, { opacity: 0, transform: 'translate(-80px,700px) rotate(45deg)' }], [t, { opacity: 1, transform: 'translate(-80px,700px) rotate(45deg)' }], [t + .8, { opacity: 1, transform: 'translate(600px,120px) rotate(45deg)' }], [t + .85, { opacity: 0, transform: 'translate(600px,120px) rotate(45deg)' }]], 'ease-in'); };
+// sections de cartes (compte à rebours : la dernière carte est la n°1)
+(D.sections || []).forEach((s, si) => {
+  if (si) { plane(); t += .5; }
+  const n = s.cards.length, H = n <= 3 ? 150 : n === 4 ? 124 : 106, G = 14, top0 = 235, step = n <= 3 ? 2.3 : 1.9, a = t, end = a + .7 + n * step + 1.6;
+  show(el('chip', esc(s.chip)), a, end, 'translateX(-60px)'); show(el('st', s.title), a + .2, end);
+  s.cards.forEach((c, i) => {
+    const order = n - 1 - i, at = a + .7 + order * step; // c[0] est la n°1 : elle arrive en dernier
+    const big = n <= 3, y = top0 + i * (H + G);
+    const e = el('card' + (i === 0 ? ' one' : ''), `<div class="r" style="top:${big ? 14 : 10}px;font-size:${big ? (n === 1 ? 64 : 96) : 76}px">${n === 1 ? "✈️" : i + 1}</div>` +
+      `<span class="f" style="top:${big ? 26 : 16}px;font-size:${big ? 36 : 30}px">${c.flag}</span><div class="rt" style="top:${big ? 28 : 18}px;font-size:${big ? 28 : 24}px">${esc(c.route)}</div>` +
+      `<div class="x" style="top:${big ? 88 : 66}px;font-size:${big ? 17 : 15}px">${esc(c.extra || 'aller-retour dès')}</div><div class="p" style="top:${big ? 72 : 50}px;font-size:${big ? 56 : 46}px">0 €</div>`, `top:${y}px;height:${H}px`);
+    tl(e, [[at, { opacity: 0, transform: 'translateX(520px) rotate(4deg)' }], [at + .55, { opacity: 1, transform: 'none' }], [end - .2, { opacity: 1, transform: 'none' }], [end + .15, { opacity: 0, transform: 'translateX(-520px)' }]], B);
+    ticks.push({ e: e.querySelector('.p'), v: c.price, s: at + .4 });
+    if (i === 0) tl(e.querySelector('.r'), [[at + 1.2, { transform: 'scale(1)' }], [at + 1.4, { transform: 'scale(1.3) rotate(-8deg)' }], [at + 1.7, { transform: 'scale(1)' }]], 'ease-out');
+  });
+  t = end + .2;
+});
+// astuce du jour
+if (D.tip) {
+  const a = t, n = D.tip.lines.length, end = a + .6 + n * 3.0 + 1.2;
+  show(el('tipn', esc(D.tip.label)), a, end, 'translateX(-60px)');
+  D.tip.lines.forEach((l, i) => show(el('tipl', l, `top:${240 + i * 140}px`), a + .6 + i * 3.0, end, 'translateX(80px)'));
+  t = end + .2;
+}
+// quiz : devine le prix
+if (D.quiz) {
+  const a = t, q = D.quiz, rev = a + 1.6 + 3 * .5 + 3.2, end = rev + 2.6;
+  show(el('q', `<div class="f">${q.flag}</div><h2>${esc(q.route)}</h2><p>aller-retour, prix le plus bas repéré</p>`), a, end);
+  q.options.forEach((o, i) => {
+    const e = el('opt', `<span>${'ABC'[i]}</span>${o} €`, `top:${420 + i * 104}px`);
+    show(e, a + 1.4 + i * .5, end, 'translateX(80px)');
+    if (i === q.answer) tl(e, [[rev, { background: 'rgba(255,255,255,.1)', borderColor: 'rgba(255,255,255,.25)', color: '#fff' }], [rev + .3, { background: '#16a34a', borderColor: '#16a34a', color: '#fff' }]]);
+    else tl(e, [[rev, { filter: 'none' }], [rev + .3, { filter: 'opacity(.35)' }]]);
+  });
+  ['3', '2', '1'].forEach((c, i) => { const s = rev - 3 + i; tl(el('cd', c), [[s, { opacity: 0, transform: 'scale(1.8)' }], [s + .2, { opacity: 1, transform: 'none' }], [s + .85, { opacity: 1, transform: 'none' }], [s + .95, { opacity: 0, transform: 'none' }]]); });
+  tl(el('cd', '✅', 'font-size:70px'), [[rev, { opacity: 0, transform: 'scale(.3)' }], [rev + .3, { opacity: 1, transform: 'none' }], [end, { opacity: 1, transform: 'none' }], [end + .3, { opacity: 0, transform: 'none' }]], B);
+  t = end + .3;
+}
+// fin
+const o = t;
+if (D.outro.note) tl(el('note', D.outro.note), [[o, { opacity: 0 }], [o + .4, { opacity: 1 }], [MAX, { opacity: 1 }]]);
+tl(el('ask', D.outro.ask), [[o + .3, { opacity: 0, transform: 'scale(.6)' }], [o + .8, { opacity: 1, transform: 'none' }], [o + 1.9, { opacity: 1, transform: 'scale(1.05)' }], [o + 2.3, { opacity: 1, transform: 'none' }]], B);
+tl(el('logo', '<svg viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2f86ff"/><stop offset="1" stop-color="#0050c0"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="url(#g)"/><g transform="translate(32 32) rotate(45) translate(-17 -17) scale(1.4167)"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" fill="#fff"/></g></svg>'),
+  [[o + 1.4, { opacity: 0, transform: 'scale(0) rotate(-180deg)' }], [o + 2.1, { opacity: 1, transform: 'none' }]], B);
+tl(el('url', 'escale.live'), [[o + 2.0, { opacity: 0, transform: 'translateY(30px)' }], [o + 2.5, { opacity: 1, transform: 'none' }]], B);
+tl(el('cta', esc(D.outro.cta)), [[o + 2.6, { opacity: 0, transform: 'translateX(-50%) scale(.3)' }], [o + 3.1, { opacity: 1, transform: 'translateX(-50%) scale(1)' }], [o + 3.7, { opacity: 1, transform: 'translateX(-50%) scale(1.07)' }], [o + 4.3, { opacity: 1, transform: 'translateX(-50%) scale(1)' }]]);
+window.__end = o + 5;
+window.__tick = (s) => ticks.forEach(({ e, v, s: st }) => { const p = Math.max(0, Math.min(1, (s - st) / 1.1)), k = 1 - Math.pow(1 - p, 3); e.textContent = Math.round(v * 1.6 - v * .6 * k) + ' €'; });
+</script></body></html>
