@@ -78,7 +78,6 @@ window.ESCALE_I18N = {
   "Currency": ["Moneda", "Moeda", "العملة"],
   "Language": ["Idioma", "Idioma", "اللغة"],
   "Flights, hotels and cars <em>at the best price</em>": ["Vuelos, hoteles y coches <em>al mejor precio</em>", "Voos, hotéis e carros <em>ao melhor preço</em>", "رحلات وفنادق وسيارات <em>بأفضل سعر</em>"],
-  "Created by <a href=\"/en/about/\">Dobam</a>, from the Ivorian diaspora": ["Creado por <a href=\"/es/acerca-de/\">Dobam</a>, de la diáspora marfileña", "Criado por <a href=\"/pt/sobre/\">Dobam</a>, da diáspora marfinense", "أنشأه <a href=\"/ar/about/\">دوبام</a>، من الجالية الإيفوارية"],
   "About us": ["Quiénes somos", "Quem somos", "من نحن"],
   "Cheap flights <em>home to Africa and the Maghreb</em>": ["Billetes baratos <em>para volver a África y al Magreb</em>", "Voos baratos <em>para voltar a África e ao Magrebe</em>", "تذاكر طيران رخيصة <em>للعودة إلى أفريقيا والمغرب العربي</em>"],
   "One search, every major comparison site, worldwide. Escale opens your search on Skyscanner, Kayak, Aviasales, Booking and more, sorted from cheapest to most expensive.": [
