@@ -35,6 +35,14 @@ html,body{width:540px;height:960px;overflow:hidden;background:#05203c;font-famil
 .url{left:0;right:0;top:605px;text-align:center;font-size:58px;font-weight:700;letter-spacing:-2px}
 .cta{left:50%;top:688px;white-space:nowrap;font-size:23px;font-weight:700;background:#febb02;color:#05203c;padding:13px 24px;border-radius:999px}
 .plane{width:46px;height:46px}
+.pcap{left:24px;right:24px;top:70px;text-align:center}
+.pcap h2{font-size:31px;line-height:1.12;letter-spacing:-.8px}.pcap p{font-size:19px;color:#cfe0f5;margin-top:8px}
+.phone{left:125px;top:205px;width:290px;height:620px;border-radius:44px;background:#0b0f17;box-shadow:0 0 0 2px #2a3446,0 30px 80px rgb(0 0 0/.55)}
+.screen{position:absolute;left:10px;top:10px;width:270px;height:600px;border-radius:35px;overflow:hidden;background:#fff}
+.screen img{position:absolute;left:0;top:0;width:270px;opacity:0}
+.island{position:absolute;left:50%;top:18px;width:80px;height:22px;margin-left:-40px;border-radius:13px;background:#000;z-index:5}
+.finger{position:absolute;left:0;top:0;width:42px;height:42px;margin:-21px 0 0 -21px;border-radius:50%;background:rgb(255 255 255/.55);border:3px solid #fff;box-shadow:0 6px 18px rgb(0 0 0/.35);opacity:0;z-index:9}
+.ripple{position:absolute;left:0;top:0;width:42px;height:42px;margin:-21px 0 0 -21px;border-radius:50%;border:3px solid #febb02;opacity:0;z-index:8}
 </style></head><body>
 <div class="grid" id="grid"></div><div class="glow" id="glow"></div>
 <script>
@@ -95,6 +103,33 @@ if (D.quiz) {
   ['3', '2', '1'].forEach((c, i) => { const s = rev - 3 + i; tl(el('cd', c), [[s, { opacity: 0, transform: 'scale(1.8)' }], [s + .2, { opacity: 1, transform: 'none' }], [s + .85, { opacity: 1, transform: 'none' }], [s + .95, { opacity: 0, transform: 'none' }]]); });
   tl(el('cd', '✅', 'font-size:70px'), [[rev, { opacity: 0, transform: 'scale(.3)' }], [rev + .3, { opacity: 1, transform: 'none' }], [end, { opacity: 1, transform: 'none' }], [end + .3, { opacity: 0, transform: 'none' }]], B);
   t = end + .3;
+}
+// téléphone : vraies pages du site du jour, le doigt touche (voir phoneScene dans make.js)
+if (D.phone) {
+  const a = t, total = D.phone.shots.reduce((n, sh) => n + sh.dur, 0) + .9, end = a + total;
+  show(el('pcap', `<h2>${esc(D.phone.caption)}</h2><p>${esc(D.phone.sub)}</p>`), a, end);
+  const ph = el('phone', '<div class="screen"><div class="island"></div><div class="finger"></div></div>');
+  tl(ph, [[a, { opacity: 0, transform: 'translateY(420px) rotate(5deg)' }], [a + .8, { opacity: 1, transform: 'none' }], [end, { opacity: 1, transform: 'none' }], [end + .5, { opacity: 0, transform: 'translateY(60px) scale(.6)' }]], 'cubic-bezier(.2,1,.3,1)');
+  const scr = ph.querySelector('.screen'), fin = ph.querySelector('.finger'), fk = [];
+  let s0 = a + .7;
+  D.phone.shots.forEach((sh, k) => {
+    const S = 270 / sh.w, img = document.createElement('img'); img.src = sh.src; scr.insertBefore(img, scr.firstChild);
+    const last = k === D.phone.shots.length - 1, fr = sh.steps.map(([dt, y]) => [s0 + dt, { transform: `translateY(${-y * S}px)`, opacity: 1 }]);
+    fr.unshift([s0 - .3, { transform: `translateY(${-sh.steps[0][1] * S}px)`, opacity: 0 }]);
+    if (!last) fr.push([s0 + sh.dur + .3, { transform: `translateY(${-sh.steps[sh.steps.length - 1][1] * S}px)`, opacity: 0 }]);
+    tl(img, fr);
+    sh.taps.forEach(([dt, x, y, sy]) => {
+      const X = x * S, Y = (y - sy) * S, at = s0 + dt;
+      fk.push([at - .9, X + 40, Y + 120, 1], [at, X, Y, 1], [at + .5, X, Y, 1]);
+      const r = document.createElement('div'); r.className = 'ripple'; scr.appendChild(r);
+      tl(r, [[at, { opacity: 0, transform: `translate(${X}px,${Y}px) scale(.4)` }], [at + .02, { opacity: 1, transform: `translate(${X}px,${Y}px) scale(.5)` }], [at + .55, { opacity: 0, transform: `translate(${X}px,${Y}px) scale(2.2)` }]], 'ease-out');
+    });
+    s0 += sh.dur;
+  });
+  if (fk.length) { fk.sort((p, q) => p[0] - q[0]); const f = [[fk[0][0] - .3, { opacity: 0, transform: `translate(${fk[0][1]}px,${fk[0][2]}px)` }]];
+    fk.forEach(([tt, x, y]) => f.push([tt, { opacity: 1, transform: `translate(${x}px,${y}px)` }]));
+    f.push([fk[fk.length - 1][0] + .4, { opacity: 0, transform: `translate(${fk[fk.length - 1][1]}px,${fk[fk.length - 1][2]}px)` }]); tl(fin, f); }
+  t = end + .4;
 }
 // fin
 const o = t;
