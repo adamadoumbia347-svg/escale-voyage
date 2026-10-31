@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Ouvrir les pages trajets du baromètre
         run: |
-          PAGES=$(curl -fsS "$SITE_URL/barometre-prix/" | grep -o 'href="/vol-[a-z-]*/"' | sed 's/href="//;s/"$//' | sort -u)
+          PAGES=$(curl -fsS "$SITE_URL/barometre-prix/" | grep -oE 'href="/(vol|it/voli)-[a-z-]+/"' | sed 's/href="//;s/"$//' | sort -u)
           echo "$(echo "$PAGES" | wc -l) pages trajets"
           for P in $PAGES; do
             echo "$P : $(curl -s -o /dev/null -w '%{http_code}' "$SITE_URL$P")"

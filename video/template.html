@@ -76,7 +76,7 @@ const plane = () => { const p = el('plane', '<svg viewBox="0 0 24 24"><path fill
     const big = n <= 3, y = top0 + i * (H + G);
     const e = el('card' + (i === 0 ? ' one' : ''), `<div class="r" style="top:${big ? 14 : 10}px;font-size:${big ? (n === 1 ? 64 : 96) : 76}px">${n === 1 ? "✈️" : i + 1}</div>` +
       `<span class="f" style="top:${big ? 26 : 16}px;font-size:${big ? 36 : 30}px">${c.flag}</span><div class="rt" style="top:${big ? 28 : 18}px;font-size:${big ? 28 : 24}px">${esc(c.route)}</div>` +
-      `<div class="x" style="top:${big ? 88 : 66}px;font-size:${big ? 17 : 15}px">${esc(c.extra || 'aller-retour dès')}</div><div class="p" style="top:${big ? 72 : 50}px;font-size:${big ? 56 : 46}px">0 €</div>`, `top:${y}px;height:${H}px`);
+      `<div class="x" style="top:${big ? 88 : 66}px;font-size:${big ? 17 : 15}px">${esc(c.extra || D.lbl || 'aller-retour dès')}</div><div class="p" style="top:${big ? 72 : 50}px;font-size:${big ? 56 : 46}px">0 €</div>`, `top:${y}px;height:${H}px`);
     tl(e, [[at, { opacity: 0, transform: 'translateX(520px) rotate(4deg)' }], [at + .55, { opacity: 1, transform: 'none' }], [end - .2, { opacity: 1, transform: 'none' }], [end + .15, { opacity: 0, transform: 'translateX(-520px)' }]], B);
     ticks.push({ e: e.querySelector('.p'), v: c.price, s: at + .4 });
     if (i === 0) tl(e.querySelector('.r'), [[at + 1.2, { transform: 'scale(1)' }], [at + 1.4, { transform: 'scale(1.3) rotate(-8deg)' }], [at + 1.7, { transform: 'scale(1)' }]], 'ease-out');
@@ -93,7 +93,7 @@ if (D.tip) {
 // quiz : devine le prix
 if (D.quiz) {
   const a = t, q = D.quiz, rev = a + 1.6 + 3 * .5 + 3.2, end = rev + 2.6;
-  show(el('q', `<div class="f">${q.flag}</div><h2>${esc(q.route)}</h2><p>aller-retour, prix le plus bas repéré</p>`), a, end);
+  show(el('q', `<div class="f">${q.flag}</div><h2>${esc(q.route)}</h2><p>${esc(q.sub || 'aller-retour, prix le plus bas repéré')}</p>`), a, end);
   q.options.forEach((o, i) => {
     const e = el('opt', `<span>${'ABC'[i]}</span>${o} €`, `top:${420 + i * 104}px`);
     show(e, a + 1.4 + i * .5, end, 'translateX(80px)');

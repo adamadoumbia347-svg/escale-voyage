@@ -17,6 +17,10 @@ const ROUTES: [string, string, string, string][] = [
   ["CDG", "DJE", "Paris → Djerba", "vol-paris-djerba"], ["LYS", "ALG", "Lyon → Alger", "vol-lyon-alger"],
   ["MRS", "ALG", "Marseille → Alger", "vol-marseille-alger"], ["MRS", "TUN", "Marseille → Tunis", "vol-marseille-tunis"],
   ["BRU", "FIH", "Bruxelles → Kinshasa", "vol-bruxelles-kinshasa"], ["BRU", "DSS", "Bruxelles → Dakar", "vol-bruxelles-dakar"],
+  // Depuis l'Italie (pages en italien) : grandes communautés ivoirienne, sénégalaise, nigériane, ghanéenne et marocaine
+  ["MXP", "ABJ", "Milan → Abidjan", "it/voli-milano-abidjan"], ["MXP", "DSS", "Milan → Dakar", "it/voli-milano-dakar"],
+  ["FCO", "DSS", "Rome → Dakar", "it/voli-roma-dakar"], ["MXP", "CMN", "Milan → Casablanca", "it/voli-milano-casablanca"],
+  ["MXP", "LOS", "Milan → Lagos", "it/voli-milano-lagos"], ["MXP", "ACC", "Milan → Accra", "it/voli-milano-accra"],
 ]
 const CACHE_S = 3600
 const STABLE = 3 // variation de ±3 % ou moins : « stable »

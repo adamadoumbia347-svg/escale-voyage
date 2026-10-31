@@ -318,7 +318,7 @@ def hotels_live_page():
 def barometre_page():
     """Baromètre des prix : le tableau est écrit par le serveur (src/barometre.ts) ; ici, la page et sa méthode."""
     src = (ROOT / "src" / "barometre.ts").read_text(encoding="utf-8")
-    routes = re.findall(r'\["[A-Z]{3}", "[A-Z]{3}", "([^"]+)", "(vol-[a-z-]+)"\]', src)
+    routes = re.findall(r'\["[A-Z]{3}", "[A-Z]{3}", "([^"]+)", "((?:vol|it/voli)-[a-z-]+)"\]', src)
     links = "".join(f'<li><a href="/{p}/">{E(l)}</a></li>' for l, p in routes)
     hero = ('<p class="eyebrow">Mis à jour chaque jour</p><h1>Baromètre des prix des vols</h1>'
             '<p class="hero-lead">Les prix aller-retour les plus bas repérés vers l\'Afrique et le Maghreb, et leur évolution sur 7 et 30 jours, pour les grands trajets de la diaspora.</p>')
