@@ -9,6 +9,9 @@ import re
 
 from build_i18n import ALL, TR, duration, faq_ld, slugify, tr, write
 import hub_info_en
+import hubs_itde
+import italia
+import deutsch
 
 E = html.escape
 MIN_ORIGINS = 3
@@ -85,11 +88,51 @@ H = {
                     ("ما مطار {b}؟", "تصل الرحلات إلى {airport} (الرمز {code}).")],
                from_="من"),
 }
-SEP = {"fr": ", ", "en": ", ", "es": ", ", "pt": ", ", "ar": "، "}
+H["it"] = dict(path="it/voli-per-{s}", title="Voli economici per {b}: confronta da {n} città",
+               desc="Voli economici per {b} ({code}) da {some} e altre città: durata del volo, prezzi recenti e il momento migliore per prenotare.",
+               h1="Voli economici per <span>{b}</span>",
+               lead="Confronta i voli per {b} dall'Italia e da {n} città d'Europa e del Nord America: durata, prezzi trovati di recente e consigli per pagare meno.",
+               th=("Partenza da", "Durata del volo", "Prezzo trovato"), see="Vedi", direct="volo diretto", est="stima", stops="con scalo",
+               airport="Aeroporto di arrivo", shortest="Volo più breve", peak="Periodi più cari", short_v="da {a}, circa {d}",
+               table_h="I voli per {b}, città per città", table_p="Prezzi andata e ritorno più bassi trovati di recente dai viaggiatori. La tariffa esatta appare sui siti di prenotazione.",
+               more_h="Preparare il viaggio", hotels="Hotel economici a {b}", cars="Noleggio auto a {b}", search="Cerca un volo per {b}",
+               faq_h="Domande frequenti",
+               faq=[("Da quali città partono i voli per {b}?", "Escale confronta i voli per {b} da {all}."),
+                    ("Qual è il volo più breve per {b}?", "Da {a}, conta circa {d} di volo ({kind})."),
+                    ("Quando prenotare un volo economico per {b}?", "In genere due o tre mesi prima della partenza. Prenota prima per {peak}: i prezzi salgono molto."),
+                    ("Quale aeroporto a {b}?", "I voli arrivano all'aeroporto {airport} (codice {code}).")],
+               from_="da")
+H["de"] = dict(path="de/fluege-nach-{s}", title="Günstige Flüge nach {b}: Preise aus {n} Städten",
+               desc="Günstige Flüge nach {b} ({code}) ab {some} und weiteren Städten: Flugdauer, aktuelle Preise und die beste Zeit zum Buchen.",
+               h1="Günstige Flüge nach <span>{b}</span>",
+               lead="Vergleiche Flüge nach {b} ab Deutschland, Österreich und {n} Städten in Europa und Nordamerika: Flugdauer, kürzlich gefundene Preise und Spartipps.",
+               th=("Abflug ab", "Flugdauer", "Gefundener Preis"), see="Ansehen", direct="Direktflug", est="geschätzt", stops="mit Umstieg",
+               airport="Ankunftsflughafen", shortest="Kürzester Flug", peak="Teuerste Zeiten", short_v="ab {a}, etwa {d}",
+               table_h="Flüge nach {b}, Stadt für Stadt", table_p="Niedrigste Preise für Hin- und Rückflug, kürzlich von Reisenden gefunden. Der genaue Tarif erscheint auf den Buchungsseiten.",
+               more_h="Reise vorbereiten", hotels="Günstige Hotels in {b}", cars="Mietwagen in {b}", search="Flug nach {b} suchen",
+               faq_h="Häufige Fragen",
+               faq=[("Von welchen Städten gibt es Flüge nach {b}?", "Escale vergleicht Flüge nach {b} ab {all}."),
+                    ("Was ist der kürzeste Flug nach {b}?", "Ab {a} dauert der Flug etwa {d} ({kind})."),
+                    ("Wann sollte man einen günstigen Flug nach {b} buchen?", "Meist zwei bis drei Monate vor dem Abflug. Für {peak} früher buchen: Die Preise steigen stark."),
+                    ("Welcher Flughafen in {b}?", "Die Flüge landen am Flughafen {airport} (Code {code}).")],
+               from_="ab")
+SEP = {"fr": ", ", "en": ", ", "es": ", ", "pt": ", ", "ar": "، ", "it": ", ", "de": ", "}
+HUB_LANGS = ALL + ["it", "de"]
+MARKETS = {"it": italia, "de": deutsch}  # trajets au départ de l'Italie / de l'Allemagne, en tête du tableau
 
 
 def loc(table, key, lang):
-    return key if lang == "fr" else tr(table, key, lang)
+    if lang == "fr":
+        return key
+    if lang in ("it", "de"):
+        if table is TR.CITIES:
+            return hubs_itde.CITY[lang].get(key) or tr(table, key, "en")
+        if table is TR.COUNTRIES:
+            return hubs_itde.COUNTRY[lang].get(key) or tr(table, key, "en")
+        if table is TR.PEAKS:
+            return hubs_itde.PEAK[lang].get(key) or tr(table, key, "en")
+        return tr(table, key, "en")
+    return tr(table, key, lang)
 
 
 def minutes(d):
@@ -100,7 +143,7 @@ def minutes(d):
 def hub_paths(routes):
     """{ville d'arrivée (nom français) : {langue : chemin}} pour les destinations desservies depuis au moins 3 villes."""
     count = collections.Counter(r[3] for r in routes)
-    return {ct: {l: H[l]["path"].format(s=slugify(ct if l == "fr" else loc(TR.CITIES, ct, "en" if l == "ar" else l))) for l in ALL}
+    return {ct: {l: H[l]["path"].format(s=deutsch.slug(ct if l == "fr" else loc(TR.CITIES, ct, "en" if l == "ar" else l))) for l in HUB_LANGS}
             for ct, n in count.items() if n >= MIN_ORIGINS}
 
 
@@ -117,7 +160,7 @@ def build_hubs(site, ctx, route_paths, hotel_paths):
         timed = sorted((r for r in rs if minutes(r[6]) is not None), key=lambda r: minutes(r[6]))
         rs.sort(key=lambda r: (minutes(r[6]) or 10 ** 6, r[2]))
         hotel = next((h for h in ctx["hotels"] if h[0] == ct), None)
-        for lang in ALL:
+        for lang in HUB_LANGS:
             h = H[lang]
             b = loc(TR.CITIES, ct, lang)
             cities = [loc(TR.CITIES, r[2], lang) for r in rs]
@@ -125,35 +168,49 @@ def build_hubs(site, ctx, route_paths, hotel_paths):
                 pref = ["London", "New York", "Manchester", "Toronto", "Dublin", "Paris"]
                 cities_t = sorted(cities, key=lambda c: pref.index(c) if c in pref else 99)
                 some = SEP[lang].join(cities_t[:2])
+            elif lang in MARKETS:  # en italien / allemand : les villes d'Italie / d'Allemagne d'abord
+                M = MARKETS[lang]
+                mk = [r2 for r2 in M.ROUTES if r2[1] == code]
+                some = SEP[lang].join(list(dict.fromkeys([M.ORIG[r2[0]][0] for r2 in mk] + cities))[:2])
             else:
                 some = SEP[lang].join(cities[:2])
             peak = loc(TR.PEAKS, peak_fr, lang)
             airport = (ap[2] if ap else code) if lang != "fr" else rs[0][5]
             q = "" if lang == "fr" else "&lang=" + lang
             rows = []
+            dur_l = (lambda x: duration(x, lang).replace(" h ", " Std. ").replace(" h", " Std.")) if lang == "de" else (lambda x: duration(x, lang))
+            if lang in MARKETS:  # trajets au départ de l'Italie / de l'Allemagne (pages en italien / allemand), en tête
+                M = MARKETS[lang]
+                for r2 in [x for x in M.ROUTES if x[1] == code]:
+                    d2, _ = italia.est(airports, r2[0], r2[1])
+                    rows.append(f'<tr><th scope="row"><a href="/{M.path(r2)}/"><bdi>{E(M.ORIG[r2[0]][0])}</bdi></a> <span class="hub-code" dir="ltr">{r2[0]}</span></th>'
+                                f'<td>{E(dur_l(d2) + " (" + h["est"] + ")")}</td><td class="hub-price" data-from="{r2[0]}" data-to="{r2[1]}" data-label="{E(h["from_"])}"></td>'
+                                f'<td><a class="price-go" href="/{M.path(r2)}/">{E(h["see"])}</a></td></tr>')
             for r in rs:
                 a = loc(TR.CITIES, r[2], lang)
                 dur = r[6]
                 if not dur:
                     dtxt = h["stops"]
                 else:
-                    dtxt = duration(dur.lstrip("~"), lang) + " (" + (h["est"] if dur.startswith("~") else h["direct"]) + ")"
-                rows.append(f'<tr><th scope="row"><a href="/{route_paths[r][lang]}/"><bdi>{E(a)}</bdi></a> <span class="hub-code" dir="ltr">{r[0]}</span></th>'
+                    dtxt = dur_l(dur.lstrip("~")) + " (" + (h["est"] if dur.startswith("~") else h["direct"]) + ")"
+                # Pas de page trajet en italien / allemand pour ces départs : lien vers la recherche, dans la langue
+                href = f"/{route_paths[r][lang]}/" if lang in route_paths[r] else f"/?type=vols&amp;from={r[0]}&amp;to={r[1]}&amp;lang={lang}"
+                rows.append(f'<tr><th scope="row"><a href="{href}"><bdi>{E(a)}</bdi></a> <span class="hub-code" dir="ltr">{r[0]}</span></th>'
                             f'<td>{E(dtxt)}</td><td class="hub-price" data-from="{r[0]}" data-to="{r[1]}" data-label="{E(h["from_"])}"></td>'
-                            f'<td><a class="price-go" href="/{route_paths[r][lang]}/">{E(h["see"])}</a></td></tr>')
+                            f'<td><a class="price-go" href="{href}">{E(h["see"])}</a></td></tr>')
             facts = [(h["airport"], f"{airport} ({code})"), (h["peak"], peak[0].upper() + peak[1:])]
             kind = ""
             if timed:
                 t0 = timed[0]
-                d0 = duration(t0[6].lstrip("~"), lang)
+                d0 = dur_l(t0[6].lstrip("~"))
                 kind = h["est"] if t0[6].startswith("~") else h["direct"]
                 facts.insert(1, (h["shortest"], h["short_v"].format(a=loc(TR.CITIES, t0[2], lang), d=d0)))
             f = dict(b=b, all=SEP[lang].join(cities), airport=airport, code=code, peak=peak,
-                     a=loc(TR.CITIES, timed[0][2], lang) if timed else "", d=duration(timed[0][6].lstrip("~"), lang) if timed else "", kind=kind)
+                     a=loc(TR.CITIES, timed[0][2], lang) if timed else "", d=dur_l(timed[0][6].lstrip("~")) if timed else "", kind=kind)
             faq = [(qq.format(**f), aa.format(**f)) for i, (qq, aa) in enumerate(h["faq"]) if i != 1 or timed]
             more = [f'<li><a href="/?type=vols&amp;to={code}{E(q)}">{E(h["search"].format(b=b))}</a></li>']
             if hotel:
-                more.append(f'<li><a href="/{hotel_paths[hotel[0]][lang]}/">{E(h["hotels"].format(b=b))}</a></li>')
+                more.append(f'<li><a href="/{hotel_paths[hotel[0]].get(lang) or hotel_paths[hotel[0]]["en"]}/">{E(h["hotels"].format(b=b))}</a></li>')
             more.append(f'<li><a href="/?type=voitures&amp;pick={code}{E(q)}">{E(h["cars"].format(b=b))}</a></li>')
             ess = '<script src="/fx.js" defer></script>'
             if lang == "en":
