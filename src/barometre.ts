@@ -93,7 +93,7 @@ export const onRequest = async (ctx: Ctx) => {
   const response = await ctx.next()
   if (ctx.request.method !== "GET" || !response.ok) return response
   const cache = (globalThis as any).caches?.default
-  const key = new Request("https://escale.live/__barometre/" + iso(0))
+  const key = new Request("https://escale.live/__barometre/v2/" + iso(0))
   try {
     let block = ""
     const hit = cache ? await cache.match(key) : null
@@ -102,7 +102,7 @@ export const onRequest = async (ctx: Ctx) => {
       const list = await rows(ctx)
       if (list.length) {
         block = render(list)
-        if (cache) ctx.waitUntil(cache.put(key, new Response(block, { headers: { "Cache-Control": `public, max-age=${CACHE_S}` } })))
+        if (cache) ctx.waitUntil(cache.put(key, new Response(block, { headers: { "Cache-Control": `public, max-age=${list.length < ROUTES.length ? 300 : CACHE_S}` } })))  // trajets encore sans prix : on réessaie dans 5 min
       }
     }
     if (!block) return response

@@ -17,9 +17,11 @@ jobs:
   releve:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Ouvrir les pages trajets du baromètre
         run: |
-          PAGES=$(curl -fsS "$SITE_URL/barometre-prix/" | grep -oE 'href="/(vol|it/voli)-[a-z-]+/"' | sed 's/href="//;s/"$//' | sort -u)
+          # Liste prise dans le code du baromètre (src/barometre.ts) : les trajets encore sans prix sont aussi visités
+          PAGES=$(grep -oE '"(vol|it/voli)-[a-z-]+"\]' src/barometre.ts | tr -d '"]' | sed 's#^#/#;s#$#/#' | sort -u)
           echo "$(echo "$PAGES" | wc -l) pages trajets"
           for P in $PAGES; do
             echo "$P : $(curl -s -o /dev/null -w '%{http_code}' "$SITE_URL$P")"
