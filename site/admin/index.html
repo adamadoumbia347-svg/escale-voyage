@@ -32,7 +32,7 @@
 <div class="wrap">
   <form class="ad-form" id="f">
     <label>Clé d’accès<br><input id="key" type="password" autocomplete="current-password" required></label>
-    <label>Afficher<br><select id="form"><option value="bons-plans">Inscriptions aux bons plans</option><option value="contact">Messages de contact</option></select></label>
+    <label>Afficher<br><select id="form"><option value="bons-plans">Inscriptions aux bons plans</option><option value="contact">Messages de contact</option><option value="avis">Avis des voyageurs (à relire)</option></select></label>
     <button type="submit">Afficher</button>
   </form>
   <p id="msg" class="small" role="status"></p>
@@ -57,11 +57,14 @@
   var when = function (iso) { try { return new Date(iso).toLocaleString("fr-FR", { dateStyle: "medium", timeStyle: "short" }); } catch (e) { return iso; } };
   function render() {
     var form = $("form").value;
-    $("count").textContent = items.length + (form === "contact" ? " message(s)" : " inscrit(s)");
-    $("copy-emails").hidden = $("copy-wa").hidden = form === "contact";
+    $("count").textContent = items.length + (form === "contact" ? " message(s)" : form === "avis" ? " avis à relire" : " inscrit(s)");
+    $("copy-emails").hidden = $("copy-wa").hidden = form !== "bons-plans";
     $("list").innerHTML = items.length ? items.map(function (it, i) {
       var f = it.fields || {};
-      var body = form === "contact"
+      var body = form === "avis"
+        ? "<strong>" + esc(f.prenom) + "</strong>, " + esc(f.ville) + " · " + esc(f.trajet) + (f.compagnie ? " · " + esc(f.compagnie) : "") + (f.prix ? " · " + esc(f.prix) : "") + (f.mois ? " · " + esc(f.mois) : "") + " · " + esc(f.note || "") + "★" +
+          "<div class=\"msg\">" + esc(f.texte) + "</div><p class=\"small\">Pour le publier : dites à Claude « publie l'avis de " + esc(f.prenom) + " ». " + (f.email ? "E-mail (privé) : " + esc(f.email) : "") + "</p>"
+        : form === "contact"
         ? "<strong>" + esc(f.nom || "(sans nom)") + "</strong> · <a href=\"mailto:" + esc(f.email) + "\">" + esc(f.email) + "</a><div class=\"msg\">" + esc(f.message) + "</div>"
         : (f.email ? "<a href=\"mailto:" + esc(f.email) + "\">" + esc(f.email) + "</a>" : "") + (f.email && f.whatsapp ? " · " : "") + (f.whatsapp ? "WhatsApp " + esc(f.whatsapp) : "");
       return "<li><div class=\"meta\"><span>" + esc(when(it.at)) + "</span><span>" + esc(f.langue || "") + "</span></div>" + body +
@@ -123,7 +126,7 @@
   $("copy-emails").addEventListener("click", function () { copy(items.map(function (i) { return (i.fields || {}).email; }), "E-mails"); });
   $("copy-wa").addEventListener("click", function () { copy(items.map(function (i) { return (i.fields || {}).whatsapp; }), "Numéros"); });
   $("csv").addEventListener("click", function () {
-    var cols = $("form").value === "contact" ? ["nom", "email", "message"] : ["email", "whatsapp", "langue"];
+    var cols = $("form").value === "contact" ? ["nom", "email", "message"] : $("form").value === "avis" ? ["prenom", "ville", "trajet", "compagnie", "prix", "mois", "note", "texte", "email", "langue"] : ["email", "whatsapp", "langue"];
     var q = function (v) { return '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"'; };
     var rows = [["date"].concat(cols).map(q).join(";")].concat(items.map(function (i) { return [i.at].concat(cols.map(function (c) { return (i.fields || {})[c]; })).map(q).join(";"); }));
     var a = document.createElement("a");

@@ -1,6 +1,6 @@
 {
 "/": [
-"1fb0afdcaebb20d9",
+"eb90fe519c3dceb6",
 "2026-11-01"
 ],
 "/a-propos/": [
@@ -2171,8 +2171,68 @@
 "a9830ca1843b4fcc",
 "2026-11-01"
 ],
+"/arriver-aeroport-abidjan/": [
+"13967c53a6a442a0",
+"2026-11-01"
+],
+"/arriver-aeroport-accra/": [
+"1387eaff507c255b",
+"2026-11-01"
+],
+"/arriver-aeroport-alger/": [
+"172e63aea432aeaa",
+"2026-11-01"
+],
+"/arriver-aeroport-bamako/": [
+"d90af0d1636ff4bd",
+"2026-11-01"
+],
+"/arriver-aeroport-casablanca/": [
+"eaff1856e795221c",
+"2026-11-01"
+],
+"/arriver-aeroport-conakry/": [
+"02a69eb2971e9707",
+"2026-11-01"
+],
+"/arriver-aeroport-dakar/": [
+"414ab6a44f4d09e4",
+"2026-11-01"
+],
+"/arriver-aeroport-douala/": [
+"c8dd7f522bb736e6",
+"2026-11-01"
+],
+"/arriver-aeroport-kinshasa/": [
+"62c737c746ee1792",
+"2026-11-01"
+],
+"/arriver-aeroport-lagos/": [
+"b8d3f3cad4e36610",
+"2026-11-01"
+],
+"/arriver-aeroport-lome/": [
+"854e2c9f7a290859",
+"2026-11-01"
+],
+"/arriver-aeroport-tunis/": [
+"01c1d8fb5ac0d55b",
+"2026-11-01"
+],
+"/avis-voyageurs/": [
+"6cb958afb2c9efa5",
+"2026-11-01"
+],
+"/bagages-compagnies-afrique/": [
+"08bc3c5414e92f9c",
+"2026-11-01"
+],
 "/barometre-prix/": [
 "ad6bea4ab7d8790f",
+"2026-11-01"
+],
+"/billet-avion-urgent/": [
+"7dd1213ccc060a59",
 "2026-11-01"
 ],
 "/blog/": [
@@ -2621,6 +2681,58 @@
 ],
 "/en/anywhere/": [
 "5c21de1447d8ba64",
+"2026-11-01"
+],
+"/en/arriving-at-abidjan-airport/": [
+"2b7bd94877d07eb3",
+"2026-11-01"
+],
+"/en/arriving-at-accra-airport/": [
+"2ff6fb9cf8f74c22",
+"2026-11-01"
+],
+"/en/arriving-at-algiers-airport/": [
+"692f8f824664e167",
+"2026-11-01"
+],
+"/en/arriving-at-bamako-airport/": [
+"0ec453b03f9e7b06",
+"2026-11-01"
+],
+"/en/arriving-at-casablanca-airport/": [
+"8913b1d23c50d5cf",
+"2026-11-01"
+],
+"/en/arriving-at-conakry-airport/": [
+"846ec785f4e3e048",
+"2026-11-01"
+],
+"/en/arriving-at-dakar-airport/": [
+"9c0b13b4d4af4654",
+"2026-11-01"
+],
+"/en/arriving-at-douala-airport/": [
+"2eb0a3a4d739daab",
+"2026-11-01"
+],
+"/en/arriving-at-kinshasa-airport/": [
+"d11be529e6c6348d",
+"2026-11-01"
+],
+"/en/arriving-at-lagos-airport/": [
+"63cd8d017d89a399",
+"2026-11-01"
+],
+"/en/arriving-at-lome-airport/": [
+"e99251e5a740de40",
+"2026-11-01"
+],
+"/en/arriving-at-tunis-airport/": [
+"df36af1c2a586aab",
+"2026-11-01"
+],
+"/en/baggage-allowance-africa-airlines/": [
+"35d8e8e1373d2c84",
 "2026-11-01"
 ],
 "/en/business-flights-dubai-guangzhou-istanbul/": [
@@ -4785,6 +4897,14 @@
 ],
 "/en/student-flights-from-africa/": [
 "bf4528c4026abee1",
+"2026-11-01"
+],
+"/en/traveller-reviews/": [
+"d07b5f82a233ab94",
+"2026-11-01"
+],
+"/en/urgent-flight-to-africa/": [
+"84e23930b56b99ae",
 "2026-11-01"
 ],
 "/en/visa/": [

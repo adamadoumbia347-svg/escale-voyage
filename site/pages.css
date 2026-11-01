@@ -493,3 +493,12 @@ a.pg-cell:hover, a.pg-cell:focus-visible { outline: 2px solid var(--accent); }
 .lite main img:not([data-keep]), .lite .city-card img { display: none; }
 .lite .lite-load { margin: 6px 0 4px; }
 .lite-toggle { background: none; border: 0; padding: 0; color: inherit; font: inherit; text-decoration: underline; cursor: pointer; }
+/* Avis des voyageurs (scripts/pratique_afrique.py) */
+.avis-list { list-style: none; padding: 0; display: grid; gap: 10px; }
+.avis { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; background: var(--soft); }
+.avis-head { margin: 0 0 6px; font-size: 14px; color: var(--muted); } .avis-head strong { color: var(--ink); }
+.avis-form { display: grid; gap: 12px; }
+.avis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 12px; }
+.avis-form label { display: grid; gap: 4px; font-weight: 600; }
+.avis-form input, .avis-form select, .avis-form textarea { font: inherit; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink); max-width: 100%; box-sizing: border-box; }
+.avis-form .consent { display: flex; gap: 8px; align-items: flex-start; font-weight: 400; font-size: 14px; }
