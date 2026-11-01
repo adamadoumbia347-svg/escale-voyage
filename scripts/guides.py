@@ -803,6 +803,139 @@ GUIDES = [
             ],
             note="قواعد العبور والتأشيرات والأمتعة تعتمد على شركة الطيران والدول: تحقّق منها دائمًا قبل السفر."),
     },
+    {
+        "key": "nuit",
+        "fr": dict(
+            slug="guides/vol-de-nuit", title="Vol de nuit : bien dormir et arriver en forme",
+            desc="Choisir son siège, quoi emporter en cabine, dormir à bord et récupérer à l’arrivée : nos conseils pour un vol de nuit vers l’Afrique ou ailleurs.",
+            intro="Beaucoup de vols vers l’Afrique, le Golfe ou les Antilles partent le soir ou arrivent au petit matin. Un peu de préparation aide à dormir à bord et à bien commencer le séjour.",
+            sections=[
+                ("Avant d’embarquer", [
+                    "- Choisissez votre siège à l’avance si possible : un hublot pour s’appuyer et ne pas être dérangé, un couloir si vous vous levez souvent.",
+                    "- Mangez léger avant le vol et limitez le café en fin de journée.",
+                    "- Pensez à l’heure d’arrivée : prévoyez le transport depuis l’aéroport et, si besoin, une chambre disponible dès le matin.",
+                ]),
+                ("Dans le bagage cabine", [
+                    "- Un oreiller de voyage, un masque pour les yeux et des bouchons d’oreilles (ou un casque).",
+                    "- Une couche chaude : il fait souvent frais en cabine la nuit.",
+                    "- Une gourde vide, à remplir après le contrôle de sécurité, vos médicaments et une brosse à dents.",
+                ]),
+                ("Pendant le vol", [
+                    "- Buvez de l’eau régulièrement et levez-vous de temps en temps pour marcher et étirer les jambes.",
+                    "- Gardez la ceinture attachée par-dessus la couverture : l’équipage ne vous réveillera pas en cas de turbulences.",
+                    "- Avec des enfants, gardez les habitudes du coucher (pyjama, doudou) pour les aider à s’endormir.",
+                ]),
+                ("À l’arrivée", [
+                    "Prenez la lumière du jour et calez-vous sur l’heure locale dès que possible. Une courte sieste peut aider, mais évitez de dormir toute la journée pour retrouver un rythme normal.",
+                    "Si vous conduisez à l’arrivée après une nuit courte, soyez prudent : un transfert réservé à l’avance ou un taxi peut être plus sûr.",
+                ]),
+            ],
+            note="Conseils généraux : en cas de problème de santé (circulation, grossesse, traitement), demandez l’avis de votre médecin avant un long vol."),
+        "en": dict(
+            slug="en/guides/overnight-flight", title="Overnight flights: sleep well and arrive refreshed",
+            desc="Picking your seat, what to pack in your cabin bag, sleeping on board and recovering on arrival: our tips for an overnight flight to Africa or elsewhere.",
+            intro="Many flights to Africa, the Gulf or the Caribbean leave in the evening or land early in the morning. A little preparation helps you sleep on board and start your trip well.",
+            sections=[
+                ("Before boarding", [
+                    "- Choose your seat in advance if you can: a window to lean on and not be disturbed, an aisle if you get up often.",
+                    "- Eat light before the flight and cut down on coffee late in the day.",
+                    "- Think about your arrival time: plan transport from the airport and, if needed, a room available from the morning.",
+                ]),
+                ("In your cabin bag", [
+                    "- A travel pillow, an eye mask and earplugs (or headphones).",
+                    "- A warm layer: the cabin is often cool at night.",
+                    "- An empty bottle to fill after security, your medication and a toothbrush.",
+                ]),
+                ("During the flight", [
+                    "- Drink water regularly and get up from time to time to walk and stretch your legs.",
+                    "- Keep your seatbelt fastened over the blanket: the crew will not need to wake you if there is turbulence.",
+                    "- With children, keep the bedtime routine (pyjamas, favourite toy) to help them fall asleep.",
+                ]),
+                ("On arrival", [
+                    "Get some daylight and switch to local time as soon as possible. A short nap can help, but avoid sleeping all day so you get back to a normal rhythm.",
+                    "If you have to drive after a short night, be careful: a pre-booked transfer or a taxi can be safer.",
+                ]),
+            ],
+            note="General advice: if you have a health condition (circulation, pregnancy, treatment), ask your doctor before a long flight."),
+        "es": dict(
+            slug="es/guias/vuelo-nocturno", title="Vuelo nocturno: dormir bien y llegar en forma",
+            desc="Elegir asiento, qué llevar en cabina, dormir a bordo y recuperarse al llegar: nuestros consejos para un vuelo nocturno a África o a otro destino.",
+            intro="Muchos vuelos a África, el Golfo o el Caribe salen por la noche o llegan de madrugada. Un poco de preparación ayuda a dormir a bordo y a empezar bien el viaje.",
+            sections=[
+                ("Antes de embarcar", [
+                    "- Elige tu asiento con antelación si puedes: ventanilla para apoyarte y que no te molesten, pasillo si te levantas a menudo.",
+                    "- Come ligero antes del vuelo y reduce el café al final del día.",
+                    "- Piensa en la hora de llegada: organiza el transporte desde el aeropuerto y, si hace falta, una habitación disponible desde la mañana.",
+                ]),
+                ("En el equipaje de mano", [
+                    "- Una almohada de viaje, un antifaz y tapones para los oídos (o auriculares).",
+                    "- Una prenda de abrigo: en cabina suele hacer fresco por la noche.",
+                    "- Una botella vacía para llenar después del control de seguridad, tus medicamentos y un cepillo de dientes.",
+                ]),
+                ("Durante el vuelo", [
+                    "- Bebe agua con regularidad y levántate de vez en cuando para caminar y estirar las piernas.",
+                    "- Lleva el cinturón abrochado por encima de la manta: la tripulación no tendrá que despertarte si hay turbulencias.",
+                    "- Con niños, mantén la rutina de dormir (pijama, peluche) para ayudarles a conciliar el sueño.",
+                ]),
+                ("Al llegar", [
+                    "Toma luz natural y adáptate a la hora local cuanto antes. Una siesta corta puede ayudar, pero evita dormir todo el día para recuperar un ritmo normal.",
+                    "Si tienes que conducir tras una noche corta, ten cuidado: un traslado reservado o un taxi puede ser más seguro.",
+                ]),
+            ],
+            note="Consejos generales: si tienes un problema de salud (circulación, embarazo, tratamiento), consulta a tu médico antes de un vuelo largo."),
+        "pt": dict(
+            slug="pt/guias/voo-noturno", title="Voo noturno: dormir bem e chegar em forma",
+            desc="Escolher o lugar, o que levar na cabine, dormir a bordo e recuperar à chegada: as nossas dicas para um voo noturno para África ou outro destino.",
+            intro="Muitos voos para África, o Golfo ou as Caraíbas partem à noite ou chegam de madrugada. Um pouco de preparação ajuda a dormir a bordo e a começar bem a viagem.",
+            sections=[
+                ("Antes de embarcar", [
+                    "- Escolha o lugar com antecedência se puder: janela para se encostar e não ser incomodado, corredor se se levanta muitas vezes.",
+                    "- Coma leve antes do voo e reduza o café ao fim do dia.",
+                    "- Pense na hora de chegada: organize o transporte desde o aeroporto e, se necessário, um quarto disponível logo de manhã.",
+                ]),
+                ("Na bagagem de mão", [
+                    "- Uma almofada de viagem, uma máscara para os olhos e tampões para os ouvidos (ou auscultadores).",
+                    "- Uma peça quente: a cabine costuma estar fresca à noite.",
+                    "- Uma garrafa vazia para encher depois do controlo de segurança, os seus medicamentos e uma escova de dentes.",
+                ]),
+                ("Durante o voo", [
+                    "- Beba água regularmente e levante-se de vez em quando para andar e esticar as pernas.",
+                    "- Mantenha o cinto apertado por cima da manta: a tripulação não terá de o acordar em caso de turbulência.",
+                    "- Com crianças, mantenha a rotina de deitar (pijama, peluche) para as ajudar a adormecer.",
+                ]),
+                ("À chegada", [
+                    "Apanhe luz do dia e ajuste-se à hora local o mais cedo possível. Uma sesta curta pode ajudar, mas evite dormir o dia todo para recuperar um ritmo normal.",
+                    "Se tiver de conduzir depois de uma noite curta, tenha cuidado: um transfer reservado ou um táxi pode ser mais seguro.",
+                ]),
+            ],
+            note="Conselhos gerais: se tiver um problema de saúde (circulação, gravidez, tratamento), peça a opinião do seu médico antes de um voo longo."),
+        "ar": dict(
+            slug="ar/guides/overnight-flight", title="رحلة ليلية: نوم جيد ووصول بنشاط",
+            desc="اختيار المقعد، ما تأخذه في المقصورة، النوم على متن الطائرة والتعافي عند الوصول: نصائحنا لرحلة ليلية إلى أفريقيا أو أي وجهة أخرى.",
+            intro="تغادر رحلات كثيرة إلى أفريقيا والخليج والكاريبي مساءً أو تصل في الصباح الباكر. قليل من التحضير يساعدك على النوم في الطائرة وبدء رحلتك جيدًا.",
+            sections=[
+                ("قبل الصعود", [
+                    "- اختر مقعدك مسبقًا إن أمكن: النافذة لتستند ولا يزعجك أحد، والممر إذا كنت تنهض كثيرًا.",
+                    "- تناول وجبة خفيفة قبل الرحلة وقلّل القهوة في آخر النهار.",
+                    "- فكّر في وقت الوصول: رتّب وسيلة النقل من المطار، وغرفة متاحة منذ الصباح إن لزم.",
+                ]),
+                ("في حقيبة اليد", [
+                    "- وسادة سفر وقناع للعينين وسدادات للأذنين (أو سماعات).",
+                    "- قطعة ملابس دافئة: المقصورة باردة غالبًا في الليل.",
+                    "- قارورة فارغة تملؤها بعد التفتيش الأمني، وأدويتك وفرشاة أسنان.",
+                ]),
+                ("أثناء الرحلة", [
+                    "- اشرب الماء بانتظام وانهض من حين لآخر للمشي وتمديد ساقيك.",
+                    "- أبقِ حزام الأمان مربوطًا فوق البطانية: لن يحتاج الطاقم إلى إيقاظك عند حدوث مطبات.",
+                    "- مع الأطفال، حافظ على عادات النوم (ملابس النوم، اللعبة المفضلة) لمساعدتهم على النوم.",
+                ]),
+                ("عند الوصول", [
+                    "تعرّض لضوء النهار واضبط نفسك على التوقيت المحلي في أسرع وقت. قيلولة قصيرة قد تفيد، لكن تجنّب النوم طوال اليوم لتستعيد إيقاعك الطبيعي.",
+                    "إذا كان عليك القيادة بعد ليلة قصيرة، فكن حذرًا: النقل المحجوز مسبقًا أو سيارة الأجرة قد يكونان أكثر أمانًا.",
+                ]),
+            ],
+            note="نصائح عامة: إذا كانت لديك مشكلة صحية (الدورة الدموية، الحمل، علاج)، استشر طبيبك قبل الرحلات الطويلة."),
+    },
 ]
 
 INDEX = {

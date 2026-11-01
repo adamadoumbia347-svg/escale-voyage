@@ -98,7 +98,7 @@ def build(page, E, alert_btn, route_exists, wa_btn):
                ("Combien coûte l'attestation d'accueil ?", "Un timbre fiscal de 30 €, payé par la personne qui accueille, à la demande en mairie.")]
         ld = ('<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", "@type": "FAQPage",
               "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]}, ensure_ascii=False) + "</script>")
-        urls.append(page(path(slug), f"Faire venir sa famille {de(v)} en France ou en Italie : billet et visa | Escale",
+        urls.append(page(path(slug), f"Faire venir sa famille {de(v)} : billet d'avion et visa | Escale",
                          f"Faire venir ses parents {de(v)} : prix des billets {v} → Paris, Lyon, Bruxelles, Milan, Rome, visa, attestation d'accueil et assurance.",
                          hero, body, ld))
     items = "".join(f'<li><a href="/{path(s)}/"><strong>{E(v)}</strong></a> · <span class="small">{E(p)}</span></li>' for c, v, p, s in VILLES)

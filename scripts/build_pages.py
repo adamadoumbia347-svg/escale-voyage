@@ -645,6 +645,7 @@ def main():
                                         '<li><a href="/guides/check-list-depart/">Check-list avant de partir</a></li>',
                                         '<li><a href="/guides/argent-en-voyage/">Argent en voyage : carte, change, Mobile Money</a></li>',
                                         '<li><a href="/guides/correspondances-escales/">Correspondances et longues escales</a></li>',
+                                        '<li><a href="/guides/vol-de-nuit/">Vol de nuit : bien dormir à bord</a></li>',
                                         '<li><a href="/vols-fetes/">Vols pour les fêtes : Noël, Ramadan, Tabaski, été</a></li>',
                                         '<li><a href="/vols-ete-2027/">Vacances d’été 2027 au pays : prix par destination</a></li>',
                                         '<li><a href="/barometre-prix/">Baromètre des prix des vols</a></li>',
