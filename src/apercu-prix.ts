@@ -23,19 +23,21 @@ const TRACKED = new Set(("CDG-DSS CDG-BKO CDG-ABJ CDG-CKY CDG-DLA CDG-NSI CDG-LF
   "LIL-ALG LIL-ORN LIL-TUN LIL-OUD GVA-ABJ CDG-MPM BOD-RAK MXP-ABJ MXP-DSS FCO-DSS MXP-CMN MXP-LOS MXP-ACC " +
   "CDG-NIM CDG-NDJ CDG-OXB CDG-BJL CDG-RAI CDG-ACC CDG-LOS CDG-ADD CDG-NBO CDG-JNB CDG-KGL CDG-CAI CDG-TNR CDG-LAD CDG-MPM CDG-DAR CDG-MRU MXP-TUN MXP-CAI MXP-ADD MXP-ALG FCO-CMN FCO-TUN FCO-CAI FCO-LOS FCO-ADD FCO-ALG FCO-ACC FCO-ABJ").split(" "))
 const HIST_DAYS = 120, HIST_MIN = 7, HIST_WINDOW = 60
-export type Point = [string, number] // [date, prix le plus bas des 6 prochains mois]
+export type Point = [string, number, string?] // [date, prix le plus bas des 6 prochains mois]
 
 export async function readHistory(ctx: Ctx, from: string, to: string): Promise<Point[]> {
   if (!ctx.env.ESCALE || !TRACKED.has(`${from}-${to}`)) return []
   try { return ((await ctx.env.ESCALE.get(`hist:${from}-${to}`, "json")) as Point[]) || [] } catch { return [] }
 }
 
-async function recordHistory(ctx: Ctx, from: string, to: string, price: number) {
+// Le mois le moins cher est gardé avec le prix : le baromètre lit tout dans KV, sans ouvrir le cache de chaque trajet
+async function recordHistory(ctx: Ctx, from: string, to: string, price: number, month: string) {
   if (!ctx.env.ESCALE || !TRACKED.has(`${from}-${to}`)) return
   const today = new Date().toISOString().slice(0, 10)
   const hist = await readHistory(ctx, from, to)
-  if (hist.length && hist[hist.length - 1][0] === today) return
-  hist.push([today, Math.round(price)])
+  const last = hist[hist.length - 1]
+  if (last && last[0] === today) { if (last[2]) return; last[2] = month } // relevé du jour déjà fait (on complète le mois s'il manquait)
+  else hist.push([today, Math.round(price), month])
   await ctx.env.ESCALE.put(`hist:${from}-${to}`, JSON.stringify(hist.slice(-HIST_DAYS)))
 }
 
@@ -125,7 +127,7 @@ export async function routeMonths(ctx: Ctx, from: string, to: string): Promise<M
     if (t) out.push({ month: months[i], price: t.price, dep: String(t.departure_at).slice(0, 10), ret: t.return_at ? String(t.return_at).slice(0, 10) : "", transfers: t.transfers ?? 0 })
   })
   if (cache) ctx.waitUntil(cache.put(key, new Response(JSON.stringify(out), { headers: { "Content-Type": "application/json", "Cache-Control": `public, max-age=${CACHE_S}` } })))
-  if (out.length) ctx.waitUntil(recordHistory(ctx, from, to, Math.min(...out.map((r) => r.price))).catch(() => {}))
+  if (out.length) { const b = out.reduce((a, c) => (c.price < a.price ? c : a)); ctx.waitUntil(recordHistory(ctx, from, to, b.price, b.month).catch(() => {})) }
   return out
 }
 

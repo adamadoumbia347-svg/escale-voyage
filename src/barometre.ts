@@ -48,18 +48,25 @@ type Row = { label: string; path: string; from: string; to: string; price: numbe
 
 async function rows(ctx: Ctx): Promise<Row[]> {
   const cache = (globalThis as any).caches?.default
+  let budget = 15
   const out = await Promise.all(ROUTES.map(async ([from, to, label, path]) => {
+    // D'abord l'historique (KV, relevé du jour ou de la veille) ; le cache du trajet seulement s'il n'y a rien de récent,
+    // et pour 15 trajets au plus : une visite Cloudflare (offre gratuite) est limitée à 50 sous-requêtes
     const hist = await readHistory(ctx, from, to)
-    const hit = cache ? await cache.match(cacheKey(from, to)) : null
-    const months: Month[] = hit ? await hit.json() : []
     const last = hist.length ? hist[hist.length - 1] : null
-    const price = months.length ? Math.min(...months.map((m) => m.price)) : last && last[0] >= iso(3) ? last[1] : null
+    let price: number | null = null, month: Month | null = null
+    if (last && last[0] >= iso(1)) { price = last[1]; month = last[2] ? ({ month: last[2] } as Month) : null }
+    else if (cache && budget-- > 0) {
+      const hit = await cache.match(cacheKey(from, to)).catch(() => null)
+      const months: Month[] = hit ? await hit.json() : []
+      if (months.length) { month = months.reduce((a, b) => (b.price < a.price ? b : a)); price = month.price }
+      else if (last && last[0] >= iso(3)) price = last[1]
+    }
     if (!price) return { missing: [from, to] as const }
-    const month = months.length ? months.reduce((a, b) => (b.price < a.price ? b : a)) : null
     return { row: { label, path, from, to, price, d7: pct(price, ago(hist, 7, 2)), d30: pct(price, ago(hist, 30, 5)), month } as Row }
   }))
-  // Trajets sans prix en cache : préparés en arrière-plan (3 par visite) pour la visite suivante
-  const missing = out.filter((o: any) => o.missing).slice(0, 3).map((o: any) => o.missing)
+  // Trajets sans prix en cache : préparés en arrière-plan (2 par visite) pour la visite suivante
+  const missing = out.filter((o: any) => o.missing).slice(0, 2).map((o: any) => o.missing)
   if (missing.length) ctx.waitUntil(Promise.all(missing.map(([f, t]: string[]) => routeMonths(ctx, f, t).catch(() => null))))
   return out.filter((o: any) => o.row).map((o: any) => o.row)
 }
