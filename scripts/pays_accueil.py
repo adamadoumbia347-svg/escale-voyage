@@ -97,7 +97,7 @@ def build(site, ctx, route_paths):
             secs += (f'<section class="hub"><h2>{E(h)}</h2><table class="hub-table"><thead><tr><th scope="col">{E(t["th"][0])}</th>'
                      f'<th scope="col">{E(t["th"][1])}</th><td></td></tr></thead><tbody>{rows}</tbody></table></section>')
         q = urllib.parse.urlencode({"type": "vols", "from": origins[0], **({"lang": lang} if lang != "fr" else {})})
-        visa_href = "/visa/" if lang == "fr" else "/en/visa/"
+        visa_href = ("/visa/" if lang == "fr" else "/en/visa/") + "?p=" + code.upper()
         tips = "".join(f"<li>{E(x.format(cur=curn))}</li>" for x in t["tips"])
         others = " · ".join(f'<a href="/{c}/">{p[1]} {E(EN_NAME.get(c, p[0]) if lang == "en" else p[0])}</a>' for c, p in PAYS.items() if c != code)
         hero = (f'<p class="eyebrow">{flag} {E(pname)}</p><h1>{t["h1"].format(pays=E(pform))}</h1>'

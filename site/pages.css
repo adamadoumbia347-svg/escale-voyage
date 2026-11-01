@@ -473,3 +473,17 @@ a.pg-cell:hover, a.pg-cell:focus-visible { outline: 2px solid var(--accent); }
 .pc-tip { position: absolute; display: grid; gap: 1px; padding: 6px 10px; border-radius: 8px; background: var(--surface); color: var(--ink);
   border: 1px solid var(--line); box-shadow: 0 4px 14px rgb(0 0 0 / .12); text-decoration: none; font-size: 12px; white-space: nowrap; pointer-events: auto; }
 .pc-tip span { color: var(--muted); } .pc-tip strong { font-size: 14px; } .pc-tip em { font-style: normal; color: var(--accent); font-weight: 600; }
+/* Outil visa (site/visa.js) : statut toujours écrit en toutes lettres, la couleur ne fait que l'accompagner */
+.visa-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 12px; margin: 8px 0 16px; }
+.visa-form label { display: grid; gap: 6px; font-weight: 600; }
+.visa-form select { min-height: 48px; padding: 0 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink); font: inherit; max-width: 100%; }
+.visa-card { border: 1px solid var(--line); border-radius: 14px; padding: 16px; background: var(--soft); }
+.visa-head { font-weight: 700; margin: 0 0 10px; }
+.visa-badge { display: inline-block; padding: 4px 10px; border-radius: 999px; font-weight: 700; font-size: 14px; border: 1px solid currentColor; }
+.visa-badge.v0 { color: #0f7a4a; } .visa-badge.v1 { color: #1a56db; } .visa-badge.v2 { color: #b42318; } .visa-badge.v9 { color: #8a6100; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .visa-badge.v0 { color: #4cc38a; } :root:not([data-theme="light"]) .visa-badge.v1 { color: #6cb6ff; } :root:not([data-theme="light"]) .visa-badge.v2 { color: #ff7b6b; } :root:not([data-theme="light"]) .visa-badge.v9 { color: #f2c94c; } }
+:root[data-theme="dark"] .visa-badge.v0 { color: #4cc38a; } :root[data-theme="dark"] .visa-badge.v1 { color: #6cb6ff; } :root[data-theme="dark"] .visa-badge.v2 { color: #ff7b6b; } :root[data-theme="dark"] .visa-badge.v9 { color: #f2c94c; }
+.visa-all { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 8px; }
+.visa-all button { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink); font: inherit; text-align: start; cursor: pointer; }
+.visa-all button .visa-badge { font-size: 12px; padding: 2px 8px; white-space: nowrap; }
+.visa-warn { margin-top: 16px; }

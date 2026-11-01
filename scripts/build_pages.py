@@ -24,6 +24,7 @@ import italia  # noqa: E402
 import deutsch  # noqa: E402
 import nederlands  # noqa: E402
 import pays_accueil  # noqa: E402
+import visa  # noqa: E402
 import explore_pages  # noqa: E402
 import hubs  # noqa: E402
 import villes  # noqa: E402
@@ -610,6 +611,7 @@ def main():
     explore_pages.build_favs(SITE, ctx)  # pages personnelles : hors du plan du site
     hub_urls, _ = hubs.build_hubs(SITE, ctx, route_paths, hotel_paths)
     urls += pays_accueil.build(SITE, ctx, route_paths)  # accueils par pays africain (/ci/, /sn/, /ng/…)
+    urls += visa.build(SITE, ctx)  # outil « visa selon mon passeport » (/visa/, /en/visa/)
     urls += hub_urls
     urls += i18n_urls + build_i18n.build_indexes(SITE, ctx, route_paths, hotel_paths) + build_i18n.build_deals(SITE, ctx) + build_i18n.build_guides(SITE, ctx) + build_i18n.build_about(SITE, ctx) + build_i18n.build_fetes(SITE, ctx) + explore_pages.build_anywhere(SITE, ctx)
     urls += legal_pages()
