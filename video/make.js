@@ -53,7 +53,7 @@ async function prices() {
 }
 
 const day = () => new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Paris' }));
-const today = () => day().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' });
+const today = () => day().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }).replace(/^1 /, '1er ');
 const doy = () => { const d = day(); return Math.floor((d - new Date(d.getFullYear(), 0, 0)) / 864e5); };
 const tags = (list) => [...new Set(list.map((r) => TAGS[r.flag]).filter(Boolean).join(' ').split(' '))].slice(0, 6).join(' ');
 const card = (r, extra) => ({ flag: r.flag, route: r.route, price: r.price, extra: extra || 'aller-retour dès' });
@@ -85,6 +85,16 @@ function build(rows, fmt) {
     return { title: `Devine le prix : ${r.route}`, data: { hook: { emoji: '🤔💸', title: 'Devine le prix<br>de ce billet', sub: 'Réponds avant la fin du compte à rebours !' },
         quiz: { flag: r.flag, route: r.route, options: order.map((i) => opts[i]), answer: order.indexOf(0) }, outro: { ask: 'Tu avais trouvé ?<br><span class="y">Dis-le en commentaire 👇</span>', cta: 'Tous les prix sur escale.live 👆' } },
       route: r.path, caption: `Devine le prix 🤔 ${r.route} aller-retour : A, B ou C ? Réponse dans la vidéo 👀 ${base} ${tags([r])}` }; }
+  if (fmt === 'toutes') { // toutes les destinations du baromètre, par région, la moins chère par ville
+    const best = {}; rows.forEach((r) => { if (!best[r.city] || r.price < best[r.city].price) best[r.city] = r; });
+    const all = Object.values(best).sort((a, b) => a.price - b.price), dep = (r) => 'depuis ' + r.route.split('→')[0].trim() + ' · A/R';
+    const REG = [['Afrique de l\'Ouest', '🌍', ['🇸🇳', '🇲🇱', '🇨🇮', '🇬🇳', '🇹🇬', '🇧🇯', '🇧🇫', '🇲🇷', '🇳🇪']], ['Afrique centrale', '🌍', ['🇨🇲', '🇨🇩', '🇨🇬', '🇬🇦']], ['Maghreb', '🌴', ['🇩🇿', '🇲🇦', '🇹🇳']]];
+    const sections = REG.map(([nom, e, fl]) => ({ chip: nom, title: 'Aller-retour, prix les plus bas ' + e, grid: true,
+      cards: all.filter((r) => fl.includes(r.flag)).slice(0, 8).map((r) => ({ flag: r.flag, route: r.city, price: r.price, extra: dep(r) })) })).filter((x) => x.cards.length);
+    return { title: 'Tous les prix vers l\'Afrique', route: (afr[0] || rows[0]).path, data: { hook: { emoji: '🌍✈️', title: 'Combien coûte<br>un billet pour <b>le bled</b><br>cette semaine ?', sub: `Toutes les destinations · prix repérés le ${date}` },
+        sections, outro: OUTRO },
+      caption: `Combien coûte un billet pour le bled cette semaine ? 🌍✈️ ${all.slice(0, 4).map((r) => `${r.city} dès ${r.price} €`).join(', ')}… Toutes les destinations sur escale.live 👇 Ta ville ? Dis-le en commentaire ${base} #afrique #maghreb` };
+  }
   // astuce
   const k = doy() % TIPS.length, [l1, l2, l3] = TIPS[k];
   return { title: `Astuce : ${l1}`, data: { hook: { emoji: '💡✈️', title: 'L\'astuce du jour<br>pour payer ton billet<br><b>moins cher</b>', sub: 'Garde-la pour ton prochain voyage 📌' },
@@ -97,7 +107,7 @@ async function phoneScene(b, fmt, v) {
   const route = v.route || 'vol-paris-dakar';
   const R = await capture(b, `${SITE}/${route}/`, 'trajet', { hero: '#hero-price', cal: '#route-calendar', day: '#route-calendar .cal-day.t0', alert: '#price-alert', alertBtn: '#price-alert button[type=submit]' }, 7200, 7000);
   const shots = [], cal = R.boxes.cal, day = R.boxes.day, al = R.boxes.alert, btn = R.boxes.alertBtn;
-  if (LANG === 'fr' && ['top', 'afrique', 'maghreb', 'baisse'].includes(fmt)) {
+  if (LANG === 'fr' && ['top', 'afrique', 'maghreb', 'baisse', 'toutes'].includes(fmt)) {
     const Bp = await capture(b, `${SITE}/barometre-prix/`, 'barometre', { table: '#barometre table', row: `#barometre a[href="/${route}/"]` }, 6000, 4000);
     const ty = Bp.boxes.table ? Bp.boxes.table.top - 110 : 500, row = Bp.boxes.row;
     shots.push({ src: Bp.src, w: Bp.w, steps: [[0, 0], [.9, 0], [2.6, ty], [4.6, ty]], taps: row ? [[3.4, row.x, row.y, ty]] : [], dur: 4.6 });

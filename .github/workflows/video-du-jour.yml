@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
     inputs:
       format:
-        description: "Format à forcer pour la vidéo française (top, focus, astuce, afrique, baisse, maghreb, quiz) – vide = format du jour"
+        description: "Format à forcer pour la vidéo française (top, focus, astuce, afrique, baisse, maghreb, quiz, toutes) – vide = format du jour, et la vidéo italienne n'est alors pas refaite"
         required: false
         default: ""
 permissions:
@@ -34,4 +34,4 @@ jobs:
           if [ -z "$ADMIN_KEY" ]; then echo "Secret ADMIN_KEY absent : GitHub › Settings › Secrets and variables › Actions"; exit 1; fi
           NODE_PATH=/tmp/node_modules node video/make.js
           # Même chose en italien (trajets depuis Milan et Rome), envoyée dans un second e-mail
-          LANG_VIDEO=it FORMAT= NODE_PATH=/tmp/node_modules node video/make.js || echo "Vidéo italienne non envoyée (trajets italiens pas encore dans le baromètre ?)"
+          if [ -z "$FORMAT" ]; then LANG_VIDEO=it FORMAT= NODE_PATH=/tmp/node_modules node video/make.js || echo "Vidéo italienne non envoyée (trajets italiens pas encore dans le baromètre ?)"; fi

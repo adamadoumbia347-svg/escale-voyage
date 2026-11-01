@@ -69,9 +69,17 @@ const plane = () => { const p = el('plane', '<svg viewBox="0 0 24 24"><path fill
 // sections de cartes (compte à rebours : la dernière carte est la n°1)
 (D.sections || []).forEach((s, si) => {
   if (si) { plane(); t += .5; }
-  const n = s.cards.length, H = n <= 3 ? 150 : n === 4 ? 124 : 106, G = 14, top0 = 235, step = n <= 3 ? 2.3 : 1.9, a = t, end = a + .7 + n * step + 1.6;
+  const n = s.cards.length, grid = !!s.grid, H = grid ? 112 : n <= 3 ? 150 : n === 4 ? 124 : 106, G = grid ? 12 : 14, top0 = 235, step = grid ? .65 : n <= 3 ? 2.3 : 1.9, a = t, end = a + .7 + n * step + (grid ? 3.0 : 1.6);
   show(el('chip', esc(s.chip)), a, end, 'translateX(-60px)'); show(el('st', s.title), a + .2, end);
   s.cards.forEach((c, i) => {
+    if (grid) { // grille : la ville, le départ et le prix ; les cartes arrivent dans l'ordre
+      const at = a + .7 + i * step, x = 30 + (i % 2) * 246, y = top0 + Math.floor(i / 2) * (H + G);
+      const e = el('card', `<span class="f" style="left:14px;top:12px;font-size:30px">${c.flag}</span><div class="rt" style="left:56px;top:14px;font-size:22px">${esc(c.route)}</div>` +
+        `<div class="x" style="left:58px;right:auto;top:42px;font-size:13px">${esc(c.extra || '')}</div><div class="p" style="right:16px;top:66px;font-size:34px">0 €</div>`, `left:${x}px;right:auto;width:234px;top:${y}px;height:${H}px`);
+      tl(e, [[at, { opacity: 0, transform: 'scale(.4) rotate(-6deg)' }], [at + .45, { opacity: 1, transform: 'none' }], [end - .2, { opacity: 1, transform: 'none' }], [end + .15, { opacity: 0, transform: 'translateY(-40px)' }]], B);
+      ticks.push({ e: e.querySelector('.p'), v: c.price, s: at + .3 });
+      return;
+    }
     const order = n - 1 - i, at = a + .7 + order * step; // c[0] est la n°1 : elle arrive en dernier
     const big = n <= 3, y = top0 + i * (H + G);
     const e = el('card' + (i === 0 ? ' one' : ''), `<div class="r" style="top:${big ? 14 : 10}px;font-size:${big ? (n === 1 ? 64 : 96) : 76}px">${n === 1 ? "✈️" : i + 1}</div>` +
