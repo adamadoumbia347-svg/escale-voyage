@@ -79,7 +79,7 @@ window.ESCALE_I18N = {
   "Language": ["Idioma", "Idioma", "اللغة", "Lingua", "Sprache"],
   "Flights, hotels and cars <em>at the best price</em>": ["Vuelos, hoteles y coches <em>al mejor precio</em>", "Voos, hotéis e carros <em>ao melhor preço</em>", "رحلات وفنادق وسيارات <em>بأفضل سعر</em>", "Voli, hotel e auto <em>al miglior prezzo</em>", "Flüge, Hotels und Mietwagen <em>zum besten Preis</em>"],
   "About us": ["Quiénes somos", "Quem somos", "من نحن", "Chi siamo", "Über uns"],
-  "Cheap flights <em>home to Africa and the Maghreb</em>": ["Billetes baratos <em>para volver a África y al Magreb</em>", "Voos baratos <em>para voltar a África e ao Magrebe</em>", "تذاكر طيران رخيصة <em>للعودة إلى أفريقيا والمغرب العربي</em>", "Voli economici <em>verso l’Africa e il Maghreb</em>", "Günstige Flüge <em>nach Afrika und in den Maghreb</em>"],
+  "Cheap flights <em>to every destination</em>": ["Billetes baratos <em>a todos los destinos</em>", "Voos baratos <em>para todos os destinos</em>", "تذاكر طيران رخيصة <em>إلى كل الوجهات</em>", "Voli economici <em>per tutte le destinazioni</em>", "Günstige Flüge <em>zu allen Reisezielen</em>"],
   "One search, every major comparison site, worldwide. Escale opens your search on Skyscanner, Kayak, Aviasales, Booking and more, sorted from cheapest to most expensive.": [
     "Una sola búsqueda, todos los grandes comparadores, en todo el mundo. Escale abre tu búsqueda en Skyscanner, Kayak, Aviasales, Booking y otros, ordenada del más barato al más caro.",
     "Uma só pesquisa, todos os grandes comparadores, no mundo inteiro. A Escale abre a sua pesquisa no Skyscanner, Kayak, Aviasales, Booking e outros, ordenada do mais barato ao mais caro.",
