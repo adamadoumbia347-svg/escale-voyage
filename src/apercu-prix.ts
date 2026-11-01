@@ -6,7 +6,7 @@ import { Ctx, esc, pricesForDates } from "./_lib/common"
 // - section « Prix repérés récemment » : le prix le plus bas pour chacun des 6 prochains mois, avec une phrase de résumé
 // Les prix (Travelpayouts) sont gardés 6 heures dans le cache de Cloudflare. Sans réponse rapide, la page part telle quelle
 // et route-prices.js prend le relais dans le navigateur. Les chemins concernés sont listés dans wrangler.jsonc (run_worker_first).
-const PAGES = /^\/(vol-|vols-pour-|en\/flights-|es\/vuelos-|pt\/voos-|ar\/flights-|it\/voli-|de\/fluege-)/
+const PAGES = /^\/(vol-|vols-pour-|en\/flights-|es\/vuelos-|pt\/voos-|ar\/flights-|it\/voli-|de\/fluege-|nl\/vluchten-)/
 const MONTHS = 6
 const WAIT_MS = 1200
 const CACHE_S = 6 * 3600
@@ -103,6 +103,13 @@ const L: Record<string, { loc: string; from: string; hero: string; direct: strin
     midTxt: "{p}, nah am üblichen Preis ({avg}, Median der letzten {n} erfassten Tage).",
     highTxt: "{p}, also {x} % teurer als üblich ({avg}, Median der letzten {n} erfassten Tage). Wenn du warten kannst, erstelle einen Preisalarm.",
     chart: "Niedrigster Preis nach Abflugmonat" },
+  nl: { loc: "nl-NL", from: "vanaf", hero: "Retour gevonden vanaf", direct: "rechtstreeks", one: "1 overstap", many: " overstappen", best: "Goedkoopst", go: "Bekijk deze data",
+    summary: "Goedkoopste maand op dit moment: {m}, vanaf {p} retour. In de komende {n} maanden liggen de gevonden prijzen tussen {p} en {max}.", updated: "Prijzen bijgewerkt op {d}.",
+    low: "Nu een goede prijs", mid: "Gemiddelde prijs", high: "Nu eerder duur",
+    lowTxt: "{p}, dus {x} % goedkoper dan normaal (mediaanprijs {avg} over de laatste {n} gemeten dagen).",
+    midTxt: "{p}, dicht bij de normale prijs ({avg}, mediaan van de laatste {n} gemeten dagen).",
+    highTxt: "{p}, dus {x} % duurder dan normaal ({avg}, mediaan van de laatste {n} gemeten dagen). Kun je wachten, stel dan een prijsalert in.",
+    chart: "Laagste prijs per vertrekmaand" },
 }
 
 // Prix le plus bas par mois de départ (6 prochains mois), depuis le cache Cloudflare ou Travelpayouts.
@@ -141,7 +148,7 @@ function render(html: string, from: string, to: string, rows: Month[], hist: Poi
   const bestRow = rows.find((r) => r.price === best)!
   const label = `${t.from} ${money(best)}`
   const lead = label.charAt(0).toUpperCase() + label.slice(1)
-  const app = lang === "fr" ? "" : "&lang=" + lang
+  const app = lang === "fr" ? "" : "&lang=" + (lang === "nl" ? "en" : lang)
   const items = rows.map((r) => {
     const stops = r.transfers === 0 ? t.direct : r.transfers === 1 ? t.one : r.transfers + t.many
     const when = date(r.dep, { day: "numeric", month: "short" }) + (r.ret ? " → " + date(r.ret, { day: "numeric", month: "short" }) : "")
@@ -174,7 +181,7 @@ function render(html: string, from: string, to: string, rows: Month[], hist: Poi
 
 // Pages « destination » (tous les vols vers une ville) : chaque ligne reçoit le prix déjà connu du trajet (cache des pages trajets).
 // Les trajets pas encore en cache sont préparés en arrière-plan (3 par visite) ; hub.js complète dans le navigateur.
-const t2 = (lang: string) => ({ fr: "dès", en: "from", es: "desde", pt: "desde", ar: "من", it: "da", de: "ab" } as Record<string, string>)[lang] || "dès"
+const t2 = (lang: string) => ({ fr: "dès", en: "from", es: "desde", pt: "desde", ar: "من", it: "da", de: "ab", nl: "vanaf" } as Record<string, string>)[lang] || "dès"
 async function fillHub(ctx: Ctx, html: string) {
   const cache = (globalThis as any).caches?.default
   const cells = [...html.matchAll(/<td class="hub-price" data-from="([A-Z]{3})" data-to="([A-Z]{3})" data-label="([^"]*)"><\/td>/g)]

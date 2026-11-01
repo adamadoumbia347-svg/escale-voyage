@@ -14,8 +14,8 @@ import translations as TR
 E = html.escape
 LANGS = ["en", "es", "pt", "ar"]
 COL = {"en": 0, "es": 1, "pt": 2, "ar": 3}
-NAMES = {"fr": "Français", "en": "English", "es": "Español", "pt": "Português", "ar": "العربية", "it": "Italiano", "de": "Deutsch"}
-LOCALE = {"fr": "fr_FR", "en": "en_GB", "es": "es_ES", "pt": "pt_PT", "ar": "ar", "it": "it_IT", "de": "de_DE"}
+NAMES = {"fr": "Français", "en": "English", "es": "Español", "pt": "Português", "ar": "العربية", "it": "Italiano", "de": "Deutsch", "nl": "Nederlands"}
+LOCALE = {"fr": "fr_FR", "en": "en_GB", "es": "es_ES", "pt": "pt_PT", "ar": "ar", "it": "it_IT", "de": "de_DE", "nl": "nl_NL"}
 
 UI = {
     "en": dict(
@@ -254,7 +254,8 @@ SECTION_PATHS = {
 for _k, _v in SECTION_PATHS.items():
     _v["it"] = _v["en"]
     _v["de"] = _v["en"]
-FETES_LABEL = {"fr": "Fêtes", "en": "Holidays", "es": "Fiestas", "pt": "Festas", "ar": "الأعياد", "it": "Feste", "de": "Feiertage"}
+    _v["nl"] = _v["en"]
+FETES_LABEL = {"fr": "Fêtes", "en": "Holidays", "es": "Fiestas", "pt": "Festas", "ar": "الأعياد", "it": "Feste", "de": "Feiertage", "nl": "Feestdagen"}
 NAV_LABELS = {
     "fr": ("Vols", "Hôtels", "Voitures", "Bons plans", "Partout", "Guides", "Favoris", "Menu principal", "Escale, accueil"),
     "en": ("Flights", "Hotels", "Cars", "Deals", "Anywhere", "Guides", "Favorites", "Main menu", "Escale, home"),
@@ -263,11 +264,12 @@ NAV_LABELS = {
     "ar": ("رحلات", "فنادق", "سيارات", "العروض", "استكشف", "أدلة", "المفضلة", "القائمة الرئيسية", "Escale، الرئيسية"),
     "it": ("Voli", "Hotel", "Auto", "Offerte", "Ovunque", "Guide", "Preferiti", "Menu principale", "Escale, home"),
     "de": ("Flüge", "Hotels", "Mietwagen", "Angebote", "Überall", "Ratgeber", "Favoriten", "Hauptmenü", "Escale, Startseite"),
+    "nl": ("Vluchten", "Hotels", "Huurauto's", "Deals", "Overal", "Gidsen", "Favorieten", "Hoofdmenu", "Escale, home"),
 }
 # Recherche de vols en direct (/recherche/, White Label Travelpayouts) : lien du menu et lien des pages trajets
-LIVE_LABEL = {"fr": "En direct", "en": "Live prices", "es": "En directo", "pt": "Ao vivo", "ar": "أسعار مباشرة", "it": "In diretta", "de": "Live-Preise"}
+LIVE_LABEL = {"fr": "En direct", "en": "Live prices", "es": "En directo", "pt": "Ao vivo", "ar": "أسعار مباشرة", "it": "In diretta", "de": "Live-Preise", "nl": "Live prijzen"}
 LIVE_LINK = {"fr": "Prix en direct de toutes les agences", "en": "Live prices from all agencies", "es": "Precios en directo de todas las agencias",
-             "pt": "Preços ao vivo de todas as agências", "ar": "أسعار مباشرة من كل الوكالات", "it": "Prezzi in diretta di tutte le agenzie", "de": "Live-Preise aller Anbieter"}
+             "pt": "Preços ao vivo de todas as agências", "ar": "أسعار مباشرة من كل الوكالات", "it": "Prezzi in diretta di tutte le agenzie", "de": "Live-Preise aller Anbieter", "nl": "Live prijzen van alle aanbieders"}
 
 
 def live_link(fr, to, lang):
@@ -280,21 +282,21 @@ PLANE = '<svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true"><path d=
 
 
 HUB_LINK = {'en': 'All flights to {b}', 'es': 'Todos los vuelos a {b}', 'pt': 'Todos os voos para {b}', 'ar': 'كل الرحلات إلى {b}'}
-FAV_LABEL = {"fr": "Ajouter aux favoris", "en": "Add to favorites", "es": "Añadir a favoritos", "pt": "Adicionar aos favoritos", "ar": "أضف إلى المفضلة", "it": "Aggiungi ai preferiti", "de": "Zu Favoriten hinzufügen"}
+FAV_LABEL = {"fr": "Ajouter aux favoris", "en": "Add to favorites", "es": "Añadir a favoritos", "pt": "Adicionar aos favoritos", "ar": "أضف إلى المفضلة", "it": "Aggiungi ai preferiti", "de": "Zu Favoriten hinzufügen", "nl": "Toevoegen aan favorieten"}
 
 
 # Chaîne WhatsApp « Escale – Bons plans vols »
 WA_CHANNEL = "https://whatsapp.com/channel/0029VbE28kB0LKZN7ypnGj0d"
-WA_LABEL = {"fr": "Chaîne WhatsApp", "en": "WhatsApp channel", "es": "Canal de WhatsApp", "pt": "Canal no WhatsApp", "ar": "قناة واتساب", "it": "Canale WhatsApp", "de": "WhatsApp-Kanal"}
+WA_LABEL = {"fr": "Chaîne WhatsApp", "en": "WhatsApp channel", "es": "Canal de WhatsApp", "pt": "Canal no WhatsApp", "ar": "قناة واتساب", "it": "Canale WhatsApp", "de": "WhatsApp-Kanal", "nl": "WhatsApp-kanaal"}
 WA_JOIN = {"fr": "Rejoindre la chaîne WhatsApp des bons plans", "en": "Join our WhatsApp deals channel", "es": "Únete al canal de ofertas en WhatsApp",
-           "pt": "Junte-se ao canal de promoções no WhatsApp", "ar": "انضم إلى قناة العروض على واتساب", "it": "Unisciti al canale WhatsApp delle offerte", "de": "Tritt unserem WhatsApp-Kanal mit Angeboten bei"}
+           "pt": "Junte-se ao canal de promoções no WhatsApp", "ar": "انضم إلى قناة العروض على واتساب", "it": "Unisciti al canale WhatsApp delle offerte", "de": "Tritt unserem WhatsApp-Kanal mit Angeboten bei", "nl": "Volg ons WhatsApp-kanaal met deals"}
 
 
 def wa_btn(lang):
     return f'<p class="wa-p"><a class="btn wa-btn" href="{WA_CHANNEL}" target="_blank" rel="noopener">{E(WA_JOIN[lang])}</a></p>'
 
 
-ALERT_LABEL = {"fr": "Alerte prix", "en": "Price alert", "es": "Alerta de precio", "pt": "Alerta de preço", "ar": "تنبيه السعر", "it": "Avviso prezzo", "de": "Preisalarm"}
+ALERT_LABEL = {"fr": "Alerte prix", "en": "Price alert", "es": "Alerta de precio", "pt": "Alerta de preço", "ar": "تنبيه السعر", "it": "Avviso prezzo", "de": "Preisalarm", "nl": "Prijsalert"}
 
 
 def alert_btn(lang):
@@ -374,8 +376,8 @@ HEAD = """<!doctype html>
 """
 
 
-HOME_NAME = {"fr": "Accueil", "en": "Home", "es": "Inicio", "pt": "Início", "ar": "الرئيسية", "it": "Home", "de": "Startseite"}
-GUIDES_DIR = {"fr": "guides", "en": "en/guides", "es": "es/guias", "pt": "pt/guias", "ar": "ar/guides", "it": "en/guides", "de": "en/guides"}
+HOME_NAME = {"fr": "Accueil", "en": "Home", "es": "Inicio", "pt": "Início", "ar": "الرئيسية", "it": "Home", "de": "Startseite", "nl": "Home"}
+GUIDES_DIR = {"fr": "guides", "en": "en/guides", "es": "es/guias", "pt": "pt/guias", "ar": "ar/guides", "it": "en/guides", "de": "en/guides", "nl": "en/guides"}
 
 
 def breadcrumb_ld(domain, path, lang, hero):
@@ -422,14 +424,14 @@ def write(site, path, lang, title, desc, hero, body, ld, paths, ctx, og="og-imag
         lang=lang, dir="rtl" if lang == "ar" else "ltr", tp=ctx["tp"], title=E(title), desc=E(desc),
         url=f"{ctx['domain']}/{path}/", alts=alternates(paths, ctx["domain"]), oglocale=LOCALE[lang], domain=ctx["domain"],
         ogimg=og, arpreload=('\n<link rel="preload" href="/fonts/noto-sans-arabic-arabic-378a89.woff2" as="font" type="font/woff2" crossorigin>' if lang == "ar" else ""), ld=ld, homeq="" if lang == "fr" else "?lang=" + u["app_lang"],
-        dealsp={"fr": "bons-plans", "en": "en/deals", "es": "es/ofertas", "pt": "pt/promocoes", "ar": "ar/deals", "it": "en/deals", "de": "en/deals"}[lang],
-        dealsl={"fr": "Bons plans", "en": "Deals", "es": "Ofertas", "pt": "Promoções", "ar": "العروض", "it": "Offerte", "de": "Angebote"}[lang],
-        aboutp={"fr": "a-propos", "en": "en/about", "es": "es/acerca-de", "pt": "pt/sobre", "ar": "ar/about", "it": "en/about", "de": "en/about"}[lang],
-        aboutl={"fr": "À propos", "en": "About", "es": "Acerca de", "pt": "Sobre", "ar": "عن Escale", "it": "Chi siamo", "de": "Über uns"}[lang],
-        fetesp={"fr": "vols-fetes", "en": "en/holiday-flights", "es": "es/vuelos-fiestas", "pt": "pt/voos-festas", "ar": "ar/holiday-flights", "it": "en/holiday-flights", "de": "en/holiday-flights"}[lang],
+        dealsp={"fr": "bons-plans", "en": "en/deals", "es": "es/ofertas", "pt": "pt/promocoes", "ar": "ar/deals", "it": "en/deals", "de": "en/deals", "nl": "en/deals"}[lang],
+        dealsl={"fr": "Bons plans", "en": "Deals", "es": "Ofertas", "pt": "Promoções", "ar": "العروض", "it": "Offerte", "de": "Angebote", "nl": "Deals"}[lang],
+        aboutp={"fr": "a-propos", "en": "en/about", "es": "es/acerca-de", "pt": "pt/sobre", "ar": "ar/about", "it": "en/about", "de": "en/about", "nl": "en/about"}[lang],
+        aboutl={"fr": "À propos", "en": "About", "es": "Acerca de", "pt": "Sobre", "ar": "عن Escale", "it": "Chi siamo", "de": "Über uns", "nl": "Over ons"}[lang],
+        fetesp={"fr": "vols-fetes", "en": "en/holiday-flights", "es": "es/vuelos-fiestas", "pt": "pt/voos-festas", "ar": "ar/holiday-flights", "it": "en/holiday-flights", "de": "en/holiday-flights", "nl": "en/holiday-flights"}[lang],
         wa=WA_CHANNEL, wal=WA_LABEL[lang],
-        fetesl={"fr": "Vols pour les fêtes", "en": "Holiday flights", "es": "Vuelos para las fiestas", "pt": "Voos para as festas", "ar": "رحلات الأعياد", "it": "Voli per le feste", "de": "Flüge zu den Feiertagen"}[lang],
-        guidesp={"fr": "guides", "en": "en/guides", "es": "es/guias", "pt": "pt/guias", "ar": "ar/guides", "it": "en/guides", "de": "en/guides"}[lang],
+        fetesl={"fr": "Vols pour les fêtes", "en": "Holiday flights", "es": "Vuelos para las fiestas", "pt": "Voos para as festas", "ar": "رحلات الأعياد", "it": "Voli per le feste", "de": "Flüge zu den Feiertagen", "nl": "Vluchten voor de feestdagen"}[lang],
+        guidesp={"fr": "guides", "en": "en/guides", "es": "es/guias", "pt": "pt/guias", "ar": "ar/guides", "it": "en/guides", "de": "en/guides", "nl": "en/guides"}[lang],
         header=site_header(lang, path, switcher(paths, lang)), hero=hero, body=body, home=E(u["home"]), legal=E(u["legal"]), privacy=E(u["privacy"]),
         cookies=E(u["cookies"]), disclaimer=E(u["disclaimer"]))
     d = site / path
@@ -615,6 +617,8 @@ BLOCKS = {
                go_h="Prima di partire", go_p="Servizi utili per il tuo viaggio a {c}.", go_btn="Vedi l’offerta"),
     "de": dict(cal_h="Preiskalender", cal_p="Niedrigster Preis für Hin- und Rückflug je Abflugtag. Klicke auf einen Tag, um die Suche zu starten.",
                go_h="Vor der Reise", go_p="Nützliche Services für deine Reise nach {c}.", go_btn="Zum Angebot"),
+    "nl": dict(cal_h="Prijskalender", cal_p="Laagste retourprijs per vertrekdag. Klik op een dag om te zoeken.",
+               go_h="Voor vertrek", go_p="Handige diensten voor je reis naar {c}.", go_btn="Bekijk aanbod"),
     "ar": dict(cal_h="تقويم الأسعار", cal_p="أقل سعر ذهاب وعودة وُجد لكل يوم مغادرة. انقر على يوم لبدء البحث.",
                go_h="قبل السفر", go_p="خدمات مفيدة لرحلتك إلى {c}.", go_btn="اعرض العرض"),
 }

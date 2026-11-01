@@ -11,7 +11,8 @@
     pt: ["Antes de partir", "Serviços úteis para a sua viagem", "Serviços úteis para a sua viagem a {c}", "Ver oferta"],
     ar: ["قبل السفر", "خدمات مفيدة لرحلتك", "خدمات مفيدة لرحلتك إلى {c}", "اعرض العرض"],
     it: ["Prima di partire", "Servizi utili per il tuo viaggio", "Servizi utili per il tuo viaggio a {c}", "Vedi l’offerta"],
-    de: ["Vor der Reise", "Nützliche Services für deine Reise", "Nützliche Services für deine Reise nach {c}", "Zum Angebot"] }[lang] || null;
+    de: ["Vor der Reise", "Nützliche Services für deine Reise", "Nützliche Services für deine Reise nach {c}", "Zum Angebot"],
+    nl: ["Voor vertrek", "Handige diensten voor je reis", "Handige diensten voor je reis naar {c}", "Bekijk aanbod"] }[lang] || null;
   if (!T) return;
   var esc = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
   var P = new URLSearchParams(location.search), fs = (P.get("flightSearch") || "").match(/^[A-Z]{3}\d{4}([A-Z]{3})/);

@@ -20,7 +20,9 @@
     it: { loc: "it-IT", h: "Griglia dei prezzi andata × ritorno", p: "Prezzo andata e ritorno più basso trovato di recente per ogni combinazione di date. Tocca una casella per avviare la ricerca.",
       dep: "Andata", ret: "Ritorno", stay: "Soggiorno", wk: ["1 sett.", "2 sett.", "3 sett.", "4 sett."], prev: "‹ Prima", next: "Dopo ›", empty: "Ancora nessun prezzo noto intorno a queste date. Prova altre date.", best: "Il più economico", app: "it" },
     de: { loc: "de-DE", h: "Preistabelle: Hinflug × Rückflug", p: "Niedrigster Preis für Hin- und Rückflug, kürzlich gefunden, für jede Datumskombination. Tippe auf ein Feld, um die Suche zu starten.",
-      dep: "Hinflug", ret: "Rückflug", stay: "Aufenthalt", wk: ["1 Wo.", "2 Wo.", "3 Wo.", "4 Wo."], prev: "‹ Früher", next: "Später ›", empty: "Noch keine bekannten Preise rund um diese Daten. Versuche andere Daten.", best: "Am günstigsten", app: "de" }
+      dep: "Hinflug", ret: "Rückflug", stay: "Aufenthalt", wk: ["1 Wo.", "2 Wo.", "3 Wo.", "4 Wo."], prev: "‹ Früher", next: "Später ›", empty: "Noch keine bekannten Preise rund um diese Daten. Versuche andere Daten.", best: "Am günstigsten", app: "de" },
+    nl: { loc: "nl-NL", h: "Prijstabel: heen × terug", p: "Laagste retourprijs die onlangs is gevonden voor elke combinatie van data. Tik op een vakje om te zoeken.",
+      dep: "Heen", ret: "Terug", stay: "Verblijf", wk: ["1 wk", "2 wk", "3 wk", "4 wk"], prev: "‹ Eerder", next: "Later ›", empty: "Nog geen bekende prijzen rond deze data. Probeer andere data.", best: "Goedkoopst", app: "en" }
   }[lang] || null;
   if (!L) return;
   var esc = function (t) { return String(t).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };

@@ -14,7 +14,8 @@
         "pt": "Hotéis ao melhor preço",
         "ar": "فنادق بأفضل سعر",
         "it": "Hotel al miglior prezzo",
-        "de": "Hotels zum besten Preis"
+        "de": "Hotels zum besten Preis",
+        "nl": "Hotels voor de beste prijs"
       },
       "desc": {
         "fr": "Booking, Expedia, Agoda… : vous êtes envoyé vers le site le moins cher pour votre destination.",
@@ -23,7 +24,8 @@
         "pt": "Booking, Expedia, Agoda…: é enviado para o site mais barato para o seu destino.",
         "ar": "بوكينغ وإكسبيديا وأغودا…: نوجّهك إلى أرخص موقع لوجهتك.",
         "it": "Booking, Expedia, Agoda…: ti inviamo al sito più economico per la tua destinazione.",
-        "de": "Booking, Expedia, Agoda…: Wir leiten dich zur günstigsten Seite für dein Reiseziel weiter."
+        "de": "Booking, Expedia, Agoda…: Wir leiten dich zur günstigsten Seite für dein Reiseziel weiter.",
+        "nl": "Booking, Expedia, Agoda…: we sturen je naar de goedkoopste site voor je bestemming."
       }
     },
     {
@@ -38,7 +40,8 @@
         "pt": "SIM internacional (eSIM)",
         "ar": "شريحة دولية (eSIM)",
         "it": "SIM internazionale (eSIM)",
-        "de": "Internationale SIM (eSIM)"
+        "de": "Internationale SIM (eSIM)",
+        "nl": "Internationale simkaart (eSIM)"
       },
       "desc": {
         "fr": "Internet dès l’atterrissage, sans frais d’itinérance. S’installe en quelques minutes sur le téléphone.",
@@ -47,7 +50,8 @@
         "pt": "Internet assim que aterra, sem roaming. Instala-se no telemóvel em poucos minutos.",
         "ar": "إنترنت فور الهبوط بلا رسوم تجوال. تُثبَّت على الهاتف في دقائق.",
         "it": "Internet appena atterri, senza costi di roaming. Si installa sul telefono in pochi minuti.",
-        "de": "Internet direkt nach der Landung, ohne Roaminggebühren. In wenigen Minuten auf dem Handy installiert."
+        "de": "Internet direkt nach der Landung, ohne Roaminggebühren. In wenigen Minuten auf dem Handy installiert.",
+        "nl": "Internet zodra je landt, zonder roamingkosten. In een paar minuten op je telefoon geïnstalleerd."
       },
       "affiliate": true
     },
@@ -63,7 +67,8 @@
         "pt": "Aluguer de carro",
         "ar": "تأجير سيارة",
         "it": "Noleggio auto",
-        "de": "Mietwagen"
+        "de": "Mietwagen",
+        "nl": "Huurauto"
       },
       "desc": {
         "fr": "Comparez des centaines de loueurs sur place, souvent avec annulation gratuite.",
@@ -72,7 +77,8 @@
         "pt": "Compare centenas de empresas de aluguer locais, muitas vezes com cancelamento gratuito.",
         "ar": "قارن مئات شركات التأجير المحلية، غالبًا مع إلغاء مجاني.",
         "it": "Confronta centinaia di noleggiatori sul posto, spesso con cancellazione gratuita.",
-        "de": "Vergleiche Hunderte Vermieter vor Ort, oft mit kostenloser Stornierung."
+        "de": "Vergleiche Hunderte Vermieter vor Ort, oft mit kostenloser Stornierung.",
+        "nl": "Vergelijk honderden verhuurders ter plaatse, vaak met gratis annulering."
       },
       "affiliate": true
     },
@@ -89,7 +95,8 @@
         "pt": "Scooters, motas e bicicletas",
         "ar": "دراجات نارية وسكوتر ودراجات",
         "it": "Scooter e moto",
-        "de": "Roller und Motorräder"
+        "de": "Roller und Motorräder",
+        "nl": "Scooters en motoren"
       },
       "desc": {
         "fr": "Louez un deux-roues sur place pour vous déplacer librement, souvent moins cher qu’une voiture.",
@@ -98,7 +105,8 @@
         "pt": "Alugue uma mota ou scooter no destino para se deslocar à vontade, muitas vezes mais barato do que um carro.",
         "ar": "استأجر دراجة نارية أو سكوتر عند الوصول للتنقل بحرية، وغالبًا أرخص من السيارة.",
         "it": "Un mezzo a due ruote invece dell’auto: spesso più economico e comodo in città.",
-        "de": "Zwei Räder statt Auto: oft günstiger und praktischer in der Stadt."
+        "de": "Zwei Räder statt Auto: oft günstiger und praktischer in der Stadt.",
+        "nl": "Twee wielen in plaats van een auto: vaak goedkoper en handiger in de stad."
       }
     },
     {
@@ -113,7 +121,8 @@
         "pt": "Seguro de viagem",
         "ar": "تأمين السفر",
         "it": "Assicurazione di viaggio",
-        "de": "Reiseversicherung"
+        "de": "Reiseversicherung",
+        "nl": "Reisverzekering"
       },
       "desc": {
         "fr": "Frais médicaux, bagages, annulation : à comparer avant le départ, surtout hors d’Europe.",
@@ -122,7 +131,8 @@
         "pt": "Despesas médicas, bagagem, cancelamento: compare antes de partir, sobretudo fora da Europa.",
         "ar": "المصاريف الطبية والأمتعة والإلغاء: قارن قبل السفر، خاصة خارج أوروبا.",
         "it": "Spese mediche e imprevisti coperti durante il viaggio.",
-        "de": "Arztkosten und Unvorhergesehenes während der Reise abgesichert."
+        "de": "Arztkosten und Unvorhergesehenes während der Reise abgesichert.",
+        "nl": "Medische kosten en onvoorziene zaken tijdens je reis gedekt."
       }
     },
     {
@@ -137,7 +147,8 @@
         "pt": "Transfer aeroporto – hotel",
         "ar": "التوصيل من المطار إلى الفندق",
         "it": "Transfer dall’aeroporto",
-        "de": "Flughafentransfer"
+        "de": "Flughafentransfer",
+        "nl": "Luchthaventransfer"
       },
       "desc": {
         "fr": "Un chauffeur vous attend à l’arrivée, prix fixé à l’avance. Pratique pour une arrivée de nuit.",
@@ -146,7 +157,8 @@
         "pt": "Um motorista espera por si à chegada, preço fixo. Prático para chegadas à noite.",
         "ar": "سائق ينتظرك عند الوصول بسعر محدد مسبقًا. مناسب للوصول ليلًا.",
         "it": "Un autista ti aspetta all’arrivo, prezzo fisso prenotato in anticipo.",
-        "de": "Ein Fahrer erwartet dich bei der Ankunft, zum vorab gebuchten Festpreis."
+        "de": "Ein Fahrer erwartet dich bei der Ankunft, zum vorab gebuchten Festpreis.",
+        "nl": "Een chauffeur wacht op je bij aankomst, tegen een vooraf vastgestelde prijs."
       },
       "affiliate": true
     },
@@ -162,7 +174,8 @@
         "pt": "Atrações e museus",
         "ar": "المعالم والمتاحف",
         "it": "Attività e biglietti",
-        "de": "Aktivitäten und Tickets"
+        "de": "Aktivitäten und Tickets",
+        "nl": "Activiteiten en tickets"
       },
       "desc": {
         "fr": "Billets pour les musées, monuments et attractions, sur le téléphone, souvent sans faire la queue.",
@@ -171,7 +184,8 @@
         "pt": "Bilhetes para museus, monumentos e atrações, no telemóvel, muitas vezes sem filas.",
         "ar": "تذاكر المتاحف والمعالم والمعالم السياحية على هاتفك، وغالبًا دون انتظار في الطابور.",
         "it": "Musei, escursioni e visite guidate, da prenotare prima di partire.",
-        "de": "Museen, Ausflüge und Führungen, vor der Abreise gebucht."
+        "de": "Museen, Ausflüge und Führungen, vor der Abreise gebucht.",
+        "nl": "Musea, excursies en rondleidingen, te boeken vóór vertrek."
       },
       "affiliate": true
     },
@@ -188,7 +202,8 @@
         "pt": "Voo atrasado ou cancelado?",
         "ar": "رحلة متأخرة أو ملغاة؟",
         "it": "Volo in ritardo o cancellato?",
-        "de": "Flug verspätet oder annulliert?"
+        "de": "Flug verspätet oder annulliert?",
+        "nl": "Vlucht vertraagd of geannuleerd?"
       },
       "desc": {
         "fr": "Jusqu’à 600 € d’indemnisation selon le règlement européen (vols au départ de l’Europe ou sur une compagnie européenne). Vérification gratuite.",
@@ -197,7 +212,8 @@
         "pt": "Até 600 € de indemnização segundo as regras europeias (voos a partir da Europa ou em companhia europeia). Verificação gratuita.",
         "ar": "تعويض يصل إلى 600 يورو وفق القواعد الأوروبية (رحلات من أوروبا أو على شركة طيران أوروبية). تحقق مجاني.",
         "it": "Fino a 600 € di risarcimento: verifica gratuitamente il tuo diritto.",
-        "de": "Bis zu 600 € Entschädigung: Prüfe kostenlos deinen Anspruch."
+        "de": "Bis zu 600 € Entschädigung: Prüfe kostenlos deinen Anspruch.",
+        "nl": "Tot € 600 compensatie: controleer gratis of je recht hebt."
       }
     }
   ]

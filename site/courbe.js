@@ -14,7 +14,8 @@
     pt: { loc: "pt-PT", h: "Preço conforme a data de partida", p: "Preço de ida e volta mais baixo encontrado recentemente, dia a dia, nos próximos 3 meses. Toque na curva para ver um dia e pesquise.", min: "o mais barato", go: "Pesquisar", app: "pt" },
     ar: { loc: "ar-u-nu-latn", h: "السعر حسب تاريخ المغادرة", p: "أقل سعر ذهاب وعودة وُجد مؤخرًا، يومًا بيوم، خلال الأشهر الثلاثة القادمة. المس المنحنى لرؤية يوم ثم ابدأ البحث.", min: "الأرخص", go: "بحث", app: "ar" },
     it: { loc: "it-IT", h: "Prezzo in base alla data di partenza", p: "Prezzo andata e ritorno più basso trovato di recente, giorno per giorno, nei prossimi 3 mesi. Tocca la curva per vedere un giorno, poi avvia la ricerca.", min: "il più economico", go: "Cerca", app: "it" },
-    de: { loc: "de-DE", h: "Preis nach Abflugdatum", p: "Niedrigster Preis für Hin- und Rückflug, kürzlich gefunden, Tag für Tag in den nächsten 3 Monaten. Tippe auf die Kurve, um einen Tag zu sehen, und starte die Suche.", min: "am günstigsten", go: "Suchen", app: "de" }
+    de: { loc: "de-DE", h: "Preis nach Abflugdatum", p: "Niedrigster Preis für Hin- und Rückflug, kürzlich gefunden, Tag für Tag in den nächsten 3 Monaten. Tippe auf die Kurve, um einen Tag zu sehen, und starte die Suche.", min: "am günstigsten", go: "Suchen", app: "de" },
+    nl: { loc: "nl-NL", h: "Prijs per vertrekdatum", p: "Laagste retourprijs die onlangs is gevonden, dag per dag, de komende 3 maanden. Tik op de lijn om een dag te zien en start de zoekopdracht.", min: "goedkoopst", go: "Zoeken", app: "en" }
   }[lang] || null;
   if (!L) return;
   var pad = function (n) { return String(n).padStart(2, "0"); };

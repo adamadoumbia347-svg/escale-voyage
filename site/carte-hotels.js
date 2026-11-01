@@ -11,7 +11,8 @@
     pt: ["Hotéis em {c} para as suas datas", "Preços ao vivo da Booking, Expedia, Agoda, Hotels.com… Clique num hotel para ver a oferta."],
     ar: ["فنادق {c} لتواريخك", "أسعار مباشرة من بوكينغ وإكسبيديا وأغودا… انقر على فندق لعرض العرض."],
     it: ["Hotel a {c} per le tue date", "Prezzi in diretta di Booking, Expedia, Agoda, Hotels.com… Clicca su un hotel per vedere l’offerta."],
-    de: ["Hotels in {c} für deine Daten", "Live-Preise von Booking, Expedia, Agoda, Hotels.com… Klicke auf ein Hotel, um das Angebot zu sehen."] }[lang] || null;
+    de: ["Hotels in {c} für deine Daten", "Live-Preise von Booking, Expedia, Agoda, Hotels.com… Klicke auf ein Hotel, um das Angebot zu sehen."],
+    nl: ["Hotels in {c} voor je data", "Live prijzen van Booking, Expedia, Agoda, Hotels.com… Klik op een hotel om het aanbod te zien."] }[lang] || null;
   var url = function (address, checkin, checkout) {
     return "https://www.stay22.com/embed/gm?" + new URLSearchParams(Object.assign({ aid: "escalelive", address: address, maincolor: "1A56DB", currency: "EUR" },
       checkin && checkout ? { checkin: checkin, checkout: checkout } : {})).toString();
@@ -63,7 +64,11 @@
       de: { eyebrow: "Live-Preise", title: "Hotels in {c}", lead: "Echtzeitpreise von Booking, Expedia, Agoda, Hotels.com und weiteren, auf einer Karte. Klicke auf ein Hotel, um das Angebot zu sehen.",
         city: "Reiseziel", in: "Anreise", out: "Abreise", adults: "Erwachsene", go: "Suchen", cmp_h: "Vergleiche auch bei",
         note: "Karte von unserem Partner Stay22. Escale verkauft keine Hotelnächte: Der Endpreis erscheint auf der Buchungsseite. Escale erhält eventuell eine Provision, ohne Kosten für dich.",
-        sum: "{a} → {b} · {n} Nacht/Nächte · {p} Erwachsene. Live-Preise von Booking, Expedia, Agoda, Hotels.com… Klicke auf ein Hotel, um das Angebot zu sehen.", list: "Hotelliste", map: "Auf der Karte ansehen" }
+        sum: "{a} → {b} · {n} Nacht/Nächte · {p} Erwachsene. Live-Preise von Booking, Expedia, Agoda, Hotels.com… Klicke auf ein Hotel, um das Angebot zu sehen.", list: "Hotelliste", map: "Auf der Karte ansehen" },
+      nl: { eyebrow: "Live prijzen", title: "Hotels in {c}", lead: "Realtime prijzen van Booking, Expedia, Agoda, Hotels.com en meer, op een kaart. Klik op een hotel om het aanbod te zien.",
+        city: "Bestemming", in: "Inchecken", out: "Uitchecken", adults: "Volwassenen", go: "Zoeken", cmp_h: "Vergelijk ook op",
+        note: "Kaart van onze partner Stay22. Escale verkoopt geen hotelnachten: de eindprijs zie je op de boekingssite. Escale kan een commissie ontvangen, zonder extra kosten voor jou.",
+        sum: "{a} → {b} · {n} nacht(en) · {p} volwassene(n). Live prijzen van Booking, Expedia, Agoda, Hotels.com… Klik op een hotel om het aanbod te zien.", list: "Hotellijst", map: "Bekijk op de kaart" }
     }[lg];
     if (lg !== "fr") {
       document.documentElement.lang = lg; if (lg === "ar") document.documentElement.dir = "rtl";

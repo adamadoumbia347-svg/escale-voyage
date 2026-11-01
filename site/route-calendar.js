@@ -13,7 +13,8 @@
     pt: { loc: "pt-PT", cheap: "Mais barato", dear: "Mais caro", none: "Sem preço conhecido nesse dia", empty: "Ainda não há preços para este mês.", app: "pt", stops: ["direto", "1 escala", " escalas"] },
     ar: { loc: "ar-u-nu-latn", cheap: "أرخص", dear: "أغلى", none: "لا يوجد سعر معروف لهذا اليوم", empty: "لا توجد أسعار معروفة لهذا الشهر بعد.", app: "ar", stops: ["مباشرة", "توقف واحد", " توقفات"] },
     it: { loc: "it-IT", cheap: "Più economico", dear: "Più caro", none: "Nessun prezzo noto per quel giorno", empty: "Ancora nessun prezzo noto per questo mese.", app: "it", stops: ["diretto", "1 scalo", " scali"] },
-    de: { loc: "de-DE", cheap: "Günstiger", dear: "Teurer", none: "Kein bekannter Preis an diesem Tag", empty: "Noch keine bekannten Preise für diesen Monat.", app: "de", stops: ["Direktflug", "1 Stopp", " Stopps"] }
+    de: { loc: "de-DE", cheap: "Günstiger", dear: "Teurer", none: "Kein bekannter Preis an diesem Tag", empty: "Noch keine bekannten Preise für diesen Monat.", app: "de", stops: ["Direktflug", "1 Stopp", " Stopps"] },
+    nl: { loc: "nl-NL", cheap: "Goedkoper", dear: "Duurder", none: "Geen bekende prijs op die dag", empty: "Nog geen bekende prijzen voor deze maand.", app: "en", stops: ["rechtstreeks", "1 overstap", " overstappen"] }
   }[lang] || null;
   if (!L) return;
   var monthsEl = box.querySelector(".cal-months"), gridEl = box.querySelector(".cal-grid"), legendEl = box.querySelector(".cal-legend");

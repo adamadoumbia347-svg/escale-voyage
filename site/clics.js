@@ -7,7 +7,7 @@
   if (/^\/(admin|outils)\//.test(path)) return;
   var lang = (document.documentElement.lang || "fr").slice(0, 2);
   var CHANNEL = "https://whatsapp.com/channel/0029VbE28kB0LKZN7ypnGj0d";
-  var L = { fr: "Bons plans sur WhatsApp", en: "Deals on WhatsApp", es: "Ofertas en WhatsApp", pt: "Promoções no WhatsApp", ar: "العروض على واتساب", it: "Offerte su WhatsApp", de: "Angebote auf WhatsApp" }[lang] || "Bons plans sur WhatsApp";
+  var L = { fr: "Bons plans sur WhatsApp", en: "Deals on WhatsApp", es: "Ofertas en WhatsApp", pt: "Promoções no WhatsApp", ar: "العروض على واتساب", it: "Offerte su WhatsApp", de: "Angebote auf WhatsApp", nl: "Deals op WhatsApp" }[lang] || "Bons plans sur WhatsApp";
 
   // Bulle WhatsApp (masquable pour la visite)
   var closed = false; try { closed = sessionStorage.getItem("escale.wa") === "0"; } catch (e) {}
@@ -29,7 +29,8 @@
     pt: ["Instale a Escale no telemóvel: os preços num toque, como uma app.", "Instalar", "No iPhone: toque em Partilhar e depois «Adicionar ao ecrã principal»."],
     ar: ["ثبّت Escale على هاتفك: الأسعار بلمسة واحدة مثل التطبيق.", "تثبيت", "على آيفون: اضغط مشاركة ثم «إضافة إلى الشاشة الرئيسية»."],
     it: ["Installa Escale sul telefono: i prezzi con un tocco, come un’app.", "Installa", "Su iPhone: tocca Condividi e poi «Aggiungi alla schermata Home»."],
-    de: ["Installiere Escale auf dem Handy: die Preise mit einem Fingertipp, wie eine App.", "Installieren", "Auf dem iPhone: Tippe auf Teilen und dann auf „Zum Home-Bildschirm“."] }[lang] || null;
+    de: ["Installiere Escale auf dem Handy: die Preise mit einem Fingertipp, wie eine App.", "Installieren", "Auf dem iPhone: Tippe auf Teilen und dann auf „Zum Home-Bildschirm“."],
+    nl: ["Installeer Escale op je telefoon: de prijzen met één tik, als een app.", "Installeren", "Op iPhone: tik op Delen en dan op ‘Zet op beginscherm’."] }[lang] || null;
   var store = function (k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } };
   var visits = +(store("escale.visites") || 0);
   try { if (!sessionStorage.getItem("escale.v")) { sessionStorage.setItem("escale.v", "1"); store("escale.visites", String(++visits)); } } catch (e) {}

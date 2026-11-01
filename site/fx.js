@@ -5,7 +5,7 @@
   "use strict";
   var SEL = ".hub-price strong, #hero-price strong, .price-val";
   var lang = (document.documentElement.lang || "fr").slice(0, 2);
-  var loc = { fr: "fr-FR", en: "en-GB", es: "es-ES", pt: "pt-PT", ar: "ar-u-nu-latn", it: "it-IT", de: "de-DE" }[lang] || "fr-FR";
+  var loc = { fr: "fr-FR", en: "en-GB", es: "es-ES", pt: "pt-PT", ar: "ar-u-nu-latn", it: "it-IT", de: "de-DE", nl: "nl-NL" }[lang] || "fr-FR";
   var BY_COUNTRY = { GB: "GBP", US: "USD", CA: "CAD", CH: "CHF", MA: "MAD", DZ: "DZD", TN: "TND", EG: "EGP", NG: "NGN", GH: "GHS",
     KE: "KES", ZA: "ZAR", AE: "AED", SA: "SAR", QA: "QAR", ET: "ETB", RW: "RWF", CD: "CDF", GN: "GNF", MR: "MRU", GM: "GMD", CV: "CVE",
     AO: "AOA", MZ: "MZN", TZ: "TZS", UG: "UGX", SE: "SEK", NO: "NOK", DK: "DKK", PL: "PLN", TR: "TRY", BR: "BRL", HT: "HTG",
@@ -14,7 +14,7 @@
   var NOTE = { fr: "Équivalent indicatif, les prix sont comparés en euros.", en: "Approximate equivalent: prices are compared in euros.",
     es: "Equivalente aproximado: los precios se comparan en euros.", pt: "Equivalente aproximado: os preços são comparados em euros.",
     ar: "قيمة تقريبية: تُقارن الأسعار باليورو.", it: "Equivalente indicativo: i prezzi sono confrontati in euro.",
-    de: "Ungefährer Gegenwert: Die Preise werden in Euro verglichen." }[lang] || "";
+    de: "Ungefährer Gegenwert: Die Preise werden in Euro verglichen.", nl: "Indicatieve tegenwaarde: de prijzen worden in euro vergeleken." }[lang] || "";
   var store = function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } };
   var sget = function (k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } };
   var sset = function (k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} };
