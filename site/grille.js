@@ -4,6 +4,18 @@
   "use strict";
   var box = document.getElementById("price-grid");
   if (!box) return;
+  // Mode léger : rien n'est chargé tant que le visiteur ne le demande pas (le script est relancé au clic)
+  if (document.documentElement.classList.contains("lite") && !box.getAttribute("data-go")) {
+    var lg = (document.documentElement.lang || "fr").slice(0, 2), btn = document.createElement("button");
+    btn.type = "button"; btn.className = "btn ghost lite-load";
+    btn.textContent = { fr: "📊 Afficher la grille des prix aller × retour", en: "📊 Show the departure × return price grid", es: "📊 Ver la cuadrícula de precios", pt: "📊 Ver a grelha de preços", ar: "📊 اعرض جدول الأسعار", it: "📊 Mostra la griglia dei prezzi", de: "📊 Preistabelle anzeigen", nl: "📊 Prijstabel tonen" }[lg] || { fr: "📊 Afficher la grille des prix aller × retour", en: "📊 Show the departure × return price grid", es: "📊 Ver la cuadrícula de precios", pt: "📊 Ver a grelha de preços", ar: "📊 اعرض جدول الأسعار", it: "📊 Mostra la griglia dei prezzi", de: "📊 Preistabelle anzeigen", nl: "📊 Prijstabel tonen" }.en;
+    box.innerHTML = ""; box.appendChild(btn); box.hidden = false;
+    btn.addEventListener("click", function () {
+      box.setAttribute("data-go", "1"); box.innerHTML = ""; box.hidden = true;
+      var sc = document.createElement("script"); sc.src = document.currentScript ? document.currentScript.src : "/grille.js"; document.head.appendChild(sc);
+    });
+    return;
+  }
   var from = box.getAttribute("data-from"), to = box.getAttribute("data-to");
   var lang = (document.documentElement.lang || "fr").slice(0, 2);
   var L = {

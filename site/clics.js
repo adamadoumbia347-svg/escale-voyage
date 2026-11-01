@@ -7,6 +7,26 @@
   if (/^\/(admin|outils)\//.test(path)) return;
   var lang = (document.documentElement.lang || "fr").slice(0, 2);
   var CHANNEL = "https://whatsapp.com/channel/0029VbE28kB0LKZN7ypnGj0d";
+  // Bas de page : passer en version légère (moins de données) ou revenir à la version complète (scripts/build_pages.py, lite_mode)
+  (function () {
+    var foot = document.querySelector("footer");
+    if (!foot) return;
+    var lite = document.documentElement.classList.contains("lite");
+    var T = {
+      fr: ["Version légère (moins de données) · Afficher la version complète", "Passer en version légère (moins de données)"],
+      en: ["Light version (less data) · Show the full version", "Switch to the light version (less data)"],
+      es: ["Versión ligera (menos datos) · Ver la versión completa", "Pasar a la versión ligera (menos datos)"],
+      pt: ["Versão leve (menos dados) · Ver a versão completa", "Mudar para a versão leve (menos dados)"],
+      ar: ["النسخة الخفيفة (بيانات أقل) · اعرض النسخة الكاملة", "انتقل إلى النسخة الخفيفة (بيانات أقل)"],
+      it: ["Versione leggera (meno dati) · Mostra la versione completa", "Passa alla versione leggera (meno dati)"],
+      de: ["Leichte Version (weniger Daten) · Vollständige Version anzeigen", "Zur leichten Version wechseln (weniger Daten)"],
+      nl: ["Lichte versie (minder data) · Volledige versie tonen", "Naar de lichte versie (minder data)"]
+    }[lang] || ["Version légère · Afficher la version complète", "Passer en version légère"];
+    var p = document.createElement("p"), b = document.createElement("button");
+    b.type = "button"; b.className = "lite-toggle"; b.textContent = lite ? T[0] : T[1];
+    b.addEventListener("click", function () { try { localStorage.setItem("escale.lite", lite ? "0" : "1"); } catch (e) {} location.reload(); });
+    p.className = "small"; p.appendChild(b); foot.appendChild(p);
+  })();
   var L = { fr: "Bons plans sur WhatsApp", en: "Deals on WhatsApp", es: "Ofertas en WhatsApp", pt: "Promoções no WhatsApp", ar: "العروض على واتساب", it: "Offerte su WhatsApp", de: "Angebote auf WhatsApp", nl: "Deals op WhatsApp" }[lang] || "Bons plans sur WhatsApp";
 
   // Bulle WhatsApp (masquable pour la visite)

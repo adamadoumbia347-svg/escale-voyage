@@ -56,7 +56,7 @@
 </script>
 <script type="application/ld+json" id="faq-ld"></script>
 <!-- Polices hébergées sur le site (site/fonts) : pas de Google Fonts, affichage plus rapide -->
-<link rel="preload" href="/fonts/instrument-sans-latin-f587e7.woff2" as="font" type="font/woff2" crossorigin>
+<script>(function(){try{var d=document.documentElement,s=localStorage.getItem("escale.lite"),c=navigator.connection||{},z="";try{z=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}if(s==="1"||(s!=="0"&&(c.saveData||/2g|3g/.test(c.effectiveType||"")||z.indexOf("Africa/")===0)))d.classList.add("lite");else{var l=document.createElement("link");l.rel="preload";l.as="font";l.type="font/woff2";l.crossOrigin="anonymous";l.href="/fonts/instrument-sans-latin-f587e7.woff2";document.head.appendChild(l)}}catch(e){}})();</script>
 
 <style>
 /* Polices du site écrites ici (copie des règles utiles de /fonts/fonts.css) : une requête bloquante en moins */
@@ -67,6 +67,12 @@
 @font-face{font-family:'Noto Sans Arabic';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/noto-sans-arabic-latin-e4b4f4.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 /* Sections sous la ligne de flottaison : le navigateur ne les met en page qu'à l'approche de l'écran (chargement plus léger) */
 main > section.block, main > footer { content-visibility: auto; contain-intrinsic-size: auto 640px; }
+
+/* Mode léger (classe « lite » posée en tête de page, voir scripts/build_pages.py) : police du système, pas de photos décoratives */
+:root.lite { --f-body: "Instrument Fallback", "Segoe UI", system-ui, sans-serif; --f-display: "Instrument Fallback", "Segoe UI", system-ui, sans-serif; --f-mono: "Instrument Fallback", "Segoe UI", system-ui, sans-serif; }
+.lite main img:not([data-keep]), .lite .city-card img { display: none; }
+.lite .lite-load { margin: 6px 0 4px; }
+.lite-toggle { background: none; border: 0; padding: 0; color: inherit; font: inherit; text-decoration: underline; cursor: pointer; }
 </style>
 <script>
 /* Langue et sens d'écriture fixés avant l'affichage (même règle que app.js) : la page ne se retourne pas après coup en arabe */
@@ -1127,7 +1133,7 @@ footer { margin-top: 72px; }
   <span data-en="New search">Nouvelle recherche</span>
 </button>
 
-<script src="/i18n.js" defer></script>
+<script>if (!/^(fr|en)$/.test(document.documentElement.lang)) document.write('<script src="/i18n.js" defer><\/script>');</script>
 <script src="/app.js" defer></script>
 <script src="/newsletter.js" defer></script>
 <script src="/favs.js" defer></script>

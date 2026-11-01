@@ -487,3 +487,9 @@ a.pg-cell:hover, a.pg-cell:focus-visible { outline: 2px solid var(--accent); }
 .visa-all button { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink); font: inherit; text-align: start; cursor: pointer; }
 .visa-all button .visa-badge { font-size: 12px; padding: 2px 8px; white-space: nowrap; }
 .visa-warn { margin-top: 16px; }
+
+/* Mode léger (classe « lite » posée en tête de page, voir scripts/build_pages.py) : police du système, pas de photos décoratives */
+:root.lite { --f-body: "Instrument Fallback", "Segoe UI", system-ui, sans-serif; --f-display: "Instrument Fallback", "Segoe UI", system-ui, sans-serif; --f-mono: "Instrument Fallback", "Segoe UI", system-ui, sans-serif; }
+.lite main img:not([data-keep]), .lite .city-card img { display: none; }
+.lite .lite-load { margin: 6px 0 4px; }
+.lite-toggle { background: none; border: 0; padding: 0; color: inherit; font: inherit; text-decoration: underline; cursor: pointer; }

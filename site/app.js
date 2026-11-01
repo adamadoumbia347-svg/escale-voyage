@@ -40,9 +40,9 @@
   let LANG = store.get("escale.lang") || (LANGS.includes(navLang) ? navLang : "en");
   if (!LANGS.includes(LANG)) LANG = "fr";
   // Français et anglais écrits dans le code ; espagnol, portugais et arabe dans i18n.js (clé = texte anglais)
-  const DICT = window.ESCALE_I18N || {};
+  // i18n.js (88 ko) n'est chargé que pour l'espagnol, le portugais, l'arabe, l'italien et l'allemand (voir index.html)
   const COL = { es: 0, pt: 1, ar: 2, it: 3, de: 4 };
-  const tr = (en) => (DICT[en] && DICT[en][COL[LANG]]) || en;
+  const tr = (en) => { const D = window.ESCALE_I18N || {}; return (D[en] && D[en][COL[LANG]]) || en; };
   const T = (fr, en) => (LANG === "fr" ? fr : LANG === "en" ? en : tr(en));
   const fmt = (str, vars) => str.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m));
   const locale = () => ({ fr: "fr-FR", en: "en-GB", es: "es-ES", pt: "pt-PT", ar: "ar-u-nu-latn", it: "it-IT", de: "de-DE" })[LANG];
@@ -131,7 +131,9 @@
   function buildIndex() { index = DB.map((a) => [a, norm(a[1]), norm(a[2])]); }
   function loadDB() {
     if (dbPromise) return dbPromise;
-    dbPromise = fetch("/data/airports.json").then((r) => (r.ok ? r.json() : null)).then((list) => {
+    // Liste partagée avec accueil.js (window.ESCALE_AIRPORTS) : un seul téléchargement de /data/airports.json
+    window.ESCALE_AIRPORTS = window.ESCALE_AIRPORTS || fetch("/data/airports.json").then((r) => (r.ok ? r.json() : null)).catch(() => null);
+    dbPromise = window.ESCALE_AIRPORTS.then((list) => {
       if (!Array.isArray(list) || !list.length) return;
       DB = list; byCode = new Map(list.map((a) => [a[0], a])); dbLoaded = true; index = null; // index de recherche refait à la première saisie
       // Remplace les codes nus (ex. « BKO » venu d'un lien) par « Bamako (BKO) »
@@ -1027,7 +1029,7 @@
       const [c1, c2] = DEST_COLORS[b] || ["#0b5cd6", "#18202c"];
       const known = destPrices.get(destKey(a, b));
       const loading = isLive && (known === undefined || known === null);
-      const photo = DEST_PHOTOS[b];
+      const photo = document.documentElement.classList.contains("lite") ? null : DEST_PHOTOS[b];  // mode léger : sans photo
       return `<button type="button" class="dest" data-i="${i}" style="--c1:${c1};--c2:${c2}">
         <span class="dest-art${photo ? " photo" : ""}" aria-hidden="true"${photo ? ` style="background-image:linear-gradient(180deg, rgb(0 0 0 / .05), rgb(0 0 0 / .45)), url(${photo})"` : ""}>
           <svg viewBox="0 0 200 104" preserveAspectRatio="none"><path class="arc" d="M18 92 C 60 18, 140 10, 184 50"/><circle class="pin" cx="18" cy="92" r="3"/><circle class="pin" cx="184" cy="50" r="3"/></svg>
@@ -1391,8 +1393,9 @@
   });
 
   // ---------- Langue et devise : changements ----------
-  $("lang").addEventListener("change", () => {
+  $("lang").addEventListener("change", async () => {
     LANG = $("lang").value; store.set("escale.lang", LANG);
+    if (!/^(fr|en)$/.test(LANG) && !window.ESCALE_I18N) await new Promise((ok) => { const s = document.createElement("script"); s.src = "/i18n.js"; s.onload = s.onerror = ok; document.head.appendChild(s); });
     countryNames = null; paintMonthOptions(); calc();
     applyLang(); paintDests(); paintFaq(); paintRecent(); paintChecklist(); paintThemeBtn(); rerender();
     if (!$("explore").hidden) { paintExploreMonths(); renderExplore($("ex-grid"), exploreFrom, exploreMonth); }

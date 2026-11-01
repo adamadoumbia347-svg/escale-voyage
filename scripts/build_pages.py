@@ -594,6 +594,27 @@ def legal_pages():
 DISTANCES = {}
 
 
+# Mode léger (réseaux lents, économie de données, visiteurs en Afrique) : un petit script en tête de chaque page ajoute la classe
+# « lite » à <html> ; sans elle, il précharge la police du site. En mode léger : police du système, pas de photos décoratives,
+# grille et courbe des prix chargées à la demande (pages.css, site/grille.js, site/courbe.js). Choix modifiable en bas de page (clics.js).
+FONT_PRELOAD = '<link rel="preload" href="/fonts/instrument-sans-latin-f587e7.woff2" as="font" type="font/woff2" crossorigin>'
+LITE_JS = ('<script>(function(){try{var d=document.documentElement,s=localStorage.getItem("escale.lite"),c=navigator.connection||{},z="";'
+           'try{z=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}'
+           'if(s==="1"||(s!=="0"&&(c.saveData||/2g|3g/.test(c.effectiveType||"")||z.indexOf("Africa/")===0)))d.classList.add("lite");'
+           'else{var l=document.createElement("link");l.rel="preload";l.as="font";l.type="font/woff2";l.crossOrigin="anonymous";'
+           'l.href="/fonts/instrument-sans-latin-f587e7.woff2";document.head.appendChild(l)}}catch(e){}})();</script>')
+
+
+def lite_mode(site):
+    n = 0
+    for f in site.rglob("*.html"):
+        t = f.read_text(encoding="utf-8")
+        if FONT_PRELOAD in t:
+            f.write_text(t.replace(FONT_PRELOAD, LITE_JS), encoding="utf-8")
+            n += 1
+    return n
+
+
 def main():
     airports_all = {a[0]: a for a in __import__("json").loads((SITE / "data" / "airports.json").read_text(encoding="utf-8"))}
     _, dist = routes_extra.extend(ROUTES, translations, airports_all)
@@ -729,6 +750,7 @@ def main():
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
         "".join(f"  <url><loc>{u}</loc><lastmod>{new_lm['/' + (u[len(DOMAIN):].strip('/') + '/' if u[len(DOMAIN):].strip('/') else '')][1]}</lastmod></url>\n" for u in urls) + "</urlset>\n", encoding="utf-8")
     (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {DOMAIN}/sitemap.xml\n", encoding="utf-8")
+    lite_mode(SITE)
     print(f"{len(urls)} pages dans le sitemap")
 
 if __name__ == "__main__":

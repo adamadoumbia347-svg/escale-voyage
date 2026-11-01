@@ -40,7 +40,7 @@
     if (photoDone) return; photoDone = true;
     EV.forEach(function (e) { removeEventListener(e, photo, { passive: true }); });
     var band = document.querySelector(".band");
-    if (!band || matchMedia("(prefers-reduced-data: reduce)").matches) return;
+    if (!band || matchMedia("(prefers-reduced-data: reduce)").matches || document.documentElement.classList.contains("lite")) return;
     var n = (+(get("escale.photo") || 0) + 1) % PHOTOS.length; set("escale.photo", String(n));
     var img = new Image();
     img.onload = function () { band.style.setProperty("--hero-img", "url(" + img.src + ")"); band.classList.add("has-photo"); };
@@ -58,14 +58,14 @@
   var go = function () {
     Promise.all([
       fetch("/api/deals?currency=EUR").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
-      fetch("/data/airports.json").then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; })
+      (window.ESCALE_AIRPORTS = window.ESCALE_AIRPORTS || fetch("/data/airports.json").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }))
     ]).then(function (res) {
       var d = res[0], names = {};
       (res[1] || []).forEach(function (a) { if (!names[a[0]]) names[a[0]] = a[1]; });
       var deals = d && d.origins && d.origins.CDG ? d.origins.CDG.filter(function (x) { return x.dep && x.ret; }).slice(0, 8) : [];
       if (!deals.length) return;
       grid.innerHTML = deals.map(function (x) {
-        var city = names[x.to] || x.to, img = IMG[x.to];
+        var city = names[x.to] || x.to, img = document.documentElement.classList.contains("lite") ? null : IMG[x.to];  // mode léger : sans photo
         var href = "/recherche/?flightSearch=CDG" + ddmm(x.dep) + x.to + ddmm(x.ret) + "1";
         return '<a class="city-card' + (img ? "" : " no-img") + '" href="' + esc(href) + '">' +
           (img ? '<img src="/img/villes/' + img + '-480.webp" width="480" height="360" alt="" loading="lazy" decoding="async">' : "") +
