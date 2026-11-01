@@ -7,10 +7,31 @@ const SITE = 'https://escale.live', DIR = __dirname, OUT = path.join(DIR, 'out')
 const LANG = process.env.LANG_VIDEO === 'it' ? 'it' : 'fr'; // fr : France et Belgique · it : vidéo en italien, trajets depuis l'Italie
 
 const FLAGS = { Dakar: '🇸🇳', Bamako: '🇲🇱', Abidjan: '🇨🇮', Conakry: '🇬🇳', Douala: '🇨🇲', 'Yaoundé': '🇨🇲', Kinshasa: '🇨🇩', Brazzaville: '🇨🇬',
-  Libreville: '🇬🇦', Lagos: '🇳🇬', Accra: '🇬🇭', 'Lomé': '🇹🇬', Cotonou: '🇧🇯', Ouagadougou: '🇧🇫', Nouakchott: '🇲🇷', Alger: '🇩🇿', Oran: '🇩🇿', Casablanca: '🇲🇦', Marrakech: '🇲🇦', Tunis: '🇹🇳', Djerba: '🇹🇳' };
+  Libreville: '🇬🇦', Lagos: '🇳🇬', Accra: '🇬🇭', 'Lomé': '🇹🇬', Cotonou: '🇧🇯', Ouagadougou: '🇧🇫', Nouakchott: '🇲🇷', Alger: '🇩🇿', Oran: '🇩🇿', Casablanca: '🇲🇦', Marrakech: '🇲🇦', Tunis: '🇹🇳', Djerba: '🇹🇳',
+  Niamey: '🇳🇪', 'N’Djamena': '🇹🇩', Bissau: '🇬🇼', Banjul: '🇬🇲', Praia: '🇨🇻', 'Addis-Abeba': '🇪🇹', Nairobi: '🇰🇪', Johannesburg: '🇿🇦', Kigali: '🇷🇼', 'Le Caire': '🇪🇬',
+  Antananarivo: '🇲🇬', Luanda: '🇦🇴', Maputo: '🇲🇿', 'Dar es Salaam': '🇹🇿', Maurice: '🇲🇺' };
 const TAGS = { '🇸🇳': '#senegal #dakar', '🇲🇱': '#mali #bamako', '🇨🇮': '#cotedivoire #abidjan', '🇬🇳': '#guinee #conakry', '🇨🇲': '#cameroun', '🇨🇩': '#rdc #kinshasa', '🇨🇬': '#congo',
-  '🇬🇦': '#gabon', '🇳🇬': '#nigeria #lagos', '🇬🇭': '#ghana #accra', '🇹🇬': '#togo', '🇧🇯': '#benin', '🇧🇫': '#burkinafaso', '🇲🇷': '#mauritanie', '🇩🇿': '#algerie', '🇲🇦': '#maroc', '🇹🇳': '#tunisie' };
-const MAGHREB = new Set(['🇩🇿', '🇲🇦', '🇹🇳']);
+  '🇬🇦': '#gabon', '🇳🇬': '#nigeria #lagos', '🇬🇭': '#ghana #accra', '🇹🇬': '#togo', '🇧🇯': '#benin', '🇧🇫': '#burkinafaso', '🇲🇷': '#mauritanie', '🇩🇿': '#algerie', '🇲🇦': '#maroc', '🇹🇳': '#tunisie',
+  '🇪🇬': '#egypte', '🇪🇹': '#ethiopie', '🇰🇪': '#kenya', '🇿🇦': '#afriquedusud', '🇲🇬': '#madagascar', '🇳🇪': '#niger', '🇹🇩': '#tchad' };
+const MAGHREB = new Set(['🇩🇿', '🇲🇦', '🇹🇳', '🇪🇬']);
+// Régions de la vidéo « tous les pays » (chaque ville du baromètre tombe dans l'une d'elles)
+const REGIONS = [
+  { fr: 'Afrique de l\'Ouest', it: 'Africa occidentale', e: '🌍', f: ['🇸🇳', '🇲🇱', '🇨🇮', '🇬🇳', '🇹🇬', '🇧🇯', '🇧🇫', '🇲🇷', '🇳🇪', '🇬🇼', '🇬🇲', '🇨🇻', '🇳🇬', '🇬🇭'] },
+  { fr: 'Afrique centrale', it: 'Africa centrale', e: '🌍', f: ['🇨🇲', '🇨🇩', '🇨🇬', '🇬🇦', '🇹🇩', '🇦🇴'] },
+  { fr: 'Afrique de l\'Est et du Sud', it: 'Africa orientale e australe', e: '🌍', f: ['🇪🇹', '🇰🇪', '🇷🇼', '🇹🇿', '🇿🇦', '🇲🇿', '🇲🇬', '🇲🇺'] },
+  { fr: 'Maghreb et Égypte', it: 'Nord Africa', e: '🌴', f: ['🇩🇿', '🇲🇦', '🇹🇳', '🇪🇬'] },
+];
+// Une carte par ville (la moins chère), groupées par région ; 8 cartes au plus par écran (sinon la région continue sur un 2e écran)
+function regionSections(rows, lang, dep, title) {
+  const best = {}; rows.forEach((r) => { if (!best[r.city] || r.price < best[r.city].price) best[r.city] = r; });
+  const all = Object.values(best).sort((a, b) => a.price - b.price), out = [];
+  REGIONS.forEach((g) => {
+    const L = all.filter((r) => g.f.includes(r.flag)), parts = Math.ceil(L.length / 8);
+    for (let k = 0; k < parts; k++) out.push({ chip: g[lang] + (parts > 1 ? ` ${k + 1}/${parts}` : ''), title: title + ' ' + g.e, grid: true,
+      cards: L.slice(k * 8, k * 8 + 8).map((r) => ({ flag: r.flag, route: r.cityLabel || r.city, price: r.price, extra: dep(r) })) });
+  });
+  return { sections: out, all };
+}
 const TIPS = [
   ['Décale ton départ d\'un ou deux jours', 'Le calendrier des prix montre les jours les moins chers', 'Même trajet, même mois… mais pas le même prix'],
   ['Compare le prix AVEC la valise', 'Le billet le moins cher n\'inclut pas toujours la soute', 'Ajoute le prix du bagage avant de comparer'],
@@ -95,6 +116,7 @@ function build(rows, fmt) {
         sections, outro: OUTRO },
       caption: `Combien coûte un billet pour le bled cette semaine ? 🌍✈️ ${all.slice(0, 4).map((r) => `${r.city} dès ${r.price} €`).join(', ')}… Toutes les destinations sur escale.live 👇 Ta ville ? Dis-le en commentaire ${base} #afrique #maghreb` };
   }
+  if (fmt.startsWith('pays')) return multi(rows, fmt.split('-')[1] || 'quiz');
   // astuce
   const k = doy() % TIPS.length, [l1, l2, l3] = TIPS[k];
   return { title: `Astuce : ${l1}`, data: { hook: { emoji: '💡✈️', title: 'L\'astuce du jour<br>pour payer ton billet<br><b>moins cher</b>', sub: 'Garde-la pour ton prochain voyage 📌' },
@@ -102,12 +124,43 @@ function build(rows, fmt) {
     caption: `Astuce du jour 💡 ${l1} : ${l2.toLowerCase()}, ${l3}. Compare gratuitement sur escale.live ✈️ #astuce ${base}` };
 }
 
+// Vidéo quotidienne « tous les pays » (40 s et plus) : toutes les destinations du baromètre, région par région,
+// puis un bonus qui change chaque jour (quiz, baisses de la semaine ou astuce)
+function multi(rows, extra) {
+  rows = rows.filter((r) => !r.path.startsWith('it/'));
+  const base = '#billetdavion #volpascher #diaspora #bonplan #afrique', date = today();
+  const { sections, all } = regionSections(rows, 'fr', (r) => 'depuis ' + r.route.split('→')[0].trim() + ' · A/R', 'Aller-retour, prix le plus bas');
+  const HOOKS = {
+    quiz: { emoji: '🌍✈️', title: 'Combien coûte<br>un billet pour <b>le bled</b><br>cette semaine ?', sub: `${all.length} destinations · prix repérés le ${date}` },
+    baisse: { emoji: '📉🌍', title: 'Les prix des vols<br>vers <b>toute l\'Afrique</b><br>cette semaine', sub: `${all.length} destinations · prix repérés le ${date}` },
+    astuce: { emoji: '💸🌍', title: 'Ton pays est-il<br><b>le moins cher</b><br>cette semaine ?', sub: `${all.length} destinations · prix repérés le ${date}` },
+  };
+  const data = { hook: HOOKS[extra] || HOOKS.quiz, sections, outro: OUTRO };
+  let bonus = '';
+  if (extra === 'baisse') {
+    const down = rows.filter((r) => r.d7 !== null && r.d7 <= -3).sort((a, b) => a.d7 - b.d7).slice(0, 3);
+    if (down.length) { data.sections = sections.concat([{ chip: 'En baisse 📉', title: 'Comparé à il y a 7 jours', cards: down.map((r) => card(r, `${r.d7} % en 7 jours`)) }]);
+      bonus = ` 📉 En baisse : ${down.map((r) => `${r.city} ${r.d7} %`).join(', ')}.`; }
+    else extra = 'astuce';
+  }
+  if (extra === 'quiz') {
+    const pool = all.filter((r) => r.price > 60), r = pool[(doy() * 7) % pool.length];
+    const opts = [r.price, Math.round(r.price * 1.45 / 5) * 5, Math.round(r.price * 0.65 / 5) * 5], order = [[0, 1, 2], [1, 0, 2], [2, 1, 0]][doy() % 3];
+    data.quiz = { flag: r.flag, route: r.route, sub: 'Bonus : devine le prix de ce billet !', options: order.map((i) => opts[i]), answer: order.indexOf(0) };
+    bonus = ` 🤔 Bonus : devine le prix de ${r.route} !`;
+  }
+  if (extra === 'astuce') { const k = doy() % TIPS.length, [l1, l2, l3] = TIPS[k]; data.tip = { label: 'Astuce du jour 💡', lines: [l1, `<small>${l2}</small>`, `<span class="y">${l3}</span>`] }; bonus = ` 💡 Astuce : ${l1.toLowerCase()}.`; }
+  const cheap = all.slice(0, 4).map((r) => `${r.flag} ${r.city} dès ${r.price} €`).join(', ');
+  return { title: `Les prix vers toute l'Afrique (${all.length} destinations)`, route: (all.find((r) => !MAGHREB.has(r.flag)) || all[0]).path, data,
+    caption: `Combien coûte un billet vers l'Afrique cette semaine ? 🌍✈️ ${cheap}…${bonus} Toutes les destinations sur escale.live 👇 Ta ville ? Dis-le en commentaire ${base} #maghreb` };
+}
+
 // Scène « téléphone » : baromètre puis page du trajet mis en avant (calendrier, alerte), avec le doigt qui touche
 async function phoneScene(b, fmt, v) {
   const route = v.route || 'vol-paris-dakar';
   const R = await capture(b, `${SITE}/${route}/`, 'trajet', { hero: '#hero-price', cal: '#route-calendar', day: '#route-calendar .cal-day.t0', alert: '#price-alert', alertBtn: '#price-alert button[type=submit]' }, 7200, 7000);
   const shots = [], cal = R.boxes.cal, day = R.boxes.day, al = R.boxes.alert, btn = R.boxes.alertBtn;
-  if (LANG === 'fr' && ['top', 'afrique', 'maghreb', 'baisse', 'toutes'].includes(fmt)) {
+  if (LANG === 'fr' && (['top', 'afrique', 'maghreb', 'baisse', 'toutes'].includes(fmt) || fmt.startsWith('pays'))) {
     const Bp = await capture(b, `${SITE}/barometre-prix/`, 'barometre', { table: '#barometre table', row: `#barometre a[href="/${route}/"]` }, 6000, 4000);
     const ty = Bp.boxes.table ? Bp.boxes.table.top - 110 : 500, row = Bp.boxes.row;
     shots.push({ src: Bp.src, w: Bp.w, steps: [[0, 0], [.9, 0], [2.6, ty], [4.6, ty]], taps: row ? [[3.4, row.x, row.y, ty]] : [], dur: 4.6 });
@@ -136,13 +189,26 @@ const itName = (r) => r.route.replace('Milan', 'Milano').replace('Rome', 'Roma')
 const MOIS_IT = { janvier: 'gennaio', 'février': 'febbraio', mars: 'marzo', avril: 'aprile', mai: 'maggio', juin: 'giugno', juillet: 'luglio', 'août': 'agosto', septembre: 'settembre', octobre: 'ottobre', novembre: 'novembre', 'décembre': 'dicembre' };
 const itMonth = (m) => (m || '').replace(/[a-zéû]+/, (w) => MOIS_IT[w] || w);
 const itDate = () => day().toLocaleDateString('it-IT', { day: 'numeric', month: 'long' });
-const TAGS_IT = { '🇨🇮': '#costadavorio #ivoriani', '🇸🇳': '#senegal #senegalesi', '🇳🇬': '#nigeria #nigeriani', '🇬🇭': '#ghana #ghanesi', '🇲🇦': '#marocco #marocchini' };
+const TAGS_IT = { '🇨🇮': '#costadavorio #ivoriani', '🇸🇳': '#senegal #senegalesi', '🇳🇬': '#nigeria #nigeriani', '🇬🇭': '#ghana #ghanesi', '🇲🇦': '#marocco #marocchini',
+  '🇹🇳': '#tunisia', '🇪🇬': '#egitto', '🇪🇹': '#etiopia', '🇩🇿': '#algeria' };
+const CITY_IT = { 'Le Caire': 'Il Cairo', Alger: 'Algeri', Tunis: 'Tunisi', 'Addis-Abeba': 'Addis Abeba' };
 function buildIt(rows, fmt) {
-  const L = rows.filter((r) => r.path.startsWith('it/')).map((r) => Object.assign({}, r, { route: itName(r), month: itMonth(r.month) }));
+  const L = rows.filter((r) => r.path.startsWith('it/')).map((r) => Object.assign({}, r, { route: itName(r).replace(r.city, CITY_IT[r.city] || r.city), cityLabel: CITY_IT[r.city] || r.city, month: itMonth(r.month) }));
   if (L.length < 3) throw new Error('trajets italiens absents du baromètre');
   const base = '#voli #bigliettiaerei #voloeconomico #italia #diaspora', tg = (l) => [...new Set(l.map((r) => TAGS_IT[r.flag]).filter(Boolean))].join(' ');
   const OUT_IT = { note: 'Prezzi andata e ritorno più bassi trovati per una partenza<br>nei prossimi 6 mesi. Cambiano ogni giorno.', ask: 'La tua città non c\'è?<br><span class="y">Scrivila nei commenti 👇</span>', cta: 'Tutti i prezzi, ogni giorno 👆' };
   const c = (r, x) => ({ flag: r.flag, route: r.route, price: r.price, extra: x });
+  if (fmt.startsWith('paesi')) { // tutti i paesi, regione per regione, poi un bonus (quiz o consiglio)
+    const extra = fmt.split('-')[1] || 'quiz';
+    const { sections, all } = regionSections(L, 'it', (r) => 'da ' + r.route.split('→')[0].trim() + ' · A/R', 'Andata e ritorno, prezzo più basso');
+    const data = { lbl: 'andata e ritorno da', hook: { emoji: '🇮🇹🌍', title: 'Quanto costa<br>volare dall\'Italia<br>verso <b>l\'Africa</b>?', sub: `${all.length} destinazioni · prezzi trovati il ${itDate()}` }, sections, outro: OUT_IT };
+    let bonus = '';
+    if (extra === 'quiz') { const r = all[(doy() * 7) % all.length], opts = [r.price, Math.round(r.price * 1.45 / 5) * 5, Math.round(r.price * 0.65 / 5) * 5], order = [[0, 1, 2], [1, 0, 2], [2, 1, 0]][doy() % 3];
+      data.quiz = { flag: r.flag, route: r.route, sub: 'Bonus: indovina il prezzo di questo biglietto!', options: order.map((i) => opts[i]), answer: order.indexOf(0) }; bonus = ` 🤔 Bonus: indovina il prezzo di ${r.route}!`; }
+    else { const k = doy() % TIPS_IT.length, [l1, l2, l3] = TIPS_IT[k]; data.tip = { label: 'Consiglio del giorno 💡', lines: [l1, `<small>${l2}</small>`, `<span class="y">${l3}</span>`] }; bonus = ` 💡 Consiglio: ${l1.toLowerCase()}.`; }
+    return { title: `Voli dall'Italia verso l'Africa (${all.length} destinazioni)`, route: all[0].path, data,
+      caption: `Quanto costa volare dall'Italia verso l'Africa? 🌍✈️ ${all.slice(0, 4).map((r) => `${r.flag} ${r.cityLabel} da ${r.price} €`).join(', ')}…${bonus} Tutti i prezzi su escale.live 👇 ${base} ${tg(all)}` };
+  }
   if (fmt === 'top') { const T = L.slice(0, 5);
     return { title: 'Top voli dall\'Italia', route: T[0].path, data: { lbl: 'andata e ritorno da', hook: { emoji: '🇮🇹✈️', title: 'I voli <b>più economici</b><br>dall\'Italia verso<br>l\'Africa', sub: `Prezzi trovati il ${itDate()}` },
         sections: [{ chip: 'Top dall\'Italia', title: 'Andata e ritorno da Milano e Roma', cards: T.map((r) => c(r)) }], outro: OUT_IT },
@@ -175,8 +241,9 @@ function platforms(v) {
 
 (async () => {
   const rows = await prices();
-  const week = LANG === 'it' ? ['quiz', 'top', 'focus', 'consiglio', 'top', 'focus', 'quiz'] // dimanche → samedi
-    : ['quiz', 'top', 'focus', 'astuce', 'afrique', 'baisse', 'maghreb'];
+  // Chaque jour : tous les pays, région par région (40 s et plus), avec un bonus qui change (dimanche → samedi)
+  const week = LANG === 'it' ? ['paesi-quiz', 'paesi-consiglio', 'paesi-quiz', 'paesi-consiglio', 'paesi-quiz', 'paesi-consiglio', 'paesi-quiz']
+    : ['pays-quiz', 'pays-baisse', 'pays-astuce', 'pays-quiz', 'pays-baisse', 'pays-astuce', 'pays-quiz'];
   const fmt = process.env.FORMAT || week[day().getDay()];
   const v = LANG === 'it' ? buildIt(rows, fmt) : build(rows, fmt);
   if (LANG === 'it') v.title = '🇮🇹 ' + v.title;
