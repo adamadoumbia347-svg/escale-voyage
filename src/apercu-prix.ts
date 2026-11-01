@@ -138,7 +138,7 @@ function render(html: string, from: string, to: string, rows: Month[], hist: Poi
   const bestRow = rows.find((r) => r.price === best)!
   const label = `${t.from} ${money(best)}`
   const lead = label.charAt(0).toUpperCase() + label.slice(1)
-  const app = lang === "fr" ? "" : "&lang=" + (lang === "it" || lang === "de" ? "en" : lang)
+  const app = lang === "fr" ? "" : "&lang=" + lang
   const items = rows.map((r) => {
     const stops = r.transfers === 0 ? t.direct : r.transfers === 1 ? t.one : r.transfers + t.many
     const when = date(r.dep, { day: "numeric", month: "short" }) + (r.ret ? " → " + date(r.ret, { day: "numeric", month: "short" }) : "")

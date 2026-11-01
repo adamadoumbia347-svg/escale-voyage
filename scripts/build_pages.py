@@ -674,18 +674,20 @@ def main():
         fcards.append(
             f'<a class="city-card" href="{hrefs["fr"]}" data-hrefs="{E(json.dumps(hrefs))}">'
             f'<img src="/img/villes/{img}-480.webp" srcset="/img/villes/{img}-480.webp 480w, /img/villes/{img}.webp 800w" sizes="(max-width: 600px) 46vw, 300px" width="480" height="360" alt="" loading="lazy" decoding="async">'
-            f'<span class="city-info"><strong data-names="{E(json.dumps({l: lab[l][0] for l in build_i18n.LANGS}, ensure_ascii=False))}">{E(lab["fr"][0])}</strong>'
-            f'<small data-names="{E(json.dumps({l: lab[l][1] for l in build_i18n.LANGS}, ensure_ascii=False))}">{E(lab["fr"][1])}</small></span></a>')
+            f'<span class="city-info"><strong data-names="{E(json.dumps({l: lab[l][0] for l in build_i18n.LANGS + ["it", "de"]}, ensure_ascii=False))}">{E(lab["fr"][0])}</strong>'
+            f'<small data-names="{E(json.dumps({l: lab[l][1] for l in build_i18n.LANGS + ["it", "de"]}, ensure_ascii=False))}">{E(lab["fr"][1])}</small></span></a>')
     # Bandeau de saison de l'accueil : la prochaine fête (le choix se fait dans le navigateur, selon la date du jour)
     EMO = {"noel": "🎄", "hiver": "☀️", "ramadan": "🌙", "printemps": "🌸", "tabaski": "🐑", "ete": "☀️"}
     MSG = {"fr": "{e} {t} ({d}) : les prix montent à l’approche des dates. Voir les vols →",
            "en": "{e} {t} ({d}): prices rise as the dates get closer. See flights →",
            "es": "{e} {t} ({d}): los precios suben a medida que se acercan las fechas. Ver vuelos →",
            "pt": "{e} {t} ({d}): os preços sobem à medida que as datas se aproximam. Ver voos →",
-           "ar": "{e} {t} ({d}): ترتفع الأسعار مع اقتراب المواعيد. اعرض الرحلات ←"}
+           "ar": "{e} {t} ({d}): ترتفع الأسعار مع اقتراب المواعيد. اعرض الرحلات ←",
+           "it": "{e} {t} ({d}): i prezzi salgono man mano che le date si avvicinano. Vedi i voli →",
+           "de": "{e} {t} ({d}): Die Preise steigen, je näher die Termine rücken. Flüge ansehen →"}
     season = [{"dep": f["dep"],
                "txt": {l: MSG[l].format(e=EMO.get(f["key"], "✈️"), t=FT.CARDS[f["key"]][1][l][0], d=FT.CARDS[f["key"]][1][l][1]) for l in MSG},
-               "href": {l: "/" + f[l]["slug"] + "/" for l in MSG}} for f in sorted(FT.FETES, key=lambda x: x["dep"])]
+               "href": {l: "/" + f[l if l in f else "en"]["slug"] + "/" for l in MSG}} for f in sorted(FT.FETES, key=lambda x: x["dep"])]
     s = re.sub(r"<!-- SAISON:START -->.*?<!-- SAISON:END -->", lambda m: '<!-- SAISON:START --><script type="application/json" id="season-data">'
                + __import__("json").dumps(season, ensure_ascii=False).replace("</", "<\\/") + '</script><!-- SAISON:END -->', s, flags=re.S)
     s = re.sub(r"<!-- FETES:START -->.*?<!-- FETES:END -->", lambda m: '<!-- FETES:START -->\n    <div class="city-grid fete-grid">' + "".join(fcards) + '</div>\n    <!-- FETES:END -->', s, flags=re.S)

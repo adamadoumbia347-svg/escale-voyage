@@ -33,7 +33,7 @@
   const isLive = /^https?:$/.test(location.protocol) && window.top === window;
 
   // ---------- Langue ----------
-  const LANGS = ["fr", "en", "es", "pt", "ar"];
+  const LANGS = ["fr", "en", "es", "pt", "ar", "it", "de"];
   const urlLang = new URLSearchParams(location.search).get("lang");
   if (LANGS.includes(urlLang)) { try { localStorage.setItem("escale.lang", urlLang); } catch (e) {} }
   const navLang = (navigator.language || "fr").slice(0, 2).toLowerCase();
@@ -41,11 +41,11 @@
   if (!LANGS.includes(LANG)) LANG = "fr";
   // Français et anglais écrits dans le code ; espagnol, portugais et arabe dans i18n.js (clé = texte anglais)
   const DICT = window.ESCALE_I18N || {};
-  const COL = { es: 0, pt: 1, ar: 2 };
+  const COL = { es: 0, pt: 1, ar: 2, it: 3, de: 4 };
   const tr = (en) => (DICT[en] && DICT[en][COL[LANG]]) || en;
   const T = (fr, en) => (LANG === "fr" ? fr : LANG === "en" ? en : tr(en));
   const fmt = (str, vars) => str.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m));
-  const locale = () => ({ fr: "fr-FR", en: "en-GB", es: "es-ES", pt: "pt-PT", ar: "ar-u-nu-latn" })[LANG];
+  const locale = () => ({ fr: "fr-FR", en: "en-GB", es: "es-ES", pt: "pt-PT", ar: "ar-u-nu-latn", it: "it-IT", de: "de-DE" })[LANG];
 
   function applyLang() {
     document.documentElement.lang = LANG;
@@ -68,18 +68,18 @@
       el.setAttribute("aria-label", T(el.dataset.frAria, el.dataset.enAria));
     });
     $("lang").value = LANG;
-    const dealsPath = { fr: "/bons-plans/", en: "/en/deals/", es: "/es/ofertas/", pt: "/pt/promocoes/", ar: "/ar/deals/" }[LANG];
+    const dealsPath = { fr: "/bons-plans/", en: "/en/deals/", es: "/es/ofertas/", pt: "/pt/promocoes/", ar: "/ar/deals/" , it: "/en/deals/", de: "/en/deals/" }[LANG];
     document.querySelectorAll("#deals-link, .deals-href").forEach((a) => { a.href = dealsPath; });
-    document.querySelectorAll(".about-href").forEach((a) => { a.href = { fr: "/a-propos/", en: "/en/about/", es: "/es/acerca-de/", pt: "/pt/sobre/", ar: "/ar/about/" }[LANG]; });
-    document.querySelectorAll(".fetes-href").forEach((a) => { a.href = { fr: "/vols-fetes/", en: "/en/holiday-flights/", es: "/es/vuelos-fiestas/", pt: "/pt/voos-festas/", ar: "/ar/holiday-flights/" }[LANG]; });
-    document.querySelectorAll(".anywhere-href").forEach((a) => { a.href = { fr: "/partout/", en: "/en/anywhere/", es: "/es/explorar/", pt: "/pt/explorar/", ar: "/ar/anywhere/" }[LANG]; });
-    document.querySelectorAll(".favs-href").forEach((a) => { a.href = { fr: "/favoris/", en: "/en/favorites/", es: "/es/favoritos/", pt: "/pt/favoritos/", ar: "/ar/favorites/" }[LANG]; });
-    document.querySelectorAll(".guides-href").forEach((a) => { a.href = { fr: "/guides/", en: "/en/guides/", es: "/es/guias/", pt: "/pt/guias/", ar: "/ar/guides/" }[LANG]; });
+    document.querySelectorAll(".about-href").forEach((a) => { a.href = { fr: "/a-propos/", en: "/en/about/", es: "/es/acerca-de/", pt: "/pt/sobre/", ar: "/ar/about/" , it: "/en/about/", de: "/en/about/" }[LANG]; });
+    document.querySelectorAll(".fetes-href").forEach((a) => { a.href = { fr: "/vols-fetes/", en: "/en/holiday-flights/", es: "/es/vuelos-fiestas/", pt: "/pt/voos-festas/", ar: "/ar/holiday-flights/" , it: "/en/holiday-flights/", de: "/en/holiday-flights/" }[LANG]; });
+    document.querySelectorAll(".anywhere-href").forEach((a) => { a.href = { fr: "/partout/", en: "/en/anywhere/", es: "/es/explorar/", pt: "/pt/explorar/", ar: "/ar/anywhere/" , it: "/en/anywhere/", de: "/en/anywhere/" }[LANG]; });
+    document.querySelectorAll(".favs-href").forEach((a) => { a.href = { fr: "/favoris/", en: "/en/favorites/", es: "/es/favoritos/", pt: "/pt/favoritos/", ar: "/ar/favorites/" , it: "/en/favorites/", de: "/en/favorites/" }[LANG]; });
+    document.querySelectorAll(".guides-href").forEach((a) => { a.href = { fr: "/guides/", en: "/en/guides/", es: "/es/guias/", pt: "/pt/guias/", ar: "/ar/guides/" , it: "/en/guides/", de: "/en/guides/" }[LANG]; });
     countryNames = null;
     if (window.EscaleFavs) window.EscaleFavs.sync();
     document.querySelectorAll("[data-names]").forEach((el) => {
       if (el.dataset.fr == null) el.dataset.fr = el.textContent;
-      try { el.textContent = LANG === "fr" ? el.dataset.fr : JSON.parse(el.dataset.names)[LANG] || el.dataset.fr; } catch (e) {}
+      try { el.textContent = LANG === "fr" ? el.dataset.fr : (JSON.parse(el.dataset.names)[LANG] || (LANG === "it" || LANG === "de" ? JSON.parse(el.dataset.names).en : "")) || el.dataset.fr; } catch (e) {}
     });
     document.querySelectorAll("[data-hrefs]").forEach((a) => { try { a.href = JSON.parse(a.dataset.hrefs)[LANG] || a.href; } catch (e) {} });
     // Noms des pays déjà écrits en français dans la page : traduction seulement pour les autres langues
@@ -301,7 +301,11 @@
     pt: { kayak: "www.kayak.com", momondo: "www.momondo.com", sky: "www.skyscanner.net/transport/flights", booking: "searchresults.pt-pt.html",
           hotels: "www.hotels.com", agoda: "pt-pt", airbnb: "www.airbnb.pt", rental: "pt", discover: "pt" },
     ar: { kayak: "www.kayak.com", momondo: "www.momondo.com", sky: "www.skyscanner.net/transport/flights", booking: "searchresults.ar.html",
-          hotels: "www.hotels.com", agoda: "ar-ae", airbnb: "www.airbnb.com", rental: "en", discover: "" }
+          hotels: "www.hotels.com", agoda: "ar-ae", airbnb: "www.airbnb.com", rental: "en", discover: "" },
+    it: { kayak: "www.kayak.it", momondo: "www.momondo.it", sky: "www.skyscanner.net/transport/flights", booking: "searchresults.it.html",
+          hotels: "www.hotels.com", agoda: "it-it", airbnb: "www.airbnb.it", rental: "en", discover: "" },
+    de: { kayak: "www.kayak.de", momondo: "www.momondo.de", sky: "www.skyscanner.net/transport/flights", booking: "searchresults.de.html",
+          hotels: "www.hotels.com", agoda: "de-de", airbnb: "www.airbnb.de", rental: "en", discover: "" }
   };
   const D = () => SITES[LANG];
 

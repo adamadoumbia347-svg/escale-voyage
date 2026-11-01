@@ -439,3 +439,37 @@ span.rs-arr { opacity: .35; }
 .fx{font-size:.85em;color:var(--muted,#5b6472);white-space:nowrap}
 .essentials table{margin:.5rem 0}
 .essentials h3{margin:1rem 0 .4rem;font-size:1.05rem}
+/* Grille des prix aller × retour (site/grille.js) */
+.pg-ctrl { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; margin: 8px 0 10px; }
+.pg-nav { display: flex; gap: 8px; }
+.pg-nav .btn { padding: 6px 12px; min-height: 36px; font-size: 14px; }
+.pg-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 640px; }
+.pg-table { border-collapse: separate; border-spacing: 3px; font-variant-numeric: tabular-nums; width: 100%; min-width: 330px; table-layout: fixed; }
+.pg-table th { font: 600 10.5px/1.15 var(--f-body); color: var(--muted); text-align: center; padding: 2px; white-space: normal; }
+.pg-table tbody th { text-align: end; padding-inline-end: 4px; width: 62px; }
+.pg-corner { width: 62px; } .pg-corner span { display: block; font-size: 10px; }
+.pg-table td { padding: 0; text-align: center; }
+.pg-cell { display: grid; place-items: center; min-height: 36px; border-radius: 6px; text-decoration: none; color: var(--ink); font: 700 12px/1 var(--f-mono); background: var(--line); }
+.pg-cell.t0 { background: color-mix(in srgb, var(--t0) 30%, var(--surface)); } .pg-cell.t1 { background: color-mix(in srgb, var(--t1) 30%, var(--surface)); }
+.pg-cell.t2 { background: color-mix(in srgb, var(--t2) 32%, var(--surface)); } .pg-cell.t3 { background: color-mix(in srgb, var(--t3) 32%, var(--surface)); }
+.pg-cell.t4 { background: color-mix(in srgb, var(--t4) 30%, var(--surface)); }
+.pg-cell.pg-min { outline: 2px solid var(--accent); }
+a.pg-cell:hover, a.pg-cell:focus-visible { outline: 2px solid var(--accent); }
+.pg-none { color: var(--muted); font-size: 12px; } .pg-off { background: transparent; }
+/* Courbe « prix selon la date de départ » (site/courbe.js) : une série, couleur validée (clair #1a56db, sombre #4a8ff5) */
+:root { --curve: #1a56db; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --curve: #4a8ff5; } }
+:root[data-theme="dark"] { --curve: #4a8ff5; }
+.pc-plot { position: relative; max-width: 640px; }
+.pc-svg { display: block; width: 100%; height: auto; overflow: visible; touch-action: pan-y; }
+.pc-grid { stroke: var(--line); stroke-width: 1; }
+.pc-axis { fill: var(--muted); font: 500 11px var(--f-body); }
+.pc-line { fill: none; stroke: var(--curve); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.pc-min { fill: var(--curve); stroke: var(--surface); stroke-width: 2; }
+.pc-label { fill: var(--ink); font: 700 12px var(--f-body); }
+.pc-cross { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; }
+.pc-dot { fill: var(--surface); stroke: var(--curve); stroke-width: 2; }
+.pc-hit { cursor: crosshair; }
+.pc-tip { position: absolute; display: grid; gap: 1px; padding: 6px 10px; border-radius: 8px; background: var(--surface); color: var(--ink);
+  border: 1px solid var(--line); box-shadow: 0 4px 14px rgb(0 0 0 / .12); text-decoration: none; font-size: 12px; white-space: nowrap; pointer-events: auto; }
+.pc-tip span { color: var(--muted); } .pc-tip strong { font-size: 14px; } .pc-tip em { font-style: normal; color: var(--accent); font-weight: 600; }

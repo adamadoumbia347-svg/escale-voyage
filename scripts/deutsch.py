@@ -15,7 +15,7 @@ from italia import est
 E = html.escape
 
 B.UI["de"] = dict(
-    flight_slug="fluege", app_lang="en", arrow="→",
+    flight_slug="fluege", app_lang="de", arrow="→",
     home="Flüge, Hotels und Mietwagen vergleichen", legal="Impressum (FR)", privacy="Datenschutz (FR)", cookies="Cookies verwalten",
     disclaimer="Escale verkauft keine Tickets und legt keine Preise fest. Die angezeigten Preise sind echte, kürzlich gefundene Preise: Der genaue Tarif erscheint auf der Buchungsseite.",
 )

@@ -54,9 +54,18 @@
 
   // Ville de départ : dernier choix, sinon la ville la plus proche (pays du visiteur), sinon Paris
   var codes = [].map.call(sel.options, function (o) { return o.value; });
-  var BY_COUNTRY = { FR: "CDG", BE: "BRU", LU: "BRU", CH: "GVA", GB: "LHR", IE: "LHR", US: "JFK", CA: "YUL", NL: "AMS", DE: "FRA", AT: "FRA", ES: "MAD", PT: "LIS", IT: "FCO" };
-  var saved = null;
+  var BY_COUNTRY = { FR: "CDG", BE: "BRU", LU: "BRU", CH: "GVA", GB: "LHR", IE: "DUB", US: "JFK", CA: "YUL", NL: "AMS", DE: "FRA", AT: "VIE", ES: "MAD", PT: "LIS",
+    IT: "MXP", TR: "IST", AE: "DXB", QA: "DOH", MA: "CMN", DZ: "ALG", TN: "TUN", EG: "CAI", SN: "DSS", CI: "ABJ", GH: "ACC", NG: "LOS", CM: "DLA", CD: "FIH",
+    ET: "ADD", KE: "NBO", ZA: "JNB" };
+  // N'importe quel aéroport du monde : /partout/?from=XXX, ou le dernier aéroport de départ saisi sur l'accueil
+  var addCode = function (c) {
+    if (!c || !/^[A-Z]{3}$/.test(c) || codes.indexOf(c) >= 0) return;
+    var o = document.createElement("option"); o.value = c; o.textContent = c; sel.insertBefore(o, sel.firstChild); codes.unshift(c);
+  };
+  var saved = null, urlFrom = (new URLSearchParams(location.search).get("from") || "").toUpperCase();
   try { saved = localStorage.getItem("escale.any.from") || ((localStorage.getItem("escale.from") || "").match(/\(([A-Z]{3})\)/) || [])[1]; } catch (e) {}
+  if (urlFrom) saved = urlFrom;
+  addCode(saved);
   if (saved && codes.indexOf(saved) >= 0) sel.value = saved;
   sel.addEventListener("change", function () { try { localStorage.setItem("escale.any.from", sel.value); } catch (e) {} load(); });
 
@@ -153,6 +162,7 @@
 
   fetch("/data/airports.json").then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }).then(function (rows) {
     (rows || []).forEach(function (a) { ap[a[0]] = a; });
+    [].forEach.call(sel.options, function (o) { if (o.textContent === o.value && ap[o.value]) o.textContent = ap[o.value][1] + " (" + o.value + ")"; });
     if (saved && codes.indexOf(saved) >= 0) return load();
     fetch("/api/geo").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }).then(function (g) {
       var c = g && BY_COUNTRY[g.country];

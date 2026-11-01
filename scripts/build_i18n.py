@@ -626,6 +626,10 @@ def calendar_html(lang, fr_, to):
             f'<p class="small">{E(b["cal_p"])}</p><div class="chips cal-months" role="group"></div>'
             f'<div class="cal-grid" dir="ltr"></div><p class="small cal-legend"></p></section>\n'
             f'<script src="/route-calendar.js" defer></script>\n'
+            f'<section id="price-curve" class="price-curve" data-from="{fr_}" data-to="{to}" hidden></section>\n'
+            f'<script src="/courbe.js" defer></script>\n'
+            f'<section id="price-grid" class="price-grid" data-from="{fr_}" data-to="{to}" hidden></section>\n'
+            f'<script src="/grille.js" defer></script>\n'
             f'<section id="price-alert" class="price-alert" data-from="{fr_}" data-to="{to}" hidden></section>\n'
             f'<script src="/alerts.js" defer></script>')
 

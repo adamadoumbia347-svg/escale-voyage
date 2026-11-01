@@ -34,8 +34,8 @@
     es: { loc: "es-ES", hero: "Ida y vuelta desde", from: "desde", direct: "vuelo directo", one: "1 escala", many: " escalas", best: "El más barato", go: "Ver estas fechas", app: "es" },
     pt: { loc: "pt-PT", hero: "Ida e volta desde", from: "desde", direct: "voo direto", one: "1 escala", many: " escalas", best: "O mais barato", go: "Ver estas datas", app: "pt" },
     ar: { loc: "ar", hero: "ذهاب وعودة ابتداءً من", from: "من", direct: "رحلة مباشرة", one: "توقف واحد", many: " توقفات", best: "الأرخص", go: "اعرض هذه التواريخ", app: "ar" },
-    it: { loc: "it-IT", hero: "Andata e ritorno trovato da", from: "da", direct: "volo diretto", one: "1 scalo", many: " scali", best: "Il più economico", go: "Vedi queste date", app: "en" },
-    de: { loc: "de-DE", hero: "Hin- und Rückflug gefunden ab", from: "ab", direct: "Direktflug", one: "1 Stopp", many: " Stopps", best: "Am günstigsten", go: "Diese Daten ansehen", app: "en" }
+    it: { loc: "it-IT", hero: "Andata e ritorno trovato da", from: "da", direct: "volo diretto", one: "1 scalo", many: " scali", best: "Il più economico", go: "Vedi queste date", app: "it" },
+    de: { loc: "de-DE", hero: "Hin- und Rückflug gefunden ab", from: "ab", direct: "Direktflug", one: "1 Stopp", many: " Stopps", best: "Am günstigsten", go: "Diese Daten ansehen", app: "de" }
   }[lang] || null;
   if (!L) return;
   var money = function (n) {

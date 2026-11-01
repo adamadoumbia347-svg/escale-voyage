@@ -14,7 +14,7 @@ import build_i18n as B
 E = html.escape
 
 B.UI["it"] = dict(
-    flight_slug="voli", app_lang="en", arrow="→",
+    flight_slug="voli", app_lang="it", arrow="→",
     home="Confronta voli, hotel e auto", legal="Note legali (FR)", privacy="Privacy (FR)", cookies="Gestisci i cookie",
     disclaimer="Escale non vende biglietti e non fissa alcun prezzo. I prezzi mostrati sono prezzi reali trovati di recente: la tariffa esatta appare sul sito di prenotazione.",
 )
@@ -88,7 +88,7 @@ def build(site, ctx):
         d, km = est(airports, fr_, to)
         dur = f"circa {d} senza scalo (stima in base alla distanza di {km:,} km)".replace(",", ".")
         p = path(r)
-        app = "/?" + urllib.parse.urlencode({"type": "vols", "from": fr_, "to": to, "lang": "en"})
+        app = "/?" + urllib.parse.urlencode({"type": "vols", "from": fr_, "to": to, "lang": "it"})
         faq = [
             (f"Quanto dura un volo da {a} a {b}?", f"Circa {d} con un volo senza scalo (stima in base alla distanza). Con uno scalo, il viaggio dura spesso diverse ore in più a seconda della coincidenza."),
             (f"Quando prenotare un volo economico {a} – {b}?", f"In genere due o tre mesi prima della partenza. I prezzi salgono molto durante {peak}: per questi periodi prenota prima."),
