@@ -21,6 +21,9 @@
   var getJSON = function (u) { return fetch(u).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }); };
 
   function currencies() {
+    // Page « pays » (/ci/, /ng/…) : la monnaie de la page ; sinon celle choisie sur l'accueil ou celle du pays du visiteur
+    var forced = document.querySelector('meta[name="escale-cur"]');
+    if (forced) return Promise.resolve([forced.content]);
     var c = store("escale.cur") || sget("escale.fxcur");
     if (c) return Promise.resolve(c === "EUR" ? [] : [c]);
     return getJSON("/api/geo").then(function (g) {

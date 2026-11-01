@@ -22,6 +22,7 @@ import fetes_dest  # noqa: E402
 import famille_pages  # noqa: E402
 import italia  # noqa: E402
 import deutsch  # noqa: E402
+import pays_accueil  # noqa: E402
 import explore_pages  # noqa: E402
 import hubs  # noqa: E402
 import villes  # noqa: E402
@@ -607,6 +608,7 @@ def main():
     i18n_urls, route_paths, hotel_paths = build_i18n.build(SITE, ctx)
     explore_pages.build_favs(SITE, ctx)  # pages personnelles : hors du plan du site
     hub_urls, _ = hubs.build_hubs(SITE, ctx, route_paths, hotel_paths)
+    urls += pays_accueil.build(SITE, ctx, route_paths)  # accueils par pays africain (/ci/, /sn/, /ng/…)
     urls += hub_urls
     urls += i18n_urls + build_i18n.build_indexes(SITE, ctx, route_paths, hotel_paths) + build_i18n.build_deals(SITE, ctx) + build_i18n.build_guides(SITE, ctx) + build_i18n.build_about(SITE, ctx) + build_i18n.build_fetes(SITE, ctx) + explore_pages.build_anywhere(SITE, ctx)
     urls += legal_pages()
@@ -638,7 +640,8 @@ def main():
     by_origin = {}
     for r in ROUTES:
         by_origin.setdefault(r[2], []).append(f'<li><a href="/{route_slug(r)}/">Vol {E(r[2])} → {E(r[3])}</a></li>')
-    links = "".join(group(f"Vols au départ de {E(o)}", items) for o, items in by_origin.items())
+    links = group("Partir d’Afrique : vols au départ de chaque pays", [f'<li><a href="/{c}/">{p[1]} Vols au départ {E(pays_accueil.DU.get(c, "du " + p[0]))}</a></li>' for c, p in pays_accueil.PAYS.items()])
+    links += "".join(group(f"Vols au départ de {E(o)}", items) for o, items in by_origin.items())
     links += group("Hôtels pas chers", [f'<li><a href="/{hotel_slug(h)}/">Hôtel pas cher à {E(h[0])}</a></li>' for h in HOTELS])
     links += group("Articles du blog", [f'<li><a href="/blog/{a["slug"]}/">{E(a["h1"])}</a></li>' for a in blog.ARTICLES] + ['<li><a href="/blog/">Tous les articles</a></li>'])
     links += group("Guides pratiques", ['<li><a href="/guides/bagages-avion/">Bagages : ne pas payer plus cher</a></li>',

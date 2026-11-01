@@ -212,15 +212,26 @@ PAIRS = {
     "DOH": "LOS ACC ADD NBO CAI CMN ABJ KGL",
     "JED": "CAI ADD DSS LOS NBO",
     # Vols entre villes africaines
-    "ABJ": "DSS ACC LOS DLA CMN BKO OUA COO LFW CKY NBO JNB",
-    "DSS": "ABJ BKO CMN CKY NKC BJL ACC",
-    "LOS": "ACC ABJ NBO JNB ADD DLA",
-    "ACC": "LOS ABJ DSS NBO JNB",
-    "CMN": "ABJ DSS BKO DLA CKY LBV TUN CAI",
+    "ABJ": "DSS ACC LOS DLA CMN BKO OUA COO LFW CKY NBO JNB CDG BRU IST DXB JFK YUL MAD LHR",
+    "DSS": "ABJ BKO CMN CKY NKC BJL ACC CDG BRU MAD IST DXB JFK YUL LIS",
+    "LOS": "ACC ABJ NBO JNB ADD DLA LHR DXB JFK IST CDG IAH ATL",
+    "ACC": "LOS ABJ DSS NBO JNB LHR JFK DXB CDG IST IAD",
+    "CMN": "ABJ DSS BKO DLA CKY LBV TUN CAI CDG MAD BRU IST DXB JFK YUL LHR",
     "NBO": "JNB ADD KGL DAR LOS",
     "ADD": "NBO LOS ACC JNB",
     "JNB": "NBO LOS ACC MPM LAD",
-    "DLA": "ABJ LOS LBV FIH",
+    "DLA": "ABJ LOS LBV FIH CDG BRU IST DXB YUL",
+    # Départs d'Afrique vers l'Europe, le Golfe et l'Amérique du Nord (pages « accueil par pays » : /ci/, /sn/, /ng/…)
+    "BKO": "CDG BRU IST DXB MAD",
+    "CKY": "CDG BRU IST DXB",
+    "LFW": "CDG BRU IST",
+    "COO": "CDG BRU IST",
+    "OUA": "CDG BRU IST",
+    "FIH": "CDG BRU IST DXB",
+    "ALG": "CDG LYS MRS IST DXB YUL",
+    "TUN": "CDG LYS MRS IST DXB YUL",
+    "ABV": "LHR DXB IST JFK",
+    "RAK": "CDG BRU MAD LHR",
 }
 
 
