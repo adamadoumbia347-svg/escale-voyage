@@ -155,11 +155,11 @@ def build_hubs(site, ctx, route_paths, hotel_paths):
             if hotel:
                 more.append(f'<li><a href="/{hotel_paths[hotel[0]][lang]}/">{E(h["hotels"].format(b=b))}</a></li>')
             more.append(f'<li><a href="/?type=voitures&amp;pick={code}{E(q)}">{E(h["cars"].format(b=b))}</a></li>')
-            ess = ""
+            ess = '<script src="/fx.js" defer></script>'
             if lang == "en":
-                ess, fq = hub_info_en.html_block(ct, b, f"/{hotel_paths[hotel[0]]['en']}/" if hotel else "")
+                blk, fq = hub_info_en.html_block(ct, b, f"/{hotel_paths[hotel[0]]['en']}/" if hotel else "")
                 faq += fq
-                ess += '<script src="/fx.js" defer></script>'
+                ess = blk + ess
             hero = (f'<p class="eyebrow">{E(loc(TR.COUNTRIES, country, lang))}</p><h1>{h["h1"].format(b=E(b))}</h1>'
                     f'<p class="hero-lead">{E(h["lead"].format(b=b, n=len(rs)))}</p>')
             body = (f'<dl class="facts">' + "".join(f"<div><dt>{E(k)}</dt><dd>{E(v)}</dd></div>" for k, v in facts) + "</dl>"

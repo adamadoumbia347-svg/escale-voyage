@@ -11,10 +11,11 @@
     es: ["👨‍👩‍👧‍👦 Para toda la familia", "Adultos", "Niños", "≈ {t} ida y vuelta", "Compartir en WhatsApp", "{r} para {a} adulto(s) y {c} niño(s): unos {t} ida y vuelta (desde {p} por persona). Compara fechas gratis:", "Estimación: precio por persona × viajeros. Los niños suelen pagar algo menos."],
     pt: ["👨‍👩‍👧‍👦 Para toda a família", "Adultos", "Crianças", "≈ {t} ida e volta", "Partilhar no WhatsApp", "{r} para {a} adulto(s) e {c} criança(s): cerca de {t} ida e volta (desde {p} por pessoa). Compare datas grátis:", "Estimativa: preço por pessoa × viajantes. As crianças pagam muitas vezes um pouco menos."],
     ar: ["👨‍👩‍👧‍👦 لكل العائلة", "البالغون", "الأطفال", "≈ {t} ذهاب وعودة", "مشاركة على واتساب", "{r} لـ {a} بالغ و{c} طفل: حوالي {t} ذهابًا وعودة (من {p} للشخص). قارن التواريخ مجانًا:", "تقدير: سعر الشخص × عدد المسافرين. غالبًا ما يدفع الأطفال أقل قليلًا."],
-    it: ["👨‍👩‍👧‍👦 Per tutta la famiglia", "Adulti", "Bambini", "≈ {t} andata e ritorno", "Condividi su WhatsApp", "{r} per {a} adulto/i e {c} bambino/i: circa {t} andata e ritorno (da {p} a persona). Confronta le date gratis:", "Stima: prezzo a persona × viaggiatori. I bambini spesso pagano un po' meno."]
+    it: ["👨‍👩‍👧‍👦 Per tutta la famiglia", "Adulti", "Bambini", "≈ {t} andata e ritorno", "Condividi su WhatsApp", "{r} per {a} adulto/i e {c} bambino/i: circa {t} andata e ritorno (da {p} a persona). Confronta le date gratis:", "Stima: prezzo a persona × viaggiatori. I bambini spesso pagano un po' meno."],
+    de: ["👨‍👩‍👧‍👦 Für die ganze Familie", "Erwachsene", "Kinder", "≈ {t} hin und zurück", "Auf WhatsApp teilen", "{r} für {a} Erwachsene und {c} Kind(er): etwa {t} hin und zurück (ab {p} pro Person). Daten kostenlos vergleichen:", "Schätzung: Preis pro Person × Reisende. Kinder zahlen oft etwas weniger."]
   }[lang] || null;
   if (!L) return;
-  var loc = { fr: "fr-FR", en: "en-GB", es: "es-ES", pt: "pt-PT", ar: "ar-u-nu-latn", it: "it-IT" }[lang];
+  var loc = { fr: "fr-FR", en: "en-GB", es: "es-ES", pt: "pt-PT", ar: "ar-u-nu-latn", it: "it-IT", de: "de-DE" }[lang];
   var money = function (n) { try { return new Intl.NumberFormat(loc, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n); } catch (e) { return Math.round(n) + " €"; } };
   var tries = 0;
   var start = function () {

@@ -21,6 +21,7 @@ import ete  # noqa: E402
 import fetes_dest  # noqa: E402
 import famille_pages  # noqa: E402
 import italia  # noqa: E402
+import deutsch  # noqa: E402
 import explore_pages  # noqa: E402
 import hubs  # noqa: E402
 import villes  # noqa: E402
@@ -614,6 +615,7 @@ def main():
     urls.append(recherche_page())
     urls.append(hotels_live_page())
     urls += italia.build(SITE, ctx)  # test : trajets au départ de l'Italie, en italien
+    urls += deutsch.build(SITE, ctx)  # trajets au départ de l'Allemagne, de l'Autriche et de Zurich, en allemand
     urls += ete.build(page, E, lambda lang, c, c_en, code: build_i18n.extras_html(SITE, lang, c, c_en, code), build_i18n.alert_btn, DOMAIN,
                       lambda p: (SITE / p / "index.html").exists(), lambda p: (SITE / p / "index.html").exists(), build_i18n.wa_btn)
     urls += fetes_dest.build(page, E, lambda lang, c, c_en, code: build_i18n.extras_html(SITE, lang, c, c_en, code), build_i18n.alert_btn,
@@ -650,8 +652,8 @@ def main():
                                         '<li><a href="/vols-ete-2027/">Vacances d’été 2027 au pays : prix par destination</a></li>',
                                         '<li><a href="/barometre-prix/">Baromètre des prix des vols</a></li>',
                                         '<li><a href="/widget/">Widget gratuit « Prix des vols » pour votre site</a></li>'])
-    links += '<p class="lead guides-langs">Guides in English, en español, em português, بالعربية, in italiano : ' + " · ".join(
-        f'<a href="/{l}/" hreflang="{l}" lang="{l}">{build_i18n.NAMES[l]}</a>' for l in build_i18n.LANGS + ["it"]) + "</p>"
+    links += '<p class="lead guides-langs">Guides in English, en español, em português, بالعربية, in italiano, auf Deutsch : ' + " · ".join(
+        f'<a href="/{l}/" hreflang="{l}" lang="{l}">{build_i18n.NAMES[l]}</a>' for l in build_i18n.LANGS + ["it", "de"]) + "</p>"
     s = re.sub(r"<!-- TRAVELPAYOUTS:START -->.*?<!-- TRAVELPAYOUTS:END -->",
                lambda m: "<!-- TRAVELPAYOUTS:START -->\n" + TRAVELPAYOUTS + "\n<!-- TRAVELPAYOUTS:END -->", s, flags=re.S)
     # Accueil : bandeau des cookies écrit dans la page (fin du <body>) au lieu de /consent.js chargé à part,

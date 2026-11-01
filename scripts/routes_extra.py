@@ -24,6 +24,11 @@ CITIES = {
     "BHX": ("Birmingham", "Royaume-Uni", ("Birmingham", "Birmingham", "Birmingham", "برمنغهام")),
     "DUB": ("Dublin", "Irlande", ("Dublin", "Dublín", "Dublin", "دبلن")),
     "YYZ": ("Toronto", "Canada", ("Toronto", "Toronto", "Toronto", "تورونتو")),
+    # Diaspora aux États-Unis (étape 2 : départs du monde entier)
+    "IAD": ("Washington", "États-Unis", ("Washington", "Washington", "Washington", "واشنطن")),
+    "ATL": ("Atlanta", "États-Unis", ("Atlanta", "Atlanta", "Atlanta", "أتلانتا")),
+    "IAH": ("Houston", "États-Unis", ("Houston", "Houston", "Houston", "هيوستن")),
+    "ZRH": ("Zurich", "Suisse", ("Zurich", "Zúrich", "Zurique", "زيورخ")),
     "MAD": ("Madrid", "Espagne", ("Madrid", "Madrid", "Madrid", "مدريد")),
     "LIS": ("Lisbonne", "Portugal", ("Lisbon", "Lisboa", "Lisboa", "لشبونة")),
     "BZV": ("Brazzaville", "Congo", ("Brazzaville", "Brazzaville", "Brazzaville", "برازافيل")),
@@ -197,6 +202,25 @@ PAIRS = {
     "YUL": "DSS ABJ CMN ALG TUN PAP DLA CKY",
     "MAD": "DSS CMN RAK TNG ALG ABJ BKO LOS",
     "LIS": "LAD MPM RAI OXB DSS CMN ABJ ACC",
+    # États-Unis et Suisse alémanique
+    "IAD": "ACC LOS ADD DSS ABJ CMN DLA",
+    "ATL": "LOS ACC DSS ABJ JNB CMN",
+    "IAH": "LOS ACC ABV DLA",
+    "ZRH": "ACC LOS CMN TUN ADD NBO DLA",
+    # Golfe : travailleurs et familles africaines installés à Dubaï, Doha, Djeddah
+    "DXB": "LOS ACC ADD NBO CAI CMN DSS ABJ KGL DAR",
+    "DOH": "LOS ACC ADD NBO CAI CMN ABJ KGL",
+    "JED": "CAI ADD DSS LOS NBO",
+    # Vols entre villes africaines
+    "ABJ": "DSS ACC LOS DLA CMN BKO OUA COO LFW CKY NBO JNB",
+    "DSS": "ABJ BKO CMN CKY NKC BJL ACC",
+    "LOS": "ACC ABJ NBO JNB ADD DLA",
+    "ACC": "LOS ABJ DSS NBO JNB",
+    "CMN": "ABJ DSS BKO DLA CKY LBV TUN CAI",
+    "NBO": "JNB ADD KGL DAR LOS",
+    "ADD": "NBO LOS ACC JNB",
+    "JNB": "NBO LOS ACC MPM LAD",
+    "DLA": "ABJ LOS LBV FIH",
 }
 
 

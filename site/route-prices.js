@@ -4,8 +4,8 @@
   "use strict";
   // « Pour toute la famille » (estimation et partage WhatsApp) : site/famille.js
   (function () { var f = document.createElement("script"); f.src = "/famille.js"; f.defer = true; document.head.appendChild(f); })();
-  // Pages en anglais : équivalent en livres et en dollars à côté des prix en euros (site/fx.js)
-  if ((document.documentElement.lang || "").slice(0, 2) === "en") (function () { var x = document.createElement("script"); x.src = "/fx.js"; x.defer = true; document.head.appendChild(x); })();
+  // Équivalent des prix en euros dans la monnaie du visiteur (site/fx.js)
+  (function () { var x = document.createElement("script"); x.src = "/fx.js"; x.defer = true; document.head.appendChild(x); })();
   // Lien Aviasales (partenaire rémunéré) : ouvre directement une recherche datée, départ dans 45 jours, retour 7 jours après
   var pad2 = function (n) { return String(n).padStart(2, "0"); };
   var ddmm = function (dt) { return pad2(dt.getDate()) + pad2(dt.getMonth() + 1); };
@@ -34,7 +34,8 @@
     es: { loc: "es-ES", hero: "Ida y vuelta desde", from: "desde", direct: "vuelo directo", one: "1 escala", many: " escalas", best: "El más barato", go: "Ver estas fechas", app: "es" },
     pt: { loc: "pt-PT", hero: "Ida e volta desde", from: "desde", direct: "voo direto", one: "1 escala", many: " escalas", best: "O mais barato", go: "Ver estas datas", app: "pt" },
     ar: { loc: "ar", hero: "ذهاب وعودة ابتداءً من", from: "من", direct: "رحلة مباشرة", one: "توقف واحد", many: " توقفات", best: "الأرخص", go: "اعرض هذه التواريخ", app: "ar" },
-    it: { loc: "it-IT", hero: "Andata e ritorno trovato da", from: "da", direct: "volo diretto", one: "1 scalo", many: " scali", best: "Il più economico", go: "Vedi queste date", app: "en" }
+    it: { loc: "it-IT", hero: "Andata e ritorno trovato da", from: "da", direct: "volo diretto", one: "1 scalo", many: " scali", best: "Il più economico", go: "Vedi queste date", app: "en" },
+    de: { loc: "de-DE", hero: "Hin- und Rückflug gefunden ab", from: "ab", direct: "Direktflug", one: "1 Stopp", many: " Stopps", best: "Am günstigsten", go: "Diese Daten ansehen", app: "en" }
   }[lang] || null;
   if (!L) return;
   var money = function (n) {

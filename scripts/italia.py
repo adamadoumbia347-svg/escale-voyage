@@ -24,6 +24,10 @@ ORIG = {
     "MXP": ("Milano", "Da Milano confronta anche Bergamo Orio al Serio (BGY), servito da molte compagnie low cost, e Linate (LIN)."),
     "FCO": ("Roma", "Da Roma confronta anche Ciampino (CIA), servito da compagnie low cost: a volte il risparmio è notevole."),
     "BLQ": ("Bologna", "Da Bologna confronta anche le partenze da Milano e da Venezia: con uno scalo in più, il prezzo può scendere."),
+    "NAP": ("Napoli", "Da Napoli confronta anche le partenze da Roma Fiumicino (FCO), a circa un'ora di treno: l'offerta verso l'Africa è molto più ampia."),
+    "VCE": ("Venezia", "Da Venezia confronta anche Treviso (TSF), servito da compagnie low cost, e Bologna (BLQ)."),
+    "PSA": ("Pisa", "Da Pisa confronta anche Firenze (FLR) e Bologna (BLQ): a volte un aeroporto vicino costa molto meno."),
+    "BGY": ("Bergamo", "Da Bergamo partono molte compagnie low cost: confronta anche Milano Malpensa (MXP) per i voli con scalo."),
     "TRN": ("Torino", "Da Torino confronta anche Milano Malpensa (MXP), a circa un'ora e mezza: l'offerta di voli è molto più ampia."),
 }
 # Destinations (code, nom italien, pays, aéroport, périodes chères, conseil)
@@ -49,7 +53,10 @@ DEST = {
 }
 ROUTES = [("MXP", d) for d in ("DSS", "CMN", "LOS", "ACC", "ABJ", "CAI", "TUN")] + \
          [("FCO", d) for d in ("DSS", "CMN", "TUN", "CAI", "LOS", "ADD", "ALG")] + \
-         [("BLQ", d) for d in ("CMN", "DSS")] + [("TRN", d) for d in ("CMN", "DSS")]
+         [("BLQ", d) for d in ("CMN", "DSS", "ACC", "TUN", "LOS")] + [("TRN", d) for d in ("CMN", "DSS", "TUN", "ABJ")] + \
+         [("MXP", d) for d in ("ADD", "ALG")] + [("FCO", d) for d in ("ACC", "ABJ")] + \
+         [("NAP", d) for d in ("DSS", "CMN", "TUN", "ACC", "LOS")] + [("VCE", d) for d in ("DSS", "CMN", "ACC", "TUN")] + \
+         [("PSA", d) for d in ("DSS", "CMN", "TUN")] + [("BGY", d) for d in ("CMN", "TUN", "CAI")]
 
 
 def slug(t):
@@ -130,10 +137,10 @@ def build(site, ctx):
             f'<li><a href="/{path(r)}/">{E(ORIG[r[0]][0])} → {E(DEST[r[1]][0])}</a></li>' for r in rs) + "</ul></section>"
         for o, rs in groups.items())
     body += f'<section><h2>Le offerte ogni settimana</h2><p>I prezzi più bassi verso l\'Africa e il Maghreb, ogni settimana su WhatsApp, gratis.</p>{B.wa_btn("it")}</section>'
-    hero = ('<h1>Voli economici verso l\'Africa e il Maghreb</h1><p class="hero-lead">Da Milano, Roma, Bologna e Torino: durata del volo, '
+    hero = ('<h1>Voli economici verso l\'Africa e il Maghreb</h1><p class="hero-lead">Da Milano, Roma, Napoli, Venezia, Bologna, Torino, Pisa e Bergamo: durata del volo, '
             'quando prenotare e prezzi reali trovati di recente, tratta per tratta.</p>')
     urls.append(B.write(site, "it", "it", "Voli economici verso l'Africa e il Maghreb | Escale",
-                        "Voli economici da Milano, Roma, Bologna e Torino verso Dakar, Casablanca, Tunisi, Il Cairo, Lagos, Accra, Abidjan: prezzi reali e consigli.",
+                        "Voli economici da Milano, Roma, Napoli, Venezia, Bologna e Torino verso Dakar, Casablanca, Tunisi, Il Cairo, Lagos, Accra, Abidjan: prezzi reali e consigli.",
                         hero, body, "", {"it": "it"}, ctx))
     return urls
 
