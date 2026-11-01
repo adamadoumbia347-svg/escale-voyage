@@ -1423,12 +1423,30 @@
     }
     return bestD < 400 ? best : null;
   }
+  // Bandeau « Vous partez de … ? » : visiteurs en Afrique, vers la page des vols au départ de leur pays (scripts/pays_accueil.py)
+  const PAYS = { CI: ["ci", "🇨🇮", "de Côte d’Ivoire", "d’Abidjan", "Côte d’Ivoire", "Abidjan"], SN: ["sn", "🇸🇳", "du Sénégal", "de Dakar", "Senegal", "Dakar"],
+    ML: ["ml", "🇲🇱", "du Mali", "de Bamako", "Mali", "Bamako"], GN: ["gn", "🇬🇳", "de Guinée", "de Conakry", "Guinea", "Conakry"],
+    BF: ["bf", "🇧🇫", "du Burkina Faso", "de Ouagadougou", "Burkina Faso", "Ouagadougou"], TG: ["tg", "🇹🇬", "du Togo", "de Lomé", "Togo", "Lomé"],
+    BJ: ["bj", "🇧🇯", "du Bénin", "de Cotonou", "Benin", "Cotonou"], CM: ["cm", "🇨🇲", "du Cameroun", "de Douala", "Cameroon", "Douala"],
+    CD: ["cd", "🇨🇩", "de RD Congo", "de Kinshasa", "DR Congo", "Kinshasa"], MA: ["ma", "🇲🇦", "du Maroc", "de Casablanca et Marrakech", "Morocco", "Casablanca and Marrakech"],
+    DZ: ["dz", "🇩🇿", "d’Algérie", "d’Alger", "Algeria", "Algiers"], TN: ["tn", "🇹🇳", "de Tunisie", "de Tunis", "Tunisia", "Tunis"],
+    NG: ["ng", "🇳🇬", "du Nigeria", "de Lagos et Abuja", "Nigeria", "Lagos and Abuja"], GH: ["gh", "🇬🇭", "du Ghana", "d’Accra", "Ghana", "Accra"] };
+  function paysBanner(cc) {
+    const p = PAYS[cc], box = $("pays-banner");
+    if (!p || !box || store.get("escale.pays.x") === cc) return;
+    const a = $("pays-link");
+    a.href = "/" + p[0] + "/";
+    a.textContent = p[1] + " " + T(`Vous partez ${p[2]} ? Les vols au départ ${p[3]}, prix en monnaie locale →`, `Flying from ${p[4]}? Flights from ${p[5]}, with prices in your currency →`);
+    box.hidden = false;
+    $("pays-x").onclick = () => { box.hidden = true; store.set("escale.pays.x", cc); };
+  }
   async function useGeo() {
     if (!isLive) return null;
     try {
       const g = await fetch("/api/geo").then((r) => (r.ok ? r.json() : null));
       if (!g) return null;
       if (!store.get("escale.cur") && COUNTRY_CUR[g.country]) { CUR = COUNTRY_CUR[g.country]; $("cur").value = CUR; syncCurQuick(); }
+      paysBanner(g.country);
       if (g.lat == null || g.lon == null) return null;
       await loadDB();
       if (!dbLoaded) return null;
