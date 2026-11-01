@@ -29,6 +29,10 @@ CITIES = {
     "ATL": ("Atlanta", "États-Unis", ("Atlanta", "Atlanta", "Atlanta", "أتلانتا")),
     "IAH": ("Houston", "États-Unis", ("Houston", "Houston", "Houston", "هيوستن")),
     "ZRH": ("Zurich", "Suisse", ("Zurich", "Zúrich", "Zurique", "زيورخ")),
+    # Chine et Nigeria du Nord (études, commerce, Hajj)
+    "CAN": ("Canton", "Chine", ("Guangzhou", "Cantón", "Cantão", "قوانغتشو")),
+    "PEK": ("Pékin", "Chine", ("Beijing", "Pekín", "Pequim", "بكين")),
+    "KAN": ("Kano", "Nigeria", ("Kano", "Kano", "Kano", "كانو")),
     "MAD": ("Madrid", "Espagne", ("Madrid", "Madrid", "Madrid", "مدريد")),
     "LIS": ("Lisbonne", "Portugal", ("Lisbon", "Lisboa", "Lisboa", "لشبونة")),
     "BZV": ("Brazzaville", "Congo", ("Brazzaville", "Brazzaville", "Brazzaville", "برازافيل")),
@@ -111,6 +115,7 @@ COUNTRIES = {
     "Guyane": ("French Guiana", "Guayana Francesa", "Guiana Francesa", "غويانا الفرنسية"),
     "Mayotte": ("Mayotte", "Mayotte", "Maiote", "مايوت"),
     "Haïti": ("Haiti", "Haití", "Haiti", "هايتي"),
+    "Chine": ("China", "China", "China", "الصين"),
 }
 
 # Grande région par pays -> saison chère (clé existante de translations.PEAKS) et conseil générique
@@ -124,7 +129,7 @@ for c in ["Éthiopie", "Kenya", "Afrique du Sud", "Madagascar", "Maurice", "Ango
     REGION[c] = "est"
 for c in ["Maroc", "Algérie", "Tunisie", "Égypte"]:
     REGION[c] = "maghreb"
-for c in ["Qatar", "Liban", "Jordanie", "Turquie"]:
+for c in ["Qatar", "Liban", "Jordanie", "Turquie", "Chine"]:
     REGION[c] = "moyen_orient"
 REGION["Émirats arabes unis"] = "emirats"
 REGION["Arabie saoudite"] = "saoudite"
@@ -212,26 +217,29 @@ PAIRS = {
     "DOH": "LOS ACC ADD NBO CAI CMN ABJ KGL",
     "JED": "CAI ADD DSS LOS NBO",
     # Vols entre villes africaines
-    "ABJ": "DSS ACC LOS DLA CMN BKO OUA COO LFW CKY NBO JNB CDG BRU IST DXB JFK YUL MAD LHR",
-    "DSS": "ABJ BKO CMN CKY NKC BJL ACC CDG BRU MAD IST DXB JFK YUL LIS",
-    "LOS": "ACC ABJ NBO JNB ADD DLA LHR DXB JFK IST CDG IAH ATL",
-    "ACC": "LOS ABJ DSS NBO JNB LHR JFK DXB CDG IST IAD",
-    "CMN": "ABJ DSS BKO DLA CKY LBV TUN CAI CDG MAD BRU IST DXB JFK YUL LHR",
+    "ABJ": "DSS ACC LOS DLA CMN BKO OUA COO LFW CKY NBO JNB CDG BRU IST DXB JFK YUL MAD LHR JED PEK CAN",
+    "DSS": "ABJ BKO CMN CKY NKC BJL ACC CDG BRU MAD IST DXB JFK YUL LIS JED MED",
+    "LOS": "ACC ABJ NBO JNB ADD DLA LHR DXB JFK IST CDG IAH ATL JED CAN PEK",
+    "ACC": "LOS ABJ DSS NBO JNB LHR JFK DXB CDG IST IAD CAN",
+    "CMN": "ABJ DSS BKO DLA CKY LBV TUN CAI CDG MAD BRU IST DXB JFK YUL LHR JED",
     "NBO": "JNB ADD KGL DAR LOS",
     "ADD": "NBO LOS ACC JNB",
     "JNB": "NBO LOS ACC MPM LAD",
-    "DLA": "ABJ LOS LBV FIH CDG BRU IST DXB YUL",
+    "DLA": "ABJ LOS LBV FIH CDG BRU IST DXB YUL JED CAN CMN",
     # Départs d'Afrique vers l'Europe, le Golfe et l'Amérique du Nord (pages « accueil par pays » : /ci/, /sn/, /ng/…)
-    "BKO": "CDG BRU IST DXB MAD",
-    "CKY": "CDG BRU IST DXB",
+    "BKO": "CDG BRU IST DXB MAD JED",
+    "CKY": "CDG BRU IST DXB JED",
     "LFW": "CDG BRU IST",
     "COO": "CDG BRU IST",
     "OUA": "CDG BRU IST",
-    "FIH": "CDG BRU IST DXB",
-    "ALG": "CDG LYS MRS IST DXB YUL",
-    "TUN": "CDG LYS MRS IST DXB YUL",
+    "FIH": "CDG BRU IST DXB CAN CMN",
+    "ALG": "CDG LYS MRS IST DXB YUL JED",
+    "TUN": "CDG LYS MRS IST DXB YUL JED",
     "ABV": "LHR DXB IST JFK",
     "RAK": "CDG BRU MAD LHR",
+    # Hajj et Omra (Djeddah, Médine), études (Canada, Maroc, Chine, Turquie), commerce (Dubaï, Canton, Istanbul)
+    "NIM": "JED CDG IST CMN",
+    "KAN": "JED DXB CAN",
 }
 
 

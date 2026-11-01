@@ -8,6 +8,7 @@ import html
 import urllib.parse
 
 import build_i18n as B
+import afrique_themes
 
 E = html.escape
 
@@ -52,7 +53,7 @@ T = {
               "Comparez les vols avec escale à Casablanca, Istanbul, Addis-Abeba ou Dubaï : ils sont souvent bien moins chers que le vol direct.",
               "Regardez la franchise bagage avant de comparer deux prix : pour un long séjour, la deuxième valise change tout.",
               "Les prix sont trouvés en euros par nos partenaires ; l'équivalent en {cur} est indicatif et le prix final s'affiche sur le site de réservation."],
-        visa="Visa : vérifier selon votre passeport", others="Autres pays", wa="Les bons plans chaque semaine sur WhatsApp"),
+        visa="Visa : vérifier selon votre passeport", others="Autres pays", themes="Hajj, études, commerce", wa="Les bons plans chaque semaine sur WhatsApp"),
     "en": dict(
         title="Cheap flights from {pays} | Escale", h1="Cheap flights <span>from {pays}</span>",
         desc="Cheap flights from {villes} to {dests}: live prices, shown with the {cur} equivalent.",
@@ -64,7 +65,7 @@ T = {
               "Compare flights with a stop in Istanbul, Addis Ababa, Casablanca or Dubai: they are often much cheaper than a direct flight.",
               "Check the baggage allowance before comparing two fares: for a long stay, the second suitcase changes everything.",
               "Our partners find prices in euros; the {cur} equivalent is a guide and the final fare is shown on the booking site."],
-        visa="Visa: check for your passport", others="Other countries", wa="Weekly deals on WhatsApp"),
+        visa="Visa: check for your passport", others="Other countries", themes="Hajj, study, business", wa="Weekly deals on WhatsApp"),
 }
 
 
@@ -105,6 +106,7 @@ def build(site, ctx, route_paths):
                 f'<div class="cta-row"><a class="btn" href="/?{E(q)}">{E(t["search"].format(v=vform))}</a><a class="btn ghost" href="{visa_href}">🛂 {E(t["visa"])}</a></div>')
         body = (secs + '<script src="/hub.js" defer></script><script src="/fx.js" defer></script>'
                 f'<section><h2>{E(t["tips_h"].format(pays=pform))}</h2><ul>{tips}</ul></section>'
+                f'<section><h2>{E(t["themes"])}</h2><ul class="links">' + "".join(f'<li><a href="/{p}/">{E(x)}</a></li>' for p, x in afrique_themes.links(lang)) + '</ul></section>'
                 f'<section class="nl-block"><h2>{E(t["wa"])}</h2>{B.wa_btn(lang)}</section>'
                 f'<section><h2>{E(t["others"])}</h2><p class="pays-links">{others}</p></section>')
         # Monnaie affichée à côté des prix en euros, quel que soit le pays du visiteur
