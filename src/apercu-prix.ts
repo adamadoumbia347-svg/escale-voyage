@@ -164,6 +164,7 @@ function render(html: string, from: string, to: string, rows: Month[], hist: Poi
 
 // Pages « destination » (tous les vols vers une ville) : chaque ligne reçoit le prix déjà connu du trajet (cache des pages trajets).
 // Les trajets pas encore en cache sont préparés en arrière-plan (3 par visite) ; hub.js complète dans le navigateur.
+const t2 = (lang: string) => ({ fr: "dès", en: "from", es: "desde", pt: "desde", ar: "من", it: "da" } as Record<string, string>)[lang] || "dès"
 async function fillHub(ctx: Ctx, html: string) {
   const cache = (globalThis as any).caches?.default
   const cells = [...html.matchAll(/<td class="hub-price" data-from="([A-Z]{3})" data-to="([A-Z]{3})" data-label="([^"]*)"><\/td>/g)]
@@ -174,6 +175,14 @@ async function fillHub(ctx: Ctx, html: string) {
   const found = await Promise.all(cells.map(async (m) => { const hit = await cache.match(cacheKey(m[1], m[2])); return hit ? (await hit.json()) as Month[] : null }))
   const missing = cells.filter((_, i) => found[i] === null).slice(0, 3)
   if (missing.length) ctx.waitUntil(Promise.all(missing.map((m) => routeMonths(ctx, m[1], m[2]).catch(() => null))))
+  // Prix le plus bas de la page dans le titre (onglet, Google, aperçu des liens partagés) : « Cheap flights to Tunis from €74 – … »
+  const all = found.flat().filter(Boolean) as Month[]
+  if (all.length) {
+    const best = money(Math.min(...all.map((r) => r.price)))
+    const add = (t: string) => lang === "en" && / – /.test(t) ? t.replace(" – ", ` from ${best} – `) : t.replace(/ \| Escale$/, "") + ` · ${t2(lang)} ${best}` + (/ \| Escale$/.test(t) ? " | Escale" : "")
+    html = html.replace(/<title>([^<]*)<\/title>/, (_m, t) => `<title>${add(t)}</title>`)
+      .replace(/(<meta property="og:title" content=")([^"]*)(")/, (_m, a, t, c) => a + add(t) + c)
+  }
   let i = 0
   return html.replace(/<td class="hub-price" data-from="([A-Z]{3})" data-to="([A-Z]{3})" data-label="([^"]*)"><\/td>/g, (all, _f, _t, label) => {
     const rows = found[i++]

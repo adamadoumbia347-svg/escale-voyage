@@ -8,6 +8,7 @@ import html
 import re
 
 from build_i18n import ALL, TR, duration, faq_ld, slugify, tr, write
+import hub_info_en
 
 E = html.escape
 MIN_ORIGINS = 3
@@ -27,8 +28,8 @@ H = {
                     ("Quand réserver un vol pour {b} pas cher ?", "En général deux à trois mois avant le départ. Réservez plus tôt pour {peak} : les prix montent fortement."),
                     ("Quel aéroport à {b} ?", "Les vols arrivent à {airport} (code {code}).")],
                from_="dès"),
-    "en": dict(path="en/flights-to-{s}", title="Cheap flights to {b}: compare from {n} cities",
-               desc="Cheap flights to {b} ({code}) from {some} and more: flight time, recent prices and the best time to book.",
+    "en": dict(path="en/flights-to-{s}", title="Cheap flights to {b} – {some} & more",
+               desc="Cheap flights to {b} ({code}) from {some} and more ({n} cities compared): live prices, the cheapest days and flight times.",
                h1="Cheap flights to <span>{b}</span>",
                lead="Compare flights to {b} from {n} cities in Europe and North America: flight time, recent prices and tips to pay less.",
                th=("From", "Flight time", "Price found"), see="See route", direct="direct", est="estimate", stops="with a stop",
@@ -120,7 +121,12 @@ def build_hubs(site, ctx, route_paths, hotel_paths):
             h = H[lang]
             b = loc(TR.CITIES, ct, lang)
             cities = [loc(TR.CITIES, r[2], lang) for r in rs]
-            some = SEP[lang].join(cities[:2])
+            if lang == "en":  # en anglais, les départs anglophones d'abord (Royaume-Uni, Irlande, Amérique du Nord)
+                pref = ["London", "New York", "Manchester", "Toronto", "Dublin", "Paris"]
+                cities_t = sorted(cities, key=lambda c: pref.index(c) if c in pref else 99)
+                some = SEP[lang].join(cities_t[:2])
+            else:
+                some = SEP[lang].join(cities[:2])
             peak = loc(TR.PEAKS, peak_fr, lang)
             airport = (ap[2] if ap else code) if lang != "fr" else rs[0][5]
             q = "" if lang == "fr" else "&lang=" + lang
@@ -149,16 +155,21 @@ def build_hubs(site, ctx, route_paths, hotel_paths):
             if hotel:
                 more.append(f'<li><a href="/{hotel_paths[hotel[0]][lang]}/">{E(h["hotels"].format(b=b))}</a></li>')
             more.append(f'<li><a href="/?type=voitures&amp;pick={code}{E(q)}">{E(h["cars"].format(b=b))}</a></li>')
+            ess = ""
+            if lang == "en":
+                ess, fq = hub_info_en.html_block(ct, b, f"/{hotel_paths[hotel[0]]['en']}/" if hotel else "")
+                faq += fq
+                ess += '<script src="/fx.js" defer></script>'
             hero = (f'<p class="eyebrow">{E(loc(TR.COUNTRIES, country, lang))}</p><h1>{h["h1"].format(b=E(b))}</h1>'
                     f'<p class="hero-lead">{E(h["lead"].format(b=b, n=len(rs)))}</p>')
             body = (f'<dl class="facts">' + "".join(f"<div><dt>{E(k)}</dt><dd>{E(v)}</dd></div>" for k, v in facts) + "</dl>"
                     f'<section class="hub"><h2>{E(h["table_h"].format(b=b))}</h2><p class="small">{E(h["table_p"])}</p>'
                     f'<table class="hub-table"><thead><tr><th scope="col">{E(h["th"][0])}</th><th scope="col">{E(h["th"][1])}</th>'
                     f'<th scope="col">{E(h["th"][2])}</th><td></td></tr></thead><tbody>{"".join(rows)}</tbody></table></section>'
-                    f'<script src="/hub.js" defer></script>'
+                    f'<script src="/hub.js" defer></script>' + ess +
                     f'<section><h2>{E(h["more_h"])}</h2><ul class="links">{"".join(more)}</ul></section>'
                     f'<section class="faq"><h2>{E(h["faq_h"])}</h2>' + "".join(f"<details><summary>{E(qq)}</summary><p>{E(aa)}</p></details>" for qq, aa in faq) + "</section>")
-            title = h["title"].format(b=b, n=len(rs))
-            desc = h["desc"].format(b=b, code=code, some=some)
+            title = h["title"].format(b=b, n=len(rs), some=some)
+            desc = h["desc"].format(b=b, code=code, some=some, n=len(rs))
             urls.append(write(site, hp[lang], lang, title + " | Escale", desc, hero, body, faq_ld(faq), hp, ctx))
     return urls, paths

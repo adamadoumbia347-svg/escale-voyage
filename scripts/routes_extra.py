@@ -19,6 +19,11 @@ CITIES = {
     "LHR": ("Londres", "Royaume-Uni", ("London", "Londres", "Londres", "لندن")),
     "JFK": ("New York", "États-Unis", ("New York", "Nueva York", "Nova Iorque", "نيويورك")),
     "YUL": ("Montréal", "Canada", ("Montreal", "Montreal", "Montreal", "مونتريال")),
+    # Départs anglophones (les pages « flights to » en anglais attirent des visiteurs du Royaume-Uni, d'Irlande et d'Amérique du Nord)
+    "MAN": ("Manchester", "Royaume-Uni", ("Manchester", "Mánchester", "Manchester", "مانشستر")),
+    "BHX": ("Birmingham", "Royaume-Uni", ("Birmingham", "Birmingham", "Birmingham", "برمنغهام")),
+    "DUB": ("Dublin", "Irlande", ("Dublin", "Dublín", "Dublin", "دبلن")),
+    "YYZ": ("Toronto", "Canada", ("Toronto", "Toronto", "Toronto", "تورونتو")),
     "MAD": ("Madrid", "Espagne", ("Madrid", "Madrid", "Madrid", "مدريد")),
     "LIS": ("Lisbonne", "Portugal", ("Lisbon", "Lisboa", "Lisboa", "لشبونة")),
     "BZV": ("Brazzaville", "Congo", ("Brazzaville", "Brazzaville", "Brazzaville", "برازافيل")),
@@ -71,6 +76,7 @@ CITIES = {
 
 COUNTRIES = {
     "Royaume-Uni": ("United Kingdom", "Reino Unido", "Reino Unido", "المملكة المتحدة"),
+    "Irlande": ("Ireland", "Irlanda", "Irlanda", "أيرلندا"),
     "États-Unis": ("United States", "Estados Unidos", "Estados Unidos", "الولايات المتحدة"),
     "Espagne": ("Spain", "España", "Espanha", "إسبانيا"),
     "Portugal": ("Portugal", "Portugal", "Portugal", "البرتغال"),
@@ -121,7 +127,7 @@ for c in ["Guadeloupe", "Martinique", "Guyane", "Haïti"]:
     REGION[c] = "antilles"
 for c in ["La Réunion", "Mayotte"]:
     REGION[c] = "ocean_indien"
-for c in ["France", "Belgique", "Suisse", "Royaume-Uni", "Espagne", "Portugal", "Canada", "États-Unis"]:
+for c in ["France", "Belgique", "Suisse", "Royaume-Uni", "Irlande", "Espagne", "Portugal", "Canada", "États-Unis"]:
     REGION[c] = "nord"
 
 PEAK = {
@@ -182,8 +188,12 @@ PAIRS = {
     "SXB": "ALG ORN CMN RAK TUN IST DSS",
     "RNS": "ALG ORN CMN RAK AGA TUN DSS",
     "BSL": "ALG ORN CZL CMN RAK TUN IST",
-    "LHR": "LOS ACC ABV NBO JNB ADD CAI DXB CMN RAK ALG DSS ABJ FIH",
-    "JFK": "DSS ACC LOS ADD CMN ABJ CAI PAP",
+    "LHR": "LOS ACC ABV NBO JNB ADD CAI DXB CMN RAK ALG DSS ABJ FIH TUN",
+    "MAN": "TUN ALG CMN RAK LOS ACC CAI DSS ABJ",
+    "BHX": "TUN ALG CMN RAK LOS ACC DSS",
+    "DUB": "TUN CMN RAK LOS ACC CAI",
+    "YYZ": "TUN ALG CMN ACC LOS ABJ DSS CAI",
+    "JFK": "DSS ACC LOS ADD CMN ABJ CAI PAP TUN ALG",
     "YUL": "DSS ABJ CMN ALG TUN PAP DLA CKY",
     "MAD": "DSS CMN RAK TNG ALG ABJ BKO LOS",
     "LIS": "LAD MPM RAI OXB DSS CMN ABJ ACC",

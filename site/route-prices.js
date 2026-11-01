@@ -4,6 +4,8 @@
   "use strict";
   // « Pour toute la famille » (estimation et partage WhatsApp) : site/famille.js
   (function () { var f = document.createElement("script"); f.src = "/famille.js"; f.defer = true; document.head.appendChild(f); })();
+  // Pages en anglais : équivalent en livres et en dollars à côté des prix en euros (site/fx.js)
+  if ((document.documentElement.lang || "").slice(0, 2) === "en") (function () { var x = document.createElement("script"); x.src = "/fx.js"; x.defer = true; document.head.appendChild(x); })();
   // Lien Aviasales (partenaire rémunéré) : ouvre directement une recherche datée, départ dans 45 jours, retour 7 jours après
   var pad2 = function (n) { return String(n).padStart(2, "0"); };
   var ddmm = function (dt) { return pad2(dt.getDate()) + pad2(dt.getMonth() + 1); };

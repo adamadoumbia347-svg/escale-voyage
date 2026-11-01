@@ -436,3 +436,6 @@ span.rs-arr { opacity: .35; }
 .avant-list strong { display: block; } .avant-list span:not(.av-logo) { display: block; font-size: 14px; color: var(--muted); }
 .avant-list a { grid-column: 1 / -1; justify-self: start; display: inline-flex; align-items: center; min-height: 40px; padding: 8px 14px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-weight: 700; text-decoration: none; }
 @media (min-width: 760px) { .avant-list { grid-template-columns: 1fr 1fr; } }
+.fx{font-size:.85em;color:var(--muted,#5b6472);white-space:nowrap}
+.essentials table{margin:.5rem 0}
+.essentials h3{margin:1rem 0 .4rem;font-size:1.05rem}
