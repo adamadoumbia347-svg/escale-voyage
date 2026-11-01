@@ -16,10 +16,57 @@ const DEST: [string, string, string, string, string][] = [
   ["CDG", "RAK", "Marrakech", "🇲🇦", "vol-paris-marrakech"], ["CDG", "TUN", "Tunis", "🇹🇳", "vol-paris-tunis"],
   ["CDG", "DJE", "Djerba", "🇹🇳", "vol-paris-djerba"],
 ]
-const money = (n: number) => new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n)
-const day = (iso: string) => { const [y, m, d] = iso.split("-").map(Number); return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString("fr-FR", { day: "numeric", month: "short", timeZone: "UTC" }) }
+const money = (n: number, loc = "fr-FR") => new Intl.NumberFormat(loc, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n)
+const day = (iso: string, loc = "fr-FR") => { const [y, m, d] = iso.split("-").map(Number); return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString(loc, { day: "numeric", month: "short", timeZone: "UTC" }) }
 
-export async function buildMessage(env: Env) {
+// Textes du message des bons plans dans la langue de l'inscrit (champ « langue » du formulaire)
+type Txt = { loc: string; paris: string; head: string; intro: string; from: string; drop: string; ete?: string; baro: string; alert: string; share: string; foot: string;
+  subject: string; cta: string; why: string; unsub: string; app: string }
+const TXT: Record<string, Txt> = {
+  fr: { loc: "fr-FR", paris: "Paris", head: "✈️ *Bons plans Escale* · semaine du {d}", intro: "Allers-retours les moins chers repérés au départ de *Paris* :", from: "dès", drop: "en 7 jours",
+    ete: "☀️ Été 2027 : les premiers prix de juillet-août → {b}/vols-ete-2027/", baro: "📊 Baromètre des prix : {b}/barometre-prix/",
+    alert: "🔔 Alerte prix gratuite : choisissez votre trajet sur {b} et recevez un e-mail quand le prix baisse.", share: "📢 Partagez la chaîne à vos proches : {c}",
+    foot: "_Prix repérés récemment, par personne. Le tarif exact s'affiche sur le site de réservation._", subject: "✈️ Les bons plans vols de la semaine",
+    cta: "Comparer les prix en direct", why: "Vous recevez cet e-mail car vous vous êtes inscrit aux bons plans d'Escale.", unsub: "Se désinscrire en un clic", app: "" },
+  en: { loc: "en-GB", paris: "Paris", head: "✈️ *Escale deals* · week of {d}", intro: "Cheapest round trips found from *Paris*:", from: "from", drop: "in 7 days",
+    baro: "📊 Price barometer: {b}/barometre-prix/", alert: "🔔 Free price alert: pick your route on {b} and get an email when the price drops.",
+    share: "📢 Share the channel with your family: {c}", foot: "_Prices found recently, per person. The exact fare is shown on the booking site._",
+    subject: "✈️ This week's flight deals", cta: "Compare live prices", why: "You are receiving this email because you signed up for Escale deals.", unsub: "Unsubscribe in one click", app: "en" },
+  es: { loc: "es-ES", paris: "París", head: "✈️ *Ofertas Escale* · semana del {d}", intro: "Idas y vueltas más baratas encontradas desde *París*:", from: "desde", drop: "en 7 días",
+    baro: "📊 Barómetro de precios: {b}/barometre-prix/", alert: "🔔 Alerta de precio gratuita: elige tu ruta en {b} y recibe un correo cuando baje el precio.",
+    share: "📢 Comparte el canal con tu familia: {c}", foot: "_Precios encontrados recientemente, por persona. La tarifa exacta aparece en el sitio de reserva._",
+    subject: "✈️ Las ofertas de vuelos de la semana", cta: "Comparar precios en directo", why: "Recibes este correo porque te suscribiste a las ofertas de Escale.", unsub: "Darse de baja en un clic", app: "es" },
+  pt: { loc: "pt-PT", paris: "Paris", head: "✈️ *Promoções Escale* · semana de {d}", intro: "Idas e voltas mais baratas encontradas a partir de *Paris*:", from: "desde", drop: "em 7 dias",
+    baro: "📊 Barómetro de preços: {b}/barometre-prix/", alert: "🔔 Alerta de preço gratuito: escolha a rota em {b} e receba um e-mail quando o preço baixar.",
+    share: "📢 Partilhe o canal com a família: {c}", foot: "_Preços encontrados recentemente, por pessoa. A tarifa exata aparece no site de reserva._",
+    subject: "✈️ As promoções de voos da semana", cta: "Comparar preços ao vivo", why: "Recebe este e-mail porque se inscreveu nas promoções da Escale.", unsub: "Cancelar a inscrição num clique", app: "pt" },
+  ar: { loc: "ar-u-nu-latn", paris: "باريس", head: "✈️ *عروض Escale* · أسبوع {d}", intro: "أرخص رحلات الذهاب والعودة التي وُجدت من *باريس*:", from: "من", drop: "خلال 7 أيام",
+    baro: "📊 مؤشر الأسعار: {b}/barometre-prix/", alert: "🔔 تنبيه سعر مجاني: اختر رحلتك على {b} واستلم بريدًا عندما ينخفض السعر.",
+    share: "📢 شارك القناة مع عائلتك: {c}", foot: "_أسعار وُجدت مؤخرًا للشخص الواحد. يظهر السعر الدقيق على موقع الحجز._",
+    subject: "✈️ عروض الطيران لهذا الأسبوع", cta: "قارن الأسعار مباشرة", why: "تصلك هذه الرسالة لأنك اشتركت في عروض Escale.", unsub: "إلغاء الاشتراك بنقرة واحدة", app: "ar" },
+  it: { loc: "it-IT", paris: "Parigi", head: "✈️ *Offerte Escale* · settimana del {d}", intro: "Andata e ritorno più economici trovati da *Parigi*:", from: "da", drop: "in 7 giorni",
+    baro: "📊 Barometro dei prezzi: {b}/barometre-prix/", alert: "🔔 Avviso prezzo gratuito: scegli la tratta su {b} e ricevi un'e-mail quando il prezzo scende.",
+    share: "📢 Condividi il canale con la famiglia: {c}", foot: "_Prezzi trovati di recente, a persona. La tariffa esatta appare sul sito di prenotazione._",
+    subject: "✈️ Le offerte voli della settimana", cta: "Confronta i prezzi in diretta", why: "Ricevi questa e-mail perché ti sei iscritto alle offerte di Escale.", unsub: "Annulla l'iscrizione con un clic", app: "it" },
+  de: { loc: "de-DE", paris: "Paris", head: "✈️ *Escale-Angebote* · Woche vom {d}", intro: "Günstigste Hin- und Rückflüge ab *Paris*:", from: "ab", drop: "in 7 Tagen",
+    baro: "📊 Preisbarometer: {b}/barometre-prix/", alert: "🔔 Kostenloser Preisalarm: Wähle deine Strecke auf {b} und erhalte eine E-Mail, wenn der Preis fällt.",
+    share: "📢 Teile den Kanal mit deiner Familie: {c}", foot: "_Kürzlich gefundene Preise pro Person. Der genaue Tarif erscheint auf der Buchungsseite._",
+    subject: "✈️ Die Flugangebote der Woche", cta: "Live-Preise vergleichen", why: "Du erhältst diese E-Mail, weil du dich für die Angebote von Escale angemeldet hast.", unsub: "Mit einem Klick abmelden", app: "de" },
+  nl: { loc: "nl-NL", paris: "Parijs", head: "✈️ *Escale-deals* · week van {d}", intro: "Goedkoopste retourvluchten gevonden vanuit *Parijs*:", from: "vanaf", drop: "in 7 dagen",
+    baro: "📊 Prijsbarometer: {b}/barometre-prix/", alert: "🔔 Gratis prijsalert: kies je route op {b} en ontvang een e-mail als de prijs daalt.",
+    share: "📢 Deel het kanaal met je familie: {c}", foot: "_Onlangs gevonden prijzen, per persoon. Het exacte tarief zie je op de boekingssite._",
+    subject: "✈️ De vluchtdeals van de week", cta: "Live prijzen vergelijken", why: "Je ontvangt deze e-mail omdat je je hebt aangemeld voor de deals van Escale.", unsub: "Met één klik afmelden", app: "en" },
+}
+// Noms de villes qui changent selon la langue (les autres restent identiques)
+const CITY_L: Record<string, Record<string, string>> = {
+  Alger: { en: "Algiers", es: "Argel", pt: "Argel", ar: "الجزائر", it: "Algeri", de: "Algier", nl: "Algiers" },
+  Tunis: { es: "Túnez", pt: "Tunes", ar: "تونس", it: "Tunisi" }, Dakar: { ar: "داكار" }, Abidjan: { ar: "أبيدجان", es: "Abiyán" },
+  Casablanca: { ar: "الدار البيضاء" }, Marrakech: { ar: "مراكش", de: "Marrakesch", en: "Marrakesh" }, Oran: { ar: "وهران", es: "Orán", it: "Orano" },
+  Bamako: { ar: "باماكو" }, Kinshasa: { ar: "كينشاسا", es: "Kinsasa" }, Djerba: { ar: "جربة", es: "Yerba", it: "Gerba" },
+}
+
+export async function buildMessage(env: Env, lang = "fr") {
+  const t = TXT[lang] || TXT.fr
   const cache = (globalThis as any).caches?.default
   const since = new Date(Date.now() - 3 * 864e5).toISOString().slice(0, 10)
   const rows = (await Promise.all(DEST.map(async ([from, to, city, flag, path]) => {
@@ -34,19 +81,20 @@ export async function buildMessage(env: Env) {
     const trend = week && week[1] && week[0] < since ? Math.round((price / week[1] - 1) * 100) : null
     return { city, flag, path, price, best, trend }
   }))).filter(Boolean).sort((a: any, b: any) => a.price - b.price) as any[]
-  const today = new Date().toLocaleDateString("fr-FR", { day: "numeric", month: "long", timeZone: "Europe/Paris" })
+  const today = new Date().toLocaleDateString(t.loc, { day: "numeric", month: "long", timeZone: "Europe/Paris" })
   const base = siteUrl(env).replace(/^https?:\/\//, "")
-  const lines = [`✈️ *Bons plans Escale* · semaine du ${today}`, "", "Allers-retours les moins chers repérés au départ de *Paris* :", ""]
+  const sep = lang === "fr" ? " : " : ": "
+  const lines = [t.head.replace("{d}", today), "", t.intro, ""]
   for (const r of rows) {
-    const dates = r.best && r.best.ret ? ` (${day(r.best.dep)} → ${day(r.best.ret)})` : ""
-    const tr = r.trend !== null && r.trend <= -5 ? ` 📉 ${r.trend} % en 7 jours` : ""
-    lines.push(`${r.flag} Paris → ${r.city} : *dès ${money(r.price)}*${dates}${tr}`, `   👉 ${base}/${r.path}/`)
+    const dates = r.best && r.best.ret ? ` (${day(r.best.dep, t.loc)} → ${day(r.best.ret, t.loc)})` : ""
+    const tr = r.trend !== null && r.trend <= -5 ? ` 📉 ${r.trend} % ${t.drop}` : ""
+    const city = (CITY_L[r.city] || {})[lang] || r.city
+    // En français : la page trajet ; dans les autres langues : la recherche, déjà dans la bonne langue
+    const [from, to] = DEST.find((d) => d[4] === r.path)!.slice(0, 2)
+    const link = lang === "fr" ? `${base}/${r.path}/` : `${base}/?type=vols&from=${from}&to=${to}&lang=${t.app}`
+    lines.push(`${r.flag} ${t.paris} → ${city}${sep}*${t.from} ${money(r.price, t.loc)}*${dates}${tr}`, `   👉 ${link}`)
   }
-  lines.push("", `☀️ Été 2027 : les premiers prix de juillet-août → ${base}/vols-ete-2027/`,
-    `📊 Baromètre des prix : ${base}/barometre-prix/`,
-    `🔔 Alerte prix gratuite : choisissez votre trajet sur ${base} et recevez un e-mail quand le prix baisse.`,
-    `📢 Partagez la chaîne à vos proches : ${CHANNEL}`,
-    "", "_Prix repérés récemment, par personne. Le tarif exact s'affiche sur le site de réservation._")
+  lines.push("", ...(t.ete ? [t.ete.replace("{b}", base)] : []), t.baro.replace("{b}", base), t.alert.replace("{b}", base), t.share.replace("{c}", CHANNEL), "", t.foot)
   return { count: rows.length, text: lines.join("\n") }
 }
 
@@ -124,8 +172,9 @@ const linkify = (t: string) => esc(t).replace(/(https?:\/\/[^\s<]+|escale\.live\
 
 export async function sendNewsletter(env: Env) {
   if (!mailerReady(env) || !env.ESCALE) return { sent: 0, reason: "envoi d'e-mails non configuré" }
-  const m = await buildMessage(env)
-  if (!m.count) return { sent: 0, reason: "aucun prix relevé" }
+  const msgs: Record<string, Awaited<ReturnType<typeof buildMessage>>> = {}
+  const msg = async (l: string) => (msgs[l] ||= await buildMessage(env, l))
+  if (!(await msg("fr")).count) return { sent: 0, reason: "aucun prix relevé" }
   const base = siteUrl(env), now = Date.now()
   let sent = 0, cursor: string | undefined
   do {
@@ -136,13 +185,16 @@ export async function sendNewsletter(env: Env) {
       const email = rec?.fields?.email, consent = rec?.fields?.consent
       if (!email || !/^\S+@\S+\.\S+$/.test(email) || !consent || rec.unsubscribed) continue
       if (rec.lastNewsletter && now - Date.parse(rec.lastNewsletter) < 6 * 864e5) continue
+      // Langue de l'inscrit (page où il s'est inscrit) ; français par défaut
+      const lang = TXT[String(rec?.fields?.langue || "").slice(0, 2)] ? String(rec.fields.langue).slice(0, 2) : "fr", t = TXT[lang], m = await msg(lang)
       const unsub = `${base}/api/form?action=desinscription&id=${encodeURIComponent(name)}&t=${await unsubToken(env, name)}`
-      const html = `<div style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:620px;color:#0d1b2e;font-size:15px;line-height:1.55">` +
+      const home = lang === "fr" ? `${base}/` : `${base}/?lang=${t.app}`
+      const html = `<div dir="${lang === "ar" ? "rtl" : "ltr"}" lang="${lang}" style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:620px;color:#0d1b2e;font-size:15px;line-height:1.55">` +
         `<p>${linkify(m.text)}</p>` +
-        `<p style="margin-top:24px"><a href="${base}/" style="background:#1a56db;color:#fff;padding:10px 18px;border-radius:999px;text-decoration:none;font-weight:700">Comparer les prix en direct</a></p>` +
-        `<p style="color:#5b6b80;font-size:12px;margin-top:28px">Vous recevez cet e-mail car vous vous êtes inscrit aux bons plans d'Escale. ` +
-        `<a href="${unsub}" style="color:#5b6b80">Se désinscrire en un clic</a>.</p></div>`
-      if (await sendMail(env, email, "✈️ Les bons plans vols de la semaine", html)) {
+        `<p style="margin-top:24px"><a href="${home}" style="background:#1a56db;color:#fff;padding:10px 18px;border-radius:999px;text-decoration:none;font-weight:700">${esc(t.cta)}</a></p>` +
+        `<p style="color:#5b6b80;font-size:12px;margin-top:28px">${esc(t.why)} ` +
+        `<a href="${unsub}" style="color:#5b6b80">${esc(t.unsub)}</a>.</p></div>`
+      if (await sendMail(env, email, t.subject, html)) {
         rec.lastNewsletter = new Date().toISOString()
         await env.ESCALE.put(name, JSON.stringify(rec))
         sent++
