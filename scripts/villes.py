@@ -15,9 +15,14 @@ EXTRA_NAMES = {
     "Djerba": ("Djerba", "Yerba", "Djerba", "جربة"),
     "Tanger": ("Tangier", "Tánger", "Tânger", "طنجة"),
     "Accra": ("Accra", "Acra", "Acra", "أكرا"),
+    "Zanzibar": ("Zanzibar", "Zanzíbar", "Zanzibar", "زنجبار"),
+    "Bangkok": ("Bangkok", "Bangkok", "Banguecoque", "بانكوك"),
+    "Guadeloupe": ("Guadeloupe", "Guadalupe", "Guadalupe", "غوادلوب"),
+    "Tokyo": ("Tokyo", "Tokio", "Tóquio", "طوكيو"),
 }
 COUNTRY_FR = {"SN": "Sénégal", "MA": "Maroc", "CI": "Côte d’Ivoire", "TN": "Tunisie", "DZ": "Algérie", "TR": "Turquie", "AE": "Émirats arabes unis",
-              "PT": "Portugal", "ES": "Espagne", "US": "États-Unis", "EG": "Égypte", "ML": "Mali", "GH": "Ghana"}
+              "PT": "Portugal", "ES": "Espagne", "US": "États-Unis", "EG": "Égypte", "ML": "Mali", "GH": "Ghana",
+              "TZ": "Tanzanie", "TH": "Thaïlande", "GP": "Guadeloupe", "JP": "Japon", "KE": "Kenya"}
 
 
 def names(city):
