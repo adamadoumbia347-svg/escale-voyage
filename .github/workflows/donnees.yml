@@ -1,0 +1,26 @@
+# Lecture de données publiques du site (API prix), lancée à la main : sert à préparer les vidéos avec de vrais chiffres.
+name: Lire des données du site
+on:
+  workflow_dispatch:
+    inputs:
+      chemins:
+        description: "Adresses d'API séparées par des espaces (ex. /api/calendar?from=CDG&to=ABJ&month=2026-12)"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  lire:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lire
+        env:
+          CHEMINS: ${{ inputs.chemins }}
+        run: |
+          for c in $CHEMINS; do
+            case "$c" in /api/*) ;; *) echo "ignoré : $c"; continue;; esac
+            echo "=== $c"
+            curl -s -m 30 -A "EscaleDonnees/1.0" "https://escale.live$c" | head -c 20000
+            echo
+          done
