@@ -12,6 +12,9 @@ on:
       ville:
         description: "Nom de la ville (ex. Abidjan)"
         default: "Dakar"
+      liste:
+        description: "Pages à la place de la liste habituelle : nom|chemin|attente (ms), séparées par des virgules"
+        default: ""
 permissions:
   contents: write
 jobs:
@@ -25,19 +28,22 @@ jobs:
           cd /tmp && npx playwright install --with-deps chromium >/dev/null
       - name: Prendre les captures
         run: |
-          DEST="${{ inputs.dest }}"; SLUG="${{ inputs.slug }}"; VILLE="${{ inputs.ville }}"
+          DEST="${{ inputs.dest }}"; SLUG="${{ inputs.slug }}"; VILLE="${{ inputs.ville }}"; LISTE="${{ inputs.liste }}"
           D1=$(date -u -d '+40 days' +%d%m); D2=$(date -u -d '+47 days' +%d%m)
           H1=$(date -u -d '+40 days' +%Y-%m-%d); H2=$(date -u -d '+44 days' +%Y-%m-%d)
           mkdir -p cap
           cat > c.js <<JS
           const { chromium } = require('playwright');
-          const pages = [
+          const liste = process.env.LISTE || '';
+          const pages = liste ? liste.split(',').map((x) => { const [n, u, w] = x.split('|'); return [n, 'https://escale.live' + u, +w || 8000]; }) : [
             ['accueil', 'https://escale.live/', 6000],
             ['recherche', 'https://escale.live/recherche/?flightSearch=CDG${D1}${DEST}${D2}1', 35000],
             ['hotels', 'https://escale.live/hotels-en-direct/?ville=${VILLE}&arrivee=${H1}&depart=${H2}&adultes=2&lang=fr', 18000],
             ['trajet', 'https://escale.live/vol-paris-${SLUG}/', 8000],
             ['barometre', 'https://escale.live/barometre-prix/', 6000],
           ];
+          // Parties de page à faire apparaître et à défiler (grille et courbe des prix : on clique d'abord pour les charger)
+          const SHOW = ['#price-curve .lite-load', '#price-grid .lite-load'];
           (async () => {
             const b = await chromium.launch();
             const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, locale: 'fr-FR', isMobile: true, hasTouch: true,
@@ -56,7 +62,8 @@ jobs:
               }
               await p.screenshot({ path: 'cap/' + n + '-ecran.jpg', type: 'jpeg', quality: 75 });
               await p.screenshot({ path: 'cap/' + n + '-page.jpg', type: 'jpeg', quality: 70, fullPage: true });
-              const box = await p.evaluate(() => { const o = {}; const q = { hero: '#hero-price', cal: '#route-calendar', day: '#route-calendar .cal-day.t0', btn: '#hl-form button', map: '.hl-switch button:nth-child(2)', frame: '#hl-live iframe' };
+              const box = await p.evaluate(() => { const o = {}; const q = { hero: '#hero-price', cal: '#route-calendar', day: '#route-calendar .cal-day.t0', btn: '#hl-form button', map: '.hl-switch button:nth-child(2)', frame: '#hl-live iframe',
+                  curve: '#price-curve', svg: '#price-curve .pc-svg', grid: '#price-grid', cell: '#price-grid .pg-min', visa: '#visa-res', vall: '#visa-all', vsel: '#visa-d', hub: '.hub-table', fx: '.fx', h1: 'h1', from: '#f-from', to: '#f-to', go: '#form-vols button[type=submit]' };
                 for (const [k, s] of Object.entries(q)) { const e = document.querySelector(s); if (!e) continue; const r = e.getBoundingClientRect(); o[k] = [Math.round(r.left + r.width / 2), Math.round(r.top + scrollY), Math.round(r.height)]; } return o; });
               require('fs').writeFileSync('cap/' + n + '-boxes.json', JSON.stringify(box));
               console.log(n, 'ok', await p.evaluate(() => document.documentElement.scrollHeight), JSON.stringify(box));
@@ -65,7 +72,7 @@ jobs:
             await b.close();
           })();
           JS
-          NODE_PATH=/tmp/node_modules node c.js; ls -la cap; rm -f cap/*-page.jpg.tmp
+          LISTE="$LISTE" NODE_PATH=/tmp/node_modules node c.js; ls -la cap; rm -f cap/*-page.jpg.tmp
       - name: Déposer les captures dans le dépôt (dossier temporaire, supprimé après usage)
         run: |
           rm -rf c.js node_modules package.json package-lock.json
