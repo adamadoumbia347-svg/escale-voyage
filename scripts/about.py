@@ -41,7 +41,7 @@ ABOUT = {
         ("De onde vêm as informações", ["Aeroportos: base pública OurAirports. Preços: Aviasales via Travelpayouts. Dicas e guias: escritos pela Escale, a título indicativo; as regras das companhias e dos países mudam, confirme sempre junto deles."]),
         ("Escreva-nos", ["Um erro, um destino a acrescentar, uma ideia? O formulário de contacto serve para isso."]),
     ], contact="Contactar"),
-    "ar": dict(slug="ar/about", title="عن Escale", lead="يساعدك Escale على إيجاد أرخص رحلة أو فندق أو سيارة، مجانًا ودون حساب.", sections=[
+    "ar": dict(slug="ar/about", title="عن Escale", lead="يساعدك Escale على إيجاد أرخص رحلة أو فندق أو سيارة، مجانًا ودون حساب. أسعار مباشرة من عشرات الشركات والوكالات.", sections=[
         ("من يقف وراء Escale؟", ["اسمي دوبام. أعيش في إيطاليا، ومثل كثيرين منكم أعود من حين لآخر لزيارة عائلتي في كوت ديفوار.", "أنشأت Escale لمساعدة إخوتي وأخواتي في المهجر على إيجاد أرخص التذاكر للعودة إلى الوطن: مجانًا، دون حساب ودون رسوم إضافية.", "سؤال أو مدينة تريد إضافتها؟ راسلني، فأنا أقرأ كل الرسائل."]),
         ("ماذا يفعل Escale", ["يقارن Escale مباشرةً أسعار الرحلات من عشرات شركات الطيران والوكالات، وأسعار الفنادق (Booking وExpedia وAgoda…)، مرتبة حسب السعر. تقارن بنقرات قليلة بدل إعادة الكتابة في كل موقع.",
                               "الأسعار المعروضة على Escale («من 389 €» والتقاويم والعروض) أسعار حقيقية وجدها مسافرون مؤخرًا، يوفرها Aviasales عبر Travelpayouts. السعر النهائي المتاح يظهر دائمًا على موقع الحجز."]),

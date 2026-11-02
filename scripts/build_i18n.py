@@ -565,7 +565,7 @@ INDEX = {
     "en": ("Cheap flights to Africa, the Maghreb and worldwide", "Route guides with flight times, airlines, the best time to book and where to stay, plus real fares found recently.", "Flights from {c}", "Cheap hotels"),
     "es": ("Guías de vuelos y hoteles", "Duración, aeropuertos, mejor época para reservar y dónde alojarse: nuestros consejos ruta por ruta.", "Vuelos desde {c}", "Hoteles baratos"),
     "pt": ("Guias de voos e hotéis", "Duração, aeroportos, melhor época para reservar e onde ficar: as nossas dicas rota a rota.", "Voos a partir de {c}", "Hotéis baratos"),
-    "ar": ("أدلة الرحلات والفنادق", "مدة الرحلة والمطارات وأفضل وقت للحجز وأين تقيم: نصائحنا خطًا بخط.", "رحلات من {c}", "فنادق رخيصة"),
+    "ar": ("أدلة الرحلات والفنادق", "مدة الرحلة والمطارات وأفضل وقت للحجز وأين تقيم: نصائحنا خطًا بخط، مع أسعار الرحلات إلى أفريقيا والمغرب العربي وكل الوجهات.", "رحلات من {c}", "فنادق رخيصة"),
 }
 
 

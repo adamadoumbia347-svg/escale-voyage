@@ -229,9 +229,9 @@ PAIRS = {
     # Départs d'Afrique vers l'Europe, le Golfe et l'Amérique du Nord (pages « accueil par pays » : /ci/, /sn/, /ng/…)
     "BKO": "CDG BRU IST DXB MAD JED",
     "CKY": "CDG BRU IST DXB JED",
-    "LFW": "CDG BRU IST",
-    "COO": "CDG BRU IST",
-    "OUA": "CDG BRU IST",
+    "LFW": "CDG BRU IST ABJ DSS ACC LOS DXB",
+    "COO": "CDG BRU IST ABJ LOS DSS DXB",
+    "OUA": "CDG BRU IST ABJ DSS BKO DXB",
     "FIH": "CDG BRU IST DXB CAN CMN",
     "ALG": "CDG LYS MRS IST DXB YUL JED",
     "TUN": "CDG LYS MRS IST DXB YUL JED",

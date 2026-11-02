@@ -588,7 +588,7 @@ def legal_pages():
   <button class="btn" type="submit">Envoyer</button>
 </form>
 <p class="small">Votre e-mail sert uniquement à vous répondre.</p></section>"""
-    urls.append(page("contact", "Contact | Escale", "Contacter l'équipe Escale : question, erreur, destination à ajouter.", hero, body))
+    urls.append(page("contact", "Contact | Escale", "Contacter l'équipe Escale : une question, une erreur à signaler, une destination ou une ville de départ à ajouter. Réponse par e-mail.", hero, body))
     page("contact/merci", "Message envoyé | Escale", "Merci pour votre message.", "<h1>Message envoyé</h1>",
          '<section><p>Merci, votre message est bien arrivé. Nous vous répondrons par e-mail.</p><p><a class="btn" href="/">Retour à la recherche</a></p></section>')
     return urls
@@ -677,7 +677,7 @@ def main():
                      '<li><a href="/avis-voyageurs/">Avis des voyageurs</a></li>']
                   + [f'<li><a href="/{aeroports.path(c, "fr")}/">Arriver à l’aéroport {E(aeroports.de(a[0]))}</a></li>' for c, a in aeroports.A.items()])
     links += "".join(group(f"Vols au départ de {E(o)}", items) for o, items in by_origin.items())
-    links += group("Hôtels pas chers", [f'<li><a href="/{hotel_slug(h)}/">Hôtel pas cher à {E(h[0])}</a></li>' for h in HOTELS])
+    links += group("Hôtels pas chers", [f'<li><a href="/{hotel_slug(h)}/">Hôtel pas cher à {E(h[0])}</a></li>' for h in HOTELS] + ['<li><a href="/hotels-en-direct/">Hôtels en direct : liste et carte, partout dans le monde</a></li>'])
     links += group("Articles du blog", [f'<li><a href="/blog/{a["slug"]}/">{E(a["h1"])}</a></li>' for a in blog.ARTICLES] + ['<li><a href="/blog/">Tous les articles</a></li>'])
     links += group("Guides pratiques", ['<li><a href="/guides/bagages-avion/">Bagages : ne pas payer plus cher</a></li>',
                                         '<li><a href="/guides/quand-reserver/">Quand réserver son billet</a></li>',

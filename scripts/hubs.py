@@ -118,6 +118,32 @@ H["de"] = dict(path="de/fluege-nach-{s}", title="Günstige Flüge nach {b}: Prei
                from_="ab")
 SEP = {"fr": ", ", "en": ", ", "es": ", ", "pt": ", ", "ar": "، ", "it": ", ", "de": ", "}
 HUB_LANGS = ALL + ["it", "de"]
+# « À savoir avant de réserver » : texte construit avec les données de chaque destination (vol le plus court et le plus long,
+# saison chère, conseils propres aux trajets), pour que chaque page « Vols vers… » ait un contenu utile et différent
+KNOW = {
+    "fr": ("À savoir avant de réserver un vol pour {b}", "Les vols pour {b} partent de {n} villes : {list}.", "Le vol le plus court part de {a} (environ {d}) ; le plus long de {z} (environ {dz}).",
+           "Les prix sont les plus hauts pendant {peak} : pour payer moins cher, évitez ces dates ou réservez deux à trois mois à l'avance.",
+           "Comparez aussi les vols avec escale : sur les longues distances, une escale bien placée fait souvent baisser le prix.", "Conseils pour ces trajets"),
+    "en": ("Good to know before booking a flight to {b}", "Flights to {b} leave from {n} cities: {list}.", "The shortest flight is from {a} (about {d}); the longest from {z} (about {dz}).",
+           "Prices are highest during {peak}: to pay less, avoid those dates or book two to three months ahead.",
+           "Also compare flights with a stop: on long distances, a well-placed connection often lowers the price.", "Tips for these routes"),
+    "es": ("Qué saber antes de reservar un vuelo a {b}", "Los vuelos a {b} salen de {n} ciudades: {list}.", "El vuelo más corto sale de {a} (unas {d}); el más largo de {z} (unas {dz}).",
+           "Los precios son más altos durante {peak}: para pagar menos, evita esas fechas o reserva con dos o tres meses de antelación.",
+           "Compara también los vuelos con escala: en largas distancias, una buena escala suele bajar el precio.", "Consejos para estas rutas"),
+    "pt": ("O que saber antes de reservar um voo para {b}", "Os voos para {b} partem de {n} cidades: {list}.", "O voo mais curto parte de {a} (cerca de {d}); o mais longo de {z} (cerca de {dz}).",
+           "Os preços são mais altos durante {peak}: para pagar menos, evite essas datas ou reserve com dois a três meses de antecedência.",
+           "Compare também os voos com escala: em longas distâncias, uma boa escala costuma baixar o preço.", "Dicas para estas rotas"),
+    "ar": ("ما يجب معرفته قبل حجز رحلة إلى {b}", "تنطلق الرحلات إلى {b} من {n} مدينة: {list}.", "أقصر رحلة تنطلق من {a} (حوالي {d})، وأطولها من {z} (حوالي {dz}).",
+           "تكون الأسعار في أعلى مستوياتها خلال {peak}: لتدفع أقل، تجنّب هذه التواريخ أو احجز قبل شهرين إلى ثلاثة أشهر.",
+           "قارن أيضًا الرحلات مع توقف: في المسافات الطويلة، غالبًا ما يخفض التوقف المناسب السعر.", "نصائح لهذه الرحلات"),
+    "it": ("Da sapere prima di prenotare un volo per {b}", "I voli per {b} partono da {n} città: {list}.", "Il volo più breve parte da {a} (circa {d}); il più lungo da {z} (circa {dz}).",
+           "I prezzi sono più alti durante {peak}: per pagare meno, evita queste date o prenota due o tre mesi prima.",
+           "Confronta anche i voli con scalo: sulle lunghe distanze, uno scalo ben scelto spesso abbassa il prezzo.", ""),
+    "de": ("Gut zu wissen vor der Buchung eines Flugs nach {b}", "Flüge nach {b} starten in {n} Städten: {list}.", "Der kürzeste Flug startet ab {a} (etwa {d}), der längste ab {z} (etwa {dz}).",
+           "Am teuersten ist es in folgender Zeit: {peak}. Um weniger zu zahlen, meide diese Termine oder buche zwei bis drei Monate im Voraus.",
+           "Vergleiche auch Flüge mit Umstieg: Auf langen Strecken senkt ein gut gelegener Umstieg oft den Preis.", ""),
+}
+NOTE_COL = {"en": 0, "es": 1, "pt": 2, "ar": 3}
 MARKETS = {"it": italia, "de": deutsch}  # trajets au départ de l'Italie / de l'Allemagne, en tête du tableau
 
 
@@ -217,6 +243,19 @@ def build_hubs(site, ctx, route_paths, hotel_paths):
                 blk, fq = hub_info_en.html_block(ct, b, f"/{hotel_paths[hotel[0]]['en']}/" if hotel else "")
                 faq += fq
                 ess = blk + ess
+            K = KNOW[lang]
+            longest = timed[-1] if timed else None
+            paras = [K[1].format(b=b, n=len(rs), list=SEP[lang].join(cities[:12]) + ("…" if len(cities) > 12 else ""))]
+            if timed and len(timed) > 1:
+                paras.append(K[2].format(a=loc(TR.CITIES, timed[0][2], lang), d=dur_l(timed[0][6].lstrip("~")), z=loc(TR.CITIES, longest[2], lang), dz=dur_l(longest[6].lstrip("~"))))
+            paras += [K[3].format(peak=peak), K[4]]
+            notes = []
+            for r in rs:
+                n_ = r[8] if lang == "fr" else (TR.NOTES.get(f"{r[0]}-{r[1]}") or [None] * 4)[NOTE_COL[lang]] if lang in NOTE_COL else None
+                if n_ and n_ not in notes:
+                    notes.append(n_)
+            know = (f'<section class="know"><h2>{E(K[0].format(b=b))}</h2>' + "".join(f"<p>{E(x)}</p>" for x in paras)
+                    + (f'<h3>{E(K[5])}</h3><ul>' + "".join(f"<li>{E(x)}</li>" for x in notes[:4]) + "</ul>" if notes and K[5] else "") + "</section>")
             hero = (f'<p class="eyebrow">{E(loc(TR.COUNTRIES, country, lang))}</p><h1>{h["h1"].format(b=E(b))}</h1>'
                     f'<p class="hero-lead">{E(h["lead"].format(b=b, n=len(rs)))}</p>')
             body = (f'<dl class="facts">' + "".join(f"<div><dt>{E(k)}</dt><dd>{E(v)}</dd></div>" for k, v in facts) + "</dl>"
@@ -224,6 +263,7 @@ def build_hubs(site, ctx, route_paths, hotel_paths):
                     f'<table class="hub-table"><thead><tr><th scope="col">{E(h["th"][0])}</th><th scope="col">{E(h["th"][1])}</th>'
                     f'<th scope="col">{E(h["th"][2])}</th><td></td></tr></thead><tbody>{"".join(rows)}</tbody></table></section>'
                     f'<script src="/hub.js" defer></script>' + ess +
+                    know +
                     f'<section><h2>{E(h["more_h"])}</h2><ul class="links">{"".join(more)}</ul></section>'
                     f'<section class="faq"><h2>{E(h["faq_h"])}</h2>' + "".join(f"<details><summary>{E(qq)}</summary><p>{E(aa)}</p></details>" for qq, aa in faq) + "</section>")
             title = h["title"].format(b=b, n=len(rs), some=some)
