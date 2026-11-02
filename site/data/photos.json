@@ -174,5 +174,60 @@
   "author": "Matti Blume",
   "license": "CC BY-SA 4.0",
   "license_url": "https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+ },
+ {
+  "code": "ZNZ",
+  "city": "Zanzibar",
+  "img": "/img/villes/zanzibar.webp",
+  "img_small": "/img/villes/zanzibar-480.webp",
+  "file": "File:Beach Stone Town Zanzibar Oct26 A7CR 14408.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Beach_Stone_Town_Zanzibar_Oct26_A7CR_14408.jpg",
+  "author": "This Photo was taken by Timothy A. Gonsalves . Feel free to use my photos, but please mention me as the author. I would ",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ {
+  "code": "BKK",
+  "city": "Bangkok",
+  "img": "/img/villes/bangkok.webp",
+  "img_small": "/img/villes/bangkok-480.webp",
+  "file": "File:Templo Wat Arun, Bangkok, Tailandia, 2013-08-22, DD 30.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Templo_Wat_Arun,_Bangkok,_Tailandia,_2013-08-22,_DD_30.jpg",
+  "author": "Diego Delso",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ {
+  "code": "PTP",
+  "city": "Guadeloupe",
+  "img": "/img/villes/guadeloupe.webp",
+  "img_small": "/img/villes/guadeloupe-480.webp",
+  "file": "File:Quinten Metsys - Triptyque de la confrérie de Sainte-Anne à Louvain.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Quinten_Metsys_-_Triptyque_de_la_confr%C3%A9rie_de_Sainte-Anne_%C3%A0_Louvain.jpg",
+  "author": "Quinten Metsys",
+  "license": "Public domain",
+  "license_url": ""
+ },
+ {
+  "code": "HND",
+  "city": "Tokyo",
+  "img": "/img/villes/tokyo.webp",
+  "img_small": "/img/villes/tokyo-480.webp",
+  "file": "File:Torii path with lantern at Fushimi Inari Taisha Shrine, Kyoto, Japan.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Torii_path_with_lantern_at_Fushimi_Inari_Taisha_Shrine,_Kyoto,_Japan.jpg",
+  "author": "Basile Morin",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ {
+  "code": "NBO",
+  "city": "Nairobi",
+  "img": "/img/villes/nairobi.webp",
+  "img_small": "/img/villes/nairobi-480.webp",
+  "file": "File:Elephants, Maasai Mara.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Elephants,_Maasai_Mara.jpg",
+  "author": "Michelle Juma",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
  }
 ]
