@@ -47,12 +47,12 @@ CITIES = [
     # Destinations lointaines (vidéos « soleil » et cartes de l'accueil)
     ("ZNZ", "Zanzibar", ["Nungwi beach Zanzibar", "Kendwa beach Zanzibar", "Zanzibar beach", "Stone Town Zanzibar"], "zanzibar|nungwi|kendwa|paje|stone town", ""),
     ("BKK", "Bangkok", ["Wat Arun", "Wat Arun Bangkok", "Grand Palace Bangkok", "Bangkok skyline"], "wat arun|grand palace|bangkok", ""),
-    ("PTP", "Guadeloupe", ["Grande Anse Deshaies", "Guadeloupe plage", "Plage Guadeloupe", "Sainte-Anne Guadeloupe"], "guadeloupe|deshaies|grande.?anse|sainte-anne|caravelle", ""),
+    ("PTP", "Guadeloupe", ["Grande Anse Deshaies Guadeloupe", "Plage Guadeloupe", "Guadeloupe beach", "Plage de la Caravelle Guadeloupe", "Guadeloupe coast"], "guadeloupe", ""),
     ("HND", "Tokyo", ["Chureito Pagoda Mount Fuji", "Mount Fuji Chureito", "Tokyo skyline Mount Fuji", "Fushimi Inari"], "fuji|chureito|tokyo|fushimi", ""),
     ("NBO", "Nairobi", ["Maasai Mara elephants", "Masai Mara savanna", "Maasai Mara giraffe", "Nairobi National Park giraffe"], "mara|masai|maasai|nairobi|savanna|serengeti", ""),
 ]
 OK_LICENSE = re.compile(r"^(public domain|pd|cc0|cc by(-sa)?( \d\.\d)?)", re.I)
-BAD_WORDS = re.compile(r"map|flag|logo|plan|coat of arms|diagram|stamp|banknote|poster|interior|inside|ceiling|vault|nave|portrait|ferry|ship|boat|bateau|autoroute|motorway|highway|night|nuit|roundabout|fountain|stadium|estadi|\.svg|\.png|\.gif|\.tif", re.I)
+BAD_WORDS = re.compile(r"triptyque|triptych|painting|peinture|tableau|map|flag|logo|plan|coat of arms|diagram|stamp|banknote|poster|interior|inside|ceiling|vault|nave|portrait|ferry|ship|boat|bateau|autoroute|motorway|highway|night|nuit|roundabout|fountain|stadium|estadi|\.svg|\.png|\.gif|\.tif", re.I)
 
 
 def api(params):
