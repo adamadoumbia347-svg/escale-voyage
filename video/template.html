@@ -59,6 +59,7 @@ function tl(e, frames, ease) {
 const show = (e, a, b, from = 'translateY(24px)', to = 'none', out = 'none') => tl(e, [[a, { opacity: 0, transform: from }], [a + .45, { opacity: 1, transform: to }], [b, { opacity: 1, transform: to }], [b + .3, { opacity: 0, transform: out }]], B);
 tl(document.getElementById('grid'), [[0, { transform: 'translate(0,0)' }], [MAX, { transform: "translate(60px,-150px)" }]], 'linear');
 tl(document.getElementById('glow'), [[0, { transform: 'translate(-60px,-120px)' }], [MAX / 2, { transform: 'translate(80px,160px)' }], [MAX, { transform: "translate(-30px,0)" }]]);
+const M = (n) => (D.cur === '£' ? '£' + n : n + ' €'); // monnaie affichée (livre pour la vidéo anglaise)
 let t = 0;
 // accroche
 const h = el('hook', `<div class="e">${D.hook.emoji}</div><h1>${D.hook.title}</h1>${D.hook.sub ? `<p>${esc(D.hook.sub)}</p>` : ''}`);
@@ -75,7 +76,7 @@ const plane = () => { const p = el('plane', '<svg viewBox="0 0 24 24"><path fill
     if (grid) { // grille : la ville, le départ et le prix ; les cartes arrivent dans l'ordre
       const at = a + .7 + i * step, x = 30 + (i % 2) * 246, y = top0 + Math.floor(i / 2) * (H + G);
       const e = el('card', `<span class="f" style="left:14px;top:12px;font-size:30px">${c.flag}</span><div class="rt" style="left:56px;top:14px;font-size:22px">${esc(c.route)}</div>` +
-        `<div class="x" style="left:58px;right:auto;top:42px;font-size:13px">${esc(c.extra || '')}</div><div class="p" style="right:16px;top:66px;font-size:34px">0 €</div>`, `left:${x}px;right:auto;width:234px;top:${y}px;height:${H}px`);
+        `<div class="x" style="left:58px;right:auto;top:42px;font-size:13px">${esc(c.extra || '')}</div><div class="p" style="right:16px;top:66px;font-size:34px">${M(0)}</div>`, `left:${x}px;right:auto;width:234px;top:${y}px;height:${H}px`);
       tl(e, [[at, { opacity: 0, transform: 'scale(.4) rotate(-6deg)' }], [at + .45, { opacity: 1, transform: 'none' }], [end - .2, { opacity: 1, transform: 'none' }], [end + .15, { opacity: 0, transform: 'translateY(-40px)' }]], B);
       ticks.push({ e: e.querySelector('.p'), v: c.price, s: at + .3 });
       return;
@@ -84,7 +85,7 @@ const plane = () => { const p = el('plane', '<svg viewBox="0 0 24 24"><path fill
     const big = n <= 3, y = top0 + i * (H + G);
     const e = el('card' + (i === 0 ? ' one' : ''), `<div class="r" style="top:${big ? 14 : 10}px;font-size:${big ? (n === 1 ? 64 : 96) : 76}px">${n === 1 ? "✈️" : i + 1}</div>` +
       `<span class="f" style="top:${big ? 26 : 16}px;font-size:${big ? 36 : 30}px">${c.flag}</span><div class="rt" style="top:${big ? 28 : 18}px;font-size:${big ? 28 : 24}px">${esc(c.route)}</div>` +
-      `<div class="x" style="top:${big ? 88 : 66}px;font-size:${big ? 17 : 15}px">${esc(c.extra || D.lbl || 'aller-retour dès')}</div><div class="p" style="top:${big ? 72 : 50}px;font-size:${big ? 56 : 46}px">0 €</div>`, `top:${y}px;height:${H}px`);
+      `<div class="x" style="top:${big ? 88 : 66}px;font-size:${big ? 17 : 15}px">${esc(c.extra || D.lbl || 'aller-retour dès')}</div><div class="p" style="top:${big ? 72 : 50}px;font-size:${big ? 56 : 46}px">${M(0)}</div>`, `top:${y}px;height:${H}px`);
     tl(e, [[at, { opacity: 0, transform: 'translateX(520px) rotate(4deg)' }], [at + .55, { opacity: 1, transform: 'none' }], [end - .2, { opacity: 1, transform: 'none' }], [end + .15, { opacity: 0, transform: 'translateX(-520px)' }]], B);
     ticks.push({ e: e.querySelector('.p'), v: c.price, s: at + .4 });
     if (i === 0) tl(e.querySelector('.r'), [[at + 1.2, { transform: 'scale(1)' }], [at + 1.4, { transform: 'scale(1.3) rotate(-8deg)' }], [at + 1.7, { transform: 'scale(1)' }]], 'ease-out');
@@ -103,7 +104,7 @@ if (D.quiz) {
   const a = t, q = D.quiz, rev = a + 1.6 + 3 * .5 + 3.2, end = rev + 2.6;
   show(el('q', `<div class="f">${q.flag}</div><h2>${esc(q.route)}</h2><p>${esc(q.sub || 'aller-retour, prix le plus bas repéré')}</p>`), a, end);
   q.options.forEach((o, i) => {
-    const e = el('opt', `<span>${'ABC'[i]}</span>${o} €`, `top:${420 + i * 104}px`);
+    const e = el('opt', `<span>${'ABC'[i]}</span>${M(o)}`, `top:${420 + i * 104}px`);
     show(e, a + 1.4 + i * .5, end, 'translateX(80px)');
     if (i === q.answer) tl(e, [[rev, { background: 'rgba(255,255,255,.1)', borderColor: 'rgba(255,255,255,.25)', color: '#fff' }], [rev + .3, { background: '#16a34a', borderColor: '#16a34a', color: '#fff' }]]);
     else tl(e, [[rev, { filter: 'none' }], [rev + .3, { filter: 'opacity(.35)' }]]);
@@ -148,5 +149,5 @@ tl(el('logo', '<svg viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="
 tl(el('url', 'escale.live'), [[o + 2.0, { opacity: 0, transform: 'translateY(30px)' }], [o + 2.5, { opacity: 1, transform: 'none' }]], B);
 tl(el('cta', esc(D.outro.cta)), [[o + 2.6, { opacity: 0, transform: 'translateX(-50%) scale(.3)' }], [o + 3.1, { opacity: 1, transform: 'translateX(-50%) scale(1)' }], [o + 3.7, { opacity: 1, transform: 'translateX(-50%) scale(1.07)' }], [o + 4.3, { opacity: 1, transform: 'translateX(-50%) scale(1)' }]]);
 window.__end = o + 5;
-window.__tick = (s) => ticks.forEach(({ e, v, s: st }) => { const p = Math.max(0, Math.min(1, (s - st) / 1.1)), k = 1 - Math.pow(1 - p, 3); e.textContent = Math.round(v * 1.6 - v * .6 * k) + ' €'; });
+window.__tick = (s) => ticks.forEach(({ e, v, s: st }) => { const p = Math.max(0, Math.min(1, (s - st) / 1.1)), k = 1 - Math.pow(1 - p, 3); e.textContent = M(Math.round(v * 1.6 - v * .6 * k)); });
 </script></body></html>
