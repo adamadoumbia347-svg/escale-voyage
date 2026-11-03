@@ -7,6 +7,7 @@ et néerlandais. On ne garde la ville que si son nom français correspond à cel
 remplacer « Paris-Beauvais » par un village voisin. Résultat : site/data/noms/<langue>.json = {code : nom}, seulement quand le nom diffère.
 """
 import json
+import re
 import pathlib
 import time
 import unicodedata
@@ -23,6 +24,30 @@ UA = "EscaleNoms/1.0 (https://escale.live; comparateur de vols)"
 def norm(t):
     t = unicodedata.normalize("NFD", t or "")
     return "".join(c for c in t if unicodedata.category(c) != "Mn").lower().replace("-", " ").replace("’", "'").strip()
+
+
+SUFFIX = re.compile(r"\s*(,\s*D\.C\.|Municipality|Municipio|Kommune|kommun|City|Province|Provinz|Provincia|governorate|Governorate|County|District|"
+                    r"Upazila|Island|First Nation|-shi|-machi|-shi|Landkreis)$", re.I)
+KEEP = {"Mexico City", "Quebec City", "Kuwait City", "Panama City", "Guatemala City", "Ho Chi Minh City", "Cape Town"}
+BAD = {"Luperon pto pta"}  # libellés Wikidata erronés
+
+
+def clean(base, label):
+    """Nom traduit débarrassé des mots administratifs ; le nom du site si la traduction n'apporte rien."""
+    if label in KEEP:
+        return label
+    if label in BAD:
+        return base
+    v = re.sub(r"\s*\([^)]*\)$", "", label)  # « Altái (Sinkiang) »
+    for _ in range(2):
+        v = SUFFIX.sub("", v).strip(" ,")
+    v = re.sub(r"^(Heroica|Municipio de|Comune di)\s+", "", v)
+    nb, nv = norm(base), norm(v)
+    if not v or nv == nb:
+        return v if v and len(v) == len(base) else base  # mêmes lettres : on garde les accents de la traduction si même longueur
+    if nb in nv and len(v) > len(base):  # « Tapachula de Córdova y Ordóñez » : une précision, pas une traduction
+        return base
+    return v
 
 
 def sparql(codes):
@@ -60,7 +85,7 @@ def main():
         lab = max(good, key=len)
         kept += 1
         for l in LANGS:
-            v = lab.get(l)
+            v = lab.get(l) and clean(names[code], lab.get(l))
             if v and v != names[code]:
                 out[l][code] = v
     OUT.mkdir(parents=True, exist_ok=True)
