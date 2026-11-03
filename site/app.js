@@ -1159,8 +1159,24 @@
   }
   // Prix « dès » sur les cartes photo des villes, depuis l'aéroport de départ choisi (chargés à l'approche de la section)
   let cityFrom = null;
+  // Cartes « Explorer le monde » : chaque ville ouvre directement les vols depuis l'aéroport de départ du visiteur,
+  // aux mêmes dates que le prix « dès » affiché ; la grande carte ouvre la page Explorer depuis ce même aéroport.
+  function worldLinks() {
+    const from = place($("f-from").value);
+    if (!from || !from.code) return;
+    const dd = (x) => x.slice(8, 10) + x.slice(5, 7), dep = addDays(today, 21), ret = addDays(today, 35);
+    document.querySelectorAll("#world .city-card").forEach((a) => {
+      const to = a.querySelector(".city-price[data-to]"), code = to && to.dataset.to;
+      if (!code || code === from.code) return;
+      if (!a.dataset.hub) a.dataset.hub = a.getAttribute("href");
+      a.href = `/recherche/?flightSearch=${from.code}${dd(dep)}${code}${dd(ret)}1`;
+    });
+    const w = document.querySelector("#world .world-card");
+    if (w) { const u = new URL(w.getAttribute("href"), location.href); u.searchParams.set("from", from.code); w.href = u.pathname + u.search; }
+  }
   function loadCityPrices() {
     if (!isLive) return;
+    worldLinks();
     const from = place($("f-from").value);
     if (!from || !from.code || from.code + CUR === cityFrom) return;
     cityFrom = from.code + CUR;
@@ -1468,7 +1484,7 @@
     if (!/^(fr|en)$/.test(LANG) && !window.ESCALE_I18N) await new Promise((ok) => { const s = document.createElement("script"); s.src = "/i18n.js"; s.onload = s.onerror = ok; document.head.appendChild(s); });
     countryNames = null; paintMonthOptions(); calc();
     if (dbLoaded) { await localizeNames(LANG); relabel(); }
-    applyLang(); paintDests(); paintFaq(); paintRecent(); paintChecklist(); paintThemeBtn(); rerender();
+    applyLang(); worldLinks(); paintDests(); paintFaq(); paintRecent(); paintChecklist(); paintThemeBtn(); rerender();
     if (!$("explore").hidden) { paintExploreMonths(); renderExplore($("ex-grid"), exploreFrom, exploreMonth); }
   });
   // Boutons « Prix en € / F CFA / DH / $ » sous le titre : même effet que la liste des devises
@@ -1632,6 +1648,7 @@
     const from = place($("f-from").value);
     if (!from || !from.code) return;
     if (!PARIS.test(from.code)) heroPopular(from);
+    worldLinks();
     if (destSeen) loadPopular();
     if (cityFrom !== null) loadCityPrices();
     try { window.dispatchEvent(new CustomEvent("escale:from", { detail: { code: from.code, name: from.name.replace(/\s*\([A-Z]{3}\)$/, ""), cur: CUR } })); } catch (e) {}
