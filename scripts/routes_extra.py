@@ -37,6 +37,10 @@ CITIES = {
     "KAN": ("Kano", "Nigeria", ("Kano", "Kano", "Kano", "كانو")),
     "MAD": ("Madrid", "Espagne", ("Madrid", "Madrid", "Madrid", "مدريد")),
     "LIS": ("Lisbonne", "Portugal", ("Lisbon", "Lisboa", "Lisboa", "لشبونة")),
+    "OPO": ("Porto", "Portugal", ("Porto", "Oporto", "Porto", "بورتو")),
+    "SSG": ("Malabo", "Guinée équatoriale", ("Malabo", "Malabo", "Malabo", "مالابو")),
+    "SID": ("Sal", "Cap-Vert", ("Sal", "Sal", "Sal", "سال")),
+    "TMS": ("São Tomé", "Sao Tomé-et-Principe", ("São Tomé", "Santo Tomé", "São Tomé", "ساو تومي")),
     "BZV": ("Brazzaville", "Congo", ("Brazzaville", "Brazzaville", "Brazzaville", "برازافيل")),
     "PNR": ("Pointe-Noire", "Congo", ("Pointe-Noire", "Pointe-Noire", "Pointe-Noire", "بوانت نوار")),
     "ACC": ("Accra", "Ghana", ("Accra", "Acra", "Acra", "أكرا")),
@@ -100,6 +104,8 @@ COUNTRIES = {
     "Gambie": ("Gambia", "Gambia", "Gâmbia", "غامبيا"),
     "Guinée-Bissau": ("Guinea-Bissau", "Guinea-Bisáu", "Guiné-Bissau", "غينيا بيساو"),
     "Cap-Vert": ("Cape Verde", "Cabo Verde", "Cabo Verde", "الرأس الأخضر"),
+    "Guinée équatoriale": ("Equatorial Guinea", "Guinea Ecuatorial", "Guiné Equatorial", "غينيا الاستوائية"),
+    "Sao Tomé-et-Principe": ("São Tomé and Príncipe", "Santo Tomé y Príncipe", "São Tomé e Príncipe", "ساو تومي وبرينسيب"),
     "Tchad": ("Chad", "Chad", "Chade", "تشاد"),
     "Éthiopie": ("Ethiopia", "Etiopía", "Etiópia", "إثيوبيا"),
     "Kenya": ("Kenya", "Kenia", "Quénia", "كينيا"),
@@ -126,7 +132,7 @@ REGION = {}
 for c in ["Sénégal", "Mali", "Guinée", "Niger", "Mauritanie", "Gambie", "Tchad"]:
     REGION[c] = "ouest_tabaski"
 for c in ["Côte d'Ivoire", "Burkina Faso", "Togo", "Bénin", "Cameroun", "Gabon", "Congo", "RD Congo", "Ghana", "Nigeria",
-          "Guinée-Bissau", "Cap-Vert"]:
+          "Guinée-Bissau", "Cap-Vert", "Guinée équatoriale", "Sao Tomé-et-Principe"]:
     REGION[c] = "ouest"
 for c in ["Éthiopie", "Kenya", "Afrique du Sud", "Madagascar", "Maurice", "Angola", "Mozambique", "Rwanda", "Tanzanie"]:
     REGION[c] = "est"
@@ -201,8 +207,8 @@ PAIRS = {
     "SXB": "ALG ORN CMN RAK TUN IST DSS",
     "RNS": "ALG ORN CMN RAK AGA TUN DSS",
     "BSL": "ALG ORN CZL CMN RAK TUN IST",
-    "BCN": "DSS CMN RAK TNG ALG ORN BKO",
-    "FRA": "ADD ACC LOS CMN TUN IST DSS",
+    "BCN": "DSS CMN RAK TNG ALG ORN BKO BJL CKY ABJ LOS TUN",
+    "FRA": "ADD ACC LOS CMN TUN IST DSS ABJ DLA NBO CAI",
     "LHR": "LOS ACC ABV NBO JNB ADD CAI DXB CMN RAK ALG DSS ABJ FIH TUN",
     "MAN": "TUN ALG CMN RAK LOS ACC CAI DSS ABJ",
     "BHX": "TUN ALG CMN RAK LOS ACC DSS",
@@ -210,8 +216,9 @@ PAIRS = {
     "YYZ": "TUN ALG CMN ACC LOS ABJ DSS CAI",
     "JFK": "DSS ACC LOS ADD CMN ABJ CAI PAP TUN ALG",
     "YUL": "DSS ABJ CMN ALG TUN PAP DLA CKY",
-    "MAD": "DSS CMN RAK TNG ALG ABJ BKO LOS",
-    "LIS": "LAD MPM RAI OXB DSS CMN ABJ ACC",
+    "MAD": "DSS CMN RAK TNG ALG ABJ BKO LOS ACC CKY BJL DLA SSG NKC",
+    "LIS": "LAD MPM RAI OXB DSS CMN ABJ ACC LOS DLA SID TMS",
+    "OPO": "LAD RAI CMN DSS",
     # États-Unis et Suisse alémanique
     "IAD": "ACC LOS ADD DSS ABJ CMN DLA",
     "ATL": "LOS ACC DSS ABJ JNB CMN",
