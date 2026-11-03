@@ -648,6 +648,10 @@ html { scroll-padding-top: 76px; }
 .perks.ticker li { display: block !important; position: absolute; left: 0; right: 0; top: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0; transform: translateY(100%); transition: transform .5s ease, opacity .5s ease; }
 .perks.ticker li.on { opacity: 1; transform: none; }
 .perks.ticker li.out { opacity: 0; transform: translateY(-100%); }
+/* Sans animation (mode léger ou moins d'animations demandé) : la liste complète, comme avant */
+:root.lite .perks.ticker { height: auto; overflow: visible; }
+:root.lite .perks.ticker li { position: static; opacity: 1; transform: none; white-space: normal; }
+@media (prefers-reduced-motion: reduce) { .perks.ticker { height: auto; overflow: visible; } .perks.ticker li { position: static; opacity: 1; transform: none; white-space: normal; } }
 .hero h1 em.typing::after { content: ""; display: inline-block; width: .06em; height: .9em; margin-inline-start: .05em; vertical-align: -.08em; background: currentColor; animation: caret 1s steps(1) infinite; }
 @keyframes caret { 50% { opacity: 0; } }
 .perks li::before { content: "✓"; color: var(--ok); font-weight: 700; margin-inline-end: 6px; }
@@ -838,8 +842,8 @@ footer { margin-top: 72px; }
     <h1 data-en-html="Cheap flights <em>to every destination</em>">Les billets pas chers <em>pour toutes les destinations</em></h1>
     <p class="hero-lead" data-en="Live prices from dozens of airlines and travel agencies, compared for you. You book directly on their website, with no fees added by Escale.">Les prix en direct de dizaines de compagnies et d’agences, comparés pour vous. Vous réservez directement sur leur site, sans frais ajoutés par Escale.</p>
     <div class="hero-meta">
-      <ul class="perks trust">
-        <li data-en="Live prices from dozens of airlines and agencies">Prix en direct de dizaines de compagnies et d’agences</li>
+      <ul class="perks trust ticker">
+        <li class="on" data-en="Live prices from dozens of airlines and agencies">Prix en direct de dizaines de compagnies et d’agences</li>
         <li data-en="No fees added by Escale">Aucun frais ajouté par Escale</li>
         <li data-en="You pay on the airline’s or agency’s website">Vous payez sur le site de la compagnie ou de l’agence</li>
         <li data-en="Free, no sign-up">Gratuit, sans inscription</li>
@@ -1148,7 +1152,7 @@ footer { margin-top: 72px; }
 
 <script>if (!/^(fr|en)$/.test(document.documentElement.lang)) document.write('<script src="/i18n.js?v=c54d9bea" defer><\/script>');</script>
 <script src="/app.js?v=4cab4270" defer></script>
-<script src="/hero-anim.js?v=8124a442" defer></script>
+<script src="/hero-anim.js?v=1554bc1d" defer></script>
 <script src="/newsletter.js?v=dc3eb2c8" defer></script>
 <script src="/favs.js?v=7e07a88e" defer></script>
 <script src="/clics.js?v=a539d271" defer></script>
