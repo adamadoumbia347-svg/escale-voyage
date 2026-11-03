@@ -56,5 +56,29 @@
     }
     chips.addEventListener("click", function (ev) { var b = ev.target.closest("button[data-o]"); if (b) { active = b.getAttribute("data-o"); paint(); } });
     paint();
+    // Ville du visiteur en premier : l'aéroport choisi sur Escale, sinon le plus proche de sa position (/api/geo)
+    var stored = null; try { stored = ((localStorage.getItem("escale.from") || "").match(/\(([A-Z]{3})\)$/) || [])[1]; } catch (e) {}
+    var near = function (g) {
+      var rad = Math.PI / 180, best = null, bd = 1e9, home = null, hd = 1e9;
+      (res[1] || []).forEach(function (a) {
+        if (!a[4] || a[5] == null) return;
+        var dl = (a[5] - g.lat) * rad, dn = (a[6] - g.lon) * rad, h = Math.pow(Math.sin(dl / 2), 2) + Math.cos(g.lat * rad) * Math.cos(a[5] * rad) * Math.pow(Math.sin(dn / 2), 2), d = 12742 * Math.asin(Math.sqrt(h));
+        if (d < bd) { bd = d; best = a; } if (g.country && a[3] === g.country && d < hd) { hd = d; home = a; }
+      });
+      var a = home && hd < 250 ? home : bd < 400 ? best : null;
+      return a ? a[0] : null;
+    };
+    (stored ? Promise.resolve(stored) : fetch("/api/geo").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
+      .then(function (g) { return g && g.lat != null ? near(g) : null; })).then(function (v) {
+      if (!v) return;
+      if (/^(ORY|BVA|PAR)$/.test(v)) v = "CDG";
+      if (origins.indexOf(v) >= 0) { active = v; origins = [v].concat(origins.filter(function (o) { return o !== v; })); paint(); return; }
+      fetch("/api/deals?currency=" + cur + "&from=" + v).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }).then(function (d1) {
+        var list = d1 && d1.available && d1.origins && d1.origins[v];
+        if (!list || !list.length) return;
+        if (d1.currency && d1.currency !== data.currency) return;  // même monnaie que le reste de la page
+        data.origins[v] = list; origins.unshift(v); active = v; paint();
+      });
+    });
   });
 })();
