@@ -258,14 +258,14 @@ for _k, _v in SECTION_PATHS.items():
     _v["nl"] = _v["en"]
 FETES_LABEL = {"fr": "Fêtes", "en": "Holidays", "es": "Fiestas", "pt": "Festas", "ar": "الأعياد", "it": "Feste", "de": "Feiertage", "nl": "Feestdagen"}
 NAV_LABELS = {
-    "fr": ("Vols", "Hôtels", "Voitures", "Bons plans", "Partout", "Guides", "Favoris", "Menu principal", "Escale, accueil"),
-    "en": ("Flights", "Hotels", "Cars", "Deals", "Anywhere", "Guides", "Favorites", "Main menu", "Escale, home"),
+    "fr": ("Vols", "Hôtels", "Voitures", "Bons plans", "Explorer", "Guides", "Favoris", "Menu principal", "Escale, accueil"),
+    "en": ("Flights", "Hotels", "Cars", "Deals", "Explore", "Guides", "Favorites", "Main menu", "Escale, home"),
     "es": ("Vuelos", "Hoteles", "Coches", "Ofertas", "Explorar", "Guías", "Favoritos", "Menú principal", "Escale, inicio"),
     "pt": ("Voos", "Hotéis", "Carros", "Promoções", "Explorar", "Guias", "Favoritos", "Menu principal", "Escale, início"),
     "ar": ("رحلات", "فنادق", "سيارات", "العروض", "استكشف", "أدلة", "المفضلة", "القائمة الرئيسية", "Escale، الرئيسية"),
-    "it": ("Voli", "Hotel", "Auto", "Offerte", "Ovunque", "Guide", "Preferiti", "Menu principale", "Escale, home"),
-    "de": ("Flüge", "Hotels", "Mietwagen", "Angebote", "Überall", "Ratgeber", "Favoriten", "Hauptmenü", "Escale, Startseite"),
-    "nl": ("Vluchten", "Hotels", "Huurauto's", "Deals", "Overal", "Gidsen", "Favorieten", "Hoofdmenu", "Escale, home"),
+    "it": ("Voli", "Hotel", "Auto", "Offerte", "Esplora", "Guide", "Preferiti", "Menu principale", "Escale, home"),
+    "de": ("Flüge", "Hotels", "Mietwagen", "Angebote", "Entdecken", "Ratgeber", "Favoriten", "Hauptmenü", "Escale, Startseite"),
+    "nl": ("Vluchten", "Hotels", "Huurauto's", "Deals", "Ontdekken", "Gidsen", "Favorieten", "Hoofdmenu", "Escale, home"),
 }
 # Recherche de vols en direct (/recherche/, White Label Travelpayouts) : lien du menu et lien des pages trajets
 LIVE_LABEL = {"fr": "En direct", "en": "Live prices", "es": "En directo", "pt": "Ao vivo", "ar": "أسعار مباشرة", "it": "In diretta", "de": "Live-Preise", "nl": "Live prijzen"}
@@ -319,8 +319,8 @@ def site_header(lang, path, switch):
     cur = lambda key: ' aria-current="page"' if path and (path == SECTION_PATHS[key][lang] or path.startswith(SECTION_PATHS[key][lang] + "/")) else ""
     sec = lambda key: "/" + SECTION_PATHS[key][lang] + "/"
     links = (f'<a href="/{q}">{n[0]}</a><a href="/{q}#hotels">{n[1]}</a><a href="/{q}#voitures">{n[2]}</a>'
+             f'<a class="nav-explore" href="{sec("anywhere")}"{cur("anywhere")}>🌍 {E(n[4])}</a>'
              f'<a href="{sec("deals")}"{cur("deals")}>{E(n[3])}</a><a href="{sec("fetes")}"{cur("fetes")}>{E(FETES_LABEL[lang])}</a>'
-             f'<a href="{sec("anywhere")}"{cur("anywhere")}>{E(n[4])}</a>'
              f'<a href="{sec("guides")}"{cur("guides")}>{E(n[5])}</a>'
              f'<a class="nav-fav" href="{sec("favs")}"{cur("favs")}>{STAR}<span>{E(n[6])}</span><b class="fav-count" data-fav-count hidden></b></a>')
     return (f'<header class="site-head"><div class="wrap head-row">'

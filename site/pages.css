@@ -503,3 +503,5 @@ a.pg-cell:hover, a.pg-cell:focus-visible { outline: 2px solid var(--accent); }
 .avis-form input, .avis-form select, .avis-form textarea { font: inherit; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink); max-width: 100%; box-sizing: border-box; }
 .avis-form .consent { display: flex; gap: 8px; align-items: flex-start; font-weight: 400; font-size: 14px; }
 .hl-trip{margin:12px 0}.hl-trip.top{margin:4px 0 14px}.hl-trip .small{color:var(--muted,#5b6b82)}
+
+.main-nav a.nav-explore { background: rgb(255 255 255 / .14); border-radius: 999px; font-weight: 700; }

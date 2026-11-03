@@ -400,6 +400,7 @@ window.ESCALE_I18N = {
   "For the taxi or first purchases, plus a card with no foreign fees.": ["Para el taxi o las primeras compras, y una tarjeta sin comisiones en el extranjero.", "Para o táxi ou as primeiras compras, e um cartão sem taxas no estrangeiro.", "لسيارة الأجرة أو المشتريات الأولى، مع بطاقة بلا رسوم في الخارج.", "Per il taxi o i primi acquisti, più una carta senza commissioni all’estero.", "Für das Taxi oder erste Einkäufe, dazu eine Karte ohne Auslandsgebühren."],
   // Nouveau menu du haut et carte « Partout »
   "Guides": ["Guías", "Guias", "أدلة", "Guide", "Ratgeber"],
+  "Explore": ["Explorar", "Explorar", "استكشف", "Esplora", "Entdecken"],
   "Favorites": ["Favoritos", "Favoritos", "المفضلة", "Preferiti", "Favoriten"],
   "Main menu": ["Menú principal", "Menu principal", "القائمة الرئيسية", "Menu principale", "Hauptmenü"],
   "Escale, home": ["Escale, inicio", "Escale, início", "Escale، الرئيسية", "Escale, home", "Escale, Startseite"],
