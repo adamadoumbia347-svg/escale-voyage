@@ -3,14 +3,13 @@
 // propose alors lui-même l'aéroport le plus proche du visiteur (vérifié le 29/10/2026). Le paramètre « origin » seul est ignoré.
 (function () {
   "use strict";
-  // Langue du moteur = langue choisie sur Escale (ou celle du navigateur) : le moteur lit « locale » dans l'adresse
-  // (vérifié le 3/11/2026 : &locale=en affiche le moteur en anglais ; sans ce paramètre il reste en français).
-  // Langues activées dans le moteur : fr, en, es, pt, ar, it (vérifié le 3/11/2026) ; allemand et néerlandais → anglais.
-  // Monnaie : celle choisie sur Escale (testé : USD, GBP, XOF), sinon celle réglée dans le moteur (EUR).
+  // Le moteur lit « locale » dans l'adresse (vérifié le 3/11/2026 : &locale=en l'affiche en anglais ; sans, il reste en français).
+  // Langue : celle choisie sur Escale, sinon celle du navigateur (toutes les langues sont activées dans le moteur
+  // depuis le 3/11/2026 : japonais, turc, chinois… aussi). Monnaie : celle choisie sur Escale (testé : USD, GBP, XOF).
   try {
-    var u = new URL(location.href), ok = { en: 1, es: 1, pt: 1, ar: 1, it: 1, de: "en", nl: "en" }, changed = false;
+    var u = new URL(location.href), changed = false;
     var lang = (localStorage.getItem("escale.lang") || (navigator.language || "fr").slice(0, 2)).toLowerCase();
-    if (!u.searchParams.get("locale") && ok[lang]) { u.searchParams.set("locale", ok[lang] === 1 ? lang : ok[lang]); changed = true; }
+    if (!u.searchParams.get("locale") && /^[a-z]{2}$/.test(lang) && lang !== "fr") { u.searchParams.set("locale", lang); changed = true; }
     var cur = (localStorage.getItem("escale.cur") || "").toUpperCase();
     if (!u.searchParams.get("currency") && /^(USD|GBP|CAD|CHF|XOF|XAF|MAD)$/.test(cur)) { u.searchParams.set("currency", cur.toLowerCase()); changed = true; }
     if (changed) history.replaceState(history.state, "", u.pathname + u.search + u.hash);
