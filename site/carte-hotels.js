@@ -38,6 +38,8 @@
   var hl = document.getElementById("hl-form");
   if (hl) {
     var P = new URLSearchParams(location.search), lg = P.get("lang") || "";
+    // Sans « lang » dans l'adresse : la langue choisie sur Escale, sinon celle du navigateur
+    if (!lg) { try { lg = (localStorage.getItem("escale.lang") || (navigator.language || "fr").slice(0, 2)).toLowerCase(); } catch (e) {} }
     if (!/^(fr|en|es|pt|ar|it|de|nl)$/.test(lg)) lg = "fr";
     var H = {
       fr: { title: "Hôtels à {c}", sum: "{a} → {b} · {n} nuit(s) · {p} adulte(s). Prix en direct de Booking, Expedia, Agoda, Hotels.com… Cliquez sur un hôtel pour voir l’offre." },
