@@ -16,6 +16,8 @@ CITIES = {
     "SXB": ("Strasbourg", "France", ("Strasbourg", "Estrasburgo", "Estrasburgo", "ستراسبورغ")),
     "RNS": ("Rennes", "France", ("Rennes", "Rennes", "Rennes", "رين")),
     "BSL": ("Bâle-Mulhouse", "France", ("Basel-Mulhouse", "Basilea-Mulhouse", "Basileia-Mulhouse", "بازل-مولوز")),
+    "BCN": ("Barcelone", "Espagne", ("Barcelona", "Barcelona", "Barcelona", "برشلونة")),
+    "FRA": ("Francfort", "Allemagne", ("Frankfurt", "Fráncfort", "Frankfurt", "فرانكفورت")),
     "LHR": ("Londres", "Royaume-Uni", ("London", "Londres", "Londres", "لندن")),
     "JFK": ("New York", "États-Unis", ("New York", "Nueva York", "Nova Iorque", "نيويورك")),
     "YUL": ("Montréal", "Canada", ("Montreal", "Montreal", "Montreal", "مونتريال")),
@@ -88,6 +90,7 @@ COUNTRIES = {
     "Irlande": ("Ireland", "Irlanda", "Irlanda", "أيرلندا"),
     "États-Unis": ("United States", "Estados Unidos", "Estados Unidos", "الولايات المتحدة"),
     "Espagne": ("Spain", "España", "Espanha", "إسبانيا"),
+    "Allemagne": ("Germany", "Alemania", "Alemanha", "ألمانيا"),
     "Portugal": ("Portugal", "Portugal", "Portugal", "البرتغال"),
     "Belgique": ("Belgium", "Bélgica", "Bélgica", "بلجيكا"),
     "Suisse": ("Switzerland", "Suiza", "Suíça", "سويسرا"),
@@ -137,7 +140,7 @@ for c in ["Guadeloupe", "Martinique", "Guyane", "Haïti"]:
     REGION[c] = "antilles"
 for c in ["La Réunion", "Mayotte"]:
     REGION[c] = "ocean_indien"
-for c in ["France", "Belgique", "Suisse", "Royaume-Uni", "Irlande", "Espagne", "Portugal", "Canada", "États-Unis"]:
+for c in ["France", "Belgique", "Suisse", "Royaume-Uni", "Irlande", "Espagne", "Portugal", "Canada", "États-Unis", "Allemagne"]:
     REGION[c] = "nord"
 
 PEAK = {
@@ -198,6 +201,8 @@ PAIRS = {
     "SXB": "ALG ORN CMN RAK TUN IST DSS",
     "RNS": "ALG ORN CMN RAK AGA TUN DSS",
     "BSL": "ALG ORN CZL CMN RAK TUN IST",
+    "BCN": "DSS CMN RAK TNG ALG ORN BKO",
+    "FRA": "ADD ACC LOS CMN TUN IST DSS",
     "LHR": "LOS ACC ABV NBO JNB ADD CAI DXB CMN RAK ALG DSS ABJ FIH TUN",
     "MAN": "TUN ALG CMN RAK LOS ACC CAI DSS ABJ",
     "BHX": "TUN ALG CMN RAK LOS ACC DSS",
