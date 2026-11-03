@@ -816,8 +816,8 @@ footer { margin-top: 72px; }
 .main-nav a[aria-current="page"], .lang-nav a[aria-current="page"] { color: var(--teal-d); background: var(--mint); }
 .main-nav a.nav-explore { color: var(--teal-d); background: var(--mint); }
 .site-head .cur-select, .site-head .theme-btn { background: var(--surface); color: var(--ink); border-color: var(--line); }
-.btn:not(.ghost) { background: var(--teal); color: var(--teal-ink); border-color: transparent; border-radius: 999px; box-shadow: 0 10px 24px -12px color-mix(in srgb, var(--teal) 80%, transparent); }
-.btn:not(.ghost):hover { filter: brightness(1.04); }
+.btn:not(.ghost):not(.wa-btn) { background: var(--teal); color: var(--teal-ink); border-color: transparent; border-radius: 999px; box-shadow: 0 10px 24px -12px color-mix(in srgb, var(--teal) 80%, transparent); }
+.btn:not(.ghost):not(.wa-btn):hover { filter: brightness(1.04); }
 .btn.ghost { border-radius: 999px; }
 .eyebrow { color: var(--teal-d); letter-spacing: .08em; text-transform: uppercase; font-weight: 700; }
 h1 em, h1 span, .hero h1 em { color: var(--teal-d); font-style: normal; }
@@ -866,19 +866,24 @@ h1 em, h1 span, .hero h1 em { color: var(--teal-d); font-style: normal; }
 .how-steps h3 { margin: 12px 0 6px; font: 700 21px/1.2 var(--f-body); letter-spacing: -.01em; }
 .how-steps p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.5; }
 @media (max-width: 760px) { .how-steps { grid-template-columns: 1fr; } }
-/* Barre fixe du bas (téléphone) : Escale à gauche, bouton à droite */
+.btn, a.btn, .wa-btn { text-decoration: none; }
+.wa-btn { border-radius: 999px; display: inline-flex; width: auto; padding: 12px 20px; font-size: 16px; line-height: 1.2; }
+/* Barre fixe du bas (téléphone) : Escale à gauche, bouton à droite — fine, sur une seule ligne */
 .fab .fab-brand { display: none; }
 @media (max-width: 700px) {
-  .fab { inset: auto 10px calc(10px + env(safe-area-inset-bottom, 0px)) 10px; justify-content: space-between; padding: 10px 10px 10px 14px; border-radius: 22px;
-    background: color-mix(in srgb, var(--surface) 96%, transparent); color: var(--ink); border: 1px solid var(--line); box-shadow: 0 12px 30px -12px rgb(15 23 42 / .35); backdrop-filter: blur(10px); }
-  .fab .fab-brand { display: flex; align-items: center; gap: 10px; text-align: left; }
-  .fab .fab-brand svg { width: 30px; height: 30px; color: var(--teal); transform: rotate(45deg); }
-  .fab .fab-brand b { display: block; font: 700 16px/1.1 var(--f-body); }
-  .fab .fab-brand small { display: block; font: 500 12px/1.2 var(--f-body); color: var(--muted); }
-  .fab .fab-go { display: inline-flex; align-items: center; gap: 6px; background: var(--teal); color: var(--teal-ink); padding: 12px 16px; border-radius: 999px; font: 700 15px/1 var(--f-body); }
-  .fab .fab-go svg { width: 16px; height: 16px; }
-  body:has(.fab:not([hidden])) .wa-float { bottom: calc(86px + env(safe-area-inset-bottom, 0px)); }
+  .fab { inset: auto 12px calc(8px + env(safe-area-inset-bottom, 0px)) 12px; justify-content: space-between; gap: 10px; padding: 6px 6px 6px 12px; border-radius: 999px; min-height: 0;
+    background: color-mix(in srgb, var(--surface) 96%, transparent); color: var(--ink); border: 1px solid var(--line); box-shadow: 0 8px 22px -12px rgb(15 23 42 / .35); backdrop-filter: blur(10px); }
+  .fab .fab-brand { display: flex; align-items: center; gap: 8px; min-width: 0; text-align: left; white-space: nowrap; }
+  .fab .fab-brand svg { width: 20px; height: 20px; flex: none; color: var(--teal); transform: rotate(45deg); }
+  .fab .fab-brand > span { display: flex; align-items: baseline; gap: 6px; min-width: 0; overflow: hidden; }
+  .fab .fab-brand b { font: 700 15px/1 var(--f-body); }
+  .fab .fab-brand small { font: 500 12px/1 var(--f-body); color: var(--muted); overflow: hidden; text-overflow: ellipsis; }
+  .fab .fab-go { display: inline-flex; align-items: center; gap: 6px; flex: none; white-space: nowrap; background: var(--teal); color: var(--teal-ink); padding: 9px 14px; border-radius: 999px; font: 700 14px/1 var(--f-body); }
+  .fab .fab-go svg { width: 15px; height: 15px; }
+  body:has(.fab:not([hidden])) .wa-float { bottom: calc(66px + env(safe-area-inset-bottom, 0px)); }
 }
+@media (max-width: 440px) { .fab .fab-brand small { display: none; } }
+
 </style>
 </head>
 <body>
