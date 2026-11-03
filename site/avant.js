@@ -17,13 +17,35 @@
   var esc = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
   var P = new URLSearchParams(location.search), fs = (P.get("flightSearch") || "").match(/^[A-Z]{3}\d{4}([A-Z]{3})/);
   var code = fs ? fs[1] : "", city0 = (P.get("ville") || "").trim().slice(0, 80);
+  var cc = "";
   var cityP = code ? fetch("/data/airports.json").then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; })
-    .then(function (db) { var a = (db || []).filter(function (x) { return x[0] === code; })[0]; return a ? a[1] : ""; }) : Promise.resolve(city0);
+    .then(function (db) { var a = (db || []).filter(function (x) { return x[0] === code; })[0]; cc = a ? a[3] : ""; return a ? a[1] : ""; }) : Promise.resolve(city0);
+  // Pack selon la destination : d'abord les infos Escale (visa selon le passeport, guide d'arrivée à l'aéroport), puis l'essentiel
+  // (eSIM, transfert, assurance), puis le reste
+  var ARR = { ABJ: "abidjan", DSS: "dakar", LOS: "lagos", ACC: "accra", DLA: "douala", CMN: "casablanca", FIH: "kinshasa", BKO: "bamako", CKY: "conakry",
+    ALG: ["alger", "algiers"], TUN: "tunis", LFW: "lome" };
+  var ORDER = ["esim", "transfer", "insurance", "car", "activities", "bike", "claim"];
+  var X = { fr: ["Votre pack pour {c}", "Faut-il un visa ?", "La réponse selon votre passeport, avec le lien officiel.", "Arriver à l’aéroport de {c}", "Taxi, change, carte SIM : ce qu’il faut savoir en arrivant.", "Vérifier"],
+    en: ["Your pack for {c}", "Do you need a visa?", "The answer for your passport, with the official link.", "Arriving at {c} airport", "Taxis, money, SIM card: what to know when you land.", "Check"],
+    es: ["Tu pack para {c}", "¿Necesitas visado?", "La respuesta según tu pasaporte, con el enlace oficial.", "Llegar al aeropuerto de {c}", "Taxi, cambio, tarjeta SIM: lo que hay que saber al llegar.", "Comprobar"],
+    pt: ["O seu pack para {c}", "Precisa de visto?", "A resposta segundo o seu passaporte, com o link oficial.", "Chegar ao aeroporto de {c}", "Táxi, câmbio, cartão SIM: o que saber ao chegar.", "Verificar"],
+    ar: ["حزمتك إلى {c}", "هل تحتاج إلى تأشيرة؟", "الإجابة حسب جواز سفرك مع الرابط الرسمي.", "الوصول إلى مطار {c}", "سيارات الأجرة والصرف وشريحة الاتصال: ما يجب معرفته عند الوصول.", "تحقّق"],
+    it: ["Il tuo pacchetto per {c}", "Serve il visto?", "La risposta in base al tuo passaporto, con il link ufficiale.", "Arrivare all’aeroporto di {c}", "Taxi, cambio, SIM: cosa sapere all’arrivo.", "Verifica"],
+    de: ["Dein Paket für {c}", "Brauchst du ein Visum?", "Die Antwort für deinen Pass, mit offiziellem Link.", "Ankunft am Flughafen {c}", "Taxi, Geld, SIM-Karte: was du bei der Ankunft wissen musst.", "Prüfen"],
+    nl: ["Je pakket voor {c}", "Heb je een visum nodig?", "Het antwoord voor je paspoort, met de officiële link.", "Aankomst op de luchthaven van {c}", "Taxi, geld, simkaart: wat je moet weten bij aankomst.", "Bekijken"] }[lang];
   Promise.all([fetch("/data/partners.json").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }), cityP]).then(function (res) {
     var cfg = res[0], city = res[1];
     if (!cfg || !cfg.services) return;
     var list = cfg.services.filter(function (p) { return p.key !== "hotel"; }); // les hôtels sont déjà sur ces pages
-    box.innerHTML = "<h2>" + esc(T[0]) + "</h2><p class=\"small\">" + esc(city ? T[2].replace("{c}", city) : T[1]) + "</p><ul class=\"avant-list\">" +
+    list.sort(function (a, b) { var i = ORDER.indexOf(a.key), j = ORDER.indexOf(b.key); return (i < 0 ? 99 : i) - (j < 0 ? 99 : j); });
+    var own = "";
+    if (city && X) {
+      var en = lang !== "fr", item = function (icon, t, d, href) { return "<li><span class=\"av-logo\" style=\"background:#1a56db\" aria-hidden=\"true\">" + icon + "</span><div><strong>" + esc(t) + "</strong><span>" + esc(d) + "</span></div><a href=\"" + esc(href) + "\">" + esc(X[5]) + " →</a></li>"; };
+      var SCH = /^(AT|BE|BG|HR|CZ|DK|EE|FI|FR|DE|GR|HU|IS|IT|LV|LI|LT|LU|MT|NL|NO|PL|PT|RO|SK|SI|ES|SE|CH)$/;
+      if (cc) own += item("🛂", X[1], X[2], (en ? "/en/visa/" : "/visa/") + "?d=" + (SCH.test(cc) ? "SCH" : cc));
+      var g = ARR[code]; if (g) { var slug = Array.isArray(g) ? g[en ? 1 : 0] : g; own += item("🛬", X[3].replace("{c}", city), X[4], en ? "/en/arriving-at-" + slug + "-airport/" : "/arriver-aeroport-" + slug + "/"); }
+    }
+    box.innerHTML = "<h2>" + esc(city && X ? X[0].replace("{c}", city) : T[0]) + "</h2><p class=\"small\">" + esc(city ? T[2].replace("{c}", city) : T[1]) + "</p><ul class=\"avant-list\">" + own +
       list.map(function (p) {
         var url = p.url.replace("{city}", encodeURIComponent(city)).replace("{code}", code);
         if (/stay22\.com/.test(url)) url += "&lang=" + lang;  // page Stay22 dans la langue de la page
