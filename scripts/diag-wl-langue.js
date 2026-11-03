@@ -2,8 +2,7 @@
 // Lancé par .github/workflows/diag-wl-langue.yml
 const { chromium } = require('playwright');
 const base = 'https://escale.live/recherche/?flightSearch=CDG1012DSS20121';
-const tests = [['fr-FR', ''], ['en-GB', ''], ['fr-FR', '&locale=en'], ['fr-FR', '&lang=en'], ['fr-FR', '&language=en'], ['fr-FR', '&locale=en-GB'],
-  ['fr-FR', '&locale=en_GB'], ['fr-FR', '&hl=en'], ['fr-FR', '#locale=en']];
+const tests = (process.env.TESTS || '&locale=en').split(' ').map((x) => ['fr-FR', x === '-' ? '' : x]);
 (async () => { const b = await chromium.launch();
   for (const [loc, extra] of tests) {
     const c = await b.newContext({ locale: loc, viewport: { width: 1280, height: 900 } }); const p = await c.newPage();

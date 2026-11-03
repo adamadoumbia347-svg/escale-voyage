@@ -2,6 +2,11 @@
 name: Diagnostic langue du moteur
 on:
   workflow_dispatch:
+    inputs:
+      tests:
+        description: "Paramètres à essayer, séparés par des espaces (- = aucun)"
+        required: false
+        default: "- &locale=en &locale=es &locale=pt &locale=ar &locale=it &locale=de &locale=en&currency=usd &locale=en&currency=GBP"
 
 permissions:
   contents: read
@@ -14,4 +19,4 @@ jobs:
       - name: Tester
         run: |
           npm i playwright@1.48.2 >/dev/null && npx playwright install --with-deps chromium >/dev/null
-          node scripts/diag-wl-langue.js
+          TESTS="${{ inputs.tests || '- &locale=en' }}" node scripts/diag-wl-langue.js
