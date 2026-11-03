@@ -61,6 +61,20 @@
     var a = document.createElement("a"); a.className = "btn ghost"; a.target = "_blank"; a.rel = "sponsored noopener noreferrer"; a.dataset.k = "tripcom";
     a.href = "https://www.trip.com/flights/showfarefirst?" + qs.join("&"); a.textContent = "✈️ " + TL[0]; p.appendChild(a);
     if (asia) { var n = document.createElement("span"); n.className = "small"; n.textContent = " " + TL[1]; p.appendChild(n); }
+    // Vol + hôtel Trip.com (même trajet, mêmes dates) pour les villes dont on connaît l'identifiant Trip.com
+    var HID = { ABJ: 3265, DSS: 856, CMN: 809, RAK: 1360, CAI: 332, LOS: 783, ACC: 1274, NBO: 825, DXB: 220, IST: 532, SAW: 532, BKK: 359, DMK: 359,
+      HND: 228, NRT: 228, DPS: 723, SIN: 73, HKT: 725, CDG: 192, ORY: 192 };
+    var NM = { ABJ: "Abidjan", DSS: "Dakar", CMN: "Casablanca", RAK: "Marrakech", CAI: "Le Caire", LOS: "Lagos", ACC: "Accra", NBO: "Nairobi", DXB: "Dubaï", IST: "Istanbul", SAW: "Istanbul",
+      BKK: "Bangkok", DMK: "Bangkok", HND: "Tokyo", NRT: "Tokyo", DPS: "Bali", SIN: "Singapour", HKT: "Phuket", CDG: "Paris", ORY: "Paris" };
+    if (ret && HID[to]) {
+      var o2 = { adult: String(ad), child: String(ch), infants: "0", aCityCode: cityOf(to).toUpperCase(), dCityCode: cityOf(from).toUpperCase(), tripWay: "round-trip", classType: "ys",
+        dDate: iso(dep), rDate: iso(ret), hCity: String(HID[to]), iDate: iso(dep), oDate: iso(ret), room: "1", curr: "EUR", destinationName: NM[to], isOversea: "true",
+        locale: lg === "en" ? "en-GB" : "fr-FR", Allianceid: "11233048", SID: "335082259", trip_sub1: "escale", trip_sub2: "recherche-vol-hotel" }, q2 = [];
+      for (var k2 in o2) q2.push(k2 + "=" + encodeURIComponent(o2[k2]));
+      var b2 = document.createElement("a"); b2.className = "btn ghost"; b2.target = "_blank"; b2.rel = "sponsored noopener noreferrer"; b2.dataset.k = "tripcom-package";
+      b2.href = "https://www.trip.com/packages/list?" + q2.join("&"); b2.textContent = "✈️+🏨 " + (lg === "en" ? "Flight + hotel on Trip.com" : "Vol + hôtel sur Trip.com");
+      p.appendChild(document.createTextNode(" ")); p.insertBefore(b2, p.children[1] || null);
+    }
     var res = document.getElementById("tpwl-tickets");
     if (asia || !res) bar.parentNode.insertBefore(p, bar.nextSibling); else res.parentNode.insertBefore(p, res.nextSibling);
   };
