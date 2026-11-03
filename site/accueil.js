@@ -5,7 +5,8 @@
   var lang = (document.documentElement.lang || "fr").slice(0, 2);
   var T = function (fr, en) { return lang === "fr" ? fr : en; };
   var loc = { fr: "fr-FR", en: "en-GB", es: "es-ES", pt: "pt-PT", ar: "ar-u-nu-latn" }[lang] || "fr-FR";
-  var money = function (n) { try { return new Intl.NumberFormat(loc, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n); } catch (e) { return Math.round(n) + " €"; } };
+  // Prix reçus en euros : affichés dans la monnaie du visiteur par app.js quand il est chargé (conversion au taux du jour)
+  var money = function (n) { if (window.ESCALE_MONEY) return window.ESCALE_MONEY(n, "EUR"); try { return new Intl.NumberFormat(loc, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n); } catch (e) { return Math.round(n) + " €"; } };
   var esc = function (t) { return String(t).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
   var get = function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } };
   var set = function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} };
@@ -65,20 +66,20 @@
   var ORIG = { CDG: 1, BRU: 1, LYS: 1, MRS: 1, GVA: 1, LHR: 1, JFK: 1, YUL: 1 };
   var cur = { code: "CDG", name: "Paris" }, loaded = null;
   var go = function () {
-    var o = /^(CDG|ORY|BVA|PAR)$/.test(cur.code) ? "CDG" : cur.code, name = o === "CDG" ? "Paris" : cur.name;
-    if (loaded === o) return;
-    loaded = o;
+    var o = /^(CDG|ORY|BVA|PAR)$/.test(cur.code) ? "CDG" : cur.code, name = o === "CDG" ? "Paris" : cur.name, k = o + (cur.cur || "");
+    if (loaded === k) return;
+    loaded = k;
     Promise.all([
       fetch("/api/deals?currency=EUR" + (ORIG[o] ? "" : "&from=" + o)).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
       (window.ESCALE_AIRPORTS = window.ESCALE_AIRPORTS || fetch("/data/airports.json").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })),
       fetch("/data/photos.json").then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; })
     ]).then(function (res) {
-      if (loaded !== o) return;
+      if (loaded !== k) return;
       var d = res[0], names = {}, IMG = {};
       (res[2] || []).forEach(function (p) { var sl = slugOf(p.img); if (sl) IMG[p.code] = sl; });
       (res[1] || []).forEach(function (a) { if (!names[a[0]]) names[a[0]] = a[1]; });
       var deals = d && d.origins && d.origins[o] ? d.origins[o].filter(function (x) { return x.dep && x.ret; }).slice(0, 8) : [];
-      if (!deals.length) { if (o !== "CDG") { cur = { code: "CDG", name: "Paris" }; go(); } return; }  // rien pour cette ville : Paris
+      if (!deals.length) { if (o !== "CDG") { cur = { code: "CDG", name: "Paris", cur: cur.cur }; go(); } return; }  // rien pour cette ville : Paris
       var h = sec.querySelector("h2");
       if (h) h.textContent = T("Partez ce mois-ci : les moins chers depuis " + name, "Go this month: cheapest from " + name);
       grid.innerHTML = deals.map(function (x) {
@@ -92,7 +93,7 @@
     });
   };
   var started = false;
-  var setFrom = function (f) { if (!f || !f.code) return; cur = { code: f.code, name: f.name || f.code }; if (started) go(); };
+  var setFrom = function (f) { if (!f || !f.code) return; cur = { code: f.code, name: f.name || f.code, cur: f.cur }; if (started) go(); };
   setFrom(window.ESCALE_FROM);
   addEventListener("escale:from", function (e) { setFrom(e.detail); });
   var start = function () { started = true; go(); };

@@ -400,6 +400,7 @@ window.ESCALE_I18N = {
   "For the taxi or first purchases, plus a card with no foreign fees.": ["Para el taxi o las primeras compras, y una tarjeta sin comisiones en el extranjero.", "Para o táxi ou as primeiras compras, e um cartão sem taxas no estrangeiro.", "لسيارة الأجرة أو المشتريات الأولى، مع بطاقة بلا رسوم في الخارج.", "Per il taxi o i primi acquisti, più una carta senza commissioni all’estero.", "Für das Taxi oder erste Einkäufe, dazu eine Karte ohne Auslandsgebühren."],
   // Nouveau menu du haut et carte « Partout »
   "Guides": ["Guías", "Guias", "أدلة", "Guide", "Ratgeber"],
+  "Popular routes from {c}, round trip from": ["Rutas populares desde {c}, ida y vuelta desde", "Rotas populares a partir de {c}, ida e volta desde", "مسارات شائعة من {c}، ذهاب وعودة من", "Tratte popolari da {c}, andata e ritorno da", "Beliebte Strecken ab {c}, Hin und zurück ab"],
   "Explore": ["Explorar", "Explorar", "استكشف", "Esplora", "Entdecken"],
   "Favorites": ["Favoritos", "Favoritos", "المفضلة", "Preferiti", "Favoriten"],
   "Main menu": ["Menú principal", "Menu principal", "القائمة الرئيسية", "Menu principale", "Hauptmenü"],

@@ -87,11 +87,25 @@
   }
 
   // ---------- Devise ----------
+  // Monnaies demandées aux partenaires (prix « natifs ») ; toute autre monnaie du monde est affichée par conversion
+  // (taux du jour, /api/fx?all=1), à partir des prix en euros.
   const CURRENCIES = ["EUR", "USD", "GBP", "CAD", "CHF", "XOF", "MAD"];
   const COUNTRY_CUR = { US: "USD", GB: "GBP", CA: "CAD", CH: "CHF", MA: "MAD",
-    SN: "XOF", ML: "XOF", CI: "XOF", BF: "XOF", NE: "XOF", TG: "XOF", BJ: "XOF", GW: "XOF" };
+    SN: "XOF", ML: "XOF", CI: "XOF", BF: "XOF", NE: "XOF", TG: "XOF", BJ: "XOF", GW: "XOF",
+    CM: "XAF", GA: "XAF", CG: "XAF", TD: "XAF", CF: "XAF", GQ: "XAF", GN: "GNF", NG: "NGN", GH: "GHS", CD: "CDF", AO: "AOA", KE: "KES",
+    TZ: "TZS", UG: "UGX", RW: "RWF", BI: "BIF", ET: "ETB", ZA: "ZAR", MZ: "MZN", MG: "MGA", MU: "MUR", ZM: "ZMW", CV: "CVE", GM: "GMD",
+    SL: "SLE", LR: "LRD", MR: "MRU", SD: "SDG", DJ: "DJF", KM: "KMF", SC: "SCR", NA: "NAD", BW: "BWP", MW: "MWK", DZ: "DZD", TN: "TND",
+    LY: "LYD", EG: "EGP", NO: "NOK", SE: "SEK", DK: "DKK", IS: "ISK", PL: "PLN", CZ: "CZK", HU: "HUF", RO: "RON", BG: "BGN", RS: "RSD",
+    AL: "ALL", MK: "MKD", BA: "BAM", MD: "MDL", UA: "UAH", TR: "TRY", GE: "GEL", AM: "AMD", AZ: "AZN", KZ: "KZT", UZ: "UZS", RU: "RUB",
+    MX: "MXN", BR: "BRL", AR: "ARS", CL: "CLP", CO: "COP", PE: "PEN", UY: "UYU", PY: "PYG", BO: "BOB", DO: "DOP", HT: "HTG", JM: "JMD",
+    TT: "TTD", CR: "CRC", GT: "GTQ", HN: "HNL", NI: "NIO", AU: "AUD", NZ: "NZD", JP: "JPY", CN: "CNY", HK: "HKD", TW: "TWD", KR: "KRW",
+    IN: "INR", PK: "PKR", BD: "BDT", LK: "LKR", NP: "NPR", MV: "MVR", TH: "THB", VN: "VND", ID: "IDR", MY: "MYR", SG: "SGD", PH: "PHP",
+    KH: "KHR", AE: "AED", SA: "SAR", QA: "QAR", KW: "KWD", BH: "BHD", OM: "OMR", JO: "JOD", LB: "LBP", IL: "ILS", IQ: "IQD" };
   let CUR = store.get("escale.cur") || "EUR";
-  if (!CURRENCIES.includes(CUR)) CUR = "EUR";
+  if (!/^[A-Z]{3}$/.test(CUR)) CUR = "EUR";
+  const API_CUR = () => (CURRENCIES.includes(CUR) ? CUR : "EUR");
+  let FX = null, fxLoading = null;
+  const loadFx = () => fxLoading || (fxLoading = fetch("/api/fx?all=1").then((r) => (r.ok ? r.json() : null)).catch(() => null).then((d) => { FX = d && d.rates ? Object.assign({ EUR: 1 }, d.rates) : null; return FX; }));
   // Les formateurs Intl coûtent cher à créer : on les garde en mémoire (par langue et options)
   const intlCache = new Map();
   const intl = (Kind, loc, opts) => {
@@ -102,9 +116,13 @@
   };
   const dateFmt = (d, opts) => intl(Intl.DateTimeFormat, locale(), opts).format(d);
   const money = (n, cur) => {
-    try { return intl(Intl.NumberFormat, locale(), { style: "currency", currency: cur || CUR, currencyDisplay: "narrowSymbol", maximumFractionDigits: 0 }).format(n); }
-    catch (e) { return Math.round(n) + " " + (cur || CUR); }
+    let c = cur || CUR;
+    // Prix reçu dans une autre monnaie que celle du visiteur : converti au taux du jour s'il est connu
+    if (c !== CUR && FX && FX[c] && FX[CUR]) { n = n / FX[c] * FX[CUR]; c = CUR; }
+    try { return intl(Intl.NumberFormat, locale(), { style: "currency", currency: c, currencyDisplay: "narrowSymbol", maximumFractionDigits: 0 }).format(n); }
+    catch (e) { return Math.round(n) + " " + c; }
   };
+  window.ESCALE_MONEY = (n, cur) => money(n, cur || "EUR");
 
   // ---------- Aéroports du monde ----------
   // Liste intégrée (affichage immédiat), complétée par /data/airports.json : [code, ville, nom, pays, grand, lat, lon]
@@ -334,7 +352,7 @@
       const ddmm = (x) => x.slice(8, 10) + x.slice(5, 7);
       const paxAv = String(s.adults) + (s.children ? String(s.children) : "");
       list.push({ k: "aviasales", name: "Aviasales", best: true, sponsored: true, desc: T("Compare des centaines de compagnies et d’agences, souvent très bon sur les vols avec escale.", "Compares hundreds of airlines and agencies, often great for flights with stops."),
-        url: `https://www.aviasales.com/search/${s.from.code}${ddmm(s.dep)}${s.to.code}${s.ret ? ddmm(s.ret) : ""}${paxAv}?` + q({ marker: AFFILIATE.travelpayouts_marker, currency: CUR.toLowerCase() }) });
+        url: `https://www.aviasales.com/search/${s.from.code}${ddmm(s.dep)}${s.to.code}${s.ret ? ddmm(s.ret) : ""}${paxAv}?` + q({ marker: AFFILIATE.travelpayouts_marker, currency: API_CUR().toLowerCase() }) });
     }
     // Partenaire Trip.com (lien rémunéré) : en avant vers l'Asie et le Moyen-Orient, où il est souvent très compétitif
     {
@@ -389,7 +407,7 @@
         url: `https://www.stay22.com/allez/roam?${q({ aid: "escalelive", address: x, checkin: s.in, checkout: s.out, adults: s.adults, campaign: "recherche-hotels" })}` },
       ...(trip ? [{ k: "tripcom", name: "Trip.com", desc: T("Très bon en Asie et au Moyen-Orient, souvent des prix membres.", "Strong in Asia and the Middle East, often with member prices."), best: true, sponsored: true, url: trip }] : []),
       { k: "booking", name: "Booking.com", desc: T("Le plus grand choix d’hébergements, souvent annulables gratuitement.", "The widest choice of stays, often with free cancellation."), best: true,
-        url: `https://www.booking.com/${d.booking}?${q({ ss: x, checkin: s.in, checkout: s.out, group_adults: s.adults, no_rooms: s.rooms, group_children: 0, order: "price", selected_currency: CUR })}` },
+        url: `https://www.booking.com/${d.booking}?${q({ ss: x, checkin: s.in, checkout: s.out, group_adults: s.adults, no_rooms: s.rooms, group_children: 0, order: "price", selected_currency: API_CUR() })}` },
       { k: "google", name: T("Google Hôtels", "Google Hotels"), desc: T("Compare les prix de plusieurs agences pour le même hôtel.", "Compares prices from several agencies for the same hotel."), best: true,
         url: `https://www.google.com/travel/search?${q({ q: T(`hôtels ${x} du ${s.in} au ${s.out}`, `hotels in ${x} from ${s.in} to ${s.out}`), hl: LANG, curr: CUR })}` },
       { k: "kayak", name: T("Kayak Hôtels", "Kayak Hotels"), desc: T("Agrège Booking, Expedia, Hotels.com et d’autres, tri par prix.", "Aggregates Booking, Expedia, Hotels.com and more, sorted by price."),
@@ -465,7 +483,7 @@
     const ddmm = (x) => x.slice(8, 10) + x.slice(5, 7);
     const paxAv = String(s.adults) + (s.children ? String(s.children) : "");
     return `https://www.aviasales.com/search/${s.from.code}${ddmm(dep)}${s.to.code}${ret ? ddmm(ret) : ""}${paxAv}?` +
-      q({ marker: AFFILIATE.travelpayouts_marker, currency: CUR.toLowerCase() });
+      q({ marker: AFFILIATE.travelpayouts_marker, currency: API_CUR().toLowerCase() });
   }
   const AIRLINES = { AF: "Air France", TO: "Transavia", TK: "Turkish Airlines", AT: "Royal Air Maroc", SN: "Brussels Airlines", TP: "TAP Air Portugal",
     AH: "Air Algérie", TU: "Tunisair", ET: "Ethiopian Airlines", KQ: "Kenya Airways", MS: "EgyptAir", EK: "Emirates", QR: "Qatar Airways",
@@ -587,7 +605,7 @@
   const calCache = new Map();
   function calMonth(from, to, month) {
     const k = [from, to, month, CUR].join("|");
-    if (!calCache.has(k)) calCache.set(k, fetch("/api/calendar?" + q({ from, to, month, currency: CUR })).then((r) => (r.ok ? r.json() : null)).catch(() => null));
+    if (!calCache.has(k)) calCache.set(k, fetch("/api/calendar?" + q({ from, to, month, currency: API_CUR() })).then((r) => (r.ok ? r.json() : null)).catch(() => null));
     return calCache.get(k);
   }
   async function fillStrip(s) {
@@ -612,7 +630,7 @@
     let d = null;
     if (isLive) {
       try {
-        const r = await fetch("/api/prix?" + q({ from: s.from.code, to: s.to.code, dep: s.dep, ret: s.ret || "", currency: CUR, list: 1, direct: s.direct ? 1 : "" }));
+        const r = await fetch("/api/prix?" + q({ from: s.from.code, to: s.to.code, dep: s.dep, ret: s.ret || "", currency: API_CUR(), list: 1, direct: s.direct ? 1 : "" }));
         if (r.ok) d = await r.json();
       } catch (e) { d = null; }
     }
@@ -853,7 +871,7 @@
     show(head + `<div id="month-cal"><p class="lead">${esc(T("Chargement des prix du mois…", "Loading prices for the month…"))}</p></div>` + links);
     const id = ++monthReq;
     if (!isLive) { $("month-cal").innerHTML = ""; return; }
-    fetch("/api/calendar?" + q({ from: s.from.code, to: s.to.code, month: s.month, currency: CUR })).then((r) => (r.ok ? r.json() : null)).catch(() => null).then((data) => {
+    fetch("/api/calendar?" + q({ from: s.from.code, to: s.to.code, month: s.month, currency: API_CUR() })).then((r) => (r.ok ? r.json() : null)).catch(() => null).then((data) => {
       if (id !== monthReq || !$("month-cal")) return;
       const days = data && data.available ? data.days || {} : {};
       const keys = Object.keys(days).filter((k) => k >= today);
@@ -934,7 +952,7 @@
   function fetchExplore(from, month) {
     const key = from + month + CUR;
     if (!exploreCache.has(key)) {
-      exploreCache.set(key, fetch("/api/explore?" + q({ from, month, currency: CUR }))
+      exploreCache.set(key, fetch("/api/explore?" + q({ from, month, currency: API_CUR() }))
         .then((r) => (r.ok ? r.json() : null)).catch(() => null));
     }
     return exploreCache.get(key);
@@ -1024,7 +1042,7 @@
     const rows = items.slice(0, 8).map((it) => {
       // Panneau en caractères latins quelle que soit la langue
       let p;
-      try { p = intl(Intl.NumberFormat, "en", { style: "currency", currency: CUR, currencyDisplay: "narrowSymbol", maximumFractionDigits: 0 }).format(it.price).replace(/\s/g, ""); }
+      try { p = intl(Intl.NumberFormat, "en", { style: "currency", currency: API_CUR(), currencyDisplay: "narrowSymbol", maximumFractionDigits: 0 }).format(it.price).replace(/\s/g, ""); }
       catch (e) { p = Math.round(it.price) + CUR; }
       return `${from} → ${(byCode.get(it.to) || [it.to])[0]} ${p}`;
     });
@@ -1083,7 +1101,7 @@
     const from = place($("f-from").value);
     if (!from || !from.code || from.code + CUR === popFrom) return;
     popFrom = from.code + CUR; popPending = true;
-    Promise.all([fetch("/api/populaires?" + q({ from: from.code, currency: CUR })).then((r) => (r.ok ? r.json() : null)).catch(() => null), loadDB()]).then(([d]) => {
+    Promise.all([fetch("/api/populaires?" + q({ from: from.code, currency: API_CUR() })).then((r) => (r.ok ? r.json() : null)).catch(() => null), loadDB()]).then(([d]) => {
       if (popFrom !== from.code + CUR) return;
       popPending = false;
       const routes = d && d.available && d.routes ? d.routes.filter((r) => byCode.has(r.to)) : [];
@@ -1112,7 +1130,7 @@
       const k = destKey(a, b);
       if (destPrices.has(k)) return;
       destPrices.set(k, null);
-      fetch("/api/prix?" + q({ from: a, to: b, dep, ret, currency: CUR }))
+      fetch("/api/prix?" + q({ from: a, to: b, dep, ret, currency: API_CUR() }))
         .then((r) => (r.ok ? r.json() : null)).catch(() => null)
         .then((d) => {
           const v = d && d.available && d.price ? { price: d.price, currency: d.currency } : false;
@@ -1134,7 +1152,7 @@
       const to = el.dataset.to;
       el.textContent = "";
       if (to === from.code) return;
-      fetch("/api/prix?" + q({ from: from.code, to, dep, ret, currency: CUR })).then((r) => (r.ok ? r.json() : null)).catch(() => null).then((d) => {
+      fetch("/api/prix?" + q({ from: from.code, to, dep, ret, currency: API_CUR() })).then((r) => (r.ok ? r.json() : null)).catch(() => null).then((d) => {
         if (cityFrom !== from.code + CUR || !d || !d.available || !d.price) return;
         el.textContent = fmt(T("{a} · dès {p}", "{a} · from {p}"), { a: from.code, p: money(d.price, d.currency) });
       });
@@ -1442,10 +1460,19 @@
     $("cur").value = b.dataset.cur; $("cur").dispatchEvent(new Event("change"));
   }));
   $("cur").addEventListener("change", syncCurQuick);
-  $("cur").addEventListener("change", () => {
-    CUR = $("cur").value; store.set("escale.cur", CUR);
+  // Monnaies du monde dans la liste (en plus des 7 principales), pour qui veut changer à la main
+  const addCur = (c) => { const sel = $("cur"); if (!c || [...sel.options].some((o) => o.value === c)) return;
+    const o = document.createElement("option"); o.value = c; o.textContent = c; sel.appendChild(o); };
+  [...new Set(Object.values(COUNTRY_CUR))].sort().forEach(addCur);
+  const curChanged = () => {
     rerender(); paintDests();
     if (!$("explore").hidden) renderExplore($("ex-grid"), exploreFrom, exploreMonth);
+    // Prix déjà affichés par la page (trajets populaires, villes…) : refaits avec la nouvelle monnaie
+    heroFrom = null; if (cityFrom !== null) cityFrom = ""; fromChanged();
+  };
+  $("cur").addEventListener("change", () => {
+    CUR = $("cur").value; store.set("escale.cur", CUR);
+    if (!CURRENCIES.includes(CUR) && !FX) loadFx().then(curChanged); else curChanged();
   });
 
   // ---------- Position du visiteur : aéroport le plus proche et devise ----------
@@ -1463,7 +1490,17 @@
       if (cc && a[3] === cc && dist < homeD) { homeD = dist; home = a; }
     }
     if (home && homeD < 250) return home;
-    return bestD < 400 ? best : null;
+    if (bestD < 400) return best;
+    // Loin de tout grand aéroport (régions isolées) : l'aéroport régional le plus proche, jusqu'à 300 km
+    let any = null, anyD = Infinity;
+    for (const a of DB) {
+      if (a[5] == null) continue;
+      const dLat = (a[5] - lat) * rad, dLon = (a[6] - lon) * rad;
+      const h = Math.sin(dLat / 2) ** 2 + Math.cos(lat * rad) * Math.cos(a[5] * rad) * Math.sin(dLon / 2) ** 2;
+      const dist = 12742 * Math.asin(Math.sqrt(h));
+      if (dist < anyD) { anyD = dist; any = a; }
+    }
+    return anyD < 300 ? any : null;
   }
   // Bouton « 📍 Aéroport le plus proche » : position précise du téléphone (avec l'accord du visiteur), rien n'est envoyé ni gardé
   $("f-near") && $("f-near").addEventListener("click", () => {
@@ -1503,7 +1540,10 @@
     try {
       const g = await fetch("/api/geo").then((r) => (r.ok ? r.json() : null));
       if (!g) return null;
-      if (!store.get("escale.cur") && COUNTRY_CUR[g.country]) { CUR = COUNTRY_CUR[g.country]; $("cur").value = CUR; syncCurQuick(); }
+      if (!store.get("escale.cur") && COUNTRY_CUR[g.country]) {
+        CUR = COUNTRY_CUR[g.country]; addCur(CUR); $("cur").value = CUR; syncCurQuick();
+        if (!CURRENCIES.includes(CUR)) await loadFx();  // monnaie affichée par conversion : taux du jour avant d'afficher les prix
+      }
       paysBanner(g.country);
       if (g.lat == null || g.lon == null) return null;
       await loadDB();
@@ -1513,8 +1553,9 @@
   }
 
   // ---------- Démarrage ----------
-  $("cur").value = CUR;
+  addCur(CUR); $("cur").value = CUR;
   syncCurQuick();
+  if (!CURRENCIES.includes(CUR)) loadFx().then(() => { rerender(); paintDests(); });
   applyLang(); paintDests(); paintThemeBtn();
   // Questions fréquentes et check-list (bas de page) : préparées quand le navigateur est libre
   (window.requestIdleCallback || ((f) => setTimeout(f, 200)))(() => { paintFaq(); paintChecklist(); });
@@ -1558,7 +1599,7 @@
     const row = $("pop-hero-row"), h = $("pop-hero-h");
     if (!row || !h || heroFrom === from.code + CUR) return;
     heroFrom = from.code + CUR;
-    Promise.all([fetch("/api/populaires?" + q({ from: from.code, currency: CUR })).then((r) => (r.ok ? r.json() : null)).catch(() => null), loadDB()]).then(([d]) => {
+    Promise.all([fetch("/api/populaires?" + q({ from: from.code, currency: API_CUR() })).then((r) => (r.ok ? r.json() : null)).catch(() => null), loadDB()]).then(([d]) => {
       if (heroFrom !== from.code + CUR) return;
       const routes = d && d.available && d.routes ? d.routes.filter((r) => byCode.has(r.to)).slice(0, 8) : [];
       if (routes.length < 4) return; // pas assez de données : on garde les trajets de départ
