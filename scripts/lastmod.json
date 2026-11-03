@@ -540,7 +540,7 @@
 "2026-11-03"
 ],
 "/ar/flights-christmas/": [
-"db60d3c6d92ff549",
+"b566f0642ddb6cca",
 "2026-11-03"
 ],
 "/ar/flights-conakry-brussels/": [
@@ -804,15 +804,15 @@
 "2026-11-03"
 ],
 "/ar/flights-easter-holidays/": [
-"4ee778837dc5d29f",
+"8d69d6ae2a0a3819",
 "2026-11-03"
 ],
 "/ar/flights-eid-al-adha/": [
-"472b1806ffa52725",
+"23e14ad86d4ffe91",
 "2026-11-03"
 ],
 "/ar/flights-eid-al-fitr/": [
-"083548b69738795c",
+"614cfcd09c531819",
 "2026-11-03"
 ],
 "/ar/flights-frankfurt-abidjan/": [
@@ -1948,7 +1948,7 @@
 "2026-11-03"
 ],
 "/ar/flights-summer/": [
-"325f52867d4c859d",
+"1d4ccc81068fd64e",
 "2026-11-03"
 ],
 "/ar/flights-to-abidjan/": [
@@ -2240,7 +2240,7 @@
 "2026-11-03"
 ],
 "/ar/flights-winter-holidays/": [
-"d30e48e609cbbda7",
+"2b72ce5b33a6bd28",
 "2026-11-03"
 ],
 "/ar/flights-zurich-accra/": [
@@ -3568,7 +3568,7 @@
 "2026-11-03"
 ],
 "/en/flights-christmas/": [
-"4ce5271b477e50b5",
+"7de07c82fdb25e52",
 "2026-11-03"
 ],
 "/en/flights-conakry-brussels/": [
@@ -3832,11 +3832,11 @@
 "2026-11-03"
 ],
 "/en/flights-easter-holidays/": [
-"a2ff1fd3592ee695",
+"1009f3f7914882fd",
 "2026-11-03"
 ],
 "/en/flights-eid-al-fitr/": [
-"612f28d223010e4f",
+"3460f1ab37be6fe5",
 "2026-11-03"
 ],
 "/en/flights-frankfurt-abidjan/": [
@@ -4972,11 +4972,11 @@
 "2026-11-03"
 ],
 "/en/flights-summer-holidays/": [
-"dbcac1dc4f267f89",
+"96b19c158784c1af",
 "2026-11-03"
 ],
 "/en/flights-tabaski-eid-al-adha/": [
-"6ff3b286610ec0b6",
+"61842feb68da9b03",
 "2026-11-03"
 ],
 "/en/flights-to-abidjan/": [
@@ -5268,7 +5268,7 @@
 "2026-11-03"
 ],
 "/en/flights-winter-holidays/": [
-"9f94745f9417f420",
+"0534284d965cfdb4",
 "2026-11-03"
 ],
 "/en/flights-zurich-accra/": [
@@ -6436,7 +6436,7 @@
 "2026-11-03"
 ],
 "/es/vuelos-eid-al-fitr/": [
-"fff419bfe1187ffc",
+"8ecce9050568580d",
 "2026-11-03"
 ],
 "/es/vuelos-estrasburgo-argel/": [
@@ -7176,7 +7176,7 @@
 "2026-11-03"
 ],
 "/es/vuelos-navidad/": [
-"89fd2c774c08ed9c",
+"50643d5216cbd609",
 "2026-11-03"
 ],
 "/es/vuelos-niamey-casablanca/": [
@@ -7532,7 +7532,7 @@
 "2026-11-03"
 ],
 "/es/vuelos-tabaski/": [
-"fb0602fe546b2615",
+"ad900b9304c7421a",
 "2026-11-03"
 ],
 "/es/vuelos-toronto-abiyan/": [
@@ -7644,15 +7644,15 @@
 "2026-11-03"
 ],
 "/es/vuelos-vacaciones-invierno/": [
-"43f497f70572f544",
+"1089cedda37e9a82",
 "2026-11-03"
 ],
 "/es/vuelos-vacaciones-primavera/": [
-"2aef43b6a68061fd",
+"3ab74ab71b4a0dcd",
 "2026-11-03"
 ],
 "/es/vuelos-verano/": [
-"afa825ea5d7fa6cf",
+"dfcbe098cd2a4b79",
 "2026-11-03"
 ],
 "/es/vuelos-washington-abiyan/": [
@@ -9288,7 +9288,7 @@
 "2026-11-03"
 ],
 "/pt/voos-eid-al-fitr/": [
-"8c8e5679020af4a5",
+"2c57b15af2c5779f",
 "2026-11-03"
 ],
 "/pt/voos-estrasburgo-argel/": [
@@ -9320,15 +9320,15 @@
 "2026-11-03"
 ],
 "/pt/voos-ferias-inverno/": [
-"a00ffad1bd46ccb6",
+"ada90bef3ee5e2ca",
 "2026-11-03"
 ],
 "/pt/voos-ferias-pascoa/": [
-"7dd6caca1f540540",
+"e4ccaa0a15ce2ef3",
 "2026-11-03"
 ],
 "/pt/voos-ferias-verao/": [
-"6c2305d125df2bae",
+"073707f7bdce3791",
 "2026-11-03"
 ],
 "/pt/voos-festas/": [
@@ -10060,7 +10060,7 @@
 "2026-11-03"
 ],
 "/pt/voos-natal/": [
-"00d193e8e7074270",
+"fa87238137fdc415",
 "2026-11-03"
 ],
 "/pt/voos-niamey-casablanca/": [
@@ -10596,7 +10596,7 @@
 "2026-11-03"
 ],
 "/pt/voos-tabaski/": [
-"44019c8398087429",
+"5848b86391661992",
 "2026-11-03"
 ],
 "/pt/voos-toronto-abidjan/": [
@@ -12936,7 +12936,7 @@
 "2026-11-03"
 ],
 "/vols-noel/": [
-"40699cf79585b710",
+"1806d5678f263fe2",
 "2026-11-03"
 ],
 "/vols-pour-abidjan/": [
@@ -13120,7 +13120,7 @@
 "2026-11-03"
 ],
 "/vols-ramadan-aid-el-fitr/": [
-"2dea7e5521fffcc1",
+"91916e543afd051d",
 "2026-11-03"
 ],
 "/vols-tabaski-2027-abidjan/": [
@@ -13152,23 +13152,23 @@
 "2026-11-03"
 ],
 "/vols-tabaski/": [
-"47a71204975ff8eb",
+"ed275f879bcf1614",
 "2026-11-03"
 ],
 "/vols-vacances-ete/": [
-"f6fd9ee2e9130328",
+"e4f2d5decc00b5a3",
 "2026-11-03"
 ],
 "/vols-vacances-hiver/": [
-"38b9a894e92bb480",
+"b25c8b57a504799b",
 "2026-11-03"
 ],
 "/vols-vacances-paques/": [
-"1ae3b0c996e2b807",
+"7fe76b3f41664943",
 "2026-11-03"
 ],
 "/widget/": [
-"61fb87b564ccc0c0",
+"0f4f63c58f95e194",
 "2026-11-03"
 ]
 }

@@ -508,3 +508,6 @@ a.pg-cell:hover, a.pg-cell:focus-visible { outline: 2px solid var(--accent); }
 /* Cibles tactiles d'au moins 24 px dans les tableaux (liens des trajets, alertes des fêtes) et sur le logo */
 th > a, td > a.fete-alert { display: inline-block; padding-block: 6px; }
 .site-head .brand { padding-block: 4px; }
+.best-day .bd-list { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 8px; }
+.best-day .bd-list li { padding: 10px 12px; border: 1px solid var(--line, #e3e8ef); border-radius: 12px; line-height: 1.45; }
+.best-day .bd-save { color: #16843f; }

@@ -832,6 +832,18 @@ def build_fetes(site, ctx):
                      f'<table class="fete-table" data-dep="{f["dep"]}" data-ret="{f["ret"]}" data-from-label="{E(u["from_"])}" data-none="{E(u["none"])}">'
                      f'<thead><tr><th scope="col">{E(u["route"])}</th><th scope="col">{E(u["price"])}</th><th scope="col"><span class="sr-only">{E(u["see"])}</span></th></tr></thead>'
                      f'<tbody>{"".join(rows)}</tbody></table><p class="small">{E(u["table_note"])}</p></section>')
+            # Le jour le moins cher pour partir autour de la fête (prix réels du calendrier, site/fetes.js) : une semaine avant à 5 jours après
+            import datetime as _dt
+            _d = _dt.date.fromisoformat(f["dep"])
+            BD = {"fr": ("Le jour le moins cher pour partir", "Prix aller-retour les plus bas repérés pour un départ entre le {a} et le {b}, comparés au départ le {c} (jour le plus demandé).", "Partir le", "au lieu de", "soit", "de moins", "retour le"),
+                  "en": ("The cheapest day to fly out", "Lowest return prices found for a departure between {a} and {b}, compared with leaving on {c} (the busiest day).", "Leave on", "instead of", "that is", "less", "back on"),
+                  "es": ("El día más barato para salir", "Precios de ida y vuelta más bajos para salir entre el {a} y el {b}, comparados con salir el {c} (el día más solicitado).", "Salir el", "en vez de", "es decir", "menos", "vuelta el"),
+                  "pt": ("O dia mais barato para partir", "Preços de ida e volta mais baixos para partir entre {a} e {b}, comparados com partir a {c} (o dia mais procurado).", "Partir a", "em vez de", "ou seja", "a menos", "regresso a"),
+                  "ar": ("أرخص يوم للسفر", "أدنى أسعار الذهاب والعودة المرصودة للسفر بين {a} و{b}، مقارنةً بالسفر يوم {c} (اليوم الأكثر طلبًا).", "السفر يوم", "بدلًا من", "أي", "أقل", "العودة يوم")}[lang]
+            _a, _b = _d - _dt.timedelta(days=7), _d + _dt.timedelta(days=5)
+            body += (f'<section class="best-day" hidden data-from="CDG" data-routes="{",".join(c for c, _ in f["routes"][:6])}" data-names="{E(json.dumps({c: cname(n, lang) for c, n in f["routes"][:6]}, ensure_ascii=False))}" '
+                     f'data-start="{_a.isoformat()}" data-end="{_b.isoformat()}" data-ref="{f["dep"]}" data-lang="{lang}" data-t="{E(json.dumps(BD[2:], ensure_ascii=False))}">'
+                     f'<h2>{E(BD[0])}</h2><p class="small" data-tpl="{E(BD[1])}"></p><ul class="bd-list"></ul></section>')
             body += f'<section><h2>{E(u["book_h"])}</h2><ul>' + "".join(f"<li>{E(x)}</li>" for x in d["book"]) + "</ul></section>"
             body += f'<section><h2>{E(u["alert_h"])}</h2><p>{E(u["alert_p"])}</p></section>'
             if f["key"] == "ete" and lang == "fr":
