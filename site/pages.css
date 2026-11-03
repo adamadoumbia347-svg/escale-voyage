@@ -511,3 +511,7 @@ th > a, td > a.fete-alert { display: inline-block; padding-block: 6px; }
 .best-day .bd-list { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 8px; }
 .best-day .bd-list li { padding: 10px 12px; border: 1px solid var(--line, #e3e8ef); border-radius: 12px; line-height: 1.45; }
 .best-day .bd-save { color: #16843f; }
+.escale-malin { border: 1px solid #f5d68a; background: #fff8e6; border-radius: 16px; padding: 16px 18px; }
+.escale-malin h2 { margin-top: 0; }
+:root[data-theme="dark"] .escale-malin { background: #2a2414; border-color: #6b5a24; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .escale-malin { background: #2a2414; border-color: #6b5a24; } }

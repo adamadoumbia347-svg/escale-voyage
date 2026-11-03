@@ -4,6 +4,8 @@
   "use strict";
   // « Pour toute la famille » (estimation et partage WhatsApp) : site/famille.js
   (function () { var f = document.createElement("script"); f.src = "/famille.js"; f.defer = true; document.head.appendChild(f); })();
+  // « Escale malin » : vol avec escale nettement moins cher que le direct (site/escale-malin.js)
+  (function () { var f = document.createElement("script"); f.src = "/escale-malin.js"; f.defer = true; document.head.appendChild(f); })();
   // Équivalent des prix en euros dans la monnaie du visiteur (site/fx.js)
   (function () { var x = document.createElement("script"); x.src = "/fx.js"; x.defer = true; document.head.appendChild(x); })();
   // Lien Aviasales (partenaire rémunéré) : ouvre directement une recherche datée, départ dans 45 jours, retour 7 jours après
