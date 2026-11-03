@@ -1,0 +1,23 @@
+# Diagnostic manuel : texte visible de pages partenaires (langue, monnaie), avec un navigateur réglé en français.
+name: Diagnostic pages partenaires
+on:
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: "Adresses complètes séparées par des espaces"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ouvrir
+        env:
+          URLS: ${{ inputs.urls }}
+        run: |
+          npm i playwright@1.48.2 >/dev/null && npx playwright install --with-deps chromium >/dev/null
+          node scripts/diag-pages.js
