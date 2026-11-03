@@ -517,3 +517,24 @@ th > a, td > a.fete-alert { display: inline-block; padding-block: 6px; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .escale-malin { background: #2a2414; border-color: #6b5a24; } }
 .push-box { margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--line, #e3e8ef); }
 .push-box h3 { margin: 0 0 4px; font-size: 1.05rem; }
+
+/* ===== Style « frais » (clair, vert d'eau et turquoise, cartes pastel) — remplace l'en-tête bleu nuit ===== */
+:root { --mint: #e9faf5; --mint-2: #d5f4ea; --teal: #12b3a0; --teal-d: #0b8577; --teal-ink: #ffffff; --peach: #fff1e6; --lav: #f1edff; --sun: #fff7d6;
+  --accent: #0b8577; --sign: #0b8577; --focus: #12b3a0; --navy: #ffffff; --on-navy: var(--muted); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --mint: #0f2622; --mint-2: #143430; --teal: #2fd0ba; --teal-d: #5fe0cc; --teal-ink: #05221e;
+  --peach: #2a1f17; --lav: #1e1a2e; --sun: #2a2614; --accent: #5fe0cc; --sign: #5fe0cc; --focus: #2fd0ba; --navy: #0d1117; } }
+:root[data-theme="dark"] { --mint: #0f2622; --mint-2: #143430; --teal: #2fd0ba; --teal-d: #5fe0cc; --teal-ink: #05221e;
+  --peach: #2a1f17; --lav: #1e1a2e; --sun: #2a2614; --accent: #5fe0cc; --sign: #5fe0cc; --focus: #2fd0ba; --navy: #0d1117; }
+.site-head { background: color-mix(in srgb, var(--bg) 94%, transparent); border-bottom: 1px solid var(--line); backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px); }
+.site-head .brand { color: var(--ink); }
+.site-head .brand-icon { color: var(--teal); }
+.main-nav a, .lang-nav a { color: var(--muted); }
+.main-nav a:hover, .lang-nav a:hover { color: var(--ink); background: var(--soft); }
+.main-nav a[aria-current="page"], .lang-nav a[aria-current="page"] { color: var(--teal-d); background: var(--mint); }
+.main-nav a.nav-explore { color: var(--teal-d); background: var(--mint); }
+.site-head .cur-select, .site-head .theme-btn { background: var(--surface); color: var(--ink); border-color: var(--line); }
+.btn:not(.ghost) { background: var(--teal); color: var(--teal-ink); border-color: transparent; border-radius: 999px; box-shadow: 0 10px 24px -12px color-mix(in srgb, var(--teal) 80%, transparent); }
+.btn:not(.ghost):hover { filter: brightness(1.04); }
+.btn.ghost { border-radius: 999px; }
+.eyebrow { color: var(--teal-d); letter-spacing: .08em; text-transform: uppercase; font-weight: 700; }
+h1 em, h1 span, .hero h1 em { color: var(--teal-d); font-style: normal; }
