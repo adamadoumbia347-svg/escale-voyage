@@ -619,6 +619,27 @@ def lite_mode(site):
     return n
 
 
+def bust_cache(site):
+    """Ajoute ?v=<empreinte du fichier> aux scripts et feuilles de style du site, pour que téléphones et appli installée
+    prennent tout de suite la nouvelle version après une mise à jour (sinon l'ancienne copie peut rester plusieurs heures)."""
+    import hashlib, re
+    memo = {}
+    def ver(path):
+        if path not in memo:
+            f = site / path.lstrip("/")
+            memo[path] = hashlib.sha1(f.read_bytes()).hexdigest()[:8] if f.is_file() else None
+        return memo[path]
+    pat = re.compile(r'((?:src|href)=")(/[A-Za-z0-9_./-]+\.(?:js|css))(?:\?v=[0-9a-f]+)?(")')
+    def sub(m):
+        v = ver(m.group(2))
+        return m.group(1) + m.group(2) + (f"?v={v}" if v else "") + m.group(3)
+    for f in site.rglob("*.html"):
+        t = f.read_text(encoding="utf-8")
+        n = pat.sub(sub, t)
+        if n != t:
+            f.write_text(n, encoding="utf-8")
+
+
 def main():
     airports_all = {a[0]: a for a in __import__("json").loads((SITE / "data" / "airports.json").read_text(encoding="utf-8"))}
     _, dist = routes_extra.extend(ROUTES, translations, airports_all)
@@ -760,6 +781,7 @@ def main():
         "".join(f"  <url><loc>{u}</loc><lastmod>{new_lm['/' + (u[len(DOMAIN):].strip('/') + '/' if u[len(DOMAIN):].strip('/') else '')][1]}</lastmod></url>\n" for u in urls) + "</urlset>\n", encoding="utf-8")
     (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {DOMAIN}/sitemap.xml\n", encoding="utf-8")
     lite_mode(SITE)
+    bust_cache(SITE)
     print(f"{len(urls)} pages dans le sitemap")
 
 if __name__ == "__main__":
