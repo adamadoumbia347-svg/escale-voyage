@@ -336,6 +336,20 @@
       list.push({ k: "aviasales", name: "Aviasales", best: true, sponsored: true, desc: T("Compare des centaines de compagnies et d’agences, souvent très bon sur les vols avec escale.", "Compares hundreds of airlines and agencies, often great for flights with stops."),
         url: `https://www.aviasales.com/search/${s.from.code}${ddmm(s.dep)}${s.to.code}${s.ret ? ddmm(s.ret) : ""}${paxAv}?` + q({ marker: AFFILIATE.travelpayouts_marker, currency: CUR.toLowerCase() }) });
     }
+    // Partenaire Trip.com (lien rémunéré) : en avant vers l'Asie et le Moyen-Orient, où il est souvent très compétitif
+    {
+      const CITY = { CDG: "par", ORY: "par", BVA: "par", LHR: "lon", LGW: "lon", STN: "lon", LTN: "lon", LCY: "lon", FCO: "rom", CIA: "rom", MXP: "mil", LIN: "mil", BGY: "mil",
+        JFK: "nyc", EWR: "nyc", LGA: "nyc", HND: "tyo", NRT: "tyo", SAW: "ist", IST: "ist", DSS: "dkr", CMN: "cas", YUL: "ymq", IAD: "was", DCA: "was", ORD: "chi", DMK: "bkk", BKK: "bkk", BSL: "bsl", MLH: "bsl" };
+      const ASIA = /^(TH|JP|ID|SG|MY|VN|KH|PH|KR|CN|HK|TW|IN|LK|MV|AE|QA|OM|SA|BH|KW|JO)$/;
+      const cityOf = (c) => (CITY[c] || c).toLowerCase(), ap = (c) => (CITY[c] && CITY[c].toUpperCase() !== c ? c.toLowerCase() : "");
+      const asia = ASIA.test(s.to.cc || "");
+      list.push({ k: "tripcom", name: "Trip.com", best: asia, sponsored: true,
+        desc: asia ? T("Souvent parmi les moins chers vers l’Asie et le Moyen-Orient.", "Often among the cheapest to Asia and the Middle East.") : T("Agence en ligne mondiale, parfois des tarifs que les autres n’ont pas.", "Global online agency, sometimes with fares others don’t have."),
+        url: "https://www.trip.com/flights/showfarefirst?" + q({ dcity: cityOf(s.from.code), acity: cityOf(s.to.code), dairport: ap(s.from.code), aairport: ap(s.to.code),
+          ddate: s.dep, rdate: s.ret || "", triptype: s.ret ? "rt" : "ow", class: { business: "c", first: "f" }[s.cabin] || "y", quantity: s.adults + (s.children || 0),
+          nonstoponly: s.direct ? "on" : "off", searchboxarg: "t", locale: { fr: "fr-FR", en: "en-GB", es: "es-ES", pt: "pt-PT", ar: "ar-AE", it: "it-IT", de: "de-DE", nl: "nl-NL" }[LANG] || "en-GB", curr: CUR,
+          Allianceid: "11233048", SID: "335082259", trip_sub1: "escale", trip_sub2: "recherche-vols" }) });
+    }
     list.push({ k: "sky", name: "Skyscanner", desc: T("Très bon sur les compagnies low-cost et les agences en ligne.", "Great for low-cost airlines and online agencies."),
       url: `https://${d.sky}/${F}/${Tt}/${yymmdd(s.dep)}/` + (s.ret ? `${yymmdd(s.ret)}/` : "") + "?" +
         q({ adultsv2: s.adults, childrenv2: s.children ? Array(s.children).fill(8).join("|") : "", cabinclass: cabinSky,

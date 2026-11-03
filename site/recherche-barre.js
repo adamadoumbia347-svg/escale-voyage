@@ -45,11 +45,31 @@
       if (open) form.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   };
+  // Partenaire Trip.com (lien rémunéré) : même trajet et mêmes dates ; juste sous la barre vers l'Asie et le Moyen-Orient, sous les résultats ailleurs
+  var tripButton = function (cc) {
+    var CITY = { CDG: "par", ORY: "par", BVA: "par", LHR: "lon", LGW: "lon", STN: "lon", LTN: "lon", LCY: "lon", FCO: "rom", CIA: "rom", MXP: "mil", LIN: "mil", BGY: "mil",
+      JFK: "nyc", EWR: "nyc", LGA: "nyc", HND: "tyo", NRT: "tyo", SAW: "ist", IST: "ist", DSS: "dkr", CMN: "cas", YUL: "ymq", IAD: "was", DCA: "was", ORD: "chi", DMK: "bkk", BKK: "bkk" };
+    var cityOf = function (c) { return (CITY[c] || c).toLowerCase(); }, ap = function (c) { return CITY[c] && CITY[c].toUpperCase() !== c ? c.toLowerCase() : ""; };
+    var iso = function (d) { return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
+    var lg = (document.documentElement.lang || "fr").slice(0, 2), asia = /^(TH|JP|ID|SG|MY|VN|KH|PH|KR|CN|HK|TW|IN|LK|MV|AE|QA|OM|SA|BH|KW|JO)$/.test(cc);
+    var TL = { fr: ["Voir aussi ce vol sur Trip.com", "souvent moins cher vers l’Asie"], en: ["Also see this flight on Trip.com", "often cheaper to Asia"] }[lg === "en" ? "en" : "fr"];
+    var o = { dcity: cityOf(from), acity: cityOf(to), dairport: ap(from), aairport: ap(to), ddate: iso(dep), rdate: ret ? iso(ret) : "", triptype: ret ? "rt" : "ow", "class": "y",
+      quantity: String(ad + ch), nonstoponly: "off", searchboxarg: "t", locale: lg === "en" ? "en-GB" : "fr-FR", curr: "EUR",
+      Allianceid: "11233048", SID: "335082259", trip_sub1: "escale", trip_sub2: "recherche-en-direct" }, qs = [];
+    for (var k in o) if (o[k]) qs.push(k + "=" + encodeURIComponent(o[k]));
+    var p = document.createElement("p"); p.className = "hl-trip" + (asia ? " top" : "");
+    var a = document.createElement("a"); a.className = "btn ghost"; a.target = "_blank"; a.rel = "sponsored noopener noreferrer"; a.dataset.k = "tripcom";
+    a.href = "https://www.trip.com/flights/showfarefirst?" + qs.join("&"); a.textContent = "✈️ " + TL[0]; p.appendChild(a);
+    if (asia) { var n = document.createElement("span"); n.className = "small"; n.textContent = " " + TL[1]; p.appendChild(n); }
+    var res = document.getElementById("tpwl-tickets");
+    if (asia || !res) bar.parentNode.insertBefore(p, bar.nextSibling); else res.parentNode.insertBefore(p, res.nextSibling);
+  };
   paint(from, to);
   fetch("/data/airports.json").then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }).then(function (db) {
     var name = function (c) { var a = (db || []).filter(function (x) { return x[0] === c; })[0]; return a ? a[1] + " (" + c + ")" : c; };
     var open = form.classList.contains("open");
     paint(name(from), name(to));
     if (open) bar.querySelector(".rs-sum").setAttribute("aria-expanded", "true");
+    tripButton(((db || []).filter(function (x) { return x[0] === to; })[0] || [])[3] || "");
   });
 })();
