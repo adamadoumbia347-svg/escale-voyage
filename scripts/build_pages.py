@@ -15,6 +15,7 @@ import urllib.parse
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import build_i18n
+import tripcom
 import trajets
 import blog  # noqa: E402
 import ete  # noqa: E402
@@ -498,6 +499,7 @@ def hotel_page(h):
 <section><h2>Accès direct aux comparateurs</h2>
 <ul class="links">
   <li><a href="{E(build_i18n.stay22(f"{build_i18n.city(city, 'en')}, {translations.COUNTRIES.get(country, [country])[0] if isinstance(translations.COUNTRIES.get(country), (list, tuple)) else country}", "page-hotels-fr"))}" target="_blank" rel="sponsored noopener noreferrer"><strong>{E(build_i18n.STAY22_L["fr"].format(c=city))}</strong></a></li>
+  {tripcom.li(code, city, "fr", "page-hotels-fr")}
   <li><a href="{E(booking)}" target="_blank" rel="noopener noreferrer">Hôtels à {E(city)} sur Booking.com, du moins cher au plus cher</a></li>
   <li><a href="{E(google)}" target="_blank" rel="noopener noreferrer">Comparer les prix sur Google Hôtels</a></li>
   <li><a href="{E(airbnb)}" target="_blank" rel="noopener noreferrer">Appartements à {E(city)} sur Airbnb</a></li>
@@ -528,7 +530,7 @@ def legal_pages():
 <p>Certains liens peuvent être des liens partenaires : si vous réservez, Escale peut percevoir une commission, sans surcoût pour vous.</p>
 </section>
 <section><h2>Propriété intellectuelle</h2>
-<p>Les textes et le design du site sont la propriété de l'éditeur. Les marques citées (Google, Aviasales, Skyscanner, Kayak, momondo, Booking.com, Hotels.com, Agoda, Airbnb, Rentalcars, Discover Cars, EconomyBookings, Airalo, Tiqets, Kiwitaxi, BikesBooking, Compensair) appartiennent à leurs propriétaires respectifs et sont citées uniquement pour identifier les services comparés.</p>
+<p>Les textes et le design du site sont la propriété de l'éditeur. Les marques citées (Google, Aviasales, Trip.com, Skyscanner, Kayak, momondo, Booking.com, Hotels.com, Agoda, Airbnb, Rentalcars, Discover Cars, EconomyBookings, Airalo, Tiqets, Kiwitaxi, BikesBooking, Compensair) appartiennent à leurs propriétaires respectifs et sont citées uniquement pour identifier les services comparés.</p>
 </section>"""
     urls.append(page("mentions-legales", "Mentions légales | Escale", "Mentions légales du site Escale, comparateur de vols, hôtels et locations de voitures.", hero, body.replace("__HOST__", DOMAIN.split("//")[1])))
     hero = '<h1>Confidentialité</h1>'

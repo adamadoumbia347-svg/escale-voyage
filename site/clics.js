@@ -106,6 +106,7 @@
     var host = h.host.replace(/^www\./, "");
     if (/aviasales\./.test(host)) return "aviasales";
     if (/stay22\./.test(host)) return "stay22";
+    if (/(^|\.)trip\.com$/.test(host)) return "tripcom";
     if (/\.tpm\.lv$/.test(host)) return host.split(".")[0];
     if (/whatsapp\.com$/.test(host)) return "whatsapp";
     if (/^wa\.me$/.test(host)) return "partage-whatsapp";

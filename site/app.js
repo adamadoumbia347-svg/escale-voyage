@@ -292,7 +292,7 @@
 
   // ---------- Sites comparés ----------
   const COLORS = { google: "#1a73e8", sky: "#0062e3", kayak: "#ff690f", momondo: "#d1006e", booking: "#003580",
-    hotels: "#d32f2f", agoda: "#5c2d91", airbnb: "#e0475b", rental: "#00897b", discover: "#2e7d32", aviasales: "#0c73fe", economy: "#f26b21", bike: "#ff8a00", stay22: "#2a3ff6" };
+    hotels: "#d32f2f", agoda: "#5c2d91", airbnb: "#e0475b", rental: "#00897b", discover: "#2e7d32", aviasales: "#0c73fe", economy: "#f26b21", bike: "#ff8a00", stay22: "#2a3ff6", tripcom: "#287dfa" };
   const SITES = {
     fr: { kayak: "www.kayak.fr", momondo: "www.momondo.fr", sky: "www.skyscanner.fr/transport/vols", booking: "searchresults.fr.html",
           hotels: "fr.hotels.com", agoda: "fr-fr", airbnb: "www.airbnb.fr", rental: "fr", discover: "fr" },
@@ -347,12 +347,21 @@
     return list;
   }
 
+  // Partenaire Trip.com (lien rémunéré) : identifiant de ville Trip.com selon le nom de la ville
+  const TRIP_CITY = { abidjan: 3265, dakar: 856, casablanca: 809, marrakech: 1360, marrakesh: 1360, "le caire": 332, cairo: 332, "il cairo": 332, lagos: 783, accra: 1274,
+    nairobi: 825, dubai: 220, "dubaï": 220, istanbul: 532, bangkok: 359, tokyo: 228, bali: 723, denpasar: 723, singapour: 73, singapore: 73, phuket: 725, paris: 192 };
+  function tripLink(x) {
+    const k = String(x || "").split(",")[0].trim().toLowerCase(), id = TRIP_CITY[k] || TRIP_CITY[k.normalize("NFD").replace(/[\u0300-\u036f]/g, "")];
+    return id ? `https://www.trip.com/hotels/list?${q({ city: id, Allianceid: "11233048", SID: "335082259", trip_sub1: "escale", trip_sub2: "recherche-hotels" })}` : null;
+  }
+
   function hotelLinks(s) {
-    const d = D(), x = s.dest;
+    const d = D(), x = s.dest, trip = tripLink(x);
     return [
       // Partenaire Stay22 (lien rémunéré) : envoie vers le site d'hôtels le moins cher pour ces dates (Booking, Expedia, Agoda…)
       { k: "stay22", name: T("Meilleur prix du moment", "Best price right now"), desc: T("Booking, Expedia, Agoda… : vous êtes envoyé vers le site le moins cher pour ces dates.", "Booking, Expedia, Agoda…: you are sent to the cheapest site for these dates."), best: true, sponsored: true,
         url: `https://www.stay22.com/allez/roam?${q({ aid: "escalelive", address: x, checkin: s.in, checkout: s.out, adults: s.adults, campaign: "recherche-hotels" })}` },
+      ...(trip ? [{ k: "tripcom", name: "Trip.com", desc: T("Très bon en Asie et au Moyen-Orient, souvent des prix membres.", "Strong in Asia and the Middle East, often with member prices."), best: true, sponsored: true, url: trip }] : []),
       { k: "booking", name: "Booking.com", desc: T("Le plus grand choix d’hébergements, souvent annulables gratuitement.", "The widest choice of stays, often with free cancellation."), best: true,
         url: `https://www.booking.com/${d.booking}?${q({ ss: x, checkin: s.in, checkout: s.out, group_adults: s.adults, no_rooms: s.rooms, group_children: 0, order: "price", selected_currency: CUR })}` },
       { k: "google", name: T("Google Hôtels", "Google Hotels"), desc: T("Compare les prix de plusieurs agences pour le même hôtel.", "Compares prices from several agencies for the same hotel."), best: true,

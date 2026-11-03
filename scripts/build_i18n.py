@@ -8,6 +8,7 @@ import html
 import json
 import re
 import urllib.parse
+import tripcom
 
 import translations as TR
 
@@ -545,6 +546,7 @@ def build(site, ctx):
 <section><h2>{E(u["direct_h"])}</h2>
 <ul class="links">
   <li><a href="{E(stay22(f"{city(cname, 'en')}, {tr(TR.COUNTRIES, country, 'en')}", "page-hotels-" + lang))}" target="_blank" rel="sponsored noopener noreferrer"><strong>{E(STAY22_L[lang].format(c=c))}</strong></a></li>
+  {tripcom.li(code, c, lang, "page-hotels-" + lang)}
   <li><a href="{E(booking)}" target="_blank" rel="noopener noreferrer">{E(u["booking_l"].format(c=c))}</a></li>
   <li><a href="{E(google)}" target="_blank" rel="noopener noreferrer">{E(u["google_l"])}</a></li>
   <li><a href="{E(airbnb)}" target="_blank" rel="noopener noreferrer">{E(u["airbnb_l"].format(c=c))}</a></li>

@@ -101,7 +101,7 @@ export async function buildMessage(env: Env, lang = "fr") {
 // Bilan de la semaine (ajouté à l'e-mail du lundi) : clics des 7 derniers jours comparés aux 7 précédents (compteur anonyme
 // de site/clics.js, clés clics:AAAA-MM-JJ), pages d'où partent les clics, inscrits aux bons plans et alertes prix actives.
 const LINKS: Record<string, string> = { "moteur-resultat": "Vols choisis dans la recherche en direct", "moteur-lien": "Ouvertures de la recherche en direct",
-  "trajet-populaire": "Trajets populaires (accueil)", "bandeau-saison": "Bandeau de saison", aviasales: "Aviasales", stay22: "Hôtels (Stay22)",
+  "trajet-populaire": "Trajets populaires (accueil)", "bandeau-saison": "Bandeau de saison", aviasales: "Aviasales", stay22: "Hôtels (Stay22)", tripcom: "Hôtels (Trip.com)",
   whatsapp: "Chaîne WhatsApp", "whatsapp-bulle": "Bulle WhatsApp", "partage-whatsapp": "Partages sur WhatsApp", booking: "Booking", google: "Google Hôtels / Vols",
   airbnb: "Airbnb", agoda: "Agoda", kayak: "Kayak", skyscanner: "Skyscanner", momondo: "momondo", "autre-site": "Autres sites" }
 const PAGES: Record<string, string> = { accueil: "Accueil", recherche: "Recherche en direct", trajet: "Pages trajets", destination: "Pages destinations", ete: "Pages été 2027", autre: "Autres pages" }
