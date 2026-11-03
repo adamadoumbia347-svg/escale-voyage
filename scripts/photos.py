@@ -73,7 +73,7 @@ CITIES = [
     ("VIE", "Vienne", ["Schönbrunn Palace facade", "Vienna Hofburg Michaelerplatz", "Vienna panorama"], "sch[oö]nbrunn|vienna|wien|hofburg", ""),
     ("KRK", "Cracovie", ["St. Mary's Basilica Kraków", "Kraków Cloth Hall", "Wawel Castle Kraków"], "krak[oó]w|cracow|wawel|sukiennice|mary", ""),
     ("WAW", "Varsovie", ["Warsaw Old Town", "Warsaw Old Town Market Place", "Warszawa Stare Miasto"], "warsaw|warszawa|stare miasto", ""),
-    ("CPH", "Copenhague", ["Nyhavn harbour Copenhagen", "Copenhagen Nyhavn canal", "Copenhagen harbour"], "nyhavn|copenhag|k[oø]benhavn", ""),
+    ("CPH", "Copenhague", ["Nyhavn", "Nyhavn Copenhagen colourful", "Copenhagen Nyhavn waterfront"], "nyhavn|copenhag|k[oø]benhavn", ""),
     ("OSL", "Oslo", ["Oslo Opera House", "Oslo harbour", "Oslo fjord city"], "oslo", ""),
     ("STO", "Stockholm", ["Stockholm Gamla stan", "Stockholm skyline", "Stockholm old town"], "stockholm|gamla stan", ""),
     ("REK", "Reykjavik", ["Hallgrímskirkja", "Reykjavík panorama", "Reykjavik harbour"], "reykjav|hallgr", ""),
@@ -87,13 +87,13 @@ CITIES = [
     ("NCE", "Nice", ["Promenade des Anglais Nice", "Nice baie des Anges", "Nice France coast"], "nice|promenade des anglais|baie des anges", ""),
     ("BRU", "Bruxelles", ["Grand-Place Brussels", "Grand Place Bruxelles"], "grand.?place|brussel|bruxelles", ""),
     ("GVA", "Genève", ["Jet d'Eau Geneva", "Geneva lake city", "Genève rade"], "gen[eè]v|jet d'eau", ""),
-    ("AYT", "Antalya", ["Antalya Kaleiçi marina", "Konyaaltı beach Antalya", "Antalya coastline"], "antalya|kalei|konyaalt", ""),
+    ("AYT", "Antalya", ["Antalya old harbour", "Kaleiçi Antalya harbour", "Antalya cliffs coast"], "antalya|kalei", ""),
     ("SSH", "Charm el-Cheikh", ["Sharm el-Sheikh beach", "Sharm El Sheikh coast", "Ras Mohammed"], "sharm|ras mohamm", ""),
     ("HRG", "Hurghada", ["Hurghada beach", "Hurghada Red Sea", "Hurghada coast"], "hurghada", ""),
-    ("AGA", "Agadir", ["Agadir beach panorama", "Agadir marina", "Agadir bay view"], "agadir", ""),
+    ("AGA", "Agadir", ["Agadir beach", "Agadir bay panorama", "Agadir from Oufella"], "agadir", ""),
     ("FEZ", "Fès", ["Fes medina panorama", "Fes el Bali view", "Bab Bou Jeloud"], "f[eè]s|fez|bou jeloud", ""),
     ("MRU", "Maurice", ["Le Morne Brabant", "Mauritius lagoon", "Île aux Cerfs Mauritius"], "mauritius|maurice|le morne|cerfs", ""),
-    ("RUN", "La Réunion", ["Cirque de Mafate", "Cirque de Cilaos", "Piton de la Fournaise crater"], "r[ée]union|piton|mafate|cilaos|salazie", ""),
+    ("RUN", "La Réunion", ["Cirque de Cilaos view", "Piton des Neiges", "Cirque de Salazie", "Réunion island landscape"], "r[ée]union|piton|mafate|cilaos|salazie", ""),
     ("FDF", "Martinique", ["Plage des Salines Martinique", "Martinique beach", "Diamond Rock Martinique"], "martinique|salines|diamant", ""),
     ("PUJ", "Punta Cana", ["Punta Cana beach", "Bávaro beach", "Playa Bávaro"], "punta cana|b[aá]varo", ""),
     ("CUN", "Cancún", ["Cancún beach", "Cancun hotel zone beach", "Tulum ruins"], "canc[uú]n|tulum", ""),
@@ -105,7 +105,7 @@ CITIES = [
     ("MLE", "Maldives", ["Maldives water villas", "Maldives island aerial view", "Maldives lagoon"], "maldiv", ""),
 ]
 OK_LICENSE = re.compile(r"^(public domain|pd|cc0|cc by(-sa)?( \d\.\d)?)", re.I)
-BAD_WORDS = re.compile(r"art project|protest|manifestation|demolition|construction|statue|sculpture|skulptur|sparrow|bird|oiseau|prayer hall|triptyque|triptych|painting|peinture|tableau|map|flag|logo|plan|coat of arms|diagram|stamp|banknote|poster|interior|inside|ceiling|vault|nave|portrait|ferry|ship|boat|bateau|autoroute|motorway|highway|night|nuit|roundabout|fountain|stadium|estadi|\.svg|\.png|\.gif|\.tif", re.I)
+BAD_WORDS = re.compile(r"-- 1711|amietophrynus|frog|toad|grenouille|lizard|insect|welcome|entrance|art project|protest|manifestation|demolition|construction|statue|sculpture|skulptur|sparrow|bird|oiseau|prayer hall|triptyque|triptych|painting|peinture|tableau|map|flag|logo|plan|coat of arms|diagram|stamp|banknote|poster|interior|inside|ceiling|vault|nave|portrait|ferry|ship|boat|bateau|autoroute|motorway|highway|night|nuit|roundabout|fountain|stadium|estadi|\.svg|\.png|\.gif|\.tif", re.I)
 
 
 def api(params):
