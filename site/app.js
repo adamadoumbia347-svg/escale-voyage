@@ -421,7 +421,7 @@
     return [
       // Partenaire Stay22 (lien rémunéré) : envoie vers le site d'hôtels le moins cher pour ces dates (Booking, Expedia, Agoda…)
       { k: "stay22", name: T("Meilleur prix du moment", "Best price right now"), desc: T("Booking, Expedia, Agoda… : vous êtes envoyé vers le site le moins cher pour ces dates.", "Booking, Expedia, Agoda…: you are sent to the cheapest site for these dates."), best: true, sponsored: true,
-        url: `https://www.stay22.com/allez/roam?${q({ aid: "escalelive", address: x, checkin: s.in, checkout: s.out, adults: s.adults, campaign: "recherche-hotels" })}` },
+        url: `https://www.stay22.com/allez/roam?${q({ aid: "escalelive", address: x, checkin: s.in, checkout: s.out, adults: s.adults, campaign: "recherche-hotels", lang: LANG, currency: CUR })}` },
       ...(trip ? [{ k: "tripcom", name: "Trip.com", desc: T("Très bon en Asie et au Moyen-Orient, souvent des prix membres.", "Strong in Asia and the Middle East, often with member prices."), best: true, sponsored: true, url: trip }] : []),
       { k: "booking", name: "Booking.com", desc: T("Le plus grand choix d’hébergements, souvent annulables gratuitement.", "The widest choice of stays, often with free cancellation."), best: true,
         url: `https://www.booking.com/${d.booking}?${q({ ss: x, checkin: s.in, checkout: s.out, group_adults: s.adults, no_rooms: s.rooms, group_children: 0, order: "price", selected_currency: API_CUR() })}` },

@@ -26,6 +26,7 @@
     box.innerHTML = "<h2>" + esc(T[0]) + "</h2><p class=\"small\">" + esc(city ? T[2].replace("{c}", city) : T[1]) + "</p><ul class=\"avant-list\">" +
       list.map(function (p) {
         var url = p.url.replace("{city}", encodeURIComponent(city)).replace("{code}", code);
+        if (/stay22\.com/.test(url)) url += "&lang=" + lang;  // page Stay22 dans la langue de la page
         return "<li><span class=\"av-logo\" style=\"background:" + esc(p.color) + "\" aria-hidden=\"true\">" + esc(p.name[0]) + "</span>" +
           "<div><strong>" + esc(p.title[lang] || p.title.en) + "</strong><span>" + esc(p.desc[lang] || p.desc.en) + "</span></div>" +
           "<a href=\"" + esc(url) + "\" target=\"_blank\" rel=\"sponsored noopener noreferrer\">" + esc(T[3]) + " · " + esc(p.name) + "</a></li>";

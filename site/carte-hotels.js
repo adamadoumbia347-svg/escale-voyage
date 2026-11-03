@@ -13,8 +13,11 @@
     it: ["Hotel a {c} per le tue date", "Prezzi in diretta di Booking, Expedia, Agoda, Hotels.com… Clicca su un hotel per vedere l’offerta."],
     de: ["Hotels in {c} für deine Daten", "Live-Preise von Booking, Expedia, Agoda, Hotels.com… Klicke auf ein Hotel, um das Angebot zu sehen."],
     nl: ["Hotels in {c} voor je data", "Live prijzen van Booking, Expedia, Agoda, Hotels.com… Klik op een hotel om het aanbod te zien."] }[lang] || null;
+  // Langue (ljs) et monnaie de la carte : celles de la page et du visiteur (vérifié le 3/11/2026 : ljs=en, ljs=es, currency=USD)
+  var mapCur = function () { try { var c = (localStorage.getItem("escale.cur") || "").toUpperCase(); return /^[A-Z]{3}$/.test(c) ? c : "EUR"; } catch (e) { return "EUR"; } };
   var url = function (address, checkin, checkout) {
-    return "https://www.stay22.com/embed/gm?" + new URLSearchParams(Object.assign({ aid: "escalelive", address: address, maincolor: "1A56DB", currency: "EUR" },
+    return "https://www.stay22.com/embed/gm?" + new URLSearchParams(Object.assign({ aid: "escalelive", address: address, maincolor: "1A56DB", currency: mapCur(),
+      ljs: (document.documentElement.lang || "fr").slice(0, 2) },
       checkin && checkout ? { checkin: checkin, checkout: checkout } : {})).toString();
   };
   var frame = function (src, title) {

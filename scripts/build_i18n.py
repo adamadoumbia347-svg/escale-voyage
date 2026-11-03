@@ -662,7 +662,10 @@ def hotel_map(lang, city_label, address):
 
 def stay22(address, campaign):
     """Lien Stay22 « roam » (partenaire rémunéré) : envoie vers le site d'hôtels le moins cher pour cette destination."""
-    return "https://www.stay22.com/allez/roam?" + urllib.parse.urlencode({"aid": "escalelive", "address": address, "campaign": campaign})
+    # Langue de la page de destination : celle de la page (fin de « campaign », ex. page-hotels-en)
+    lang = campaign.rsplit("-", 1)[-1]
+    extra = {"lang": lang} if len(lang) == 2 and lang.isalpha() else {}
+    return "https://www.stay22.com/allez/roam?" + urllib.parse.urlencode({"aid": "escalelive", "address": address, "campaign": campaign, **extra})
 
 
 def extras_html(site, lang, city_label, city_en, code):
