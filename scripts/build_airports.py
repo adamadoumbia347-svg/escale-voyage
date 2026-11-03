@@ -26,6 +26,7 @@ FR = {
     "DSS": "Dakar", "TNR": "Antananarivo", "BZV": "Brazzaville", "PNR": "Pointe-Noire", "ZNZ": "Zanzibar", "DJE": "Djerba",
     "TNG": "Tanger", "FEZ": "Fès", "AGA": "Agadir", "OUD": "Oujda", "ESU": "Essaouira", "TLV": "Tel-Aviv", "BEY": "Beyrouth",
     "AMM": "Amman", "SSH": "Charm el-Cheikh", "HRG": "Hurghada", "CMN": "Casablanca", "RAK": "Marrakech", "DOH": "Doha",
+    "VRN": "Vérone", "TRN": "Turin", "FLR": "Florence", "GOA": "Gênes", "TSF": "Trévise", "BLQ": "Bologne", "PMO": "Palerme", "CTA": "Catane", "PSA": "Pise", "OLB": "Olbia", "SUF": "Lamezia Terme", "VBS": "Brescia", "FRL": "Forlì", "PMF": "Parme", "PEG": "Pérouse", "TPS": "Trapani", "AOI": "Ancône", "PNL": "Pantelleria", "EBA": "Île d’Elbe",
 }
 
 def main(src):

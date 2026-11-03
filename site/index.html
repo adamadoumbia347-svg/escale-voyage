@@ -639,6 +639,10 @@ html { scroll-padding-top: 76px; }
 .hero-lead { color: var(--muted); font-size: 17px; max-width: 58ch; margin: 0; }
 .hero-meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; margin-top: 20px; }
 .perks { list-style: none; display: flex; flex-wrap: wrap; gap: 4px 18px; padding: 0; margin: 0; color: var(--muted); font: 500 14px/1.4 var(--f-body); }
+.field:has(.near-btn) { position: relative; }
+.near-btn { position: absolute; top: 6px; inset-inline-end: 10px; border: 0; background: none; padding: 4px 6px; font: 600 12px/1.2 var(--f-body); color: var(--accent); cursor: pointer; border-radius: 8px; }
+.near-btn:hover, .near-btn:focus-visible { background: rgb(26 86 219 / .08); }
+.near-btn[aria-busy="true"] { opacity: .6; }
 .perks.ticker { display: block; position: relative; height: 1.6em; overflow: hidden; flex-wrap: nowrap; width: 100%; flex: 1 1 100%; min-width: 0; }
 .perks.ticker li { display: block !important; position: absolute; left: 0; right: 0; top: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0; transform: translateY(100%); transition: transform .5s ease, opacity .5s ease; }
 .perks.ticker li.on { opacity: 1; transform: none; }
@@ -890,6 +894,7 @@ footer { margin-top: 72px; }
         <div class="field">
           <label for="f-from" data-en="From">Départ</label>
           <input id="f-from" data-ac="airport" placeholder="Ville, aéroport ou pays" data-en-ph="City, airport or country" autocomplete="off" required>
+          <button type="button" class="near-btn" id="f-near" data-en="📍 Nearest airport">📍 Aéroport le plus proche</button>
         </div>
         <button type="button" class="swap" id="f-swap" aria-label="Inverser départ et arrivée" data-en-aria="Swap origin and destination">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 7h13l-4-4M17 17H4l4 4"/></svg>
@@ -1140,7 +1145,7 @@ footer { margin-top: 72px; }
 </button>
 
 <script>if (!/^(fr|en)$/.test(document.documentElement.lang)) document.write('<script src="/i18n.js?v=303ba468" defer><\/script>');</script>
-<script src="/app.js?v=0835af10" defer></script>
+<script src="/app.js?v=4cab4270" defer></script>
 <script src="/hero-anim.js?v=ce7f126a" defer></script>
 <script src="/newsletter.js?v=dc3eb2c8" defer></script>
 <script src="/favs.js?v=7e07a88e" defer></script>

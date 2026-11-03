@@ -1449,18 +1449,38 @@
   });
 
   // ---------- Position du visiteur : aéroport le plus proche et devise ----------
-  function nearestAirport(lat, lon) {
+  // Aéroport principal le plus proche. Avec le pays du visiteur (position déduite de l'adresse IP, souvent approximative près
+  // des frontières), on préfère un aéroport de son pays s'il y en a un à moins de 250 km.
+  function nearestAirport(lat, lon, cc) {
     const rad = Math.PI / 180;
-    let best = null, bestD = Infinity;
+    let best = null, bestD = Infinity, home = null, homeD = Infinity;
     for (const a of DB) {
       if (!a[4] || a[5] == null) continue;
       const dLat = (a[5] - lat) * rad, dLon = (a[6] - lon) * rad;
       const h = Math.sin(dLat / 2) ** 2 + Math.cos(lat * rad) * Math.cos(a[5] * rad) * Math.sin(dLon / 2) ** 2;
       const dist = 12742 * Math.asin(Math.sqrt(h));
       if (dist < bestD) { bestD = dist; best = a; }
+      if (cc && a[3] === cc && dist < homeD) { homeD = dist; home = a; }
     }
+    if (home && homeD < 250) return home;
     return bestD < 400 ? best : null;
   }
+  // Bouton « 📍 Aéroport le plus proche » : position précise du téléphone (avec l'accord du visiteur), rien n'est envoyé ni gardé
+  $("f-near") && $("f-near").addEventListener("click", () => {
+    const b = $("f-near");
+    if (!navigator.geolocation) { b.textContent = T("Position indisponible", "Location unavailable"); return; }
+    b.setAttribute("aria-busy", "true");
+    navigator.geolocation.getCurrentPosition(async (pos) => {
+      await loadDB(); b.removeAttribute("aria-busy");
+      const near = dbLoaded && nearestAirport(pos.coords.latitude, pos.coords.longitude);
+      if (!near) { b.textContent = T("Aucun aéroport trouvé", "No airport found"); return; }
+      $("f-from").value = labelOf(near[0]);
+      $("f-from").dispatchEvent(new Event("change", { bubbles: true }));
+      store.set("escale.from", labelOf(near[0]));
+      if (currentTab === "vols") rerender();
+    }, () => { b.removeAttribute("aria-busy"); b.textContent = T("Position refusée : tapez votre ville", "Location denied: type your city"); },
+    { enableHighAccuracy: false, timeout: 10000, maximumAge: 600000 });
+  });
   // Bandeau « Vous partez de … ? » : visiteurs en Afrique, vers la page des vols au départ de leur pays (scripts/pays_accueil.py)
   const PAYS = { CI: ["ci", "🇨🇮", "de Côte d’Ivoire", "d’Abidjan", "Côte d’Ivoire", "Abidjan"], SN: ["sn", "🇸🇳", "du Sénégal", "de Dakar", "Senegal", "Dakar"],
     ML: ["ml", "🇲🇱", "du Mali", "de Bamako", "Mali", "Bamako"], GN: ["gn", "🇬🇳", "de Guinée", "de Conakry", "Guinea", "Conakry"],
@@ -1488,7 +1508,7 @@
       if (g.lat == null || g.lon == null) return null;
       await loadDB();
       if (!dbLoaded) return null;
-      return nearestAirport(g.lat, g.lon);
+      return nearestAirport(g.lat, g.lon, g.country);
     } catch (e) { return null; }
   }
 
