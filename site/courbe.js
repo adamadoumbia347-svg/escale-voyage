@@ -95,7 +95,7 @@
     var plot = box.querySelector(".pc-plot");
     plot.appendChild(svg);
     var tip = document.createElement("a");
-    tip.className = "pc-tip"; tip.hidden = true;
+    tip.className = "pc-tip"; tip.hidden = true; tip.href = "/recherche/";
     plot.appendChild(tip);
     var app = L.app !== "fr" ? "&lang=" + L.app : "";
     var pick = function (ev) {
