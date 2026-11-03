@@ -15,6 +15,17 @@
     if (!u.searchParams.get("currency") && /^(USD|GBP|CAD|CHF|XOF|XAF|MAD)$/.test(cur)) { u.searchParams.set("currency", cur.toLowerCase()); changed = true; }
     if (changed) history.replaceState(history.state, "", u.pathname + u.search + u.hash);
   } catch (e) {}
+  // Place réservée au formulaire (pages.css, min-height) : libérée dès que le moteur est affiché. Sinon, quand le moteur
+  // replie son formulaire en simple loupe après une recherche, un grand espace vide reste au-dessus des résultats.
+  (function () {
+    var el = document.getElementById("tpwl-search"), n = 0;
+    if (!el) return;
+    var t = setInterval(function () {
+      var r = el.shadowRoot || el;
+      if ((r.childElementCount || (r.children && r.children.length)) && el.getBoundingClientRect().height > 0) { el.style.minHeight = "0"; clearInterval(t); }
+      else if (++n > 100) clearInterval(t);
+    }, 250);
+  })();
   var s = document.createElement("script"); s.async = 1; s.type = "module";
   s.src = "https://tpemb.com/wl_web/main.js?wl_id=24006"; document.head.appendChild(s);
 })();
