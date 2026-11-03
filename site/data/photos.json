@@ -279,11 +279,11 @@
   "city": "Naples",
   "img": "/img/villes/naples.webp",
   "img_small": "/img/villes/naples-480.webp",
-  "file": "File:Johan Christian Dahl - The Bay of Naples with Vesuvius - Google Art Project.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Johan_Christian_Dahl_-_The_Bay_of_Naples_with_Vesuvius_-_Google_Art_Project.jpg",
-  "author": "Johan Christian Dahl",
-  "license": "Public domain",
-  "license_url": ""
+  "file": "File:Naples from the Castello Sant Elmo with Abbazia San Martino the port and the Vesuv.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Naples_from_the_Castello_Sant_Elmo_with_Abbazia_San_Martino_the_port_and_the_Vesuv.jpg",
+  "author": "This Photo was taken by Wolfgang Moroder . Feel free to use my photos, but please mention me as the author and send me a",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0"
  },
  {
   "code": "FLR",
@@ -334,11 +334,11 @@
   "city": "Malaga",
   "img": "/img/villes/malaga.webp",
   "img_small": "/img/villes/malaga-480.webp",
-  "file": "File:Alcazaba, Málaga, España, 2023-05-20, DD 98.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Alcazaba,_M%C3%A1laga,_Espa%C3%B1a,_2023-05-20,_DD_98.jpg",
-  "author": "Diego Delso",
-  "license": "CC BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  "file": "File:Malaga skyline from Gibralfaro - panoramio.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Malaga_skyline_from_Gibralfaro_-_panoramio.jpg",
+  "author": "Vlad Podvorny",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0"
  },
  {
   "code": "PMI",
@@ -444,22 +444,22 @@
   "city": "Vienne",
   "img": "/img/villes/vienne.webp",
   "img_small": "/img/villes/vienne-480.webp",
-  "file": "File:Wien, Schloss Schönbrunn, Schlossgarten -- 2018 -- 3229.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Wien,_Schloss_Sch%C3%B6nbrunn,_Schlossgarten_--_2018_--_3229.jpg",
-  "author": "Dietmar Rabich",
-  "license": "CC BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  "file": "File:Façade Schönbrunn Jardins horloge.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Fa%C3%A7ade_Sch%C3%B6nbrunn_Jardins_horloge.jpg",
+  "author": "Jebulon",
+  "license": "CC0",
+  "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
  },
  {
   "code": "KRK",
   "city": "Cracovie",
   "img": "/img/villes/cracovie.webp",
   "img_small": "/img/villes/cracovie-480.webp",
-  "file": "File:Anti-Ukrainian protest Krakow, Main Market square, Old Town, Kraków, Poland.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Anti-Ukrainian_protest_Krakow,_Main_Market_square,_Old_Town,_Krak%C3%B3w,_Poland.jpg",
-  "author": "Igor123121",
-  "license": "CC BY 4.0",
-  "license_url": "https://creativecommons.org/licenses/by/4.0"
+  "file": "File:St. Mary's Basilica and Adam Mickiewicz Monument. Kraków, Poland.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:St._Mary%27s_Basilica_and_Adam_Mickiewicz_Monument._Krak%C3%B3w,_Poland.jpg",
+  "author": "Ввласенко",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0"
  },
  {
   "code": "WAW",
@@ -543,9 +543,9 @@
   "city": "Manchester",
   "img": "/img/villes/manchester.webp",
   "img_small": "/img/villes/manchester-480.webp",
-  "file": "File:Demolition of the Manchester Precinct Centre 32.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Demolition_of_the_Manchester_Precinct_Centre_32.jpg",
-  "author": "Photograph by Mike Peel ( www.mikepeel.net ).",
+  "file": "File:Manchester Town Hall, Albert Square..jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Manchester_Town_Hall,_Albert_Square..jpg",
+  "author": "Samuel Vincent",
   "license": "CC BY-SA 4.0",
   "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
  },
@@ -631,11 +631,11 @@
   "city": "Antalya",
   "img": "/img/villes/antalya.webp",
   "img_small": "/img/villes/antalya-480.webp",
-  "file": "File:Hadrian's Gate, Antalya 05.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Hadrian%27s_Gate,_Antalya_05.jpg",
-  "author": "Bernard Gagnon",
-  "license": "CC BY-SA 3.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/3.0"
+  "file": "File:Konyaaltı Beach, Antalya, Turkey, March 2022 - Welcome.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Konyaalt%C4%B1_Beach,_Antalya,_Turkey,_March_2022_-_Welcome.jpg",
+  "author": "Sharon Hahn Darlin",
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0"
  },
  {
   "code": "SSH",
@@ -664,9 +664,9 @@
   "city": "Agadir",
   "img": "/img/villes/agadir.webp",
   "img_small": "/img/villes/agadir-480.webp",
-  "file": "File:Agadir beach 1989.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Agadir_beach_1989.jpg",
-  "author": "JopkeB",
+  "file": "File:Agadir Marina entrance.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Agadir_Marina_entrance.jpg",
+  "author": "MustaSensei",
   "license": "CC BY-SA 4.0",
   "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
  },
@@ -675,8 +675,8 @@
   "city": "Fès",
   "img": "/img/villes/fes.webp",
   "img_small": "/img/villes/fes-480.webp",
-  "file": "File:Prayer Hall Bou Inania Fez Nov25 A7CR 09148-52 HDR0.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Prayer_Hall_Bou_Inania_Fez_Nov25_A7CR_09148-52_HDR0.jpg",
+  "file": "File:Bab Bou Jeloud Frame Minaret Fes Nov25 A7CR 09127-8 HDR3.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Bab_Bou_Jeloud_Frame_Minaret_Fes_Nov25_A7CR_09127-8_HDR3.jpg",
   "author": "This Photo was taken by Timothy A. Gonsalves . Feel free to use my photos, but please mention me as the author. I would ",
   "license": "CC BY-SA 4.0",
   "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
@@ -686,22 +686,22 @@
   "city": "Maurice",
   "img": "/img/villes/maurice.webp",
   "img_small": "/img/villes/maurice-480.webp",
-  "file": "File:Balaclava Mauritius A-band-of-sparrows-sitting-on-a-prickly-pear-01.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Balaclava_Mauritius_A-band-of-sparrows-sitting-on-a-prickly-pear-01.jpg",
-  "author": "CEphoto, Uwe Aranas",
-  "license": "CC BY-SA 3.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/3.0"
+  "file": "File:Le Morne Peninsula in Mauritius (53697779236).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Le_Morne_Peninsula_in_Mauritius_(53697779236).jpg",
+  "author": "\"dronepicr\"",
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0"
  },
  {
   "code": "RUN",
   "city": "La Réunion",
   "img": "/img/villes/la-reunion.webp",
   "img_small": "/img/villes/la-reunion-480.webp",
-  "file": "File:Reunion PitonFournaise PitonChisny.JPG",
-  "page": "https://commons.wikimedia.org/wiki/File:Reunion_PitonFournaise_PitonChisny.JPG",
-  "author": "B.navez",
-  "license": "CC BY-SA 3.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/3.0"
+  "file": "File:Amietophrynus gutturalis in Mafate.JPG",
+  "page": "https://commons.wikimedia.org/wiki/File:Amietophrynus_gutturalis_in_Mafate.JPG",
+  "author": "Rorolinus",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
  },
  {
   "code": "FDF",
@@ -785,21 +785,21 @@
   "city": "Phuket",
   "img": "/img/villes/phuket.webp",
   "img_small": "/img/villes/phuket-480.webp",
-  "file": "File:Banana beach Phuket 2017 - 02.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Banana_beach_Phuket_2017_-_02.jpg",
-  "author": "This photo was taken by Anton Zelenov . Please credit this with : Photo : Anton Zelenov in the immediate vicinity of the",
-  "license": "CC BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  "file": "File:Sunrise, Koh Yao Noi (island), Phang Nga Bay, Thailand.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Sunrise,_Koh_Yao_Noi_(island),_Phang_Nga_Bay,_Thailand.jpg",
+  "author": "Vyacheslav Argenberg",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0"
  },
  {
   "code": "MLE",
   "city": "Maldives",
   "img": "/img/villes/maldives.webp",
   "img_small": "/img/villes/maldives-480.webp",
-  "file": "File:Beach and bungalow. Eriyadu, Maldives.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Beach_and_bungalow._Eriyadu,_Maldives.jpg",
-  "author": "Ввласенко",
-  "license": "CC BY-SA 3.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/3.0"
+  "file": "File:Water villas at Medhufushi Island Resort in the Maldives.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Water_villas_at_Medhufushi_Island_Resort_in_the_Maldives.jpg",
+  "author": "Priyaflorenceshah",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
  }
 ]
