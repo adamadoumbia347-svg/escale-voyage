@@ -106,7 +106,7 @@ def build(site, ctx, route_paths):
                 f'<div class="cta-row"><a class="btn" href="/?{E(q)}">{E(t["search"].format(v=vform))}</a><a class="btn ghost" href="{visa_href}">🛂 {E(t["visa"])}</a></div>')
         body = (secs + '<script src="/hub.js" defer></script><script src="/fx.js" defer></script>'
                 f'<section><h2>{E(t["tips_h"].format(pays=pform))}</h2><ul>{tips}</ul></section>'
-                f'<section><h2>{E(t["themes"])}</h2><ul class="links">' + "".join(f'<li><a href="/{p}/">{E(x)}</a></li>' for p, x in afrique_themes.links(lang)) + '</ul></section>'
+                f'<section><h2>{E(t["themes"])}</h2><ul class="links">' + "".join(f'<li><a href="/{p}/">{E(x)}</a></li>' for p, x in afrique_themes.links(lang) + [("payer-billet-avion-mobile-money", "Payer avec Orange Money, Wave ou MTN MoMo") if lang == "fr" else ("en/pay-flight-mobile-money", "Pay with Orange Money, Wave or MTN MoMo")]) + '</ul></section>'
                 f'<section class="nl-block"><h2>{E(t["wa"])}</h2>{B.wa_btn(lang)}</section>'
                 f'<section><h2>{E(t["others"])}</h2><p class="pays-links">{others}</p></section>')
         # Monnaie affichée à côté des prix en euros, quel que soit le pays du visiteur

@@ -124,6 +124,64 @@ AVIS = {
 }
 
 
+# « Payer son billet avec le mobile money » (Orange Money, Wave, MTN MoMo, Moov Money). Faits vérifiés en novembre 2026 :
+# carte Visa virtuelle Orange Money en Côte d'Ivoire (lancée le 12/12/2025, créée dans l'appli Max it ; annoncée aussi au Mali et au Sénégal),
+# carte virtuelle Wave au Sénégal (janvier 2026), carte Mastercard virtuelle MTN MoMo en Ouganda (février 2025) et au Cameroun (décembre 2025),
+# MoovMoney Card en Côte d'Ivoire. Rien n'est affirmé sur une compagnie précise : on renvoie à l'étape de paiement de chaque site.
+MOMO = {
+    "fr": dict(path="payer-billet-avion-mobile-money", title="Payer son billet d'avion avec Orange Money, Wave ou MTN MoMo | Escale",
+               desc="Orange Money, Wave, MTN MoMo, Moov Money : 3 façons de payer un billet d’avion avec le mobile money, la carte virtuelle étape par étape et les pièges à éviter.",
+               h1="Payer son billet avec le <span>mobile money</span>",
+               lead="Pas de carte bancaire ? Avec Orange Money, Wave, MTN MoMo ou Moov Money, vous pouvez quand même réserver vos vols et vos hôtels en ligne. Voici comment, et ce qu'il faut vérifier.",
+               cta="Comparer les vols", checked="Informations vérifiées en novembre 2026. Les offres changent : vérifiez toujours dans l'application de votre opérateur et à l'étape de paiement du site.",
+               sections=[
+                   ("1. La carte virtuelle de votre portefeuille mobile (la solution la plus simple)", [
+                       "<strong>Le principe :</strong> votre opérateur crée une carte Visa ou Mastercard « virtuelle » (un numéro de carte dans l'application), rechargée depuis votre solde mobile money. Elle se paie comme une carte bancaire sur les sites des compagnies et des agences.",
+                       "<strong>Orange Money :</strong> carte Visa virtuelle lancée en Côte d'Ivoire en décembre 2025, à créer dans l'application Max it, rechargeable depuis le solde Orange Money. Orange l'a aussi annoncée au Mali et au Sénégal.",
+                       "<strong>Wave :</strong> carte virtuelle lancée au Sénégal en janvier 2026, directement dans l'application Wave.",
+                       "<strong>MTN MoMo :</strong> carte Mastercard virtuelle « Virtual Card by MoMo » en Ouganda et au Cameroun, liée au portefeuille MoMo, sans compte bancaire.",
+                       "<strong>Moov Money :</strong> la MoovMoney Card existe en Côte d'Ivoire pour les paiements.",
+                       "<strong>Comment faire :</strong> 1) comparez les prix sur Escale ; 2) notez le prix total ; 3) créez la carte dans l'application de votre opérateur ; 4) rechargez-la du montant du billet (plus une petite marge pour les frais) ; 5) payez sur le site de réservation avec le numéro de la carte virtuelle."]),
+                   ("2. Payer directement sur le site d'une compagnie africaine", [
+                       "Plusieurs compagnies africaines proposent le mobile money à l'étape de paiement de leur site ou de leur application, en francs CFA ou en monnaie locale.",
+                       "Le choix change selon le pays d'où vous payez : regardez les moyens de paiement proposés à la dernière étape, avant de valider.",
+                       "Comparez d'abord sur Escale : le même vol est parfois moins cher chez une agence en ligne que sur le site de la compagnie."]),
+                   ("3. Passer par une agence de voyage de votre ville", [
+                       "Beaucoup d'agences acceptent Orange Money, Wave ou MTN MoMo. Elles peuvent ajouter des frais de service : demandez le prix total avant de payer.",
+                       "Montrez-leur le prix trouvé sur Escale : c'est une bonne base pour négocier."]),
+                   ("Les pièges à éviter", [
+                       "<strong>Plafonds :</strong> les cartes virtuelles ont des limites de paiement (fixées par l'opérateur et la banque centrale). Vérifiez le plafond avant d'acheter plusieurs billets.",
+                       "<strong>Frais de change :</strong> un prix affiché en euros ou en dollars est converti ; il peut y avoir des frais. Choisissez si possible un paiement en francs CFA ou dans votre monnaie.",
+                       "<strong>Arnaques :</strong> ne payez jamais par transfert mobile money un « agent » trouvé sur WhatsApp ou Facebook qui promet un billet très bon marché. Payez uniquement sur le site officiel de la compagnie, d'une agence connue, ou dans une agence physique.",
+                       "<strong>Nom du passager :</strong> il doit être exactement celui du passeport. Gardez le reçu et l'e-mail de confirmation avec le numéro de réservation."])]),
+    "en": dict(path="en/pay-flight-mobile-money", title="Pay for a flight with Orange Money, Wave or MTN MoMo | Escale",
+               desc="Orange Money, Wave, MTN MoMo, Moov Money: 3 ways to pay for a flight with mobile money, the virtual card step by step, and the traps to avoid.",
+               h1="Paying for flights with <span>mobile money</span>",
+               lead="No bank card? With Orange Money, Wave, MTN MoMo or Moov Money you can still book flights and hotels online. Here is how, and what to check.",
+               cta="Compare flights", checked="Information checked in November 2026. Offers change: always check in your operator's app and at the payment step of the site.",
+               sections=[
+                   ("1. Your mobile wallet's virtual card (the easiest way)", [
+                       "<strong>How it works:</strong> your operator creates a 'virtual' Visa or Mastercard (a card number in the app), topped up from your mobile money balance. You pay with it like a bank card on airline and agency websites.",
+                       "<strong>Orange Money:</strong> virtual Visa card launched in Côte d'Ivoire in December 2025, created in the Max it app and topped up from your Orange Money balance. Orange also announced it in Mali and Senegal.",
+                       "<strong>Wave:</strong> virtual card launched in Senegal in January 2026, right in the Wave app.",
+                       "<strong>MTN MoMo:</strong> Mastercard 'Virtual Card by MoMo' in Uganda and Cameroon, linked to your MoMo wallet, no bank account needed.",
+                       "<strong>Moov Money:</strong> the MoovMoney Card exists in Côte d'Ivoire for payments.",
+                       "<strong>Step by step:</strong> 1) compare prices on Escale; 2) note the total price; 3) create the card in your operator's app; 4) top it up with the ticket amount (plus a small margin for fees); 5) pay on the booking site with the virtual card number."]),
+                   ("2. Pay directly on an African airline's website", [
+                       "Several African airlines offer mobile money at the payment step of their website or app, in CFA francs or local currency.",
+                       "Options depend on the country you pay from: look at the payment methods offered at the last step, before confirming.",
+                       "Compare on Escale first: the same flight is sometimes cheaper with an online agency than on the airline's site."]),
+                   ("3. Use a travel agency in your city", [
+                       "Many agencies accept Orange Money, Wave or MTN MoMo. They may add service fees: ask for the total price before paying.",
+                       "Show them the price you found on Escale: it is a good basis to negotiate."]),
+                   ("Traps to avoid", [
+                       "<strong>Limits:</strong> virtual cards have payment limits (set by the operator and the central bank). Check the limit before buying several tickets.",
+                       "<strong>Exchange fees:</strong> a price in euros or dollars is converted and fees may apply. If you can, pay in CFA francs or your own currency.",
+                       "<strong>Scams:</strong> never send mobile money to an 'agent' found on WhatsApp or Facebook promising a very cheap ticket. Pay only on the airline's official site, a well-known agency, or in a physical agency.",
+                       "<strong>Passenger name:</strong> it must match the passport exactly. Keep the receipt and the confirmation email with the booking reference."])]),
+}
+
+
 def build(site, ctx):
     urls = []
     p_urg = {l: URGENT[l]["path"] for l in URGENT}
@@ -133,6 +191,16 @@ def build(site, ctx):
         body += f'<p><a class="btn" href="/recherche/">{E(t["cta"])}</a> <a class="btn ghost" href="/{q}">Escale</a></p>'
         hero = f'<h1>{t["h1"]}</h1><p class="hero-lead">{E(t["lead"])}</p>'
         urls.append(B.write(site, t["path"], lang, t["title"], t["desc"], hero, body, "", p_urg, ctx))
+    p_mm = {l: MOMO[l]["path"] for l in MOMO}
+    for lang, t in MOMO.items():
+        q = "" if lang == "fr" else "?lang=en"
+        body = "".join(f'<section><h2>{E(h)}</h2><ul>' + "".join(f"<li>{x}</li>" for x in items) + "</ul></section>" for h, items in t["sections"])
+        body += f'<p class="small">{E(t["checked"])}</p><p><a class="btn" href="/{q}">{E(t["cta"])}</a></p>'
+        hero = f'<h1>{t["h1"]}</h1><p class="hero-lead">{E(t["lead"])}</p>'
+        ld = '<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", "@type": "Article", "headline": t["title"].split(" | ")[0],
+                                                                   "description": t["desc"], "inLanguage": lang, "dateModified": "2026-11-03",
+                                                                   "author": {"@type": "Organization", "name": "Escale"}}, ensure_ascii=False) + "</script>"
+        urls.append(B.write(site, t["path"], lang, t["title"], t["desc"], hero, body, ld, p_mm, ctx))
     p_bag = {l: BAG[l]["path"] for l in BAG}
     for lang, t in BAG.items():
         col = 0 if lang == "fr" else 1
