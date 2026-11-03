@@ -1,0 +1,17 @@
+# Diagnostic manuel : langue du moteur de recherche en direct selon l'adresse et la langue du navigateur.
+name: Diagnostic langue du moteur
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  langue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tester
+        run: |
+          npm i playwright@1.48.2 >/dev/null && npx playwright install --with-deps chromium >/dev/null
+          node scripts/diag-wl-langue.js
