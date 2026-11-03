@@ -71,7 +71,9 @@
     loaded = k;
     Promise.all([
       fetch("/api/deals?currency=EUR" + (ORIG[o] ? "" : "&from=" + o)).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
-      (window.ESCALE_AIRPORTS = window.ESCALE_AIRPORTS || fetch("/data/airports.json").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })),
+      // Noms des villes dans la langue du visiteur : app.js les applique à la liste partagée (window.ESCALE_DB_READY)
+      (window.ESCALE_AIRPORTS = window.ESCALE_AIRPORTS || fetch("/data/airports.json").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }))
+        .then(function (l) { return (window.ESCALE_DB_READY || Promise.resolve()).then(function () { return l; }); }),
       fetch("/data/photos.json").then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; })
     ]).then(function (res) {
       if (loaded !== k) return;

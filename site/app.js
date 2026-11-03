@@ -146,7 +146,7 @@
   }
   const flag = (cc) => (cc && cc.length === 2 ? String.fromCodePoint(...[...cc.toUpperCase()].map((c) => 127397 + c.charCodeAt(0))) : "✈");
   let index = null; // [entrée, ville normalisée, nom normalisé]
-  function buildIndex() { index = DB.map((a) => [a, norm(a[1]), norm(a[2])]); }
+  function buildIndex() { index = DB.map((a) => [a, norm(a[1]), norm(a[2]), a[7] && a[7] !== a[1] ? norm(a[7]) : ""]); }
   function loadDB() {
     if (dbPromise) return dbPromise;
     // Liste partagée avec accueil.js (window.ESCALE_AIRPORTS) : un seul téléchargement de /data/airports.json
@@ -154,13 +154,30 @@
     dbPromise = window.ESCALE_AIRPORTS.then((list) => {
       if (!Array.isArray(list) || !list.length) return;
       DB = list; byCode = new Map(list.map((a) => [a[0], a])); dbLoaded = true; index = null; // index de recherche refait à la première saisie
-      // Remplace les codes nus (ex. « BKO » venu d'un lien) par « Bamako (BKO) »
-      document.querySelectorAll('input[data-ac="airport"]').forEach((el) => {
-        if (/^[A-Z]{3}$/.test(el.value.trim()) && byCode.has(el.value.trim())) el.value = labelOf(el.value.trim());
-      });
+      return localizeNames(LANG);
+    }).then(() => {
+      if (!dbLoaded) return;
+      relabel();
       paintDests();
     }).catch(() => {});
+    window.ESCALE_DB_READY = dbPromise;
     return dbPromise;
+  }
+  // Noms des villes dans la langue du visiteur (site/data/noms/<langue>.json, tirés de Wikidata) ; le nom français
+  // de base reste gardé (a[7]) et cherchable : « Londres » comme « London » trouvent LHR.
+  const namesCache = {};
+  function localizeNames(lang) {
+    DB.forEach((a) => { if (a[7] === undefined) a[7] = a[1]; });
+    if (lang === "fr") { DB.forEach((a) => { a[1] = a[7]; }); index = null; return Promise.resolve(); }
+    const p = namesCache[lang] || (namesCache[lang] = fetch(`/data/noms/${lang}.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})));
+    return p.then((m) => { if (LANG !== lang) return; DB.forEach((a) => { a[1] = (m && m[a[0]]) || a[7]; }); index = null; });
+  }
+  // Champs déjà remplis (« Bamako (BKO) », ou code nu venu d'un lien) : réécrits avec le nom dans la langue affichée
+  function relabel() {
+    document.querySelectorAll('input[data-ac="airport"]').forEach((el) => {
+      const v = el.value.trim(), m = v.match(/\(([A-Z]{3})\)$/), c = /^[A-Z]{3}$/.test(v) ? v : m && m[1];
+      if (c && byCode.has(c)) el.value = labelOf(c);
+    });
   }
   buildIndex();
   const labelOf = (code) => { const a = byCode.get(code); return a ? `${a[1]} (${code})` : code; };
@@ -171,11 +188,11 @@
     if (!index) buildIndex();
     const up = text.trim().toUpperCase();
     const out = [];
-    for (const [a, city, name] of index) {
+    for (const [a, city, name, fr] of index) {
       let s = 0;
       if (a[0] === up) s = 1000;
-      else if (city === t) s = 600;
-      else if (city.startsWith(t)) s = 400;
+      else if (city === t || fr === t) s = 600;
+      else if (city.startsWith(t) || (fr && fr.startsWith(t))) s = 400;
       else if (name.startsWith(t)) s = 250;
       else if (t.length >= 3 && (city.includes(" " + t) || name.includes(t))) s = 120;
       else if (t.length >= 3 && norm(countryName(a[3])).startsWith(t)) s = 80;
@@ -1450,6 +1467,7 @@
     LANG = $("lang").value; store.set("escale.lang", LANG);
     if (!/^(fr|en)$/.test(LANG) && !window.ESCALE_I18N) await new Promise((ok) => { const s = document.createElement("script"); s.src = "/i18n.js"; s.onload = s.onerror = ok; document.head.appendChild(s); });
     countryNames = null; paintMonthOptions(); calc();
+    if (dbLoaded) { await localizeNames(LANG); relabel(); }
     applyLang(); paintDests(); paintFaq(); paintRecent(); paintChecklist(); paintThemeBtn(); rerender();
     if (!$("explore").hidden) { paintExploreMonths(); renderExplore($("ex-grid"), exploreFrom, exploreMonth); }
   });
