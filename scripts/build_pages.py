@@ -779,7 +779,8 @@ def main():
     (SITE / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
         "".join(f"  <url><loc>{u}</loc><lastmod>{new_lm['/' + (u[len(DOMAIN):].strip('/') + '/' if u[len(DOMAIN):].strip('/') else '')][1]}</lastmod></url>\n" for u in urls) + "</urlset>\n", encoding="utf-8")
-    (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {DOMAIN}/sitemap.xml\n", encoding="utf-8")
+    # /api/ : données en direct (inutile aux moteurs, et chaque visite consomme le quota Cloudflare) ; /admin/ : espace privé
+    (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /admin/\n\nSitemap: {DOMAIN}/sitemap.xml\n", encoding="utf-8")
     lite_mode(SITE)
     bust_cache(SITE)
     print(f"{len(urls)} pages dans le sitemap")

@@ -505,3 +505,6 @@ a.pg-cell:hover, a.pg-cell:focus-visible { outline: 2px solid var(--accent); }
 .hl-trip{margin:12px 0}.hl-trip.top{margin:4px 0 14px}.hl-trip .small{color:var(--muted,#5b6b82)}
 
 .main-nav a.nav-explore { background: rgb(255 255 255 / .14); border-radius: 999px; font-weight: 700; }
+/* Cibles tactiles d'au moins 24 px dans les tableaux (liens des trajets, alertes des fêtes) et sur le logo */
+th > a, td > a.fete-alert { display: inline-block; padding-block: 6px; }
+.site-head .brand { padding-block: 4px; }
