@@ -55,23 +55,35 @@
   var ALIAS = { LHR: "LON", LGW: "LON", STN: "LON", LTN: "LON", LCY: "LON", MXP: "MIL", LIN: "MIL", BGY: "MIL", FCO: "ROM", CIA: "ROM", TSF: "VCE",
     ARN: "STO", BMA: "STO", KEF: "REK", TFS: "TCI", TFN: "TCI", NYC: "JFK", EWR: "JFK", LGA: "JFK", SAW: "IST", YUL: "YMQ", TYO: "HND", NRT: "HND", CAS: "CMN", DKR: "DSS",
     BUH: "OTP", PAR: "CDG", MOW: "SVO", ROM: "ROM" };
+  // Codes de ville (plusieurs aéroports) absents de la liste des aéroports
+  var CITYN = { LON: "Londres", MIL: "Milan", ROM: "Rome", NYC: "New York", PAR: "Paris", TYO: "Tokyo", STO: "Stockholm", REK: "Reykjavik", BUH: "Bucarest",
+    MOW: "Moscou", OSA: "Osaka", SEL: "Séoul", WAS: "Washington", CHI: "Chicago", YMQ: "Montréal", YTO: "Toronto", BJS: "Pékin", SAO: "São Paulo", RIO: "Rio de Janeiro", BUE: "Buenos Aires", TCI: "Tenerife" };
   var slugOf = function (img) { var m = /\/img\/villes\/([a-z0-9-]+)\.webp$/.exec(img || ""); return m ? m[1] : null; };
   var day = function (s) { var p = s.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]).toLocaleDateString(loc, { day: "numeric", month: "short" }); };
   var ddmm = function (s) { return s.slice(8, 10) + s.slice(5, 7); };
+  // Départ du visiteur (app.js, événement escale:from) : Paris par défaut
+  var ORIG = { CDG: 1, BRU: 1, LYS: 1, MRS: 1, GVA: 1, LHR: 1, JFK: 1, YUL: 1 };
+  var cur = { code: "CDG", name: "Paris" }, loaded = null;
   var go = function () {
+    var o = /^(CDG|ORY|BVA|PAR)$/.test(cur.code) ? "CDG" : cur.code, name = o === "CDG" ? "Paris" : cur.name;
+    if (loaded === o) return;
+    loaded = o;
     Promise.all([
-      fetch("/api/deals?currency=EUR").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+      fetch("/api/deals?currency=EUR" + (ORIG[o] ? "" : "&from=" + o)).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
       (window.ESCALE_AIRPORTS = window.ESCALE_AIRPORTS || fetch("/data/airports.json").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })),
       fetch("/data/photos.json").then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; })
     ]).then(function (res) {
+      if (loaded !== o) return;
       var d = res[0], names = {}, IMG = {};
       (res[2] || []).forEach(function (p) { var sl = slugOf(p.img); if (sl) IMG[p.code] = sl; });
       (res[1] || []).forEach(function (a) { if (!names[a[0]]) names[a[0]] = a[1]; });
-      var deals = d && d.origins && d.origins.CDG ? d.origins.CDG.filter(function (x) { return x.dep && x.ret; }).slice(0, 8) : [];
-      if (!deals.length) return;
+      var deals = d && d.origins && d.origins[o] ? d.origins[o].filter(function (x) { return x.dep && x.ret; }).slice(0, 8) : [];
+      if (!deals.length) { if (o !== "CDG") { cur = { code: "CDG", name: "Paris" }; go(); } return; }  // rien pour cette ville : Paris
+      var h = sec.querySelector("h2");
+      if (h) h.textContent = T("Partez ce mois-ci : les moins chers depuis " + name, "Go this month: cheapest from " + name);
       grid.innerHTML = deals.map(function (x) {
-        var city = names[x.to] || x.to, img = document.documentElement.classList.contains("lite") ? null : (IMG[x.to] || IMG[ALIAS[x.to]]);  // mode léger : sans photo
-        var href = "/recherche/?flightSearch=CDG" + ddmm(x.dep) + x.to + ddmm(x.ret) + "1";
+        var city = names[x.to] || CITYN[x.to] || x.to, img = document.documentElement.classList.contains("lite") ? null : (IMG[x.to] || IMG[ALIAS[x.to]]);  // mode léger : sans photo
+        var href = "/recherche/?flightSearch=" + o + ddmm(x.dep) + x.to + ddmm(x.ret) + "1";
         return '<a class="city-card' + (img ? "" : " no-img") + '" href="' + esc(href) + '">' +
           (img ? '<img src="/img/villes/' + img + '-480.webp" width="480" height="360" alt="" loading="lazy" decoding="async">' : "") +
           '<span class="city-info"><strong>' + esc(city) + '</strong><small>' + esc(day(x.dep) + " → " + day(x.ret)) + '</small><b class="city-price">' + esc(T("dès ", "from ") + money(x.price)) + "</b></span></a>";
@@ -79,8 +91,13 @@
       sec.hidden = false;
     });
   };
+  var started = false;
+  var setFrom = function (f) { if (!f || !f.code) return; cur = { code: f.code, name: f.name || f.code }; if (started) go(); };
+  setFrom(window.ESCALE_FROM);
+  addEventListener("escale:from", function (e) { setFrom(e.detail); });
+  var start = function () { started = true; go(); };
   if ("IntersectionObserver" in window) {
-    var io = new IntersectionObserver(function (e) { if (e.some(function (x) { return x.isIntersecting; })) { io.disconnect(); go(); } }, { rootMargin: "600px" });
+    var io = new IntersectionObserver(function (e) { if (e.some(function (x) { return x.isIntersecting; })) { io.disconnect(); start(); } }, { rootMargin: "600px" });
     io.observe(document.getElementById("fetes") || document.querySelector("main")); // la section est cachée tant qu'elle est vide : on observe la suivante
-  } else go();
+  } else start();
 })();

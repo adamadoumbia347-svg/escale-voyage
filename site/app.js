@@ -1545,6 +1545,38 @@
       const from = place($("f-from").value);
       showHomeExplore(from && from.code ? from.code : "CDG");
       if (CUR !== "EUR" && currentTab !== "vols") rerender();
+      fromChanged();
     });
   });
+
+  // ---------- Accueil « local » : tout suit l'aéroport de départ du visiteur ----------
+  // Trajets populaires sous le moteur, destinations populaires, prix des cartes « Explorer le monde » et « Partez ce mois-ci »
+  // (accueil.js, prévenu par l'événement escale:from). Paris reste la version de départ de la page (vue par Google).
+  const PARIS = /^(CDG|ORY|BVA|PAR)$/;
+  let heroFrom = null;
+  function heroPopular(from) {
+    const row = $("pop-hero-row"), h = $("pop-hero-h");
+    if (!row || !h || heroFrom === from.code + CUR) return;
+    heroFrom = from.code + CUR;
+    Promise.all([fetch("/api/populaires?" + q({ from: from.code, currency: CUR })).then((r) => (r.ok ? r.json() : null)).catch(() => null), loadDB()]).then(([d]) => {
+      if (heroFrom !== from.code + CUR) return;
+      const routes = d && d.available && d.routes ? d.routes.filter((r) => byCode.has(r.to)).slice(0, 8) : [];
+      if (routes.length < 4) return; // pas assez de données : on garde les trajets de départ
+      const dd = (n) => { const x = parse(addDays(today, n)); return String(x.getDate()).padStart(2, "0") + String(x.getMonth() + 1).padStart(2, "0"); };
+      const city = from.name.replace(/\s*\([A-Z]{3}\)$/, "");
+      h.textContent = fmt(T("Trajets populaires depuis {c}, aller-retour dès", "Popular routes from {c}, round trip from"), { c: city });
+      row.innerHTML = routes.map((r) => `<a class="pop-chip" href="/recherche/?flightSearch=${from.code}${dd(45)}${r.to}${dd(52)}1"><span>${esc(city)} → ${esc(byCode.get(r.to)[1])}</span><b class="pr">${esc(money(r.price, d.currency))}</b></a>`).join("");
+    });
+  }
+  function fromChanged() {
+    if (!isLive) return;
+    const from = place($("f-from").value);
+    if (!from || !from.code) return;
+    if (!PARIS.test(from.code)) heroPopular(from);
+    if (destSeen) loadPopular();
+    if (cityFrom !== null) loadCityPrices();
+    try { window.dispatchEvent(new CustomEvent("escale:from", { detail: { code: from.code, name: from.name.replace(/\s*\([A-Z]{3}\)$/, ""), cur: CUR } })); } catch (e) {}
+    window.ESCALE_FROM = { code: from.code, name: from.name.replace(/\s*\([A-Z]{3}\)$/, ""), cur: CUR };
+  }
+  $("f-from").addEventListener("change", fromChanged);
 })();

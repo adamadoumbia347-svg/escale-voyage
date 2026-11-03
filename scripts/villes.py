@@ -35,9 +35,16 @@ def photos(site):
     return json.loads(p.read_text(encoding="utf-8")) if p.exists() else []
 
 
+# « Explorer le monde » (accueil) : une sélection de 24 villes. Les autres photos servent aux cartes des bons plans ;
+# toutes les afficher ici alourdirait la page et multiplierait les demandes de prix.
+HOME_CITIES = ["DSS", "RAK", "CMN", "ABJ", "TUN", "ALG", "IST", "DXB", "LIS", "BCN", "JFK", "CAI", "BKO", "DJE", "TNG", "ACC",
+               "ZNZ", "BKK", "PTP", "HND", "NBO", "ATH", "PRG", "MRU"]
+
+
 def cards(site, hubs, airports):
     out = []
-    for p in photos(site):
+    by = {p["code"]: p for p in photos(site)}
+    for p in [by[c] for c in HOME_CITIES if c in by]:
         code, city = p["code"], p["city"]
         hp = hubs.get(city)
         hrefs = {l: (f"/{hp[l]}/" if hp else f"/?type=vols&to={code}" + ("" if l == "fr" else f"&lang={l}")) for l in ["fr"] + LANGS}
