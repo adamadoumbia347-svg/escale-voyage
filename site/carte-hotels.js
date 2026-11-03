@@ -38,7 +38,7 @@
   var hl = document.getElementById("hl-form");
   if (hl) {
     var P = new URLSearchParams(location.search), lg = P.get("lang") || "";
-    if (!/^(fr|en|es|pt|ar|it)$/.test(lg)) lg = "fr";
+    if (!/^(fr|en|es|pt|ar|it|de|nl)$/.test(lg)) lg = "fr";
     var H = {
       fr: { title: "Hôtels à {c}", sum: "{a} → {b} · {n} nuit(s) · {p} adulte(s). Prix en direct de Booking, Expedia, Agoda, Hotels.com… Cliquez sur un hôtel pour voir l’offre." },
       en: { eyebrow: "Live prices", title: "Hotels in {c}", lead: "Real-time prices from Booking, Expedia, Agoda, Hotels.com and more, on a map. Click a hotel to see the deal and book on the partner’s site.",
@@ -109,6 +109,24 @@
         sw.appendChild(b);
       });
       box.appendChild(sw); box.appendChild(fr); box.hidden = false;
+      // Partenaire Trip.com (lien rémunéré) pour les villes dont on connaît l'identifiant Trip.com :
+      // au-dessus de la carte en Asie et à Dubaï (souvent moins cher là-bas), en dessous ailleurs.
+      var TRIP = { abidjan: 3265, dakar: 856, casablanca: 809, marrakech: 1360, marrakesh: 1360, "le caire": 332, cairo: 332, "il cairo": 332, lagos: 783, accra: 1274,
+        nairobi: 825, dubai: 220, istanbul: 532, bangkok: 359, tokyo: 228, bali: 723, denpasar: 723, singapour: 73, singapore: 73, phuket: 725, paris: 192 };
+      var ASIA = { 359: 1, 228: 1, 723: 1, 73: 1, 725: 1, 220: 1 };
+      var key = city.split(",")[0].trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""), tid = TRIP[key];
+      if (tid) {
+        var TL = { fr: ["Voir aussi les prix sur Trip.com", "souvent moins cher en Asie"], en: ["Also see prices on Trip.com", "often cheaper in Asia"],
+          es: ["Ver también los precios en Trip.com", "a menudo más barato en Asia"], pt: ["Ver também os preços na Trip.com", "muitas vezes mais barato na Ásia"],
+          ar: ["شاهد الأسعار أيضاً على Trip.com", "غالباً أرخص في آسيا"], it: ["Vedi anche i prezzi su Trip.com", "spesso più economico in Asia"],
+          de: ["Preise auch bei Trip.com ansehen", "in Asien oft günstiger"], nl: ["Bekijk ook de prijzen op Trip.com", "in Azië vaak goedkoper"] }[lg];
+        var asia = ASIA[tid] === 1, tp = document.createElement("p"); tp.className = "hl-trip" + (asia ? " top" : "");
+        var ta = document.createElement("a"); ta.className = "btn ghost"; ta.target = "_blank"; ta.rel = "sponsored noopener noreferrer"; ta.dataset.k = "tripcom";
+        ta.href = "https://www.trip.com/hotels/list?" + new URLSearchParams({ city: String(tid), Allianceid: "11233048", SID: "335082259", trip_sub1: "escale", trip_sub2: "hotels-en-direct" }).toString();
+        ta.textContent = "🏨 " + TL[0]; tp.appendChild(ta);
+        if (asia) { var tn = document.createElement("span"); tn.className = "small"; tn.textContent = " " + TL[1]; tp.appendChild(tn); }
+        box.parentNode.insertBefore(tp, asia ? box : box.nextSibling);
+      }
       f("hl-cmp-a").href = "/?" + new URLSearchParams({ type: "hotels", dest: city, in: inD, out: outD, ad: String(ad), cmp: "1" }).toString();
       f("hl-cmp").hidden = false;
     } else f("hl-ville").focus();
