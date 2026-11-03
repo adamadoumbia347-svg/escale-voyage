@@ -515,3 +515,5 @@ th > a, td > a.fete-alert { display: inline-block; padding-block: 6px; }
 .escale-malin h2 { margin-top: 0; }
 :root[data-theme="dark"] .escale-malin { background: #2a2414; border-color: #6b5a24; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .escale-malin { background: #2a2414; border-color: #6b5a24; } }
+.push-box { margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--line, #e3e8ef); }
+.push-box h3 { margin: 0 0 4px; font-size: 1.05rem; }

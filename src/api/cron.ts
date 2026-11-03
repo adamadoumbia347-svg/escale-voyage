@@ -1,6 +1,7 @@
 import { Ctx, Env, json, sameKey, siteUrl } from "../_lib/common"
 import { mailerReady, sendMail, cheapestRoundTrip } from "../_lib/mail"
 import { TXT, fill } from "../_lib/alert-texts"
+import { sendPush } from "../_lib/webpush"
 // Vérification quotidienne des alertes prix : lancée chaque matin par Cloudflare (« triggers » dans wrangler.jsonc),
 // ou à la main avec POST /api/cron et l'en-tête « x-cron-key: <CRON_KEY> ». Au plus un e-mail tous les 3 jours par alerte.
 export const onRequestPost = async ({ request, env }: Ctx) => {
@@ -9,9 +10,10 @@ export const onRequestPost = async ({ request, env }: Ctx) => {
 }
 
 export async function checkAlerts(env: Env) {
-  if (!mailerReady(env)) return { ok: true, skipped: "mail not configured" }
   const kv = env.ESCALE, base = siteUrl(env)
   const now = Date.now(), cache = new Map<string, number | null>()
+  const pushed = kv ? await checkPush(env, cache) : null
+  if (!mailerReady(env)) return { ok: true, skipped: "mail not configured", pushed }
   let sent = 0, checked = 0
   const { keys } = await kv.list({ prefix: "alert:", limit: 500 })
   for (const { name } of keys) {
@@ -36,5 +38,48 @@ export async function checkAlerts(env: Env) {
       sent++
     }
   }
-  return { ok: true, checked, sent }
+  return { ok: true, checked, sent, pushed }
+}
+
+// Alertes par notification (palert:<id>) : même vérification de prix, au plus une notification tous les 3 jours par alerte.
+// Le message est gardé (pmsg:<abonnement>, 7 jours) puis le téléphone est réveillé ; site/sw.js vient le lire et l'affiche.
+const PT: Record<string, [string, string]> = {
+  fr: ["✈️ {a} → {b} : {price}", "Prix sous votre budget ({max}). Touchez pour voir les vols."],
+  en: ["✈️ {a} → {b}: {price}", "Below your budget ({max}). Tap to see flights."],
+  es: ["✈️ {a} → {b}: {price}", "Por debajo de tu presupuesto ({max}). Toca para ver los vuelos."],
+  pt: ["✈️ {a} → {b}: {price}", "Abaixo do seu orçamento ({max}). Toque para ver os voos."],
+  ar: ["✈️ {a} → {b}: {price}", "أقل من ميزانيتك ({max}). المس لعرض الرحلات."],
+  it: ["✈️ {a} → {b}: {price}", "Sotto il tuo budget ({max}). Tocca per vedere i voli."],
+  de: ["✈️ {a} → {b}: {price}", "Unter deinem Budget ({max}). Tippe, um die Flüge zu sehen."],
+  nl: ["✈️ {a} → {b}: {price}", "Onder je budget ({max}). Tik om de vluchten te zien."],
+}
+async function checkPush(env: Env, cache: Map<string, number | null>) {
+  const kv = env.ESCALE, base = siteUrl(env), now = Date.now()
+  let sent = 0, checked = 0, gone = 0
+  const { keys } = await kv.list({ prefix: "palert:", limit: 300 })
+  for (const { name } of keys) {
+    if (sent >= 25) break  // reste sous la limite de requêtes d'une tâche planifiée (offre gratuite)
+    const rec: any = await kv.get(name, "json")
+    if (!rec) continue
+    checked++
+    if (rec.lastSent && now - Date.parse(rec.lastSent) < 3 * 864e5) continue
+    const ck = `${rec.from}-${rec.to}-${rec.currency}`
+    if (!cache.has(ck)) cache.set(ck, await cheapestRoundTrip(env.TRAVELPAYOUTS_TOKEN, rec.from, rec.to, rec.currency))
+    const price = cache.get(ck)
+    if (price == null || price > rec.max) continue
+    const loc = rec.lang === "ar" ? "ar-u-nu-latn" : rec.lang
+    const fmtM = (n: number) => new Intl.NumberFormat(loc, { style: "currency", currency: rec.currency, maximumFractionDigits: 0 }).format(n)
+    const t = PT[rec.lang] || PT.fr, v = { a: rec.from, b: rec.to, price: fmtM(price), max: fmtM(rec.max) }
+    const msg = { title: fill(t[0], v), body: fill(t[1], v), url: `/?type=vols&from=${rec.from}&to=${rec.to}${rec.lang === "fr" ? "" : "&lang=" + rec.lang}` }
+    await kv.put(`pmsg:${rec.eid}`, JSON.stringify(msg), { expirationTtl: 7 * 86400 })
+    const status = await sendPush(kv, rec.endpoint, base).catch(() => 0)
+    if (status === 404 || status === 410) { await kv.delete(name); gone++; continue }  // abonnement expiré ou refusé : alerte supprimée
+    if (status >= 200 && status < 300) {
+      rec.lastSent = new Date().toISOString(); rec.lastPrice = price
+      const left = Math.max(86400, Math.round((Date.parse(rec.created) + 365 * 864e5 - now) / 1000))
+      await kv.put(name, JSON.stringify(rec), { expirationTtl: left })
+      sent++
+    }
+  }
+  return { checked, sent, gone }
 }

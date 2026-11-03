@@ -2,7 +2,7 @@
 // - pages : réseau d'abord (prix à jour), copie gardée en secours si la connexion coupe ;
 // - fichiers du site (CSS, JS, polices, images) : copie locale d'abord, mise à jour en arrière-plan ;
 // - jamais de cache pour /api/ ni pour les autres sites (moteur Travelpayouts, partenaires).
-const VERSION = "escale-v2"
+const VERSION = "escale-v3"
 const PAGES = VERSION + "-pages", FILES = VERSION + "-files"
 
 self.addEventListener("install", (e) => {
@@ -27,4 +27,21 @@ self.addEventListener("fetch", (e) => {
       return hit || net
     })))
   }
+})
+
+// Alertes prix par notification : le serveur réveille le téléphone sans contenu (src/_lib/webpush.ts),
+// on va chercher le message (prix, trajet) puis on l'affiche ; un toucher ouvre la recherche du trajet.
+self.addEventListener("push", (e) => {
+  e.waitUntil(self.registration.pushManager.getSubscription()
+    .then((sub) => fetch("/api/push?action=msg&e=" + encodeURIComponent(sub ? sub.endpoint : "")).then((r) => r.json()))
+    .catch(() => ({ title: "Escale", body: "", url: "/" }))
+    .then((m) => self.registration.showNotification(m.title || "Escale", { body: m.body || "", icon: "/icon-192.png", badge: "/icon-192.png", data: { url: m.url || "/" }, tag: "escale-prix" })))
+})
+self.addEventListener("notificationclick", (e) => {
+  e.notification.close()
+  const url = (e.notification.data && e.notification.data.url) || "/"
+  e.waitUntil(self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((list) => {
+    for (const c of list) if ("focus" in c) { c.navigate(url); return c.focus() }
+    return self.clients.openWindow(url)
+  }))
 })

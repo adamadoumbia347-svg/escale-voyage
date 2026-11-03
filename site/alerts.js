@@ -16,8 +16,48 @@
   }[lang];
   if (!L) return;
   var esc = function (t) { return String(t).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
+  // Alerte par notification sur le téléphone (Web Push) : sans e-mail, avec l'accord du navigateur. Site/sw.js affiche le message.
+  var N = { fr: ["🔔 Ou par notification sur ce téléphone", "Sans e-mail : une notification quand le prix passe sous votre budget.", "Recevoir une notification", "C’est fait : vous serez prévenu sur cet appareil.", "Notifications refusées : autorisez-les dans les réglages du navigateur.", "Sur iPhone : ajoutez d’abord Escale à l’écran d’accueil (Partager → Sur l’écran d’accueil), puis ouvrez-le depuis l’icône."],
+    en: ["🔔 Or by notification on this phone", "No email needed: a notification when the price drops below your budget.", "Get a notification", "Done: you will be notified on this device.", "Notifications blocked: allow them in your browser settings.", "On iPhone: first add Escale to your Home Screen (Share → Add to Home Screen), then open it from the icon."],
+    es: ["🔔 O por notificación en este teléfono", "Sin correo: una notificación cuando el precio baje de tu presupuesto.", "Recibir una notificación", "Listo: recibirás el aviso en este dispositivo.", "Notificaciones bloqueadas: permítelas en los ajustes del navegador.", "En iPhone: añade primero Escale a la pantalla de inicio (Compartir → Añadir a pantalla de inicio) y ábrelo desde el icono."],
+    pt: ["🔔 Ou por notificação neste telemóvel", "Sem e-mail: uma notificação quando o preço descer abaixo do seu orçamento.", "Receber uma notificação", "Feito: será avisado neste aparelho.", "Notificações bloqueadas: permita-as nas definições do navegador.", "No iPhone: adicione primeiro a Escale ao ecrã principal (Partilhar → Adicionar ao ecrã principal) e abra-a pelo ícone."],
+    ar: ["🔔 أو عبر إشعار على هذا الهاتف", "بلا بريد إلكتروني: إشعار عندما ينخفض السعر إلى أقل من ميزانيتك.", "تلقَّ إشعارًا", "تم: ستتلقى التنبيه على هذا الجهاز.", "الإشعارات محظورة: اسمح بها في إعدادات المتصفح.", "على آيفون: أضف Escale أولًا إلى الشاشة الرئيسية (مشاركة ← إضافة إلى الشاشة الرئيسية) ثم افتحه من الأيقونة."],
+    it: ["🔔 Oppure con una notifica su questo telefono", "Senza e-mail: una notifica quando il prezzo scende sotto il tuo budget.", "Ricevi una notifica", "Fatto: riceverai l’avviso su questo dispositivo.", "Notifiche bloccate: consentile nelle impostazioni del browser.", "Su iPhone: aggiungi prima Escale alla schermata Home (Condividi → Aggiungi alla schermata Home), poi aprilo dall’icona."],
+    de: ["🔔 Oder per Benachrichtigung auf diesem Handy", "Ohne E-Mail: eine Benachrichtigung, sobald der Preis unter dein Budget fällt.", "Benachrichtigung erhalten", "Erledigt: Du wirst auf diesem Gerät benachrichtigt.", "Benachrichtigungen blockiert: Erlaube sie in den Browser-Einstellungen.", "Auf dem iPhone: Füge Escale zuerst zum Home-Bildschirm hinzu (Teilen → Zum Home-Bildschirm) und öffne es über das Symbol."],
+    nl: ["🔔 Of met een melding op deze telefoon", "Zonder e-mail: een melding zodra de prijs onder je budget zakt.", "Melding ontvangen", "Klaar: je krijgt een melding op dit apparaat.", "Meldingen geblokkeerd: sta ze toe in de browserinstellingen.", "Op iPhone: zet Escale eerst op je beginscherm (Deel → Zet op beginscherm) en open het via het icoon."] }[lang] || null;
+  var b64 = function (s) { s = s.replace(/-/g, "+").replace(/_/g, "/"); while (s.length % 4) s += "="; var r = atob(s), u = new Uint8Array(r.length); for (var i = 0; i < r.length; i++) u[i] = r.charCodeAt(i); return u; };
+  var pushOk = N && "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
+  var ios = /iPhone|iPad|iPod/.test(navigator.userAgent) && !(window.navigator.standalone || (window.matchMedia && matchMedia("(display-mode: standalone)").matches));
+  var renderPush = function () {
+    if (!N || (!pushOk && !ios)) return;
+    var d = document.createElement("div"); d.className = "push-box";
+    d.innerHTML = "<h3>" + esc(N[0]) + '</h3><p class="small">' + esc(N[1]) + "</p>" +
+      '<div class="alert-row"><label><span>' + esc(L.max) + '</span><input type="number" name="pmax" min="1" inputmode="numeric"></label></div>' +
+      '<button class="btn ghost" type="button">' + esc(N[2]) + '</button><p class="small push-msg" role="status"></p>';
+    box.appendChild(d); box.hidden = false;
+    Array.prototype.forEach.call(document.querySelectorAll(".alert-cta"), function (a) { a.hidden = false; });
+    var inp = d.querySelector("input"), btn = d.querySelector("button"), out = d.querySelector(".push-msg");
+    var sug = function () { var st = document.querySelector("#hero-price strong"), n = st ? Number(st.textContent.replace(/[^0-9]/g, "")) : 0; if (n > 0 && !inp.value) inp.value = Math.max(1, Math.floor(n * 0.9 / 10) * 10); };
+    sug(); setTimeout(sug, 2500);
+    if (ios && !pushOk) { btn.hidden = true; inp.parentNode.parentNode.hidden = true; out.textContent = N[5]; return; }
+    btn.addEventListener("click", function () {
+      var max = Number(inp.value);
+      if (!(max > 0)) { out.textContent = L.err; inp.focus(); return; }
+      btn.disabled = true;
+      Notification.requestPermission().then(function (perm) {
+        if (perm !== "granted") { out.textContent = N[4]; btn.disabled = false; return null; }
+        return Promise.all([navigator.serviceWorker.register("/sw.js").then(function () { return navigator.serviceWorker.ready; }),
+          fetch("/api/push?action=key").then(function (r) { return r.json(); })]).then(function (res) {
+          return res[0].pushManager.getSubscription().then(function (sub) { return sub || res[0].pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64(res[1].key) }); });
+        }).then(function (sub) {
+          return fetch("/api/push", { method: "POST", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ endpoint: sub.endpoint, max: max, from: box.getAttribute("data-from"), to: box.getAttribute("data-to"), lang: lang, currency: "EUR" }) });
+        }).then(function (r) { out.textContent = r && r.ok ? N[3] : L.fail; if (!(r && r.ok)) btn.disabled = false; });
+      }).catch(function () { out.textContent = L.fail; btn.disabled = false; });
+    });
+  };
   fetch("/api/alert?action=status").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }).then(function (s) {
-    if (!s || !s.enabled) return;
+    if (!s || !s.enabled) { renderPush(); return; }
     box.innerHTML = "<h2>" + esc(L.h) + '</h2><p class="small">' + esc(L.p) + "</p>" +
       '<form class="alert-form" novalidate><div class="alert-row">' +
       '<label><span>' + esc(L.email) + '</span><input type="email" name="email" required autocomplete="email"></label>' +
@@ -26,6 +66,7 @@
       '<button class="btn" type="submit">' + esc(L.btn) + '</button><p class="small alert-msg" role="status"></p></form>';
     box.hidden = false;
     Array.prototype.forEach.call(document.querySelectorAll(".alert-cta"), function (a) { a.hidden = false; });
+    renderPush();
     var form = box.querySelector("form"), msg = box.querySelector(".alert-msg");
     // Budget proposé : 90 % du prix le plus bas affiché en haut de la page (s'il est connu)
     var suggest = function () {
