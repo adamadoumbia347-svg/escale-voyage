@@ -70,6 +70,21 @@ SERIES = {
         ("sensoji", ["Senso-ji Asakusa", "Sensō-ji"], "sens[oō]-?ji|asakusa"),
         ("tokyotour", ["Tokyo Tower", "Tokyo skyline Tokyo Tower"], "tokyo"),
     ],
+    "tendances": [
+        ("bishkek", ["Ala Archa National Park", "Ala-Archa gorge Kyrgyzstan", "Bishkek Ala-Too Square"], "ala.?archa|bishkek"),
+        ("hurghada", ["Giftun Island Hurghada", "Hurghada beach Red Sea", "Hurghada coast"], "hurghada|giftun"),
+        ("malmo", ["Turning Torso Malmö", "Malmö skyline", "Øresund Bridge"], "malm|turning torso|[oø]resund"),
+        ("trapani", ["Saline di Trapani", "Trapani salt pans windmill", "Erice Sicily", "Trapani"], "trapani|erice|saline|marsala"),
+        ("chongqing", ["Hongyadong Chongqing", "Chongqing skyline", "Chongqing Yangtze"], "chongqing|hongyadong"),
+        ("danang", ["Golden Bridge Ba Na Hills", "Dragon Bridge Da Nang", "My Khe beach Da Nang"], "golden bridge|ba na|da nang|đà nẵng|dragon bridge|my khe"),
+        ("sal", ["Santa Maria beach Sal Cape Verde", "Sal island Cape Verde beach", "Ilha do Sal"], "sal|santa maria|cabo verde|cape verde"),
+        ("quebec", ["Château Frontenac", "Château Frontenac Québec", "Old Quebec"], "frontenac|qu[eé]bec"),
+        ("redwoods", ["Redwood National Park", "Jedediah Smith Redwoods State Park", "Redwood forest California"], "redwood|sequoia"),
+        ("venetie", ["Tre Cime di Lavaredo", "Venice Grand Canal", "Dolomites Veneto"], "lavaredo|venezia|venice|dolomit|veneto"),
+        ("sibenik", ["Šibenik cathedral", "Šibenik old town", "Krka waterfalls Skradinski buk"], "[sš]ibenik|krka|skradin"),
+        ("rabat", ["Hassan Tower Rabat", "Kasbah of the Udayas", "Rabat Morocco"], "rabat|hassan tower|oudaya|udaya"),
+        ("okinawa", ["Kouri Bridge Okinawa", "Okinawa beach", "Shuri Castle"], "okinawa|shuri|kouri|ishigaki|miyako|kerama"),
+    ],
 }
 
 
