@@ -42,10 +42,32 @@
           p.firstChild.textContent = cfg.getAttribute("data-from") + " " + money(b.price, b.cur);
           p.lastChild.textContent = "· " + day(b.dep);
           a.href = "/recherche/?flightSearch=" + from + ddmm(b.dep) + b.to + (b.ret ? ddmm(b.ret) : "") + "1";
+          c.setAttribute("data-best", b.price); c.setAttribute("data-best-to", b.to);
         });
       };
       tryNext(0);
     };
+    // Alerte prix (alerts.js) : la cloche d'une carte choisit la destination de l'alerte
+    var box = document.getElementById("price-alert");
+    if (box) {
+      box.setAttribute("data-from", from);
+      var label = function (name) {
+        var p = box.querySelector(".tr-alert-for");
+        if (!p) { p = document.createElement("p"); p.className = "tr-alert-for"; box.insertBefore(p, box.firstChild); }
+        p.innerHTML = "<strong></strong>"; p.firstChild.textContent = box.getAttribute("data-for") + " " + (f.name || "Paris") + " → " + name;
+      };
+      cards.forEach(function (c) {
+        var bell = c.querySelector(".tr-bell"); if (!bell) return;
+        bell.addEventListener("click", function () {
+          box.setAttribute("data-to", c.getAttribute("data-best-to") || c.getAttribute("data-to").split(",")[0]);
+          label(bell.getAttribute("data-name"));
+          var best = Number(c.getAttribute("data-best")) || 0;
+          box.querySelectorAll('input[name="max"], input[name="pmax"]').forEach(function (i) { if (best) i.value = Math.max(1, Math.floor(best * 0.9 / 10) * 10); });
+          box.scrollIntoView({ behavior: "smooth", block: "start" });
+          var inp = box.querySelector('input[type="email"]') || box.querySelector("input"); if (inp) setTimeout(function () { inp.focus({ preventScroll: true }); }, 500);
+        });
+      });
+    }
     if ("IntersectionObserver" in window) {
       var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { io.unobserve(e.target); go(e.target); } }); }, { rootMargin: "300px" });
       cards.forEach(function (c) { io.observe(c); });

@@ -575,3 +575,6 @@ h1 em, h1 span, .hero h1 em { color: var(--teal-d); font-style: normal; }
 :root[data-theme="dark"] .we-price { color: #5fe0cc; }
 .we-wait { color: var(--muted); padding: 20px 0; }
 @media (max-width: 520px) { .we-grid { grid-template-columns: 1fr 1fr; gap: 10px; } .we-txt { padding: 10px; } .we-price { font-size: 1.15rem; } .we-dates { font-size: .78rem; } }
+.tr-bell { margin: 6px 0 0; width: 100%; font: inherit; font-size: .85rem; font-weight: 700; padding: 7px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.tr-bell:hover { border-color: #12b3a0; }
+.tr-alert-for { font-size: 1.05rem; margin-bottom: 6px; }

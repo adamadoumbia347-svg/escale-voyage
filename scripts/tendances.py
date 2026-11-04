@@ -48,7 +48,7 @@ T = {
                more="Sources", src_sky="Skyscanner Travel Trends 2027", src_lp="Lonely Planet Best in Travel 2027",
                searches="de recherches", from_l="dès", loading="Prix en cours…", none="Comparer les prix", photo="Photo",
                note="Prix aller-retour en direct (calendrier des prix Escale), pour une date précise : ils changent tous les jours. Les tendances viennent des sources citées, vérifiées en novembre 2026.",
-               cta="Chercher un autre vol", from_txt="Prix depuis"),
+               cta="Chercher un autre vol", from_txt="Prix depuis", bell="Alerte prix", alert_for="Alerte pour :"),
     "en": dict(path="en/trending-2027", title="Trending destinations 2027: where to travel in 2027 (Skyscanner, Lonely Planet) | Escale",
                desc="The destinations on the rise in 2027 according to Skyscanner and Lonely Planet: Hurghada, Da Nang, Cape Verde, Québec, Veneto, Rabat… with live flight prices from your airport.",
                h1="Where to go <span>in 2027</span>?", lead="The destinations on the rise, from Skyscanner flight searches and Lonely Planet's picks. The price shown is the best round trip found right now from your airport.",
@@ -57,7 +57,7 @@ T = {
                more="Sources", src_sky="Skyscanner Travel Trends 2027", src_lp="Lonely Planet Best in Travel 2027",
                searches="searches", from_l="from", loading="Loading price…", none="Compare prices", photo="Photo",
                note="Live round-trip prices (Escale price calendar), for a specific date: they change every day. Trends come from the sources cited, checked in November 2026.",
-               cta="Search another flight", from_txt="Prices from"),
+               cta="Search another flight", from_txt="Prices from", bell="Price alert", alert_for="Alert for:"),
 }
 
 
@@ -71,6 +71,7 @@ def card(site_photos, lang, key, codes, name, country, badge, why, near):
             f'<span class="tr-info"><strong>{E(name)}</strong><small>{E(country)}</small>'
             + (f'<em class="tr-why">{E(why)}</em>' if why else "") +
             f'<span class="tr-price" aria-live="polite"></span>' + (f'<small class="tr-near">{E(near)}</small>' if near else "") + '</span></a>'
+            f'<button type="button" class="tr-bell alert-cta" hidden data-name="{E(name)}">🔔 {E(T[lang]["bell"])}</button>'
             f'<p class="tr-credit">{E(T[lang]["photo"])} : <a href="{E(c.get("page", ""))}" target="_blank" rel="noopener">{E(c.get("author", "Wikimedia Commons")[:60])}</a>, {E(c.get("license", ""))}</p></li>')
 
 
@@ -88,11 +89,12 @@ def build(site, ctx):
         body = (f'<p class="tr-from small" hidden>{E(t["from_txt"])} <strong class="tr-from-city"></strong></p>'
                 f'<section><h2>{E(t["sky_h"])}</h2><p class="small">{E(t["sky_p"])}</p><ul class="tr-grid">{sky}</ul></section>'
                 f'<section><h2>{E(t["lp_h"])}</h2><p class="small">{E(t["lp_p"])}</p><ul class="tr-grid">{lp}</ul></section>'
+                f'<section id="price-alert" class="price-alert" data-from="PAR" data-to="HRG" data-for="{E(t["alert_for"])}" hidden></section>'
                 f'<section><h2>{E(t["more"])}</h2><ul><li><a href="{SKY}" target="_blank" rel="noopener">{E(t["src_sky"])}</a></li>'
                 f'<li><a href="{LP}" target="_blank" rel="noopener">{E(t["src_lp"])}</a></li></ul><p class="small">{E(t["note"])}</p></section>'
                 f'<p><a class="btn" href="/{q}">{E(t["cta"])}</a></p>'
                 f'<div id="tr-cfg" hidden data-from="{E(t["from_l"])}" data-loading="{E(t["loading"])}" data-none="{E(t["none"])}"></div>'
-                '<script src="/fetes.js" defer></script><script src="/tendances.js" defer></script>')
+                '<script src="/fetes.js" defer></script><script src="/tendances.js" defer></script><script src="/alerts.js" defer></script>')
         hero = f'<p class="eyebrow">2027</p><h1>{t["h1"]}</h1><p class="hero-lead">{E(t["lead"])}</p>'
         ld = '<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", "@type": "Article", "headline": t["title"].split(" | ")[0],
                                                                    "description": t["desc"], "inLanguage": lang, "dateModified": "2026-11-04",
