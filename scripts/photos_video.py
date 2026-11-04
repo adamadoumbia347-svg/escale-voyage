@@ -85,6 +85,12 @@ SERIES = {
         ("rabat", ["Hassan Tower Rabat", "Kasbah of the Udayas", "Rabat Morocco"], "rabat|hassan tower|oudaya|udaya"),
         ("okinawa", ["Kouri Bridge Okinawa", "Okinawa beach", "Shuri Castle"], "okinawa|shuri|kouri|ishigaki|miyako|kerama"),
     ],
+    "argent": [
+        ("inde", ["Taj Mahal", "Taj Mahal Agra", "Taj Mahal sunrise"], "taj mahal"),
+        ("tunisie", ["Sidi Bou Said", "Sidi Bou Saïd village", "Sidi Bou Said blue door"], "sidi.?bou"),
+        ("suisse", ["Matterhorn Zermatt", "Matterhorn", "Lauterbrunnen valley"], "matterhorn|zermatt|lauterbrunnen|cervin"),
+        ("dakar", ["Dakar Corniche", "Dakar Senegal city", "African Renaissance Monument"], "dakar|renaissance"),
+    ],
 }
 
 
