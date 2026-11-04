@@ -7,7 +7,7 @@
 <title>Administration | Escale</title>
 <script>(function(){try{var d=document.documentElement,s=localStorage.getItem("escale.lite"),c=navigator.connection||{},z="";try{z=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}if(s==="1"||(s!=="0"&&(c.saveData||/2g|3g/.test(c.effectiveType||"")||z.indexOf("Africa/")===0)))d.classList.add("lite");else{var l=document.createElement("link");l.rel="preload";l.as="font";l.type="font/woff2";l.crossOrigin="anonymous";l.href="/fonts/instrument-sans-latin-f587e7.woff2";document.head.appendChild(l)}}catch(e){}})();</script>
 <link rel="stylesheet" href="/fonts/fonts.css?v=4be1f210">
-<link rel="stylesheet" href="/pages.css?v=ec1012ee">
+<link rel="stylesheet" href="/pages.css?v=3d3e0466">
 <style>
   .ad-form { display: flex; flex-wrap: wrap; gap: 8px; align-items: end; margin: 16px 0; }
   .ad-form input, .ad-form select { font: inherit; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); }
@@ -32,7 +32,7 @@
 <div class="wrap">
   <form class="ad-form" id="f">
     <label>Clé d’accès<br><input id="key" type="password" autocomplete="current-password" required></label>
-    <label>Afficher<br><select id="form"><option value="bons-plans">Inscriptions aux bons plans</option><option value="contact">Messages de contact</option><option value="avis">Avis des voyageurs (à relire)</option></select></label>
+    <label>Afficher<br><select id="form"><option value="bons-plans">Inscriptions aux bons plans</option><option value="contact">Messages de contact</option><option value="avis">Avis des voyageurs (à relire)</option><option value="agence">Agences partenaires (demandes)</option></select></label>
     <button type="submit">Afficher</button>
   </form>
   <p id="msg" class="small" role="status"></p>
@@ -57,13 +57,16 @@
   var when = function (iso) { try { return new Date(iso).toLocaleString("fr-FR", { dateStyle: "medium", timeStyle: "short" }); } catch (e) { return iso; } };
   function render() {
     var form = $("form").value;
-    $("count").textContent = items.length + (form === "contact" ? " message(s)" : form === "avis" ? " avis à relire" : " inscrit(s)");
+    $("count").textContent = items.length + (form === "contact" ? " message(s)" : form === "avis" ? " avis à relire" : form === "agence" ? " demande(s) d'agence" : " inscrit(s)");
     $("copy-emails").hidden = $("copy-wa").hidden = form !== "bons-plans";
     $("list").innerHTML = items.length ? items.map(function (it, i) {
       var f = it.fields || {};
       var body = form === "avis"
         ? "<strong>" + esc(f.prenom) + "</strong>, " + esc(f.ville) + " · " + esc(f.trajet) + (f.compagnie ? " · " + esc(f.compagnie) : "") + (f.prix ? " · " + esc(f.prix) : "") + (f.mois ? " · " + esc(f.mois) : "") + " · " + esc(f.note || "") + "★" +
           "<div class=\"msg\">" + esc(f.texte) + "</div><p class=\"small\">Pour le publier : dites à Claude « publie l'avis de " + esc(f.prenom) + " ». " + (f.email ? "E-mail (privé) : " + esc(f.email) : "") + "</p>"
+        : form === "agence"
+        ? "<strong>" + esc(f.agence) + "</strong> · " + esc(f.ville) + ", " + esc(f.pays) + (f.aeroport ? " (" + esc(f.aeroport) + ")" : "") + "<br>" + esc(f.nom || "") + (f.whatsapp ? " · WhatsApp " + esc(f.whatsapp) : "") + (f.email ? " · <a href=\"mailto:" + esc(f.email) + "\">" + esc(f.email) + "</a>" : "") + (f.site ? " · " + esc(f.site) : "") +
+          (f.paiements ? "<br>Paiements : " + esc(f.paiements) : "") + (f.message ? "<div class=\"msg\">" + esc(f.message) + "</div>" : "") + "<p class=\"small\">Pour créer sa page : dites à Claude « crée la page de l'agence " + esc(f.agence) + " ».</p>"
         : form === "contact"
         ? "<strong>" + esc(f.nom || "(sans nom)") + "</strong> · <a href=\"mailto:" + esc(f.email) + "\">" + esc(f.email) + "</a><div class=\"msg\">" + esc(f.message) + "</div>"
         : (f.email ? "<a href=\"mailto:" + esc(f.email) + "\">" + esc(f.email) + "</a>" : "") + (f.email && f.whatsapp ? " · " : "") + (f.whatsapp ? "WhatsApp " + esc(f.whatsapp) : "");
@@ -126,7 +129,7 @@
   $("copy-emails").addEventListener("click", function () { copy(items.map(function (i) { return (i.fields || {}).email; }), "E-mails"); });
   $("copy-wa").addEventListener("click", function () { copy(items.map(function (i) { return (i.fields || {}).whatsapp; }), "Numéros"); });
   $("csv").addEventListener("click", function () {
-    var cols = $("form").value === "contact" ? ["nom", "email", "message"] : $("form").value === "avis" ? ["prenom", "ville", "trajet", "compagnie", "prix", "mois", "note", "texte", "email", "langue"] : ["email", "whatsapp", "langue"];
+    var cols = $("form").value === "contact" ? ["nom", "email", "message"] : $("form").value === "avis" ? ["prenom", "ville", "trajet", "compagnie", "prix", "mois", "note", "texte", "email", "langue"] : $("form").value === "agence" ? ["agence", "ville", "pays", "aeroport", "nom", "whatsapp", "email", "site", "paiements", "message", "langue"] : ["email", "whatsapp", "langue"];
     var q = function (v) { return '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"'; };
     var rows = [["date"].concat(cols).map(q).join(";")].concat(items.map(function (i) { return [i.at].concat(cols.map(function (c) { return (i.fields || {})[c]; })).map(q).join(";"); }));
     var a = document.createElement("a");

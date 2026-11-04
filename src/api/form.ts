@@ -4,7 +4,8 @@ import { unsubToken } from "../digest"
 // Les messages se lisent sur /admin/ (clé ADMIN_KEY). Champ piège « site-web » contre les robots.
 // « avis » : témoignage de voyageur, publié seulement après relecture (scripts/pratique_afrique.py, site/data/avis.json)
 const FORMS: Record<string, string[]> = { contact: ["nom", "email", "message"], "bons-plans": ["email", "whatsapp", "langue", "consent"],
-  avis: ["prenom", "ville", "trajet", "compagnie", "prix", "mois", "note", "texte", "email", "langue", "consent"] }
+  avis: ["prenom", "ville", "trajet", "compagnie", "prix", "mois", "note", "texte", "email", "langue", "consent"],
+  agence: ["agence", "ville", "pays", "aeroport", "nom", "whatsapp", "email", "site", "paiements", "message", "langue", "consent"] }
 const MAX = 3000
 
 export const onRequestGet = (ctx: Ctx) => unsubscribe(ctx)
@@ -14,7 +15,7 @@ export const onRequestPost = async (ctx: Ctx) => {
   const { request, env } = ctx
   const wantsJson = (request.headers.get("accept") || "").includes("application/json")
   const done = (ok: boolean, form: string) => wantsJson ? json({ ok }, { status: ok ? 200 : 400 })
-    : Response.redirect(new URL(form === "avis" ? (ok ? "/avis-voyageurs/merci/" : "/avis-voyageurs/") : ok && form === "contact" ? "/contact/merci/" : "/contact/", request.url).toString(), 303)
+    : Response.redirect(new URL(form === "avis" ? (ok ? "/avis-voyageurs/merci/" : "/avis-voyageurs/") : form === "agence" ? (ok ? "/pour-les-agences/merci/" : "/pour-les-agences/") : ok && form === "contact" ? "/contact/merci/" : "/contact/", request.url).toString(), 303)
   let data: FormData
   try { data = await request.formData() } catch { return done(false, "") }
   const form = String(data.get("form-name") || "")
@@ -25,6 +26,7 @@ export const onRequestPost = async (ctx: Ctx) => {
   if (form === "contact" && (!fields.message.trim() || !/^\S+@\S+\.\S+$/.test(fields.email))) return done(false, form)
   if (form === "bons-plans" && ((!/^\S+@\S+\.\S+$/.test(fields.email) && !/^\+?[0-9 ]{8,20}$/.test(fields.whatsapp)) || !fields.consent)) return done(false, form)
   if (form === "avis" && (!fields.texte.trim() || !fields.prenom.trim() || !fields.trajet.trim() || !fields.consent)) return done(false, form)
+  if (form === "agence" && (!fields.agence.trim() || !fields.ville.trim() || (!/^\S+@\S+\.\S+$/.test(fields.email) && !/^\+?[0-9 ]{8,20}$/.test(fields.whatsapp)) || !fields.consent)) return done(false, form)
   if (!env.ESCALE) return done(false, form)
   const at = new Date().toISOString()
   await env.ESCALE.put(`form:${form}:${at}:${crypto.randomUUID().slice(0, 8)}`, JSON.stringify({ form, at, fields }))

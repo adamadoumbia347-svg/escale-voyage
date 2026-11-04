@@ -45,7 +45,7 @@ export const onRequest = async ({ request, env }: Ctx) => {
     await env.ESCALE.delete(key)
     return json({ ok: true })
   }
-  const fq = url.searchParams.get("form"), form = fq === "contact" || fq === "avis" ? fq : "bons-plans"
+  const fq = url.searchParams.get("form"), form = fq === "contact" || fq === "avis" || fq === "agence" ? fq : "bons-plans"
   const items: any[] = []
   let cursor: string | undefined
   do {

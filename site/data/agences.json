@@ -1,0 +1,8 @@
+{
+ "_comment": "Agences partenaires validées (une page /agence/<slug>/ chacune). Ajouter une agence après sa demande (/admin/ → Agences partenaires) et son accord. « demo »: true = page d'exemple, non référencée.",
+ "agences": [
+  {"slug": "exemple", "demo": true, "nom": "Agence Exemple", "ville": "Abidjan", "pays": "Côte d'Ivoire", "aeroport": "ABJ", "whatsapp": "", "email": "",
+   "paiements": ["Orange Money", "Wave", "MTN MoMo", "Espèces en agence"], "horaires": "Lundi-samedi, 8 h - 19 h", "adresse": "", "langue": "fr",
+   "message": "Comparez les prix ici, puis réservez en ligne ou écrivez-nous sur WhatsApp pour payer en mobile money ou en agence."}
+ ]
+}
