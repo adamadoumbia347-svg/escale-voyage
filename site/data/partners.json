@@ -190,6 +190,33 @@
       "affiliate": true
     },
     {
+      "key": "tours",
+      "name": "Klook",
+      "color": "#ff5b00",
+      "url": "https://klook.tpm.lv/MHEoG42I",
+      "title": {
+        "fr": "Excursions et activités",
+        "en": "Tours and activities",
+        "es": "Excursiones y actividades",
+        "pt": "Excursões e atividades",
+        "ar": "الرحلات والأنشطة",
+        "it": "Escursioni e attività",
+        "de": "Ausflüge und Aktivitäten",
+        "nl": "Excursies en activiteiten"
+      },
+      "desc": {
+        "fr": "Excursions, visites guidées, transferts et billets d'attractions, à réserver avant de partir.",
+        "en": "Day trips, guided tours, transfers and attraction tickets, to book before you go.",
+        "es": "Excursiones, visitas guiadas, traslados y entradas, para reservar antes de salir.",
+        "pt": "Excursões, visitas guiadas, transferes e bilhetes, para reservar antes de partir.",
+        "ar": "رحلات يومية وجولات مع مرشد وتنقلات وتذاكر معالم، للحجز قبل السفر.",
+        "it": "Escursioni, visite guidate, transfer e biglietti, da prenotare prima di partire.",
+        "de": "Tagesausflüge, Führungen, Transfers und Tickets, vor der Abreise gebucht.",
+        "nl": "Dagtochten, rondleidingen, transfers en tickets, te boeken vóór vertrek."
+      },
+      "affiliate": true
+    },
+    {
       "key": "claim",
       "name": "Compensair",
       "color": "#2f6fde",

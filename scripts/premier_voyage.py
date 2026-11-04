@@ -115,12 +115,12 @@ UI = {
                know="À savoir avant de partir", price_h="Et le billet ?", price_p="Meilleur aller-retour des deux prochains mois, en direct depuis votre aéroport.",
                off="Sites officiels", checked="Règles vérifiées en novembre 2026 : elles peuvent changer. Vérifiez toujours sur les sites officiels avant de partir.",
                photo="Photo", other="Autres premiers voyages", bell="Alerte prix", alert_for="Alerte pour :", from_l="dès", loading="Prix en cours…", none="Comparer les prix",
-               flight="Vols aller-retour", from_txt="Départ de"),
+               flight="Vols aller-retour", from_txt="Départ de", act_h="Activités et excursions", act_p="Excursions, visites guidées et transferts à réserver avant de partir.", act_b="Voir les activités sur Klook"),
     "en": dict(h1="First trip to <span>{name}</span>?", pre={}, eyebrow="First trip",
                know="Good to know before you go", price_h="And the flight?", price_p="Best round trip over the next two months, live from your airport.",
                off="Official websites", checked="Rules checked in November 2026: they can change. Always check the official websites before you travel.",
                photo="Photo", other="Other first trips", bell="Price alert", alert_for="Alert for:", from_l="from", loading="Loading price…", none="Compare prices",
-               flight="Round-trip flights", from_txt="Leaving from"),
+               flight="Round-trip flights", from_txt="Leaving from", act_h="Tours and activities", act_p="Day trips, guided tours and transfers to book before you go.", act_b="See activities on Klook"),
 }
 
 
@@ -149,6 +149,7 @@ def build(site, ctx):
             other = "".join(f'<li><a href="/{d[4][lang]["path"]}/">{E(d[4][lang]["flag"])} {E(d[4][lang]["name"])}</a></li>' for d in others)
             body = (f'<section><h2>{E(u["know"])}</h2><ol class="pv-list">{cards}</ol></section>{gal}'
                     f'<section class="pv-price-sec"><h2>{E(u["price_h"])}</h2><p class="small">{E(u["price_p"])} <span class="tr-from" hidden>· {E(u["from_txt"])} <strong class="tr-from-city"></strong></span></p>{price}</section>'
+                    f'<section class="pv-act"><h2>🎟️ {E(u["act_h"])}</h2><p>{E(u["act_p"])}</p><p><a class="btn ghost" href="https://klook.tpm.lv/MHEoG42I" target="_blank" rel="sponsored noopener noreferrer">{E(u["act_b"])} ↗</a></p></section>'
                     f'<section id="price-alert" class="price-alert" data-from="PAR" data-to="{code}" data-for="{E(u["alert_for"])}" hidden></section>'
                     f'<section><h2>{E(u["off"])}</h2><ul>' + "".join(f'<li><a href="{x}" target="_blank" rel="noopener">{E(n)}</a></li>' for n, x in t["links"]) +
                     f'</ul><p class="small">{E(u["checked"])}</p></section>'

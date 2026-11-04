@@ -24,7 +24,7 @@
   // (eSIM, transfert, assurance), puis le reste
   var ARR = { ABJ: "abidjan", DSS: "dakar", LOS: "lagos", ACC: "accra", DLA: "douala", CMN: "casablanca", FIH: "kinshasa", BKO: "bamako", CKY: "conakry",
     ALG: ["alger", "algiers"], TUN: "tunis", LFW: "lome" };
-  var ORDER = ["esim", "transfer", "insurance", "car", "activities", "bike", "claim"];
+  var ORDER = ["esim", "transfer", "insurance", "car", "tours", "activities", "bike", "claim"];
   var X = { fr: ["Votre pack pour {c}", "Faut-il un visa ?", "La réponse selon votre passeport, avec le lien officiel.", "Arriver à l’aéroport de {c}", "Taxi, change, carte SIM : ce qu’il faut savoir en arrivant.", "Vérifier"],
     en: ["Your pack for {c}", "Do you need a visa?", "The answer for your passport, with the official link.", "Arriving at {c} airport", "Taxis, money, SIM card: what to know when you land.", "Check"],
     es: ["Tu pack para {c}", "¿Necesitas visado?", "La respuesta según tu pasaporte, con el enlace oficial.", "Llegar al aeropuerto de {c}", "Taxi, cambio, tarjeta SIM: lo que hay que saber al llegar.", "Comprobar"],
