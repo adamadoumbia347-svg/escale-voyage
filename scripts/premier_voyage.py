@@ -124,11 +124,11 @@ UI = {
 }
 
 
-def klook(site, code, lang):
+def klook(site, code, lang, name=""):
     """Lien Klook partenaire : page de la ville si elle est connue (site/data/partners.json → klook.villes), sinon lien général."""
     import urllib.parse
     k = json.loads((site / "data" / "partners.json").read_text(encoding="utf-8")).get("klook", {})
-    path = k.get("villes", {}).get(code)
+    path = k.get("villes", {}).get(code) or (k["search"].replace("{q}", urllib.parse.quote(name)) if name and k.get("search") else None)
     if not path:
         return "https://klook.tpm.lv/MHEoG42I"
     return E(k["format"].replace("{url}", urllib.parse.quote(f"https://www.klook.com/{'fr' if lang == 'fr' else 'en-US'}/{path}", safe="")))
@@ -159,7 +159,7 @@ def build(site, ctx):
             other = "".join(f'<li><a href="/{d[4][lang]["path"]}/">{E(d[4][lang]["flag"])} {E(d[4][lang]["name"])}</a></li>' for d in others)
             body = (f'<section><h2>{E(u["know"])}</h2><ol class="pv-list">{cards}</ol></section>{gal}'
                     f'<section class="pv-price-sec"><h2>{E(u["price_h"])}</h2><p class="small">{E(u["price_p"])} <span class="tr-from" hidden>· {E(u["from_txt"])} <strong class="tr-from-city"></strong></span></p>{price}</section>'
-                    f'<section class="pv-act"><h2>🎟️ {E(u["act_h"])}</h2><p>{E(u["act_p"])}</p><p><a class="btn ghost" href="{klook(site, code, lang)}" target="_blank" rel="sponsored noopener noreferrer">{E(u["act_b"])} ↗</a></p></section>'
+                    f'<section class="pv-act"><h2>🎟️ {E(u["act_h"])}</h2><p>{E(u["act_p"])}</p><p><a class="btn ghost" href="{klook(site, code, lang, t["name"])}" target="_blank" rel="sponsored noopener noreferrer">{E(u["act_b"])} ↗</a></p></section>'
                     f'<section id="price-alert" class="price-alert" data-from="PAR" data-to="{code}" data-for="{E(u["alert_for"])}" hidden></section>'
                     f'<section><h2>{E(u["off"])}</h2><ul>' + "".join(f'<li><a href="{x}" target="_blank" rel="noopener">{E(n)}</a></li>' for n, x in t["links"]) +
                     f'</ul><p class="small">{E(u["checked"])}</p></section>'

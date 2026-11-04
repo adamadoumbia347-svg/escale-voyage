@@ -245,10 +245,12 @@
     }
   ],
   "klook": {
-    "_comment": "Pages Klook par ville (code aéroport → chemin après la langue, ex. destination/c8-bali/). Lien = https://www.klook.com/{langue}/{chemin}, fr pour le français, en-US sinon, enveloppé dans le format Travelpayouts (marker 789659).",
+    "_comment": "Pages Klook par ville (code aéroport → chemin après la langue). Sans entrée : recherche Klook du nom de la ville (search/result/?query=…). Lien = https://www.klook.com/{fr|en-US}/{chemin}, enveloppé dans le format Travelpayouts (marker 789659).",
     "format": "https://tp.media/r?campaign_id=137&marker=789659&p=4110&trs=585259&u={url}",
     "villes": {
-      "DPS": "destination/c8-bali/"
-    }
+      "DPS": "destination/c8-bali/",
+      "BCN": "search/result/?query=Barcelone"
+    },
+    "search": "search/result/?query={q}"
   }
 }
