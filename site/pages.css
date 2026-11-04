@@ -593,3 +593,25 @@ h1 em, h1 span, .hero h1 em { color: var(--teal-d); font-style: normal; }
 @media (max-width: 520px) { .pv-gal { grid-template-columns: 1fr 1fr; } }
 .pv-price { max-width: 280px; }
 .pv-other { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; padding: 0; } .pv-other a { display: inline-block; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); text-decoration: none; }
+/* Meilleur mois pour partir */
+.mm-chart { margin: 16px 0 8px; }
+.mm-bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.mm-bars li { min-width: 0; }
+.mm-bars a, .mm-empty { display: grid; grid-template-columns: 52px 1fr 64px; align-items: center; gap: 8px; text-decoration: none; color: var(--ink); }
+.mm-bars small { order: -1; font-size: .85rem; color: var(--muted); text-transform: capitalize; }
+.mm-bar { display: block; height: 22px; width: var(--h); border-radius: 4px 8px 8px 4px; background: linear-gradient(90deg, #8fdccf, #12b3a0); }
+.mm-bars b { font-size: .88rem; text-align: right; white-space: nowrap; }
+.mm-best .mm-bar { background: linear-gradient(90deg, #ffe14a, #f2b705); }
+.mm-best small { color: var(--ink); font-weight: 700; }
+.mm-empty .mm-bar { background: var(--line); }
+@media (min-width: 700px) {
+  .mm-bars { grid-template-columns: repeat(12, 1fr); align-items: end; height: 300px; gap: 10px; }
+  .mm-bars li { height: 100%; }
+  .mm-bars a, .mm-empty { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; gap: 0; }
+  .mm-bar { width: 100%; height: var(--h); border-radius: 8px 8px 3px 3px; background: linear-gradient(180deg, #8fdccf, #12b3a0); }
+  .mm-best .mm-bar { background: linear-gradient(180deg, #ffe14a, #f2b705); }
+  .mm-bars b { order: -1; margin-bottom: 4px; font-size: .78rem; text-align: center; }
+  .mm-bars small { order: 2; margin-top: 4px; font-size: .75rem; }
+}
+.mm-summary strong { font-size: 1.15rem; }
+.mm-wait { color: var(--muted); padding: 20px 0; }

@@ -12,6 +12,12 @@ import build_i18n as B
 
 E = html.escape
 
+
+def hero_src(site, img):
+    """Grande photo (-1280) si elle existe, sinon la photo normale."""
+    big = img.replace(".webp", "-1280.webp")
+    return big if (site / big.lstrip("/")).exists() else img
+
 # clé, codes d'aéroport, photo d'en-tête (site/img/villes), photos de la galerie (site/img/premier), textes
 DESTS = [
     ("zanzibar", "ZNZ", "zanzibar", ["zanzibar"], {
@@ -149,7 +155,7 @@ def build(site, ctx):
                     f'<section><h2>{E(u["other"])}</h2><ul class="pv-other">{other}</ul></section>'
                     f'<div id="tr-cfg" hidden data-from="{E(u["from_l"])}" data-loading="{E(u["loading"])}" data-none="{E(u["none"])}"></div>'
                     '<script src="/fetes.js" defer></script><script src="/tendances.js" defer></script><script src="/alerts.js" defer></script>')
-            img = (f'<img class="pv-hero" src="{v["img"].replace(".webp", "-1280.webp")}" alt="{E(t["name"])}" width="1280" height="960" fetchpriority="high">'
+            img = (f'<img class="pv-hero" src="{hero_src(site, v["img"])}" alt="{E(t["name"])}" width="1280" height="960" fetchpriority="high">'
                    f'<p class="pv-cred small">{E(u["photo"])} : {E(v["author"][:50])}, {E(v["license"])}</p>') if v else ""
             hero = f'<p class="eyebrow">{E(t["flag"])} {E(u["eyebrow"])}</p><h1>{h1}</h1><p class="hero-lead">{E(t["lead"])}</p>{img}'
             ld = '<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", "@type": "Article", "headline": t["title"].split(" | ")[0],
