@@ -58,23 +58,23 @@ ANY = {
     "fr": dict(title="Partout : la carte des vols pas chers depuis votre ville", h1="Partout dans le monde, <span>au meilleur prix</span>",
                desc="Pas d'idée de destination ? Voyez sur une carte du monde les vols aller-retour les moins chers depuis Paris, Bruxelles, Genève, Londres, Montréal, New York et d'autres villes.",
                lead="Choisissez votre ville et un mois : la carte montre les destinations les moins chères trouvées récemment par des voyageurs. Touchez un point pour voir les vols.",
-               from_="Départ de", month="Mois", budget="Budget max", map="Carte des destinations et de leurs prix", list="Destinations"),
+               from_="Départ de", month="Mois", budget="Budget max", map="Carte des destinations et de leurs prix", list="Destinations", direct="✈️ Vols directs uniquement"),
     "en": dict(title="Anywhere: map of cheap flights from your city", h1="Anywhere in the world, <span>at the best price</span>",
                desc="No idea where to go? See on a world map the cheapest round-trip flights from London, Paris, Brussels, Geneva, Montreal, New York and more.",
                lead="Pick your city and a month: the map shows the cheapest destinations recently found by travellers. Tap a dot to see the flights.",
-               from_="From", month="Month", budget="Max budget", map="Map of destinations and their prices", list="Destinations"),
+               from_="From", month="Month", budget="Max budget", map="Map of destinations and their prices", list="Destinations", direct="✈️ Direct flights only"),
     "es": dict(title="Explorar: mapa de vuelos baratos desde tu ciudad", h1="A cualquier lugar del mundo, <span>al mejor precio</span>",
                desc="¿No sabes adónde ir? Mira en un mapa del mundo los vuelos de ida y vuelta más baratos desde Madrid, Barcelona, París, Londres, Nueva York y otras ciudades.",
                lead="Elige tu ciudad y un mes: el mapa muestra los destinos más baratos encontrados recientemente por viajeros. Toca un punto para ver los vuelos.",
-               from_="Salida desde", month="Mes", budget="Presupuesto máximo", map="Mapa de destinos y sus precios", list="Destinos"),
+               from_="Salida desde", month="Mes", budget="Presupuesto máximo", map="Mapa de destinos y sus precios", list="Destinos", direct="✈️ Solo vuelos directos"),
     "pt": dict(title="Explorar: mapa de voos baratos a partir da sua cidade", h1="Para qualquer lugar do mundo, <span>ao melhor preço</span>",
                desc="Sem ideia de destino? Veja num mapa do mundo os voos de ida e volta mais baratos a partir de Lisboa, Paris, Londres, Bruxelas, Nova Iorque e outras cidades.",
                lead="Escolha a sua cidade e um mês: o mapa mostra os destinos mais baratos encontrados recentemente por viajantes. Toque num ponto para ver os voos.",
-               from_="Partida de", month="Mês", budget="Orçamento máximo", map="Mapa dos destinos e dos seus preços", list="Destinos"),
+               from_="Partida de", month="Mês", budget="Orçamento máximo", map="Mapa dos destinos e dos seus preços", list="Destinos", direct="✈️ Só voos diretos"),
     "ar": dict(title="استكشف: خريطة الرحلات الرخيصة من مدينتك", h1="إلى أي مكان في العالم <span>بأفضل سعر</span>",
                desc="لا تعرف إلى أين تسافر؟ شاهد على خريطة العالم أرخص رحلات الذهاب والعودة من باريس ولندن وبروكسل وجنيف ومونتريال ونيويورك ومدن أخرى.",
                lead="اختر مدينتك وشهرًا: تعرض الخريطة أرخص الوجهات التي وجدها المسافرون مؤخرًا. المس نقطة لرؤية الرحلات.",
-               from_="المغادرة من", month="الشهر", budget="الميزانية القصوى", map="خريطة الوجهات وأسعارها", list="الوجهات"),
+               from_="المغادرة من", month="الشهر", budget="الميزانية القصوى", map="خريطة الوجهات وأسعارها", list="الوجهات", direct="✈️ رحلات مباشرة فقط"),
 }
 
 FAVS = {
@@ -110,6 +110,7 @@ def build_anywhere(site, ctx):
   <label class="any-field"><span>{E(a["from_"])}</span><select id="any-from">{opts}</select></label>
   <div class="any-field"><span id="any-months-l">{E(a["month"])}</span><div class="chips" id="any-months" role="group" aria-labelledby="any-months-l"></div></div>
   <label class="any-field any-budget"><span>{E(a["budget"])}</span><input type="range" id="any-max" min="0" max="100" disabled><output id="any-max-out" for="any-max"></output></label>
+  <label class="any-direct"><input type="checkbox" id="any-direct"> <span>{E(a["direct"])}</span></label>
 </div>
 <div class="any-map-wrap">
   <div class="any-scroll" id="any-scroll"><div class="any-map"><div class="any-land" aria-hidden="true"></div>

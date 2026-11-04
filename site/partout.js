@@ -33,6 +33,10 @@
   };
   var iso = function (d) { return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0"); };
 
+  var dir = $("any-direct");
+  try { if (dir && /[?&]direct=1/.test(location.search)) dir.checked = true; } catch (e) {}
+  if (dir) dir.addEventListener("change", function () { try { history.replaceState(null, "", location.pathname + (dir.checked ? "?direct=1" : "")); } catch (e) {} load(); });
+  var dur = function (m) { if (!m) return ""; var h = Math.floor(m / 60), mn = m % 60; return " · " + h + " h" + (mn ? " " + String(mn).padStart(2, "0") : ""); };
   var sel = $("any-from"), months = $("any-months"), range = $("any-max"), out = $("any-max-out");
   var svg = $("any-dots"), tip = $("any-tip"), list = $("any-list"), status = $("any-status"), scroller = $("any-scroll");
   var ap = {}, items = [], currency = cur, month = null, max = Infinity, req = 0;
@@ -80,7 +84,7 @@
     var id = ++req, from = sel.value;
     status.textContent = L.load;
     root.setAttribute("aria-busy", "true");
-    fetch("/api/explore?from=" + from + "&month=" + month + "&currency=" + cur).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }).then(function (data) {
+    fetch("/api/explore?from=" + from + "&month=" + month + "&currency=" + cur + (dir && dir.checked ? "&direct=1" : "")).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }).then(function (data) {
       if (id !== req) return;
       root.removeAttribute("aria-busy");
       currency = data && data.currency || cur;
@@ -122,7 +126,7 @@
       var a = ap[it.to], dep = String(it.departure_at).slice(0, 10), ret = it.return_at ? String(it.return_at).slice(0, 10) : "";
       var day = function (s) { var p = s.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]).toLocaleDateString(L.loc, { day: "numeric", month: "short" }); };
       return '<li><a class="any-item" href="' + esc(href(it)) + '" data-to="' + it.to + '"><span class="any-flag" aria-hidden="true">' + flag(a[3]) + "</span>" +
-        '<span class="any-name"><strong>' + esc(a[1]) + '</strong><small>' + esc(country(a[3])) + " · " + esc(day(dep)) + (ret ? " → " + esc(day(ret)) : "") + " · " + esc(stopsText(it.transfers)) + "</small></span>" +
+        '<span class="any-name"><strong>' + esc(a[1]) + '</strong><small>' + esc(country(a[3])) + " · " + esc(day(dep)) + (ret ? " → " + esc(day(ret)) : "") + " · " + esc(stopsText(it.transfers)) + esc(it.transfers === 0 ? dur(it.duration) : "") + "</small></span>" +
         '<span class="any-price t' + tier(it.price, lo, hi) + '">' + esc(money(it.price, currency)) + "</span></a></li>";
     }).join("");
     if (o && scroller && scroller.scrollWidth > scroller.clientWidth && !scroller.dataset.done) {

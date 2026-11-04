@@ -638,3 +638,5 @@ h1 em, h1 span, .hero h1 em { color: var(--teal-d); font-style: normal; }
 .pr-in { width: 100%; font: inherit; padding: 11px 14px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
 .pr-sug { position: absolute; z-index: 20; left: 0; right: 0; top: 100%; margin: 4px 0 0; padding: 4px; list-style: none; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); box-shadow: var(--shadow); }
 .pr-sug li { padding: 10px 12px; border-radius: 10px; cursor: pointer; } .pr-sug li:hover { background: var(--soft); } .pr-sug small { color: var(--muted); }
+.any-direct { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); cursor: pointer; align-self: end; }
+.any-direct input { width: 18px; height: 18px; accent-color: #12b3a0; }
