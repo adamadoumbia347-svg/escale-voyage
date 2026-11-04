@@ -53,4 +53,5 @@ def build(site, ctx):
     import premier_voyage
     import meilleur_mois
     import proche
-    return build_weekends(site, ctx) + premier_voyage.build(site, ctx) + meilleur_mois.build(site, ctx) + proche.build(site, ctx)
+    import outils
+    return build_weekends(site, ctx) + premier_voyage.build(site, ctx) + meilleur_mois.build(site, ctx) + proche.build(site, ctx) + outils.build(site, ctx)

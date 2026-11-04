@@ -640,3 +640,19 @@ h1 em, h1 span, .hero h1 em { color: var(--teal-d); font-style: normal; }
 .pr-sug li { padding: 10px 12px; border-radius: 10px; cursor: pointer; } .pr-sug li:hover { background: var(--soft); } .pr-sug small { color: var(--muted); }
 .any-direct { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); cursor: pointer; align-self: end; }
 .any-direct input { width: 18px; height: 18px; accent-color: #12b3a0; }
+/* Outils : trop cher, budget famille */
+.tool-form { border: 1px solid var(--line); border-radius: 20px; padding: 18px; background: var(--surface); margin: 10px 0 20px; }
+.tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); gap: 12px; margin-bottom: 12px; }
+.tool-grid label { display: flex; flex-direction: column; gap: 4px; font-weight: 600; font-size: .9rem; }
+.tool-grid input, .tool-grid select { font: inherit; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); width: 100%; }
+.ac-wrap { position: relative; }
+.ac-sug { position: absolute; z-index: 30; left: 0; right: 0; top: 100%; margin: 4px 0 0; padding: 4px; list-style: none; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); box-shadow: var(--shadow); font-weight: 400; }
+.ac-sug li { padding: 9px 10px; border-radius: 8px; cursor: pointer; } .ac-sug li:hover { background: var(--soft); } .ac-sug small { color: var(--muted); }
+.tc-res, .bf-res { border-radius: 20px; padding: 18px; border: 2px solid var(--line); background: var(--surface); }
+.tc-good { border-color: #12b3a0; } .tc-mid { border-color: #f2b705; } .tc-bad { border-color: #ef4444; }
+.tc-v { font-size: 1.5rem; font-weight: 700; margin: 0 0 6px; } .tc-diff { font-size: 1.1rem; font-weight: 600; }
+.tc-err { color: #b91c1c; font-weight: 600; }
+.bf-table { width: 100%; border-collapse: collapse; margin: 10px 0; } .bf-table th { text-align: left; font-weight: 500; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.bf-table td { text-align: right; font-weight: 700; padding: 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.bf-tot th, .bf-tot td { font-size: 1.2rem; font-weight: 700; border-bottom: 0; } .bf-tot td small { display: block; font-size: .85rem; color: var(--muted); }
+.bf-per { font-weight: 600; } .bf-sch-wrap { align-self: end; margin: 0; }
