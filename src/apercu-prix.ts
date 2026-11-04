@@ -43,7 +43,7 @@ async function recordHistory(ctx: Ctx, from: string, to: string, price: number, 
 }
 
 // « Bas », « normal » ou « élevé » : prix du jour comparé à la médiane des 60 derniers jours (au moins 7 jours de données)
-function verdict(hist: Point[], price: number) {
+export function verdict(hist: Point[], price: number) {
   const since = new Date(Date.now() - HIST_WINDOW * 864e5).toISOString().slice(0, 10)
   const today = new Date().toISOString().slice(0, 10)
   const past = hist.filter(([d]) => d >= since && d < today).map(([, p]) => p).sort((a, b) => a - b)

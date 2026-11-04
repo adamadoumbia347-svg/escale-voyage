@@ -4,7 +4,7 @@ import { Month, Point, cacheKey, readHistory, routeMonths } from "./apercu-prix"
 // 6 prochains mois, son évolution sur 7 et 30 jours (historique gardé dans KV par apercu-prix.ts) et le mois le moins cher.
 // Le tableau est écrit dans la page par le serveur (lisible par Google). Les prix viennent du cache des pages trajets ;
 // le relevé quotidien (.github/workflows/releve-prix.yml) ouvre chaque page trajet listée ici pour tenir les prix à jour.
-const ROUTES: [string, string, string, string][] = [
+export const ROUTES: [string, string, string, string][] = [
   ["CDG", "DSS", "Paris → Dakar", "vol-paris-dakar"], ["CDG", "BKO", "Paris → Bamako", "vol-paris-bamako"],
   ["CDG", "ABJ", "Paris → Abidjan", "vol-paris-abidjan"], ["CDG", "CKY", "Paris → Conakry", "vol-paris-conakry"],
   ["CDG", "DLA", "Paris → Douala", "vol-paris-douala"], ["CDG", "NSI", "Paris → Yaoundé", "vol-paris-yaounde"],

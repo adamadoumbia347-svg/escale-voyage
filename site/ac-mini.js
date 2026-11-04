@@ -6,6 +6,8 @@
   var get = function (u) { return fetch(u).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }); };
   var CITY = { PAR: ["Paris", "FR"], LON: ["London", "GB"], MIL: ["Milano", "IT"], ROM: ["Roma", "IT"], NYC: ["New York", "US"], TYO: ["Tokyo", "JP"], STO: ["Stockholm", "SE"],
     YMQ: ["Montréal", "CA"], YTO: ["Toronto", "CA"], WAS: ["Washington", "US"], CHI: ["Chicago", "US"], SAO: ["São Paulo", "BR"], BUE: ["Buenos Aires", "AR"], MOW: ["Moskva", "RU"], BUH: ["București", "RO"] };
+  var GEO = { PAR: [48.86, 2.35], LON: [51.51, -0.13], MIL: [45.46, 9.19], ROM: [41.9, 12.5], NYC: [40.71, -74.0], TYO: [35.68, 139.69], STO: [59.33, 18.07], YMQ: [45.5, -73.57],
+    YTO: [43.65, -79.38], WAS: [38.9, -77.04], CHI: [41.88, -87.63], SAO: [-23.55, -46.63], BUE: [-34.6, -58.38], MOW: [55.75, 37.62], BUH: [44.43, 26.1] };
   var CITYN = { fr: { LON: "Londres", MIL: "Milan", ROM: "Rome", MOW: "Moscou", BUH: "Bucarest" }, en: { MIL: "Milan", ROM: "Rome", MOW: "Moscow", BUH: "Bucharest" },
     es: { PAR: "París", LON: "Londres", MIL: "Milán", NYC: "Nueva York" }, pt: { LON: "Londres", MIL: "Milão", NYC: "Nova Iorque" }, it: { PAR: "Parigi", LON: "Londra" }, de: { LON: "London", MIL: "Mailand", ROM: "Rom" } }[lang] || {};
   var db = {}, list = [];
@@ -14,8 +16,8 @@
   var country = function (cc) { try { return new Intl.DisplayNames([lang], { type: "region" }).of(cc); } catch (e) { return cc; } };
   var ready = Promise.all([get("/data/airports.json"), lang === "fr" ? Promise.resolve({}) : get("/data/noms/" + lang + ".json")]).then(function (r) {
     var names = r[1] || {};
-    (r[0] || []).forEach(function (a) { db[a[0]] = { n: names[a[0]] || a[1], cc: a[3], big: a[4] }; });
-    Object.keys(CITY).forEach(function (k) { db[k] = { n: CITYN[k] || names[k] || CITY[k][0], cc: CITY[k][1], big: 1, city: 1 }; });
+    (r[0] || []).forEach(function (a) { db[a[0]] = { n: names[a[0]] || a[1], cc: a[3], big: a[4], la: a[5], lo: a[6] }; });
+    Object.keys(CITY).forEach(function (k) { db[k] = { n: CITYN[k] || names[k] || CITY[k][0], cc: CITY[k][1], big: 1, city: 1, la: GEO[k][0], lo: GEO[k][1] }; });
     list = Object.keys(db).map(function (k) { return [k, db[k]]; });
   });
   var attach = function (inp, onPick) {
@@ -37,5 +39,7 @@
     inp.addEventListener("blur", function () { setTimeout(function () { ul.hidden = true; }, 150); });
     return { set: pick };
   };
-  window.EscaleAC = { attach: attach, ready: ready, name: function (c) { return (db[c] && db[c].n) || c; }, cc: function (c) { return db[c] && db[c].cc; } };
+  window.EscaleAC = { attach: attach, ready: ready, name: function (c) { return (db[c] && db[c].n) || c; }, cc: function (c) { return db[c] && db[c].cc; },
+    km: function (a, b) { var x = db[a], y = db[b]; if (!x || !y || x.la == null || y.la == null) return null; var r = Math.PI / 180, dl = (y.la - x.la) * r, dn = (y.lo - x.lo) * r;
+      var h = Math.pow(Math.sin(dl / 2), 2) + Math.cos(x.la * r) * Math.cos(y.la * r) * Math.pow(Math.sin(dn / 2), 2); return Math.round(12742 * Math.asin(Math.sqrt(h))); } };
 })();

@@ -1,11 +1,15 @@
 {
 "/": [
-"89905cab77d51205",
+"e82622b6760b2752",
 "2026-11-04"
 ],
 "/a-propos/": [
 "69101e0ef8ae93a5",
 "2026-11-03"
+],
+"/acheter-ou-attendre/": [
+"459cf03e8d2e9bb8",
+"2026-11-04"
 ],
 "/ar/": [
 "f3a2b954dede8a66",
@@ -2499,6 +2503,10 @@
 "bfb3744260886d79",
 "2026-11-04"
 ],
+"/calendrier-prix-diaspora/": [
+"a18bded84ff4a78a",
+"2026-11-04"
+],
 "/cd/": [
 "606829a5a2b2a374",
 "2026-11-03"
@@ -2518,6 +2526,10 @@
 "/contact/": [
 "82523fb8be95d452",
 "2026-11-03"
+],
+"/controle-avant-vol/": [
+"f18434efa9f04888",
+"2026-11-04"
 ],
 "/credits-photos/": [
 "1cce4ed7aae12e72",
@@ -2911,6 +2923,10 @@
 "4d3fded4102163fb",
 "2026-11-03"
 ],
+"/dossier-visa/": [
+"5065c243c9ac5b21",
+"2026-11-04"
+],
 "/dz/": [
 "13cf5ecfb85d6ac1",
 "2026-11-03"
@@ -3111,6 +3127,10 @@
 "fd0a4a1b429cd4b9",
 "2026-11-03"
 ],
+"/en/buy-or-wait/": [
+"aa8bc78ebe38e348",
+"2026-11-04"
+],
 "/en/cheap-hotels-abidjan/": [
 "0a248f8b3bb4d002",
 "2026-11-03"
@@ -3191,9 +3211,17 @@
 "fa100968a12c3190",
 "2026-11-04"
 ],
+"/en/check-flight-ticket-scam/": [
+"ee1cd9ed3103ae9b",
+"2026-11-04"
+],
 "/en/deals/": [
 "b376de7bf2164ba7",
 "2026-11-03"
+],
+"/en/diaspora-price-calendar/": [
+"364788408e69e21e",
+"2026-11-04"
 ],
 "/en/did-i-overpay/": [
 "c8e1d34d2ef6d386",
@@ -3213,6 +3241,10 @@
 ],
 "/en/first-trip-zanzibar/": [
 "820afe70044b24ce",
+"2026-11-04"
+],
+"/en/flight-delay-compensation/": [
+"1cad0965e88767fa",
 "2026-11-04"
 ],
 "/en/flights-abidjan-accra/": [
@@ -5503,9 +5535,17 @@
 "6483980a743ae21e",
 "2026-11-03"
 ],
+"/en/offline-travel-kit/": [
+"54d61e1ed0e5f56f",
+"2026-11-04"
+],
 "/en/pay-flight-mobile-money/": [
 "2ebccde1aed7994a",
 "2026-11-03"
+],
+"/en/pre-flight-check/": [
+"2acf25a3bc68badb",
+"2026-11-04"
 ],
 "/en/student-flights-from-africa/": [
 "738862424d909436",
@@ -5522,6 +5562,14 @@
 "/en/urgent-flight-to-africa/": [
 "84d881346abccee2",
 "2026-11-03"
+],
+"/en/visa-application-checklist/": [
+"4d28b2b8ffaf6c5d",
+"2026-11-04"
+],
+"/en/visa-free/": [
+"dc374559eb7a3b16",
+"2026-11-04"
 ],
 "/en/visa/": [
 "b0c6ae5ccb6dc4ca",
@@ -8075,6 +8123,10 @@
 "b3d774d2d3acd42c",
 "2026-11-03"
 ],
+"/indemnisation-retard-vol/": [
+"e73cfcc9f881ba00",
+"2026-11-04"
+],
 "/it/": [
 "57b53dd05329889f",
 "2026-11-03"
@@ -8430,6 +8482,10 @@
 "/it/voli-venezia-tunisi/": [
 "b69c07127ad85fe4",
 "2026-11-03"
+],
+"/kit-voyage-hors-ligne/": [
+"2e14a96b95208f02",
+"2026-11-04"
 ],
 "/ma/": [
 "56514f7d1439c3d5",
@@ -11095,6 +11151,10 @@
 "437c08bb9b971be8",
 "2026-11-03"
 ],
+"/sans-visa/": [
+"81f8c09c21e2d6c2",
+"2026-11-04"
+],
 "/sn/": [
 "d0772854d1fdf501",
 "2026-11-03"
@@ -11110,6 +11170,10 @@
 "/tn/": [
 "2f6bb923f1b3aaaf",
 "2026-11-03"
+],
+"/verifier-billet-avion/": [
+"c998a2d8f93b300a",
+"2026-11-04"
 ],
 "/visa/": [
 "8cee87bda406c9d4",
@@ -13504,7 +13568,7 @@
 "2026-11-04"
 ],
 "/widget/": [
-"62b39074ad42b732",
+"291ceaa80e9dc532",
 "2026-11-04"
 ]
 }
