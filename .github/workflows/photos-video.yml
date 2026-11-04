@@ -1,0 +1,32 @@
+# Photos plein écran pour les vidéos (Wikimedia Commons, licences libres) : video/photos/<série>/
+name: Photos des vidéos
+on:
+  workflow_dispatch:
+    inputs:
+      series:
+        description: "Séries à télécharger (ex. bali), séparées par des espaces"
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  photos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Télécharger et recadrer
+        run: |
+          pip install --quiet pillow
+          python3 scripts/photos_video.py ${{ inputs.series }}
+      - name: Enregistrer dans le dépôt
+        run: |
+          git config user.name "escale-photos"
+          git config user.email "escale-photos@users.noreply.github.com"
+          git add video/photos
+          git diff --cached --quiet && echo "Rien de nouveau" && exit 0
+          git commit -m "Photos des vidéos (Wikimedia Commons, licences libres)"
+          git pull --no-rebase --no-edit && git push
