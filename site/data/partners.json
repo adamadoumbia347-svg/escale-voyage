@@ -243,5 +243,10 @@
         "nl": "Tot € 600 compensatie: controleer gratis of je recht hebt."
       }
     }
-  ]
+  ],
+  "klook": {
+    "_comment": "Liens Klook par ville (code aéroport ou ville → adresse d'une page klook.com). Le lien partenaire est fabriqué automatiquement avec le format Travelpayouts ci-dessous (marker 789659).",
+    "format": "https://tp.media/r?campaign_id=137&marker=789659&p=4110&trs=585259&u={url}",
+    "villes": {}
+  }
 }
