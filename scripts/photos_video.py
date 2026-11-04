@@ -71,17 +71,17 @@ SERIES = {
         ("tokyotour", ["Tokyo Tower", "Tokyo skyline Tokyo Tower"], "tokyo"),
     ],
     "tendances": [
-        ("bishkek", ["Ala Archa National Park", "Ala-Archa gorge Kyrgyzstan", "Bishkek Ala-Too Square"], "ala.?archa|bishkek"),
-        ("hurghada", ["Giftun Island Hurghada", "Hurghada beach Red Sea", "Hurghada coast"], "hurghada|giftun"),
-        ("malmo", ["Turning Torso Malmö", "Malmö skyline", "Øresund Bridge"], "malm|turning torso|[oø]resund"),
-        ("trapani", ["Saline di Trapani", "Trapani salt pans windmill", "Erice Sicily", "Trapani"], "trapani|erice|saline|marsala"),
-        ("chongqing", ["Hongyadong Chongqing", "Chongqing skyline", "Chongqing Yangtze"], "chongqing|hongyadong"),
+        ("bishkek", ["Issyk-Kul lake mountains", "Song-Kol lake yurts", "Ala Archa gorge", "Kyrgyzstan mountains yurt"], "kyrgyz|issyk|ala.?archa|song.?k[oö]l|bishkek|tian shan"),
+        ("hurghada", ["Giftun island beach", "Hurghada coral reef", "Makadi Bay", "El Gouna lagoon", "Hurghada beach"], "hurghada|giftun|makadi|gouna|sahl hasheesh"),
+        ("malmo", ["Turning Torso", "Malmö Västra hamnen", "Malmö Stortorget", "Øresund Bridge aerial"], "malm|turning torso|[oø]resund"),
+        ("trapani", ["Saline di Trapani", "Trapani salt pans windmill", "San Vito Lo Capo beach", "Favignana", "Erice Sicily"], "trapani|saline|marsala|san vito|favignana|erice"),
+        ("chongqing", ["Hongyadong", "Chongqing skyline Yangtze", "Chongqing Jiefangbei", "Chongqing skyline"], "chongqing|hongyadong"),
         ("danang", ["Golden Bridge Ba Na Hills", "Dragon Bridge Da Nang", "My Khe beach Da Nang"], "golden bridge|ba na|da nang|đà nẵng|dragon bridge|my khe"),
         ("sal", ["Santa Maria beach Sal Cape Verde", "Sal island Cape Verde beach", "Ilha do Sal"], "sal|santa maria|cabo verde|cape verde"),
         ("quebec", ["Château Frontenac", "Château Frontenac Québec", "Old Quebec"], "frontenac|qu[eé]bec"),
-        ("redwoods", ["Redwood National Park", "Jedediah Smith Redwoods State Park", "Redwood forest California"], "redwood|sequoia"),
+        ("redwoods", ["Redwood National and State Parks", "Jedediah Smith Redwoods", "Muir Woods", "Avenue of the Giants", "Prairie Creek Redwoods"], "redwood national|jedediah|muir woods|avenue of the giants|humboldt redwoods|prairie creek"),
         ("venetie", ["Tre Cime di Lavaredo", "Venice Grand Canal", "Dolomites Veneto"], "lavaredo|venezia|venice|dolomit|veneto"),
-        ("sibenik", ["Šibenik cathedral", "Šibenik old town", "Krka waterfalls Skradinski buk"], "[sš]ibenik|krka|skradin"),
+        ("sibenik", ["Šibenik panorama", "St. Nicholas Fortress Šibenik", "Skradinski buk Krka", "Šibenik harbour"], "[sš]ibenik|krka|skradin"),
         ("rabat", ["Hassan Tower Rabat", "Kasbah of the Udayas", "Rabat Morocco"], "rabat|hassan tower|oudaya|udaya"),
         ("okinawa", ["Kouri Bridge Okinawa", "Okinawa beach", "Shuri Castle"], "okinawa|shuri|kouri|ishigaki|miyako|kerama"),
     ],
@@ -117,14 +117,55 @@ def vertical(data):
     return im.crop((l, t, l + W, t + H))
 
 
+def candidates(name, key, queries, must):
+    """Mode choix : jusqu'à 6 photos possibles par lieu, en petit, dans video/photos/_choix/<série>/."""
+    out = ROOT / "video" / "photos" / "_choix" / name
+    out.mkdir(parents=True, exist_ok=True)
+    seen, n, titles = set(), 0, {}
+    for quality in (True, False):
+        for q in queries:
+            try:
+                found = [t for t in search(q, quality) if t not in seen]
+            except Exception:  # noqa: BLE001
+                continue
+            seen.update(found)
+            for i in range(0, len(found), 10):
+                for x in info(found[i:i + 10]):
+                    if n < 6 and ok(x, must):
+                        data = urllib.request.urlopen(urllib.request.Request(x["thumb"], headers={"User-Agent": UA}), timeout=60).read()
+                        vertical(data).resize((360, 640)).save(out / f"{key}-{n}.webp", "WEBP", quality=70)
+                        titles[f"{key}-{n}"] = x["title"]; n += 1
+            time.sleep(0.5)
+    p = out / "titres.json"
+    old = json.loads(p.read_text()) if p.exists() else {}
+    old.update(titles); p.write_text(json.dumps(old, ensure_ascii=False, indent=1))
+    print(key, n, "candidates")
+
+
+CAND = False
+ONLY = []
+
+
 def main():
-    names = sys.argv[1:] or list(SERIES)
+    global CAND, ONLY
+    args = sys.argv[1:]
+    if "--choix" in args:
+        CAND = True; args.remove("--choix")
+    ONLY = [a.split("=", 1)[1].split(",") for a in args if a.startswith("--lieux=")]
+    ONLY = ONLY[0] if ONLY else []
+    args = [a for a in args if not a.startswith("--lieux=")]
+    names = args or list(SERIES)
     for name in names:
         out = ROOT / "video" / "photos" / name
         out.mkdir(parents=True, exist_ok=True)
         credits, used = {}, set()
-        for key, queries, must in SERIES[name]:
-            x = pick(queries, must, used)
+        only = set(ONLY)
+        for key, queries, must, *forced in SERIES[name]:
+            if only and key not in only:
+                continue
+            if CAND:
+                candidates(name, key, queries, must); continue
+            x = (info([forced[0]]) or [None])[0] if forced else pick(queries, must, used)
             if not x:
                 print("AUCUNE photo pour", key); continue
             used.add(x["title"])
@@ -139,7 +180,12 @@ def main():
             credits[key] = {k: x[k] for k in ("title", "page", "author", "license", "license_url")}
             print("OK", key, "<-", x["title"], "|", x["author"], "|", x["license"])
             time.sleep(0.5)
-        (out / "credits.json").write_text(json.dumps(credits, ensure_ascii=False, indent=1))
+        if CAND:
+            continue
+        p = out / "credits.json"
+        if only and p.exists():
+            credits = {**json.loads(p.read_text()), **credits}
+        p.write_text(json.dumps(credits, ensure_ascii=False, indent=1))
 
 
 if __name__ == "__main__":
