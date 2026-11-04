@@ -578,3 +578,18 @@ h1 em, h1 span, .hero h1 em { color: var(--teal-d); font-style: normal; }
 .tr-bell { margin: 6px 0 0; width: 100%; font: inherit; font-size: .85rem; font-weight: 700; padding: 7px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
 .tr-bell:hover { border-color: #12b3a0; }
 .tr-alert-for { font-size: 1.05rem; margin-bottom: 6px; }
+/* Premier voyage à… */
+.pv-hero { display: block; width: 100%; height: auto; aspect-ratio: 16 / 7; object-fit: cover; border-radius: 20px; margin-top: 18px; }
+.pv-cred { margin: 4px 2px 0; }
+.pv-list { list-style: none; counter-reset: pv; margin: 12px 0 0; padding: 0; display: grid; gap: 12px; }
+.pv-item { counter-increment: pv; display: flex; gap: 14px; align-items: flex-start; padding: 16px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+.pv-ic { flex: none; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 14px; font-size: 1.7rem; background: #e9faf5; }
+.pv-item h3 { margin: 2px 0 4px; font-size: 1.08rem; } .pv-item h3::before { content: counter(pv) ". "; color: #0b8577; }
+.pv-item p { margin: 0; color: var(--muted); }
+.pv-gal { list-style: none; margin: 18px 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.pv-gal li { min-width: 0; }
+.pv-gal img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 14px; }
+.pv-gal small { display: block; font-size: .65rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 520px) { .pv-gal { grid-template-columns: 1fr 1fr; } }
+.pv-price { max-width: 280px; }
+.pv-other { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; padding: 0; } .pv-other a { display: inline-block; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); text-decoration: none; }

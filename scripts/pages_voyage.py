@@ -50,4 +50,5 @@ def build_weekends(site, ctx):
 
 
 def build(site, ctx):
-    return build_weekends(site, ctx)
+    import premier_voyage
+    return build_weekends(site, ctx) + premier_voyage.build(site, ctx)
