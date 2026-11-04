@@ -158,6 +158,14 @@ function multi(rows, extra) {
 
 // Scène « téléphone » : baromètre puis page du trajet mis en avant (calendrier, alerte), avec le doigt qui touche
 async function phoneScene(b, fmt, v) {
+  if (v.world) {  // vidéo Monde : la page Explorer (carte des destinations depuis la ville de départ), qui défile
+    const P = await capture(b, `${SITE}${{ fr: '/partout/', it: '/en/anywhere/', en: '/en/anywhere/' }[LANG]}?from=${WFROM[LANG][0]}`, 'explorer', { list: '.any-list, #any-list, main' }, 5200, 7000);
+    const ty = Math.min(1400, Math.max(0, P.h - 844));
+    v.data.phone = { caption: { fr: 'Le monde entier, prix en direct sur escale.live 👇', it: 'Tutto il mondo, prezzi in diretta su escale.live 👇', en: 'The whole world, live prices on escale.live 👇' }[LANG],
+      sub: { fr: 'Carte Explorer · jour le moins cher · gratuit', it: 'Mappa Esplora · giorno più economico · gratis', en: 'Explore map · cheapest day · free' }[LANG],
+      shots: [{ src: P.src, w: P.w, steps: [[0, 0], [1.6, 0], [4.2, ty], [5.6, ty]], taps: [], dur: 5.6 }] };
+    return;
+  }
   const route = v.route || 'vol-paris-dakar';
   const R = await capture(b, `${SITE}/${route}/`, 'trajet', { hero: '#hero-price', cal: '#route-calendar', day: '#route-calendar .cal-day.t0', alert: '#price-alert', alertBtn: '#price-alert button[type=submit]' }, 7200, 7000);
   const shots = [], cal = R.boxes.cal, day = R.boxes.day, al = R.boxes.alert, btn = R.boxes.alertBtn;
@@ -263,6 +271,74 @@ async function buildEn(rows, fmt) {
     caption: `How much is a flight from London to Africa this week? ✈️ ${all.slice(0, 4).map((r) => `${r.flag} ${r.cityLabel} from £${r.price}`).join(', ')}…${bonus} All prices on escale.live 👇 ${base} ${tg(all)}` };
 }
 
+
+// ---------- Vidéo « Monde » : grandes destinations touristiques sur tous les continents (prix réels du jour, /api/prix) ----------
+// [code, nom fr, nom it, nom en, drapeau, région]
+const WORLD = [
+  ['BCN', 'Barcelone', 'Barcellona', 'Barcelona', '🇪🇸', 'eu'], ['LIS', 'Lisbonne', 'Lisbona', 'Lisbon', '🇵🇹', 'eu'], ['ROM', 'Rome', 'Roma', 'Rome', '🇮🇹', 'eu'],
+  ['ATH', 'Athènes', 'Atene', 'Athens', '🇬🇷', 'eu'], ['PRG', 'Prague', 'Praga', 'Prague', '🇨🇿', 'eu'], ['AMS', 'Amsterdam', 'Amsterdam', 'Amsterdam', '🇳🇱', 'eu'],
+  ['IST', 'Istanbul', 'Istanbul', 'Istanbul', '🇹🇷', 'eu'], ['REK', 'Reykjavik', 'Reykjavik', 'Reykjavik', '🇮🇸', 'eu'], ['TCI', 'Tenerife', 'Tenerife', 'Tenerife', '🇪🇸', 'eu'],
+  ['LON', 'Londres', 'Londra', 'London', '🇬🇧', 'eu'], ['PAR', 'Paris', 'Parigi', 'Paris', '🇫🇷', 'eu'],
+  ['RAK', 'Marrakech', 'Marrakech', 'Marrakesh', '🇲🇦', 'af'], ['DSS', 'Dakar', 'Dakar', 'Dakar', '🇸🇳', 'af'], ['ZNZ', 'Zanzibar', 'Zanzibar', 'Zanzibar', '🇹🇿', 'af'],
+  ['CPT', 'Le Cap', 'Città del Capo', 'Cape Town', '🇿🇦', 'af'], ['MRU', 'Maurice', 'Mauritius', 'Mauritius', '🇲🇺', 'af'], ['CAI', 'Le Caire', 'Il Cairo', 'Cairo', '🇪🇬', 'af'],
+  ['SEZ', 'Seychelles', 'Seychelles', 'Seychelles', '🇸🇨', 'af'], ['DJE', 'Djerba', 'Djerba', 'Djerba', '🇹🇳', 'af'],
+  ['DXB', 'Dubaï', 'Dubai', 'Dubai', '🇦🇪', 'as'], ['BKK', 'Bangkok', 'Bangkok', 'Bangkok', '🇹🇭', 'as'], ['HKT', 'Phuket', 'Phuket', 'Phuket', '🇹🇭', 'as'],
+  ['DPS', 'Bali', 'Bali', 'Bali', '🇮🇩', 'as'], ['TYO', 'Tokyo', 'Tokyo', 'Tokyo', '🇯🇵', 'as'], ['SIN', 'Singapour', 'Singapore', 'Singapore', '🇸🇬', 'as'],
+  ['MLE', 'Maldives', 'Maldive', 'Maldives', '🇲🇻', 'as'],
+  ['NYC', 'New York', 'New York', 'New York', '🇺🇸', 'am'], ['MIA', 'Miami', 'Miami', 'Miami', '🇺🇸', 'am'], ['CUN', 'Cancún', 'Cancún', 'Cancún', '🇲🇽', 'am'],
+  ['PUJ', 'Punta Cana', 'Punta Cana', 'Punta Cana', '🇩🇴', 'am'], ['HAV', 'La Havane', "L'Avana", 'Havana', '🇨🇺', 'am'], ['PTP', 'Guadeloupe', 'Guadalupa', 'Guadeloupe', '🇬🇵', 'am'],
+  ['FDF', 'Martinique', 'Martinica', 'Martinique', '🇲🇶', 'am'], ['RIO', 'Rio de Janeiro', 'Rio de Janeiro', 'Rio de Janeiro', '🇧🇷', 'am'], ['YMQ', 'Montréal', 'Montréal', 'Montreal', '🇨🇦', 'am'],
+];
+const WREG = { eu: { fr: 'Europe', it: 'Europa', en: 'Europe', e: '🏛️' }, af: { fr: 'Afrique et océan Indien', it: 'Africa e oceano Indiano', en: 'Africa & Indian Ocean', e: '🌍' },
+  as: { fr: 'Moyen-Orient et Asie', it: 'Medio Oriente e Asia', en: 'Middle East & Asia', e: '🌏' }, am: { fr: 'Amériques et Caraïbes', it: 'Americhe e Caraibi', en: 'Americas & Caribbean', e: '🌎' } };
+const WFROM = { fr: ['CDG', 'Paris', 'EUR'], it: ['MXP', 'Milano', 'EUR'], en: ['LHR', 'London', 'GBP'] };
+async function worldRows() {
+  const [from, fromName, cur] = WFROM[LANG], col = { fr: 1, it: 2, en: 3 }[LANG];
+  const d = new Date(); d.setMonth(d.getMonth() + 1, 10);
+  const dep = d.toISOString().slice(0, 10), ret = new Date(d.getTime() + 7 * 864e5).toISOString().slice(0, 10);
+  const skip = { CDG: 'PAR', MXP: 'MIL', LHR: 'LON' }[from], rows = [];
+  for (const w of WORLD) {
+    if (w[0] === skip) continue;
+    try {
+      const j = await (await fetch(`${SITE}/api/prix?from=${from}&to=${w[0]}&dep=${dep}&ret=${ret}&currency=${cur}`)).json();
+      if (j && j.available && j.price) rows.push({ code: w[0], city: w[col], cityLabel: w[col], flag: w[4], reg: w[5], price: Math.round(j.price), route: `${fromName} → ${w[col]}`, d7: null, month: '', path: '' });
+    } catch (e) {}
+    await new Promise((r) => setTimeout(r, 150));
+  }
+  if (rows.length < 8) throw new Error('prix du monde illisibles (' + rows.length + ')');
+  return rows.sort((a, b) => a.price - b.price);
+}
+async function buildWorld(fmt) {
+  const rows = await worldRows(), extra = fmt.split('-')[1] || 'quiz', lang = LANG, cur = WFROM[LANG][2];
+  const T = {
+    fr: { lbl: 'aller-retour dès', hook: ['🌍✈️', 'Les plus belles<br>destinations<br><b>du monde</b> à petit prix', 'destinations · prix repérés le '], title: 'Aller-retour depuis Paris', dep: 'depuis Paris · A/R',
+      quizSub: 'Bonus : devine le prix de ce billet !', tip: 'Astuce du jour 💡', name: 'Les plus belles destinations du monde', cap: 'Les plus belles destinations du monde à petit prix 🌍✈️', all: 'Toutes les destinations sur escale.live 👇 Et toi, tu pars où ? Dis-le en commentaire', tags: '#voyage #vacances #billetdavion #volpascher #bonplan #tourdumonde' },
+    it: { lbl: 'andata e ritorno da', hook: ['🌍✈️', 'Le mete più belle<br>del <b>mondo</b><br>a prezzi bassi', 'destinazioni · prezzi trovati il '], title: 'Andata e ritorno da Milano', dep: 'da Milano · A/R',
+      quizSub: 'Bonus: indovina il prezzo di questo biglietto!', tip: 'Consiglio del giorno 💡', name: 'Le mete più belle del mondo', cap: 'Le mete più belle del mondo a prezzi bassi 🌍✈️', all: 'Tutti i prezzi su escale.live 👇 E tu, dove vai? Scrivilo nei commenti', tags: '#viaggi #vacanze #voli #bigliettiaerei #offerte #giroilmondo' },
+    en: { lbl: 'return from', hook: ['🌍✈️', 'The world’s<br>most beautiful places<br><b>for less</b>', 'destinations · prices found on '], title: 'Return from London', dep: 'from London · return',
+      quizSub: 'Bonus: guess the price of this ticket!', tip: 'Tip of the day 💡', name: 'The world’s most beautiful places', cap: 'The world’s most beautiful places for less 🌍✈️', all: 'All prices on escale.live 👇 Where are you going? Tell us in the comments', tags: '#travel #cheapflights #holiday #wanderlust #flights #bucketlist' } }[lang];
+  const date = day().toLocaleDateString({ fr: 'fr-FR', it: 'it-IT', en: 'en-GB' }[lang], { day: 'numeric', month: 'long' });
+  const sections = ['eu', 'af', 'as', 'am'].map((g) => ({ chip: WREG[g][lang], title: T.title + ' ' + WREG[g].e, grid: true,
+    cards: rows.filter((r) => r.reg === g).slice(0, 8).map((r) => ({ flag: r.flag, route: r.city, price: r.price, extra: T.dep })) })).filter((x) => x.cards.length);
+  const data = { lbl: T.lbl, hook: { emoji: T.hook[0], title: T.hook[1], sub: `${rows.length} ${T.hook[2]}${date}` }, sections,
+    outro: lang === 'fr' ? OUTRO : lang === 'it' ? { note: 'Prezzi andata e ritorno più bassi trovati<br>per il mese prossimo. Cambiano ogni giorno.', ask: 'Dove vorresti andare?<br><span class="y">Scrivilo nei commenti 👇</span>', cta: 'Tutti i prezzi, ogni giorno 👆' }
+      : { note: 'Lowest return fares found<br>for next month. They change every day.', ask: 'Where would you go?<br><span class="y">Tell us in the comments 👇</span>', cta: 'All prices, every day 👆' } };
+  if (cur === 'GBP') data.cur = '£';
+  let bonus = '';
+  if (extra === 'quiz') {
+    const pool = rows.filter((r) => r.price > 60), r = pool[(doy() * 7) % pool.length];
+    const opts = [r.price, Math.round(r.price * 1.45 / 5) * 5, Math.round(r.price * 0.65 / 5) * 5], order = [[0, 1, 2], [1, 0, 2], [2, 1, 0]][doy() % 3];
+    data.quiz = { flag: r.flag, route: r.route, sub: T.quizSub, options: order.map((i) => opts[i]), answer: order.indexOf(0) };
+    bonus = lang === 'fr' ? ` 🤔 Bonus : devine le prix de ${r.route} !` : lang === 'it' ? ` 🤔 Bonus: indovina il prezzo di ${r.route}!` : ` 🤔 Bonus: guess the price of ${r.route}!`;
+  } else {
+    const TT = lang === 'fr' ? TIPS : lang === 'it' ? TIPS_IT : TIPS_EN, k = doy() % TT.length, [l1, l2, l3] = TT[k];
+    data.tip = { label: T.tip, lines: [l1, `<small>${l2}</small>`, `<span class="y">${l3}</span>`] };
+  }
+  const money = (n) => (cur === 'GBP' ? '£' + n : n + ' €');
+  const cheap = rows.slice(0, 4).map((r) => `${r.flag} ${r.city} ${lang === 'en' ? 'from' : lang === 'it' ? 'da' : 'dès'} ${money(r.price)}`).join(', ');
+  return { title: `${T.name} (${rows.length})`, world: true, data, caption: `${T.cap} ${cheap}…${bonus} ${T.all} ${T.tags}` };
+}
+
 // Textes pour publier la même vidéo ailleurs : YouTube Shorts (titre court + description), Instagram et Facebook Reels
 function platforms(v) {
   const tags = (v.caption.match(/#\w+/g) || []).slice(0, 8).join(' '), text = v.caption.replace(/#\w+/g, '').replace(/\s+/g, ' ').trim();
@@ -277,11 +353,15 @@ function platforms(v) {
 (async () => {
   const rows = await prices();
   // Chaque jour : tous les pays, région par région (40 s et plus), avec un bonus qui change (dimanche → samedi)
-  const week = LANG === 'en' ? ['all-quiz', 'all-tip', 'all-quiz', 'all-tip', 'all-quiz', 'all-tip', 'all-quiz']
-    : LANG === 'it' ? ['paesi-quiz', 'paesi-consiglio', 'paesi-quiz', 'paesi-consiglio', 'paesi-quiz', 'paesi-consiglio', 'paesi-quiz']
-    : ['pays-quiz', 'pays-baisse', 'pays-astuce', 'pays-quiz', 'pays-baisse', 'pays-astuce', 'pays-quiz'];
+  // Dimanche → samedi : le monde entier (destinations touristiques) 4 jours sur 7, l'Afrique les 3 autres
+  const week = LANG === 'en' ? ['monde-quiz', 'all-quiz', 'monde-astuce', 'all-tip', 'monde-quiz', 'all-quiz', 'monde-astuce']
+    : LANG === 'it' ? ['monde-quiz', 'paesi-quiz', 'monde-astuce', 'paesi-consiglio', 'monde-quiz', 'paesi-quiz', 'monde-astuce']
+    : ['monde-quiz', 'pays-baisse', 'monde-astuce', 'pays-quiz', 'monde-quiz', 'pays-astuce', 'monde-astuce'];
   const fmt = process.env.FORMAT || week[day().getDay()];
-  const v = LANG === 'en' ? await buildEn(rows, fmt) : LANG === 'it' ? buildIt(rows, fmt) : build(rows, fmt);
+  let v;
+  if (fmt.startsWith('monde')) { try { v = await buildWorld(fmt); } catch (e) { console.log('Vidéo Monde impossible, vidéo Afrique à la place :', e.message); } }
+  if (!v) { const f2 = fmt.startsWith('monde') ? (LANG === 'en' ? 'all-quiz' : LANG === 'it' ? 'paesi-quiz' : 'pays-quiz') : fmt;
+    v = LANG === 'en' ? await buildEn(rows, f2) : LANG === 'it' ? buildIt(rows, f2) : build(rows, f2); }
   if (LANG === 'it') v.title = '🇮🇹 ' + v.title;
   if (LANG === 'en') v.title = '🇬🇧 ' + v.title;
   console.log('Format :', fmt, '·', v.title);
