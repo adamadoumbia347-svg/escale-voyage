@@ -560,3 +560,18 @@ h1 em, h1 span, .hero h1 em { color: var(--teal-d); font-style: normal; }
 .tr-credit { margin: 4px 2px 0; font-size: .68rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .tr-credit a { color: inherit; }
 @media (max-width: 520px) { .tr-why { display: none; } .tr-info strong { font-size: 1.05rem; } }
+/* Week-ends pas chers */
+.we-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin: 8px 0 14px; }
+.we-budget { display: flex; gap: 8px; }
+.we-budget button { font: inherit; font-weight: 700; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.we-budget button[aria-pressed="true"] { background: #12b3a0; border-color: #12b3a0; color: #fff; }
+.we-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 14px; }
+.we-card a { display: flex; flex-direction: column; height: 100%; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: var(--surface); color: var(--ink); text-decoration: none; box-shadow: var(--shadow); }
+.we-card img, .we-noimg { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: grid; place-items: center; font-size: 2.4rem; background: linear-gradient(135deg, #e9faf5, #dff3ff); }
+.we-txt { display: flex; flex-direction: column; gap: 2px; padding: 12px 14px 14px; }
+.we-txt strong { font-size: 1.1rem; } .we-txt small { color: var(--muted); }
+.we-dates { font-size: .88rem; color: var(--muted); margin-top: 4px; }
+.we-price { font-size: 1.35rem; color: #0b8577; margin-top: 4px; }
+:root[data-theme="dark"] .we-price { color: #5fe0cc; }
+.we-wait { color: var(--muted); padding: 20px 0; }
+@media (max-width: 520px) { .we-grid { grid-template-columns: 1fr 1fr; gap: 10px; } .we-txt { padding: 10px; } .we-price { font-size: 1.15rem; } .we-dates { font-size: .78rem; } }

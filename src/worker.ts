@@ -19,12 +19,13 @@ import * as populaires from "./api/populaires"
 import * as clic from "./api/clic"
 import * as fx from "./api/fx"
 import * as grille from "./api/grille"
+import * as weekends from "./api/weekends"
 import * as apercu from "./apercu-prix"
 import * as barometre from "./barometre"
 import * as accueil from "./accueil"
 import { sendDigest, sendNewsletter } from "./digest"
 
-const API: Record<string, any> = { push, prix, explore, calendar, deals, geo, alert, form, admin, cron, populaires, clic, fx, grille, connus: accueil }
+const API: Record<string, any> = { push, prix, explore, calendar, deals, geo, alert, form, admin, cron, populaires, clic, fx, grille, weekends, connus: accueil }
 
 export default {
   async fetch(request: Request, env: Env & { ASSETS: { fetch: (r: Request) => Promise<Response> } }, ctx: { waitUntil: (p: Promise<any>) => void }) {
