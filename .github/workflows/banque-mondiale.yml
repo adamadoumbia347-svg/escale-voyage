@@ -1,0 +1,29 @@
+# Lecture d'un indicateur de la Banque mondiale (données publiques) pour plusieurs pays, affiché dans le journal.
+# Ex. PA.NUS.PPPC.RF = niveau des prix (rapport entre la parité de pouvoir d'achat et le taux de change, États-Unis = 1).
+name: Données Banque mondiale
+on:
+  workflow_dispatch:
+    inputs:
+      indicateur:
+        description: "Code de l'indicateur"
+        required: true
+        default: "PA.NUS.PPPC.RF"
+      pays:
+        description: "Codes pays ISO2 séparés par des points-virgules (ex. FR;TR;TH)"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  lire:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lire
+        env:
+          IND: ${{ inputs.indicateur }}
+          PAYS: ${{ inputs.pays }}
+        run: |
+          case "$IND$PAYS" in *[!A-Za-z0-9.\;_]*) echo "paramètres invalides"; exit 1;; esac
+          curl -s -m 60 "https://api.worldbank.org/v2/country/$PAYS/indicator/$IND?format=json&mrv=3&per_page=500" \
+            | python3 -c "import json,sys;d=json.load(sys.stdin);print(d[0]);[print(r['country']['id'],r['countryiso3code'],r['date'],r['value'],r['indicator']['value']) for r in d[1] or [] if r['value'] is not None]"
