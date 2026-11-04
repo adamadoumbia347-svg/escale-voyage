@@ -29,6 +29,7 @@ import visa  # noqa: E402
 import afrique_themes  # noqa: E402
 import aeroports  # noqa: E402
 import pratique_afrique  # noqa: E402
+import tendances  # noqa: E402
 import explore_pages  # noqa: E402
 import hubs  # noqa: E402
 import villes  # noqa: E402
@@ -663,6 +664,7 @@ def main():
     urls += afrique_themes.build(SITE, ctx, route_paths)  # Hajj/Omra, études, commerce : vols au départ de l'Afrique
     urls += aeroports.build(SITE, ctx, HUBS)  # guides « Arriver à l'aéroport de … » (fr/en)
     urls += pratique_afrique.build(SITE, ctx)  # billet urgent, bagages par compagnie, avis des voyageurs
+    urls += tendances.build(SITE, ctx)  # destinations tendance 2027
     urls += hub_urls
     urls += i18n_urls + build_i18n.build_indexes(SITE, ctx, route_paths, hotel_paths) + build_i18n.build_deals(SITE, ctx) + build_i18n.build_guides(SITE, ctx) + build_i18n.build_about(SITE, ctx) + build_i18n.build_fetes(SITE, ctx) + explore_pages.build_anywhere(SITE, ctx)
     urls += legal_pages()

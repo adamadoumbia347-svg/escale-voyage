@@ -771,6 +771,15 @@ footer { margin-top: 72px; }
 }
 
 /* Grande carte photo « Le monde entier » et villes à explorer */
+.trend-card { display: flex; align-items: center; gap: 18px; margin: -26px 0 40px; padding: 14px; border-radius: 20px; background: var(--mint, #e9faf5); color: inherit; text-decoration: none; border: 1px solid rgb(18 179 160 / .25); }
+.trend-imgs { display: flex; flex: none; }
+.trend-imgs img { width: 62px; height: 82px; object-fit: cover; border-radius: 12px; border: 3px solid #fff; box-shadow: 0 6px 14px rgb(0 0 0 / .15); }
+.trend-imgs img + img { margin-left: -18px; }
+.trend-text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.trend-text strong { font-size: 1.1rem; }
+.trend-text span { font-size: .92rem; color: var(--muted, #5b6474); }
+.trend-text b { color: var(--teal-d, #0b8577); }
+@media (max-width: 520px) { .trend-imgs img { width: 48px; height: 64px; } .trend-card { gap: 12px; } }
 .world-card { position: relative; display: block; overflow: hidden; border-radius: 20px; aspect-ratio: 16 / 7; min-height: 280px; margin-bottom: 44px; color: #fff; text-decoration: none; background: var(--navy); }
 .world-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 25%; }
 .world-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, rgb(5 32 60 / .78) 0%, rgb(5 32 60 / .35) 45%, rgb(5 32 60 / 0) 70%); }
@@ -1091,6 +1100,12 @@ h1 em, h1 span, .hero h1 em { color: var(--teal-d); font-style: normal; }
       <span class="world-text"><strong data-en="The whole world, at the best price">Le monde entier, au meilleur prix</strong>
         <span data-en="The cheapest destinations from your city, on a map.">Les destinations les moins chères depuis votre ville, sur une carte.</span>
         <b data-en="Explore the map →">Explorer la carte →</b></span>
+    </a>
+    <a class="trend-card" href="/tendances-2027/" data-hrefs="{&quot;fr&quot;: &quot;/tendances-2027/&quot;, &quot;en&quot;: &quot;/en/trending-2027/&quot;, &quot;es&quot;: &quot;/en/trending-2027/&quot;, &quot;pt&quot;: &quot;/en/trending-2027/&quot;, &quot;ar&quot;: &quot;/en/trending-2027/&quot;, &quot;it&quot;: &quot;/en/trending-2027/&quot;, &quot;de&quot;: &quot;/en/trending-2027/&quot;, &quot;nl&quot;: &quot;/en/trending-2027/&quot;}">
+      <span class="trend-imgs" aria-hidden="true"><img src="/img/tendances/danang.webp" width="480" height="640" alt="" loading="lazy" decoding="async"><img src="/img/tendances/venetie.webp" width="480" height="640" alt="" loading="lazy" decoding="async"><img src="/img/tendances/sal.webp" width="480" height="640" alt="" loading="lazy" decoding="async"></span>
+      <span class="trend-text"><strong data-en="📈 Where to go in 2027?">📈 Où partir en 2027 ?</strong>
+        <span data-en="The trending destinations (Skyscanner, Lonely Planet), with prices from your city.">Les destinations tendance (Skyscanner, Lonely Planet), avec les prix depuis votre ville.</span>
+        <b data-en="See the trends →">Voir les tendances →</b></span>
     </a>
     <h2 data-en="Explore the world">Explorer le monde</h2>
     <p class="lead" data-en="Where to go next? Prices from your city, updated every day.">Où partir ? Les prix depuis votre ville, mis à jour chaque jour.</p>
