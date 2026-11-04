@@ -49,7 +49,7 @@
       list.map(function (p) {
         var url = p.url.replace("{city}", encodeURIComponent(city)).replace("{code}", code);
         // Klook : page de la ville si on l'a (partners.json → klook.villes), lien partenaire au format Travelpayouts
-        if (p.key === "tours" && cfg.klook && cfg.klook.villes && cfg.klook.villes[code]) url = cfg.klook.format.replace("{url}", encodeURIComponent(cfg.klook.villes[code]));
+        if (p.key === "tours" && cfg.klook && cfg.klook.villes && cfg.klook.villes[code]) url = cfg.klook.format.replace("{url}", encodeURIComponent("https://www.klook.com/" + (lang === "fr" ? "fr" : "en-US") + "/" + cfg.klook.villes[code]));
         if (/stay22\.com/.test(url)) url += "&lang=" + lang;  // page Stay22 dans la langue de la page
         return "<li><span class=\"av-logo\" style=\"background:" + esc(p.color) + "\" aria-hidden=\"true\">" + esc(p.name[0]) + "</span>" +
           "<div><strong>" + esc(p.title[lang] || p.title.en) + "</strong><span>" + esc(p.desc[lang] || p.desc.en) + "</span></div>" +

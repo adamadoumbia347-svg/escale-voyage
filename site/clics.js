@@ -108,6 +108,7 @@
     if (/stay22\./.test(host)) return "stay22";
     if (/(^|\.)trip\.com$/.test(host)) return "tripcom";
     if (/\.tpm\.lv$/.test(host)) return host.split(".")[0];
+    if (host === "tp.media") return /campaign_id=137\b/.test(h.search) ? "klook" : "tp-media";
     if (/whatsapp\.com$/.test(host)) return "whatsapp";
     if (/^wa\.me$/.test(host)) return "partage-whatsapp";
     var m = host.match(/(skyscanner|kayak|momondo|booking|google|airbnb|agoda|safetywing)/);

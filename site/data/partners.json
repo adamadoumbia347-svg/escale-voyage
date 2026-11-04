@@ -245,8 +245,10 @@
     }
   ],
   "klook": {
-    "_comment": "Liens Klook par ville (code aéroport ou ville → adresse d'une page klook.com). Le lien partenaire est fabriqué automatiquement avec le format Travelpayouts ci-dessous (marker 789659).",
+    "_comment": "Pages Klook par ville (code aéroport → chemin après la langue, ex. destination/c8-bali/). Lien = https://www.klook.com/{langue}/{chemin}, fr pour le français, en-US sinon, enveloppé dans le format Travelpayouts (marker 789659).",
     "format": "https://tp.media/r?campaign_id=137&marker=789659&p=4110&trs=585259&u={url}",
-    "villes": {}
+    "villes": {
+      "DPS": "destination/c8-bali/"
+    }
   }
 }
