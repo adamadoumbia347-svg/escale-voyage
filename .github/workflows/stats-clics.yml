@@ -1,0 +1,19 @@
+# Bilan des clics vers les partenaires (compteur anonyme du site, 7 et 30 derniers jours). Lancement à la main.
+# Utilise le secret ADMIN_KEY du dépôt ; n'affiche que des totaux (aucune donnée personnelle).
+name: Bilan des clics partenaires
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  clics:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lire les clics
+        env:
+          KEY: ${{ secrets.ADMIN_KEY }}
+        run: |
+          curl -s -m 30 -H "x-admin-key: $KEY" "https://escale.live/api/admin?action=clics" > c.json
+          jq -r '"Depuis le \(.depuis)", (.clics | to_entries | sort_by(-.value.j30)[] | "\(.key): \(.value.j7) clics sur 7 jours, \(.value.j30) sur 30 jours  [\(.value.pages | to_entries | sort_by(-.value) | map("\(.key)=\(.value)") | join(", "))]")' c.json || head -c 300 c.json
