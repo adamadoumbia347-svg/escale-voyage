@@ -52,7 +52,7 @@ SERIES = {
         ("londres", ["Tower Bridge London", "Big Ben Westminster", "London skyline Thames"], "tower bridge|big ben|westminster|london"),
         ("islande", ["Skógafoss", "Seljalandsfoss", "Jökulsárlón"], "sk[oó]gafoss|seljalandsfoss|j[oö]kuls"),
         ("athenes", ["Acropolis of Athens", "Parthenon Athens"], "acropol|parthenon|athen"),
-        ("abidjan", ["Abidjan Plateau skyline", "Abidjan lagune Ebrié", "Abidjan Plateau"], "abidjan|plateau"),
+        ("abidjan", ["Abidjan Plateau skyline", "Abidjan lagune Ebrié", "Abidjan Plateau"], "abidjan"),
         ("zanzibar", ["Nungwi beach Zanzibar", "Kendwa beach Zanzibar", "Zanzibar beach"], "zanzibar|nungwi|kendwa|paje"),
         ("puntacana", ["Bávaro beach", "Punta Cana beach", "Playa Bávaro"], "punta cana|b[aá]varo"),
         ("avion", ["Airplane wing above clouds", "Aircraft wing clouds", "Airbus A350 takeoff"], "wing|clouds|a350|a380|takeoff|airliner|aircraft|airplane"),
