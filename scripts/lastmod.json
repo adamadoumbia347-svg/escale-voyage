@@ -1,6 +1,6 @@
 {
 "/": [
-"1232c997dc6df509",
+"f070c7ca9cfb9f83",
 "2026-11-04"
 ],
 "/a-propos/": [
@@ -2519,6 +2519,10 @@
 "b53a9204b6b75405",
 "2026-11-03"
 ],
+"/de/familie-einladen/": [
+"c8a97021c103c65e",
+"2026-11-04"
+],
 "/de/fluege-berlin-accra/": [
 "dc42ba21cace3ba7",
 "2026-11-03"
@@ -3092,7 +3096,7 @@
 "2026-11-04"
 ],
 "/en/bring-family/": [
-"d52d7c31d533f506",
+"09b74201c20af64c",
 "2026-11-04"
 ],
 "/en/business-flights-dubai-guangzhou-istanbul/": [
@@ -5631,6 +5635,10 @@
 "6c9faf6ec37a8628",
 "2026-11-03"
 ],
+"/es/traer-a-un-familiar/": [
+"73557477bb3ff2c1",
+"2026-11-04"
+],
 "/es/vuelos-a-abiyan/": [
 "990cc85cb95dcefc",
 "2026-11-03"
@@ -7928,7 +7936,7 @@
 "2026-11-03"
 ],
 "/faire-venir-un-proche/": [
-"41987c609338dc58",
+"7b59cb851c02c210",
 "2026-11-04"
 ],
 "/gh/": [
@@ -8054,6 +8062,10 @@
 "/it/": [
 "57b53dd05329889f",
 "2026-11-03"
+],
+"/it/far-venire-un-familiare/": [
+"22e8bf298619790c",
+"2026-11-04"
 ],
 "/it/voli-bergamo-casablanca/": [
 "be80be26047d0a13",
@@ -8806,6 +8818,10 @@
 "/pt/sobre/": [
 "a244018393738d56",
 "2026-11-03"
+],
+"/pt/trazer-um-familiar/": [
+"4b05ffa04139b5d2",
+"2026-11-04"
 ],
 "/pt/voos-abidjan-acra/": [
 "83ed977e0589dcb0",
@@ -13472,7 +13488,7 @@
 "2026-11-04"
 ],
 "/widget/": [
-"2a74c9f631834b5c",
+"922cf8046a605a97",
 "2026-11-04"
 ]
 }
