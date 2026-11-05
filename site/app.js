@@ -1602,10 +1602,13 @@
     "Asia/Bangkok": "BKK", "Asia/Kolkata": "DEL", "Australia/Sydney": "SYD" };
   const tzAirport = () => { try { const c = TZ_AIR[Intl.DateTimeFormat().resolvedOptions().timeZone]; return c && byCode.get(c); } catch (e) { return null; } };
   const geoFetch = isLive ? fetch("/api/geo").then((r) => (r.ok ? r.json() : null)).catch(() => null) : Promise.resolve(null);
+  // La liste des aéroports (220 ko) n'est chargée qu'une fois la page affichée, pour ne pas ralentir le premier affichage
+  const pageLoaded = new Promise((res) => { if (document.readyState === "complete") res(); else addEventListener("load", () => res(), { once: true }); });
   async function useGeo() {
     if (!isLive) return null;
     try {
       const g = await geoFetch;
+      await pageLoaded;
       if (!g) { await loadDB(); return dbLoaded ? tzAirport() : null; }
       if (!store.get("escale.cur") && COUNTRY_CUR[g.country]) {
         CUR = COUNTRY_CUR[g.country]; addCur(CUR); $("cur").value = CUR; syncCurQuick();

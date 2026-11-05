@@ -312,7 +312,7 @@ ALERT_LABEL = {"fr": "Alerte prix", "en": "Price alert", "es": "Alerta de precio
 
 def alert_btn(lang):
     """Bouton « Alerte prix » du haut des pages trajets : visible seulement si les alertes sont actives (alerts.js)."""
-    return f'<a class="btn ghost alert-cta" href="#price-alert" hidden>🔔 {E(ALERT_LABEL[lang])}</a>'
+    return f'<a class="btn ghost alert-cta" href="#price-alert">🔔 {E(ALERT_LABEL[lang])}</a>'
 
 
 def fav_btn(lang, path, title, sub, kind):
