@@ -57,7 +57,7 @@
     chips.addEventListener("click", function (ev) { var b = ev.target.closest("button[data-o]"); if (b) { active = b.getAttribute("data-o"); paint(); } });
     paint();
     // Ville du visiteur en premier : l'aéroport choisi sur Escale, sinon le plus proche de sa position (/api/geo)
-    var stored = null; try { stored = ((localStorage.getItem("escale.from") || "").match(/\(([A-Z]{3})\)$/) || [])[1]; } catch (e) {}
+    var stored = null; try { stored = (((localStorage.getItem("escale.from.m") ? localStorage.getItem("escale.from") : "") || "").match(/\(([A-Z]{3})\)$/) || [])[1]; } catch (e) {}
     var near = function (g) {
       var rad = Math.PI / 180, best = null, bd = 1e9, home = null, hd = 1e9;
       (res[1] || []).forEach(function (a) {

@@ -316,6 +316,12 @@
   }
   paintMonthOptions();
   const DEFAULT_FROM = "Paris (CDG)";
+  // Le départ suit le visiteur (position déduite de l'adresse IP, sinon fuseau horaire du téléphone). Seul un aéroport choisi
+  // à la main est gardé (« escale.from.m ») ; un ancien départ enregistré automatiquement est oublié une fois.
+  if (!store.get("escale.from.m")) store.set("escale.from", "");
+  let fromTouched = false;
+  const manualFrom = () => { fromTouched = true; store.set("escale.from.m", "1"); };
+  $("f-from").addEventListener("input", manualFrom);
   $("f-from").value = store.get("escale.from") || DEFAULT_FROM;
   // Pas de destination imposée : le départ est l'aéroport le plus proche du visiteur, il écrit lui-même où il va
   $("c-pick").value = $("f-from").value;
@@ -1321,7 +1327,7 @@
   document.querySelectorAll('input[name="trip"]').forEach((r) => r.addEventListener("change", syncTrip));
   function syncDrop() { $("c-drop-wrap").hidden = !$("c-other").checked; }
   $("c-other").addEventListener("change", syncDrop);
-  $("f-swap").addEventListener("click", () => { const a = $("f-from").value; $("f-from").value = $("f-to").value; $("f-to").value = a; });
+  $("f-swap").addEventListener("click", () => { manualFrom(); const a = $("f-from").value; $("f-from").value = $("f-to").value; $("f-to").value = a; });
 
   $("form-vols").addEventListener("submit", (ev) => {
     ev.preventDefault();
@@ -1336,7 +1342,7 @@
       if (!to) return (err.textContent = T("Choisissez une destination pour voir les prix du mois entier.", "Choose a destination to see prices for the whole month."));
       renderMonth({ from, to, month: $("f-month").value, stay: ow ? 0 : +$("f-stay").value, ow,
         adults: +$("f-adults").value, children: +$("f-children").value, cabin: $("f-cabin").value });
-      if (!booting) store.set("escale.from", labelOf(from.code));
+      if (!booting && fromTouched) store.set("escale.from", labelOf(from.code));
       return;
     }
     const dep = $("f-dep").value, ret = ow ? null : $("f-ret").value;
@@ -1346,7 +1352,7 @@
     const s = { from, to, dep, ret, adults: +$("f-adults").value, children: +$("f-children").value, cabin: $("f-cabin").value,
       flex: $("f-flex").checked, direct: $("f-direct").checked };
     renderFlights(s);
-    if (!booting) store.set("escale.from", labelOf(from.code));
+    if (!booting && fromTouched) store.set("escale.from", labelOf(from.code));
     remember({ tab: "vols", label: `✈ ${from.code}→${to ? to.code : "?"} · ${dep.slice(5)}`,
       fields: snapshot(["f-from", "f-to", "f-dep", "f-ret", "f-adults", "f-children", "f-cabin", "f-flex", "f-direct", "trip-rt", "trip-ow"]) });
   });
@@ -1556,7 +1562,7 @@
       if (!near) { b.textContent = T("Aucun aéroport trouvé", "No airport found"); return; }
       $("f-from").value = labelOf(near[0]);
       $("f-from").dispatchEvent(new Event("change", { bubbles: true }));
-      store.set("escale.from", labelOf(near[0]));
+      manualFrom(); store.set("escale.from", labelOf(near[0]));
       if (currentTab === "vols") rerender();
     }, () => { b.removeAttribute("aria-busy"); b.textContent = T("Position refusée : tapez votre ville", "Location denied: type your city"); },
     { enableHighAccuracy: false, timeout: 10000, maximumAge: 600000 });
@@ -1578,19 +1584,35 @@
     box.hidden = false;
     $("pays-x").onclick = () => { box.hidden = true; store.set("escale.pays.x", cc); };
   }
+  // Fuseau horaire du téléphone -> grand aéroport (si la position par l'adresse IP manque)
+  const TZ_AIR = { "Europe/Rome": "FCO", "Europe/Paris": "CDG", "Europe/London": "LHR", "Europe/Madrid": "MAD", "Europe/Lisbon": "LIS", "Europe/Berlin": "BER",
+    "Europe/Brussels": "BRU", "Europe/Amsterdam": "AMS", "Europe/Zurich": "ZRH", "Europe/Vienna": "VIE", "Europe/Dublin": "DUB", "Europe/Stockholm": "ARN",
+    "Europe/Oslo": "OSL", "Europe/Copenhagen": "CPH", "Europe/Warsaw": "WAW", "Europe/Athens": "ATH", "Europe/Istanbul": "IST", "Europe/Bucharest": "OTP",
+    "Europe/Prague": "PRG", "Europe/Budapest": "BUD", "Europe/Luxembourg": "LUX", "Europe/Moscow": "SVO", "Europe/Kiev": "KBP", "Europe/Kyiv": "KBP",
+    "Africa/Abidjan": "ABJ", "Africa/Dakar": "DSS", "Africa/Bamako": "BKO", "Africa/Lagos": "LOS", "Africa/Accra": "ACC", "Africa/Casablanca": "CMN",
+    "Africa/Algiers": "ALG", "Africa/Tunis": "TUN", "Africa/Cairo": "CAI", "Africa/Douala": "DLA", "Africa/Kinshasa": "FIH", "Africa/Lome": "LFW",
+    "Africa/Porto-Novo": "COO", "Africa/Ouagadougou": "OUA", "Africa/Conakry": "CKY", "Africa/Niamey": "NIM", "Africa/Libreville": "LBV",
+    "Africa/Brazzaville": "BZV", "Africa/Nairobi": "NBO", "Africa/Addis_Ababa": "ADD", "Africa/Johannesburg": "JNB", "Africa/Nouakchott": "NKC",
+    "Africa/Ndjamena": "NDJ", "Africa/Kigali": "KGL", "Africa/Dar_es_Salaam": "DAR", "Africa/Luanda": "LAD", "Indian/Reunion": "RUN", "Indian/Mauritius": "MRU",
+    "America/New_York": "JFK", "America/Toronto": "YYZ", "America/Montreal": "YUL", "America/Chicago": "ORD", "America/Los_Angeles": "LAX",
+    "America/Guadeloupe": "PTP", "America/Martinique": "FDF", "America/Cayenne": "CAY", "America/Sao_Paulo": "GRU", "America/Mexico_City": "MEX",
+    "Asia/Dubai": "DXB", "Asia/Riyadh": "RUH", "Asia/Qatar": "DOH", "Asia/Tokyo": "HND", "Asia/Shanghai": "PVG", "Asia/Singapore": "SIN",
+    "Asia/Bangkok": "BKK", "Asia/Kolkata": "DEL", "Australia/Sydney": "SYD" };
+  const tzAirport = () => { try { const c = TZ_AIR[Intl.DateTimeFormat().resolvedOptions().timeZone]; return c && byCode.get(c); } catch (e) { return null; } };
+  const geoFetch = isLive ? fetch("/api/geo").then((r) => (r.ok ? r.json() : null)).catch(() => null) : Promise.resolve(null);
   async function useGeo() {
     if (!isLive) return null;
     try {
-      const g = await fetch("/api/geo").then((r) => (r.ok ? r.json() : null));
-      if (!g) return null;
+      const g = await geoFetch;
+      if (!g) { await loadDB(); return dbLoaded ? tzAirport() : null; }
       if (!store.get("escale.cur") && COUNTRY_CUR[g.country]) {
         CUR = COUNTRY_CUR[g.country]; addCur(CUR); $("cur").value = CUR; syncCurQuick();
         if (!CURRENCIES.includes(CUR)) await loadFx();  // monnaie affichée par conversion : taux du jour avant d'afficher les prix
       }
       paysBanner(g.country);
-      if (g.lat == null || g.lon == null) return null;
       await loadDB();
       if (!dbLoaded) return null;
+      if (g.lat == null || g.lon == null) return tzAirport();
       return nearestAirport(g.lat, g.lon, g.country);
     } catch (e) { return null; }
   }
@@ -1618,14 +1640,30 @@
   // Position du visiteur et liste des aéroports : seulement après le chargement de la page (sections du bas, autocomplétion)
   const afterLoad = (f) => { const go = () => (window.requestIdleCallback || ((g) => setTimeout(g, 300)))(f, { timeout: 3000 });
     if (document.readyState === "complete") go(); else addEventListener("load", go, { once: true }); };
+  // Position demandée dès le démarrage ; le champ « Départ » est rempli dès qu'elle arrive
+  let geoDone = !isLive;
+  const geoReady = (isLive ? useGeo() : Promise.resolve(null)).then((near) => {
+    geoDone = true;
+    const userChose = urlHadParams || store.get("escale.from") || fromTouched;
+    // Comparaison par code : le libellé par défaut est traduit (« Parigi (CDG) », « París (CDG) »…)
+    const isDef = (v) => { const x = place(v); return v === DEFAULT_FROM || (x && x.code === "CDG"); };
+    if (near && !userChose && isDef($("f-from").value)) {
+      $("f-from").value = labelOf(near[0]);
+      if (isDef($("c-pick").value)) $("c-pick").value = labelOf(near[0]);
+      if (currentTab === "vols" && searched) rerender();
+    }
+  });
+  // Recherche lancée avant que la position soit connue : on attend la position (2,5 s au plus), puis on relance
+  $("form-vols").addEventListener("submit", (ev) => {
+    if (geoDone || fromTouched || urlHadParams) return;
+    ev.preventDefault(); ev.stopImmediatePropagation();
+    Promise.race([geoReady, new Promise((r) => setTimeout(r, 2500))]).then(() => {
+      geoDone = true; const f = $("form-vols");
+      if (f.requestSubmit) f.requestSubmit(); else f.dispatchEvent(new Event("submit", { cancelable: true }));
+    });
+  }, true);
   if (isLive) afterLoad(() => {
-    useGeo().then((near) => {
-      const userChose = urlHadParams || store.get("escale.from");
-      if (near && !userChose && $("f-from").value === DEFAULT_FROM) {
-        $("f-from").value = labelOf(near[0]);
-        if ($("c-pick").value === DEFAULT_FROM) $("c-pick").value = labelOf(near[0]);
-        if (currentTab === "vols") rerender();
-      }
+    geoReady.then(() => {
       const from = place($("f-from").value);
       showHomeExplore(from && from.code ? from.code : "CDG");
       if (CUR !== "EUR" && currentTab !== "vols") rerender();

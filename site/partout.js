@@ -67,7 +67,7 @@
     var o = document.createElement("option"); o.value = c; o.textContent = c; sel.insertBefore(o, sel.firstChild); codes.unshift(c);
   };
   var saved = null, urlFrom = (new URLSearchParams(location.search).get("from") || "").toUpperCase();
-  try { saved = localStorage.getItem("escale.any.from") || ((localStorage.getItem("escale.from") || "").match(/\(([A-Z]{3})\)/) || [])[1]; } catch (e) {}
+  try { saved = localStorage.getItem("escale.any.from") || (((localStorage.getItem("escale.from.m") ? localStorage.getItem("escale.from") : "") || "").match(/\(([A-Z]{3})\)/) || [])[1]; } catch (e) {}
   if (urlFrom) saved = urlFrom;
   addCode(saved);
   if (saved && codes.indexOf(saved) >= 0) sel.value = saved;

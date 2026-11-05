@@ -5,7 +5,7 @@
   var lang = (document.documentElement.lang || "fr").slice(0, 2);
   var get = function (u) { return fetch(u).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }); };
   var paris = { code: "CDG", name: null };
-  var stored = null; try { stored = (localStorage.getItem("escale.from") || "").match(/^(.*?)\s*\(([A-Z]{3})\)$/); } catch (e) {}
+  var stored = null; try { stored = ((localStorage.getItem("escale.from.m") ? localStorage.getItem("escale.from") : "") || "").match(/^(.*?)\s*\(([A-Z]{3})\)$/); } catch (e) {}
   var names = lang === "fr" ? Promise.resolve({}) : get("/data/noms/" + lang + ".json").then(function (m) { return m || {}; });
   var pick = function (db, lat, lon, cc) {
     var rad = Math.PI / 180, best = null, bd = 1e9, home = null, hd = 1e9;
