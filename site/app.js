@@ -255,7 +255,7 @@
       if (/\([A-Z]{3}\)$/.test(v) || !v) { close(); return; }
       items = kind === "city" ? searchCities(v) : searchAirports(v);
       if (!items.length) {
-        list.innerHTML = `<li class="ac-empty" role="option" aria-disabled="true">${esc(dbLoaded ? T("Aucun aéroport trouvé. Essayez le nom de la ville ou le code à 3 lettres.", "No airport found. Try the city name or the 3-letter code.") : T("Chargement des aéroports du monde…", "Loading airports worldwide…"))}</li>`;
+        list.innerHTML = `<li class="ac-empty" role="option" aria-disabled="true">${esc(dbLoaded ? T("Aucun aéroport trouvé. Essaie le nom de la ville ou le code à 3 lettres.", "No airport found. Try the city name or the 3-letter code.") : T("Chargement des aéroports du monde…", "Loading airports worldwide…"))}</li>`;
       } else {
         list.innerHTML = items.map((a, i) => kind === "city"
           ? `<li role="option" id="${list.id}-${i}" data-i="${i}"><span class="ac-flag" aria-hidden="true">${flag(a[3])}</span><span class="ac-main">${esc(a[1])}</span><span class="ac-sub">${esc(countryName(a[3]))}</span></li>`
@@ -381,7 +381,7 @@
     if (!Tt) {
       list.push({ k: "sky", name: T("Skyscanner « Partout »", "Skyscanner “Everywhere”"), desc: T("Toutes les destinations triées par prix.", "Every destination sorted by price."),
         url: `https://${d.sky}/${F}/anywhere/${yymmdd(s.dep)}/` + (s.ret ? `${yymmdd(s.ret)}/` : "") + "?" + q({ adultsv2: s.adults, cabinclass: cabinSky, rtn: s.ret ? 1 : 0 }) });
-      list.push({ k: "kayak", name: "Kayak Explore", desc: T("Destinations selon votre budget et vos dates.", "Destinations by budget and dates."),
+      list.push({ k: "kayak", name: "Kayak Explore", desc: T("Destinations selon ton budget et tes dates.", "Destinations by budget and dates."),
         url: `https://${d.kayak}/explore/${s.from.code}-anywhere` });
       return list;
     }
@@ -422,7 +422,7 @@
       url: `https://${d.sky}/${F}/${Tt}/${yymmdd(s.dep)}/` + (s.ret ? `${yymmdd(s.ret)}/` : "") + "?" +
         q({ adultsv2: s.adults, childrenv2: s.children ? Array(s.children).fill(8).join("|") : "", cabinclass: cabinSky,
             rtn: s.ret ? 1 : 0, preferdirects: s.direct ? "true" : "", sortby: "cheapest" }) });
-    list.push({ k: "kayak", name: "Kayak", desc: s.flex ? T("Recherche ±3 jours autour de vos dates, triée par prix.", "Searches ±3 days around your dates, sorted by price.") : T("Compare des centaines de sites, tri par prix.", "Compares hundreds of sites, sorted by price."),
+    list.push({ k: "kayak", name: "Kayak", desc: s.flex ? T("Recherche ±3 jours autour de tes dates, triée par prix.", "Searches ±3 days around your dates, sorted by price.") : T("Compare des centaines de sites, tri par prix.", "Compares hundreds of sites, sorted by price."),
       url: `https://${d.kayak}/flights/${s.from.code}-${s.to.code}${kDates}${cabinKayak}${pax}${kids}${kParams}` });
     list.push({ k: "momondo", name: "momondo", desc: T("Souvent des tarifs d’agences que les autres n’affichent pas.", "Often shows agency fares others don’t."),
       url: `https://${d.momondo}/flight-search/${s.from.code}-${s.to.code}${kDates}${cabinKayak}${pax}${kids}${kParams}` });
@@ -441,7 +441,7 @@
     const d = D(), x = s.dest, trip = tripLink(x);
     return [
       // Partenaire Stay22 (lien rémunéré) : envoie vers le site d'hôtels le moins cher pour ces dates (Booking, Expedia, Agoda…)
-      { k: "stay22", name: T("Meilleur prix du moment", "Best price right now"), desc: T("Booking, Expedia, Agoda… : vous êtes envoyé vers le site le moins cher pour ces dates.", "Booking, Expedia, Agoda…: you are sent to the cheapest site for these dates."), best: true, sponsored: true,
+      { k: "stay22", name: T("Meilleur prix du moment", "Best price right now"), desc: T("Booking, Expedia, Agoda… : tu es envoyé vers le site le moins cher pour ces dates.", "Booking, Expedia, Agoda…: you are sent to the cheapest site for these dates."), best: true, sponsored: true,
         url: `https://www.stay22.com/allez/roam?${q({ aid: "escalelive", address: x, checkin: s.in, checkout: s.out, adults: s.adults, campaign: "recherche-hotels", lang: LANG, currency: CUR })}` },
       ...(trip ? [{ k: "tripcom", name: "Trip.com", desc: T("Très bon en Asie et au Moyen-Orient, souvent des prix membres.", "Strong in Asia and the Middle East, often with member prices."), best: true, sponsored: true, url: trip }] : []),
       { k: "booking", name: "Booking.com", desc: T("Le plus grand choix d’hébergements, souvent annulables gratuitement.", "The widest choice of stays, often with free cancellation."), best: true,
@@ -565,7 +565,7 @@
       return;
     }
     const skel = Array.from({ length: 3 }, () => `<li class="fl skel" aria-hidden="true"><span></span><span></span><span></span></li>`).join("");
-    show(head + `<div id="day-strip" class="day-strip" role="group" aria-label="${esc(T("Prix autour de vos dates", "Prices around your dates"))}"></div>
+    show(head + `<div id="day-strip" class="day-strip" role="group" aria-label="${esc(T("Prix autour de tes dates", "Prices around your dates"))}"></div>
       <div class="fl-tools" id="fl-tools" hidden>
         <div class="sort-tabs" role="tablist" aria-label="${esc(T("Trier les vols", "Sort flights"))}">
           <button type="button" role="tab" data-sort="cheap" aria-selected="true"><span>${T("Le moins cher", "Cheapest")}</span><b id="sort-cheap"></b></button>
@@ -584,7 +584,7 @@
         </div>
       </div>
       <div class="fl-insight" id="fl-insight" hidden></div>
-      <div class="av-head"><span class="logo" style="background:#0074c7" aria-hidden="true">A</span><div><strong>${T("Prix Aviasales", "Aviasales prices")}</strong><small>${T("Vols repérés sur Aviasales, notre partenaire : cliquez sur un vol pour le réserver.", "Flights found on Aviasales, our partner: click a flight to book it.")}</small></div></div>
+      <div class="av-head"><span class="logo" style="background:#0074c7" aria-hidden="true">A</span><div><strong>${T("Prix Aviasales", "Aviasales prices")}</strong><small>${T("Vols repérés sur Aviasales, notre partenaire : clique sur un vol pour le réserver.", "Flights found on Aviasales, our partner: click a flight to book it.")}</small></div></div>
       <p class="summary" id="fl-note" aria-live="polite">${esc(T("Recherche des meilleurs prix…", "Looking for the best prices…"))}</p>
       <ul class="fl-list" id="fl-list">${skel}</ul>
       ${AFFILIATE.travelpayouts_marker ? `<p class="av-all"><a class="btn" href="${esc(aviasalesUrl(s, s.dep, s.ret))}" target="_blank" rel="sponsored noopener noreferrer">${T("Voir tous les vols sur Aviasales", "See all flights on Aviasales")} →</a></p>` : ""}
@@ -679,7 +679,7 @@
     renderStrip(s, offers);
     if (!offers.length) {
       $("fl-list").innerHTML = "";
-      $("fl-note").textContent = T("Pas de prix récent pour ce trajet : comparez directement sur les sites ci-dessous.", "No recent price for this route: compare directly on the sites below.");
+      $("fl-note").textContent = T("Pas de prix récent pour ce trajet : compare directement sur les sites ci-dessous.", "No recent price for this route: compare directly on the sites below.");
       $("fl-list").insertAdjacentHTML("afterend", providerList(flightLinks(s)));
       if ($("cmp-wrap")) $("cmp-wrap").remove();
       return;
@@ -705,9 +705,9 @@
     const box = $("app-alert");
     if (!alertsOn || !box || !isFinite(low)) return;
     const max = Math.max(1, Math.floor((low * 0.9) / 10) * 10);
-    box.innerHTML = `<p class="kit-h">🔔 ${esc(fmt(T("Prévenez-moi si {a} → {b} passe sous mon budget", "Tell me when {a} → {b} drops below my budget"), { a: s.from.name, b: s.to.name }))}</p>
+    box.innerHTML = `<p class="kit-h">🔔 ${esc(fmt(T("Préviens-moi si {a} → {b} passe sous mon budget", "Tell me when {a} → {b} drops below my budget"), { a: s.from.name, b: s.to.name }))}</p>
       <form class="aa-form" novalidate>
-        <label><span class="sr-only">${T("Votre e-mail", "Your email")}</span><input type="email" name="email" required autocomplete="email" placeholder="${esc(T("Votre e-mail", "Your email"))}"></label>
+        <label><span class="sr-only">${T("Ton e-mail", "Your email")}</span><input type="email" name="email" required autocomplete="email" placeholder="${esc(T("Ton e-mail", "Your email"))}"></label>
         <label class="aa-max"><span>${T("Budget max.", "Max. budget")}</span><input type="number" name="max" min="1" inputmode="numeric" required value="${max}"><span>${esc(cur)}</span></label>
         <button class="btn" type="submit">${T("Créer l’alerte", "Create alert")}</button>
         <label class="aa-consent"><input type="checkbox" name="consent" required><span>${T("J’accepte de recevoir des e-mails pour cette alerte (désinscription en un clic).", "I agree to receive emails for this alert (one-click unsubscribe).")}</span></label>
@@ -718,7 +718,7 @@
     form.addEventListener("submit", async (ev) => {
       ev.preventDefault();
       const email = form.email.value.trim(), m = Number(form.max.value);
-      if (!/^\S+@\S+\.\S+$/.test(email) || !(m > 0) || !form.consent.checked) { msg.textContent = T("Vérifiez l’e-mail, le budget et la case de consentement.", "Check the email, the budget and the consent box."); return; }
+      if (!/^\S+@\S+\.\S+$/.test(email) || !(m > 0) || !form.consent.checked) { msg.textContent = T("Vérifie l’e-mail, le budget et la case de consentement.", "Check the email, the budget and the consent box."); return; }
       form.querySelector("button").disabled = true;
       let ok = false;
       try {
@@ -726,8 +726,8 @@
           body: JSON.stringify({ email, max: m, from: s.from.code, to: s.to.code, lang: LANG, currency: cur, consent: true }) });
         ok = r.ok;
       } catch (e) { ok = false; }
-      if (ok) { form.reset(); form.max.value = m; msg.textContent = fmt(T("C’est presque fini : confirmez votre alerte avec le lien envoyé à {e}.", "Almost done: confirm your alert with the link sent to {e}."), { e: email }); }
-      else { msg.textContent = T("L’alerte n’a pas pu être créée. Réessayez plus tard.", "The alert could not be created. Please try again later."); form.querySelector("button").disabled = false; }
+      if (ok) { form.reset(); form.max.value = m; msg.textContent = fmt(T("C’est presque fini : confirme ton alerte avec le lien envoyé à {e}.", "Almost done: confirm your alert with the link sent to {e}."), { e: email }); }
+      else { msg.textContent = T("L’alerte n’a pas pu être créée. Réessaie plus tard.", "The alert could not be created. Please try again later."); form.querySelector("button").disabled = false; }
     });
   }
   // Conseil de prix : vos dates sont-elles parmi les moins chères du mois ?
@@ -741,7 +741,7 @@
     const diff = mine != null ? mine - best.price : null;
     if (mine != null && diff <= Math.max(10, mine * 0.05)) {
       box.className = "fl-insight good";
-      box.textContent = "✓ " + T("Bon prix : vos dates sont parmi les moins chères du mois.", "Good price: your dates are among the cheapest of the month.");
+      box.textContent = "✓ " + T("Bon prix : tes dates sont parmi les moins chères du mois.", "Good price: your dates are among the cheapest of the month.");
     } else {
       box.className = "fl-insight tip";
       const txt = fmt(T("Moins cher ce mois-ci : {price} le {date} ({diff} de moins).", "Cheaper this month: {price} on {date} ({diff} less)."),
@@ -767,8 +767,8 @@
     const near = (o) => Math.abs(nights(s.dep, day(o))) <= (s.flex ? 3 : 0) && (!s.ret || !o.return_at || Math.abs(nights(s.ret, o.return_at.slice(0, 10))) <= (s.flex ? 3 : 0));
     const exact = list.filter(near);
     const note = $("fl-note");
-    if (exact.length) { list = exact; note.textContent = T("Prix repérés ces derniers jours pour vos dates. Le tarif final se confirme sur le site de réservation.", "Prices found in the last few days for your dates. The final fare is confirmed on the booking site."); }
-    else note.textContent = T("Aucun prix repéré exactement à vos dates : voici les moins chers du mois.", "No price found for your exact dates: here are the cheapest of the month.");
+    if (exact.length) { list = exact; note.textContent = T("Prix repérés ces derniers jours pour tes dates. Le tarif final se confirme sur le site de réservation.", "Prices found in the last few days for your dates. The final fare is confirmed on the booking site."); }
+    else note.textContent = T("Aucun prix repéré exactement à tes dates : voici les moins chers du mois.", "No price found for your exact dates: here are the cheapest of the month.");
     const minP = Math.min(...list.map((o) => o.price)), minT = Math.min(...list.map(totalMin));
     const score = (o) => o.price / minP + 0.6 * (totalMin(o) / minT);
     const by = { cheap: (a, b) => a.price - b.price, fast: (a, b) => totalMin(a) - totalMin(b) || a.price - b.price, best: (a, b) => score(a) - score(b) };
@@ -794,7 +794,7 @@
         <div class="fl-buy"><strong>${esc(money(o.price, cur))}</strong><small>${esc(T("par personne", "per person"))}</small>
           <a class="go buy" href="${esc(url)}" target="_blank" rel="sponsored noopener noreferrer">${T("Voir sur Aviasales", "View on Aviasales")} →</a></div>
       </li>`;
-    }).join("") : `<li class="fl-empty">${esc(T("Aucun vol ne correspond à ces filtres : élargissez les escales ou la compagnie.", "No flight matches these filters: widen the stops or airline."))}</li>`;
+    }).join("") : `<li class="fl-empty">${esc(T("Aucun vol ne correspond à ces filtres : élargis les escales ou la compagnie.", "No flight matches these filters: widen the stops or airline."))}</li>`;
   }
   // Recherche d'hôtels en direct (/hotels-en-direct/, carte Stay22 en grand), comme les vols vont sur /recherche/.
   // « Comparer aussi sur » de cette page revient ici avec cmp=1 : on affiche alors la liste des sites.
@@ -819,7 +819,7 @@
   function renderCars(s) {
     const days = Math.max(1, Math.ceil(nights(s.d1, s.d2) + (s.t2 > s.t1 ? 1 : 0)));
     const code = s.pick.code || s.pick.name.slice(0, 3).toUpperCase();
-    show(`<div class="results-head"><h2>${T("Location à", "Car rental in")} ${esc(s.pick.name)}</h2><span class="summary">${T("Vérifiez franchise et politique carburant", "Check the excess and fuel policy")}</span></div>` +
+    show(`<div class="results-head"><h2>${T("Location à", "Car rental in")} ${esc(s.pick.name)}</h2><span class="summary">${T("Vérifie franchise et politique carburant", "Check the excess and fuel policy")}</span></div>` +
       pass(`${esc(code)}${s.drop ? ` <small>→</small> ${esc(s.drop.code || s.drop.name.slice(0, 3).toUpperCase())}` : ""}`,
         [[T("Prise en charge", "Pick-up"), `${human(s.d1)} · ${s.t1}h`], [T("Restitution", "Drop-off"), `${human(s.d2)} · ${s.t2}h`], [T("Conducteur", "Driver"), $("c-age").selectedOptions[0].text]],
         `${days} ${T("J", "D")}`, T("de location", "rental")) +
@@ -849,7 +849,7 @@
       if (a && /^[A-Z]{3}$/.test(city)) city = kitCity = a[1]; // nom de la ville plutôt que le code (base complète chargée)
       const links = kitLinks(cfg, city, code);
       if (!links) return;
-      box.innerHTML = `<p class="kit-h">${esc(fmt(T("Pour votre arrivée à {c}", "For your arrival in {c}"), { c: city }))}</p><div class="kit-row">${links}</div>`;
+      box.innerHTML = `<p class="kit-h">${esc(fmt(T("Pour ton arrivée à {c}", "For your arrival in {c}"), { c: city }))}</p><div class="kit-row">${links}</div>`;
       box.hidden = false;
       box.dataset.code = code || "";
     });
@@ -864,9 +864,9 @@
       if (!links) return;
       const old = $("kit-card"); if (old) old.remove();
       const card = document.createElement("div");
-      card.id = "kit-card"; card.className = "kit-card"; card.setAttribute("role", "dialog"); card.setAttribute("aria-label", T("Pour votre arrivée", "For your arrival"));
+      card.id = "kit-card"; card.className = "kit-card"; card.setAttribute("role", "dialog"); card.setAttribute("aria-label", T("Pour ton arrivée", "For your arrival"));
       card.innerHTML = `<button type="button" class="kit-x" aria-label="${esc(T("Fermer", "Close"))}">×</button>
-        <p class="kit-h">${esc(fmt(T("Bon voyage ! Pour votre arrivée à {c} :", "Have a good trip! For your arrival in {c}:"), { c: kitCity }))}</p><div class="kit-row">${links}</div>`;
+        <p class="kit-h">${esc(fmt(T("Bon voyage ! Pour ton arrivée à {c} :", "Have a good trip! For your arrival in {c}:"), { c: kitCity }))}</p><div class="kit-row">${links}</div>`;
       const bar = document.querySelector(".cc-bar"); // bandeau des cookies encore ouvert : la carte se place au-dessus
       if (bar && bar.offsetHeight) card.style.bottom = bar.offsetHeight + 12 + "px";
       document.body.appendChild(card);
@@ -876,7 +876,7 @@
   }
   $("results").addEventListener("click", (ev) => { if (ev.target.closest("#fl-list a.buy, #cmp-wrap a.cmp")) setTimeout(showKitCard, 600); });
   const extrasSlot = (city) => `<div id="res-extras-wrap"><h3 class="sub-h">${esc(T("Avant de partir", "Before you go"))}</h3>
-    <p class="summary">${esc(fmt(T("Les services utiles pour votre voyage à {c}.", "Useful services for your trip to {c}."), { c: city }))}</p>
+    <p class="summary">${esc(fmt(T("Les services utiles pour ton voyage à {c}.", "Useful services for your trip to {c}."), { c: city }))}</p>
     <ul class="extras-res providers" id="res-extras"></ul></div>`;
   function fillExtras(city, code) {
     if (!partnersP) partnersP = fetch("/data/partners.json").then((r) => (r.ok ? r.json() : null)).catch(() => null);
@@ -902,7 +902,7 @@
     const retMonth = (() => { const x = new Date(y, mo - 1, 1); x.setDate(x.getDate() + 32); return iso(x).slice(2, 7).replace("-", ""); })();
     const sky = `https://${d.sky}/${s.from.code.toLowerCase()}/${s.to.code.toLowerCase()}/${yymm}/` + (s.ow ? "" : `${s.stay > 20 ? retMonth : yymm}/`) + "?" + q({ adultsv2: s.adults, rtn: s.ow ? 0 : 1 });
     const head = `<div class="results-head"><h2><bdi dir="ltr">${esc(s.from.name)} → ${esc(s.to.name)}</bdi> · ${esc(monthName)}</h2>
-      <span class="summary">${esc(fmt(T("Séjour de {n} nuits · cliquez sur un jour pour lancer la recherche", "{n}-night trip · click a day to search"), { n: s.stay || 1 }))}</span></div>`;
+      <span class="summary">${esc(fmt(T("Séjour de {n} nuits · clique sur un jour pour lancer la recherche", "{n}-night trip · click a day to search"), { n: s.stay || 1 }))}</span></div>`;
     const links = providerList([
       { k: "sky", name: T("Skyscanner : le mois entier", "Skyscanner: whole month"), desc: T("Vue du mois avec le prix de chaque jour.", "Month view with the price of each day."), best: true, url: sky }
     ]);
@@ -913,7 +913,7 @@
       if (id !== monthReq || !$("month-cal")) return;
       const days = data && data.available ? data.days || {} : {};
       const keys = Object.keys(days).filter((k) => k >= today);
-      if (!keys.length) { $("month-cal").innerHTML = `<p class="lead">${esc(T("Pas encore de prix connus pour ce mois. Utilisez les liens ci-dessous.", "No known prices for this month yet. Use the links below."))}</p>`; return; }
+      if (!keys.length) { $("month-cal").innerHTML = `<p class="lead">${esc(T("Pas encore de prix connus pour ce mois. Utilise les liens ci-dessous.", "No known prices for this month yet. Use the links below."))}</p>`; return; }
       const prices = keys.map((k) => days[k].price), min = Math.min(...prices), max = Math.max(...prices);
       const first = new Date(y, mo - 1, 1), nDays = new Date(y, mo, 0).getDate(), offset = (first.getDay() + 6) % 7;
       const cells = [];
@@ -1003,7 +1003,7 @@
     const items = data && data.available && Array.isArray(data.items) ? data.items.filter((it) => it.departure_at && it.departure_at.slice(0, 10) >= today) : [];
     if (!items.length) {
       if (grid.id === "ex-grid") $("ex-budget").hidden = true;
-      grid.innerHTML = `<p class="lead" style="grid-column:1/-1">${T("Pas encore de prix repérés pour ce mois. Essayez un autre mois ou les liens ci-dessus.", "No prices found yet for this month. Try another month or the links above.")}</p>`;
+      grid.innerHTML = `<p class="lead" style="grid-column:1/-1">${T("Pas encore de prix repérés pour ce mois. Essaie un autre mois ou les liens ci-dessus.", "No prices found yet for this month. Try another month or the links above.")}</p>`;
       return false;
     }
     grid.innerHTML = items.slice(0, 16).map((it, i) => {
@@ -1349,19 +1349,19 @@
     const err = $("f-err"); err.textContent = "";
     const from = place($("f-from").value), to = place($("f-to").value);
     const ow = $("trip-ow").checked;
-    if (!from) return (err.textContent = T("Indiquez un aéroport de départ.", "Enter a departure airport."));
-    if (!from.code) return (err.textContent = T("Choisissez l’aéroport de départ dans la liste ou tapez son code à 3 lettres (ex. CDG).", "Pick the departure airport from the list or type its 3-letter code (e.g. JFK)."));
-    if (to && !to.code) return (err.textContent = T("Choisissez l’aéroport d’arrivée dans la liste ou tapez son code à 3 lettres (ex. BKO).", "Pick the destination airport from the list or type its 3-letter code (e.g. LHR)."));
+    if (!from) return (err.textContent = T("Indique un aéroport de départ.", "Enter a departure airport."));
+    if (!from.code) return (err.textContent = T("Choisis l’aéroport de départ dans la liste ou tape son code à 3 lettres (ex. CDG).", "Pick the departure airport from the list or type its 3-letter code (e.g. JFK)."));
+    if (to && !to.code) return (err.textContent = T("Choisis l’aéroport d’arrivée dans la liste ou tape son code à 3 lettres (ex. BKO).", "Pick the destination airport from the list or type its 3-letter code (e.g. LHR)."));
     if (to && to.code === from.code) return (err.textContent = T("Le départ et l’arrivée sont identiques.", "Origin and destination are the same."));
     if ($("f-monthmode").checked) {
-      if (!to) return (err.textContent = T("Choisissez une destination pour voir les prix du mois entier.", "Choose a destination to see prices for the whole month."));
+      if (!to) return (err.textContent = T("Choisis une destination pour voir les prix du mois entier.", "Choose a destination to see prices for the whole month."));
       renderMonth({ from, to, month: $("f-month").value, stay: ow ? 0 : +$("f-stay").value, ow,
         adults: +$("f-adults").value, children: +$("f-children").value, cabin: $("f-cabin").value });
       if (!booting && fromTouched) store.set("escale.from", labelOf(from.code));
       return;
     }
     const dep = $("f-dep").value, ret = ow ? null : $("f-ret").value;
-    if (!dep) return (err.textContent = T("Choisissez une date d’aller.", "Choose a departure date."));
+    if (!dep) return (err.textContent = T("Choisis une date d’aller.", "Choose a departure date."));
     if (dep < today) return (err.textContent = T("La date d’aller est déjà passée.", "The departure date is in the past."));
     if (!ow && (!ret || ret < dep)) return (err.textContent = T("La date de retour doit être après l’aller.", "The return date must be after departure."));
     const s = { from, to, dep, ret, adults: +$("f-adults").value, children: +$("f-children").value, cabin: $("f-cabin").value,
@@ -1376,7 +1376,7 @@
     ev.preventDefault();
     const err = $("h-err"); err.textContent = "";
     const dest = $("h-dest").value.trim();
-    if (!dest) return (err.textContent = T("Indiquez une destination.", "Enter a destination."));
+    if (!dest) return (err.textContent = T("Indique une destination.", "Enter a destination."));
     const a = $("h-in").value, b = $("h-out").value;
     if (!a || !b || b <= a) return (err.textContent = T("La date de départ doit être après la date d’arrivée.", "Check-out must be after check-in."));
     if (a < today) return (err.textContent = T("La date d’arrivée est déjà passée.", "The check-in date is in the past."));
@@ -1389,8 +1389,8 @@
     ev.preventDefault();
     const err = $("c-err"); err.textContent = "";
     const pick = place($("c-pick").value), drop = $("c-other").checked ? place($("c-drop").value) : null;
-    if (!pick) return (err.textContent = T("Indiquez un lieu de prise en charge.", "Enter a pick-up location."));
-    if ($("c-other").checked && !drop) return (err.textContent = T("Indiquez le lieu de restitution.", "Enter a drop-off location."));
+    if (!pick) return (err.textContent = T("Indique un lieu de prise en charge.", "Enter a pick-up location."));
+    if ($("c-other").checked && !drop) return (err.textContent = T("Indique le lieu de restitution.", "Enter a drop-off location."));
     const d1 = $("c-d1").value, d2 = $("c-d2").value, t1 = +$("c-t1").value, t2 = +$("c-t2").value;
     if (!d1 || !d2 || d2 < d1 || (d2 === d1 && t2 <= t1)) return (err.textContent = T("La restitution doit être après la prise en charge.", "Drop-off must be after pick-up."));
     if (d1 < today) return (err.textContent = T("La date de prise en charge est déjà passée.", "The pick-up date is in the past."));
@@ -1579,7 +1579,7 @@
       $("f-from").dispatchEvent(new Event("change", { bubbles: true }));
       manualFrom(); store.set("escale.from", labelOf(near[0]));
       if (currentTab === "vols") rerender();
-    }, () => { b.removeAttribute("aria-busy"); b.textContent = T("Position refusée : tapez votre ville", "Location denied: type your city"); },
+    }, () => { b.removeAttribute("aria-busy"); b.textContent = T("Position refusée : tape ta ville", "Location denied: type your city"); },
     { enableHighAccuracy: false, timeout: 10000, maximumAge: 600000 });
   });
   // Bandeau « Vous partez de … ? » : visiteurs en Afrique, vers la page des vols au départ de leur pays (scripts/pays_accueil.py)
