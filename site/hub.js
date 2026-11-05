@@ -59,6 +59,40 @@
     });
   }
 
+  // Grande photo du haut : diaporama lent (une photo toutes les 7 s), chargé après la page, en pause hors écran
+  var bg = document.getElementById("hero-bg"), cap = document.getElementById("hero-cap");
+  if (bg && document.documentElement.classList.contains("has-hero")) {
+    var SL = [["zanzibar", "ZNZ", "Zanzibar"], ["bali", "DPS", "Bali"], ["marrakech", "RAK", "Marrakech", "Marrakesh"], ["dakar", "DSS", "Dakar", null, 1],
+      ["tokyo", "HND", "Tokyo"], ["maldives", "MLE", "Maldives"]];
+    var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var imgs = [bg.querySelector("img")], k = 0, visible = true, timer = null;
+    var start = function () {
+      SL.slice(1).forEach(function (x) {
+        var im = document.createElement("img"); im.alt = ""; im.decoding = "async"; im.width = 1280; im.height = 960;
+        im.srcset = "/img/villes/" + x[0] + ".webp 800w" + (x[4] ? "" : ", /img/villes/" + x[0] + "-1280.webp 1280w"); im.sizes = "100vw";
+        im.src = "/img/villes/" + x[0] + ".webp"; bg.appendChild(im); imgs.push(im);
+      });
+      timer = setInterval(function () {
+        if (!visible || document.hidden) return;
+        var n = (k + 1) % imgs.length; if (!imgs[n].complete) return;
+        imgs[k].classList.remove("on"); imgs[n].classList.add("on"); k = n;
+        if (cap) {
+          cap.classList.add("fade");
+          setTimeout(function () {
+            var x = SL[k], en = (document.documentElement.lang || "fr").slice(0, 2) !== "fr";
+            cap.querySelector(".hc-city").textContent = en && x[3] ? x[3] : x[2];
+            cap.setAttribute("href", "/?type=vols&to=" + x[1]); cap.classList.remove("fade");
+          }, 450);
+        }
+      }, 7000);
+    };
+    if (!still) {
+      var later = function () { (window.requestIdleCallback || function (f) { setTimeout(f, 1500); })(start, { timeout: 4000 }); };
+      if (document.readyState === "complete") later(); else window.addEventListener("load", later);
+      if ("IntersectionObserver" in window) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }).observe(bg);
+    }
+  }
+
   // Photos animées
   var root = document.documentElement;
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -67,5 +101,7 @@
   var io = new IntersectionObserver(function (es) {
     es.forEach(function (e) { e.target.classList.toggle("kb-run", e.isIntersecting); });
   }, { threshold: 0.2 });
-  document.querySelectorAll(".inspi-card, .city-card").forEach(function (c) { io.observe(c); });
+  var watch = function () { document.querySelectorAll(".inspi-card, .city-card, .ex-card").forEach(function (c) { if (!c.kbw) { c.kbw = 1; io.observe(c); } }); };
+  watch();
+  var eg = document.getElementById("ex-grid"); if (eg && "MutationObserver" in window) new MutationObserver(watch).observe(eg, { childList: true });
 })();

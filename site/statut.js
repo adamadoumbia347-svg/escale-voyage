@@ -25,7 +25,7 @@
       var g = c.createLinearGradient(0, 0, 0, 1920); g.addColorStop(0, "#0f8f80"); g.addColorStop(.55, "#0a5c63"); g.addColorStop(1, "#062b3a");
       c.fillStyle = g; c.fillRect(0, 0, 1080, 1920);
       c.fillStyle = "rgba(255,255,255,.08)"; for (var i = 0; i < 6; i++) { c.beginPath(); c.arc(150 + i * 170, 260 + (i % 2) * 90, 60 + i * 8, 0, 7); c.fill(); }
-      var font = "'Instrument Sans', 'Segoe UI', system-ui, sans-serif";
+      var font = "'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif";
       c.fillStyle = "#fff"; c.textAlign = "center";
       c.font = "700 64px " + font; c.fillText("✈️ escale.live", 540, 200);
       c.font = "700 92px " + font; c.fillText(t.t, 540, 420);

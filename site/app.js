@@ -990,10 +990,10 @@
       const city = a ? a[1] : it.to, cc = a ? a[3] : "";
       const dep = it.departure_at.slice(0, 10), ret = it.return_at ? it.return_at.slice(0, 10) : "";
       return `<button type="button" class="ex-card" style="--i:${i}" data-price="${Math.round(it.price)}" data-to="${esc(a ? a[0] : it.to)}" data-dep="${dep}" data-ret="${ret}" data-from="${esc(from)}">
-        <span class="ex-top"><span aria-hidden="true">${flag(cc)}</span><b>${esc(a ? a[0] : it.to)}</b></span>
-        <span class="ex-name">${esc(city)}</span>
+        <span class="ex-ph">${exPhoto(a ? a[0] : it.to, it.city_code) ? `<img src="${exPhoto(a ? a[0] : it.to, it.city_code)}" alt="" width="480" height="360" loading="lazy" decoding="async">` : ""}<span class="ex-flag" aria-hidden="true">${flag(cc)}</span><b>${esc(a ? a[0] : it.to)}</b></span>
+        <span class="ex-body"><span class="ex-name">${esc(city)}</span>
         <span class="ex-meta">${esc(cc ? countryName(cc) : "")}${ret ? ` · ${esc(short(dep))} → ${esc(short(ret))}` : ""} · ${esc(stopsText(it.transfers))}</span>
-        <span class="ex-price">${T("dès", "from")} ${esc(money(it.price, data.currency))}</span>
+        <span class="ex-price">${T("dès", "from")} ${esc(money(it.price, data.currency))}</span></span>
       </button>`;
     }).join("");
     if (grid.id === "ex-grid") { feedFlap(from, items); setupBudget(items.slice(0, 16), data.currency); }
@@ -1013,6 +1013,15 @@
   function paintExploreMonths() {
     $("ex-months").innerHTML = monthsAhead().map((m) => `<button type="button" data-m="${m}" aria-pressed="${m === exploreMonth}">${esc(dateFmt(parse(m + "-01"), { month: "long" }))}</button>`).join("");
   }
+  // Photo d'une destination (mêmes photos que les cartes des villes ; un aéroport prend la photo de sa ville)
+  const EX_ALIAS = { LHR: "LON", LGW: "LON", STN: "LON", LTN: "LON", MXP: "MIL", LIN: "MIL", BGY: "MIL", FCO: "ROM", CIA: "ROM", TSF: "VCE", ARN: "STO", KEF: "REK",
+    TFS: "TCI", TFN: "TCI", NYC: "JFK", EWR: "JFK", LGA: "JFK", SAW: "IST", YUL: "YMQ", TYO: "HND", NRT: "HND", CAS: "CMN", DKR: "DSS", PAR: "CDG", BRU: "BRU", CRL: "BRU" };
+  let exPhotos = null;
+  const exPhoto = (code, city) => {
+    if (document.documentElement.classList.contains("lite")) return "";
+    if (!exPhotos) { try { exPhotos = JSON.parse(($("dests") && $("dests").dataset.photos) || "{}"); } catch (e) { exPhotos = {}; } }
+    return exPhotos[code] || exPhotos[EX_ALIAS[code]] || (city && (exPhotos[city] || exPhotos[EX_ALIAS[city]])) || "";
+  };
   async function showHomeExplore(from) {
     if (!isLive || !from) return;
     exploreFrom = from; exploreMonth = exploreMonth || monthsAhead()[1];

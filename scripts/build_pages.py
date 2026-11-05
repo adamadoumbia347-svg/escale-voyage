@@ -240,7 +240,7 @@ HEAD = """<!doctype html>
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preload" href="/fonts/instrument-sans-latin-f587e7.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/plus-jakarta-sans-latin-7660bd.woff2" as="font" type="font/woff2" crossorigin>
 
 <link rel="stylesheet" href="/pages.css">
 {ld}
@@ -604,12 +604,12 @@ DISTANCES = {}
 # Mode léger (réseaux lents, économie de données, visiteurs en Afrique) : un petit script en tête de chaque page ajoute la classe
 # « lite » à <html> ; sans elle, il précharge la police du site. En mode léger : police du système, pas de photos décoratives,
 # grille et courbe des prix chargées à la demande (pages.css, site/grille.js, site/courbe.js). Choix modifiable en bas de page (clics.js).
-FONT_PRELOAD = '<link rel="preload" href="/fonts/instrument-sans-latin-f587e7.woff2" as="font" type="font/woff2" crossorigin>'
+FONT_PRELOAD = '<link rel="preload" href="/fonts/plus-jakarta-sans-latin-7660bd.woff2" as="font" type="font/woff2" crossorigin>'
 LITE_JS = ('<script>(function(){try{var d=document.documentElement,s=localStorage.getItem("escale.lite"),c=navigator.connection||{},z="";'
            'try{z=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}'
            'if(s==="1"||(s!=="0"&&(c.saveData||/2g|3g/.test(c.effectiveType||"")||z.indexOf("Africa/")===0)))d.classList.add("lite");'
            'else{var l=document.createElement("link");l.rel="preload";l.as="font";l.type="font/woff2";l.crossOrigin="anonymous";'
-           'l.href="/fonts/instrument-sans-latin-f587e7.woff2";document.head.appendChild(l)}}catch(e){}})();</script>')
+           'l.href="/fonts/plus-jakarta-sans-latin-7660bd.woff2";document.head.appendChild(l)}}catch(e){}})();</script>')
 
 
 def lite_mode(site):

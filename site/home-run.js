@@ -21,6 +21,8 @@
   var money = function (n, cur) { if (window.ESCALE_MONEY) return window.ESCALE_MONEY(n, cur || "EUR"); return Math.round(n) + " €"; };
   var ddmm = function (s) { return s.slice(8, 10) + s.slice(5, 7); };
   var month = (function () { var x = new Date(d.getFullYear(), d.getMonth() + 1, 1); return x.getFullYear() + "-" + ("0" + (x.getMonth() + 1)).slice(-2); })();
+  var PH = {};
+  try { if (!document.documentElement.classList.contains("lite")) PH = JSON.parse(document.getElementById("dests").getAttribute("data-photos") || "{}"); } catch (e) {}
   var cur = { code: "PAR", name: "Paris" }, seen = false, token = 0;
   var render = function () {
     var t = ++token, from = cur.code === "CDG" || cur.code === "ORY" ? "PAR" : cur.code;
@@ -28,7 +30,8 @@
     var list = D.filter(function (x) { return x[0] !== from; });
     row.innerHTML = list.map(function (x) {
       var name = lang() === "fr" ? x[2] : (x[3] || x[2]);
-      return '<a class="hr-chip" data-to="' + x[0] + '" href="/?type=vols&amp;from=' + from + "&amp;to=" + x[0] + '"><b>' + x[1] + " " + name + '</b><span class="pr"></span><small></small></a>';
+      var ph = PH[x[0]] ? ' style="background-image:linear-gradient(180deg,rgb(0 0 0 / 0) 40%,rgb(0 0 0 / .45)),url(' + PH[x[0]] + ')"' : "";
+      return '<a class="hr-chip" data-to="' + x[0] + '" href="/?type=vols&amp;from=' + from + "&amp;to=" + x[0] + '"><span class="hr-ph"' + ph + '><i aria-hidden="true">' + x[1] + '</i></span><b>' + name + '</b><span class="pr"></span><small></small></a>';
     }).join("");
     row.querySelectorAll(".hr-chip").forEach(function (a) {
       var to = a.getAttribute("data-to");
