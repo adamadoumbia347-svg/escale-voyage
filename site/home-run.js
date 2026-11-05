@@ -1,5 +1,5 @@
 // Accueil : « Rentrer au pays » (meilleur aller-retour du mois prochain vers les grandes villes d'Afrique, depuis la ville
-// du visiteur : événement escale:from d'app.js, Paris par défaut), bouton « Options » sur téléphone, place du bloc Fêtes selon la saison.
+// du visiteur : événement escale:from d'app.js, Paris par défaut), bouton « Options » sur téléphone, les thèmes sont gérés par hub.js.
 (function () {
   "use strict";
   // Bouton « Options » : montre la classe de voyage sur téléphone
@@ -10,12 +10,8 @@
   var wm = document.getElementById("world-more");
   if (wm) wm.addEventListener("click", function () { var w = document.getElementById("world"); if (w) w.classList.add("all"); });
 
-  // Fêtes : en haut en saison (novembre → 5 janvier, juillet-août), sinon plus bas, après les idées de voyage
-  var fe = document.getElementById("fetes"), ex = document.getElementById("explore");
-  var d = new Date(), m = d.getMonth(), inSeason = m === 10 || m === 11 || (m === 0 && d.getDate() <= 5) || m === 6 || m === 7;
-  if (fe && ex && !inSeason && ex.parentNode) ex.parentNode.insertBefore(fe, ex.nextSibling);
-
   // Rentrer au pays
+  var d = new Date();
   var sec = document.getElementById("home-run"), row = document.getElementById("hr-row");
   if (!sec || !row) return;
   var lang = function () { return (document.documentElement.lang || "fr").slice(0, 2); };
