@@ -21,6 +21,19 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 BAD = re.compile(r"map|flag|logo|plan|diagram|stamp|poster|interior|inside|portrait|painting|night|crowd|construction|\.svg|\.png|\.gif|\.tif", re.I)
 
 SERIES = {
+    # Accueil du site : lieux qui parlent à la diaspora (format paysage 1280x960, voir LANDSCAPE)
+    "accueil": [
+        ("goree", ["Île de Gorée", "Goree island Senegal", "Gorée island houses"], "gor[eé]e"),
+        ("assinie", ["Assinie beach", "Assinie Mafia", "Assinie Côte d'Ivoire"], "assinie"),
+        ("grandbassam", ["Grand-Bassam beach", "Grand-Bassam", "Grand Bassam quartier France"], "bassam"),
+        ("lacrose", ["Lac Rose Sénégal", "Lake Retba", "Lac Retba"], "retba|lac rose"),
+        ("ganvie", ["Ganvié", "Ganvie lake village", "Ganvié Bénin"], "ganvi"),
+        ("kribi", ["Kribi beach", "Chutes de la Lobé Kribi", "Kribi Cameroun"], "kribi|lob[eé]"),
+        ("chefchaouen", ["Chefchaouen blue city", "Chefchaouen medina", "Chefchaouen"], "chefchaouen|chaouen"),
+        ("sidibousaid", ["Sidi Bou Said", "Sidi Bou Saïd Tunisia", "Sidi Bou Said houses"], "sidi bou"),
+        ("saintlouis", ["Saint-Louis Sénégal pont Faidherbe", "Saint-Louis Senegal", "Pont Faidherbe"], "saint-louis|faidherbe"),
+        ("cotonou", ["Cotonou plage", "Route des pêches Cotonou", "Ouidah porte du non retour"], "cotonou|ouidah|p[eê]ches"),
+    ],
     "bali": [
         ("kelingking", ["Kelingking beach Nusa Penida", "Kelingking Nusa Penida", "Nusa Penida cliff"], "kelingking|nusa penida"),
         ("tanahlot", ["Tanah Lot temple sunset", "Tanah Lot temple", "Pura Tanah Lot"], "tanah lot"),
@@ -123,6 +136,18 @@ def vertical(data):
     return im.crop((l, t, l + W, t + H))
 
 
+LANDSCAPE = {"accueil"}
+
+
+def landscape(data):
+    im = Image.open(io.BytesIO(data)).convert("RGB")
+    W, H = 1280, 960
+    s = max(W / im.width, H / im.height)
+    im = im.resize((round(im.width * s), round(im.height * s)), Image.LANCZOS)
+    l, t = (im.width - W) // 2, (im.height - H) // 2
+    return im.crop((l, t, l + W, t + H))
+
+
 def candidates(name, key, queries, must):
     """Mode choix : jusqu'à 6 photos possibles par lieu, en petit, dans video/photos/_choix/<série>/."""
     out = ROOT / "video" / "photos" / "_choix" / name
@@ -182,7 +207,13 @@ def main():
                 data = urllib.request.urlopen(req, timeout=60).read()
             except Exception:  # noqa: BLE001
                 data = urllib.request.urlopen(urllib.request.Request(x["thumb"], headers={"User-Agent": UA}), timeout=60).read()
-            vertical(data).save(out / f"{key}.webp", "WEBP", quality=82)
+            if name in LANDSCAPE:
+                im = landscape(data)
+                im.save(out / f"{key}-1280.webp", "WEBP", quality=72)
+                im.resize((800, 600), Image.LANCZOS).save(out / f"{key}.webp", "WEBP", quality=72)
+                im.resize((480, 360), Image.LANCZOS).save(out / f"{key}-480.webp", "WEBP", quality=72)
+            else:
+                vertical(data).save(out / f"{key}.webp", "WEBP", quality=82)
             credits[key] = {k: x[k] for k in ("title", "page", "author", "license", "license_url")}
             print("OK", key, "<-", x["title"], "|", x["author"], "|", x["license"])
             time.sleep(0.5)
