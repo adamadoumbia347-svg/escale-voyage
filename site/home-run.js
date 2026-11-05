@@ -15,6 +15,8 @@
   var sec = document.getElementById("home-run"), row = document.getElementById("hr-row");
   if (!sec || !row) return;
   var lang = function () { return (document.documentElement.lang || "fr").slice(0, 2); };
+  var FROM = { fr: "dès ", en: "from ", it: "da ", de: "ab ", es: "desde ", pt: "desde ", ar: "من " };
+  var LOC = { fr: "fr-FR", en: "en-GB", it: "it-IT", de: "de-DE", es: "es-ES", pt: "pt-PT", ar: "ar-u-nu-latn" };
   var D = [["ABJ", "🇨🇮", "Abidjan"], ["DSS", "🇸🇳", "Dakar"], ["DLA", "🇨🇲", "Douala"], ["BKO", "🇲🇱", "Bamako"], ["CMN", "🇲🇦", "Casablanca"],
     ["ALG", "🇩🇿", "Alger", "Algiers"], ["TUN", "🇹🇳", "Tunis"], ["FIH", "🇨🇩", "Kinshasa"], ["OUA", "🇧🇫", "Ouagadougou"], ["LFW", "🇹🇬", "Lomé"],
     ["COO", "🇧🇯", "Cotonou"], ["CKY", "🇬🇳", "Conakry"], ["LOS", "🇳🇬", "Lagos"], ["ACC", "🇬🇭", "Accra"]];
@@ -40,8 +42,8 @@
         var b = null;
         if (r && r.available && r.days) Object.keys(r.days).forEach(function (k) { var x = r.days[k]; if (x && x.price && (!b || x.price < b.price)) b = { p: x.price, dep: k, ret: x.ret, c: r.currency }; });
         if (!b) { a.remove(); if (!row.children.length) sec.hidden = true; return; }
-        a.querySelector(".pr").textContent = (lang() === "fr" ? "dès " : "from ") + money(b.p, b.c);
-        try { a.querySelector("small").textContent = new Date(b.dep + "T12:00:00").toLocaleDateString(lang() === "fr" ? "fr-FR" : "en-GB", { day: "numeric", month: "short" }); } catch (e) {}
+        a.querySelector(".pr").textContent = (FROM[lang()] || "from ") + money(b.p, b.c);
+        try { a.querySelector("small").textContent = new Date(b.dep + "T12:00:00").toLocaleDateString(LOC[lang()] || "en-GB", { day: "numeric", month: "short" }); } catch (e) {}
         a.href = "/recherche/?flightSearch=" + from + ddmm(b.dep) + to + (b.ret ? ddmm(b.ret) : "") + "1";
         a.setAttribute("data-p", b.p);
         // Trier du moins cher au plus cher

@@ -7,8 +7,15 @@
   var get = function (u) { return fetch(u).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }); };
   var L = function () {
     var l = (document.documentElement.lang || "fr").slice(0, 2);
-    return l === "fr" ? { loc: "fr-FR", t: "Les bons plans du jour", from: "depuis", rt: "aller-retour", foot: "Prix trouvés le {d} · ils changent chaque jour", wait: "Création de l'image…", none: "Pas de prix disponible pour l'instant, réessayez plus tard.", dl: "Image enregistrée : publiez-la dans votre statut WhatsApp." }
-      : { loc: "en-GB", t: "Today's best deals", from: "from", rt: "round trip", foot: "Prices found on {d} · they change every day", wait: "Creating the image…", none: "No prices available right now, try again later.", dl: "Image saved: post it to your WhatsApp status." };
+    var M = {
+      fr: { loc: "fr-FR", t: "Les bons plans du jour", from: "depuis", rt: "aller-retour", foot: "Prix trouvés le {d} · ils changent chaque jour", wait: "Création de l'image…", none: "Pas de prix disponible pour l'instant, réessayez plus tard.", dl: "Image enregistrée : publiez-la dans votre statut WhatsApp." },
+      en: { loc: "en-GB", t: "Today's best deals", from: "from", rt: "round trip", foot: "Prices found on {d} · they change every day", wait: "Creating the image…", none: "No prices available right now, try again later.", dl: "Image saved: post it to your WhatsApp status." },
+      it: { loc: "it-IT", t: "Le offerte del giorno", from: "da", rt: "andata e ritorno", foot: "Prezzi trovati il {d} · cambiano ogni giorno", wait: "Creazione dell’immagine…", none: "Nessun prezzo disponibile al momento, riprova più tardi.", dl: "Immagine salvata: pubblicala nel tuo stato WhatsApp." },
+      de: { loc: "de-DE", t: "Die Angebote des Tages", from: "ab", rt: "Hin und zurück", foot: "Preise vom {d} · sie ändern sich täglich", wait: "Bild wird erstellt…", none: "Gerade keine Preise verfügbar, versuche es später noch einmal.", dl: "Bild gespeichert: Teile es in deinem WhatsApp-Status." },
+      es: { loc: "es-ES", t: "Las ofertas del día", from: "desde", rt: "ida y vuelta", foot: "Precios encontrados el {d} · cambian cada día", wait: "Creando la imagen…", none: "No hay precios disponibles ahora, inténtalo más tarde.", dl: "Imagen guardada: publícala en tu estado de WhatsApp." },
+      pt: { loc: "pt-PT", t: "As promoções do dia", from: "desde", rt: "ida e volta", foot: "Preços encontrados a {d} · mudam todos os dias", wait: "A criar a imagem…", none: "Sem preços disponíveis de momento, tente mais tarde.", dl: "Imagem guardada: publique-a no seu estado do WhatsApp." }
+    };
+    return M[l] || M.en;
   };
   var rr = function (c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); };
   btn.addEventListener("click", function () {
