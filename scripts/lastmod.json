@@ -1,7 +1,7 @@
 {
 "/": [
-"7716a424b865f75e",
-"2026-11-04"
+"0da66b12e2d196e1",
+"2026-11-05"
 ],
 "/a-propos/": [
 "69101e0ef8ae93a5",
@@ -2939,6 +2939,58 @@
 "ed07b35977f35d67",
 "2026-11-03"
 ],
+"/en/airport-hotels/": [
+"08d3e019775e6162",
+"2026-11-05"
+],
+"/en/airport-hotels/abidjan/": [
+"91ad84f31c11cd24",
+"2026-11-05"
+],
+"/en/airport-hotels/accra/": [
+"2a85e10e15b980cc",
+"2026-11-05"
+],
+"/en/airport-hotels/algiers/": [
+"78061305e730a309",
+"2026-11-05"
+],
+"/en/airport-hotels/bamako/": [
+"8ed9959d737510e7",
+"2026-11-05"
+],
+"/en/airport-hotels/casablanca/": [
+"fcc0cd6d286e6797",
+"2026-11-05"
+],
+"/en/airport-hotels/conakry/": [
+"19b562b026732968",
+"2026-11-05"
+],
+"/en/airport-hotels/dakar/": [
+"caaa5518dfeabf0f",
+"2026-11-05"
+],
+"/en/airport-hotels/douala/": [
+"2de2f005c60980c8",
+"2026-11-05"
+],
+"/en/airport-hotels/kinshasa/": [
+"82ed8926b4988993",
+"2026-11-05"
+],
+"/en/airport-hotels/lagos/": [
+"97c5ad4297f8d8da",
+"2026-11-05"
+],
+"/en/airport-hotels/lome/": [
+"a8b630bb37537674",
+"2026-11-05"
+],
+"/en/airport-hotels/tunis/": [
+"fd4681b3ca95fa38",
+"2026-11-05"
+],
 "/en/anywhere/": [
 "78a3f3604f2406c5",
 "2026-11-04"
@@ -3131,6 +3183,54 @@
 "aa8bc78ebe38e348",
 "2026-11-04"
 ],
+"/en/car-rental/": [
+"b5690764fec494de",
+"2026-11-05"
+],
+"/en/car-rental/abidjan/": [
+"117de81d63d09e3f",
+"2026-11-05"
+],
+"/en/car-rental/accra/": [
+"769b50e6f8e1b572",
+"2026-11-05"
+],
+"/en/car-rental/agadir/": [
+"e9874e869417cf42",
+"2026-11-05"
+],
+"/en/car-rental/algiers/": [
+"1234572ade475eb7",
+"2026-11-05"
+],
+"/en/car-rental/casablanca/": [
+"17e3ac22601415c1",
+"2026-11-05"
+],
+"/en/car-rental/dakar/": [
+"6174f9e1bc57c0dd",
+"2026-11-05"
+],
+"/en/car-rental/djerba/": [
+"d7b46a7377ebe1c3",
+"2026-11-05"
+],
+"/en/car-rental/douala/": [
+"d2286dfd123c39a8",
+"2026-11-05"
+],
+"/en/car-rental/lome/": [
+"b62956319b6e9286",
+"2026-11-05"
+],
+"/en/car-rental/marrakech/": [
+"4ef0a6ca559056e9",
+"2026-11-05"
+],
+"/en/car-rental/tunis/": [
+"2053b895ea7b72ae",
+"2026-11-05"
+],
 "/en/cheap-hotels-abidjan/": [
 "6bf5251005a01ab8",
 "2026-11-04"
@@ -3226,6 +3326,78 @@
 "/en/did-i-overpay/": [
 "c8e1d34d2ef6d386",
 "2026-11-04"
+],
+"/en/esim/": [
+"c341d76a7a5d64a0",
+"2026-11-05"
+],
+"/en/esim/algeria/": [
+"8fb22cebea83786d",
+"2026-11-05"
+],
+"/en/esim/benin/": [
+"ed39fb0c475eaaca",
+"2026-11-05"
+],
+"/en/esim/burkina-faso/": [
+"1b30790c872c6696",
+"2026-11-05"
+],
+"/en/esim/cameroon/": [
+"7c3b9c4351a99a4a",
+"2026-11-05"
+],
+"/en/esim/dr-congo/": [
+"601b81343cae1941",
+"2026-11-05"
+],
+"/en/esim/egypt/": [
+"687af3452ce3a110",
+"2026-11-05"
+],
+"/en/esim/gabon/": [
+"cef2f1097aa2a8e1",
+"2026-11-05"
+],
+"/en/esim/ghana/": [
+"ca6141fcf98dbe14",
+"2026-11-05"
+],
+"/en/esim/guinea/": [
+"44c513056498a201",
+"2026-11-05"
+],
+"/en/esim/ivory-coast/": [
+"716fdbf74b61cba4",
+"2026-11-05"
+],
+"/en/esim/kenya/": [
+"3a521e66af9cab0c",
+"2026-11-05"
+],
+"/en/esim/mali/": [
+"03373e8029f3eb4b",
+"2026-11-05"
+],
+"/en/esim/morocco/": [
+"f2c6fd5279beeb9f",
+"2026-11-05"
+],
+"/en/esim/nigeria/": [
+"44458ea89baae90e",
+"2026-11-05"
+],
+"/en/esim/senegal/": [
+"6baaa9a36170c86a",
+"2026-11-05"
+],
+"/en/esim/togo/": [
+"21a9eb6d19155119",
+"2026-11-05"
+],
+"/en/esim/tunisia/": [
+"d26b2e583de69b2e",
+"2026-11-05"
 ],
 "/en/family-trip-budget/": [
 "905fe985330cca68",
@@ -7955,6 +8127,78 @@
 "8cd33a1cd379be17",
 "2026-11-04"
 ],
+"/esim/": [
+"347a35cbbe6473eb",
+"2026-11-05"
+],
+"/esim/algerie/": [
+"a01b2efda1390bf8",
+"2026-11-05"
+],
+"/esim/benin/": [
+"c3b25743ca6d5fc9",
+"2026-11-05"
+],
+"/esim/burkina-faso/": [
+"12559ce8bb3dd1b6",
+"2026-11-05"
+],
+"/esim/cameroun/": [
+"8876d2e0185d5e4e",
+"2026-11-05"
+],
+"/esim/cote-d-ivoire/": [
+"4ab72b4fe8298bc1",
+"2026-11-05"
+],
+"/esim/egypte/": [
+"d397758b18bc80ad",
+"2026-11-05"
+],
+"/esim/gabon/": [
+"1908c9294d922c0b",
+"2026-11-05"
+],
+"/esim/ghana/": [
+"461bdd1d298234c6",
+"2026-11-05"
+],
+"/esim/guinee/": [
+"3d7ff4e1a73b143b",
+"2026-11-05"
+],
+"/esim/kenya/": [
+"235b67512ccc5c4c",
+"2026-11-05"
+],
+"/esim/mali/": [
+"5733da7747aec19b",
+"2026-11-05"
+],
+"/esim/maroc/": [
+"c45b07be2f26b7f6",
+"2026-11-05"
+],
+"/esim/nigeria/": [
+"9a798cef0e68ac40",
+"2026-11-05"
+],
+"/esim/rd-congo/": [
+"d9983a0f690d9588",
+"2026-11-05"
+],
+"/esim/senegal/": [
+"4beca63e3ebc7ea3",
+"2026-11-05"
+],
+"/esim/togo/": [
+"e8309a51d0c6469b",
+"2026-11-05"
+],
+"/esim/tunisie/": [
+"bc80915befcb08c2",
+"2026-11-05"
+],
 "/etudiants-billet-avion/": [
 "5163fe94171804c9",
 "2026-11-03"
@@ -8042,6 +8286,58 @@
 "/guides/voyager-avec-enfants/": [
 "12b088ba42a847d9",
 "2026-11-03"
+],
+"/hotel-aeroport/": [
+"ea6d7d87af8edd9d",
+"2026-11-05"
+],
+"/hotel-aeroport/abidjan/": [
+"6d1d68b70a4efef2",
+"2026-11-05"
+],
+"/hotel-aeroport/accra/": [
+"da94a8545a18985f",
+"2026-11-05"
+],
+"/hotel-aeroport/alger/": [
+"fe6ec5321c42d912",
+"2026-11-05"
+],
+"/hotel-aeroport/bamako/": [
+"1d06c347be895d14",
+"2026-11-05"
+],
+"/hotel-aeroport/casablanca/": [
+"dedf4416bd3e892c",
+"2026-11-05"
+],
+"/hotel-aeroport/conakry/": [
+"22cf0d9599faa562",
+"2026-11-05"
+],
+"/hotel-aeroport/dakar/": [
+"8f551e6ac8b53f87",
+"2026-11-05"
+],
+"/hotel-aeroport/douala/": [
+"b9992f379214283e",
+"2026-11-05"
+],
+"/hotel-aeroport/kinshasa/": [
+"d59ea2f467fd22a1",
+"2026-11-05"
+],
+"/hotel-aeroport/lagos/": [
+"1c56272c4e21311a",
+"2026-11-05"
+],
+"/hotel-aeroport/lome/": [
+"885f5c53d8fddc36",
+"2026-11-05"
+],
+"/hotel-aeroport/tunis/": [
+"1840ae93debea8eb",
+"2026-11-05"
 ],
 "/hotel-pas-cher-abidjan/": [
 "f3b78cc1e2643b26",
@@ -8486,6 +8782,54 @@
 "/kit-voyage-hors-ligne/": [
 "2e14a96b95208f02",
 "2026-11-04"
+],
+"/location-voiture/": [
+"3550a4ac84a221c2",
+"2026-11-05"
+],
+"/location-voiture/abidjan/": [
+"73d95a3041ad517d",
+"2026-11-05"
+],
+"/location-voiture/accra/": [
+"34faf407d153bcaa",
+"2026-11-05"
+],
+"/location-voiture/agadir/": [
+"37051e85d14803de",
+"2026-11-05"
+],
+"/location-voiture/alger/": [
+"8b4319dc1b5ad905",
+"2026-11-05"
+],
+"/location-voiture/casablanca/": [
+"6bc2aafce4891530",
+"2026-11-05"
+],
+"/location-voiture/dakar/": [
+"ef3e85d1cfe90972",
+"2026-11-05"
+],
+"/location-voiture/djerba/": [
+"885da278796bbc2a",
+"2026-11-05"
+],
+"/location-voiture/douala/": [
+"ebe94ce347a26a26",
+"2026-11-05"
+],
+"/location-voiture/lome/": [
+"a0ba9cb9fc0453d8",
+"2026-11-05"
+],
+"/location-voiture/marrakech/": [
+"f38d9d19ea70dd33",
+"2026-11-05"
+],
+"/location-voiture/tunis/": [
+"f5c4dfde8bc0c8d4",
+"2026-11-05"
 ],
 "/ma/": [
 "56514f7d1439c3d5",

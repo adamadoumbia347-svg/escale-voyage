@@ -55,4 +55,5 @@ def build(site, ctx):
     import proche
     import outils
     import protection
-    return build_weekends(site, ctx) + premier_voyage.build(site, ctx) + meilleur_mois.build(site, ctx) + proche.build(site, ctx) + outils.build(site, ctx) + protection.build(site, ctx)  # agences.build(site, ctx) : à réactiver plus tard (« Escale pour les agences »)
+    import pratiques_pays
+    return build_weekends(site, ctx) + premier_voyage.build(site, ctx) + meilleur_mois.build(site, ctx) + proche.build(site, ctx) + outils.build(site, ctx) + protection.build(site, ctx) + pratiques_pays.build(site, ctx)  # agences.build(site, ctx) : à réactiver plus tard (« Escale pour les agences »)
