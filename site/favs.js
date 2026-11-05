@@ -17,7 +17,16 @@
       kinds: { vol: "Pesquisa de voo", route: "Rota", hotel: "Hotéis", deal: "Promoção" }, added: "Adicionado a", clear: "Apagar tudo", confirm: "Apagar todos os favoritos?" },
     ar: { save: "أضف إلى المفضلة", saved: "في المفضلة", short: "المفضلة", shortOn: "محفوظ", remove: "إزالة", open: "فتح",
       empty: "لا توجد عناصر مفضلة بعد. المس النجمة في صفحة رحلة أو فندق أو بحث لتجده هنا.",
-      kinds: { vol: "بحث عن رحلة", route: "رحلة", hotel: "فنادق", deal: "عرض" }, added: "أضيف في", clear: "حذف الكل", confirm: "حذف كل العناصر المفضلة؟" }
+      kinds: { vol: "بحث عن رحلة", route: "رحلة", hotel: "فنادق", deal: "عرض" }, added: "أضيف في", clear: "حذف الكل", confirm: "حذف كل العناصر المفضلة؟" },
+    it: { save: "Aggiungi ai preferiti", saved: "Nei tuoi preferiti", short: "Preferito", shortOn: "Salvato", remove: "Rimuovi", open: "Apri",
+      empty: "Ancora nessun preferito. Tocca la stella su una tratta, un hotel o una ricerca per ritrovarla qui.",
+      kinds: { vol: "Ricerca voli", route: "Tratta", hotel: "Hotel", deal: "Offerta" }, added: "Aggiunto il", clear: "Cancella tutto", confirm: "Cancellare tutti i preferiti?" },
+    de: { save: "Zu Favoriten hinzufügen", saved: "In deinen Favoriten", short: "Merken", shortOn: "Gemerkt", remove: "Entfernen", open: "Öffnen",
+      empty: "Noch keine Favoriten. Tippe auf den Stern bei einer Strecke, einem Hotel oder einer Suche, um sie hier wiederzufinden.",
+      kinds: { vol: "Flugsuche", route: "Strecke", hotel: "Hotels", deal: "Angebot" }, added: "Hinzugefügt am", clear: "Alle löschen", confirm: "Alle Favoriten löschen?" },
+    nl: { save: "Toevoegen aan favorieten", saved: "In je favorieten", short: "Bewaren", shortOn: "Bewaard", remove: "Verwijderen", open: "Openen",
+      empty: "Nog geen favorieten. Tik op de ster bij een route, hotel of zoekopdracht om die hier terug te vinden.",
+      kinds: { vol: "Vluchtzoekopdracht", route: "Route", hotel: "Hotels", deal: "Aanbieding" }, added: "Toegevoegd op", clear: "Alles wissen", confirm: "Alle favorieten wissen?" }
   };
   var lang = function () { var l = (document.documentElement.lang || "fr").slice(0, 2); return L[l] ? l : "fr"; };
   var esc = function (t) { return String(t == null ? "" : t).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
@@ -45,7 +54,7 @@
   }
 
   function paint(box, list, l) {
-    var loc = { fr: "fr-FR", en: "en-GB", es: "es-ES", pt: "pt-PT", ar: "ar-u-nu-latn" }[lang()];
+    var loc = { fr: "fr-FR", en: "en-GB", es: "es-ES", pt: "pt-PT", ar: "ar-u-nu-latn", it: "it-IT", de: "de-DE", nl: "nl-NL" }[lang()];
     var clear = document.getElementById("fav-clear");
     if (clear) clear.hidden = !list.length;
     if (!list.length) { box.innerHTML = '<p class="fav-empty">' + esc(l.empty) + "</p>"; return; }

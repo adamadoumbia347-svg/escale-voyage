@@ -429,7 +429,7 @@ def route_page(r):
 {''.join(f'<details><summary>{E(q)}</summary><p>{E(a)}</p></details>' for q, a in faq)}
 </section>
 <section><h2>Autres trajets</h2><ul class="route-links">{''.join(f'<li><a href="/{route_slug(o)}/">{E(o[2])} → {E(o[3])}</a></li>' for o in related(r))}</ul></section>"""
-    paths = {"fr": s, **{l: build_i18n.route_path(r, l) for l in build_i18n.LANGS}}
+    paths = {"fr": s, **{l: build_i18n.route_path(r, l) for l in build_i18n.LANGS + build_i18n.RX.LANGS if l in build_i18n.LANGS or build_i18n.is_itde(r, l)}}
     og = f"og/{fr}-{to}.jpg" if (SITE / "og" / f"{fr}-{to}.jpg").exists() else "og-image.png"
     return page(s, title, desc, hero, body, ld, paths, og)
 

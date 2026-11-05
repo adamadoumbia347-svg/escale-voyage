@@ -11,6 +11,7 @@ import urllib.parse
 import tripcom
 
 import translations as TR
+import routes_itde as RX  # italien et allemand des 34 grands trajets
 
 E = html.escape
 LANGS = ["en", "es", "pt", "ar"]
@@ -195,6 +196,9 @@ def slugify(t):
 
 
 def tr(table, key, lang):
+    if lang in RX.COLX:
+        t = {id(TR.CITIES): RX.CITIES, id(TR.COUNTRIES): RX.COUNTRIES, id(TR.PEAKS): RX.PEAKS}.get(id(table))
+        return RX.tr(t, key, lang) if t else key
     v = table.get(key)
     return v[COL[lang]] if v else key
 
@@ -206,6 +210,11 @@ def city(name, lang):
 def slug_city(name, lang):
     # Les URL arabes utilisent les noms anglais en caractères latins
     return slugify(city(name, "en" if lang == "ar" else lang))
+
+
+def is_itde(r, lang):
+    """Trajet traduit en italien / allemand ?"""
+    return lang in RX.COLX and f"{r[0]}-{r[1]}" in RX.TOP
 
 
 def route_path(r, lang):
@@ -444,12 +453,15 @@ def write(site, path, lang, title, desc, hero, body, ld, paths, ctx, og="og-imag
 def build(site, ctx):
     """ctx : domain, tp (script Travelpayouts), routes, hotels, route_slug, hotel_slug, airports, related"""
     routes, hotels = ctx["routes"], ctx["hotels"]
-    route_paths = {r: {"fr": ctx["route_slug"](r), **{l: route_path(r, l) for l in LANGS}} for r in routes}
+    route_paths = {r: {"fr": ctx["route_slug"](r), **{l: route_path(r, l) for l in LANGS + RX.LANGS if l in LANGS or is_itde(r, l)}} for r in routes}
     hotel_paths = {h[0]: {"fr": ctx["hotel_slug"](h), **{l: hotel_path(h, l) for l in LANGS}} for h in hotels}
     urls = []
-    for lang in LANGS:
-        u = UI[lang]
+    for lang in LANGS + RX.LANGS:
+        itde = lang in RX.COLX
+        u = {**UI[lang], **RX.UI[lang]} if itde else UI[lang]
         for r in routes:
+            if itde and not is_itde(r, lang):
+                continue
             fr_, to, cf, ct, country, _airport, dur, peak, _note = r
             a, b = city(cf, lang), city(ct, lang)
             ap = ctx["airports"].get(to)
@@ -457,17 +469,17 @@ def build(site, ctx):
             km = ctx.get("distances", {}).get((fr_, to))
             if dur and dur.startswith("~"):
                 kms = f"{km:,}".replace(",", " " if lang != "en" else ",")
-                dur_txt = EST[lang].format(d=duration(dur[1:], lang), km=kms)
+                dur_txt = (u["est"] if itde else EST[lang]).format(d=duration(dur[1:], lang), km=kms)
                 dur_long = dur_txt
             else:
                 dur_txt = u["dur_direct"].format(d=duration(dur, lang)) if dur else u["dur_var"]
                 dur_long = u["dur_long_direct"].format(d=duration(dur, lang)) if dur else u["dur_long_var"]
             peak_t = tr(TR.PEAKS, peak, lang)
-            note = TR.NOTES[f"{fr_}-{to}"][COL[lang]]
+            note = RX.NOTES[f"{fr_}-{to}"][RX.COLX[lang]] if itde else TR.NOTES[f"{fr_}-{to}"][COL[lang]]
             app = "/?" + urllib.parse.urlencode({"type": "vols", "from": fr_, "to": to, "lang": u["app_lang"]})
             backl = "/?" + urllib.parse.urlencode({"type": "vols", "from": to, "to": fr_, "lang": u["app_lang"]})
             hp = next((h for h in hotels if h[0] == ct), None)
-            hotels_l = f"/{hotel_paths[hp[0]][lang]}/" if hp else "/?" + urllib.parse.urlencode({"type": "hotels", "dest": b, "lang": u["app_lang"]})
+            hotels_l = f"/{hotel_paths[hp[0]][lang]}/" if hp and lang in hotel_paths[hp[0]] else "/?" + urllib.parse.urlencode({"type": "hotels", "dest": b, "lang": u["app_lang"]})
             cars_l = "/?" + urllib.parse.urlencode({"type": "voitures", "pick": to, "lang": u["app_lang"]})
             f = dict(a=a, b=b, fa=fr_, ta=to, peak=peak_t, airport=airport, dur_long=dur_long)
             faq = [(q.format(**f), ans.format(**f)) for q, ans in u["faq"]]
@@ -480,7 +492,7 @@ def build(site, ctx):
   <p class="hero-price" id="hero-price" hidden></p>
   <div class="cta-row"><a class="btn" href="/recherche/" data-wl="{fr_}-{to}">{E(u["cta"])}</a><a class="btn ghost" href="/recherche/" data-wl="{to}-{fr_}">{E(u["back"].format(a=a, b=b))}</a>{fav_btn(lang, route_paths[r][lang], f"{a} → {b}", f"{fr_} → {to}", "route")}{alert_btn(lang)}</div>"""
             others = "".join(f'<li><a href="/{route_paths[o][lang]}/">{E(city(o[2], lang))} {u["arrow"]} {E(city(o[3], lang))}</a></li>'
-                             for o in ctx["related"](r))
+                             for o in ctx["related"](r) if lang in route_paths[o])
             body = f"""<dl class="facts">
   <div><dt>{E(u["duration"])}</dt><dd>{E(dur_txt)}</dd></div>
   <div><dt>{E(u["arrival"])}</dt><dd>{E(airport)} ({to})</dd></div>
@@ -502,7 +514,7 @@ def build(site, ctx):
   {live_link(fr_, to, lang)}
   <li><a href="{E(av_link(fr_, to))}" data-av="{fr_}-{to}" target="_blank" rel="sponsored noopener">{E(u["sky"])}</a></li>
   <li><a href="{E(hotels_l)}">{E(u["hotels_in"].format(b=b))}</a></li>
-  <li><a href="{E(cars_l)}">{E(u["cars_in"].format(b=b))}</a></li>{f'<li><a href="/{ctx["hubs"][ct][lang]}/">{E(HUB_LINK[lang].format(b=b))}</a></li>' if ct in ctx.get("hubs", {}) else ''}
+  <li><a href="{E(cars_l)}">{E(u["cars_in"].format(b=b))}</a></li>{f'<li><a href="/{ctx["hubs"][ct][lang]}/">{E(HUB_LINK[lang].format(b=b))}</a></li>' if ct in ctx.get("hubs", {}) and lang in HUB_LINK and lang in ctx["hubs"][ct] else ''}
 </ul></section>
 <section class="faq"><h2>{E(u["faq_h"])}</h2>
 {"".join(f"<details><summary>{E(q)}</summary><p>{E(ans)}</p></details>" for q, ans in faq)}
@@ -512,6 +524,8 @@ def build(site, ctx):
                               u["desc_route"].format(a=a, b=b, fa=fr_, ta=to), hero, body, faq_ld(faq), route_paths[r], ctx,
                               f"og/{fr_}-{to}.jpg" if (site / "og" / f"{fr_}-{to}.jpg").exists() else "og-image.png"))
 
+        if itde:
+            continue  # hôtels : pas encore en italien / allemand
         for h in hotels:
             cname, country, areas, _tip, code = h
             c = city(cname, lang)
