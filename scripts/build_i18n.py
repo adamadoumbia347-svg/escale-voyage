@@ -197,7 +197,7 @@ def slugify(t):
 
 def tr(table, key, lang):
     if lang in RX.COLX:
-        t = {id(TR.CITIES): RX.CITIES, id(TR.COUNTRIES): RX.COUNTRIES, id(TR.PEAKS): RX.PEAKS}.get(id(table))
+        t = {id(TR.CITIES): RX.CITIES, id(TR.COUNTRIES): RX.COUNTRIES, id(TR.PEAKS): RX.PEAKS, id(TR.AREAS): RX.AREAS}.get(id(table))
         return RX.tr(t, key, lang) if t else key
     v = table.get(key)
     return v[COL[lang]] if v else key
@@ -222,7 +222,8 @@ def route_path(r, lang):
 
 
 def hotel_path(h, lang):
-    return f"{lang}/{UI[lang]['hotel_slug']}-{slug_city(h[0], lang)}"
+    slug = UI[lang].get("hotel_slug") or RX.UI[lang]["hotel_slug"]
+    return f"{lang}/{slug}-{slug_city(h[0], lang)}"
 
 
 def duration(d, lang):
@@ -454,7 +455,7 @@ def build(site, ctx):
     """ctx : domain, tp (script Travelpayouts), routes, hotels, route_slug, hotel_slug, airports, related"""
     routes, hotels = ctx["routes"], ctx["hotels"]
     route_paths = {r: {"fr": ctx["route_slug"](r), **{l: route_path(r, l) for l in LANGS + RX.LANGS if l in LANGS or is_itde(r, l)}} for r in routes}
-    hotel_paths = {h[0]: {"fr": ctx["hotel_slug"](h), **{l: hotel_path(h, l) for l in LANGS}} for h in hotels}
+    hotel_paths = {h[0]: {"fr": ctx["hotel_slug"](h), **{l: hotel_path(h, l) for l in LANGS + RX.HOTEL_LANGS}} for h in hotels}
     urls = []
     for lang in LANGS + RX.LANGS:
         itde = lang in RX.COLX
@@ -524,8 +525,6 @@ def build(site, ctx):
                               u["desc_route"].format(a=a, b=b, fa=fr_, ta=to), hero, body, faq_ld(faq), route_paths[r], ctx,
                               f"og/{fr_}-{to}.jpg" if (site / "og" / f"{fr_}-{to}.jpg").exists() else "og-image.png"))
 
-        if itde:
-            continue  # hôtels : pas encore en italien / allemand
         for h in hotels:
             cname, country, areas, _tip, code = h
             c = city(cname, lang)
@@ -535,7 +534,7 @@ def build(site, ctx):
             google = "https://www.google.com/travel/search?" + urllib.parse.urlencode({"q": f"hotels {city(cname, 'en')}", "hl": lang, "curr": "EUR"})
             airbnb = f"https://www.airbnb.com/s/{urllib.parse.quote(city(cname, 'en'))}/homes"
             cars_l = "/?" + urllib.parse.urlencode({"type": "voitures", "pick": code, "lang": u["app_lang"]})
-            flights = [r for r in routes if r[3] == cname]
+            flights = [r for r in routes if r[3] == cname and lang in route_paths[r]]
             aname = lambda n: u["area_names"].get(n, n.replace(" et ", u["conj"]))
             area_items = [(aname(n), tr(TR.AREAS, d, lang)) for n, d in areas]
             faq = [(q.format(c=c), ans.format(c=c, areas=" ; ".join(f"{n}: {d}" for n, d in area_items))) for q, ans in u["hfaq"]]
@@ -552,7 +551,7 @@ def build(site, ctx):
                 fl_html = f'<section><h2>{E(u["flights_to"].format(c=c))}</h2><ul class="route-links">' + "".join(
                     f'<li><a href="/{route_paths[r][lang]}/">{E(city(r[2], lang))} {u["arrow"]} {E(city(r[3], lang))}</a></li>' for r in flights) + "</ul></section>"
             body = f"""<section><h2>{E(u["where_h"].format(c=c))}</h2><dl class="facts">{areas_html}</dl></section>{hotel_map(lang, c, f"{city(cname, 'en')}, {tr(TR.COUNTRIES, country, 'en')}")}{TEN.hotel_html(hen, c, {p["key"]: p for p in partners(site)}) if hen else ""}
-<section><h2>{E(u["our_tip"])}</h2><p>{E(TR.HOTEL_TIPS[cname][COL[lang]])}</p></section>
+<section><h2>{E(u["our_tip"])}</h2><p>{E(RX.HOTEL_TIPS[cname][RX.COLX[lang]] if itde else TR.HOTEL_TIPS[cname][COL[lang]])}</p></section>
 <section><h2>{E(u["cheap_h"])}</h2>
 <ol class="steps">{"".join(f"<li>{s}</li>" for s in u["hsteps"])}</ol>
 <p><a class="btn" href="{E(app)}">{E(u["hlaunch"].format(c=c))}</a></p>
@@ -574,6 +573,14 @@ def build(site, ctx):
 <section><h2>{E(u["other_cities"])}</h2><ul class="route-links">{"".join(f'<li><a href="/{hotel_paths[o[0]][lang]}/">{E(u["hotels_short"].format(c=city(o[0], lang)))}</a></li>' for o in hotels if o is not h)}</ul></section>"""
             urls.append(write(site, hotel_paths[h[0]][lang], lang, u["title_hotel"].format(c=c),
                               u["desc_hotel"].format(c=c, country=cn), hero, body, faq_ld(faq), hotel_paths[h[0]], ctx))
+    # Italien : « ad » devant une ville qui commence par une voyelle (ad Abidjan, ad Accra, ad Algeri…)
+    for p in [x["it"] for x in list(route_paths.values()) + list(hotel_paths.values()) if "it" in x]:
+        f = site / p / "index.html"
+        if f.exists():
+            t = f.read_text(encoding="utf-8")
+            n = re.sub(r"\b([Aa]) ((?:<span>)?(?:Abidjan|Accra|Addis Abeba|Algeri|Istanbul|Ouagadougou)\b)", r"\1d \2", t)
+            if n != t:
+                f.write_text(n, encoding="utf-8")
     return urls, route_paths, hotel_paths
 
 
@@ -664,6 +671,11 @@ MAP_L = {"fr": ("Carte des hôtels à {c} : prix en direct", "Booking, Expedia, 
          "es": ("Mapa de hoteles en {c}: precios en directo", "Booking, Expedia, Agoda, Hotels.com… en un mapa, con los precios actuales. Elige tus fechas en el mapa.", "Mostrar el mapa de hoteles"),
          "pt": ("Mapa de hotéis em {c}: preços ao vivo", "Booking, Expedia, Agoda, Hotels.com… num mapa, com os preços atuais. Escolha as datas no mapa.", "Mostrar o mapa de hotéis"),
          "ar": ("خريطة فنادق {c}: أسعار مباشرة", "بوكينغ وإكسبيديا وأغودا… على خريطة مع الأسعار الحالية. اختر تواريخك على الخريطة.", "اعرض خريطة الفنادق")}
+
+
+for _l in RX.LANGS:
+    MAP_L[_l] = RX.UI[_l]["map"]
+    STAY22_L[_l] = RX.UI[_l]["stay22"]
 
 
 def hotel_map(lang, city_label, address):

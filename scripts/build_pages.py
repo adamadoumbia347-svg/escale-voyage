@@ -515,7 +515,7 @@ def hotel_page(h):
 {''.join(f'<details><summary>{E(q)}</summary><p>{E(a)}</p></details>' for q, a in faq)}
 </section>
 <section><h2>Autres villes</h2><ul class="route-links">{''.join(f'<li><a href="/{hotel_slug(o)}/">Hôtels à {E(o[0])}</a></li>' for o in HOTELS if o is not h)}</ul></section>"""
-    paths = {"fr": s, **{l: build_i18n.hotel_path(h, l) for l in build_i18n.LANGS}}
+    paths = {"fr": s, **{l: build_i18n.hotel_path(h, l) for l in build_i18n.LANGS + build_i18n.RX.HOTEL_LANGS}}
     return page(s, title, desc, hero, body, ld, paths)
 
 def legal_pages():
