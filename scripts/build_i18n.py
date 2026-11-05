@@ -12,6 +12,7 @@ import tripcom
 
 import translations as TR
 import routes_itde as RX  # italien et allemand des 34 grands trajets
+import routes_local as RL  # contenu propre en espagnol / portugais, bloc « Depuis Londres »
 
 E = html.escape
 LANGS = ["en", "es", "pt", "ar"]
@@ -490,6 +491,12 @@ def build(site, ctx):
             ten = TEN.ROUTES.get((fr_, to)) if lang == "en" else None  # contenu unique en anglais (grands trajets)
             if ten:
                 faq = ten["faq"] + faq
+            loc_ = RL.ROUTES.get((fr_, to, lang))
+            if loc_:
+                faq = loc_["faq"] + faq
+            lon = lang == "en" and fr_ in ("LHR", "LGW", "LON")
+            if lon:
+                faq = faq + RL.london_faq(b)
             hero = f"""<p class="eyebrow">{E(tr(TR.COUNTRIES, country, lang))}</p>
   <h1>{u["h1_route"].format(a=E(a), b=E(b))}</h1>
   <p class="codes" dir="ltr">{fr_} → {to}</p>
@@ -508,7 +515,7 @@ def build(site, ctx):
 <script src="/route-prices.js" defer></script>
 {calendar_html(lang, fr_, to)}
 {extras_html(site, lang, b, city(ct, "en"), to)}
-{TEN.route_html(ten, a, b, {p["key"]: p for p in partners(site)}) if ten else ""}<section><h2>{E(u["tip_h"])}</h2><p>{E(note)}</p></section>
+{TEN.route_html(ten, a, b, {p["key"]: p for p in partners(site)}) if ten else ""}{RL.route_html(loc_, a, b, lang) if loc_ else ""}{RL.london_html(b) if lon else ""}<section><h2>{E(u["tip_h"])}</h2><p>{E(note)}</p></section>
 <section><h2>{E(u["cheap_h"])}</h2>
 <ol class="steps">{"".join(f"<li>{s}</li>" for s in u["steps"])}</ol>
 <p><a class="btn" href="/recherche/" data-wl="{fr_}-{to}">{E(u["launch"].format(a=a, b=b))}</a></p>

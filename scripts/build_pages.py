@@ -665,6 +665,10 @@ def bust_cache(site):
 
 def main():
     airports_all = {a[0]: a for a in __import__("json").loads((SITE / "data" / "airports.json").read_text(encoding="utf-8"))}
+    # Accueil : liste allégée (sans les noms officiels des aéroports) + noms à part, chargés à la première saisie
+    _j = __import__("json")
+    (SITE / "data" / "airports-lite.json").write_text(_j.dumps([[a[0], a[1], ""] + a[3:] for a in airports_all.values()], ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    (SITE / "data" / "airport-names.json").write_text(_j.dumps({a[0]: a[2] for a in airports_all.values()}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     _, dist = routes_extra.extend(ROUTES, translations, airports_all)
     DISTANCES.update(dist)
     HUBS.update(hubs.hub_paths(ROUTES))
@@ -806,6 +810,8 @@ def main():
         "".join(f"  <url><loc>{u}</loc><lastmod>{new_lm['/' + (u[len(DOMAIN):].strip('/') + '/' if u[len(DOMAIN):].strip('/') else '')][1]}</lastmod></url>\n" for u in urls) + "</urlset>\n", encoding="utf-8")
     # /api/ : données en direct (inutile aux moteurs, et chaque visite consomme le quota Cloudflare) ; /admin/ : espace privé
     (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /admin/\n\nSitemap: {DOMAIN}/sitemap.xml\n", encoding="utf-8")
+    import home_i18n
+    urls += [u for u in home_i18n.build(SITE) if u not in urls]  # accueils traduits (/en/, /es/, /it/…)
     lite_mode(SITE)
     print(f"langue automatique : {langue_auto(SITE)} pages")
     bust_cache(SITE)

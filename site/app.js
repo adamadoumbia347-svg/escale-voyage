@@ -41,6 +41,9 @@
     .map((l) => String(l).slice(0, 2).toLowerCase()).find((l) => LANGS.includes(l)) || "en";
   let LANG = store.get("escale.lang") || (LANGS.includes(navLang) ? navLang : "en");
   if (!LANGS.includes(LANG)) LANG = "fr";
+  // Accueils traduits (/en/, /es/, /it/…) : la langue de la page (texte déjà écrit dans cette langue)
+  const fixedLang = document.documentElement.getAttribute("data-lang-fixed");
+  if (LANGS.includes(fixedLang)) LANG = fixedLang;
   // Français et anglais écrits dans le code ; espagnol, portugais et arabe dans i18n.js (clé = texte anglais)
   // i18n.js (88 ko) n'est chargé que pour l'espagnol, le portugais, l'arabe, l'italien et l'allemand (voir index.html)
   const COL = { es: 0, pt: 1, ar: 2, it: 3, de: 4 };
@@ -152,7 +155,8 @@
   function loadDB() {
     if (dbPromise) return dbPromise;
     // Liste partagée avec accueil.js (window.ESCALE_AIRPORTS) : un seul téléchargement de /data/airports.json
-    window.ESCALE_AIRPORTS = window.ESCALE_AIRPORTS || fetch("/data/airports.json").then((r) => (r.ok ? r.json() : null)).catch(() => null);
+    // Version allégée (sans les noms officiels des aéroports, chargés à la première saisie : loadNames)
+    window.ESCALE_AIRPORTS = window.ESCALE_AIRPORTS || fetch("/data/airports-lite.json").then((r) => (r.ok ? r.json() : null)).catch(() => null);
     dbPromise = window.ESCALE_AIRPORTS.then((list) => {
       if (!Array.isArray(list) || !list.length) return;
       DB = list; byCode = new Map(list.map((a) => [a[0], a])); dbLoaded = true; index = null; // index de recherche refait à la première saisie
@@ -164,6 +168,15 @@
     }).catch(() => {});
     window.ESCALE_DB_READY = dbPromise;
     return dbPromise;
+  }
+  // Noms officiels des aéroports (« Blaise Diagne International Airport »…) : seulement pour la recherche et les suggestions
+  let namesP = null;
+  function loadNames() {
+    if (namesP) return namesP;
+    namesP = Promise.all([loadDB(), fetch("/data/airport-names.json").then((r) => (r.ok ? r.json() : {})).catch(() => ({}))]).then(([, n]) => {
+      DB.forEach((a) => { if (!a[2] && n[a[0]]) a[2] = n[a[0]]; }); index = null;
+    });
+    return namesP;
   }
   // Noms des villes dans la langue du visiteur (site/data/noms/<langue>.json, tirés de Wikidata) ; le nom français
   // de base reste gardé (a[7]) et cherchable : « Londres » comme « London » trouvent LHR.
@@ -250,8 +263,8 @@
       }
       list.hidden = false; input.setAttribute("aria-expanded", "true"); active = -1;
     };
-    input.addEventListener("focus", () => { loadDB().then(() => { if (document.activeElement === input && input.value.trim() && !/\([A-Z]{3}\)$/.test(input.value)) render(); }); });
-    input.addEventListener("input", () => { render(); if (!dbLoaded) loadDB().then(() => { if (document.activeElement === input) render(); }); });
+    input.addEventListener("focus", () => { loadNames().then(() => { if (document.activeElement === input && input.value.trim() && !/\([A-Z]{3}\)$/.test(input.value)) render(); }); });
+    input.addEventListener("input", () => { render(); if (!dbLoaded || !namesP) loadNames().then(() => { if (document.activeElement === input) render(); }); });
     input.addEventListener("keydown", (ev) => {
       if (list.hidden) { if (ev.key === "ArrowDown") render(); return; }
       if (ev.key === "ArrowDown") { ev.preventDefault(); highlight(Math.min(items.length - 1, active + 1)); }
