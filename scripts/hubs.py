@@ -286,7 +286,9 @@ def build_hubs(site, ctx, route_paths, hotel_paths):
             if pc:
                 fl = FROM_L.get(lang)
                 if fl:
-                    hero += f'<p class="hub-from"><a class="btn ghost" href="/{pc}/">{E(fl[0].format(b=b))} →</a></p>'
+                    import pays_accueil as PA
+                    dest = PA.EXTRA.get(pc, {}).get(lang, (pc,))[0]
+                    hero += f'<p class="hub-from"><a class="btn ghost" href="/{dest}/">{E(fl[0].format(b=b))} →</a></p>'
                 if lang == "en":
                     title = f"Cheap flights to & from {b}: live prices"
                     desc = f"Cheap flights to and from {b} ({code}): live prices from {some} and more, the cheapest days, flight times. Flying from {b}? See departures too."

@@ -124,7 +124,15 @@ HOTELS = {
               "Serviced apartments are common and often good value for stays of a week or more.",
               "Ask the hotel to arrange an airport pick-up, especially for late-night arrivals."],
         faq=[("Which area is best to stay in Bamako?", "ACI 2000 and Hippodrome are practical for business, restaurants and nightlife; the riverside areas are calmer."),
-             ("Are there serviced apartments in Bamako?", "Yes, many hotels and residences offer apartments with a kitchen, often good value for longer stays.")],
+             ("Are there serviced apartments in Bamako?", "Yes, many hotels and residences offer apartments with a kitchen, often good value for longer stays."),
+             ("How do I find a cheap hotel in Bamako?", "Compare the same dates on several sites, look at Badalabougou and the right bank for lower prices, and book apartments for stays of a week or more."),
+             ("How far is Bamako airport from the city?", "Modibo Keïta Airport is about 15 km south of the centre: roughly 30 minutes by car outside rush hour."),
+             ("When is the best time to visit Bamako?", "November to February is the coolest and driest period. March to May is very hot, and the rainy season runs roughly from June to September."),
+             ("Is it safe to travel to Mali?", "Check your government's travel advice before booking: it changes with the situation. Prefer free cancellation and keep your trip details with a relative.")],
+        more=[("Areas at a glance", "ACI 2000: modern district with business hotels and offices. Hippodrome: lively, with restaurants and bars. Badalabougou and the right bank: quieter, often cheaper, close to the river."),
+              ("Hotel or apartment?", "For one or two nights a hotel is simpler, with a generator, security and breakfast. From a week, a furnished apartment with a kitchen often costs less per night, which suits families and business stays."),
+              ("Getting from the airport", "Ask your hotel for a pick-up or book a transfer before you land, especially at night. Agree the price before getting into a taxi."),
+              ("Money and connectivity", "The currency is the CFA franc (XOF). Cash is still widely used; keep some for the taxi. An eSIM lets you be online as soon as you land.")],
     ),
     "Douala": dict(
         intro="Douala is Cameroon's economic capital and main port. Akwa and Bonanjo are the business districts with most hotels; Bonapriso is quieter and residential. The airport is close to the centre, about 15 to 30 minutes by car depending on traffic.",
@@ -132,7 +140,14 @@ HOTELS = {
               "It rains a lot, especially from July to September: plan extra time for journeys.",
               "Many hotels offer airport transfers: book one in advance for a night arrival."],
         faq=[("Where to stay in Douala?", "Akwa and Bonanjo for business and convenience; Bonapriso for a quieter, residential area."),
-             ("How far is Douala airport from the city centre?", "Only a few kilometres: about 15 to 30 minutes by car depending on traffic.")],
+             ("How far is Douala airport from the city centre?", "Only a few kilometres: about 15 to 30 minutes by car depending on traffic."),
+             ("How do I find a cheap hotel in Douala?", "Compare several sites for the same dates, look slightly outside Akwa and Bonanjo, and choose free cancellation so you can rebook if the price drops."),
+             ("When is the best time to visit Douala?", "December to February is the driest period. The rainy season is long and heavy, especially from July to September."),
+             ("Are there apartments for rent in Douala?", "Yes: furnished apartments and residences are common in Bonapriso, Akwa and Bonamoussadi, and are often better value for long stays.")],
+        more=[("Areas at a glance", "Akwa: shops, restaurants and many mid-range hotels. Bonanjo: government and business district, close to the port and the river. Bonapriso: residential and quieter, with upscale hotels and apartments."),
+              ("Getting around", "Traffic jams are common at rush hour, so the right area saves you hours. Taxis are cheap but shared: for a first visit, ask your hotel to book a car."),
+              ("Arriving at night", "Book an airport transfer in advance and share your hotel address with a relative. The airport is close to the centre, so a central hotel works well even for a late arrival."),
+              ("Money and connectivity", "The currency is the CFA franc (XAF). Mobile money is widely used; an eSIM gets you online as soon as you land.")],
     ),
     "Kinshasa": dict(
         intro="Kinshasa is huge, and traffic can turn short distances into long journeys. Most visitors stay in Gombe, the business and diplomatic district along the river. N'djili Airport is about 25 km from Gombe: allow an hour or more.",
@@ -161,8 +176,9 @@ def route_html(tj, a, b, partners):
 def hotel_html(h, c, partners):
     links = " · ".join(f'<a href="{E(partners[k]["url"])}" target="_blank" rel="sponsored noopener noreferrer">{t}</a>'
                        for k, t in (("transfer", "book an airport transfer"), ("esim", "get mobile data with an eSIM")) if k in partners)
+    more = "".join(f"<h3>{E(t)}</h3><p>{E(x)}</p>" for t, x in h.get("more", []))
     return (f'<section class="trajet"><h2>Staying in {E(c)}: what to know</h2><p>{E(h["intro"])}</p>'
-            + '<ul class="plain">' + "".join(f"<li>{E(t)}</li>" for t in h["tips"]) + "</ul>"
+            + '<ul class="plain">' + "".join(f"<li>{E(t)}</li>" for t in h["tips"]) + "</ul>" + more
             + (f'<p class="small">Before you arrive: {links}.</p>' if links else "") + "</section>")
 
 

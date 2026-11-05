@@ -41,7 +41,7 @@ UI = {
              ("Which airport in {b}?", "Flights arrive at {airport} ({ta})."),
              ("Is baggage included?", "Not always. The lowest fares sometimes include only a small bag. Check the checked-baggage allowance before paying.")],
         dur_long_direct="About {d} on a direct flight", dur_long_var="It varies: most trips have at least one stop",
-        title_hotel="Cheap hotels in {c}: compare prices",
+        title_hotel="Hotels in {c}, {country}: cheap hotels & apartments compared",
         desc_hotel="Cheap hotel in {c} ({country}): where to stay, tips to pay less and prices compared on Booking, Agoda and Airbnb.",
         h1_hotel="Cheap hotels in <span>{c}</span>", hotel_codes="hotels and apartments", hotel_cta="Compare hotel prices", flights_to="Flights to {c}",
         where_h="Where to stay in {c}", our_tip="Our tip",
@@ -576,7 +576,7 @@ def build(site, ctx):
 {"".join(f"<details><summary>{E(q)}</summary><p>{E(ans)}</p></details>" for q, ans in faq)}
 </section>
 <section><h2>{E(u["other_cities"])}</h2><ul class="route-links">{"".join(f'<li><a href="/{hotel_paths[o[0]][lang]}/">{E(u["hotels_short"].format(c=city(o[0], lang)))}</a></li>' for o in hotels if o is not h)}</ul></section>"""
-            urls.append(write(site, hotel_paths[h[0]][lang], lang, u["title_hotel"].format(c=c),
+            urls.append(write(site, hotel_paths[h[0]][lang], lang, (lambda t1: t1 if len(t1) <= 62 else u["title_hotel"].replace(", {country}", "").format(c=c))(u["title_hotel"].format(c=c, country=cn)),
                               u["desc_hotel"].format(c=c, country=cn), hero, body, faq_ld(faq), hotel_paths[h[0]], ctx))
     # Italien : « ad » devant une ville qui commence par une voyelle (ad Abidjan, ad Accra, ad Algeri…)
     for p in [x["it"] for x in list(route_paths.values()) + list(hotel_paths.values()) if "it" in x]:

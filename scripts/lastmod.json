@@ -863,6 +863,18 @@
 "5c5d5ee5c6eb94ca",
 "2026-11-05"
 ],
+"/ar/flights-from-algeria/": [
+"c40b289fb12959be",
+"2026-11-05"
+],
+"/ar/flights-from-morocco/": [
+"e8ac2c8ecdf9a142",
+"2026-11-05"
+],
+"/ar/flights-from-tunisia/": [
+"15889bcebbe33ed1",
+"2026-11-05"
+],
 "/ar/flights-geneva-abidjan/": [
 "6fad1eec0cd55e83",
 "2026-11-05"
@@ -1972,7 +1984,7 @@
 "2026-11-05"
 ],
 "/ar/flights-to-algiers/": [
-"60a640dca4829862",
+"cb48dedd0b461db3",
 "2026-11-05"
 ],
 "/ar/flights-to-bamako/": [
@@ -1992,7 +2004,7 @@
 "2026-11-05"
 ],
 "/ar/flights-to-casablanca/": [
-"ae2d4806b8738a73",
+"6686c880880c829c",
 "2026-11-05"
 ],
 "/ar/flights-to-conakry/": [
@@ -2132,7 +2144,7 @@
 "2026-11-05"
 ],
 "/ar/flights-to-tunis/": [
-"1cc09679aff0a39c",
+"66ffed187d9d6afd",
 "2026-11-05"
 ],
 "/ar/flights-toronto-abidjan/": [
@@ -3504,7 +3516,7 @@
 "2026-11-05"
 ],
 "/dz/": [
-"bbe4d9d037fcd3a7",
+"4c3299c30d7fd052",
 "2026-11-05"
 ],
 "/en/": [
@@ -3808,83 +3820,83 @@
 "2026-11-05"
 ],
 "/en/cheap-hotels-abidjan/": [
-"a880ab365bef1790",
+"3ae60d46e23f3986",
 "2026-11-05"
 ],
 "/en/cheap-hotels-accra/": [
-"6141bbfc83847fe3",
+"5c33de02d019c05e",
 "2026-11-05"
 ],
 "/en/cheap-hotels-addis-ababa/": [
-"9d696ee035f8df12",
+"08c521b8661a2690",
 "2026-11-05"
 ],
 "/en/cheap-hotels-algiers/": [
-"77f277fd4db5eb94",
+"28f2c4c4f4605d60",
 "2026-11-05"
 ],
 "/en/cheap-hotels-bamako/": [
-"ce7afdbd6d1b8639",
+"70320a00ce5d3f6b",
 "2026-11-05"
 ],
 "/en/cheap-hotels-casablanca/": [
-"ddbd3bfbfc81c94b",
+"078da0efd7b12aeb",
 "2026-11-05"
 ],
 "/en/cheap-hotels-conakry/": [
-"570711704f8c09d0",
+"4f714e3960364fc4",
 "2026-11-05"
 ],
 "/en/cheap-hotels-cotonou/": [
-"13b4a7d9f603bddb",
+"ed644457602d9da7",
 "2026-11-05"
 ],
 "/en/cheap-hotels-dakar/": [
-"ea1b794caca26d7e",
+"ddec466094b1bfcc",
 "2026-11-05"
 ],
 "/en/cheap-hotels-douala/": [
-"dbdc6b2daf137540",
+"5cb18f2d36a3b6d3",
 "2026-11-05"
 ],
 "/en/cheap-hotels-dubai/": [
-"ae74d0924d960883",
+"3a7e1d93ce2a3fdf",
 "2026-11-05"
 ],
 "/en/cheap-hotels-istanbul/": [
-"2e207662defb6114",
+"568573f196f00eea",
 "2026-11-05"
 ],
 "/en/cheap-hotels-kinshasa/": [
-"c8cc701cf75864d3",
+"df7f581932fd0995",
 "2026-11-05"
 ],
 "/en/cheap-hotels-lagos/": [
-"5350c0afa9bfbe98",
+"fed9d8a6565a4aea",
 "2026-11-05"
 ],
 "/en/cheap-hotels-lome/": [
-"0d76df8b13882566",
+"971fe602470f757c",
 "2026-11-05"
 ],
 "/en/cheap-hotels-marrakesh/": [
-"ad53a10a233b4df7",
+"e609d60646bad212",
 "2026-11-05"
 ],
 "/en/cheap-hotels-montreal/": [
-"b40826a39b6ed411",
+"d1d7d9e8c8e182a7",
 "2026-11-05"
 ],
 "/en/cheap-hotels-nairobi/": [
-"2c1246d4811e3902",
+"622a19cc77895063",
 "2026-11-05"
 ],
 "/en/cheap-hotels-paris/": [
-"3b2eaabbec088040",
+"0b3aa933c130d764",
 "2026-11-05"
 ],
 "/en/cheap-hotels-tunis/": [
-"9f061722f57dd204",
+"d85a9569fd8023ee",
 "2026-11-05"
 ],
 "/en/cheap-weekends/": [
@@ -4829,6 +4841,18 @@
 ],
 "/en/flights-frankfurt-tunis/": [
 "9e8fa756cb127974",
+"2026-11-05"
+],
+"/en/flights-from-algeria/": [
+"7de8e73dc28f55f0",
+"2026-11-05"
+],
+"/en/flights-from-morocco/": [
+"8bbc1cbbc05c0779",
+"2026-11-05"
+],
+"/en/flights-from-tunisia/": [
+"76f0ab755d8132ad",
 "2026-11-05"
 ],
 "/en/flights-geneva-abidjan/": [
@@ -5944,7 +5968,7 @@
 "2026-11-05"
 ],
 "/en/flights-to-algiers/": [
-"709d8fa13582f1f3",
+"7cdacb1a48c263d2",
 "2026-11-05"
 ],
 "/en/flights-to-bamako/": [
@@ -5964,7 +5988,7 @@
 "2026-11-05"
 ],
 "/en/flights-to-casablanca/": [
-"44aa26bce6d8c674",
+"3a18f43fccbfdc5b",
 "2026-11-05"
 ],
 "/en/flights-to-conakry/": [
@@ -6104,7 +6128,7 @@
 "2026-11-05"
 ],
 "/en/flights-to-tunis/": [
-"4398dcbac5cd1a15",
+"8799c99d34698897",
 "2026-11-05"
 ],
 "/en/flights-toronto-abidjan/": [
@@ -8832,7 +8856,7 @@
 "2026-11-05"
 ],
 "/gh/": [
-"68edebad40dee784",
+"d2c66fe0db453572",
 "2026-11-05"
 ],
 "/gn/": [
@@ -9992,7 +10016,7 @@
 "2026-11-05"
 ],
 "/ma/": [
-"67626ab0da83b788",
+"c426d5383cca4c45",
 "2026-11-05"
 ],
 "/meilleur-mois-pour-partir/": [
@@ -10128,7 +10152,7 @@
 "2026-11-05"
 ],
 "/ng/": [
-"d4d40b4a36ac689a",
+"0473fadd746d82d7",
 "2026-11-05"
 ],
 "/nl/": [
@@ -12676,7 +12700,7 @@
 "2026-11-05"
 ],
 "/tn/": [
-"e3f0e319e1e2a9a8",
+"b8df0ef3a93bdb44",
 "2026-11-05"
 ],
 "/verifier-billet-avion/": [
@@ -14432,7 +14456,7 @@
 "2026-11-05"
 ],
 "/vol-paris-maputo/": [
-"4b651002626b15a9",
+"87e7b92d8debaf8a",
 "2026-11-05"
 ],
 "/vol-paris-marrakech/": [

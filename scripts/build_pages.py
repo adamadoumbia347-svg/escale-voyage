@@ -365,6 +365,8 @@ def route_page(r):
     title = f"Vol pas cher {cf} {ct} : comparer les prix des billets"
     if len(title) > 65:  # noms de villes longs : version courte pour que Google affiche tout le titre
         title = f"Vol pas cher {cf} {ct} : comparer les prix"
+    # Titres ajustés d'après la Search Console (mots réellement tapés)
+    title = {("CDG", "MPM"): "Vol Paris Maputo : direct ou avec escale, prix des billets"}.get((fr, to), title)
     desc = f"Vol pas cher {cf} – {ct} ({fr} → {to}) : prix en direct de dizaines de compagnies, jours les moins chers et alerte prix gratuite."
     app = "/?" + urllib.parse.urlencode({"type": "vols", "from": fr, "to": to})
     back = "/?" + urllib.parse.urlencode({"type": "vols", "from": to, "to": fr})
