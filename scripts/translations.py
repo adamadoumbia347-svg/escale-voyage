@@ -369,6 +369,11 @@ HOTEL_TIPS = {
         "El aeropuerto Jomo Kenyatta está alejado del centro y el tráfico puede ser denso en hora punta: deja margen o pasa una noche cerca del aeropuerto si tienes una conexión.",
         "O aeroporto Jomo Kenyatta fica afastado do centro e o trânsito pode ser intenso nas horas de ponta: preveja margem, ou uma noite perto do aeroporto numa ligação.",
         "مطار جومو كينياتا بعيد عن وسط المدينة وقد تكون حركة السير كثيفة في أوقات الذروة: اترك هامشًا من الوقت، أو أمضِ ليلة قرب المطار عند وجود رحلة متصلة."),
+    "Addis-Abeba": (
+        "Bole airport is close to the centre and is a major connecting hub: for a long layover, a hotel in the Bole area keeps journeys short.",
+        "El aeropuerto de Bole está cerca del centro y es un gran centro de conexiones: para una escala larga, un hotel en el barrio de Bole acorta los trayectos.",
+        "O aeroporto de Bole fica perto do centro e é um grande centro de ligações: para uma escala longa, um hotel no bairro de Bole encurta as deslocações.",
+        "مطار بولي قريب من وسط المدينة وهو مركز عبور كبير: في حال الترانزيت الطويل، الإقامة في حي بولي تختصر التنقلات."),
 }
 
 AREAS = {
@@ -426,4 +431,7 @@ AREAS = {
     "animé, restaurants et centres commerciaux": ("lively, restaurants and shopping malls", "animado, restaurantes y centros comerciales", "animado, restaurantes e centros comerciais", "حيوي، مطاعم ومراكز تسوق"),
     "quartier des affaires, hôtels internationaux": ("business district, international hotels", "distrito de negocios, hoteles internacionales", "bairro de negócios, hotéis internacionais", "حي الأعمال، فنادق دولية"),
     "résidentiel, appartements, plus calme": ("residential, apartments, quieter", "residencial, apartamentos, más tranquilo", "residencial, apartamentos, mais calmo", "سكني، شقق، أهدأ"),
+    "proche de l'aéroport, hôtels et restaurants": ("close to the airport, hotels and restaurants", "cerca del aeropuerto, hoteles y restaurantes", "perto do aeroporto, hotéis e restaurantes", "قريب من المطار، فنادق ومطاعم"),
+    "quartier des affaires et des organisations internationales": ("business district and international organisations", "distrito de negocios y organismos internacionales", "bairro de negócios e organizações internacionais", "حي الأعمال والمنظمات الدولية"),
+    "vieux quartier, hôtels plus simples et moins chers": ("old town, simpler and cheaper hotels", "barrio antiguo, hoteles más sencillos y baratos", "bairro antigo, hotéis mais simples e baratos", "الحي القديم، فنادق أبسط وأرخص"),
 }

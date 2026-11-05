@@ -193,6 +193,8 @@ HOTELS = [
      "Les embouteillages entre le continent et les îles peuvent être très longs : pour une arrivée tardive ou un départ tôt, une nuit à Ikeja, près de l'aéroport, est souvent plus pratique.", "LOS"),
     ("Nairobi", "Kenya", [("Westlands", "animé, restaurants et centres commerciaux"), ("Upper Hill", "quartier des affaires, hôtels internationaux"), ("Kilimani et Kileleshwa", "résidentiel, appartements, plus calme")],
      "L'aéroport Jomo-Kenyatta est à l'écart du centre et la circulation peut être dense aux heures de pointe : prévoyez de la marge, ou une nuit près de l'aéroport pour une correspondance.", "NBO"),
+    ("Addis-Abeba", "Éthiopie", [("Bole", "proche de l'aéroport, hôtels et restaurants"), ("Kazanchis", "quartier des affaires et des organisations internationales"), ("Piazza", "vieux quartier, hôtels plus simples et moins chers")],
+     "L'aéroport de Bole est proche du centre et sert de grande plateforme de correspondance : pour une escale longue, un hôtel dans le quartier de Bole limite les trajets.", "ADD"),
 ]
 
 def hotel_slug(h):

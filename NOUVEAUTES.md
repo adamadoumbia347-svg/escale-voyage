@@ -14,7 +14,7 @@ Une tâche planifiée de Claude ajoute une nouveauté au site tous les 2 jours, 
   assurance voyage, voyager enceinte,
   droits en cas de retard (règlement européen 261/2004), envoyer des colis au pays.
 - Trajets : nouvelles villes de départ (Toulouse vers l'Afrique de l'Ouest, Clermont-Ferrand, Amsterdam, Zurich… ; Milan est déjà couvert par les pages en italien) vers l'Afrique et le Maghreb.
-- Hôtels : Addis-Abeba, Libreville, Yaoundé, Niamey, Ouagadougou, Nouakchott.
+- Hôtels : Libreville, Yaoundé, Niamey, Ouagadougou, Nouakchott.
 
 ## Journal
 | Date | Nouveauté |
@@ -31,3 +31,4 @@ Une tâche planifiée de Claude ajoute une nouveauté au site tous les 2 jours, 
 | 2026-10-31 | Page « Hôtel pas cher à Nairobi » en 5 langues (`/hotel-pas-cher-nairobi/`) — prochain : guide pratique |
 | 2026-11-01 | Guide « Vol de nuit : bien dormir et arriver en forme » en 5 langues (`/guides/vol-de-nuit/`) — prochain : nouveaux trajets |
 | 2026-11-03 | 14 trajets depuis Barcelone (Dakar, Casablanca, Marrakech, Tanger, Alger, Oran, Bamako) et Francfort (Addis-Abeba, Accra, Lagos, Casablanca, Tunis, Istanbul, Dakar) en 5 langues, avec images de partage — prochain : page hôtels |
+| 2026-11-05 | Page « Hôtel pas cher à Addis-Abeba » en 5 langues (`/hotel-pas-cher-addis-abeba/`) — prochain : guide pratique |
