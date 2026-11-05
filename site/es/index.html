@@ -1038,6 +1038,42 @@ html:not(.has-hero) .hero-season a { background: var(--mint, #e9faf5); border-co
   .ex-grid#ex-grid > * { flex: 0 0 64%; scroll-snap-align: start; }
   .ex-grid#ex-grid .ex-skel { min-height: 220px; }
 }
+/* Téléphone : la recherche reste en haut, les autres pages passent dans une barre fixe en bas de l'écran */
+@media (max-width: 700px) {
+  .site-head { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--bg, #fff); }
+  .main-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; order: 0; flex-basis: auto; margin: 0; overflow: visible; display: flex; justify-content: space-around; align-items: stretch; gap: 0;
+    padding: 4px 4px calc(4px + env(safe-area-inset-bottom, 0px)); background: var(--surface, var(--bg, #fff)); border-top: 1px solid var(--line, #e3e7ee); box-shadow: 0 -6px 20px rgb(3 18 28 / .08); }
+  .main-nav > a:nth-child(-n+3) { display: none; }
+  .main-nav a, .main-nav a.nav-explore { flex: 1 1 0; min-width: 0; flex-direction: column; justify-content: center; gap: 3px; padding: 6px 2px; border-radius: 10px; background: none; color: var(--muted, #5b6474);
+    font: 600 11px/1.1 var(--f-body); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .main-nav a > span, .main-nav a.nav-explore > span { font-size: 11px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+  .main-nav a.nav-explore { font-size: 20px; line-height: 1; }
+  .main-nav a.nav-explore > span { line-height: 1.1; }
+  .main-nav a[aria-current="page"] { color: var(--teal-d, #0b8577); background: var(--mint, #e9faf5); }
+  .main-nav > a:nth-child(5)::before, .main-nav > a:nth-child(6)::before, .main-nav > a:nth-child(7)::before { font-size: 20px; line-height: 1; }
+  .main-nav > a:nth-child(5)::before { content: "🔥"; } .main-nav > a:nth-child(6)::before { content: "🎉"; } .main-nav > a:nth-child(7)::before { content: "📖"; }
+  .main-nav a.nav-fav svg { width: 22px; height: 22px; color: #f5a524; }
+  .main-nav a.nav-fav { position: relative; } .main-nav .fav-count { position: absolute; top: 2px; left: calc(50% + 6px); font-size: 10px; }
+  body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
+  .wa-float { bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+  .fab { bottom: calc(80px + env(safe-area-inset-bottom, 0px)) !important; }
+  .inst-bar { bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
+  .kit-card { bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+}
+@media print { .main-nav { display: none; } }
+/* Accueil : le moteur de recherche juste sous le titre, le reste (prix du jour, saison, photo) en dessous */
+@media all {
+  .band > .wrap { display: flex; flex-direction: column; position: relative; z-index: 0; isolation: isolate; }
+  .band .hero { display: contents; }
+  .band .hero > :not(.hero-bg) { order: 3; align-self: flex-start; max-width: 100%; }
+  .band .hero > h1:not(.hero-bg), .band .hero > .hero-meta:not(.hero-bg), .band .hero > .pays-banner:not(.hero-bg) { align-self: stretch; }
+  .band .hero > .hero-lead:not(.hero-bg) { order: 1; margin-bottom: 18px; }
+  .band .hero > h1:not(.hero-bg) { order: 1; margin-top: 18px; }
+  .band > .wrap > .card { order: 2; margin-top: 4px; }
+  .has-hero .hero-bg { top: 0; bottom: 0; }
+  .band .hero > .hero-season, .band .hero > .hero-deal { margin-top: 14px; }
+  .has-hero .band { padding-bottom: 18px; }
+}
 </style>
 <script src="/langue.js?v=0b33c8f2"></script>
 </head>

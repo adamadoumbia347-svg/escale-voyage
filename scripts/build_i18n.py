@@ -333,7 +333,7 @@ def site_header(lang, path, switch):
     cur = lambda key: ' aria-current="page"' if path and (path == SECTION_PATHS[key][lang] or path.startswith(SECTION_PATHS[key][lang] + "/")) else ""
     sec = lambda key: "/" + SECTION_PATHS[key][lang] + "/"
     links = (f'<a href="/{q}">{n[0]}</a><a href="/{q}#hotels">{n[1]}</a><a href="/{q}#voitures">{n[2]}</a>'
-             f'<a class="nav-explore" href="{sec("anywhere")}"{cur("anywhere")}>🌍 {E(n[4])}</a>'
+             f'<a class="nav-explore" href="{sec("anywhere")}"{cur("anywhere")}>🌍 <span>{E(n[4])}</span></a>'
              f'<a href="{sec("deals")}"{cur("deals")}>{E(n[3])}</a><a href="{sec("fetes")}"{cur("fetes")}>{E(FETES_LABEL[lang])}</a>'
              f'<a href="{sec("guides")}"{cur("guides")}>{E(n[5])}</a>'
              f'<a class="nav-fav" href="{sec("favs")}"{cur("favs")}>{STAR}<span>{E(n[6])}</span><b class="fav-count" data-fav-count hidden></b></a>')
