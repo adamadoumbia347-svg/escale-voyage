@@ -62,29 +62,48 @@
   // Grande photo du haut : diaporama lent (une photo toutes les 7 s), chargé après la page, en pause hors écran
   var bg = document.getElementById("hero-bg"), cap = document.getElementById("hero-cap");
   if (bg && document.documentElement.classList.contains("has-hero")) {
-    var SL = [["zanzibar", "ZNZ", "Zanzibar"], ["bali", "DPS", "Bali"], ["marrakech", "RAK", "Marrakech", "Marrakesh"], ["dakar", "DSS", "Dakar", null, 1],
-      ["tokyo", "HND", "Tokyo"], ["maldives", "MLE", "Maldives"]];
+    // Toutes les destinations en photo (site/data/hero.json : code, photo, pays, nom fr, nom en, grande photo) ; Zanzibar d'abord, puis au hasard
+    var SL = [["ZNZ", "zanzibar", "TZ", "Zanzibar", 0, 1]], k = 0, visible = true, cur = bg.querySelector("img"), busy = false;
     var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var imgs = [bg.querySelector("img")], k = 0, visible = true, timer = null;
+    var lang = function () { return (document.documentElement.lang || "fr").slice(0, 2); };
+    var country = function (cc) { try { return new Intl.DisplayNames([lang()], { type: "region" }).of(cc); } catch (e) { return ""; } };
+    var label = function (x) {
+      var city = lang() === "fr" ? x[3] : (x[4] || x[3]), c = country(x[2]);
+      return c && c !== city && c.indexOf(city) < 0 && city.indexOf(c) < 0 ? city + ", " + c : city;
+    };
+    var setCap = function (x) {
+      if (!cap) return;
+      cap.querySelector(".hc-city").textContent = label(x);
+      cap.setAttribute("href", "/?type=vols&to=" + x[0]);
+    };
+    var next = function () {
+      if (busy || !visible || document.hidden || SL.length < 2) return;
+      busy = true;
+      var n = (k + 1) % SL.length, x = SL[n], im = document.createElement("img");
+      im.alt = ""; im.decoding = "async"; im.width = 1280; im.height = 960; im.sizes = "100vw";
+      im.srcset = "/img/villes/" + x[1] + ".webp 800w" + (x[5] ? ", /img/villes/" + x[1] + "-1280.webp 1280w" : "");
+      im.onload = function () {
+        bg.appendChild(im);
+        requestAnimationFrame(function () {
+          im.classList.add("on"); cur.classList.remove("on");
+          var old = cur; cur = im; k = n;
+          setTimeout(function () { if (old.parentNode) old.parentNode.removeChild(old); }, 1800);
+          if (cap) { cap.classList.add("fade"); setTimeout(function () { setCap(x); cap.classList.remove("fade"); }, 450); }
+          busy = false;
+        });
+      };
+      im.onerror = function () { SL.splice(n, 1); busy = false; };
+      im.src = "/img/villes/" + x[1] + ".webp";
+    };
+    setCap(SL[0]);
+    window.addEventListener("escale:lang", function () { setCap(SL[k]); });
     var start = function () {
-      SL.slice(1).forEach(function (x) {
-        var im = document.createElement("img"); im.alt = ""; im.decoding = "async"; im.width = 1280; im.height = 960;
-        im.srcset = "/img/villes/" + x[0] + ".webp 800w" + (x[4] ? "" : ", /img/villes/" + x[0] + "-1280.webp 1280w"); im.sizes = "100vw";
-        im.src = "/img/villes/" + x[0] + ".webp"; bg.appendChild(im); imgs.push(im);
+      fetch("/data/hero.json").then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }).then(function (l) {
+        l = l.filter(function (x) { return x[0] !== "ZNZ"; });
+        for (var i = l.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = l[i]; l[i] = l[j]; l[j] = t; }
+        SL = SL.concat(l);
+        setInterval(next, 6000);
       });
-      timer = setInterval(function () {
-        if (!visible || document.hidden) return;
-        var n = (k + 1) % imgs.length; if (!imgs[n].complete) return;
-        imgs[k].classList.remove("on"); imgs[n].classList.add("on"); k = n;
-        if (cap) {
-          cap.classList.add("fade");
-          setTimeout(function () {
-            var x = SL[k], en = (document.documentElement.lang || "fr").slice(0, 2) !== "fr";
-            cap.querySelector(".hc-city").textContent = en && x[3] ? x[3] : x[2];
-            cap.setAttribute("href", "/?type=vols&to=" + x[1]); cap.classList.remove("fade");
-          }, 450);
-        }
-      }, 7000);
     };
     if (!still) {
       var later = function () { (window.requestIdleCallback || function (f) { setTimeout(f, 1500); })(start, { timeout: 4000 }); };
