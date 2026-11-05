@@ -212,6 +212,9 @@ def slug_city(name, lang):
     return slugify(city(name, "en" if lang == "ar" else lang))
 
 
+TITLE_FIX = {("CDG", "DXB", "en"): "Paris to Dubai cheap tickets: compare flight prices"}
+
+
 def is_itde(r, lang):
     """Trajet traduit en italien / allemand ?"""
     return lang in RX.COLX and f"{r[0]}-{r[1]}" in RX.TOP
@@ -521,7 +524,9 @@ def build(site, ctx):
 {"".join(f"<details><summary>{E(q)}</summary><p>{E(ans)}</p></details>" for q, ans in faq)}
 </section>
 <section><h2>{E(u["other_routes"])}</h2><ul class="route-links">{others}</ul></section>"""
-            urls.append(write(site, route_paths[r][lang], lang, (u["title_route"].format(a=a, b=b) if len(u["title_route"].format(a=a, b=b)) <= 65 else u["title_route"].format(a=a, b=b).replace(" ticket prices", " prices")),
+            ttl = (u["title_route"].format(a=a, b=b) if len(u["title_route"].format(a=a, b=b)) <= 65 else u["title_route"].format(a=a, b=b).replace(" ticket prices", " prices"))
+            ttl = TITLE_FIX.get((fr_, to, lang), ttl)  # titres ajustés d'après la Search Console (mots réellement tapés)
+            urls.append(write(site, route_paths[r][lang], lang, ttl,
                               u["desc_route"].format(a=a, b=b, fa=fr_, ta=to), hero, body, faq_ld(faq), route_paths[r], ctx,
                               f"og/{fr_}-{to}.jpg" if (site / "og" / f"{fr_}-{to}.jpg").exists() else "og-image.png"))
 

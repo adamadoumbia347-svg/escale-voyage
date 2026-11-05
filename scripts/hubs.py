@@ -166,6 +166,19 @@ def minutes(d):
     return int(m.group(1)) * 60 + int(m.group(2) or 0) if m else None
 
 
+# Villes qui ont une page « vols au départ de » (scripts/pays_accueil.py)
+def _from_home():
+    try:
+        import pays_accueil as PA
+        return {v[6]: c for c, v in PA.PAYS.items()}
+    except Exception:
+        return {}
+FROM_HOME = _from_home()
+FROM_L = {"fr": ("Vous partez de {b} ? Les vols au départ de {b}",), "en": ("Flying from {b}? Cheap flights from {b}",),
+          "es": ("¿Sales de {b}? Vuelos desde {b}",), "pt": ("Parte de {b}? Voos a partir de {b}",), "ar": ("تسافر من {b}؟ رحلات من {b}",),
+          "it": ("Parti da {b}? Voli da {b}",), "de": ("Abflug ab {b}? Flüge ab {b}",)}
+
+
 def hub_paths(routes):
     """{ville d'arrivée (nom français) : {langue : chemin}} pour les destinations desservies depuis au moins 3 villes."""
     count = collections.Counter(r[3] for r in routes)
@@ -268,5 +281,14 @@ def build_hubs(site, ctx, route_paths, hotel_paths):
                     f'<section class="faq"><h2>{E(h["faq_h"])}</h2>' + "".join(f"<details><summary>{E(qq)}</summary><p>{E(aa)}</p></details>" for qq, aa in faq) + "</section>")
             title = h["title"].format(b=b, n=len(rs), some=some)
             desc = h["desc"].format(b=b, code=code, some=some, n=len(rs))
+            # Ville qui a sa page « au départ de » (/tn/, /dz/, /sn/…) : les gens du pays cherchent souvent des vols DEPUIS chez eux
+            pc = FROM_HOME.get(ct)
+            if pc:
+                fl = FROM_L.get(lang)
+                if fl:
+                    hero += f'<p class="hub-from"><a class="btn ghost" href="/{pc}/">{E(fl[0].format(b=b))} →</a></p>'
+                if lang == "en":
+                    title = f"Cheap flights to & from {b}: live prices"
+                    desc = f"Cheap flights to and from {b} ({code}): live prices from {some} and more, the cheapest days, flight times. Flying from {b}? See departures too."
             urls.append(write(site, hp[lang], lang, title + " | Escale", desc, hero, body, faq_ld(faq), hp, ctx))
     return urls, paths
