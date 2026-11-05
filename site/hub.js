@@ -99,9 +99,10 @@
     window.addEventListener("escale:lang", function () { setCap(SL[k]); });
     var start = function () {
       fetch("/data/hero.json").then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }).then(function (l) {
-        l = l.filter(function (x) { return x[0] !== "ZNZ"; });
-        for (var i = l.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = l[i]; l[i] = l[j]; l[j] = t; }
-        SL = SL.concat(l);
+        // Lieux de la diaspora (7e valeur à 1) d'abord, dans un ordre au hasard, puis toutes les autres destinations au hasard
+        var mix = function (a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; };
+        l = l.filter(function (x) { return x[0] !== "ZNZ" || x[6]; });
+        SL = SL.concat(mix(l.filter(function (x) { return x[6]; })), mix(l.filter(function (x) { return !x[6]; })));
         setInterval(next, 6000);
       });
     };

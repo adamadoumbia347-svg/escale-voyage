@@ -69,6 +69,12 @@ def credits_body(site):
         f'<li><strong>{E(p["city"])}</strong> : <a href="{E(p["page"])}" rel="noopener">{E(p["file"].replace("File:", ""))}</a>, '
         f'{E(p["author"])}, ' + (f'<a href="{E(p["license_url"])}" rel="noopener license">{E(p["license"])}</a>' if p.get("license_url") else E(p["license"]))
         + " (recadrée et redimensionnée)</li>" for p in photos(site))
+    import json as _j
+    extra = site / "data" / "accueil-photos.json"
+    if extra.exists():
+        rows += "".join(f'<li><strong>{E(p["city"])}</strong> : <a href="{E(p["page"])}" rel="noopener">{E(p["title"].replace("File:", ""))}</a>, {E(p["author"])}, '
+                        + (f'<a href="{E(p["license_url"])}" rel="noopener license">{E(p["license"])}</a>' if p.get("license_url") else E(p["license"])) + " (recadrée)</li>"
+                        for p in _j.loads(extra.read_text(encoding="utf-8")).values())
     return (f'<section><p>Les photos des villes viennent de <a href="https://commons.wikimedia.org/">Wikimedia Commons</a>, '
             f'sous licence libre. Merci à leurs auteurs.</p><ul class="links">{rows}</ul></section>')
 

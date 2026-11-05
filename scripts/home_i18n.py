@@ -147,6 +147,8 @@ def build(site, ctx=None):
         s = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{E(desc)}">', s, count=1)
         s = re.sub(r'<link rel="canonical" href="[^"]*">', f'<link rel="canonical" href="{DOMAIN}/{lang}/">', s, count=1)
         s = re.sub(r'<meta property="og:url" content="[^"]*">', f'<meta property="og:url" content="{DOMAIN}/{lang}/">', s, count=1)
+        if (site / "og" / f"home-{lang}.png").exists():
+            s = s.replace(f'content="{DOMAIN}/og-image.png"', f'content="{DOMAIN}/og/home-{lang}.png"')
         s = re.sub(r'<meta property="og:locale" content="[^"]*">', f'<meta property="og:locale" content="{LOCALE[lang]}">', s, count=1)
         # Bloc « Guides » : la liste des trajets et hôtels de cette langue (celle qui était publiée ici)
         if keep:

@@ -438,7 +438,7 @@ def write(site, path, lang, title, desc, hero, body, ld, paths, ctx, og="og-imag
     out = HEAD.format(
         lang=lang, dir="rtl" if lang == "ar" else "ltr", tp=ctx["tp"], title=E(title), desc=E(desc),
         url=f"{ctx['domain']}/{path}/", alts=alternates(paths, ctx["domain"]), oglocale=LOCALE[lang], domain=ctx["domain"],
-        ogimg=og, arpreload=('\n<link rel="preload" href="/fonts/noto-sans-arabic-arabic-378a89.woff2" as="font" type="font/woff2" crossorigin>' if lang == "ar" else ""), ld=ld, homeq="" if lang == "fr" else "?lang=" + u["app_lang"],
+        ogimg=(f"og/home-{lang}.png" if og == "og-image.png" and lang != "fr" and (site / "og" / f"home-{lang}.png").exists() else og), arpreload=('\n<link rel="preload" href="/fonts/noto-sans-arabic-arabic-378a89.woff2" as="font" type="font/woff2" crossorigin>' if lang == "ar" else ""), ld=ld, homeq="" if lang == "fr" else "?lang=" + u["app_lang"],
         dealsp={"fr": "bons-plans", "en": "en/deals", "es": "es/ofertas", "pt": "pt/promocoes", "ar": "ar/deals", "it": "en/deals", "de": "en/deals", "nl": "en/deals"}[lang],
         dealsl={"fr": "Bons plans", "en": "Deals", "es": "Ofertas", "pt": "Promoções", "ar": "العروض", "it": "Offerte", "de": "Angebote", "nl": "Deals"}[lang],
         aboutp={"fr": "a-propos", "en": "en/about", "es": "es/acerca-de", "pt": "pt/sobre", "ar": "ar/about", "it": "en/about", "de": "en/about", "nl": "en/about"}[lang],
