@@ -39,6 +39,30 @@ NEAR = {"MMX,CPH": ("vol pour Copenhague, puis 20 min de train", "fly to Copenha
         "TPS,PMO": ("ou vol pour Palerme", "or fly to Palermo"), "SPU,ZAD": ("vol pour Split ou Zadar", "fly to Split or Zadar"),
         "SFO": ("vol pour San Francisco", "fly to San Francisco"), "YQB,YMQ": ("ou vol pour Montréal", "or fly to Montréal")}
 
+# Noms et pays en italien / allemand (clé photo -> (nom it, pays it, nom de, pays de)), raisons et accès
+ITDE = {
+    "bishkek": ("Biškek", "Kirghizistan", "Bischkek", "Kirgisistan"), "hurghada": ("Hurghada", "Egitto", "Hurghada", "Ägypten"),
+    "malmo": ("Malmö", "Svezia", "Malmö", "Schweden"), "trapani": ("Trapani", "Sicilia, Italia", "Trapani", "Sizilien, Italien"),
+    "chongqing": ("Chongqing", "Cina", "Chongqing", "China"), "danang": ("Da Nang", "Vietnam", "Da Nang", "Vietnam"),
+    "sal": ("Sal", "Capo Verde", "Sal", "Kap Verde"), "quebec": ("Québec", "Canada", "Québec", "Kanada"),
+    "redwoods": ("Le sequoie della California", "Stati Uniti", "Die Küstenmammutbäume Kaliforniens", "USA"),
+    "venetie": ("Il Veneto", "Italia", "Venetien", "Italien"), "sibenik": ("Šibenik (Sebenico)", "Croazia", "Šibenik", "Kroatien"),
+    "rabat": ("Rabat", "Marocco", "Rabat", "Marokko"), "okinawa": ("Okinawa", "Giappone", "Okinawa", "Japan"),
+    "maldives": ("Fulidhoo, Maldive", "Maldive", "Fulidhoo, Malediven", "Malediven"),
+}
+WHY_ITDE = {
+    "quebec": ("La Vecchia Québec, città fortificata patrimonio UNESCO.", "Die Altstadt von Québec, eine befestigte Stadt und UNESCO-Welterbe."),
+    "redwoods": ("Gli alberi più alti del mondo, sul Pacifico.", "Die höchsten Bäume der Welt, am Pazifik."),
+    "venetie": ("Venezia, le Dolomiti e il lago di Garda.", "Venedig, die Dolomiten und der Gardasee."),
+    "sibenik": ("Due siti UNESCO e le cascate di Krka a due passi.", "Zwei UNESCO-Stätten, die Krka-Wasserfälle ganz in der Nähe."),
+    "rabat": ("La capitale del Marocco, patrimonio UNESCO dal 2012.", "Marokkos Hauptstadt, seit 2012 UNESCO-Welterbe."),
+    "okinawa": ("Spiagge subtropicali e cultura delle Ryūkyū.", "Subtropische Strände und Ryūkyū-Kultur."),
+    "maldives": ("Un'isola di pescatori, alternativa ai grandi resort.", "Eine Fischerinsel, eine Alternative zu großen Resorts."),
+}
+NEAR_ITDE = {"MMX,CPH": ("volo per Copenaghen, poi 20 min di treno", "Flug nach Kopenhagen, dann 20 Min. mit dem Zug"),
+             "TPS,PMO": ("oppure volo per Palermo", "oder Flug nach Palermo"), "SPU,ZAD": ("volo per Spalato o Zara", "Flug nach Split oder Zadar"),
+             "SFO": ("volo per San Francisco", "Flug nach San Francisco"), "YQB,YMQ": ("oppure volo per Montréal", "oder Flug nach Montreal")}
+
 T = {
     "fr": dict(path="tendances-2027", title="Destinations tendance 2027 : où partir en 2027 (Skyscanner, Lonely Planet) | Escale",
                desc="Les destinations qui montent en 2027 selon Skyscanner et Lonely Planet : Hurghada, Da Nang, Cap-Vert, Québec, Vénétie, Rabat… avec le prix des vols en direct depuis chez vous.",
@@ -58,12 +82,30 @@ T = {
                searches="searches", from_l="from", loading="Loading price…", none="Compare prices", photo="Photo",
                note="Live round-trip prices (Escale price calendar), for a specific date: they change every day. Trends come from the sources cited, checked in November 2026.",
                cta="Search another flight", from_txt="Prices from", bell="Price alert", alert_for="Alert for:"),
+    "it": dict(path="it/tendenze-2027", title="Destinazioni di tendenza 2027: dove andare nel 2027 (Skyscanner, Lonely Planet) | Escale",
+               desc="Le destinazioni in ascesa nel 2027 secondo Skyscanner e Lonely Planet: Hurghada, Da Nang, Capo Verde, Québec, Veneto, Rabat… con i prezzi dei voli in diretta dal tuo aeroporto.",
+               h1="Dove andare <span>nel 2027</span>?", lead="Le destinazioni in ascesa, secondo le ricerche di voli su Skyscanner e la selezione di Lonely Planet. Il prezzo mostrato è il miglior andata e ritorno trovato ora dal tuo aeroporto.",
+               sky_h="Le destinazioni che crescono di più su Skyscanner", sky_p="Aumento delle ricerche di voli andata e ritorno su Skyscanner (skyscanner.net), dal 1° gennaio al 17 giugno 2026 rispetto allo stesso periodo del 2025.",
+               lp_h="I preferiti di Lonely Planet", lp_p="Selezione tratta da Lonely Planet Best in Travel 2027 (l'ordine qui sotto non è una classifica).",
+               more="Fonti", src_sky="Skyscanner Travel Trends 2027", src_lp="Lonely Planet Best in Travel 2027",
+               searches="di ricerche", from_l="da", loading="Prezzo in arrivo…", none="Confronta i prezzi", photo="Foto",
+               note="Prezzi andata e ritorno in diretta (calendario prezzi di Escale), per una data precisa: cambiano ogni giorno. Le tendenze vengono dalle fonti citate, verificate a novembre 2026.",
+               cta="Cerca un altro volo", from_txt="Prezzi da", bell="Avviso prezzo", alert_for="Avviso per:"),
+    "de": dict(path="de/trendziele-2027", title="Trendziele 2027: wohin reisen 2027 (Skyscanner, Lonely Planet) | Escale",
+               desc="Die Reiseziele im Aufwind 2027 laut Skyscanner und Lonely Planet: Hurghada, Da Nang, Kap Verde, Québec, Venetien, Rabat… mit Live-Flugpreisen ab deinem Flughafen.",
+               h1="Wohin <span>2027</span>?", lead="Die Reiseziele im Aufwind, nach Flugsuchen bei Skyscanner und der Auswahl von Lonely Planet. Der angezeigte Preis ist der beste Hin- und Rückflug, der gerade ab deinem Flughafen gefunden wurde.",
+               sky_h="Die am stärksten wachsenden Ziele bei Skyscanner", sky_p="Zuwachs der Suchen nach Hin- und Rückflügen bei Skyscanner (skyscanner.net), 1. Januar bis 17. Juni 2026 im Vergleich zum Vorjahreszeitraum.",
+               lp_h="Die Favoriten von Lonely Planet", lp_p="Auswahl aus Lonely Planet Best in Travel 2027 (die Reihenfolge unten ist keine Rangliste).",
+               more="Quellen", src_sky="Skyscanner Travel Trends 2027", src_lp="Lonely Planet Best in Travel 2027",
+               searches="Suchen", from_l="ab", loading="Preis wird geladen…", none="Preise vergleichen", photo="Foto",
+               note="Live-Preise für Hin- und Rückflug (Preiskalender von Escale), für ein bestimmtes Datum: Sie ändern sich täglich. Die Trends stammen aus den genannten Quellen, geprüft im November 2026.",
+               cta="Einen anderen Flug suchen", from_txt="Preise ab", bell="Preisalarm", alert_for="Alarm für:"),
 }
 
 
 def card(site_photos, lang, key, codes, name, country, badge, why, near):
     c = site_photos.get(key, {})
-    fq = "" if lang == "fr" else "&lang=en"
+    fq = "" if lang == "fr" else f"&lang={lang}"
     first = codes.split(",")[0]
     return (f'<li class="tr-card" data-to="{codes}"><a class="tr-link" href="/?type=vols&amp;to={first}{fq}">'
             f'<img src="/img/tendances/{key}.webp" alt="{E(name)}, {E(country)}{(". " + E(why)) if why else ""}" width="480" height="640" loading="lazy" decoding="async">'
@@ -81,11 +123,15 @@ def build(site, ctx):
     urls = []
     for lang, t in T.items():
         col = 0 if lang == "fr" else 1
-        sky = "".join(card(photos, lang, k, codes, (fr if lang == "fr" else en), (pf if lang == "fr" else pe), f"#{i + 1} · +{pct} %", "", NEAR.get(codes, ("", ""))[col])
+        x = {"it": 0, "de": 1}.get(lang)
+        nm = lambda k, fr, en: ITDE[k][2 * x] if x is not None else (fr if lang == "fr" else en)
+        ct = lambda k, pf, pe: ITDE[k][2 * x + 1] if x is not None else (pf if lang == "fr" else pe)
+        nr = lambda codes: NEAR_ITDE.get(codes, ("", ""))[x] if x is not None else NEAR.get(codes, ("", ""))[col]
+        sky = "".join(card(photos, lang, k, codes, nm(k, fr, en), ct(k, pf, pe), f"#{i + 1} · +{pct} %", "", nr(codes))
                       for i, (k, codes, fr, en, pf, pe, pct) in enumerate(SKYSCANNER))
-        lp = "".join(card(photos, lang, k, codes, (fr if lang == "fr" else en), (pf if lang == "fr" else pe), "Lonely Planet 2027", why[col], NEAR.get(codes, ("", ""))[col])
+        lp = "".join(card(photos, lang, k, codes, nm(k, fr, en), ct(k, pf, pe), "Lonely Planet 2027", WHY_ITDE[k][x] if x is not None else why[col], nr(codes))
                      for k, codes, fr, en, pf, pe, why in LONELY)
-        q = "" if lang == "fr" else "?lang=en"
+        q = "" if lang == "fr" else f"?lang={lang}"
         body = (f'<p class="tr-from small" hidden>{E(t["from_txt"])} <strong class="tr-from-city"></strong></p>'
                 f'<section><h2>{E(t["sky_h"])}</h2><p class="small">{E(t["sky_p"])}</p><ul class="tr-grid">{sky}</ul></section>'
                 f'<section><h2>{E(t["lp_h"])}</h2><p class="small">{E(t["lp_p"])}</p><ul class="tr-grid">{lp}</ul></section>'

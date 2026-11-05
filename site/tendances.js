@@ -5,7 +5,7 @@
   var cfg = document.getElementById("tr-cfg");
   if (!cfg || !window.ESCALE_FETE_FROM) return;
   var lang = (document.documentElement.lang || "fr").slice(0, 2);
-  var loc = { fr: "fr-FR", en: "en-GB" }[lang] || "fr-FR";
+  var loc = { fr: "fr-FR", en: "en-GB", it: "it-IT", de: "de-DE" }[lang] || "fr-FR";
   var get = function (u) { return fetch(u).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }); };
   var money = function (n, cur) {
     try { return new Intl.NumberFormat(loc, { style: "currency", currency: cur || "EUR", maximumFractionDigits: 0 }).format(n); }

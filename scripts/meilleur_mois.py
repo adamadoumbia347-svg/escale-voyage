@@ -36,6 +36,33 @@ DESTS = [
 ]
 PRE = {"l'île Maurice": "à", "La Réunion": "à", "la Guadeloupe": "en", "la Martinique": "en"}
 
+# Italien et allemand : code -> (slug it, « a/ad/in + nom » it, nom it, slug de, nom de)
+ITDE = {
+    "DSS": ("dakar", "a Dakar", "Dakar", "dakar", "Dakar"), "ABJ": ("abidjan", "ad Abidjan", "Abidjan", "abidjan", "Abidjan"),
+    "RAK": ("marrakech", "a Marrakech", "Marrakech", "marrakesch", "Marrakesch"), "CMN": ("casablanca", "a Casablanca", "Casablanca", "casablanca", "Casablanca"),
+    "TUN": ("tunisi", "a Tunisi", "Tunisi", "tunis", "Tunis"), "DJE": ("djerba", "a Djerba", "Djerba", "djerba", "Djerba"),
+    "AGA": ("agadir", "ad Agadir", "Agadir", "agadir", "Agadir"), "CAI": ("il-cairo", "al Cairo", "Il Cairo", "kairo", "Kairo"),
+    "HRG": ("hurghada", "a Hurghada", "Hurghada", "hurghada", "Hurghada"), "ZNZ": ("zanzibar", "a Zanzibar", "Zanzibar", "sansibar", "Sansibar"),
+    "NBO": ("nairobi", "a Nairobi", "Nairobi", "nairobi", "Nairobi"), "MRU": ("mauritius", "a Mauritius", "Mauritius", "mauritius", "Mauritius"),
+    "RUN": ("riunione", "alla Riunione", "La Riunione", "la-reunion", "La Réunion"), "IST": ("istanbul", "ad Istanbul", "Istanbul", "istanbul", "Istanbul"),
+    "DXB": ("dubai", "a Dubai", "Dubai", "dubai", "Dubai"), "LIS": ("lisbona", "a Lisbona", "Lisbona", "lissabon", "Lissabon"),
+    "BCN": ("barcellona", "a Barcellona", "Barcellona", "barcelona", "Barcelona"), "ROM": ("roma", "a Roma", "Roma", "rom", "Rom"),
+    "ATH": ("atene", "ad Atene", "Atene", "athen", "Athen"), "LON": ("londra", "a Londra", "Londra", "london", "London"),
+    "NYC": ("new-york", "a New York", "New York", "new-york", "New York"), "MIA": ("miami", "a Miami", "Miami", "miami", "Miami"),
+    "YMQ": ("montreal", "a Montréal", "Montréal", "montreal", "Montreal"), "PTP": ("guadalupa", "in Guadalupa", "Guadalupa", "guadeloupe", "Guadeloupe"),
+    "FDF": ("martinica", "in Martinica", "Martinica", "martinique", "Martinique"), "PUJ": ("punta-cana", "a Punta Cana", "Punta Cana", "punta-cana", "Punta Cana"),
+    "CUN": ("cancun", "a Cancún", "Cancún", "cancun", "Cancún"), "BKK": ("bangkok", "a Bangkok", "Bangkok", "bangkok", "Bangkok"),
+    "DPS": ("bali", "a Bali", "Bali", "bali", "Bali"), "TYO": ("tokyo", "a Tokyo", "Tokyo", "tokio", "Tokio"),
+}
+
+
+def slug_of(d, lang):
+    return {"fr": d[2], "en": d[3], "it": ITDE[d[0]][0], "de": ITDE[d[0]][3]}[lang]
+
+
+def name_of(d, lang):
+    return {"fr": d[4], "en": d[5], "it": ITDE[d[0]][2], "de": ITDE[d[0]][4]}[lang]
+
 T = {
     "fr": dict(base="meilleur-mois-pour-partir", title="Meilleur mois pour partir {a} {n} : le mois le moins cher en avion | Escale",
                desc="Quel est le mois le moins cher pour aller {a} {n} ? Le prix aller-retour le plus bas de chacun des 12 prochains mois, en direct depuis votre aéroport.",
@@ -63,6 +90,32 @@ T = {
                idx_desc="The cheapest month to fly to Dakar, Abidjan, Marrakech, New York, Bali, Tokyo and 24 more destinations, live from your airport.",
                idx_h1="The cheapest month <span>to fly</span>", idx_lead="Pick a destination: you will see the lowest round-trip price for each month, from your airport.",
                other="Other destinations", change="Change airport", photo="Photo"),
+    "it": dict(base="it/mese-migliore-per-partire", title="Il mese più economico per volare {n}: quando prenotare | Escale",
+               desc="Qual è il mese più economico per volare {n}? Il prezzo andata e ritorno più basso di ciascuno dei prossimi 12 mesi, in diretta dal tuo aeroporto.",
+               h1="Il mese più economico per volare <span>{n}</span>", lead="Il prezzo andata e ritorno più basso trovato per ciascuno dei prossimi 12 mesi, dal tuo aeroporto. Clicca su un mese per vedere i voli.",
+               from_l="Partenza da", loading="Lettura del calendario prezzi…", none="Non ci sono ancora abbastanza prezzi per questa tratta dal tuo aeroporto. Prova una ricerca diretta.",
+               same="Sei già sul posto: scegli un altro aeroporto di partenza nella home.",
+               best="Il mese più economico: {m}, da {p} andata e ritorno.", dear="Il più caro: {m} (da {p}).", go="Vedi i voli del mese più economico",
+               how_h="Come leggere questo grafico", how=["Ogni barra è il miglior prezzo andata e ritorno trovato di recente per una partenza in quel mese (calendario prezzi del nostro partner Aviasales).",
+                   "I mesi lontani hanno spesso meno prezzi noti: un mese vuoto non vuol dire che non ci siano voli.",
+                   "Le vacanze scolastiche e le feste fanno salire i prezzi: partire qualche giorno prima o dopo cambia molto."],
+               idx_title="Il mese più economico per volare: quando partire per 30 destinazioni | Escale",
+               idx_desc="Il mese più economico per volare a Dakar, Abidjan, Marrakech, New York, Bali, Tokyo e altre 24 destinazioni, in diretta dal tuo aeroporto.",
+               idx_h1="Il mese migliore <span>per partire</span>", idx_lead="Scegli una destinazione: vedrai il prezzo andata e ritorno più basso di ogni mese, dal tuo aeroporto.",
+               other="Altre destinazioni", change="Cambia aeroporto", photo="Foto"),
+    "de": dict(base="de/bester-reisemonat", title="Günstigster Monat für Flüge nach {n}: wann buchen | Escale",
+               desc="Welcher Monat ist für Flüge nach {n} am günstigsten? Der niedrigste Hin- und Rückflugpreis für jeden der nächsten 12 Monate, live ab deinem Flughafen.",
+               h1="Der günstigste Monat für Flüge nach <span>{n}</span>", lead="Der niedrigste Hin- und Rückflugpreis für jeden der nächsten 12 Monate, ab deinem Flughafen. Klicke auf einen Monat, um die Flüge zu sehen.",
+               from_l="Abflug ab", loading="Preiskalender wird gelesen…", none="Für diese Strecke ab deinem Flughafen gibt es noch nicht genug Preise. Versuche eine direkte Suche.",
+               same="Du bist schon vor Ort: Wähle auf der Startseite einen anderen Abflughafen.",
+               best="Günstigster Monat: {m}, ab {p} hin und zurück.", dear="Am teuersten: {m} (ab {p}).", go="Flüge im günstigsten Monat ansehen",
+               how_h="So liest du dieses Diagramm", how=["Jeder Balken ist der beste Hin- und Rückflugpreis, der kürzlich für einen Abflug in diesem Monat gefunden wurde (Preiskalender unseres Partners Aviasales).",
+                   "Für weit entfernte Monate gibt es oft weniger Preise: Ein leerer Monat heißt nicht, dass es keine Flüge gibt.",
+                   "Schulferien und Feiertage treiben die Preise nach oben: Ein paar Tage früher oder später abzufliegen macht viel aus."],
+               idx_title="Günstigster Reisemonat: die beste Zeit für 30 Reiseziele | Escale",
+               idx_desc="Der günstigste Monat für Flüge nach Dakar, Abidjan, Marrakesch, New York, Bali, Tokio und 24 weitere Ziele, live ab deinem Flughafen.",
+               idx_h1="Der beste Monat <span>zum Fliegen</span>", idx_lead="Wähle ein Reiseziel: Du siehst den niedrigsten Hin- und Rückflugpreis jedes Monats, ab deinem Flughafen.",
+               other="Weitere Reiseziele", change="Flughafen ändern", photo="Foto"),
 }
 
 
@@ -71,16 +124,19 @@ def build(site, ctx):
     urls = []
     idx_paths = {l: T[l]["base"] for l in T}
     for code, pcode, sfr, sen, nfr, nen in DESTS:
-        paths = {"fr": f'{T["fr"]["base"]}/{sfr}', "en": f'{T["en"]["base"]}/{sen}'}
+        d0 = (code, pcode, sfr, sen, nfr, nen)
+        paths = {l: f'{T[l]["base"]}/{slug_of(d0, l)}' for l in T}
         for lang, t in T.items():
-            n = nfr if lang == "fr" else nen
+            n = name_of(d0, lang)
             a = PRE.get(n, "à") if lang == "fr" else ""
-            q = "" if lang == "fr" else "?lang=en"
+            if lang == "it":
+                n = ITDE[code][1]  # « a Dakar », « ad Abidjan », « in Guadalupa »…
+            q = "" if lang == "fr" else f"?lang={lang}"
             p = photos.get(pcode)
-            img = (f'<img class="pv-hero" src="{hero_src(site, p["img"])}" alt="{E(n)}" width="1280" height="960" fetchpriority="high">'
+            img = (f'<img class="pv-hero" src="{hero_src(site, p["img"])}" alt="{E(name_of(d0, lang))}" width="1280" height="960" fetchpriority="high">'
                    f'<p class="pv-cred small">{E(t["photo"])} : {E(p["author"][:50])}, {E(p["license"])}</p>') if p else ""
             tj = E(json.dumps({k: t[k] for k in ("loading", "none", "same", "best", "dear")}, ensure_ascii=False))
-            others = "".join(f'<li><a href="/{T[lang]["base"]}/{(d[2] if lang == "fr" else d[3])}/">{E(d[4] if lang == "fr" else d[5])}</a></li>' for d in DESTS if d[0] != code)
+            others = "".join(f'<li><a href="/{T[lang]["base"]}/{slug_of(d, lang)}/">{E(name_of(d, lang))}</a></li>' for d in DESTS if d[0] != code)
             body = (f'<p>{E(t["from_l"])} <strong class="mm-from">…</strong> · <a href="/{q}">{E(t["change"])}</a></p>'
                     f'<div id="mm-chart" class="mm-chart" data-to="{code}" data-t="{tj}"></div>'
                     f'<div id="mm-summary" class="mm-summary" aria-live="polite"></div><p><a id="mm-go" class="btn" href="/{q}" hidden>{E(t["go"])}</a></p>'
@@ -93,9 +149,9 @@ def build(site, ctx):
             urls.append(B.write(site, paths[lang], lang, title, desc, hero, body, "", paths, ctx))
     for lang, t in T.items():
         cards = "".join(
-            f'<li class="tr-card"><a class="tr-link" href="/{t["base"]}/{(d[2] if lang == "fr" else d[3])}/">'
+            f'<li class="tr-card"><a class="tr-link" href="/{t["base"]}/{slug_of(d, lang)}/">'
             + (f'<img src="{photos[d[1]]["img_small"]}" alt="" width="480" height="360" loading="lazy" decoding="async">' if d[1] in photos else "")
-            + f'<span class="tr-info"><strong>{E(d[4] if lang == "fr" else d[5])}</strong></span></a></li>' for d in DESTS)
+            + f'<span class="tr-info"><strong>{E(name_of(d, lang))}</strong></span></a></li>' for d in DESTS)
         hero = f'<h1>{t["idx_h1"]}</h1><p class="hero-lead">{E(t["idx_lead"])}</p>'
         urls.append(B.write(site, t["base"], lang, t["idx_title"], t["idx_desc"], hero, f'<ul class="tr-grid mm-idx">{cards}</ul>', "", idx_paths, ctx))
     return urls

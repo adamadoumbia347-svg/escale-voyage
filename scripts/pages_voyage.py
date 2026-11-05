@@ -29,6 +29,26 @@ WE = {
                    "These are base fares, often without checked luggage: a cabin bag is enough for a weekend.",
                    "Prices change every day: book as soon as a price suits you, or set a price alert on the route page."],
                note="Round-trip prices recently found by our search partner (Aviasales), for the dates shown. They are confirmed on the booking site."),
+    "it": dict(path="it/weekend-economici", title="Weekend economici: voli andata e ritorno sotto i 100 € | Escale",
+               desc="I weekend andata e ritorno sotto i 100 € dal tuo aeroporto, venerdì o sabato → domenica o lunedì, per le prossime 8 settimane. Prezzi reali, aggiornati di continuo.",
+               h1="Weekend <span>a meno di 100 €</span>", lead="Partenza venerdì o sabato, ritorno domenica o lunedì: le destinazioni più economiche dei prossimi 8 weekend, dal tuo aeroporto.",
+               from_l="Partenza da", budget="Budget andata e ritorno", loading="Ricerca dei weekend migliori…",
+               none="Nessun weekend trovato con questo budget dal tuo aeroporto per ora. Prova un budget più alto o un altro aeroporto nella home.",
+               direct="diretto", stop="con scalo", change="Cambia aeroporto",
+               tips_h="Per pagare ancora meno", tips=["Partire il sabato e tornare il lunedì costa spesso meno che venerdì → domenica.",
+                   "Questi prezzi sono tariffe base, spesso senza bagaglio in stiva: per un weekend basta il bagaglio a mano.",
+                   "I prezzi cambiano ogni giorno: prenota appena un prezzo ti piace, o crea un avviso prezzo sulla pagina della tratta."],
+               note="Prezzi andata e ritorno trovati di recente dal nostro partner di ricerca (Aviasales), per le date indicate. Vengono confermati sul sito di prenotazione."),
+    "de": dict(path="de/guenstige-wochenenden", title="Günstige Wochenendtrips: Hin- und Rückflug unter 100 € | Escale",
+               desc="Wochenendflüge hin und zurück unter 100 € ab deinem Flughafen, Freitag oder Samstag → Sonntag oder Montag, für die nächsten 8 Wochen. Echte Preise, laufend aktualisiert.",
+               h1="Wochenenden <span>unter 100 €</span>", lead="Abflug Freitag oder Samstag, zurück Sonntag oder Montag: die günstigsten Ziele der nächsten 8 Wochenenden, ab deinem Flughafen.",
+               from_l="Abflug ab", budget="Budget hin und zurück", loading="Die besten Wochenenden werden gesucht…",
+               none="Gerade kein Wochenende unter diesem Budget ab deinem Flughafen. Versuche ein höheres Budget oder einen anderen Flughafen auf der Startseite.",
+               direct="direkt", stop="mit Umstieg", change="Flughafen ändern",
+               tips_h="Noch weniger zahlen", tips=["Samstag hin und Montag zurück ist oft günstiger als Freitag → Sonntag.",
+                   "Das sind Basistarife, oft ohne Aufgabegepäck: Für ein Wochenende reicht Handgepäck.",
+                   "Die Preise ändern sich täglich: Buche, sobald dir ein Preis gefällt, oder richte auf der Streckenseite einen Preisalarm ein."],
+               note="Hin- und Rückflugpreise, kürzlich von unserem Suchpartner (Aviasales) gefunden, für die angezeigten Daten. Sie werden auf der Buchungsseite bestätigt."),
 }
 
 
@@ -36,7 +56,7 @@ def build_weekends(site, ctx):
     paths = {l: WE[l]["path"] for l in WE}
     urls = []
     for lang, t in WE.items():
-        q = "" if lang == "fr" else "?lang=en"
+        q = "" if lang == "fr" else f"?lang={lang}"
         tj = E(json.dumps({"loading": t["loading"], "none": t["none"], "direct": t["direct"], "stop": t["stop"]}, ensure_ascii=False))
         body = (f'<div class="we-head"><p>{E(t["from_l"])} <strong class="we-from">…</strong> · <a href="/{q}">{E(t["change"])}</a></p>'
                 f'<div class="we-budget" role="group" aria-label="{E(t["budget"])}">'
