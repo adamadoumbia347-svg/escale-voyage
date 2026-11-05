@@ -6,11 +6,18 @@
   var SEL = ".hub-price strong, #hero-price strong, .price-val";
   var lang = (document.documentElement.lang || "fr").slice(0, 2);
   var loc = { fr: "fr-FR", en: "en-GB", es: "es-ES", pt: "pt-PT", ar: "ar-u-nu-latn", it: "it-IT", de: "de-DE", nl: "nl-NL" }[lang] || "fr-FR";
-  var BY_COUNTRY = { GB: "GBP", US: "USD", CA: "CAD", CH: "CHF", MA: "MAD", DZ: "DZD", TN: "TND", EG: "EGP", NG: "NGN", GH: "GHS",
-    KE: "KES", ZA: "ZAR", AE: "AED", SA: "SAR", QA: "QAR", ET: "ETB", RW: "RWF", CD: "CDF", GN: "GNF", MR: "MRU", GM: "GMD", CV: "CVE",
-    AO: "AOA", MZ: "MZN", TZ: "TZS", UG: "UGX", SE: "SEK", NO: "NOK", DK: "DKK", PL: "PLN", TR: "TRY", BR: "BRL", HT: "HTG",
+  // Même liste que l'accueil (app.js) : la monnaie de chaque pays du monde
+  var BY_COUNTRY = { US: "USD", GB: "GBP", CA: "CAD", CH: "CHF", MA: "MAD",
     SN: "XOF", ML: "XOF", CI: "XOF", BF: "XOF", NE: "XOF", TG: "XOF", BJ: "XOF", GW: "XOF",
-    CM: "XAF", GA: "XAF", CG: "XAF", TD: "XAF", CF: "XAF", GQ: "XAF" };
+    CM: "XAF", GA: "XAF", CG: "XAF", TD: "XAF", CF: "XAF", GQ: "XAF", GN: "GNF", NG: "NGN", GH: "GHS", CD: "CDF", AO: "AOA", KE: "KES",
+    TZ: "TZS", UG: "UGX", RW: "RWF", BI: "BIF", ET: "ETB", ZA: "ZAR", MZ: "MZN", MG: "MGA", MU: "MUR", ZM: "ZMW", CV: "CVE", GM: "GMD",
+    SL: "SLE", LR: "LRD", MR: "MRU", SD: "SDG", DJ: "DJF", KM: "KMF", SC: "SCR", NA: "NAD", BW: "BWP", MW: "MWK", DZ: "DZD", TN: "TND",
+    LY: "LYD", EG: "EGP", NO: "NOK", SE: "SEK", DK: "DKK", IS: "ISK", PL: "PLN", CZ: "CZK", HU: "HUF", RO: "RON", BG: "BGN", RS: "RSD",
+    AL: "ALL", MK: "MKD", BA: "BAM", MD: "MDL", UA: "UAH", TR: "TRY", GE: "GEL", AM: "AMD", AZ: "AZN", KZ: "KZT", UZ: "UZS", RU: "RUB",
+    MX: "MXN", BR: "BRL", AR: "ARS", CL: "CLP", CO: "COP", PE: "PEN", UY: "UYU", PY: "PYG", BO: "BOB", DO: "DOP", HT: "HTG", JM: "JMD",
+    TT: "TTD", CR: "CRC", GT: "GTQ", HN: "HNL", NI: "NIO", AU: "AUD", NZ: "NZD", JP: "JPY", CN: "CNY", HK: "HKD", TW: "TWD", KR: "KRW",
+    IN: "INR", PK: "PKR", BD: "BDT", LK: "LKR", NP: "NPR", MV: "MVR", TH: "THB", VN: "VND", ID: "IDR", MY: "MYR", SG: "SGD", PH: "PHP",
+    KH: "KHR", AE: "AED", SA: "SAR", QA: "QAR", KW: "KWD", BH: "BHD", OM: "OMR", JO: "JOD", LB: "LBP", IL: "ILS", IQ: "IQD" };
   var NOTE = { fr: "Équivalent indicatif, les prix sont comparés en euros.", en: "Approximate equivalent: prices are compared in euros.",
     es: "Equivalente aproximado: los precios se comparan en euros.", pt: "Equivalente aproximado: os preços são comparados em euros.",
     ar: "قيمة تقريبية: تُقارن الأسعار باليورو.", it: "Equivalente indicativo: i prezzi sono confrontati in euro.",
@@ -41,7 +48,7 @@
 
   currencies().then(function (curs) {
     if (!curs.length) return;
-    return getJSON("/api/fx").then(function (d) {
+    return getJSON("/api/fx?all=1").then(function (d) {
       if (!d || !d.rates) return;
       curs = curs.filter(function (c) { return d.rates[c]; });
       if (!curs.length) return;

@@ -624,6 +624,22 @@ def lite_mode(site):
     return n
 
 
+# Langue automatique (site/langue.js) : sur toutes les pages qui existent en plusieurs langues, sauf l'accueil (app.js s'en charge)
+LANGUE_JS = '<script src="/langue.js"></script>'
+def langue_auto(site):
+    n = 0
+    for f in site.rglob("*.html"):
+        rel = f.relative_to(site).as_posix()
+        if rel == "index.html" or rel.startswith(("admin/", "widget/")):
+            continue
+        t = f.read_text(encoding="utf-8")
+        if 'hreflang=' not in t or "/langue.js" in t or "</head>" not in t:
+            continue
+        f.write_text(t.replace("</head>", LANGUE_JS + "\n</head>", 1), encoding="utf-8")
+        n += 1
+    return n
+
+
 def bust_cache(site):
     """Ajoute ?v=<empreinte du fichier> aux scripts et feuilles de style du site, pour que téléphones et appli installée
     prennent tout de suite la nouvelle version après une mise à jour (sinon l'ancienne copie peut rester plusieurs heures)."""
@@ -789,6 +805,7 @@ def main():
     # /api/ : données en direct (inutile aux moteurs, et chaque visite consomme le quota Cloudflare) ; /admin/ : espace privé
     (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /admin/\n\nSitemap: {DOMAIN}/sitemap.xml\n", encoding="utf-8")
     lite_mode(SITE)
+    print(f"langue automatique : {langue_auto(SITE)} pages")
     bust_cache(SITE)
     print(f"{len(urls)} pages dans le sitemap")
 

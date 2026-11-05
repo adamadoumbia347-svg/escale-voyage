@@ -36,7 +36,9 @@
   const LANGS = ["fr", "en", "es", "pt", "ar", "it", "de"];
   const urlLang = new URLSearchParams(location.search).get("lang");
   if (LANGS.includes(urlLang)) { try { localStorage.setItem("escale.lang", urlLang); } catch (e) {} }
-  const navLang = (navigator.language || "fr").slice(0, 2).toLowerCase();
+  // Première langue du navigateur que le site parle (navigator.languages dans l'ordre de préférence du visiteur)
+  const navLang = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || "en"])
+    .map((l) => String(l).slice(0, 2).toLowerCase()).find((l) => LANGS.includes(l)) || "en";
   let LANG = store.get("escale.lang") || (LANGS.includes(navLang) ? navLang : "en");
   if (!LANGS.includes(LANG)) LANG = "fr";
   // Français et anglais écrits dans le code ; espagnol, portugais et arabe dans i18n.js (clé = texte anglais)
