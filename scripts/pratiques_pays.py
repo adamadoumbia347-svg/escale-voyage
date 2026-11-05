@@ -153,11 +153,36 @@ FAM = {
 }
 
 
+def _secs_html(secs, fmt):
+    return "".join(f"<section><h2>{E(h)}</h2><ul>" + "".join(f"<li>{x.format(**fmt)}</li>" for x in items) + "</ul></section>" for h, items in secs)
+
+
+def itde_body(kind, lang, site=None, name="", a="", code="", guide=""):
+    """Corps des pages en italien / allemand (textes dans pratiques_itde.py)."""
+    import pratiques_itde as PI
+    t = PI.T[lang]
+    if kind == "esim":
+        return (_secs_html(t["esim_secs"], dict(a=a, n=name)) +
+                f'<p><a class="btn" href="{AIRALO}" target="_blank" rel="sponsored noopener noreferrer">📱 {E(t["esim_cta"].format(n=name))} · Airalo ↗</a></p><p class="small">{E(t["esim_note"])}</p>')
+    if kind == "car":
+        return (_secs_html(t["car_secs"], dict(a=a, n=name)) +
+                f'<p><a class="btn" href="{CAR}" target="_blank" rel="sponsored noopener noreferrer">🚗 {E(t["car_cta"].format(a=a, n=name))} · EconomyBookings ↗</a></p><p class="small">{E(t["car_note"])}</p>')
+    addr = AERO_NAME[code] + ", " + name
+    extra = f"<li>{E(t['night_dss'])}</li>" if code == "DSS" else ""
+    return (f'<section><h2>{E(t["night_h"])}</h2><ul>' + extra + "".join(f"<li>{x}</li>" for x in t["night_tips"]) + "</ul></section>"
+            + B.hotel_map(lang, t["night_map"].format(n=name), addr) +
+            f'<p class="pr-btns"><a class="btn" href="{E(B.stay22(addr, "hotel-aeroport-" + lang))}" target="_blank" rel="sponsored noopener noreferrer">🛏️ {E(t["night_hotels"])} ↗</a>'
+            f'<a class="btn ghost" href="{TAXI}" target="_blank" rel="sponsored noopener noreferrer">🚕 {E(t["night_taxi"])} · Kiwitaxi ↗</a></p>'
+            f'<p><a href="/{guide}/">🛬 {E(t["night_guide"].format(n=name))} →</a></p><p class="small">{E(t["night_note"])}</p>')
+
+
 def build(site, ctx):
+    import pratiques_itde as PI
     urls = []
     items = {"esim": [], "car": [], "night": []}
     for c, sf, se, nf, ne, a_fr, fl in PAYS:
-        paths = {"fr": f"esim/{sf}", "en": f"en/esim/{se}"}
+        pi = PI.PAYS[c]
+        paths = {"fr": f"esim/{sf}", "en": f"en/esim/{se}", "it": f"it/esim/{pi[0]}", "de": f"de/esim/{pi[2]}"}
         for lang in ("fr", "en"):
             fr = lang == "fr"
             name = nf if fr else ne
@@ -166,8 +191,16 @@ def build(site, ctx):
             hero = f'<p class="eyebrow">{fl} {"eSIM" }</p><h1>{"Internet dès l’arrivée " + E(a_fr) if fr else "Internet on arrival in " + E(name)}</h1><p class="hero-lead">{E(desc)}</p>'
             urls.append(B.write(site, paths[lang], lang, title, desc, hero, esim_body(lang, name, a_fr if fr else name), "", paths, ctx))
             items["esim"].append((lang, paths[lang], f"{fl} {name}"))
+        for lang in ("it", "de"):
+            t = PI.T[lang]
+            name = pi[1] if lang == "it" else pi[3]
+            a = pi[4] if lang == "it" else f"in {name}"
+            title, desc = t["esim_title"].format(n=name), t["esim_desc"].format(a=a, n=name)
+            hero = f'<p class="eyebrow">{fl} eSIM</p><h1>{E(t["esim_h1"].format(a=a, n=name))}</h1><p class="hero-lead">{E(desc)}</p>'
+            urls.append(B.write(site, paths[lang], lang, title, desc, hero, itde_body("esim", lang, name=name, a=a), "", paths, ctx))
+            items["esim"].append((lang, paths[lang], f"{fl} {name}"))
     for sf, se, nf, ne, a_fr, code in VILLES:
-        paths = {"fr": f"location-voiture/{sf}", "en": f"en/car-rental/{se}"}
+        paths = {"fr": f"location-voiture/{sf}", "en": f"en/car-rental/{se}", "it": f"it/noleggio-auto/{se}", "de": f"de/mietwagen/{se}"}
         for lang in ("fr", "en"):
             fr = lang == "fr"
             name = nf if fr else ne
@@ -176,8 +209,16 @@ def build(site, ctx):
             hero = f'<p class="eyebrow">🚗 {"Location de voiture" if fr else "Car rental"}</p><h1>{("Louer une voiture <span>" + E(a_fr) + "</span>") if fr else ("Rent a car <span>in " + E(name) + "</span>")}</h1><p class="hero-lead">{E(desc)}</p>'
             urls.append(B.write(site, paths[lang], lang, title, desc, hero, car_body(lang, name), "", paths, ctx))
             items["car"].append((lang, paths[lang], name))
+        for lang in ("it", "de"):
+            t = PI.T[lang]
+            name = PI.VILLES[sf][0 if lang == "it" else 1]
+            a = PI.a_it(name) if lang == "it" else f"in {name}"
+            title, desc = t["car_title"].format(a=a, n=name), t["car_desc"].format(a=a, n=name)
+            hero = f'<p class="eyebrow">🚗 {E(t["car_eyebrow"])}</p><h1>{t["car_h1"].format(a=E(a), n=E(name))}</h1><p class="hero-lead">{E(desc)}</p>'
+            urls.append(B.write(site, paths[lang], lang, title, desc, hero, itde_body("car", lang, name=name, a=a), "", paths, ctx))
+            items["car"].append((lang, paths[lang], name))
     for sf, se, nf, ne, code in AEROS:
-        paths = {"fr": f"hotel-aeroport/{sf}", "en": f"en/airport-hotels/{se}"}
+        paths = {"fr": f"hotel-aeroport/{sf}", "en": f"en/airport-hotels/{se}", "it": f"it/hotel-aeroporto/{se}", "de": f"de/flughafenhotels/{se}"}
         for lang in ("fr", "en"):
             fr = lang == "fr"
             name = nf if fr else ne
@@ -187,9 +228,18 @@ def build(site, ctx):
             hero = f'<p class="eyebrow">🌙 {"Arrivée de nuit" if fr else "Night arrival"}</p><h1>{("Dormir près de l’aéroport <span>de " + E(name) + "</span>") if fr else ("Sleep near <span>" + E(name) + " airport</span>")}</h1><p class="hero-lead">{E(desc)}</p>'
             urls.append(B.write(site, paths[lang], lang, title, desc, hero, night_body(site, lang, name, code, guide), "", paths, ctx))
             items["night"].append((lang, paths[lang], name))
+        for lang in ("it", "de"):
+            t = PI.T[lang]
+            name = PI.VILLES[sf][0 if lang == "it" else 1]
+            a = PI.a_it(name) if lang == "it" else f"in {name}"
+            title, desc = t["night_title"].format(n=name), t["night_desc"].format(a=a, n=name)
+            hero = f'<p class="eyebrow">🌙 {E(t["night_eyebrow"])}</p><h1>{t["night_h1"].format(n=E(name))}</h1><p class="hero-lead">{E(desc)}</p>'
+            urls.append(B.write(site, paths[lang], lang, title, desc, hero, itde_body("night", lang, name=name, a=a, code=code, guide=f"en/arriving-at-{se}-airport"), "", paths, ctx))
+            items["night"].append((lang, paths[lang], name))
     for fam, conf in FAM.items():
-        paths = {l: conf[l]["base"] for l in ("fr", "en")}
-        for lang in ("fr", "en"):
+        conf = {**conf, "it": PI.T["it"]["fam"][fam], "de": PI.T["de"]["fam"][fam]}
+        paths = {l: conf[l]["base"] for l in ("fr", "en", "it", "de")}
+        for lang in ("fr", "en", "it", "de"):
             c = conf[lang]
             links = "".join(f'<li><a class="tool-chip" href="/{p}/">{E(n)}</a></li>' for l, p, n in items[fam] if l == lang)
             hero = f'<h1>{c["h1"]}</h1><p class="hero-lead">{E(c["lead"])}</p>'

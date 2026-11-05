@@ -135,6 +135,10 @@ def klook(site, code, lang, name=""):
 
 
 def build(site, ctx):
+    import premier_itde as PX
+    for key, *_rest in DESTS:
+        _rest[-1].update(PX.TEXTS[key])
+    UI.update(PX.UI)
     photos = json.loads((site / "data" / "premier-photos.json").read_text(encoding="utf-8"))
     villes = {p["code"]: p for p in json.loads((site / "data" / "photos.json").read_text(encoding="utf-8"))}
     urls = []
@@ -150,7 +154,7 @@ def build(site, ctx):
                     f'<li><img src="/img/premier/{g}.webp" alt="" width="480" height="640" loading="lazy" decoding="async"><small>{E(u["photo"])} : <a href="{E(photos[g]["page"])}" target="_blank" rel="noopener">{E(photos[g]["author"][:40])}</a>, {E(photos[g]["license"])}</small></li>'
                     for g in gallery) + "</ul>"
             v = next((p for p in villes.values() if p["img"].endswith(f"/{hero_img}.webp")), None)
-            fq = "" if lang == "fr" else "&amp;lang=en"
+            fq = "" if lang == "fr" else f"&amp;lang={lang}"
             price = (f'<ul class="tr-grid pv-price"><li class="tr-card" data-to="{code}"><a class="tr-link" href="/?type=vols&amp;to={code}{fq}">'
                      f'<img src="/img/premier/{gallery[0]}.webp" alt="{E(t["name"])}" width="480" height="640" loading="lazy" decoding="async">'
                      f'<span class="tr-info"><strong>{E(t["flag"])} {E(t["name"])}</strong><small>{E(u["flight"])}</small><span class="tr-price" aria-live="polite"></span></span></a>'

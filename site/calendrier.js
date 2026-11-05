@@ -4,7 +4,7 @@
   "use strict";
   var box = document.getElementById("cal-app");
   if (!box || !window.ESCALE_FETE_FROM) return;
-  var lang = (document.documentElement.lang || "fr").slice(0, 2), loc = lang === "fr" ? "fr-FR" : "en-GB";
+  var lang = (document.documentElement.lang || "fr").slice(0, 2), loc = { fr: "fr-FR", en: "en-GB", it: "it-IT", de: "de-DE" }[lang] || "en-GB";
   var C = JSON.parse(box.getAttribute("data-c")), E = JSON.parse(box.getAttribute("data-e")), T = JSON.parse(box.getAttribute("data-t"));
   var get = function (u) { return fetch(u).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }); };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };

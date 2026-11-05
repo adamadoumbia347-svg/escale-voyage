@@ -5,7 +5,7 @@
   "use strict";
   var f = document.getElementById("cv-form");
   if (!f) return;
-  var lang = (document.documentElement.lang || "fr").slice(0, 2), loc = lang === "fr" ? "fr-FR" : "en-GB";
+  var lang = (document.documentElement.lang || "fr").slice(0, 2), loc = { fr: "fr-FR", en: "en-GB", it: "it-IT", de: "de-DE" }[lang] || "en-GB";
   var T = JSON.parse(f.getAttribute("data-t")), out = document.getElementById("cv-out");
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
   var D = function (s) { return s ? new Date(s + "T12:00:00") : null; };

@@ -196,7 +196,7 @@ UI["it"].update(
           ("Come trovare un hotel economico a {c}?", "Confronta più siti per le stesse date, ordina per prezzo, scegli la cancellazione gratuita e prenota presto per i periodi di festa. Dalle 3 notti gli appartamenti sono spesso convenienti."),
           ("Conviene prenotare con cancellazione gratuita?", "Sì, soprattutto se non hai ancora prenotato i voli: puoi passare a un'offerta migliore se il prezzo scende.")],
     conj=" e ", area_names={"Centre-ville": "Centro città", "Quartier administratif": "Quartiere amministrativo"},
-    map=("Mappa degli hotel a {c}: prezzi in diretta", "Booking, Expedia, Agoda, Hotels.com… su una mappa, con i prezzi del momento. Scegli le date sulla mappa.", "Mostra la mappa degli hotel"),
+    map=("Mappa degli hotel – {c}: prezzi in diretta", "Booking, Expedia, Agoda, Hotels.com… su una mappa, con i prezzi del momento. Scegli le date sulla mappa.", "Mostra la mappa degli hotel"),
     stay22="Hotel a {c} al miglior prezzo (Booking, Expedia, Agoda…)",
 )
 UI["de"].update(

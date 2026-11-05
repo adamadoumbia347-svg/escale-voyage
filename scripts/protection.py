@@ -22,12 +22,74 @@ CURS = ["EUR", "USD", "GBP", "CAD", "CHF", "XOF", "XAF", "NGN", "GHS", "MAD"]
 SCRIPTS = lambda *n: "".join(f'<script src="/{x}.js" defer></script>' for x in n)
 
 
+def _tx(text, i):
+    """Traduit un morceau de HTML anglais en italien (i=0) ou allemand (i=1) avec protection_itde.TR."""
+    import re
+    import protection_itde as PX
+    TRX = PX.TR
+    def one(s):
+        v = TRX.get(s)
+        return v[i] if v else None
+    # 1. blocs avec balises (<li>, <p>… contenant <strong> ou <a>)
+    for k, v in TRX.items():
+        if k.startswith("HTML:"):
+            src, dst = k[5:], v[i][5:]
+            esc_src = re.sub(r"(^|>)([^<]+)", lambda m: m.group(1) + E(m.group(2)), src)
+            for cand in (src, esc_src):
+                text = text.replace(">" + cand + "<", ">" + dst + "<")
+    # 2. nœuds de texte
+    def node(m):
+        raw = html.unescape(m.group(2))
+        t = one(raw)
+        return m.group(0) if t is None else ">" + m.group(1) + E(t, quote=False) + m.group(3) + "<"
+    text = re.sub(r">(\s*)([^<>]*?[A-Za-z][^<>]*?)(\s*)<", node, text)
+    # 3. attributs simples
+    def attr(m):
+        t = one(html.unescape(m.group(2)))
+        return m.group(0) if t is None else f'{m.group(1)}="{E(t)}"'
+    text = re.sub(r'\b(placeholder|title|aria-label|alt|data-for|data-name)="([^"]*)"', attr, text)
+    # 4. attributs JSON (textes de l'outil, listes de documents, fêtes, pays)
+    def walk(o, depth_row=False):
+        if isinstance(o, str):
+            t = one(o)
+            return o if t is None else t
+        if isinstance(o, list):
+            return [walk(x) for x in o]
+        if isinstance(o, dict):
+            return {k: walk(v) for k, v in o.items()}
+        return o
+    def jattr(m):
+        try:
+            o = json.loads(html.unescape(m.group(2)))
+        except ValueError:
+            return m.group(0)
+        if m.group(1) == "data-d":
+            for g in ("p", "d"):
+                for row in o.get(g, {}).values():
+                    t = one(row[1])
+                    if t:
+                        row[1] = t
+        else:
+            o = walk(o)
+        return f'{m.group(1)}="{J(o)}"'
+    text = re.sub(r'\b(data-t|data-l|data-e|data-d|data-c)="([^"]*)"', jattr, text)
+    return text
+
+
 def write(site, ctx, pages):
+    import protection_itde as PX
     urls = []
     paths = {l: pages[l]["path"] for l in pages}
+    itp = PX.PATHS[pages["en"]["path"]]
+    paths.update(it=itp[0], de=itp[1])
     for lang, t in pages.items():
         hero = f'<h1>{t["h1"]}</h1><p class="hero-lead">{E(t["lead"])}</p>'
         urls.append(B.write(site, t["path"], lang, t["title"], t["desc"], hero, t["body"], "", paths, ctx))
+    en = pages["en"]
+    for i, lang in enumerate(("it", "de")):
+        one = lambda s: (PX.TR.get(s) or (s,) * 2)[i]
+        hero = _tx(f'<h1>{en["h1"]}</h1><p class="hero-lead">{E(en["lead"])}</p>', i)
+        urls.append(B.write(site, paths[lang], lang, one(en["title"]), one(en["desc"]), hero, _tx(en["body"], i), "", paths, ctx))
     return urls
 
 

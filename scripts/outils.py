@@ -69,6 +69,8 @@ BF = {
 
 
 def build(site, ctx):
+    import outils_itde
+    TC.update(outils_itde.TC); BF.update(outils_itde.BF)
     urls = []
     tp = {l: TC[l]["path"] for l in TC}
     for lang, t in TC.items():

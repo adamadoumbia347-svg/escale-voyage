@@ -1,6 +1,6 @@
 {
 "/": [
-"43229145fcaa97ab",
+"9acd0845ba995865",
 "2026-11-05"
 ],
 "/a-propos/": [
@@ -8,7 +8,7 @@
 "2026-11-05"
 ],
 "/acheter-ou-attendre/": [
-"9efadc2f745d036a",
+"bff73b7a8795b63f",
 "2026-11-05"
 ],
 "/ar/": [
@@ -2460,7 +2460,7 @@
 "2026-11-05"
 ],
 "/billet-trop-cher/": [
-"efd4426fb05f85e1",
+"41837242d6d882e9",
 "2026-11-05"
 ],
 "/bj/": [
@@ -2504,11 +2504,11 @@
 "2026-11-05"
 ],
 "/budget-voyage-famille/": [
-"d0974480b3991ab3",
+"0a08203c68eeeeff",
 "2026-11-05"
 ],
 "/calendrier-prix-diaspora/": [
-"52e00339246d6ca4",
+"aef906d49a2e891d",
 "2026-11-05"
 ],
 "/cd/": [
@@ -2532,7 +2532,7 @@
 "2026-11-05"
 ],
 "/controle-avant-vol/": [
-"e1a51c3e7899a4fa",
+"da0c312e62a4ab51",
 "2026-11-05"
 ],
 "/credits-photos/": [
@@ -2667,8 +2667,104 @@
 "ca7ba4cf8ac7fb26",
 "2026-11-05"
 ],
+"/de/check-vor-dem-flug/": [
+"52626368ddb44128",
+"2026-11-05"
+],
+"/de/entschaedigung-flugverspaetung/": [
+"ed300573425818a2",
+"2026-11-05"
+],
+"/de/erste-reise-bali/": [
+"99d23d63aad51187",
+"2026-11-05"
+],
+"/de/erste-reise-japan/": [
+"aabecc0d42b6a49d",
+"2026-11-05"
+],
+"/de/erste-reise-sansibar/": [
+"b42c267bc3fd94a5",
+"2026-11-05"
+],
+"/de/esim/": [
+"b593c3ed5943af7b",
+"2026-11-05"
+],
+"/de/esim/aegypten/": [
+"cf2accf358f8e09e",
+"2026-11-05"
+],
+"/de/esim/algerien/": [
+"fe3a712e38572791",
+"2026-11-05"
+],
+"/de/esim/benin/": [
+"7e27cdbcba3d38f9",
+"2026-11-05"
+],
+"/de/esim/burkina-faso/": [
+"aca6315325edd5a3",
+"2026-11-05"
+],
+"/de/esim/dr-kongo/": [
+"4af16853edae9b50",
+"2026-11-05"
+],
+"/de/esim/elfenbeinkueste/": [
+"e80d70296c6eae8d",
+"2026-11-05"
+],
+"/de/esim/gabun/": [
+"72f75724797b0610",
+"2026-11-05"
+],
+"/de/esim/ghana/": [
+"5199ac11625ebf39",
+"2026-11-05"
+],
+"/de/esim/guinea/": [
+"185a841d32a31a32",
+"2026-11-05"
+],
+"/de/esim/kamerun/": [
+"8407c41f0af8f064",
+"2026-11-05"
+],
+"/de/esim/kenia/": [
+"91fc66293c6879d1",
+"2026-11-05"
+],
+"/de/esim/mali/": [
+"6b32094f0369bf33",
+"2026-11-05"
+],
+"/de/esim/marokko/": [
+"1dfc3d55d2fde752",
+"2026-11-05"
+],
+"/de/esim/nigeria/": [
+"a6d9e80bef8e6cbd",
+"2026-11-05"
+],
+"/de/esim/senegal/": [
+"cf5bd2996310cb44",
+"2026-11-05"
+],
+"/de/esim/togo/": [
+"71b64da285a7bb5b",
+"2026-11-05"
+],
+"/de/esim/tunesien/": [
+"2a2ea1ff13b63e4e",
+"2026-11-05"
+],
 "/de/familie-einladen/": [
 "ae68e8de1b4319d3",
+"2026-11-05"
+],
+"/de/familienreise-budget/": [
+"a5e1b80df8eceeb5",
 "2026-11-05"
 ],
 "/de/fluege-berlin-accra/": [
@@ -3187,6 +3283,62 @@
 "0e11ed11bab6c360",
 "2026-11-05"
 ],
+"/de/flughafenhotels/": [
+"ad3f48d27fc9b00f",
+"2026-11-05"
+],
+"/de/flughafenhotels/abidjan/": [
+"89b7117e1c5893a4",
+"2026-11-05"
+],
+"/de/flughafenhotels/accra/": [
+"e0a88499a067e86b",
+"2026-11-05"
+],
+"/de/flughafenhotels/algiers/": [
+"ae8ccf75364c4a16",
+"2026-11-05"
+],
+"/de/flughafenhotels/bamako/": [
+"e2ceb27dad61cabf",
+"2026-11-05"
+],
+"/de/flughafenhotels/casablanca/": [
+"878bfb7a3940f2b2",
+"2026-11-05"
+],
+"/de/flughafenhotels/conakry/": [
+"0020485e616e290f",
+"2026-11-05"
+],
+"/de/flughafenhotels/dakar/": [
+"9806c018bfb53da4",
+"2026-11-05"
+],
+"/de/flughafenhotels/douala/": [
+"f2bfbba1a49402ef",
+"2026-11-05"
+],
+"/de/flughafenhotels/kinshasa/": [
+"dd975050a3f96da2",
+"2026-11-05"
+],
+"/de/flughafenhotels/lagos/": [
+"67509b6fbe7272f9",
+"2026-11-05"
+],
+"/de/flughafenhotels/lome/": [
+"34f0a584ea6e9aba",
+"2026-11-05"
+],
+"/de/flughafenhotels/tunis/": [
+"166348540709f5e8",
+"2026-11-05"
+],
+"/de/flugticket-pruefen/": [
+"fcafb0606d801245",
+"2026-11-05"
+],
 "/de/guenstige-hotels-abidjan/": [
 "4de20ba91ecad741",
 "2026-11-05"
@@ -3271,12 +3423,84 @@
 "a646b8657e5a0352",
 "2026-11-05"
 ],
+"/de/kaufen-oder-warten/": [
+"0b75eb89117867e1",
+"2026-11-05"
+],
+"/de/mietwagen/": [
+"693651bdce21fc52",
+"2026-11-05"
+],
+"/de/mietwagen/abidjan/": [
+"8265d49f58e61f62",
+"2026-11-05"
+],
+"/de/mietwagen/accra/": [
+"dbcee64f9e63238a",
+"2026-11-05"
+],
+"/de/mietwagen/agadir/": [
+"7020cf5f0c2a0baa",
+"2026-11-05"
+],
+"/de/mietwagen/algiers/": [
+"5598ba1d8dbf2eb3",
+"2026-11-05"
+],
+"/de/mietwagen/casablanca/": [
+"f13e4c85aa589a3d",
+"2026-11-05"
+],
+"/de/mietwagen/dakar/": [
+"1d06b460fa1bf2ed",
+"2026-11-05"
+],
+"/de/mietwagen/djerba/": [
+"b252f1eec72161ef",
+"2026-11-05"
+],
+"/de/mietwagen/douala/": [
+"2efa078f5c1af802",
+"2026-11-05"
+],
+"/de/mietwagen/lome/": [
+"2a0e9dfcae250113",
+"2026-11-05"
+],
+"/de/mietwagen/marrakech/": [
+"932f11c136b794c2",
+"2026-11-05"
+],
+"/de/mietwagen/tunis/": [
+"df34ef9e36fdbe58",
+"2026-11-05"
+],
+"/de/offline-reiseset/": [
+"b8208177cbea81b6",
+"2026-11-05"
+],
+"/de/ohne-visum/": [
+"64a861d45286a1e4",
+"2026-11-05"
+],
+"/de/preiskalender-heimreise/": [
+"049026da20ec9d80",
+"2026-11-05"
+],
 "/de/trendziele-2027/": [
 "899a490acf9dadfe",
 "2026-11-05"
 ],
+"/de/visumantrag-checkliste/": [
+"95c9478685be6ac9",
+"2026-11-05"
+],
+"/de/zu-viel-bezahlt/": [
+"5619b7e62323daef",
+"2026-11-05"
+],
 "/dossier-visa/": [
-"44784e7cce6d37d5",
+"8bd6604ce4764986",
 "2026-11-05"
 ],
 "/dz/": [
@@ -3292,55 +3516,55 @@
 "2026-11-05"
 ],
 "/en/airport-hotels/": [
-"1efe0c479fc77d87",
+"7b0918d27e18f7d8",
 "2026-11-05"
 ],
 "/en/airport-hotels/abidjan/": [
-"71229ca3303ac3a5",
+"32eeaf6573b06e9f",
 "2026-11-05"
 ],
 "/en/airport-hotels/accra/": [
-"d6bffce09652c5d9",
+"d9e22a05fdb9d757",
 "2026-11-05"
 ],
 "/en/airport-hotels/algiers/": [
-"a10b92b6285755dc",
+"2d3c5695a1b7893a",
 "2026-11-05"
 ],
 "/en/airport-hotels/bamako/": [
-"79bf47ef3cf02806",
+"db19a31a22072cfd",
 "2026-11-05"
 ],
 "/en/airport-hotels/casablanca/": [
-"1788e0c0b40dc3ef",
+"5454566454e13a60",
 "2026-11-05"
 ],
 "/en/airport-hotels/conakry/": [
-"bc6a33f61a66962a",
+"b622ae4064898b8f",
 "2026-11-05"
 ],
 "/en/airport-hotels/dakar/": [
-"0895a41448225ba8",
+"f9ac12b00260fab0",
 "2026-11-05"
 ],
 "/en/airport-hotels/douala/": [
-"99e136fd312f8018",
+"750a1a407f94a71f",
 "2026-11-05"
 ],
 "/en/airport-hotels/kinshasa/": [
-"53c5950fea38bdeb",
+"9c5ba28d485acbb1",
 "2026-11-05"
 ],
 "/en/airport-hotels/lagos/": [
-"e41717a9dc6398dc",
+"142877b3dd35291e",
 "2026-11-05"
 ],
 "/en/airport-hotels/lome/": [
-"3a1c2116efdcf1bb",
+"716bbe0d866edc8d",
 "2026-11-05"
 ],
 "/en/airport-hotels/tunis/": [
-"0a59634fc076490c",
+"5b98e1a90028e730",
 "2026-11-05"
 ],
 "/en/anywhere/": [
@@ -3532,55 +3756,55 @@
 "2026-11-05"
 ],
 "/en/buy-or-wait/": [
-"9399bc8c22d0a89f",
+"9a2e2d89988b410c",
 "2026-11-05"
 ],
 "/en/car-rental/": [
-"6f0622e70bef027d",
+"69c990beae7fd7d2",
 "2026-11-05"
 ],
 "/en/car-rental/abidjan/": [
-"fef3c8f7dae69fa6",
+"05037ecd0b10d071",
 "2026-11-05"
 ],
 "/en/car-rental/accra/": [
-"7ab415747d2bf991",
+"727f91f7b7e5b6ad",
 "2026-11-05"
 ],
 "/en/car-rental/agadir/": [
-"506bd51740139a85",
+"4ec9c7b6ffdd3f0a",
 "2026-11-05"
 ],
 "/en/car-rental/algiers/": [
-"faf713c64f464e5e",
+"58277a2845fc1ac4",
 "2026-11-05"
 ],
 "/en/car-rental/casablanca/": [
-"1022e8eb37df9787",
+"6fdd814a678bae49",
 "2026-11-05"
 ],
 "/en/car-rental/dakar/": [
-"ee5da43e35a78985",
+"9b5bf5ae989c61f8",
 "2026-11-05"
 ],
 "/en/car-rental/djerba/": [
-"dbf8baa36beaab3e",
+"b928307eb5a8603d",
 "2026-11-05"
 ],
 "/en/car-rental/douala/": [
-"13fac37dd8f2b6c1",
+"43e6b39036efae8a",
 "2026-11-05"
 ],
 "/en/car-rental/lome/": [
-"a63cc163357b4d21",
+"ab7bf6c667fd1f68",
 "2026-11-05"
 ],
 "/en/car-rental/marrakech/": [
-"ccca32e46f4282fd",
+"f1c7a100aab84ac0",
 "2026-11-05"
 ],
 "/en/car-rental/tunis/": [
-"a8c00647e53e8daa",
+"20cd7216e9202b66",
 "2026-11-05"
 ],
 "/en/cheap-hotels-abidjan/": [
@@ -3668,7 +3892,7 @@
 "2026-11-05"
 ],
 "/en/check-flight-ticket-scam/": [
-"346a61e9f6c7d529",
+"73f7b4242137687e",
 "2026-11-05"
 ],
 "/en/deals/": [
@@ -3676,103 +3900,103 @@
 "2026-11-05"
 ],
 "/en/diaspora-price-calendar/": [
-"56d5cbe5d5c6f08f",
+"b118be5f4e724479",
 "2026-11-05"
 ],
 "/en/did-i-overpay/": [
-"ccfb0edd75f7c4f3",
+"6dcfdbe71505d86d",
 "2026-11-05"
 ],
 "/en/esim/": [
-"ed678a62bfcc95a3",
+"a28c47fc06d3149b",
 "2026-11-05"
 ],
 "/en/esim/algeria/": [
-"13b51d008db55e2b",
+"0567e170b0394e62",
 "2026-11-05"
 ],
 "/en/esim/benin/": [
-"7262b9aa2245f952",
+"a8187c0c48d9e993",
 "2026-11-05"
 ],
 "/en/esim/burkina-faso/": [
-"abb0d4770c3fb6d6",
+"90d5ffb0227fd4b8",
 "2026-11-05"
 ],
 "/en/esim/cameroon/": [
-"293d345ff03340dd",
+"e1c86d23449a4ede",
 "2026-11-05"
 ],
 "/en/esim/dr-congo/": [
-"5e12d3cb131f1cd9",
+"ac00d45184656252",
 "2026-11-05"
 ],
 "/en/esim/egypt/": [
-"babe3dc553efedab",
+"a5661e1e29f0efb7",
 "2026-11-05"
 ],
 "/en/esim/gabon/": [
-"f077f901cdc8be84",
+"50420a54e67fcb35",
 "2026-11-05"
 ],
 "/en/esim/ghana/": [
-"9d1f52d56a80f8ec",
+"e2c0611a784732b4",
 "2026-11-05"
 ],
 "/en/esim/guinea/": [
-"1d4b354ead330f70",
+"e898f431c4670fc3",
 "2026-11-05"
 ],
 "/en/esim/ivory-coast/": [
-"2b741089c0fa07e4",
+"8d3093d13b6ae4a5",
 "2026-11-05"
 ],
 "/en/esim/kenya/": [
-"8fe5b2b232b2a4bd",
+"da715841325cca22",
 "2026-11-05"
 ],
 "/en/esim/mali/": [
-"39d639928884724c",
+"6de27c5a0e7170cd",
 "2026-11-05"
 ],
 "/en/esim/morocco/": [
-"3e48cacb4cf51ae3",
+"75d20094152d3ba2",
 "2026-11-05"
 ],
 "/en/esim/nigeria/": [
-"7513e44fa583283a",
+"0958961ca5bfa83d",
 "2026-11-05"
 ],
 "/en/esim/senegal/": [
-"add7e5a96a800611",
+"6943c5cfc9104b56",
 "2026-11-05"
 ],
 "/en/esim/togo/": [
-"0ecd5616301991a6",
+"e337b02c3eb306cb",
 "2026-11-05"
 ],
 "/en/esim/tunisia/": [
-"6d24a406fa092f8e",
+"f6f6f24d1112c956",
 "2026-11-05"
 ],
 "/en/family-trip-budget/": [
-"a963dc57b91f6cc5",
+"74f136eb47622698",
 "2026-11-05"
 ],
 "/en/first-trip-bali/": [
-"b95688b139c57b78",
+"fc2bf91e304eeb31",
 "2026-11-05"
 ],
 "/en/first-trip-japan/": [
-"7d2ba23a4cf5d7a5",
+"e46551992c9f9ae5",
 "2026-11-05"
 ],
 "/en/first-trip-zanzibar/": [
-"f7c76b6a45755b83",
+"5acb0b80196e53d7",
 "2026-11-05"
 ],
 "/en/flight-delay-compensation/": [
-"8417c461afac3f7b",
+"97ade26b5995222d",
 "2026-11-05"
 ],
 "/en/flights-abidjan-accra/": [
@@ -6064,7 +6288,7 @@
 "2026-11-05"
 ],
 "/en/offline-travel-kit/": [
-"b6afeccc1afb8c95",
+"14a99055870c776e",
 "2026-11-05"
 ],
 "/en/pay-flight-mobile-money/": [
@@ -6072,7 +6296,7 @@
 "2026-11-05"
 ],
 "/en/pre-flight-check/": [
-"402c6796444f319c",
+"eeaa94a613d4ec24",
 "2026-11-05"
 ],
 "/en/student-flights-from-africa/": [
@@ -6092,11 +6316,11 @@
 "2026-11-05"
 ],
 "/en/visa-application-checklist/": [
-"5137beb5a3969ec2",
+"f2838bb43124f8d9",
 "2026-11-05"
 ],
 "/en/visa-free/": [
-"e6764caba0115c25",
+"c5b84f083d3a45ab",
 "2026-11-05"
 ],
 "/en/visa/": [
@@ -8488,75 +8712,75 @@
 "2026-11-05"
 ],
 "/esim/": [
-"53edfcea408ffac6",
+"9d6cfd0da92feb02",
 "2026-11-05"
 ],
 "/esim/algerie/": [
-"ffc976f058380f89",
+"fd94b07cf355b648",
 "2026-11-05"
 ],
 "/esim/benin/": [
-"1cd4c585a41df796",
+"f3f39b4e8a5b89fd",
 "2026-11-05"
 ],
 "/esim/burkina-faso/": [
-"9caf3edc62872839",
+"8fca947e8b71d168",
 "2026-11-05"
 ],
 "/esim/cameroun/": [
-"c224aba91bac661a",
+"89945c7c61d10a00",
 "2026-11-05"
 ],
 "/esim/cote-d-ivoire/": [
-"303a923ad3deddfd",
+"de19cfada4dde8c4",
 "2026-11-05"
 ],
 "/esim/egypte/": [
-"18988bcf7e3699e8",
+"9eb59c76579b7207",
 "2026-11-05"
 ],
 "/esim/gabon/": [
-"71a9fd75b969f58f",
+"33ca9730475e14f6",
 "2026-11-05"
 ],
 "/esim/ghana/": [
-"8e1d0398d280fd5a",
+"75791c77626cfaa2",
 "2026-11-05"
 ],
 "/esim/guinee/": [
-"182a274e3424c2db",
+"744cca39e23fd6cd",
 "2026-11-05"
 ],
 "/esim/kenya/": [
-"77370ce23dbc8cc1",
+"10857ac86bf3db95",
 "2026-11-05"
 ],
 "/esim/mali/": [
-"33a61049f04111d9",
+"ef9c9df3cf6c31fd",
 "2026-11-05"
 ],
 "/esim/maroc/": [
-"d870020af1ea98f5",
+"eac9d60a5bcf6614",
 "2026-11-05"
 ],
 "/esim/nigeria/": [
-"2010a41014ddeda2",
+"6656c46d0d6ed841",
 "2026-11-05"
 ],
 "/esim/rd-congo/": [
-"cf32c159b87b3d76",
+"b5fa348ba9b30607",
 "2026-11-05"
 ],
 "/esim/senegal/": [
-"10512136644252f7",
+"c255f26841821689",
 "2026-11-05"
 ],
 "/esim/togo/": [
-"28423b5d4d402fa2",
+"b53e67f8348e9c9a",
 "2026-11-05"
 ],
 "/esim/tunisie/": [
-"9b7984d25abfc14a",
+"17435f3ed5f4bd02",
 "2026-11-05"
 ],
 "/etudiants-billet-avion/": [
@@ -8648,55 +8872,55 @@
 "2026-11-05"
 ],
 "/hotel-aeroport/": [
-"857fa55e84840d68",
+"28c9c886620cea7c",
 "2026-11-05"
 ],
 "/hotel-aeroport/abidjan/": [
-"1b1c7fd5d733d76f",
+"c40460d12b811da6",
 "2026-11-05"
 ],
 "/hotel-aeroport/accra/": [
-"0b455f8e96d7435f",
+"f44daf4e1f2351c1",
 "2026-11-05"
 ],
 "/hotel-aeroport/alger/": [
-"e515d84c979db7fb",
+"7b60afaff7ad66a1",
 "2026-11-05"
 ],
 "/hotel-aeroport/bamako/": [
-"64b04bad147ab164",
+"9a11f7d69aa41824",
 "2026-11-05"
 ],
 "/hotel-aeroport/casablanca/": [
-"d0d34133720f9097",
+"b83e96670474c4c4",
 "2026-11-05"
 ],
 "/hotel-aeroport/conakry/": [
-"93576b63a0891e71",
+"40e83ae51db6afac",
 "2026-11-05"
 ],
 "/hotel-aeroport/dakar/": [
-"000e6cc15cc9063c",
+"df0e3be085df0a29",
 "2026-11-05"
 ],
 "/hotel-aeroport/douala/": [
-"e63d1bd22175ff81",
+"698efbcfbb96e7b5",
 "2026-11-05"
 ],
 "/hotel-aeroport/kinshasa/": [
-"9143011274a43ea2",
+"8a0b3557c9f97682",
 "2026-11-05"
 ],
 "/hotel-aeroport/lagos/": [
-"bc4952e453e81198",
+"5a4d3dabb4af3906",
 "2026-11-05"
 ],
 "/hotel-aeroport/lome/": [
-"4285ee75c186b98c",
+"980e33117e4d8609",
 "2026-11-05"
 ],
 "/hotel-aeroport/tunis/": [
-"2dbf8fb080f649fe",
+"8e3eb76dd9c4795e",
 "2026-11-05"
 ],
 "/hotel-pas-cher-abidjan/": [
@@ -8784,95 +9008,243 @@
 "2026-11-05"
 ],
 "/indemnisation-retard-vol/": [
-"76b336c1d7172bdc",
+"2741ab06a3acf8a9",
 "2026-11-05"
 ],
 "/it/": [
 "ebaaf32996b73032",
 "2026-11-05"
 ],
+"/it/budget-viaggio-famiglia/": [
+"83ab109255ed2205",
+"2026-11-05"
+],
+"/it/calendario-prezzi-diaspora/": [
+"20c0bc6b227381fe",
+"2026-11-05"
+],
+"/it/comprare-o-aspettare/": [
+"a1d8eebef61022c9",
+"2026-11-05"
+],
+"/it/controllo-prima-del-volo/": [
+"5e9d0943cfa68bf3",
+"2026-11-05"
+],
+"/it/esim/": [
+"9cd1f1c83ad701e8",
+"2026-11-05"
+],
+"/it/esim/algeria/": [
+"383a0da97eabb95b",
+"2026-11-05"
+],
+"/it/esim/benin/": [
+"9abc7b9674ad0d22",
+"2026-11-05"
+],
+"/it/esim/burkina-faso/": [
+"4ef5da59b8061e4e",
+"2026-11-05"
+],
+"/it/esim/camerun/": [
+"af77cd81737144d0",
+"2026-11-05"
+],
+"/it/esim/costa-d-avorio/": [
+"01a2bd82a18e3177",
+"2026-11-05"
+],
+"/it/esim/egitto/": [
+"0f792d4caaeabe3c",
+"2026-11-05"
+],
+"/it/esim/gabon/": [
+"beb3d44810fa8bf1",
+"2026-11-05"
+],
+"/it/esim/ghana/": [
+"f0f0bdd21ee0a61f",
+"2026-11-05"
+],
+"/it/esim/guinea/": [
+"da723404ba6fdee1",
+"2026-11-05"
+],
+"/it/esim/kenya/": [
+"0f199aab24fec40e",
+"2026-11-05"
+],
+"/it/esim/mali/": [
+"9ee91dd48a2a8cd3",
+"2026-11-05"
+],
+"/it/esim/marocco/": [
+"0061d76da1fc4f49",
+"2026-11-05"
+],
+"/it/esim/nigeria/": [
+"8b8c61215f451e9e",
+"2026-11-05"
+],
+"/it/esim/rd-congo/": [
+"0c925aae762ccb30",
+"2026-11-05"
+],
+"/it/esim/senegal/": [
+"4f25fd0c5f63d5b9",
+"2026-11-05"
+],
+"/it/esim/togo/": [
+"20bdf8c5892d8325",
+"2026-11-05"
+],
+"/it/esim/tunisia/": [
+"da924e2f8bef4ca5",
+"2026-11-05"
+],
 "/it/far-venire-un-familiare/": [
 "cbca02563001b4b5",
 "2026-11-05"
 ],
+"/it/hai-pagato-troppo/": [
+"685e2f5872c4ed52",
+"2026-11-05"
+],
+"/it/hotel-aeroporto/": [
+"747cdbc43aac6c38",
+"2026-11-05"
+],
+"/it/hotel-aeroporto/abidjan/": [
+"95f294b818edbe70",
+"2026-11-05"
+],
+"/it/hotel-aeroporto/accra/": [
+"3beb2d341a1f07cf",
+"2026-11-05"
+],
+"/it/hotel-aeroporto/algiers/": [
+"98b7406e600a1380",
+"2026-11-05"
+],
+"/it/hotel-aeroporto/bamako/": [
+"d803be089cfdc344",
+"2026-11-05"
+],
+"/it/hotel-aeroporto/casablanca/": [
+"0e78b76e91243216",
+"2026-11-05"
+],
+"/it/hotel-aeroporto/conakry/": [
+"4a79bf4f063c8247",
+"2026-11-05"
+],
+"/it/hotel-aeroporto/dakar/": [
+"bb050e7a215d1a57",
+"2026-11-05"
+],
+"/it/hotel-aeroporto/douala/": [
+"3d0d7b7014bcbfca",
+"2026-11-05"
+],
+"/it/hotel-aeroporto/kinshasa/": [
+"f0331983eeb0a994",
+"2026-11-05"
+],
+"/it/hotel-aeroporto/lagos/": [
+"5a99b03c070aa68e",
+"2026-11-05"
+],
+"/it/hotel-aeroporto/lome/": [
+"8d48dd9413f33372",
+"2026-11-05"
+],
+"/it/hotel-aeroporto/tunis/": [
+"db6a0dad07cafcfb",
+"2026-11-05"
+],
 "/it/hotel-economici-abidjan/": [
-"5e7a872cfb94035f",
+"eb2c73c1ea3f4a6f",
 "2026-11-05"
 ],
 "/it/hotel-economici-accra/": [
-"2cd878d0373f560c",
+"140cd7d02b28915d",
 "2026-11-05"
 ],
 "/it/hotel-economici-addis-abeba/": [
-"d8b1193e09c4c3ae",
+"3ae2b593833fc305",
 "2026-11-05"
 ],
 "/it/hotel-economici-algeri/": [
-"6d9be3c521b67ff0",
+"03137d1f0560093a",
 "2026-11-05"
 ],
 "/it/hotel-economici-bamako/": [
-"050bfe9cc58f2856",
+"72cfd819deea9e0d",
 "2026-11-05"
 ],
 "/it/hotel-economici-casablanca/": [
-"dc9e1821655fffea",
+"89d31e68254a334a",
 "2026-11-05"
 ],
 "/it/hotel-economici-conakry/": [
-"6a6d4d787907d813",
+"8b1f69480626f2b1",
 "2026-11-05"
 ],
 "/it/hotel-economici-cotonou/": [
-"360fce19d55d798d",
+"b434cc3f3797ebf9",
 "2026-11-05"
 ],
 "/it/hotel-economici-dakar/": [
-"258f78fb569b6bbb",
+"3d31d397a69b00fa",
 "2026-11-05"
 ],
 "/it/hotel-economici-douala/": [
-"03c6f86bb4432799",
+"788f1fc93f704246",
 "2026-11-05"
 ],
 "/it/hotel-economici-dubai/": [
-"360daa8afefe6446",
+"27d8adcd5f78e99c",
 "2026-11-05"
 ],
 "/it/hotel-economici-istanbul/": [
-"4667dbf371c2471d",
+"03a8526790422f8e",
 "2026-11-05"
 ],
 "/it/hotel-economici-kinshasa/": [
-"cbc9275d64e53ce6",
+"9929ca72e1e34075",
 "2026-11-05"
 ],
 "/it/hotel-economici-lagos/": [
-"108fd6a41ddd66c3",
+"2b99fd948da23d79",
 "2026-11-05"
 ],
 "/it/hotel-economici-lome/": [
-"f7b0a09df164fc18",
+"940dc291eda73b29",
 "2026-11-05"
 ],
 "/it/hotel-economici-marrakech/": [
-"aca206e64d482472",
+"4f039994d96f42d4",
 "2026-11-05"
 ],
 "/it/hotel-economici-montreal/": [
-"0049d033907e8654",
+"13af6acc359e354e",
 "2026-11-05"
 ],
 "/it/hotel-economici-nairobi/": [
-"abf03704ed32f60e",
+"a8e1bc8faef012b0",
 "2026-11-05"
 ],
 "/it/hotel-economici-parigi/": [
-"c04213ebf31ab977",
+"85b34d612e42f197",
 "2026-11-05"
 ],
 "/it/hotel-economici-tunisi/": [
-"3e66264cbd5bad63",
+"6cd60b4290ffdc0a",
+"2026-11-05"
+],
+"/it/kit-viaggio-offline/": [
+"a76b5a7cb4b0fac1",
 "2026-11-05"
 ],
 "/it/mese-migliore-per-partire/": [
@@ -8999,8 +9371,84 @@
 "a94949f12363e4e1",
 "2026-11-05"
 ],
+"/it/noleggio-auto/": [
+"bfbd9290d5da31a9",
+"2026-11-05"
+],
+"/it/noleggio-auto/abidjan/": [
+"11d866192f298c8b",
+"2026-11-05"
+],
+"/it/noleggio-auto/accra/": [
+"52cae054dde2fb7f",
+"2026-11-05"
+],
+"/it/noleggio-auto/agadir/": [
+"0e4892c7bf1ea522",
+"2026-11-05"
+],
+"/it/noleggio-auto/algiers/": [
+"2de3617eae1225f0",
+"2026-11-05"
+],
+"/it/noleggio-auto/casablanca/": [
+"3c46d6efe9b4c3db",
+"2026-11-05"
+],
+"/it/noleggio-auto/dakar/": [
+"4871b0a7bf9e9bd3",
+"2026-11-05"
+],
+"/it/noleggio-auto/djerba/": [
+"dbfb5a9f912942c7",
+"2026-11-05"
+],
+"/it/noleggio-auto/douala/": [
+"dce5a101be510894",
+"2026-11-05"
+],
+"/it/noleggio-auto/lome/": [
+"890892089e87ea11",
+"2026-11-05"
+],
+"/it/noleggio-auto/marrakech/": [
+"fdf1da696d4420ff",
+"2026-11-05"
+],
+"/it/noleggio-auto/tunis/": [
+"fb6a10b820275645",
+"2026-11-05"
+],
+"/it/pratica-visto/": [
+"f479a6480b57884a",
+"2026-11-05"
+],
+"/it/primo-viaggio-bali/": [
+"f5ced26651791d26",
+"2026-11-05"
+],
+"/it/primo-viaggio-giappone/": [
+"816b78d732d55aad",
+"2026-11-05"
+],
+"/it/primo-viaggio-zanzibar/": [
+"e7a1b73f477237b1",
+"2026-11-05"
+],
+"/it/rimborso-volo-in-ritardo/": [
+"274ff9aa646589fc",
+"2026-11-05"
+],
+"/it/senza-visto/": [
+"06f567a0582fd092",
+"2026-11-05"
+],
 "/it/tendenze-2027/": [
 "ba509ba997124ab7",
+"2026-11-05"
+],
+"/it/verifica-biglietto-aereo/": [
+"d3ee2ea1c6952cf5",
 "2026-11-05"
 ],
 "/it/voli-bergamo-casablanca/": [
@@ -9492,55 +9940,55 @@
 "2026-11-05"
 ],
 "/kit-voyage-hors-ligne/": [
-"68d64e619e30c95c",
+"9b41feca07457958",
 "2026-11-05"
 ],
 "/location-voiture/": [
-"879182e8d48a3ac4",
+"a2f36e40dd2c4159",
 "2026-11-05"
 ],
 "/location-voiture/abidjan/": [
-"1d590190569b12ff",
+"94f49b9a09cbe39b",
 "2026-11-05"
 ],
 "/location-voiture/accra/": [
-"8143caac420db1e4",
+"49cb2f544552729e",
 "2026-11-05"
 ],
 "/location-voiture/agadir/": [
-"29779c172c5fbbb6",
+"978bfea70760fc2e",
 "2026-11-05"
 ],
 "/location-voiture/alger/": [
-"d8ba4fdb0173e91e",
+"89fd7c8db754961a",
 "2026-11-05"
 ],
 "/location-voiture/casablanca/": [
-"3ff23ba079a2b77c",
+"bbf6acfacf449b00",
 "2026-11-05"
 ],
 "/location-voiture/dakar/": [
-"a9e99c982548db19",
+"cc98b05f6f29e09d",
 "2026-11-05"
 ],
 "/location-voiture/djerba/": [
-"173ab9403d552a58",
+"67d839381b671154",
 "2026-11-05"
 ],
 "/location-voiture/douala/": [
-"6cdf6aadce69f7f1",
+"a146e504403ea950",
 "2026-11-05"
 ],
 "/location-voiture/lome/": [
-"74088f81bb9a8277",
+"787c76a62a5b61f4",
 "2026-11-05"
 ],
 "/location-voiture/marrakech/": [
-"e98c8a31b0df8009",
+"8b58cf32de9219df",
 "2026-11-05"
 ],
 "/location-voiture/tunis/": [
-"e17d694693b3e8cf",
+"8f37f331a6d68321",
 "2026-11-05"
 ],
 "/ma/": [
@@ -9812,15 +10260,15 @@
 "2026-11-05"
 ],
 "/premier-voyage-bali/": [
-"4ae70241047e27a8",
+"9d2690cba02995b2",
 "2026-11-05"
 ],
 "/premier-voyage-japon/": [
-"d929f39a3bfebdb3",
+"348b10a09cf04100",
 "2026-11-05"
 ],
 "/premier-voyage-zanzibar/": [
-"8913823da2e9ce4c",
+"2db3fa7f73bfd3d3",
 "2026-11-05"
 ],
 "/pt/": [
@@ -12212,7 +12660,7 @@
 "2026-11-05"
 ],
 "/sans-visa/": [
-"bd5d7ac06cc8876c",
+"b5b14713d7335c7a",
 "2026-11-05"
 ],
 "/sn/": [
@@ -12232,7 +12680,7 @@
 "2026-11-05"
 ],
 "/verifier-billet-avion/": [
-"6893bfe3b9140c06",
+"d124ba327bfa4985",
 "2026-11-05"
 ],
 "/visa/": [
