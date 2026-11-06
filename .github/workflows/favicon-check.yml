@@ -20,12 +20,14 @@ jobs:
               curl -s -o /tmp/f -w '%{http_code} %{content_type} %{size_download}o redirect=%{redirect_url}\n' -A "$ua" "https://escale.live$u"
             done
           done
+          echo "=== robots.txt tel que servi (Cloudflare peut y ajouter des règles)"
+          curl -s -A "$GB" https://escale.live/robots.txt | grep -v '^#' | grep -v '^\s*$' | head -60
           echo "=== Liens « icon » de l'accueil vus par Googlebot"
           curl -s -A "$GB" https://escale.live/ | grep -o '<link rel="[a-z -]*icon[^>]*>' || echo "aucun"
           echo "=== Icône que Google a en mémoire pour escale.live (service public de Google)"
           for sz in 16 64; do
-            curl -s -o /tmp/g$sz.png -w "taille $sz : %{http_code} %{content_type} %{size_download}o\n" "https://www.google.com/s2/favicons?domain=escale.live&sz=$sz"
-            sha1sum /tmp/g$sz.png
+            curl -sL -o /tmp/g$sz.png -w "taille $sz : %{http_code} %{content_type} %{size_download}o\n" "https://www.google.com/s2/favicons?domain=escale.live&sz=$sz"
+            sha1sum /tmp/g$sz.png; file /tmp/g$sz.png
           done
           echo "=== Pour comparaison : icône par défaut de Google (domaine sans favicon)"
-          curl -s -o /tmp/d.png -w "%{size_download}o\n" "https://www.google.com/s2/favicons?domain=domaine-sans-favicon-xyz123.com&sz=64"; sha1sum /tmp/d.png
+          curl -sL -o /tmp/d.png -w "%{size_download}o\n" "https://www.google.com/s2/favicons?domain=domaine-sans-favicon-xyz123.com&sz=64"; sha1sum /tmp/d.png
