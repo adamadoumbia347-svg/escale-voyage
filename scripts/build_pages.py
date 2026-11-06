@@ -857,6 +857,16 @@ def main():
     idx.write_text(s, encoding="utf-8")
 
     urls.append(f"{DOMAIN}/widget/")  # page statique (site/widget/index.html)
+    # Pages utiles aux visiteurs mais sans intérêt dans Google (résultats de recherche, remerciements, favoris personnels) :
+    # « noindex, follow » et retirées du sitemap, pour que Google concentre son passage sur les vraies pages de contenu.
+    NOINDEX = ("recherche", "contact/merci", "avis-voyageurs/merci", "favoris", "en/favorites", "es/favoritos", "pt/favoritos", "ar/favorites")
+    for rel in NOINDEX:
+        f = SITE / rel / "index.html"
+        if f.exists():
+            t = f.read_text(encoding="utf-8")
+            if 'name="robots"' not in t:
+                f.write_text(t.replace("<head>", '<head>\n<meta name="robots" content="noindex, follow">', 1), encoding="utf-8")
+    urls = [u for u in urls if u[len(DOMAIN):].strip("/") not in NOINDEX]
     # Date de dernière modification réelle de chaque page (empreinte du contenu gardée dans scripts/lastmod.json),
     # pour que Google fasse confiance au sitemap au lieu de voir toutes les pages « modifiées » à chaque mise en ligne.
     lm_file = ROOT / "scripts" / "lastmod.json"

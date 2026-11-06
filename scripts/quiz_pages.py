@@ -89,6 +89,30 @@ T = {
 }
 
 
+EXTRA = {'fr': ('Comment marche le quiz ?', "Chaque destination du quiz est classée selon ce qu'on y trouve (plage, ville, culture, nature), sa distance depuis l'Europe, l'ambiance et si elle est facile en famille. Tes réponses donnent des points à chaque destination ; les mieux notées sont ensuite chiffrées avec le vrai prix aller-retour du mois prochain depuis ton aéroport, et on garde les 3 qui rentrent dans ton budget.", 'Les 25 destinations du quiz'), 'en': ('How does the quiz work?', 'Each destination in the quiz is tagged by what you find there (beach, city, culture, nature), its distance from Europe, its atmosphere and whether it is easy with children. Your answers give points to each destination; the best ones are then priced with the real round-trip fare for next month from your airport, and we keep the 3 that fit your budget.', 'The 25 destinations in the quiz'), 'it': ('Come funziona il quiz?', "Ogni meta del quiz è classificata in base a cosa offre (mare, città, cultura, natura), alla distanza dall'Europa, all'atmosfera e a quanto è adatta alle famiglie. Le tue risposte danno punti a ogni meta; le migliori vengono poi abbinate al prezzo reale andata e ritorno del mese prossimo dal tuo aeroporto e teniamo le 3 che rientrano nel tuo budget.", 'Le 25 mete del quiz'), 'de': ('Wie funktioniert das Quiz?', 'Jedes Ziel im Quiz ist danach eingeordnet, was es bietet (Strand, Stadt, Kultur, Natur), wie weit es von Europa entfernt ist, welche Stimmung es hat und ob es familienfreundlich ist. Deine Antworten geben jedem Ziel Punkte; die besten werden dann mit dem echten Hin- und Rückflugpreis für den nächsten Monat ab deinem Flughafen bewertet, und wir behalten die 3, die in dein Budget passen.', 'Die 25 Ziele des Quiz')}
+
+
+def _names(site, lang):
+    """Noms des villes : airports.json (français), sinon data/noms/<langue>.json."""
+    ap = {a[0]: a[1] for a in json.loads((site / "data" / "airports.json").read_text(encoding="utf-8"))}
+    if lang != "fr":
+        try:
+            ap.update(json.loads((site / "data" / "noms" / f"{lang}.json").read_text(encoding="utf-8")))
+        except (OSError, ValueError):
+            pass
+    return ap
+
+
+
+def _about(site, lang, t):
+    nm, ex = _names(site, lang), EXTRA[lang]
+    groups = []
+    for g in "bchn":
+        items = [nm.get(d[0], d[0]) for d in DEST if g in d[1]]
+        groups.append(f'<li><strong>{E(t["tags"][g])}</strong> : {E(", ".join(items))}</li>')
+    return (f'<section><h2>{E(ex[0])}</h2><p>{E(ex[1])}</p><h3>{E(ex[2])}</h3><ul>' + "".join(groups) + "</ul></section>")
+
+
 def build(site, ctx):
     urls = []
     for lang, t in T.items():
@@ -97,6 +121,7 @@ def build(site, ctx):
         body = (f'<div class="qz" id="qz" data-cfg="{E(json.dumps(cfg, ensure_ascii=False))}">'
                 f'<button class="btn qz-start" id="qz-start" type="button">{E(t["start"])}</button></div>'
                 f'<p class="small">{E(t["note"])}</p>'
+                + _about(site, lang, t) +
                 '<script src="/fetes.js" defer></script><script src="/quiz.js" defer></script>')
         hero = f'<h1>{t["h1"]}</h1><p class="hero-lead">{E(t["lead"])}</p>'
         urls.append(B.write(site, PATHS[lang], lang, t["title"], t["desc"], hero, body, "", PATHS, ctx))
