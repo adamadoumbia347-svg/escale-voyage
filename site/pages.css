@@ -744,3 +744,51 @@ main > section:nth-of-type(n+3), main .wrap > section:nth-of-type(n+3), body > f
 .bu-chips a { font-weight: 700; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); text-decoration: none; }
 .bu-chips a[aria-current="page"] { background: #12b3a0; border-color: #12b3a0; color: #fff; }
 .bu-count:empty { display: none; }
+/* Page « On se retrouve où ? » */
+.mt-form { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 16px; margin: 8px 0 12px; }
+.mt-form .any-field { display: flex; flex-direction: column; gap: 6px; font-weight: 700; font-size: .9rem; }
+.mt-form select { font: inherit; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); min-width: 200px; }
+.mt-form .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.mt-form .chips button { font: inherit; font-weight: 600; font-size: .85rem; padding: 7px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.mt-form .chips button[aria-pressed="true"] { background: #12b3a0; border-color: #12b3a0; color: #fff; }
+.mt-visit { margin: 0 0 14px; padding: 12px 14px; border-radius: 14px; border: 1px dashed var(--line); display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+.mt-visit a { font-weight: 600; }
+.mt-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 14px; }
+.mt-card { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--surface); display: flex; flex-direction: column; }
+.mt-card img, .mt-card .we-noimg { width: 100%; height: 150px; object-fit: cover; display: grid; place-items: center; }
+.mt-body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 8px; }
+.mt-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.mt-top strong { display: block; font-size: 1.1rem; }
+.mt-top small { color: var(--muted, #6b7280); }
+.mt-total { text-align: right; }
+.mt-total b { display: block; font-size: 1.35rem; color: #0e8f80; }
+.mt-badge { align-self: flex-start; font-size: .78rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: color-mix(in srgb, #f59e0b 18%, transparent); }
+.mt-badge.on { background: color-mix(in srgb, #12b3a0 20%, transparent); }
+.mt-leg { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 10px; background: color-mix(in srgb, var(--ink) 5%, transparent); color: var(--ink); text-decoration: none; font-size: .9rem; }
+.mt-leg small { display: block; font-size: .78rem; color: var(--muted, #6b7280); }
+.mt-leg:hover { outline: 1px solid #12b3a0; }
+.mt-share { grid-column: 1 / -1; text-align: center; padding: 6px 0; }
+.mt-status:empty { display: none; }
+/* Page « Surprends-moi » */
+.sp-box { margin: 8px 0 16px; }
+.sp-controls { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: flex-end; }
+.sp-controls .any-field { display: flex; flex-direction: column; gap: 6px; font-weight: 700; font-size: .9rem; }
+.sp-controls select { font: inherit; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); min-width: 200px; }
+.sp-controls .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.sp-controls .chips button { font: inherit; font-weight: 700; font-size: .88rem; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.sp-controls .chips button[aria-pressed="true"] { background: #12b3a0; border-color: #12b3a0; color: #fff; }
+.sp-go { margin: 16px 0; font-size: 1.15rem; padding: 14px 28px; width: min(100%, 360px); }
+.sp-go:disabled { opacity: .6; }
+.sp-stage:empty { display: none; }
+.sp-wait { padding: 20px 0; }
+.sp-roll { margin: 0; padding: 40px 12px; text-align: center; font-size: clamp(1.6rem, 7vw, 2.4rem); font-weight: 800; border-radius: 20px; border: 2px dashed #12b3a0; }
+.sp-card { border: 1px solid var(--line); border-radius: 20px; overflow: hidden; background: var(--surface); animation: sp-in .45s ease-out; }
+.sp-card img, .sp-noimg { width: 100%; height: 240px; object-fit: cover; display: grid; place-items: center; font-size: 3rem; }
+.sp-txt { padding: 16px 18px 18px; }
+.sp-name { margin: 0; font-size: 1.6rem; }
+.sp-meta { margin: 4px 0 0; color: var(--muted, #6b7280); }
+.sp-price { margin: 8px 0 14px; font-size: 2rem; font-weight: 800; color: #0e8f80; }
+.sp-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.sp-again { background: var(--surface); color: var(--ink); border: 1px solid var(--line); }
+@keyframes sp-in { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .sp-card { animation: none; } }
