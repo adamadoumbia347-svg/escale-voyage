@@ -390,7 +390,7 @@ def indice_page():
         "license": "https://creativecommons.org/licenses/by/4.0/"}, ensure_ascii=False) + "</script>"
     return page("indice-prix", "Indice Escale des prix des vols Europe – Afrique, chaque jour | Escale",
                 "Les billets d'avion vers l'Afrique montent-ils ? La variation médiane des prix sur 30 jours, par région et pays de départ, calculée chaque jour. Données libres (CC BY).",
-                hero, body, ld)
+                hero, body, ld, {"fr": "indice-prix", "en": "en/price-index"})
 
 
 def indice_page_en(ctx):
