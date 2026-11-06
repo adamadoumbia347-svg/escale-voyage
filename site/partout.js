@@ -40,6 +40,7 @@
   var sel = $("any-from"), months = $("any-months"), range = $("any-max"), out = $("any-max-out");
   var svg = $("any-dots"), tip = $("any-tip"), list = $("any-list"), status = $("any-status"), scroller = $("any-scroll");
   var ap = {}, items = [], currency = cur, month = null, max = Infinity, req = 0;
+  var want = null; try { want = Math.round(Number(new URLSearchParams(location.search).get("max"))) || null; } catch (e) {}
 
   // Mois : celui en cours et les cinq suivants (le mois prochain par défaut)
   var ms = [];
@@ -76,6 +77,7 @@
   range.addEventListener("input", function () {
     var vmax = +range.max;
     max = +range.value >= vmax ? Infinity : +range.value;
+    want = max === Infinity ? null : max;
     out.textContent = max === Infinity ? L.any : "≤ " + money(max, currency);
     paint();
   });
@@ -94,6 +96,8 @@
         var lo = Math.floor(Math.min.apply(null, prices)), hi = Math.ceil(Math.max.apply(null, prices));
         range.min = String(lo); range.max = String(hi); range.step = String(Math.max(1, Math.round((hi - lo) / 40)));
         range.value = String(hi); max = Infinity; out.textContent = L.any;
+        // Budget demandé dans l'adresse (/partout/?max=150, bannière de l'accueil) ou choisi avant de changer de mois
+        if (want && want < hi) { range.value = String(Math.max(lo, want)); max = want; out.textContent = "≤ " + money(max, currency); }
       }
       range.disabled = !prices.length;
       paint();
