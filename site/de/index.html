@@ -825,6 +825,16 @@ footer { margin-top: 72px; }
 .kb-on .inspi-card:nth-child(3n) img, .kb-on .city-card:nth-child(3n) img { animation-delay: -4s; }
 .kb-on .kb-run img { animation-play-state: running; }
 @media (prefers-reduced-motion: reduce) { .kb-on .inspi-card img, .kb-on .city-card img { animation: none; } }
+/* Accroche « Où partir avec X € ? » */
+.budget-hook { margin: 0 0 22px; padding: 16px 18px; border-radius: 18px; border: 1px solid var(--line); background: linear-gradient(120deg, color-mix(in srgb, #12b3a0 14%, var(--surface)), var(--surface)); }
+.bh-form { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; margin: 0; }
+.bh-h { margin: 0; font-size: 1.15rem; }
+.bh-field { display: inline-flex; align-items: center; gap: 6px; font: 700 1.15rem/1 var(--f-mono, monospace); }
+.bh-field input { width: 4.6em; font: inherit; padding: 8px 10px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); text-align: right; }
+.bh-ideas { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 12px 0 0; font-size: .9rem; }
+.bh-ideas a { font-weight: 700; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); text-decoration: none; }
+.bh-ideas a:hover { border-color: #12b3a0; }
+@media (max-width: 520px) { .bh-form .btn { flex: 1 1 100%; } }
 .how-mini { list-style: none; display: flex; gap: 8px; margin: 4px 0 18px; padding: 0; overflow-x: auto; }
 .how-mini li { flex: 1 0 auto; display: flex; align-items: center; gap: 8px; font-size: .86rem; font-weight: 600; padding: 8px 12px; border-radius: 999px; background: var(--mint, #e9faf5); white-space: nowrap; }
 .how-mini b { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: #12b3a0; color: #fff; font-size: .8rem; }
@@ -1281,6 +1291,16 @@ if(!t)return;var e=document.getElementById("hero-season");e.innerHTML='<a href="
 <div class="wrap">
     <ol class="how-mini" aria-label="So funktioniert’s" data-fr-aria="Comment ça marche" data-en-aria="How it works"><li><b>1</b><span data-en="Compare every price" data-fr="Compare tous les prix">Alle Preise vergleichen</span></li><li><b>2</b><span data-en="Pick the cheapest day" data-fr="Choisis le jour le moins cher">Wähle den günstigsten Tag</span></li><li><b>3</b><span data-en="Book direct, no fees added" data-fr="Réserve en direct, sans frais ajoutés">Direkt buchen, ohne Aufpreis</span></li></ol>
 
+  <section class="budget-hook" id="budget-hook" aria-labelledby="bh-h">
+    <form class="bh-form" id="bh-form" action="/partout/" data-maps="{&quot;fr&quot;: &quot;/partout/&quot;, &quot;en&quot;: &quot;/en/anywhere/&quot;, &quot;es&quot;: &quot;/es/explorar/&quot;, &quot;pt&quot;: &quot;/pt/explorar/&quot;, &quot;ar&quot;: &quot;/ar/anywhere/&quot;, &quot;it&quot;: &quot;/en/anywhere/&quot;, &quot;de&quot;: &quot;/en/anywhere/&quot;, &quot;nl&quot;: &quot;/en/anywhere/&quot;}" novalidate>
+      <h2 id="bh-h" class="bh-h"><span aria-hidden="true">💸</span> <span data-en="Where can I go with" data-fr="Où partir avec">Wohin reisen mit</span></h2>
+      <label class="bh-field"><span class="sr-only" data-en="Your round-trip budget in euros" data-fr="Ton budget aller-retour en euros">Dein Budget für Hin- und Rückflug in Euro</span><input type="number" id="bh-max" name="max" inputmode="numeric" min="20" max="5000" step="10" value="150" required><span aria-hidden="true">€ ?</span></label>
+      <button class="btn" type="submit" data-en="Show me where →" data-fr="Montre-moi où →">Zeig mir, wohin →</button>
+    </form>
+    <p class="bh-ideas"><span data-en="Ideas:" data-fr="Idées :">Ideen:</span> <a href="/de/wohin-reisen-mit-100-euro/" data-hrefs="{&quot;fr&quot;: &quot;/ou-partir-avec-100-euros/&quot;, &quot;en&quot;: &quot;/en/where-to-go-for-100-euros/&quot;, &quot;it&quot;: &quot;/it/dove-andare-con-100-euro/&quot;, &quot;de&quot;: &quot;/de/wohin-reisen-mit-100-euro/&quot;, &quot;es&quot;: &quot;/en/where-to-go-for-100-euros/&quot;, &quot;pt&quot;: &quot;/en/where-to-go-for-100-euros/&quot;, &quot;ar&quot;: &quot;/en/where-to-go-for-100-euros/&quot;, &quot;nl&quot;: &quot;/en/where-to-go-for-100-euros/&quot;}">≤ 100 €</a><a href="/de/wohin-reisen-mit-200-euro/" data-hrefs="{&quot;fr&quot;: &quot;/ou-partir-avec-200-euros/&quot;, &quot;en&quot;: &quot;/en/where-to-go-for-200-euros/&quot;, &quot;it&quot;: &quot;/it/dove-andare-con-200-euro/&quot;, &quot;de&quot;: &quot;/de/wohin-reisen-mit-200-euro/&quot;, &quot;es&quot;: &quot;/en/where-to-go-for-200-euros/&quot;, &quot;pt&quot;: &quot;/en/where-to-go-for-200-euros/&quot;, &quot;ar&quot;: &quot;/en/where-to-go-for-200-euros/&quot;, &quot;nl&quot;: &quot;/en/where-to-go-for-200-euros/&quot;}">≤ 200 €</a><a href="/de/wohin-reisen-mit-300-euro/" data-hrefs="{&quot;fr&quot;: &quot;/ou-partir-avec-300-euros/&quot;, &quot;en&quot;: &quot;/en/where-to-go-for-300-euros/&quot;, &quot;it&quot;: &quot;/it/dove-andare-con-300-euro/&quot;, &quot;de&quot;: &quot;/de/wohin-reisen-mit-300-euro/&quot;, &quot;es&quot;: &quot;/en/where-to-go-for-300-euros/&quot;, &quot;pt&quot;: &quot;/en/where-to-go-for-300-euros/&quot;, &quot;ar&quot;: &quot;/en/where-to-go-for-300-euros/&quot;, &quot;nl&quot;: &quot;/en/where-to-go-for-300-euros/&quot;}">≤ 300 €</a><a href="/de/wohin-reisen-mit-500-euro/" data-hrefs="{&quot;fr&quot;: &quot;/ou-partir-avec-500-euros/&quot;, &quot;en&quot;: &quot;/en/where-to-go-for-500-euros/&quot;, &quot;it&quot;: &quot;/it/dove-andare-con-500-euro/&quot;, &quot;de&quot;: &quot;/de/wohin-reisen-mit-500-euro/&quot;, &quot;es&quot;: &quot;/en/where-to-go-for-500-euros/&quot;, &quot;pt&quot;: &quot;/en/where-to-go-for-500-euros/&quot;, &quot;ar&quot;: &quot;/en/where-to-go-for-500-euros/&quot;, &quot;nl&quot;: &quot;/en/where-to-go-for-500-euros/&quot;}">≤ 500 €</a></p>
+  </section>
+  <script>(function(){var f=document.getElementById("bh-form");if(!f)return;f.addEventListener("submit",function(e){e.preventDefault();var v=Math.round(+document.getElementById("bh-max").value);if(!(v>0))v=150;var m={};try{m=JSON.parse(f.getAttribute("data-maps"))}catch(x){}var l=(document.documentElement.lang||"fr").slice(0,2);location.href=(m[l]||"/partout/")+"?max="+v;});})();</script>
+
   <section class="block" id="recent-block" hidden>
     <h2 data-en="Your recent searches" data-fr="Tes recherches récentes">Deine letzten Suchen</h2>
     <div class="recent" id="recent"></div>
@@ -1422,7 +1442,7 @@ if(!t)return;var e=document.getElementById("hero-season");e.innerHTML='<a href="
   <span class="fab-go"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span data-en="New search" data-fr="Nouvelle recherche">Neue Suche</span></span>
 </button>
 
-<script src="/i18n.js?v=5b104024" defer></script>
+<script src="/i18n.js?v=470115f5" defer></script>
 <script src="/app.js?v=137eab0c" defer></script>
 <script src="/hero-anim.js?v=1554bc1d" defer></script>
 <script src="/newsletter.js?v=dc3eb2c8" defer></script>

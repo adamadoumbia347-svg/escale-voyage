@@ -739,3 +739,8 @@ main > section:nth-of-type(n+3), main .wrap > section:nth-of-type(n+3), body > f
 .ix-quote { margin: 0 0 8px; padding: 14px 18px; border-left: 4px solid var(--teal-d, #0b8577); background: var(--mint, #e9faf5); border-radius: 0 14px 14px 0; }
 .ix-quote p { margin: 0 0 6px; font-weight: 600; } .ix-quote footer { font-size: 13px; color: var(--muted); }
 .ix-list { padding-left: 1.1em; } .ix-list li { margin: 4px 0; }
+/* Pages « Où partir avec X € ? » */
+.bu-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.bu-chips a { font-weight: 700; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); text-decoration: none; }
+.bu-chips a[aria-current="page"] { background: #12b3a0; border-color: #12b3a0; color: #fff; }
+.bu-count:empty { display: none; }
