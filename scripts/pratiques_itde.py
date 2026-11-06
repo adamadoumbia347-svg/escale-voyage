@@ -37,7 +37,7 @@ T = {
                 "WhatsApp, chiamate e messaggi passano da internet: un'eSIM «solo dati» spesso basta per restare in contatto con la famiglia.",
                 "Fuori dalle grandi città la copertura può essere più debole: scarica le mappe offline prima di partire."])],
         esim_cta="Vedi le eSIM per {n}", esim_note="Link partner: Escale può ricevere una commissione, senza costi per te. Piani e prezzi da verificare su Airalo.",
-        esim_title="eSIM {n}: internet appena arrivi, eSIM o SIM locale? | Escale",
+        esim_title="eSIM {n}: internet appena arrivi | Escale",
         esim_desc="Essere connessi appena atterri {a}: eSIM o SIM locale, telefono compatibile, installazione e consigli.", esim_h1="Internet appena arrivi {a}",
         car_secs=[("Prima di prenotare", [
             "<strong>Patente:</strong> la patente internazionale è spesso richiesta, oltre a quella nazionale. Informati presso il noleggiatore e l'ambasciata, e porta entrambe.",
@@ -52,7 +52,7 @@ T = {
             ("Aeroporto o centro città?", [
                 "Ritirare l'auto in aeroporto è più comodo all'arrivo, ma a volte un po' più caro che in città. Confronta le due opzioni nelle offerte."])],
         car_cta="Vedi le auto {a}", car_note="Link partner: Escale può ricevere una commissione, senza costi per te. Condizioni (patente, età, cauzione) da verificare con il noleggiatore.",
-        car_title="Noleggio auto {a}: patente, assicurazione, consigli e offerte | Escale",
+        car_title="Noleggio auto {a}: patente, assicurazione e offerte | Escale",
         car_desc="Noleggiare un'auto {a}: patente internazionale, franchigia, carburante, aeroporto o centro città, e le offerte in diretta.",
         car_eyebrow="Noleggio auto", car_h1="Noleggia un'auto <span>{a}</span>",
         night_h="Arrivare di notte: le buone abitudini",
@@ -87,7 +87,7 @@ T = {
                 "WhatsApp, Anrufe und Nachrichten laufen übers Internet: Eine reine Daten-eSIM reicht oft, um mit der Familie in Kontakt zu bleiben.",
                 "Außerhalb großer Städte kann der Empfang schwächer sein: Lade vor der Reise Offline-Karten herunter."])],
         esim_cta="eSIMs für {n} ansehen", esim_note="Partnerlink: Escale erhält eventuell eine Provision, ohne Mehrkosten für dich. Tarife und Preise bei Airalo prüfen.",
-        esim_title="eSIM {n}: Internet direkt nach der Ankunft, eSIM oder lokale SIM? | Escale",
+        esim_title="eSIM {n}: Internet direkt nach der Ankunft | Escale",
         esim_desc="Direkt nach der Landung {a} online sein: eSIM oder lokale SIM, kompatibles Handy, Einrichtung und Tipps.", esim_h1="Internet direkt nach der Ankunft {a}",
         car_secs=[("Vor der Buchung", [
             "<strong>Führerschein:</strong> Der internationale Führerschein wird oft verlangt, zusätzlich zum nationalen. Erkundige dich beim Vermieter und bei der Botschaft und nimm beide mit.",
@@ -102,7 +102,7 @@ T = {
             ("Flughafen oder Stadtzentrum?", [
                 "Die Abholung am Flughafen ist bei der Ankunft praktischer, aber manchmal etwas teurer als in der Stadt. Vergleiche beides in den Angeboten."])],
         car_cta="Mietwagen in {n} ansehen", car_note="Partnerlink: Escale erhält eventuell eine Provision, ohne Mehrkosten für dich. Bedingungen (Führerschein, Alter, Kaution) beim Vermieter prüfen.",
-        car_title="Mietwagen in {n}: Führerschein, Versicherung, Tipps und Angebote | Escale",
+        car_title="Mietwagen in {n}: Führerschein, Versicherung, Angebote | Escale",
         car_desc="Ein Auto in {n} mieten: internationaler Führerschein, Selbstbeteiligung, Tank, Flughafen oder Stadtzentrum, und Live-Angebote.",
         car_eyebrow="Mietwagen", car_h1="Mietwagen <span>in {n}</span>",
         night_h="Nachts ankommen: die richtigen Gewohnheiten",

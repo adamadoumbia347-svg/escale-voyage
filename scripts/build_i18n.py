@@ -432,6 +432,9 @@ def fit(title, desc):
     """Garde titre et description dans ce que Google affiche (~65 et ~160 caractères), pour toutes les pages."""
     if len(title) > 65 and title.endswith(" | Escale"):
         title = title[: -len(" | Escale")]
+    if len(title) > 65:  # « … (Schengen, Royaume-Uni, USA, Canada) » : la parenthèse finale saute en premier
+        t2 = re.sub(r"\s*\([^()]*\)$", "", title)
+        title = t2 if len(t2) >= 30 else title
     if len(desc) > 160:
         cut = desc[:158]
         cut = cut[: cut.rfind(" ")] if " " in cut else cut

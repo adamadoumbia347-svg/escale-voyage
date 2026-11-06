@@ -186,7 +186,7 @@ def build(site, ctx):
         for lang in ("fr", "en"):
             fr = lang == "fr"
             name = nf if fr else ne
-            title = (f"eSIM {name} : internet dès l'arrivée, eSIM ou SIM locale ? | Escale" if fr else f"eSIM for {name}: internet on arrival, eSIM or local SIM? | Escale")
+            title = (f"eSIM {name} : internet dès l'arrivée, eSIM ou SIM locale | Escale" if fr else f"eSIM for {name}: internet on arrival, eSIM or local SIM | Escale")
             desc = (f"Être connecté dès l'atterrissage {a_fr} : eSIM ou carte SIM locale, téléphone compatible, installation et conseils." if fr else f"Be online as soon as you land in {name}: eSIM or local SIM, compatible phone, setup and tips.")
             hero = f'<p class="eyebrow">{fl} {"eSIM" }</p><h1>{"Internet dès l’arrivée " + E(a_fr) if fr else "Internet on arrival in " + E(name)}</h1><p class="hero-lead">{E(desc)}</p>'
             urls.append(B.write(site, paths[lang], lang, title, desc, hero, esim_body(lang, name, a_fr if fr else name), "", paths, ctx))
@@ -204,7 +204,7 @@ def build(site, ctx):
         for lang in ("fr", "en"):
             fr = lang == "fr"
             name = nf if fr else ne
-            title = (f"Location de voiture {a_fr} : permis, assurance, conseils et offres | Escale" if fr else f"Car rental in {name}: licence, insurance, tips and offers | Escale")
+            title = (f"Location de voiture {a_fr} : permis, assurance et offres | Escale" if fr else f"Car rental in {name}: licence, insurance and offers | Escale")
             desc = (f"Louer une voiture {a_fr} : permis international, franchise, carburant, aéroport ou centre-ville, et les offres en direct." if fr else f"Renting a car in {name}: international permit, excess, fuel, airport or city centre, and live offers.")
             hero = f'<p class="eyebrow">🚗 {"Location de voiture" if fr else "Car rental"}</p><h1>{("Louer une voiture <span>" + E(a_fr) + "</span>") if fr else ("Rent a car <span>in " + E(name) + "</span>")}</h1><p class="hero-lead">{E(desc)}</p>'
             urls.append(B.write(site, paths[lang], lang, title, desc, hero, car_body(lang, name), "", paths, ctx))

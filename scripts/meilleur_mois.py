@@ -65,7 +65,7 @@ def name_of(d, lang):
     return {"fr": d[4], "en": d[5], "it": ITDE[d[0]][2], "de": ITDE[d[0]][4]}[lang]
 
 T = {
-    "fr": dict(base="meilleur-mois-pour-partir", title="Meilleur mois pour partir {a} {n} : le mois le moins cher en avion | Escale",
+    "fr": dict(base="meilleur-mois-pour-partir", title="Meilleur mois pour partir {a} {n} : climat et prix des vols | Escale",
                desc="Quel est le mois le moins cher pour aller {a} {n} ? Le prix aller-retour le plus bas de chacun des 12 prochains mois, en direct depuis votre aéroport.",
                h1="Le meilleur mois pour partir <span>{a} {n}</span>", lead="Le prix aller-retour le plus bas trouvé pour chacun des 12 prochains mois, depuis votre aéroport. Cliquez sur un mois pour voir les vols.",
                from_l="Départ de", loading="Lecture du calendrier des prix…", none="Pas encore assez de prix pour ce trajet depuis votre aéroport. Essayez une recherche directe.",
@@ -78,7 +78,7 @@ T = {
                idx_desc="Le mois le moins cher pour partir à Dakar, Abidjan, Marrakech, New York, Bali, Tokyo et 24 autres destinations, en direct depuis votre aéroport.",
                idx_h1="Le meilleur mois <span>pour partir</span>", idx_lead="Choisissez une destination : vous verrez le prix aller-retour le plus bas de chaque mois, depuis votre aéroport.",
                other="Autres destinations", change="Changer d'aéroport", photo="Photo"),
-    "en": dict(base="en/best-time-to-fly", title="Cheapest month to fly to {n}: best time to book | Escale",
+    "en": dict(base="en/best-time-to-fly", title="Best time to visit {n}: weather and cheapest month | Escale",
                desc="What is the cheapest month to fly to {n}? The lowest round-trip price for each of the next 12 months, live from your airport.",
                h1="The cheapest month to fly to <span>{n}</span>", lead="The lowest round-trip price found for each of the next 12 months, from your airport. Click a month to see the flights.",
                from_l="Leaving from", loading="Reading the price calendar…", none="Not enough prices yet for this route from your airport. Try a direct search.",
@@ -91,7 +91,7 @@ T = {
                idx_desc="The cheapest month to fly to Dakar, Abidjan, Marrakech, New York, Bali, Tokyo and 24 more destinations, live from your airport.",
                idx_h1="The cheapest month <span>to fly</span>", idx_lead="Pick a destination: you will see the lowest round-trip price for each month, from your airport.",
                other="Other destinations", change="Change airport", photo="Photo"),
-    "it": dict(base="it/mese-migliore-per-partire", title="Il mese più economico per volare {n}: quando prenotare | Escale",
+    "it": dict(base="it/mese-migliore-per-partire", title="Quando andare {n}: clima e mese più economico | Escale",
                desc="Qual è il mese più economico per volare {n}? Il prezzo andata e ritorno più basso di ciascuno dei prossimi 12 mesi, in diretta dal tuo aeroporto.",
                h1="Il mese più economico per volare <span>{n}</span>", lead="Il prezzo andata e ritorno più basso trovato per ciascuno dei prossimi 12 mesi, dal tuo aeroporto. Clicca su un mese per vedere i voli.",
                from_l="Partenza da", loading="Lettura del calendario prezzi…", none="Non ci sono ancora abbastanza prezzi per questa tratta dal tuo aeroporto. Prova una ricerca diretta.",
@@ -104,7 +104,7 @@ T = {
                idx_desc="Il mese più economico per volare a Dakar, Abidjan, Marrakech, New York, Bali, Tokyo e altre 24 destinazioni, in diretta dal tuo aeroporto.",
                idx_h1="Il mese migliore <span>per partire</span>", idx_lead="Scegli una destinazione: vedrai il prezzo andata e ritorno più basso di ogni mese, dal tuo aeroporto.",
                other="Altre destinazioni", change="Cambia aeroporto", photo="Foto"),
-    "de": dict(base="de/bester-reisemonat", title="Günstigster Monat für Flüge nach {n}: wann buchen | Escale",
+    "de": dict(base="de/bester-reisemonat", title="Beste Reisezeit {n}: Klima und günstigster Monat | Escale",
                desc="Welcher Monat ist für Flüge nach {n} am günstigsten? Der niedrigste Hin- und Rückflugpreis für jeden der nächsten 12 Monate, live ab deinem Flughafen.",
                h1="Der günstigste Monat für Flüge nach <span>{n}</span>", lead="Der niedrigste Hin- und Rückflugpreis für jeden der nächsten 12 Monate, ab deinem Flughafen. Klicke auf einen Monat, um die Flüge zu sehen.",
                from_l="Abflug ab", loading="Preiskalender wird gelesen…", none="Für diese Strecke ab deinem Flughafen gibt es noch nicht genug Preise. Versuche eine direkte Suche.",
