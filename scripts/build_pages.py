@@ -393,6 +393,37 @@ def indice_page():
                 hero, body, ld)
 
 
+def indice_page_en(ctx):
+    """English version of the Escale Price Index (figures written by src/indice.ts)."""
+    hero = ('<p class="eyebrow">Updated daily · open data</p><h1>Escale Price Index <span>for flights to Africa</span></h1>'
+            '<p class="hero-lead">Are air fares between Europe and Africa going up or down? The median change in fares on around fifty major diaspora routes, '
+            'by region and by departure country, computed every day from real prices.</p>')
+    copy = ('<script>document.addEventListener("click",function(e){if(!e.target.closest||!e.target.closest("#ix-copy"))return;var q=document.getElementById("ix-q");if(!q)return;'
+            'var t=q.textContent+" Source: Escale, https://escale.live/en/price-index/";(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){e.target.textContent="✅ Copied"},function(){prompt("Copy this text:",t)})});</script>')
+    body = ('<section><div id="indice"><p>The index is computed on each visit from the latest price records.</p></div><!-- /indice --></section>'
+            '<section><h2>How the index is calculated</h2><ul>'
+            '<li>Every day, Escale records the lowest round-trip fare found for a departure in the next 6 months on each major route of its price barometer (Paris, Lyon, Marseille, Brussels, London, Milan and Rome to Africa and North Africa).</li>'
+            '<li>For each route, that fare is compared with the one recorded 30 days earlier (or 7 days while the history is short).</li>'
+            '<li>The index is the <strong>median</strong> of those changes: half of the routes changed more, half less. A single route cannot move the index on its own.</li>'
+            '<li>A route is called stable when its fare moves by less than 3%.</li></ul>'
+            '<p class="small">Fares are real prices recently found by travellers on Aviasales (via Travelpayouts), per person, in economy. They show a trend: the exact fare depends on the dates and is confirmed on the booking site.</p></section>'
+            '<section><h2>Journalists, bloggers, community groups: quote the index</h2>'
+            '<p>The figures on this page are free to reuse under the <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a> licence: '
+            'you can quote them or use them in an article or a chart, as long as you credit “Escale (escale.live)” with a link to this page.</p>'
+            '<p>The “Copy” button above gives today\'s sentence with its source. For a figure on a specific route, a period (Christmas, summer, Eid) or a question on the method: <a href="/contact/">contact us</a>.</p></section>'
+            '<section><h2>More</h2><ul class="route-links"><li><a href="/en/christmas-flights-2026/">Christmas 2026: fares by destination from the UK</a></li>'
+            '<li><a href="/en/holiday-flights/">Holiday flights home</a></li><li><a href="/en/deals/">Deals of the week</a></li></ul></section>' + copy)
+    ld = '<script type="application/ld+json">' + __import__("json").dumps({
+        "@context": "https://schema.org", "@type": "Dataset", "name": "Escale Price Index: air fares between Europe and Africa",
+        "description": "Median change, over 30 and 7 days, in the lowest round-trip fare recorded daily on around fifty major routes between Europe, Africa and North Africa, by arrival region and departure country.",
+        "url": f"{DOMAIN}/en/price-index/", "creator": {"@type": "Organization", "name": "Escale", "url": f"{DOMAIN}/"},
+        "isAccessibleForFree": True, "inLanguage": "en", "temporalCoverage": "2026/..", "spatialCoverage": "Europe, Africa",
+        "variableMeasured": "Median change in round-trip fare (%)", "license": "https://creativecommons.org/licenses/by/4.0/"}, ensure_ascii=False) + "</script>"
+    return build_i18n.write(SITE, "en/price-index", "en", "Escale Price Index: flights Europe – Africa, updated daily",
+                            "Are flights to Africa getting more expensive? The median change in fares over 30 days, by region and departure country, computed daily. Open data (CC BY).",
+                            hero, body, ld, {"fr": "indice-prix", "en": "en/price-index"}, ctx)
+
+
 def route_page(r):
     fr, to, cf, ct, country, airport, dur, peak, note = r
     s = route_slug(r)
@@ -731,9 +762,13 @@ def main():
     urls += blog.build(page, E, DOMAIN, build_i18n.extras_html(SITE, "fr", "destination", "", ""))
     urls.append(barometre_page())
     urls.append(indice_page())
+    urls.append(indice_page_en(ctx))
     urls.append(recherche_page())
     urls.append(hotels_live_page())
     urls += italia.build(SITE, ctx)  # test : trajets au départ de l'Italie, en italien
+    import fetes_intl
+    _xu, XMAS_LINKS = fetes_intl.build(SITE, ctx)  # Christmas 2026 (anglais) et Natale 2026 (italien)
+    urls += _xu
     urls += deutsch.build(SITE, ctx)  # trajets au départ de l'Allemagne, de l'Autriche et de Zurich, en allemand
     urls += nederlands.build(SITE, ctx)  # trajets au départ des Pays-Bas et de Bruxelles, en néerlandais
     urls += ete.build(page, E, lambda lang, c, c_en, code: build_i18n.extras_html(SITE, lang, c, c_en, code), build_i18n.alert_btn, DOMAIN,
@@ -849,6 +884,7 @@ def main():
     urls += [u for u in home_i18n.build(SITE) if u not in urls]  # accueils traduits (/en/, /es/, /it/…)
     import meilleur_mois as _MM
     print("liens vers « Meilleur mois » :", _MM.link_routes(SITE))
+    print("liens Noël en/it :", fetes_intl.link_pages(SITE, XMAS_LINKS))
     lite_mode(SITE)
     print(f"langue automatique : {langue_auto(SITE)} pages")
     bust_cache(SITE)

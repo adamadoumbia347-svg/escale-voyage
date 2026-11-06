@@ -43,7 +43,7 @@ export default {
       return handler(c)
     }
     if (path === "/barometre-prix/" || path === "/barometre-prix") return barometre.onRequest(c)
-    if (path === "/indice-prix/" || path === "/indice-prix") return indice.onRequest(c)
+    if (path === "/indice-prix/" || path === "/indice-prix" || path === "/en/price-index/" || path === "/en/price-index") return indice.onRequest(c)
     if (path === "/") return accueil.onRequest(c)
     return apercu.onRequest(c)
   },
