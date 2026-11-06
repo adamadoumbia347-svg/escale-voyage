@@ -1,0 +1,31 @@
+# Vérification manuelle du logo (favicon) tel que Google le voit : réponses du site au robot de Google, et icône que Google a en mémoire.
+name: Vérifier le logo pour Google
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Vérifier
+        run: |
+          GB="Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+          GI="Googlebot-Image/1.0"
+          for u in / /robots.txt /favicon.ico /favicon.ico?v=2 /icon.svg?v=2 /icon-192.png?v=2 /apple-touch-icon.png?v=2; do
+            for ua in "$GB" "$GI"; do
+              printf '%-28s %-18s ' "$u" "${ua:0:16}"
+              curl -s -o /tmp/f -w '%{http_code} %{content_type} %{size_download}o redirect=%{redirect_url}\n' -A "$ua" "https://escale.live$u"
+            done
+          done
+          echo "=== Liens « icon » de l'accueil vus par Googlebot"
+          curl -s -A "$GB" https://escale.live/ | grep -o '<link rel="[a-z -]*icon[^>]*>' || echo "aucun"
+          echo "=== Icône que Google a en mémoire pour escale.live (service public de Google)"
+          for sz in 16 64; do
+            curl -s -o /tmp/g$sz.png -w "taille $sz : %{http_code} %{content_type} %{size_download}o\n" "https://www.google.com/s2/favicons?domain=escale.live&sz=$sz"
+            sha1sum /tmp/g$sz.png
+          done
+          echo "=== Pour comparaison : icône par défaut de Google (domaine sans favicon)"
+          curl -s -o /tmp/d.png -w "%{size_download}o\n" "https://www.google.com/s2/favicons?domain=domaine-sans-favicon-xyz123.com&sz=64"; sha1sum /tmp/d.png
