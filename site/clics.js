@@ -137,8 +137,25 @@
   })();
 
   // Compteur de clics
-  var page = path === "/" ? "accueil" : /^\/recherche\//.test(path) ? "recherche" : /^\/vols-ete-/.test(path) ? "ete"
-    : /^\/(vol-|(en|es|pt|ar)\/(flights|vuelos|voos)-|it\/voli-)/.test(path) ? "trajet" : /^\/vols-pour-|\/(flights|vuelos|voos)-(to|a|para)-/.test(path) ? "destination" : "autre";
+  // Type de page (le même pour toutes les langues), pour savoir quelles fonctions amènent des clics
+  var cat = function (p) {
+    if (p === "/" || /^\/(en|es|pt|ar|it|de|nl)\/$/.test(p)) return "accueil";
+    if (/^\/recherche\//.test(p)) return "recherche";
+    var R = [["budget", /ou-partir-avec-|where-to-go-for-|dove-andare-con-|wohin-reisen-mit-/], ["carte", /^\/partout\/|\/(anywhere|explorar)\//],
+      ["surprise", /surprends-moi|surprise-me|sorprendimi|ueberrasch-mich/], ["quiz", /quiz-destination|destination-quiz|quiz-destinazione|reiseziel-quiz/],
+      ["a-deux", /on-se-retrouve-ou|meet-halfway|dove-ci-incontriamo|wo-treffen-wir-uns/], ["weekend", /week-?end/], ["ete", /^\/vols-ete-/],
+      ["fetes", /vols-(noel|tabaski|aid|ramadan|hajj|fetes|vacances|paques)|\/(christmas|eid|holiday)/], ["trajet", /^\/(vol-|(en|es|pt|ar|nl)\/(flights|vuelos|voos|vluchten)-|it\/voli-|de\/fluege-)/],
+      ["destination", /^\/vols-pour-|\/(flights|vuelos|voos)-(to|a|para)-/], ["hotels", /hotel/], ["visa", /visa/], ["bons-plans", /bons-plans|deals/],
+      ["famille", /famille|proche|family/], ["guides", /guides|blog|premier-voyage|meilleur-mois|tendances|kit-voyage|controle-avant-vol|bagages|esim/]];
+    for (var i = 0; i < R.length; i++) if (R[i][1].test(p)) return R[i][0];
+    return "autre";
+  };
+  var page = cat(path);
+  // Sur la page de recherche, on garde la fonction d'où vient le visiteur (ex. « recherche-quiz »)
+  var ss = function (k, v) { try { if (v === undefined) return sessionStorage.getItem(k); sessionStorage.setItem(k, v); } catch (e) { return null; } };
+  if (page === "recherche" && ss("escale.src")) page = ("recherche-" + ss("escale.src")).slice(0, 30);
+  // Liens qui peuvent rapporter (partenaires) : pour eux seulement, on note aussi l'adresse de la page (sans paramètres)
+  var MONEY = /^(aviasales|stay22|tripcom|klook|tp-media|moteur-resultat|booking|agoda|airbnb|safetywing|[a-z0-9]+-tpm|[a-z0-9]{6,})$/;
   var kind = function (a) {
     if (a.dataset && a.dataset.k) return a.dataset.k;
     if (a.classList.contains("pop-chip")) return "trajet-populaire";
@@ -157,7 +174,9 @@
     return m ? m[1] : "autre-site";
   };
   var send = function (k) {
-    var body = JSON.stringify({ k: k, p: page });
+    var o = { k: k, p: page };
+    if (MONEY.test(k) && !/^(moteur-lien|trajet-populaire|bandeau-saison|whatsapp|partage-whatsapp|autre-site|google|skyscanner|kayak|momondo)$/.test(k)) o.u = path.slice(0, 90);
+    var body = JSON.stringify(o);
     try { if (navigator.sendBeacon && navigator.sendBeacon("/api/clic", body)) return; } catch (e) {}
     try { fetch("/api/clic", { method: "POST", body: body, keepalive: true }); } catch (e) {}
   };
@@ -167,6 +186,7 @@
     var a = t && t.closest && t.closest("a[href]");
     if (!a) return;
     var k = kind(a);
+    if (k === "moteur-lien" && !/^recherche/.test(page)) ss("escale.src", page);
     if (k) send(k);
   }, true);
 })();

@@ -37,7 +37,13 @@ export const onRequest = async ({ request, env }: Ctx) => {
     rows.forEach((r: any, i) => { for (const [id, n] of Object.entries(r || {})) {
       const [k, p] = id.split("|"); const o = out[k] || (out[k] = { j7: 0, j30: 0, pages: {} })
       o.j30 += n as number; if (i < 7) o.j7 += n as number; o.pages[p] = (o.pages[p] || 0) + (n as number) } })
-    return json({ depuis: days[29], clics: out }, { headers: { "Cache-Control": "no-store" } })
+    // Pages qui envoient vers les partenaires (30 jours) et clics partenaires par jour
+    const prow = await Promise.all(days.map((d) => env.ESCALE.get("pages:" + d, "json")))
+    const pages: Record<string, number> = {}, parJour: number[] = prow.map((r: any) => {
+      let t = 0; for (const [u, n] of Object.entries(r || {})) { pages[u] = (pages[u] || 0) + (n as number); t += n as number } return t })
+    const top = Object.entries(pages).sort((a, b) => b[1] - a[1]).slice(0, 60)
+    const parJourLien = rows.map((r: any) => { const o: Record<string, number> = {}; for (const [id, n] of Object.entries(r || {})) { const k = id.split("|")[0]; o[k] = (o[k] || 0) + (n as number) } return o })
+    return json({ depuis: days[29], jours: days, clics: out, pages: top, parJour, parJourLien }, { headers: { "Cache-Control": "no-store" } })
   }
   if (request.method === "DELETE") {
     const key = url.searchParams.get("key") || ""
