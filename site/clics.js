@@ -75,11 +75,13 @@
   }
 
   // « Vos trajets » : les trajets consultés sont gardés dans ce navigateur (rien n'est envoyé), pour les retrouver sur l'accueil
-  var remember = function (f, t, label, url, price) {
+  var remember = function (f, t, label, url, price, dates) {
     var list = []; try { list = JSON.parse(store("escale.trajets") || "[]"); } catch (e) { list = []; }
     var old = list.filter(function (x) { return x.f === f && x.t === t; })[0];
     list = list.filter(function (x) { return !(x.f === f && x.t === t); });
-    list.unshift({ f: f, t: t, l: label || (old && old.l) || f + " → " + t, u: url || (old && old.u) || "", p: old ? old.p : price || null, ts: Date.now() });
+    var item = { f: f, t: t, l: label || (old && old.l) || f + " → " + t, u: url || (old && old.u) || "", p: old ? old.p : price || null, ts: Date.now() };
+    if (dates) { item.d = dates[0]; item.r = dates[1]; } else if (old && old.d) { item.d = old.d; item.r = old.r; }
+    list.unshift(item);
     store("escale.trajets", JSON.stringify(list.slice(0, 6)));
   };
   addEventListener("load", function () {
@@ -90,9 +92,49 @@
       remember(rp.getAttribute("data-from"), rp.getAttribute("data-to"), label, path, price);
     }
     var fs = new URLSearchParams(location.search).get("flightSearch");
-    var m = fs && fs.match(/^([A-Z]{3})\d{4}([A-Z]{3})/);
-    if (m) remember(m[1], m[2], null, "/recherche/?flightSearch=" + fs, null);
+    var m = fs && fs.match(/^([A-Z]{3})(\d{4})([A-Z]{3})(\d{4})?/);
+    // Dates JJMM de la recherche -> AAAA-MM-JJ (année : la prochaine occurrence de ce jour)
+    var iso = function (ddmm, after) {
+      if (!ddmm) return null;
+      var now = after ? new Date(after) : new Date(), y = now.getFullYear(), d = new Date(y, +ddmm.slice(2, 4) - 1, +ddmm.slice(0, 2), 12);
+      if (d < new Date(now.getTime() - 864e5)) d.setFullYear(y + 1);
+      return d.toISOString().slice(0, 10);
+    };
+    if (m) { var dep = iso(m[2]), ret = iso(m[4], dep); remember(m[1], m[3], null, "/recherche/?flightSearch=" + fs, null, dep ? [dep, ret || dep] : null); }
   });
+
+
+  // Formulaire d'avis : trajet prérempli depuis le lien « Donne ton avis » (?trajet=…)
+  var tq = /^\/(avis-voyageurs|en\/traveller-reviews)\//.test(path) && new URLSearchParams(location.search).get("trajet");
+  if (tq) addEventListener("DOMContentLoaded", function () { var i = document.querySelector('.avis-form input[name="trajet"]'); if (i && !i.value) { i.value = tq.slice(0, 80); i.scrollIntoView({ block: "center" }); } });
+  // Après le voyage : « Ton voyage s'est bien passé ? » (seulement pour une recherche avec des dates, une fois par trajet,
+  // entre 2 et 60 jours après la date de retour ; rien n'est envoyé tant que le visiteur ne remplit pas le formulaire)
+  (function () {
+    if (/^\/(recherche|avis-voyageurs|en\/traveller-reviews)\//.test(path) || /^\/(.*\/)?(merci|thanks)\//.test(path)) return;
+    var A = { fr: ["Ton voyage {t} s'est bien passé ?", "Donne ton avis en 1 minute", "/avis-voyageurs/"],
+              en: ["How was your trip {t}?", "Leave a review in 1 minute", "/en/traveller-reviews/"] };
+    var a = A[lang] || (lang === "fr" ? A.fr : A.en);
+    var list = []; try { list = JSON.parse(store("escale.trajets") || "[]"); } catch (e) { return; }
+    var asked = {}; try { asked = JSON.parse(store("escale.avis.demande") || "{}"); } catch (e) { asked = {}; }
+    var now = Date.now(), x = list.filter(function (it) {
+      if (!it.r || asked[it.f + "-" + it.t]) return false;
+      var days = (now - Date.parse(it.r + "T12:00:00")) / 864e5;
+      return days >= 2 && days <= 60;
+    })[0];
+    if (!x) return;
+    setTimeout(function () {
+      if (document.querySelector(".cc-bar, .inst-bar")) return;
+      var b = document.createElement("div");
+      b.className = "inst-bar avis-bar";
+      b.innerHTML = '<span aria-hidden="true" style="font-size:24px">✈️</span><p></p><a class="inst-go btn"></a><button type="button" class="inst-x" aria-label="×">×</button>';
+      b.querySelector("p").textContent = a[0].replace("{t}", x.l);
+      var go = b.querySelector("a"); go.textContent = a[1]; go.href = a[2] + "?trajet=" + encodeURIComponent(x.l);
+      var done = function () { asked[x.f + "-" + x.t] = 1; store("escale.avis.demande", JSON.stringify(asked)); b.remove(); };
+      go.addEventListener("click", function () { send && send("avis-apres-voyage"); asked[x.f + "-" + x.t] = 1; store("escale.avis.demande", JSON.stringify(asked)); });
+      b.querySelector(".inst-x").addEventListener("click", done);
+      document.body.appendChild(b);
+    }, 5000);
+  })();
 
   // Compteur de clics
   var page = path === "/" ? "accueil" : /^\/recherche\//.test(path) ? "recherche" : /^\/vols-ete-/.test(path) ? "ete"
