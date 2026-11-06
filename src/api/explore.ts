@@ -4,10 +4,10 @@ export const onRequestGet = (ctx: Ctx) => edgeCached(ctx, 3600, async () => {
   const token = ctx.env.TRAVELPAYOUTS_TOKEN
   if (!token) return json({ available: false, reason: "cle-absente" })
   const q = new URL(ctx.request.url).searchParams
-  const from = (q.get("from") || "").toUpperCase(), month = q.get("month") || "", direct = q.get("direct") === "1"
+  const from = (q.get("from") || "").toUpperCase(), month = q.get("month") || "", direct = q.get("direct") === "1", wide = q.get("wide") === "1"
   let currency = currencyOf(q.get("currency"))
   if (!IATA.test(from) || !MONTH.test(month)) return json({ error: "Paramètres invalides" }, { status: 400 })
-  const ask = (cur: string) => pricesForDates(token, { origin: from, departure_at: month, unique: "true", one_way: "false", sorting: "price", currency: cur.toLowerCase(), limit: direct ? "100" : "30", ...(direct ? { direct: "true" } : {}) })
+  const ask = (cur: string) => pricesForDates(token, { origin: from, departure_at: month, unique: "true", one_way: "false", sorting: "price", currency: cur.toLowerCase(), limit: direct || wide ? "100" : "30", ...(direct ? { direct: "true" } : {}) })
   let data = await ask(currency)
   if (!data && currency !== "EUR") { currency = "EUR"; data = await ask(currency) }
   if (!data) return json({ available: false, reason: lastApiError || "inconnue" })

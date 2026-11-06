@@ -1,6 +1,8 @@
 // Traductions de l'accueil : clé = texte anglais, valeur = [espagnol, portugais, arabe, italien, allemand].
 // Le français et l'anglais sont directement dans index.html (data-en) et app.js (T("fr", "en")).
 window.ESCALE_I18N = {
+  "🎲 Surprise me": ["🎲 Sorpréndeme", "🎲 Surpreenda-me", "🎲 فاجئني", "🎲 Sorprendimi", "🎲 Überrasch mich"],
+  "👫 Two cities? Where shall we meet": ["👫 ¿Dos ciudades? ¿Dónde nos vemos?", "👫 Duas cidades? Onde nos encontramos", "👫 مدينتان؟ أين نلتقي", "👫 Due città? Dove ci incontriamo", "👫 Zwei Städte? Wo treffen wir uns"],
   "Where can I go with": ["¿Adónde ir con", "Para onde ir com", "إلى أين أسافر بـ", "Dove andare con", "Wohin reisen mit"],
   "Your round-trip budget in euros": ["Tu presupuesto de ida y vuelta en euros", "O seu orçamento de ida e volta em euros", "ميزانيتك ذهابًا وإيابًا باليورو", "Il tuo budget andata e ritorno in euro", "Dein Budget für Hin- und Rückflug in Euro"],
   "Show me where →": ["Muéstrame adónde →", "Mostre-me para onde →", "أرني إلى أين ←", "Mostrami dove →", "Zeig mir, wohin →"],
