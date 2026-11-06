@@ -20,6 +20,13 @@
   .ad-list .msg { white-space: pre-wrap; word-break: break-word; }
   .ad-list button { justify-self: start; font: inherit; font-size: 13px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); cursor: pointer; }
   .small { color: var(--muted); font-size: 14px; }
+  .ck-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin: 12px 0; }
+  .ck-card { border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .ck-card span { font-size: 12px; color: #5b6b80; } .ck-card strong { font-size: 22px; overflow-wrap: anywhere; } .ck-card small { color: #5b6b80; }
+  .ck-bars { display: flex; align-items: flex-end; gap: 3px; height: 120px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+  .ck-bars span { flex: 1; background: #12b3a0; border-radius: 3px 3px 0 0; min-height: 2px; }
+  .ck-axis { display: flex; justify-content: space-between; font-size: 12px; color: #5b6b80; margin-bottom: 12px; }
+  #clics-out h3 { font-size: 15px; margin: 18px 0 4px; }
   .ad-table { width: 100%; border-collapse: collapse; margin: 8px 0 16px; font-size: 14px; } .ad-table th, .ad-table td { text-align: start; padding: 6px 8px; border-bottom: 1px solid var(--line); }
 </style>
 </head>
@@ -95,12 +102,39 @@
     fetch("/api/admin?action=clics", { headers: { "x-admin-key": key } }).then(function (r) {
       if (r.status === 401) throw new Error("Clé incorrecte."); return r.json();
     }).then(function (j) {
-      var rows = Object.entries(j.clics || {}).sort(function (a, b) { return b[1].j30 - a[1].j30; });
       var esc = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
-      $("clics-out").innerHTML = rows.length ? '<table class="ad-table"><thead><tr><th>Lien</th><th>7 jours</th><th>30 jours</th><th>Pages</th></tr></thead><tbody>' +
-        rows.map(function (r) { return "<tr><td>" + esc(r[0]) + "</td><td>" + r[1].j7 + "</td><td>" + r[1].j30 + "</td><td>" +
-          esc(Object.entries(r[1].pages).sort(function (a, b) { return b[1] - a[1]; }).map(function (p) { return p[0] + " " + p[1]; }).join(", ")) + "</td></tr>"; }).join("") +
-        "</tbody></table>" : "<p>Pas encore de clics enregistrés.</p>";
+      // Liens qui ne rapportent rien directement (navigation, partage, autres sites) ; tout le reste = partenaires
+      var NON = /^(moteur-lien|trajet-populaire|bandeau-saison|whatsapp|partage-whatsapp|autre-site|google|skyscanner|kayak|momondo|avis-apres-voyage)$/;
+      var money = function (k) { return !NON.test(k); };
+      var rows = Object.entries(j.clics || {}).sort(function (a, b) { return b[1].j30 - a[1].j30; });
+      if (!rows.length) { $("clics-out").innerHTML = "<p>Pas encore de clics enregistrés.</p>"; return; }
+      var m7 = 0, m30 = 0, feat = {};
+      rows.forEach(function (r) { if (!money(r[0])) return; m7 += r[1].j7; m30 += r[1].j30;
+        Object.entries(r[1].pages).forEach(function (p) { feat[p[0]] = (feat[p[0]] || 0) + p[1]; }); });
+      var feats = Object.entries(feat).sort(function (a, b) { return b[1] - a[1]; });
+      var days = (j.jours || []).slice().reverse(), per = (j.parJourLien || []).slice().reverse().map(function (o) {
+        var t = 0; Object.keys(o || {}).forEach(function (k) { if (money(k)) t += o[k]; }); return t; });
+      var mx = Math.max.apply(null, per.concat([1]));
+      var bars = '<div class="ck-bars" role="img" aria-label="Clics partenaires par jour, 30 jours">' + per.map(function (n, i) {
+        return '<span title="' + esc(days[i] + " : " + n) + '" style="height:' + Math.max(2, Math.round(n / mx * 100)) + '%"></span>'; }).join("") + "</div>" +
+        '<div class="ck-axis"><span>' + esc(days[0] || "") + "</span><span>" + esc(days[days.length - 1] || "") + "</span></div>";
+      var card = function (l, v, s) { return '<div class="ck-card"><span>' + esc(l) + "</span><strong>" + esc(v) + "</strong>" + (s ? "<small>" + esc(s) + "</small>" : "") + "</div>"; };
+      var top = j.pages || [];
+      var tbl = function (head, list, fmt) { return list.length ? '<table class="ad-table"><thead><tr>' + head.map(function (h) { return "<th>" + esc(h) + "</th>"; }).join("") + "</tr></thead><tbody>" + list.map(fmt).join("") + "</tbody></table>" : "<p class=\"small\">Pas encore de données.</p>"; };
+      $("clics-out").innerHTML =
+        '<div class="ck-cards">' + card("Clics partenaires · 7 j", m7) + card("Clics partenaires · 30 j", m30) +
+        card("Fonction n° 1", feats[0] ? feats[0][0] : "–", feats[0] ? feats[0][1] + " clics" : "") +
+        card("Page n° 1", top[0] ? top[0][0] : "–", top[0] ? top[0][1] + " clics" : "") + "</div>" +
+        "<h3>Clics partenaires par jour</h3>" + bars +
+        "<h3>Quelle fonction amène les clics partenaires (30 j)</h3>" +
+        tbl(["Fonction / type de page", "Clics", "Part"], feats, function (f) { return "<tr><td>" + esc(f[0]) + "</td><td>" + f[1] + "</td><td>" + Math.round(f[1] / Math.max(1, m30) * 100) + " %</td></tr>"; }) +
+        '<p class="small">« recherche-quiz » = clic sur la page de recherche, pour un visiteur arrivé depuis le quiz (idem pour les autres).</p>' +
+        "<h3>Pages qui envoient le plus vers les partenaires (30 j)</h3>" +
+        tbl(["Page", "Clics"], top.slice(0, 30), function (p) { return '<tr><td><a href="' + esc(p[0]) + '" target="_blank" rel="noopener">' + esc(p[0]) + "</a></td><td>" + p[1] + "</td></tr>"; }) +
+        '<p class="small">Comptées depuis la mise à jour du 6 novembre 2026.</p>' +
+        "<h3>Tous les liens</h3>" +
+        tbl(["Lien", "Partenaire", "7 jours", "30 jours", "Pages"], rows, function (r) { return "<tr><td>" + esc(r[0]) + "</td><td>" + (money(r[0]) ? "✓" : "") + "</td><td>" + r[1].j7 + "</td><td>" + r[1].j30 + "</td><td>" +
+          esc(Object.entries(r[1].pages).sort(function (a, b) { return b[1] - a[1]; }).map(function (p) { return p[0] + " " + p[1]; }).join(", ")) + "</td></tr>"; });
     }).catch(function (e) { $("msg").textContent = e.message || "Erreur."; });
   });
   $("digest").addEventListener("click", function () {
