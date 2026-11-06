@@ -243,5 +243,6 @@ def build(site, ctx):
             c = conf[lang]
             links = "".join(f'<li><a class="tool-chip" href="/{p}/">{E(n)}</a></li>' for l, p, n in items[fam] if l == lang)
             hero = f'<h1>{c["h1"]}</h1><p class="hero-lead">{E(c["lead"])}</p>'
-            urls.append(B.write(site, c["base"], lang, c["ttl"], c["desc"], hero, f'<ul class="pv-other">{links}</ul>', "", paths, ctx))
+            import pratiques_index as PX
+            urls.append(B.write(site, c["base"], lang, c["ttl"], c["desc"], hero, PX.body(fam, lang, links), PX.ld(fam, lang), paths, ctx))
     return urls

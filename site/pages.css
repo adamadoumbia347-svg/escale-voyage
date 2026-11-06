@@ -723,3 +723,12 @@ main > section:nth-of-type(n+3), main .wrap > section:nth-of-type(n+3), body > f
   .kit-card { bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
 }
 @media print { .main-nav { display: none; } }
+/* Climat mois par mois (pages « Meilleur mois pour partir ») */
+.cl-grid { list-style: none; margin: 12px 0 8px; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+@media (min-width: 760px) { .cl-grid { grid-template-columns: repeat(12, 1fr); } }
+.cl-m { display: grid; justify-items: center; gap: 2px; padding: 8px 2px; border-radius: 12px; background: var(--soft, #f4f6f8); text-align: center; border: 1px solid transparent; }
+.cl-m b { font: 700 12px/1 var(--f-body); color: var(--ink); }
+.cl-m .cl-i { font-size: 22px; line-height: 1.2; }
+.cl-m small { font-size: 10px; line-height: 1.15; color: var(--muted); }
+.cl-m.cl-H { background: #fff1e6; border-color: #ffd8b8; } .cl-m.cl-b { background: var(--mint, #e9faf5); border-color: #bfeee0; }
+.cl-leg { margin: 0 0 10px; }
