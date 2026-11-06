@@ -1,6 +1,7 @@
 // Traductions de l'accueil : clé = texte anglais, valeur = [espagnol, portugais, arabe, italien, allemand].
 // Le français et l'anglais sont directement dans index.html (data-en) et app.js (T("fr", "en")).
 window.ESCALE_I18N = {
+  "🧭 Quiz: which destination suits you?": ["🧭 Test: ¿qué destino es para ti?", "🧭 Quiz: que destino é para si?", "🧭 اختبار: أي وجهة تناسبك؟", "🧭 Quiz: quale meta fa per te?", "🧭 Quiz: Welches Ziel passt zu dir?"],
   "🎲 Surprise me": ["🎲 Sorpréndeme", "🎲 Surpreenda-me", "🎲 فاجئني", "🎲 Sorprendimi", "🎲 Überrasch mich"],
   "👫 Two cities? Where shall we meet": ["👫 ¿Dos ciudades? ¿Dónde nos vemos?", "👫 Duas cidades? Onde nos encontramos", "👫 مدينتان؟ أين نلتقي", "👫 Due città? Dove ci incontriamo", "👫 Zwei Städte? Wo treffen wir uns"],
   "Where can I go with": ["¿Adónde ir con", "Para onde ir com", "إلى أين أسافر بـ", "Dove andare con", "Wohin reisen mit"],
