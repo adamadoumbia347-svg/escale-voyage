@@ -812,6 +812,8 @@ def main():
     (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /admin/\n\nSitemap: {DOMAIN}/sitemap.xml\n", encoding="utf-8")
     import home_i18n
     urls += [u for u in home_i18n.build(SITE) if u not in urls]  # accueils traduits (/en/, /es/, /it/…)
+    import meilleur_mois as _MM
+    print("liens vers « Meilleur mois » :", _MM.link_routes(SITE))
     lite_mode(SITE)
     print(f"langue automatique : {langue_auto(SITE)} pages")
     bust_cache(SITE)

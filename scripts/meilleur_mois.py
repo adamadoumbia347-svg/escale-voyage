@@ -161,3 +161,38 @@ def build(site, ctx):
         hero = f'<h1>{t["idx_h1"]}</h1><p class="hero-lead">{E(t["idx_lead"])}</p>'
         urls.append(B.write(site, t["base"], lang, t["idx_title"], t["idx_desc"], hero, f'<ul class="tr-grid mm-idx">{cards}</ul>', "", idx_paths, ctx))
     return urls
+
+
+ALIAS = {"JFK": "NYC", "EWR": "NYC", "LGA": "NYC", "HND": "TYO", "NRT": "TYO", "FCO": "ROM", "CIA": "ROM", "LHR": "LON", "LGW": "LON", "STN": "LON",
+         "LTN": "LON", "YUL": "YMQ", "SAW": "IST", "RMF": "RAK"}
+LINK = {"fr": "🗓️ Quand partir {a} ? Climat, saisons et mois le moins cher →", "en": "🗓️ When to go to {n}? Weather, seasons and the cheapest month →",
+        "it": "🗓️ Quando andare {a}? Clima, stagioni e mese più economico →", "de": "🗓️ Wann nach {n}? Klima, Reisezeit und günstigster Monat →"}
+
+
+def link_routes(site):
+    """Ajoute, sur les pages de trajets et de destinations (fr, en, it, de), un lien vers la page « Meilleur mois » de la destination."""
+    import re
+    by = {d[0]: d for d in DESTS}
+    bases = tuple("/" + T[l]["base"] + "/" for l in T)
+    n = 0
+    for f in site.rglob("index.html"):
+        rel = "/" + str(f.parent.relative_to(site)).replace("\\", "/") + "/"
+        if rel.startswith(bases) or rel.startswith("/recherche/"):
+            continue
+        s = f.read_text(encoding="utf-8")
+        m = re.search(r'<html lang="(fr|en|it|de)"', s[:400])
+        c = re.search(r'data-to="([A-Z]{3})"', s)
+        if not m or not c or "mm-link" in s:
+            continue
+        lang, code = m.group(1), ALIAS.get(c.group(1), c.group(1))
+        d = by.get(code)
+        k = s.find('<section class="faq"')
+        if not d or k < 0:
+            continue
+        nm = name_of(d, lang)
+        a = {"fr": f'{PRE.get(nm, "à")} {nm[3:] if PRE.get(nm) == "en" and nm.startswith("la ") else nm}', "it": ITDE[code][1]}.get(lang, nm)
+        href = f'/{T[lang]["base"]}/{slug_of(d, lang)}/'
+        s = s[:k] + f'<p class="mm-link"><a href="{href}">{E(LINK[lang].format(a=a, n=nm))}</a></p>' + s[k:]
+        f.write_text(s, encoding="utf-8")
+        n += 1
+    return n
