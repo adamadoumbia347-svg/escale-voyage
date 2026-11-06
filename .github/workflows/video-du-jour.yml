@@ -1,4 +1,4 @@
-# Vidéo TikTok du jour : chaque après-midi, fabrique une vidéo avec les prix du baromètre (video/make.js)
+# Vidéo TikTok du jour : le lundi et le jeudi après-midi (avant : tous les jours), fabrique une vidéo avec les prix du baromètre (video/make.js)
 # et l'envoie par e-mail à DIGEST_TO (via /api/admin?action=video). Format selon le jour :
 # lundi top 3+3 · mardi prix d'un trajet · mercredi astuce · jeudi top 5 Afrique · vendredi baisses · samedi top 5 Maghreb · dimanche quiz.
 # Puis une seconde vidéo en italien (trajets depuis l'Italie) : dimanche quiz · lundi et jeudi top · mardi et vendredi prix d'un trajet · mercredi conseil · samedi quiz.
@@ -7,7 +7,7 @@
 name: Vidéo TikTok du jour
 on:
   schedule:
-    - cron: "23 14 * * *"
+    - cron: "23 14 * * 1,4"  # deux fois par semaine : lundi et jeudi (demandé le 6 novembre 2026)
   workflow_dispatch:
     inputs:
       format:
