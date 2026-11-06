@@ -149,6 +149,8 @@ MOMO = {
                    ("3. Passer par une agence de voyage de votre ville", [
                        "Beaucoup d'agences acceptent Orange Money, Wave ou MTN MoMo. Elles peuvent ajouter des frais de service : demandez le prix total avant de payer.",
                        "Montrez-leur le prix trouvé sur Escale : c'est une bonne base pour négocier."]),
+                   ("4. Vous vivez en France ? Payer en plusieurs fois", [
+                       "Plusieurs compagnies (Corsair, Air Caraïbes, Air France, Royal Air Maroc, ASL Airlines) proposent le paiement en 3, 4 ou 10 fois par carte : <a href=\"/payer-billet-avion-plusieurs-fois/\">les conditions et les frais, compagnie par compagnie</a>."]),
                    ("Les pièges à éviter", [
                        "<strong>Plafonds :</strong> les cartes virtuelles ont des limites de paiement (fixées par l'opérateur et la banque centrale). Vérifiez le plafond avant d'acheter plusieurs billets.",
                        "<strong>Frais de change :</strong> un prix affiché en euros ou en dollars est converti ; il peut y avoir des frais. Choisissez si possible un paiement en francs CFA ou dans votre monnaie.",

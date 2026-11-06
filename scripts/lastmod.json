@@ -1,6 +1,6 @@
 {
 "/": [
-"15b69c8ffca0b40c",
+"3d1d4de2305e7859",
 "2026-11-06"
 ],
 "/a-propos/": [
@@ -13572,8 +13572,12 @@
 "2026-11-05"
 ],
 "/payer-billet-avion-mobile-money/": [
-"40d77d2af65eeff3",
-"2026-11-05"
+"29f9329358688be2",
+"2026-11-06"
+],
+"/payer-billet-avion-plusieurs-fois/": [
+"e8253afb48ee1317",
+"2026-11-06"
 ],
 "/premier-voyage-bali/": [
 "895f2a84cd7dc7f1",
@@ -21088,7 +21092,7 @@
 "2026-11-05"
 ],
 "/widget/": [
-"027354fe3abac1b1",
+"4bb7872fa2c480ff",
 "2026-11-06"
 ]
 }

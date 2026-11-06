@@ -795,7 +795,7 @@ def main():
         by_origin.setdefault(r[2], []).append(f'<li><a href="/{route_slug(r)}/">Vol {E(r[2])} → {E(r[3])}</a></li>')
     links = group("Partir d’Afrique : vols au départ de chaque pays", [f'<li><a href="/{c}/">{p[1]} Vols au départ {E(pays_accueil.DU.get(c, "du " + p[0]))}</a></li>' for c, p in pays_accueil.PAYS.items()]
                   + [f'<li><a href="/{p}/">{E(t)}</a></li>' for p, t in afrique_themes.links("fr")] + ['<li><a href="/visa/">Faut-il un visa avec mon passeport ?</a></li>',
-                     '<li><a href="/billet-avion-urgent/">Partir en urgence au pays (décès, maladie)</a></li>', '<li><a href="/payer-billet-avion-mobile-money/">Payer son billet avec Orange Money, Wave ou MTN MoMo</a></li>', '<li><a href="/bagages-compagnies-afrique/">Bagages : la franchise de chaque compagnie</a></li>',
+                     '<li><a href="/billet-avion-urgent/">Partir en urgence au pays (décès, maladie)</a></li>', '<li><a href="/payer-billet-avion-mobile-money/">Payer son billet avec Orange Money, Wave ou MTN MoMo</a></li>', '<li><a href="/payer-billet-avion-plusieurs-fois/">Payer son billet en plusieurs fois (3x, 4x, 10x)</a></li>', '<li><a href="/bagages-compagnies-afrique/">Bagages : la franchise de chaque compagnie</a></li>',
                      '<li><a href="/avis-voyageurs/">Avis des voyageurs</a></li>']
                   + [f'<li><a href="/{aeroports.path(c, "fr")}/">Arriver à l’aéroport {E(aeroports.de(a[0]))}</a></li>' for c, a in aeroports.A.items()])
     links += "".join(group(f"Vols au départ de {E(o)}", items) for o, items in by_origin.items())

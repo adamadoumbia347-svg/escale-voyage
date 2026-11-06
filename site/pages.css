@@ -823,3 +823,8 @@ main > section:nth-of-type(n+3), main .wrap > section:nth-of-type(n+3), body > f
 .qz-go { font-weight: 700; color: #0e8f80; }
 .qz-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 0; }
 .qz-again { background: var(--surface); color: var(--ink); border: 1px solid var(--line); }
+/* Page « Payer en plusieurs fois » */
+.pf-list { list-style: none; padding: 0; display: grid; gap: 12px; }
+.pf-list li { border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; background: var(--surface); }
+.pf-list h3 { margin: 0 0 4px; }
+.pf-list p { margin: 4px 0; }
