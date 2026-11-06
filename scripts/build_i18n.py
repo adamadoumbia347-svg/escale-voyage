@@ -216,6 +216,14 @@ def slug_city(name, lang):
 TITLE_FIX = {("CDG", "DXB", "en"): "Paris to Dubai cheap tickets: compare flight prices"}
 
 
+def lang_ok(r, lang):
+    """Le trajet a-t-il une page dans cette langue ? (les vols régionaux africains : français et anglais seulement)"""
+    import routes_extra as REX
+    if lang in RX.COLX:
+        return is_itde(r, lang)
+    return lang in ("fr", "en") or (r[0], r[1]) not in REX.FR_EN_ONLY
+
+
 def is_itde(r, lang):
     """Trajet traduit en italien / allemand ?"""
     return lang in RX.COLX and f"{r[0]}-{r[1]}" in RX.TOP
@@ -458,14 +466,14 @@ def write(site, path, lang, title, desc, hero, body, ld, paths, ctx, og="og-imag
 def build(site, ctx):
     """ctx : domain, tp (script Travelpayouts), routes, hotels, route_slug, hotel_slug, airports, related"""
     routes, hotels = ctx["routes"], ctx["hotels"]
-    route_paths = {r: {"fr": ctx["route_slug"](r), **{l: route_path(r, l) for l in LANGS + RX.LANGS if l in LANGS or is_itde(r, l)}} for r in routes}
+    route_paths = {r: {"fr": ctx["route_slug"](r), **{l: route_path(r, l) for l in LANGS + RX.LANGS if lang_ok(r, l)}} for r in routes}
     hotel_paths = {h[0]: {"fr": ctx["hotel_slug"](h), **{l: hotel_path(h, l) for l in LANGS + RX.HOTEL_LANGS}} for h in hotels}
     urls = []
     for lang in LANGS + RX.LANGS:
         itde = lang in RX.COLX
         u = {**UI[lang], **RX.UI[lang]} if itde else UI[lang]
         for r in routes:
-            if itde and not is_itde(r, lang):
+            if (itde and not is_itde(r, lang)) or lang not in route_paths[r]:
                 continue
             fr_, to, cf, ct, country, _airport, dur, peak, _note = r
             a, b = city(cf, lang), city(ct, lang)
@@ -611,7 +619,8 @@ def build_indexes(site, ctx, route_paths, hotel_paths):
         u, (title, lead, from_t, hotels_t) = UI[lang], INDEX[lang]
         groups = {}
         for r in ctx["routes"]:
-            groups.setdefault(r[2], []).append(r)
+            if lang in route_paths[r]:
+                groups.setdefault(r[2], []).append(r)
         body = "".join(
             f'<section><h2>{E(from_t.format(c=city(o, lang)))}</h2><ul class="route-links">' + "".join(
                 f'<li><a href="/{route_paths[r][lang]}/">{E(city(r[2], lang))} {u["arrow"]} {E(city(r[3], lang))}</a></li>' for r in rs) + "</ul></section>"

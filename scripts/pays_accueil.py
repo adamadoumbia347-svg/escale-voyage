@@ -110,6 +110,7 @@ def build(site, ctx, route_paths):
                       (t["afr"], [r for r in rs if r[4] not in EUROPE and r[4] not in LOIN])]
             secs = ""
             for h, L in groups:
+                L = [r for r in L if lang in route_paths[r]]
                 if not L:
                     continue
                 rows = "".join(

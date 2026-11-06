@@ -78,6 +78,20 @@ CITIES = {
     "CAY": ("Cayenne", "Guyane", ("Cayenne", "Cayena", "Caiena", "كايين")),
     "DZA": ("Mayotte", "Mayotte", ("Mayotte", "Mayotte", "Maiote", "مايوت")),
     "PAP": ("Port-au-Prince", "Haïti", ("Port-au-Prince", "Puerto Príncipe", "Porto Príncipe", "بور أو برنس")),
+    # Vols régionaux en Afrique (réseau ci-dessous, pages en français et en anglais)
+    "FNA": ("Freetown", "Sierra Leone", ("Freetown", "Freetown", "Freetown", "فريتاون")),
+    "ROB": ("Monrovia", "Liberia", ("Monrovia", "Monrovia", "Monróvia", "منروفيا")),
+    "EBB": ("Entebbe", "Ouganda", ("Entebbe", "Entebbe", "Entebbe", "عنتيبي")),
+    "ZNZ": ("Zanzibar", "Tanzanie", ("Zanzibar", "Zanzíbar", "Zanzibar", "زنجبار")),
+    "JIB": ("Djibouti", "Djibouti", ("Djibouti", "Yibuti", "Djibuti", "جيبوتي")),
+    "BJM": ("Bujumbura", "Burundi", ("Bujumbura", "Buyumbura", "Bujumbura", "بوجمبورا")),
+    "FBM": ("Lubumbashi", "RD Congo", ("Lubumbashi", "Lubumbashi", "Lubumbashi", "لوبومباشي")),
+    "BGF": ("Bangui", "Centrafrique", ("Bangui", "Bangui", "Bangui", "بانغي")),
+    "HRE": ("Harare", "Zimbabwe", ("Harare", "Harare", "Harare", "هراري")),
+    "LUN": ("Lusaka", "Zambie", ("Lusaka", "Lusaka", "Lusaka", "لوساكا")),
+    "WDH": ("Windhoek", "Namibie", ("Windhoek", "Windhoek", "Windhoek", "ويندهوك")),
+    "CPT": ("Le Cap", "Afrique du Sud", ("Cape Town", "Ciudad del Cabo", "Cidade do Cabo", "كيب تاون")),
+    "SEZ": ("Mahé", "Seychelles", ("Mahé", "Mahé", "Mahé", "ماهي")),
     "FIH": ("Kinshasa", "RD Congo", None), "DSS": ("Dakar", "Sénégal", None), "ABJ": ("Abidjan", "Côte d'Ivoire", None),
     "BKO": ("Bamako", "Mali", None), "CKY": ("Conakry", "Guinée", None), "DLA": ("Douala", "Cameroun", None),
     "NSI": ("Yaoundé", "Cameroun", None), "LFW": ("Lomé", "Togo", None), "COO": ("Cotonou", "Bénin", None),
@@ -123,6 +137,16 @@ COUNTRIES = {
     "Martinique": ("Martinique", "Martinica", "Martinica", "مارتينيك"),
     "Guyane": ("French Guiana", "Guayana Francesa", "Guiana Francesa", "غويانا الفرنسية"),
     "Mayotte": ("Mayotte", "Mayotte", "Maiote", "مايوت"),
+    "Sierra Leone": ("Sierra Leone", "Sierra Leona", "Serra Leoa", "سيراليون"),
+    "Liberia": ("Liberia", "Liberia", "Libéria", "ليبيريا"),
+    "Ouganda": ("Uganda", "Uganda", "Uganda", "أوغندا"),
+    "Djibouti": ("Djibouti", "Yibuti", "Djibuti", "جيبوتي"),
+    "Burundi": ("Burundi", "Burundi", "Burundi", "بوروندي"),
+    "Centrafrique": ("Central African Republic", "República Centroafricana", "República Centro-Africana", "جمهورية أفريقيا الوسطى"),
+    "Zimbabwe": ("Zimbabwe", "Zimbabue", "Zimbabué", "زيمبابوي"),
+    "Zambie": ("Zambia", "Zambia", "Zâmbia", "زامبيا"),
+    "Namibie": ("Namibia", "Namibia", "Namíbia", "ناميبيا"),
+    "Seychelles": ("Seychelles", "Seychelles", "Seicheles", "سيشل"),
     "Haïti": ("Haiti", "Haití", "Haiti", "هايتي"),
     "Chine": ("China", "China", "China", "الصين"),
 }
@@ -132,9 +156,10 @@ REGION = {}
 for c in ["Sénégal", "Mali", "Guinée", "Niger", "Mauritanie", "Gambie", "Tchad"]:
     REGION[c] = "ouest_tabaski"
 for c in ["Côte d'Ivoire", "Burkina Faso", "Togo", "Bénin", "Cameroun", "Gabon", "Congo", "RD Congo", "Ghana", "Nigeria",
-          "Guinée-Bissau", "Cap-Vert", "Guinée équatoriale", "Sao Tomé-et-Principe"]:
+          "Guinée-Bissau", "Cap-Vert", "Guinée équatoriale", "Sao Tomé-et-Principe", "Sierra Leone", "Liberia", "Centrafrique"]:
     REGION[c] = "ouest"
-for c in ["Éthiopie", "Kenya", "Afrique du Sud", "Madagascar", "Maurice", "Angola", "Mozambique", "Rwanda", "Tanzanie"]:
+for c in ["Éthiopie", "Kenya", "Afrique du Sud", "Madagascar", "Maurice", "Angola", "Mozambique", "Rwanda", "Tanzanie",
+          "Ouganda", "Djibouti", "Burundi", "Zimbabwe", "Zambie", "Namibie", "Seychelles"]:
     REGION[c] = "est"
 for c in ["Maroc", "Algérie", "Tunisie", "Égypte"]:
     REGION[c] = "maghreb"
@@ -255,6 +280,42 @@ PAIRS = {
 }
 
 
+# ---------- Vols régionaux en Afrique ----------
+# Chaque ville est reliée aux grands aéroports de sa région et à deux ou trois hubs du continent (Addis-Abeba, Casablanca,
+# Nairobi, Johannesburg, Le Caire…), et les hubs sont reliés entre eux. Pages en français et en anglais seulement
+# (FR_EN_ONLY) : ce sont les deux langues des recherches de vols à l'intérieur de l'Afrique. Durées estimées.
+_AF = {
+    "W": "DSS ABJ ACC LOS ABV BKO OUA NIM CKY FNA ROB BJL OXB RAI NKC LFW COO KAN",
+    "C": "DLA NSI LBV BZV PNR FIH FBM NDJ BGF SSG TMS",
+    "E": "ADD NBO DAR ZNZ EBB KGL JIB BJM",
+    "S": "JNB CPT LAD MPM HRE LUN WDH",
+    "I": "TNR MRU RUN SEZ",
+    "N": "CMN RAK ALG TUN CAI",
+}
+_HUB = {"W": "ABJ DSS LOS ACC LFW", "C": "DLA FIH LBV", "E": "ADD NBO KGL", "S": "JNB", "I": "MRU", "N": "CMN CAI ALG TUN"}
+_CONT = {"W": "ADD CMN", "C": "ADD CMN NBO", "E": "JNB CAI", "S": "ADD NBO", "I": "JNB NBO ADD", "N": "ADD ABJ DSS LOS"}
+FR_EN_ONLY = set()
+
+
+def _africa():
+    pairs = set()
+    for k, cs in _AF.items():
+        for c in cs.split():
+            for h in (_HUB[k] + " " + _CONT[k]).split():
+                if h != c:
+                    pairs |= {(c, h), (h, c)}
+    hubs = {h for v in _HUB.values() for h in v.split()}
+    pairs |= {(a, b) for a in hubs for b in hubs if a != b}
+    for a, b in sorted(pairs):
+        cur = PAIRS.get(a, "").split()
+        if b not in cur:
+            PAIRS[a] = " ".join(cur + [b])
+            FR_EN_ONLY.add((a, b))
+
+
+_africa()
+
+
 def _duration(a, b):
     """Durée de vol estimée sans escale : distance / 800 km/h + 30 min, arrondie au quart d'heure."""
     r = math.pi / 180
@@ -290,4 +351,5 @@ def extend(routes, translations, airports):
             existing.add((o[0], d[0]))
             added.append(route)
     routes.extend(added)
+    FR_EN_ONLY.intersection_update({(r[0], r[1]) for r in added})  # seulement les nouvelles lignes : les pages déjà publiées gardent leurs langues
     return added, distances
