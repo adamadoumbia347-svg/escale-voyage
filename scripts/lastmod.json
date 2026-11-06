@@ -1,6 +1,6 @@
 {
 "/": [
-"5f16e30dbda3d504",
+"df1af23f891af6f9",
 "2026-11-06"
 ],
 "/a-propos/": [
@@ -3707,6 +3707,10 @@
 "90c22eb1e361bcba",
 "2026-11-05"
 ],
+"/de/reiseziel-quiz/": [
+"bff2f7697b2d2bbe",
+"2026-11-06"
+],
 "/de/trendziele-2027/": [
 "3dd3e554cfe20d35",
 "2026-11-05"
@@ -4190,6 +4194,10 @@
 "/en/deals/": [
 "629eea9b1a485a84",
 "2026-11-05"
+],
+"/en/destination-quiz/": [
+"3ded14b5ae41267a",
+"2026-11-06"
 ],
 "/en/diaspora-price-calendar/": [
 "d0c982b4819b9810",
@@ -12431,6 +12439,10 @@
 "fd5f1cbffde892b9",
 "2026-11-05"
 ],
+"/it/quiz-destinazione/": [
+"a5849137638e558b",
+"2026-11-06"
+],
 "/it/rimborso-volo-in-ritardo/": [
 "085b13d11e4aff85",
 "2026-11-05"
@@ -16061,6 +16073,10 @@
 ],
 "/pt/voos-zurique-tunis/": [
 "f02fff99d37ece92",
+"2026-11-06"
+],
+"/quiz-destination/": [
+"99874f48e69e00b3",
 "2026-11-06"
 ],
 "/recherche/": [
