@@ -87,7 +87,7 @@
         return '<li class="mt-card">' + (p ? '<img src="' + esc(p.img_small || p.img) + '" alt="" width="480" height="360" loading="lazy" decoding="async">' : '<span class="we-noimg" aria-hidden="true">✈️</span>') +
           '<div class="mt-body"><div class="mt-top"><span><strong>' + esc(nm(m.x)) + "</strong><small>" + esc(x ? country(x[3]) : "") + "</small></span>" +
           '<span class="mt-total"><b>' + esc(money(m.total, cur)) + "</b><small>" + esc(T.total) + "</small></span></div>" +
-          '<span class="mt-badge' + (m.days ? " on" : "") + '">' + esc(m.days ? T.together.replace("{n}", m.days) : T.adjust) + "</span>" +
+          '<span class="mt-badge' + (m.days ? " on" : "") + '">' + esc(m.days ? (m.days === 1 ? T.together.replace(/jours|days|giorni|Tage/, function (w) { return { jours: "jour", days: "day", giorni: "giorno", Tage: "Tag" }[w]; }) : T.together).replace("{n}", m.days) : T.adjust) + "</span>" +
           '<a class="mt-leg" href="' + esc(href(a, m.x)) + '"><span>' + esc(T.you) + " · " + esc(label(A)) + "<small>" + esc(span(m.x)) + "</small></span><b>" + esc(money(m.x.price, cur)) + "</b></a>" +
           '<a class="mt-leg" href="' + esc(href(b, m.y)) + '"><span>' + esc(T.them) + " · " + esc(label(Bs)) + "<small>" + esc(span(m.y)) + "</small></span><b>" + esc(money(m.y.price, cur)) + "</b></a>" +
           "</div></li>";
