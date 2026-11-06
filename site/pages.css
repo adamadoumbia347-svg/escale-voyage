@@ -732,3 +732,10 @@ main > section:nth-of-type(n+3), main .wrap > section:nth-of-type(n+3), body > f
 .cl-m small { font-size: 10px; line-height: 1.15; color: var(--muted); }
 .cl-m.cl-H { background: #fff1e6; border-color: #ffd8b8; } .cl-m.cl-b { background: var(--mint, #e9faf5); border-color: #bfeee0; }
 .cl-leg { margin: 0 0 10px; }
+/* Indice Escale des prix (/indice-prix/) */
+.ix-big { display: flex; align-items: center; gap: 16px; margin: 10px 0 16px; padding: 18px 20px; border-radius: 18px; background: var(--soft, #f4f6f8); }
+.ix-num { font: 800 clamp(40px, 9vw, 64px)/1 var(--f-display); letter-spacing: -.03em; }
+.ix-lab { font-weight: 600; } .ix-lab small { font-weight: 500; color: var(--muted); }
+.ix-quote { margin: 0 0 8px; padding: 14px 18px; border-left: 4px solid var(--teal-d, #0b8577); background: var(--mint, #e9faf5); border-radius: 0 14px 14px 0; }
+.ix-quote p { margin: 0 0 6px; font-weight: 600; } .ix-quote footer { font-size: 13px; color: var(--muted); }
+.ix-list { padding-left: 1.1em; } .ix-list li { margin: 4px 0; }

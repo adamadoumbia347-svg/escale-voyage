@@ -865,7 +865,7 @@ def build_fetes(site, ctx):
             body = f'<section><h2>{E(u["dates_label"])}</h2>{_para_html(d["dates"])}</section>'
             if lang == "fr":  # pages par destination (Tabaski, Aïd el-Fitr) : scripts/fetes_dest.py
                 import fetes_dest
-                body += fetes_dest.links({"tabaski": "tabaski", "ramadan": "aid"}.get(f["key"], ""))
+                body += fetes_dest.links({"tabaski": "tabaski", "ramadan": "aid", "noel": "noel"}.get(f["key"], ""))
             body += (f'<section><h2>{E(u["table_h"])}</h2>'
                      f'<table class="fete-table" data-dep="{f["dep"]}" data-ret="{f["ret"]}" data-from-label="{E(u["from_"])}" data-none="{E(u["none"])}">'
                      f'<thead><tr><th scope="col">{E(u["route"])}</th><th scope="col">{E(u["price"])}</th><th scope="col"><span class="sr-only">{E(u["see"])}</span></th></tr></thead>'

@@ -258,7 +258,7 @@ HEAD = """<!doctype html>
 </div>
 </main>
 <footer class="wrap">
-  <nav class="foot-nav" aria-label="Pages du site"><a href="/">Comparer vols, hôtels et voitures</a><a href="/#guides">Guides des trajets</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/contact/">Contact</a><a href="/a-propos/">Qui sommes-nous</a><a href="/guides/">Guides</a><a href="/vols-fetes/">Vols pour les fêtes</a><a href="/faire-venir-sa-famille/">Faire venir sa famille</a><a href="/bons-plans/">Bons plans</a><a href="/blog/">Blog</a><a href="/barometre-prix/">Baromètre des prix</a><a href="https://whatsapp.com/channel/0029VbE28kB0LKZN7ypnGj0d" target="_blank" rel="noopener">Chaîne WhatsApp</a><a href="#cookies" data-open-consent>Gérer les cookies</a></nav>
+  <nav class="foot-nav" aria-label="Pages du site"><a href="/">Comparer vols, hôtels et voitures</a><a href="/#guides">Guides des trajets</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/contact/">Contact</a><a href="/a-propos/">Qui sommes-nous</a><a href="/guides/">Guides</a><a href="/vols-fetes/">Vols pour les fêtes</a><a href="/faire-venir-sa-famille/">Faire venir sa famille</a><a href="/bons-plans/">Bons plans</a><a href="/blog/">Blog</a><a href="/barometre-prix/">Baromètre des prix</a><a href="/indice-prix/">Indice des prix</a><a href="https://whatsapp.com/channel/0029VbE28kB0LKZN7ypnGj0d" target="_blank" rel="noopener">Chaîne WhatsApp</a><a href="#cookies" data-open-consent>Gérer les cookies</a></nav>
   <p>Escale ne vend pas de billets et ne fixe aucun prix. Les durées et informations sont indicatives : les programmes des compagnies changent, vérifiez toujours sur le site de réservation.</p>
 </footer>
 <script src="/favs.js" defer></script>
@@ -346,6 +346,7 @@ def barometre_page():
             '<section><h2>D\'où viennent ces prix ?</h2><p>Ce sont des prix réels trouvés récemment par des voyageurs sur Aviasales (via Travelpayouts), relevés chaque jour par Escale. '
             'Ils servent à repérer les tendances : le tarif exact dépend de vos dates et se confirme sur le site de réservation. '
             'Vous pouvez citer et réutiliser ce baromètre en mentionnant la source « Escale (escale.live) » (licence <a href="https://creativecommons.org/licenses/by/4.0/deed.fr" rel="license">CC BY 4.0</a>).</p></section>'
+            '<section><h2>La tendance générale</h2><p>Les prix montent-ils ou baissent-ils dans l\'ensemble ? <a href="/indice-prix/">L\'indice Escale des prix</a> résume ces trajets en un chiffre, par région et par pays de départ, avec une phrase prête à citer.</p></section>'
             '<section><h2>Être prévenu quand un prix baisse</h2><p>Ouvrez la page de votre trajet dans le tableau et créez une alerte prix : vous recevez un e-mail dès qu\'un aller-retour passe sous votre budget.</p>'
             '<p><a class="btn" href="/?type=vols">Comparer les prix des vols</a></p>' + build_i18n.wa_btn("fr") + '</section>')
     ld = '<script type="application/ld+json">' + __import__("json").dumps({
@@ -356,6 +357,39 @@ def barometre_page():
         "license": "https://creativecommons.org/licenses/by/4.0/"}, ensure_ascii=False) + "</script>"
     return page("barometre-prix", "Baromètre des prix des vols vers l'Afrique et le Maghreb | Escale",
                 "Chaque jour, les prix aller-retour les plus bas vers Dakar, Bamako, Abidjan, Kinshasa, Alger, Casablanca, Tunis… et leur évolution sur 7 et 30 jours.",
+                hero, body, ld)
+
+
+def indice_page():
+    """Indice Escale des prix : chiffres écrits par le serveur (src/indice.ts) à partir des relevés du baromètre ; ici, la page, la méthode et la licence."""
+    hero = ('<p class="eyebrow">Mis à jour chaque jour · données libres</p><h1>Indice Escale <span>des prix des vols</span></h1>'
+            '<p class="hero-lead">Les billets entre l\'Europe et l\'Afrique montent-ils ou baissent-ils ? La variation médiane des prix sur une cinquantaine de grands trajets de la diaspora, '
+            'par région et par pays de départ, calculée chaque jour à partir de prix réels.</p>')
+    copy = ('<script>document.addEventListener("click",function(e){if(!e.target.closest||!e.target.closest("#ix-copy"))return;var q=document.getElementById("ix-q");if(!q)return;'
+            'var t=q.textContent+" Source : Escale, https://escale.live/indice-prix/";(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){e.target.textContent="✅ Copié"},function(){prompt("Copie ce texte :",t)})});</script>')
+    body = ('<section><div id="indice"><p>L\'indice se calcule à chaque visite à partir des derniers relevés. Il est aussi visible dans le <a href="/barometre-prix/">baromètre des prix</a>, trajet par trajet.</p></div><!-- /indice --></section>'
+            '<section><h2>Comment l\'indice est calculé</h2><ul>'
+            '<li>Chaque jour, Escale relève le prix aller-retour le plus bas repéré pour un départ dans les 6 prochains mois, sur chacun des grands trajets du <a href="/barometre-prix/">baromètre</a> (Paris, Lyon, Marseille, Bruxelles, Londres, Milan et Rome vers l\'Afrique et le Maghreb).</li>'
+            '<li>Pour chaque trajet, on compare ce prix à celui relevé il y a 30 jours (ou 7 jours tant que l\'historique est court).</li>'
+            '<li>L\'indice est la <strong>médiane</strong> de ces variations : la moitié des trajets a varié plus, l\'autre moitié moins. Un trajet isolé ne peut donc pas faire bouger l\'indice à lui seul.</li>'
+            '<li>Un trajet est dit stable quand son prix varie de moins de 3 %.</li></ul>'
+            '<p class="small">Les prix sont des prix réels trouvés récemment par des voyageurs sur Aviasales (via Travelpayouts), par personne, en classe économique. Ils montrent une tendance : le tarif exact dépend des dates et se confirme sur le site de réservation.</p></section>'
+            '<section><h2>Journalistes, blogs, associations : citez l\'indice</h2>'
+            '<p>Les chiffres de cette page sont libres de réutilisation sous licence <a href="https://creativecommons.org/licenses/by/4.0/deed.fr" rel="license">CC BY 4.0</a> : '
+            'vous pouvez les citer, les reprendre dans un article ou un graphique, à condition de mentionner la source « Escale (escale.live) » avec un lien vers cette page.</p>'
+            '<p>Le bouton « Copier » ci-dessus donne la phrase du jour avec sa source. Pour un chiffre sur un trajet précis, une période (Noël, été, Tabaski) ou une question de méthode : <a href="/contact/">écrivez-nous</a>.</p></section>'
+            '<section><h2>Pour aller plus loin</h2><ul class="route-links"><li><a href="/barometre-prix/">Baromètre : tous les trajets, prix et tendances</a></li>'
+            '<li><a href="/acheter-ou-attendre/">Acheter maintenant ou attendre ? Le verdict trajet par trajet</a></li><li><a href="/vols-noel-2026/">Noël 2026 : les prix par destination</a></li>'
+            '<li><a href="/calendrier-prix-diaspora/">Calendrier des prix pour rentrer au pays</a></li></ul></section>' + copy)
+    ld = '<script type="application/ld+json">' + __import__("json").dumps({
+        "@context": "https://schema.org", "@type": "Dataset", "name": "Indice Escale des prix des vols entre l'Europe et l'Afrique",
+        "description": "Variation médiane, sur 30 et 7 jours, du prix aller-retour le plus bas repéré chaque jour sur une cinquantaine de grands trajets entre l'Europe, l'Afrique et le Maghreb, par région d'arrivée et par pays de départ.",
+        "url": f"{DOMAIN}/indice-prix/", "creator": {"@type": "Organization", "name": "Escale", "url": f"{DOMAIN}/"},
+        "isAccessibleForFree": True, "inLanguage": "fr", "temporalCoverage": "2026/..", "spatialCoverage": "Europe, Afrique",
+        "variableMeasured": "Variation médiane du prix aller-retour (%)",
+        "license": "https://creativecommons.org/licenses/by/4.0/"}, ensure_ascii=False) + "</script>"
+    return page("indice-prix", "Indice Escale des prix des vols Europe – Afrique, chaque jour | Escale",
+                "Les billets d'avion vers l'Afrique montent-ils ? La variation médiane des prix sur 30 jours, par région et pays de départ, calculée chaque jour. Données libres (CC BY).",
                 hero, body, ld)
 
 
@@ -696,6 +730,7 @@ def main():
     urls += legal_pages()
     urls += blog.build(page, E, DOMAIN, build_i18n.extras_html(SITE, "fr", "destination", "", ""))
     urls.append(barometre_page())
+    urls.append(indice_page())
     urls.append(recherche_page())
     urls.append(hotels_live_page())
     urls += italia.build(SITE, ctx)  # test : trajets au départ de l'Italie, en italien

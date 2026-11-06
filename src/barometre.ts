@@ -46,9 +46,9 @@ function ago(hist: Point[], n: number, margin: number) {
 }
 const pct = (now: number, then: number | null) => (then ? Math.round((now / then - 1) * 100) : null)
 
-type Row = { label: string; path: string; from: string; to: string; price: number; d7: number | null; d30: number | null; month: Month | null }
+export type Row = { label: string; path: string; from: string; to: string; price: number; d7: number | null; d30: number | null; month: Month | null }
 
-async function rows(ctx: Ctx): Promise<Row[]> {
+export async function rows(ctx: Ctx): Promise<Row[]> {
   const cache = (globalThis as any).caches?.default
   let budget = 15
   const out = await Promise.all(ROUTES.map(async ([from, to, label, path]) => {

@@ -29,6 +29,7 @@ ORIG = {
     "PSA": ("Pisa", "Da Pisa confronta anche Firenze (FLR) e Bologna (BLQ): a volte un aeroporto vicino costa molto meno."),
     "BGY": ("Bergamo", "Da Bergamo partono molte compagnie low cost: confronta anche Milano Malpensa (MXP) per i voli con scalo."),
     "TRN": ("Torino", "Da Torino confronta anche Milano Malpensa (MXP), a circa un'ora e mezza: l'offerta di voli è molto più ampia."),
+    "VRN": ("Verona", "Da Verona confronta anche Venezia (VCE), Bergamo Orio al Serio (BGY) e Milano Malpensa (MXP): l'offerta verso l'Africa è molto più ampia."),
 }
 # Destinations (code, nom italien, pays, aéroport, périodes chères, conseil)
 DEST = {
@@ -50,13 +51,33 @@ DEST = {
             "Addis Abeba è anche un grande scalo per il resto dell'Africa: confronta i voli con coincidenza verso la tua destinazione finale."),
     "ALG": ("Algeri", "Algeria", "Aeroporto Houari Boumediene", "luglio, agosto e la fine del Ramadan",
             "Per l'Algeria serve un visto da richiedere prima della partenza (salvo per chi ha la cittadinanza algerina)."),
+    "BKO": ("Bamako", "Mali", "Aeroporto internazionale Modibo Keïta", "Natale, l'estate e la Tabaski",
+            "Dall'Italia si vola di solito con uno scalo (per esempio a Parigi, Casablanca, Istanbul, Addis Abeba o Algeri): confronta la durata totale, non solo il prezzo."),
+    "OUA": ("Ouagadougou", "Burkina Faso", "Aeroporto internazionale di Ouagadougou", "Natale, l'estate e la Tabaski",
+            "Si vola quasi sempre con uno scalo: confronta Parigi, Casablanca, Istanbul, Addis Abeba e Abidjan. Prima di partire controlla gli avvisi di viaggio ufficiali (Viaggiare Sicuri)."),
+    "DLA": ("Douala", "Camerun", "Aeroporto internazionale di Douala", "Natale e le vacanze estive",
+            "Confronta anche l'arrivo a Yaoundé-Nsimalen (NSI) se la tua destinazione finale è la capitale: a volte il prezzo cambia molto."),
+    "LFW": ("Lomé", "Togo", "Aeroporto internazionale Gnassingbé Eyadéma", "Natale e le vacanze estive",
+            "Lomé è anche lo scalo principale di ASKY Airlines: da qui partono molte coincidenze verso l'Africa occidentale e centrale."),
+    "COO": ("Cotonou", "Benin", "Aeroporto internazionale Cardinal Bernardin Gantin", "Natale e le vacanze estive",
+            "Confronta anche l'arrivo a Lomé (LFW), a circa tre ore di strada: a volte il volo costa molto meno."),
+    "CKY": ("Conakry", "Guinea", "Aeroporto internazionale Ahmed Sékou Touré", "Natale, l'estate e la Tabaski",
+            "Si vola quasi sempre con uno scalo (Parigi, Bruxelles, Casablanca, Dakar o Istanbul): verifica il tempo di coincidenza e il bagaglio incluso."),
+    "RAK": ("Marrakech", "Marocco", "Aeroporto di Marrakech-Menara", "Pasqua, agosto e Natale",
+            "Ci sono spesso voli low cost diretti da diversi aeroporti italiani: controlla il prezzo con la valigia inclusa e confronta anche Agadir e Fès."),
+    "ABV": ("Abuja", "Nigeria", "Aeroporto internazionale Nnamdi Azikiwe", "Natale e le vacanze estive",
+            "Confronta anche Lagos (LOS): l'offerta di voli è più ampia e a volte il prezzo è più basso, poi un volo interno o la strada."),
 }
 ROUTES = [("MXP", d) for d in ("DSS", "CMN", "LOS", "ACC", "ABJ", "CAI", "TUN")] + \
          [("FCO", d) for d in ("DSS", "CMN", "TUN", "CAI", "LOS", "ADD", "ALG")] + \
          [("BLQ", d) for d in ("CMN", "DSS", "ACC", "TUN", "LOS")] + [("TRN", d) for d in ("CMN", "DSS", "TUN", "ABJ")] + \
          [("MXP", d) for d in ("ADD", "ALG")] + [("FCO", d) for d in ("ACC", "ABJ")] + \
          [("NAP", d) for d in ("DSS", "CMN", "TUN", "ACC", "LOS")] + [("VCE", d) for d in ("DSS", "CMN", "ACC", "TUN")] + \
-         [("PSA", d) for d in ("DSS", "CMN", "TUN")] + [("BGY", d) for d in ("CMN", "TUN", "CAI")]
+         [("PSA", d) for d in ("DSS", "CMN", "TUN")] + [("BGY", d) for d in ("CMN", "TUN", "CAI")] + \
+         [(o, d) for o in ("MXP", "FCO") for d in ("BKO", "OUA", "DLA", "LFW", "COO", "CKY", "RAK", "ABV")] + \
+         [("BGY", d) for d in ("DSS", "ABJ", "ACC", "OUA", "RAK")] + [("BLQ", d) for d in ("ABJ", "OUA", "RAK")] + \
+         [("VCE", d) for d in ("ABJ", "LOS", "OUA")] + [("TRN", d) for d in ("ACC", "LOS")] + [("NAP", "ABJ")] + \
+         [("VRN", d) for d in ("DSS", "ABJ", "ACC", "CMN", "OUA")]
 
 
 def slug(t):
@@ -137,7 +158,7 @@ def build(site, ctx):
             f'<li><a href="/{path(r)}/">{E(ORIG[r[0]][0])} → {E(DEST[r[1]][0])}</a></li>' for r in rs) + "</ul></section>"
         for o, rs in groups.items())
     body += f'<section><h2>Le offerte ogni settimana</h2><p>I prezzi più bassi verso l\'Africa e il Maghreb, ogni settimana su WhatsApp, gratis.</p>{B.wa_btn("it")}</section>'
-    hero = ('<h1>Voli economici verso l\'Africa e il Maghreb</h1><p class="hero-lead">Da Milano, Roma, Napoli, Venezia, Bologna, Torino, Pisa e Bergamo: durata del volo, '
+    hero = ('<h1>Voli economici verso l\'Africa e il Maghreb</h1><p class="hero-lead">Da Milano, Roma, Napoli, Venezia, Verona, Bologna, Torino, Pisa e Bergamo: durata del volo, '
             'quando prenotare e prezzi reali trovati di recente, tratta per tratta.</p>')
     urls.append(B.write(site, "it", "it", "Voli economici verso l'Africa e il Maghreb | Escale",
                         "Voli economici da Milano, Roma, Napoli, Venezia, Bologna e Torino verso Dakar, Casablanca, Tunisi, Il Cairo, Lagos, Accra, Abidjan: prezzi reali e consigli.",
@@ -145,4 +166,4 @@ def build(site, ctx):
     return urls
 
 
-DEST_EN = {"DSS": "Dakar", "CMN": "Casablanca", "TUN": "Tunis", "CAI": "Cairo", "LOS": "Lagos", "ACC": "Accra", "ABJ": "Abidjan", "ADD": "Addis Ababa", "ALG": "Algiers"}
+DEST_EN = {"BKO": "Bamako", "OUA": "Ouagadougou", "DLA": "Douala", "LFW": "Lomé", "COO": "Cotonou", "CKY": "Conakry", "RAK": "Marrakech", "ABV": "Abuja", "DSS": "Dakar", "CMN": "Casablanca", "TUN": "Tunis", "CAI": "Cairo", "LOS": "Lagos", "ACC": "Accra", "ABJ": "Abidjan", "ADD": "Addis Ababa", "ALG": "Algiers"}

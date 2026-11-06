@@ -24,6 +24,7 @@ import * as verdictApi from "./api/verdict"
 import * as compteur from "./api/compteur"
 import * as apercu from "./apercu-prix"
 import * as barometre from "./barometre"
+import * as indice from "./indice"
 import * as accueil from "./accueil"
 import { sendDigest, sendNewsletter } from "./digest"
 
@@ -42,6 +43,7 @@ export default {
       return handler(c)
     }
     if (path === "/barometre-prix/" || path === "/barometre-prix") return barometre.onRequest(c)
+    if (path === "/indice-prix/" || path === "/indice-prix") return indice.onRequest(c)
     if (path === "/") return accueil.onRequest(c)
     return apercu.onRequest(c)
   },

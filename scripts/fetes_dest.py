@@ -23,10 +23,24 @@ VILLES = {
     "ALG": ("Alger", "Algérie", "alger", "L'aéroport Houari-Boumediene est à l'est d'Alger. Comparez aussi Oran, Constantine ou Tlemcen si votre famille est loin de la capitale."),
     "ORN": ("Oran", "Algérie", "oran", "Comparez aussi les vols vers Tlemcen ou Alger si votre famille est entre les deux, et le bateau depuis Marseille si vous partez en voiture."),
     "CMN": ("Casablanca", "Maroc", "casablanca", "Comparez Casablanca avec Rabat, Tanger, Fès, Oujda ou Nador : selon votre famille, un autre aéroport peut être moins cher et plus proche."),
+    "DLA": ("Douala", "Cameroun", "douala", "L'aéroport international de Douala est à l'est de la ville. Comparez aussi l'arrivée à Yaoundé-Nsimalen (NSI) si votre famille est près de la capitale."),
+    "FIH": ("Kinshasa", "RD Congo", "kinshasa", "L'aéroport de N'Djili est à environ 25 km du centre de Kinshasa : prévoyez le transfert, surtout pour une arrivée de nuit."),
+    "LFW": ("Lomé", "Togo", "lome", "Lomé est aussi la base d'ASKY Airlines : beaucoup de correspondances vers l'Afrique de l'Ouest et centrale y passent."),
+    "COO": ("Cotonou", "Bénin", "cotonou", "Comparez aussi l'arrivée à Lomé (LFW), à environ trois heures de route : le vol est parfois bien moins cher."),
     "TUN": ("Tunis", "Tunisie", "tunis", "Comparez aussi Monastir, Enfidha et Djerba : selon votre famille, un autre aéroport peut être moins cher."),
 }
 
 FETES = [
+    dict(key="noel", annee=2026, slug="vols-noel-2026", nom="Noël", court="Noël", parent="vols-noel",
+         date="le vendredi 25 décembre 2026",
+         dates_txt="Noël tombe le vendredi 25 décembre 2026. En France, les vacances scolaires de Noël vont du samedi 19 décembre 2026 au lundi 4 janvier 2027 (reprise des cours), pour toutes les zones.",
+         villes=["ABJ", "DSS", "BKO", "CKY", "DLA", "FIH", "LFW", "COO", "OUA", "ALG", "CMN", "TUN"],
+         periodes=[("2026-12", "2027-01", "2026-12-19", "2027-01-03", "Vacances scolaires : 19 déc. → 3 janv.", "Les dates les plus demandées."),
+                   ("2026-12", "2027-01", "2026-12-12", "2027-01-02", "Départ mi-décembre, retour début janvier", "Partir une semaine avant les vacances coûte souvent moins cher."),
+                   ("2026-12", "2027-01", "2026-12-26", "2027-01-10", "Départ après Noël, retour mi-janvier", "Les départs du 26 décembre et les retours après le 5 janvier sont souvent plus calmes.")],
+         def_dep="2026-12-19", def_ret="2027-01-03", mois="2026-12",
+         conseil_fete="Pour Noël, les départs du premier week-end des vacances (19-20 décembre) et les retours du dernier week-end (2-3 janvier) sont les plus chers.",
+         reserver="Le plus tôt possible : à quelques semaines de Noël, les prix montent presque chaque semaine. Si c'est trop cher, décalez le départ de quelques jours ou comparez un autre aéroport de départ."),
     dict(key="tabaski", slug="vols-tabaski-2027", nom="la Tabaski", court="Tabaski", parent="vols-tabaski",
          date="vers le dimanche 16 mai 2027",
          dates_txt="La Tabaski (Aïd el-Kébir, Aïd el-Adha) 2027 devrait tomber vers le dimanche 16 mai 2027, le 16 ou le 17 selon les pays. La date exacte est fixée par l'observation de la lune, quelques jours avant.",
@@ -60,7 +74,7 @@ def links(key):
     if not f:
         return ""
     return ('<section><h2>Par destination</h2><ul class="route-links">'
-            + "".join(f'<li><a href="/{path(f, c)}/">Vol pour {VILLES[c][0]} · {f["court"]} {ANNEE}</a></li>' for c in f["villes"]) + "</ul></section>")
+            + "".join(f'<li><a href="/{path(f, c)}/">Vol pour {VILLES[c][0]} · {f["court"]} {f.get("annee", ANNEE)}</a></li>' for c in f["villes"]) + "</ul></section>")
 
 
 def build(page, E, extras_html, alert_btn, route_exists, hub_exists, wa_btn):
@@ -81,12 +95,12 @@ def build(page, E, extras_html, alert_btn, route_exists, hub_exists, wa_btn):
                 f'<td><a class="price-go" href="/?type=vols&amp;from={o}&amp;to={code}&amp;dep={f["def_dep"]}&amp;ret={f["def_ret"]}">Voir les vols</a></td></tr>'
                 for o, c in DEPARTS)
             route = f"vol-paris-{slug}"
-            hero = (f'<p class="eyebrow">{E(f["court"])} {ANNEE} · {E(pays)}</p>'
-                    f'<h1>Vol pour {E(v)} pour {E(f["nom"])} {ANNEE}</h1>'
-                    f'<p class="hero-lead">{E(f["court"])} {ANNEE} {E(f["date"])} : les prix repérés pour rentrer à {E(v)}, le meilleur moment pour partir et pour réserver.</p>'
+            hero = (f'<p class="eyebrow">{E(f["court"])} {f.get("annee", ANNEE)} · {E(pays)}</p>'
+                    f'<h1>Vol pour {E(v)} pour {E(f["nom"])} {f.get("annee", ANNEE)}</h1>'
+                    f'<p class="hero-lead">{E(f["court"])} {f.get("annee", ANNEE)} {E(f["date"])} : les prix repérés pour rentrer à {E(v)}, le meilleur moment pour partir et pour réserver.</p>'
                     f'<p class="hero-price" id="hero-price" hidden></p>'
                     f'<div class="cta-row"><a class="btn" href="/?type=vols&amp;from=CDG&amp;to={code}&amp;dep={f["def_dep"]}&amp;ret={f["def_ret"]}">Comparer les vols pour {E(f["nom"])}</a>{alert_btn("fr")}</div>')
-            body = (f'<section><h2>Quand tombe {E(f["nom"])} {ANNEE} ?</h2><p>{E(f["dates_txt"])}</p></section>'
+            body = (f'<section><h2>Quand tombe {E(f["nom"])} {f.get("annee", ANNEE)} ?</h2><p>{E(f["dates_txt"])}</p></section>'
                     f'<section><h2>Quand partir ?</h2>'
                     f'<table class="fete-table ete-table">{thead.format("Période (depuis Paris)")}<tbody>{rows}</tbody></table>'
                     f'<p class="small">Prix aller-retour le plus bas repéré récemment pour chaque période, par personne. Les dates indiquées sont celles du vol trouvé ; le tarif exact se confirme sur le site de réservation. '
@@ -94,36 +108,36 @@ def build(page, E, extras_html, alert_btn, route_exists, hub_exists, wa_btn):
                     f'<section><h2>Depuis quel aéroport partir ?</h2>'
                     f'<table class="fete-table ete-table">{thead.format("Trajet (départ et retour pendant le mois de la fête)")}<tbody>{orig}</tbody></table></section>'
                     f'<section id="price-alert" class="price-alert" data-from="CDG" data-to="{code}" hidden></section>'
-                    f'<section><h2>À savoir pour {E(f["nom"])} {ANNEE}</h2><ul><li>{E(f["conseil_fete"])}</li><li>{E(arrivee)}</li>'
+                    f'<section><h2>À savoir pour {E(f["nom"])} {f.get("annee", ANNEE)}</h2><ul><li>{E(f["conseil_fete"])}</li><li>{E(arrivee)}</li>'
                     '<li>Avec des valises de cadeaux, comparez les tarifs qui incluent deux bagages en soute : ils reviennent souvent moins cher qu\'un tarif de base avec bagages en supplément.</li></ul></section>'
                     f'<section><h2>Quand réserver ?</h2><p>{E(f["reserver"])} Activez l\'option « dates flexibles (±3 jours) » dans la recherche : décaler le départ de quelques jours change souvent beaucoup le prix.</p></section>'
                     f'<section><h2>Les bons plans chaque semaine</h2><p>Les prix les plus bas vers {E(v)} et l\'Afrique, chaque semaine sur WhatsApp, gratuitement.</p>{wa_btn("fr")}</section>'
                     f'<section class="faq"><h2>Questions fréquentes</h2>'
-                    f'<details><summary>Quelle est la date de {E(f["nom"])} {ANNEE} ?</summary><p>{E(f["dates_txt"])}</p></details>'
-                    f'<details><summary>Quand acheter un billet pour {E(v)} pour {E(f["nom"])} {ANNEE} ?</summary><p>{E(f["reserver"])}</p></details></section>'
+                    f'<details><summary>Quelle est la date de {E(f["nom"])} {f.get("annee", ANNEE)} ?</summary><p>{E(f["dates_txt"])}</p></details>'
+                    f'<details><summary>Quand acheter un billet pour {E(v)} pour {E(f["nom"])} {f.get("annee", ANNEE)} ?</summary><p>{E(f["reserver"])}</p></details></section>'
                     + extras_html("fr", v, v, code)
                     + '<section><h2>Pages utiles</h2><ul class="route-links">'
                     + (f'<li><a href="/{route}/">Vol Paris → {E(v)} toute l\'année : calendrier des prix, visa, bagages</a></li>' if route_exists(route) else "")
                     + (f'<li><a href="/vols-pour-{slug}/">Tous les vols pour {E(v)}</a></li>' if hub_exists(f"vols-pour-{slug}") else "")
-                    + f'<li><a href="/{f["parent"]}/">{E(f["court"])} {ANNEE} : les prix pour toutes les destinations</a></li>'
-                    + f'<li><a href="/{f["slug"]}/">{E(f["court"])} {ANNEE} : toutes nos pages par destination</a></li></ul></section>'
+                    + f'<li><a href="/{f["parent"]}/">{E(f["court"])} {f.get("annee", ANNEE)} : les prix pour toutes les destinations</a></li>'
+                    + f'<li><a href="/{f["slug"]}/">{E(f["court"])} {f.get("annee", ANNEE)} : toutes nos pages par destination</a></li></ul></section>'
                     + f'<section><h2>Autres destinations pour {E(f["nom"])}</h2><ul class="links">'
-                    + "".join(f'<li><a href="/{path(f, o)}/">Vol pour {E(VILLES[o][0])} · {E(f["court"])} {ANNEE}</a></li>' for o in f["villes"] if o != code) + "</ul></section>"
+                    + "".join(f'<li><a href="/{path(f, o)}/">Vol pour {E(VILLES[o][0])} · {E(f["court"])} {f.get("annee", ANNEE)}</a></li>' for o in f["villes"] if o != code) + "</ul></section>"
                     + '<script src="/ete.js" defer></script><script src="/alerts.js" defer></script>')
-            faq = [(f"Quelle est la date de {f['nom']} {ANNEE} ?", f["dates_txt"]), (f"Quand acheter un billet pour {v} pour {f['nom']} {ANNEE} ?", f["reserver"])]
+            faq = [(f"Quelle est la date de {f['nom']} {f.get("annee", ANNEE)} ?", f["dates_txt"]), (f"Quand acheter un billet pour {v} pour {f['nom']} {f.get("annee", ANNEE)} ?", f["reserver"])]
             ld = ('<script type="application/ld+json">' + json.dumps({
                 "@context": "https://schema.org", "@type": "FAQPage",
                 "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]}, ensure_ascii=False) + "</script>")
-            urls.append(page(path(f, code), f"Vol {v} {f['court']} {ANNEE} : prix et dates | Escale",
-                             f"Billet d'avion pour {v} pour {f['nom']} {ANNEE} ({f['date']}) : prix repérés depuis Paris, Lyon, Marseille, Bruxelles, Genève et quand réserver.",
+            urls.append(page(path(f, code), f"Vol {v} {f['court']} {f.get("annee", ANNEE)} : prix et dates | Escale",
+                             f"Billet d'avion pour {v} pour {f['nom']} {f.get("annee", ANNEE)} ({f['date']}) : prix repérés depuis Paris, Lyon, Marseille, Bruxelles, Genève et quand réserver.",
                              hero, body, ld))
         items = "".join(f'<li><a href="/{path(f, c)}/"><strong>{E(VILLES[c][0])}</strong></a> · <span class="small">{E(VILLES[c][1])}</span></li>' for c in f["villes"])
-        hero = (f'<p class="eyebrow">{E(f["court"])} {ANNEE}</p><h1>Rentrer au pays pour {E(f["nom"])} {ANNEE}</h1>'
-                f'<p class="hero-lead">{E(f["court"])} {ANNEE} {E(f["date"])}. Pour chaque destination : les prix repérés, le meilleur moment pour partir et pour réserver.</p>')
+        hero = (f'<p class="eyebrow">{E(f["court"])} {f.get("annee", ANNEE)}</p><h1>Rentrer au pays pour {E(f["nom"])} {f.get("annee", ANNEE)}</h1>'
+                f'<p class="hero-lead">{E(f["court"])} {f.get("annee", ANNEE)} {E(f["date"])}. Pour chaque destination : les prix repérés, le meilleur moment pour partir et pour réserver.</p>')
         body = (f'<section><h2>Choisissez votre destination</h2><ul class="route-links">{items}</ul></section>'
                 f'<section><h2>Les dates à retenir</h2><p>{E(f["dates_txt"])}</p><p>{E(f["conseil_fete"])} {E(f["reserver"])}</p></section>'
                 f'<section><p><a class="btn" href="/{f["parent"]}/">Voir les prix de {E(f["nom"])} par trajet</a></p></section>')
-        urls.append(page(f["slug"], f"{f['court']} {ANNEE} au pays : prix des vols par destination | Escale",
-                         f"Vols pour {f['nom']} {ANNEE} ({f['date']}) vers " + ", ".join(VILLES[c][0] for c in f["villes"]) + " : prix repérés et quand réserver.",
+        urls.append(page(f["slug"], f"{f['court']} {f.get("annee", ANNEE)} au pays : prix des vols par destination | Escale",
+                         f"Vols pour {f['nom']} {f.get("annee", ANNEE)} ({f['date']}) vers " + ", ".join(VILLES[c][0] for c in f["villes"]) + " : prix repérés et quand réserver.",
                          hero, body))
     return urls
