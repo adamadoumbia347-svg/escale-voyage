@@ -2,7 +2,7 @@
 // - pages : réseau d'abord (prix à jour), copie gardée en secours si la connexion coupe ;
 // - fichiers du site (CSS, JS, polices, images) : copie locale d'abord, mise à jour en arrière-plan ;
 // - jamais de cache pour /api/ ni pour les autres sites (moteur Travelpayouts, partenaires).
-const VERSION = "escale-v3"
+const VERSION = "escale-v4"
 const PAGES = VERSION + "-pages", FILES = VERSION + "-files"
 
 self.addEventListener("install", (e) => {

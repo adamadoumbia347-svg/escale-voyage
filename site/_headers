@@ -23,6 +23,13 @@
 /og/*
   Cache-Control: public, max-age=604800
 
+# Pages qui changent souvent : le navigateur redemande toujours la dernière version (sinon les téléphones gardaient l'ancienne)
+/
+  Cache-Control: no-cache
+
+/recherche/
+  Cache-Control: no-cache
+
 /admin/*
   X-Robots-Tag: noindex, nofollow
   Cache-Control: no-store
