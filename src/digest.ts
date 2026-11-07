@@ -3,7 +3,7 @@ import { mailerReady, sendMail, lastMailError } from "./_lib/mail"
 import { Month, Point, cacheKey } from "./apercu-prix"
 // Message WhatsApp de la semaine : chaque lundi matin (tâche quotidienne de wrangler.jsonc), un e-mail avec le message
 // des bons plans prêt à copier dans la chaîne WhatsApp. Destinataire : variable DIGEST_TO (Cloudflare > Variables et secrets).
-// Prix : relevé du jour (historique KV des pages trajets, mis à jour chaque matin par releve-prix.yml) et dates du cache.
+// Prix : relevé du jour (historique KV des pages trajets, mis à jour chaque nuit par src/releve.ts) et dates du cache.
 // Aussi envoyable à la demande depuis /admin/ (bouton « Recevoir le message WhatsApp maintenant »). Suivi du bilan de la semaine (weeklyStats).
 const CHANNEL = "https://whatsapp.com/channel/0029VbE28kB0LKZN7ypnGj0d"
 const DEST: [string, string, string, string, string][] = [

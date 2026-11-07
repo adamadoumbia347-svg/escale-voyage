@@ -26,6 +26,7 @@ Pour faire grandir le site : voir [CROISSANCE.md](CROISSANCE.md).
   - `api/prix`, `api/explore`, `api/calendar`, `api/deals` : prix réels (secret `TRAVELPAYOUTS_TOKEN`) ;
   - `api/geo` : ville et pays approximatifs du visiteur (aéroport et devise par défaut) ;
   - `api/form` : formulaires contact et bons plans, lus sur `/admin/` (secret `ADMIN_KEY`) ;
+  - `releve.ts` : relevé des prix du baromètre chaque nuit (toutes les 10 min entre 3 h et 6 h UTC, 5 trajets à la fois) ;
   - `api/alert` + `api/cron` : alertes prix par e-mail (secret `RESEND_API_KEY` ; expéditeur `MAIL_FROM` dans wrangler.jsonc ; vérification chaque matin par Cloudflare) ;
   - `apercu-prix.ts` : prix dans l'aperçu des liens partagés (WhatsApp, Facebook…).
 - `wrangler.jsonc` : configuration du Worker (dossier publié, stockage KV `escale`, adresses qui passent par le code).

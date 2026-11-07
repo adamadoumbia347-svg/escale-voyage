@@ -1,7 +1,7 @@
 import { Ctx, json, esc, IATA } from "./_lib/common"
 import { Month, Point, cacheKey, readHistory } from "./apercu-prix"
 // Accueil : les boutons « Trajets populaires » (sous le moteur) reçoivent le prix aller-retour le plus bas déjà connu
-// (cache des pages trajets, sinon dernier relevé de l'historique KV, mis à jour chaque matin par releve-prix.yml)
+// (cache des pages trajets, sinon dernier relevé de l'historique KV, mis à jour chaque nuit par src/releve.ts)
 // et une flèche de tendance sur 7 jours (↓ baisse, ↑ hausse, à partir de 3 %).
 // Rien n'est demandé à Travelpayouts ici : la page reste rapide (jamais plus de 400 ms d'attente). Prix gardés 1 heure dans le cache de Cloudflare.
 // GET /api/connus?r=CDG-DSS,ORY-CMN : mêmes prix, pour le bloc « Vos trajets » (trajets consultés, gardés dans le navigateur).

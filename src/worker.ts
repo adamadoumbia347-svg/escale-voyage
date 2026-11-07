@@ -14,6 +14,7 @@ import * as alert from "./api/alert"
 import * as form from "./api/form"
 import * as admin from "./api/admin"
 import * as cron from "./api/cron"
+import { releve } from "./releve"
 import * as push from "./api/push"
 import * as populaires from "./api/populaires"
 import * as clic from "./api/clic"
@@ -47,8 +48,13 @@ export default {
     if (path === "/") return accueil.onRequest(c)
     return apercu.onRequest(c)
   },
-  // Chaque matin (voir « triggers » dans wrangler.jsonc) : vérification des alertes prix ; le lundi, message WhatsApp de la semaine
-  async scheduled(_event: unknown, env: Env, ctx: { waitUntil: (p: Promise<any>) => void }) {
+  // Chaque matin à 6 h UTC (voir « triggers » dans wrangler.jsonc) : vérification des alertes prix ; le lundi, message WhatsApp de la semaine
+  async scheduled(event: { cron?: string }, env: Env, ctx: { waitUntil: (p: Promise<any>) => void }) {
+    // Toutes les 10 minutes entre 3 h et 6 h UTC : relevé des prix du baromètre, par tranches (src/releve.ts)
+    if (event?.cron && event.cron !== "0 6 * * *") {
+      ctx.waitUntil(releve(env).then((r) => console.log("relevé des prix", JSON.stringify(r))))
+      return
+    }
     ctx.waitUntil(cron.checkAlerts(env).then((r) => console.log("alertes", JSON.stringify(r))))
     // Le lundi : e-mail avec le message WhatsApp des bons plans de la semaine (src/digest.ts)
     if (new Date().getUTCDay() === 1) {

@@ -20,6 +20,6 @@
   // Adresse d'expéditeur des alertes prix (domaine escale.live validé chez Resend)
   "vars": { "MAIL_FROM": "alertes@escale.live" },
   // Vérification des alertes prix chaque jour à 6 h UTC (7 h ou 8 h à Paris)
-  "triggers": { "crons": ["0 6 * * *"] },
+  "triggers": { "crons": ["0 6 * * *", "*/10 3-5 * * *"] },
   "observability": { "enabled": true }
 }
