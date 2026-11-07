@@ -1,12 +1,21 @@
 // Page « Recherche en direct » avec une recherche déjà lancée (?flightSearch=CDG1911DSS26111) : comme sur Skyscanner,
 // le grand titre et le formulaire laissent la place à une barre compacte (trajet, passagers, dates avec ‹ ›).
-// Toucher la barre rouvre le formulaire du moteur pour modifier la recherche.
+// Toucher la barre (« Modifier les dates ») rouvre le formulaire du moteur pour changer les dates ou le trajet.
 (function () {
   "use strict";
   var bar = document.getElementById("rs-bar"), form = document.querySelector(".wl-form");
-  var fs = new URLSearchParams(location.search).get("flightSearch") || "";
+  if (!bar || !form) return;
+  // Recherche lue dans l'adresse : au chargement, mais aussi quand le moteur change l'adresse après une nouvelle recherche
+  // (sans recharger la page) ; on regarde aussi la partie après « # », au cas où le moteur l'y écrirait.
+  var getFS = function () {
+    var q = new URLSearchParams(location.search).get("flightSearch");
+    if (q) return q;
+    return (decodeURIComponent(location.hash).match(/[A-Z]{3}\d{4}[A-Z]{3}(?:\d{4})?\d{0,3}/) || [])[0] || "";
+  };
+  var current = "";
+  var init = function (fs) {
   var m = fs.match(/^([A-Z]{3})(\d{2})(\d{2})([A-Z]{3})(?:(\d{2})(\d{2}))?(\d)?(\d)?(\d)?$/);
-  if (!bar || !form || !m) return;
+  if (!m) return false;
   var from = m[1], to = m[4], ad = +(m[7] || 1), ch = +(m[8] || 0) + +(m[9] || 0);
   var today = new Date(); today.setHours(0, 0, 0, 0);
   var dateOf = function (d, mo) { // prochaine date à venir pour ce jour et ce mois
@@ -21,17 +30,17 @@
   var link = function (a, b) { return "/recherche/?flightSearch=" + from + dd(a) + to + (b ? dd(b) : "") + (m[7] ? m.slice(7).join("") : "1"); };
   // Langue choisie sur Escale (ou du navigateur) : barre et textes de la page dans cette langue, comme le moteur (wl.js)
   var LG = "fr"; try { LG = (localStorage.getItem("escale.lang") || (navigator.language || "fr").slice(0, 2)).toLowerCase(); } catch (e) {}
-  var W = { en: ["adult", "adults", "child", "children", "Economy", "Edit", "Outbound", "Return", "one day earlier", "one day later", "Live prices", "Live flight search",
+  var W = { en: ["adult", "adults", "child", "children", "Economy", "📅 Change dates", "Outbound", "Return", "one day earlier", "one day later", "Live prices", "Live flight search",
       "Provided by our partner Travelpayouts (Aviasales). Escale does not sell tickets: the final price and conditions (baggage, changes) are shown on the booking site. Escale may earn a commission if you book, at no cost to you."],
-    es: ["adulto", "adultos", "niño", "niños", "Turista", "Modificar", "Ida", "Vuelta", "un día antes", "un día después", "Precios en directo", "Búsqueda de vuelos en directo",
+    es: ["adulto", "adultos", "niño", "niños", "Turista", "📅 Cambiar fechas", "Ida", "Vuelta", "un día antes", "un día después", "Precios en directo", "Búsqueda de vuelos en directo",
       "Buscador de nuestro socio Travelpayouts (Aviasales). Escale no vende billetes: el precio final y las condiciones aparecen en el sitio de reserva. Escale puede recibir una comisión, sin coste para ti."],
-    pt: ["adulto", "adultos", "criança", "crianças", "Económica", "Alterar", "Ida", "Volta", "um dia antes", "um dia depois", "Preços ao vivo", "Pesquisa de voos ao vivo",
+    pt: ["adulto", "adultos", "criança", "crianças", "Económica", "📅 Alterar datas", "Ida", "Volta", "um dia antes", "um dia depois", "Preços ao vivo", "Pesquisa de voos ao vivo",
       "Motor do nosso parceiro Travelpayouts (Aviasales). A Escale não vende bilhetes: o preço final e as condições aparecem no site de reserva. A Escale pode receber uma comissão, sem custo para si."],
-    it: ["adulto", "adulti", "bambino", "bambini", "Economy", "Modifica", "Andata", "Ritorno", "un giorno prima", "un giorno dopo", "Prezzi in diretta", "Ricerca voli in diretta",
+    it: ["adulto", "adulti", "bambino", "bambini", "Economy", "📅 Cambia date", "Andata", "Ritorno", "un giorno prima", "un giorno dopo", "Prezzi in diretta", "Ricerca voli in diretta",
       "Motore del nostro partner Travelpayouts (Aviasales). Escale non vende biglietti: il prezzo finale e le condizioni appaiono sul sito di prenotazione. Escale può ricevere una commissione, senza costi per te."],
-    de: ["Erwachsener", "Erwachsene", "Kind", "Kinder", "Economy", "Ändern", "Hinflug", "Rückflug", "einen Tag früher", "einen Tag später", "Live-Preise", "Live-Flugsuche",
+    de: ["Erwachsener", "Erwachsene", "Kind", "Kinder", "Economy", "📅 Daten ändern", "Hinflug", "Rückflug", "einen Tag früher", "einen Tag später", "Live-Preise", "Live-Flugsuche",
       "Suchmaschine unseres Partners Travelpayouts (Aviasales). Escale verkauft keine Tickets: Endpreis und Bedingungen erscheinen auf der Buchungsseite. Escale erhält eventuell eine Provision, ohne Kosten für dich."],
-    ar: ["بالغ", "بالغين", "طفل", "أطفال", "اقتصادية", "تعديل", "الذهاب", "العودة", "يوماً قبل", "يوماً بعد", "أسعار مباشرة", "بحث مباشر عن الرحلات",
+    ar: ["بالغ", "بالغين", "طفل", "أطفال", "اقتصادية", "📅 تغيير التواريخ", "الذهاب", "العودة", "يوماً قبل", "يوماً بعد", "أسعار مباشرة", "بحث مباشر عن الرحلات",
       "محرك من شريكنا Travelpayouts (Aviasales). لا تبيع Escale التذاكر: يظهر السعر النهائي والشروط على موقع الحجز. قد تحصل Escale على عمولة دون أي تكلفة عليك."] }[LG];
   var LOC = { fr: "fr-FR", en: "en-GB", es: "es-ES", pt: "pt-PT", it: "it-IT", de: "de-DE", ar: "ar" }[LG] || "fr-FR";
   if (W) {
@@ -60,7 +69,7 @@
     bar.innerHTML = '<button type="button" class="rs-sum" aria-expanded="false" aria-controls="tpwl-search">' +
       '<span class="rs-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M10 2a8 8 0 0 1 6.3 12.9l5.4 5.4-1.4 1.4-5.4-5.4A8 8 0 1 1 10 2zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"/></svg></span>' +
       '<span class="rs-txt"><strong>' + esc(a) + " – " + esc(b) + "</strong><small>" + esc(pax) + "</small></span>" +
-      '<span class="rs-edit">' + (W ? W[5] : "Modifier") + '</span></button>' +
+      '<span class="rs-edit">' + (W ? W[5] : "📅 Modifier les dates") + '</span></button>' +
       '<div class="rs-dates">' + group(dep, false) + (ret ? group(ret, true) : "") + "</div>";
     bar.querySelector(".rs-sum").addEventListener("click", function () {
       var open = form.classList.toggle("open");
@@ -109,4 +118,37 @@
     if (open) bar.querySelector(".rs-sum").setAttribute("aria-expanded", "true");
     tripButton(((db || []).filter(function (x) { return x[0] === to; })[0] || [])[3] || "");
   });
+  return true;
+  };
+  var check = function () {
+    var fs = getFS();
+    if (!fs || fs === current) return;
+    current = fs;
+    Array.prototype.forEach.call(document.querySelectorAll(".hl-trip"), function (e) { e.remove(); });
+    form.classList.remove("open");
+    if (init(fs)) { document.documentElement.classList.add("rs-q"); var fb = document.getElementById("rs-fb"); if (fb) fb.remove(); }
+  };
+  check();
+  setInterval(check, 800);
+  // Si le moteur n'écrit pas la recherche dans l'adresse : dès que des résultats sont affichés, un bouton bien visible
+  // « Modifier les dates » remonte au formulaire du moteur (replié en simple loupe après une recherche) et l'ouvre.
+  var res = document.getElementById("tpwl-tickets"), n = 0;
+  var fbTimer = setInterval(function () {
+    if (current) { clearInterval(fbTimer); return; }
+    if (++n > 240) { clearInterval(fbTimer); return; }
+    if (!res || res.getBoundingClientRect().height < 250 || document.getElementById("rs-fb")) return;
+    var lg = "fr"; try { lg = (localStorage.getItem("escale.lang") || (navigator.language || "fr").slice(0, 2)).toLowerCase(); } catch (e) {}
+    var L = { en: "📅 Change dates or search", es: "📅 Cambiar fechas o búsqueda", pt: "📅 Alterar datas ou pesquisa", it: "📅 Cambia date o ricerca",
+      de: "📅 Daten oder Suche ändern", ar: "📅 تغيير التواريخ أو البحث" }[lg] || "📅 Modifier les dates ou la recherche";
+    var b = document.createElement("button"); b.type = "button"; b.id = "rs-fb"; b.className = "rs-fb"; b.textContent = L;
+    b.addEventListener("click", function () {
+      var box = document.getElementById("tpwl-search");
+      if (!box) return;
+      box.scrollIntoView({ behavior: "smooth", block: "start" });
+      var root = box.shadowRoot || box, btn = root.querySelector && root.querySelector("button, [role=button]");
+      if (btn) setTimeout(function () { try { btn.click(); } catch (e) {} }, 400);
+    });
+    var sec = res.closest(".wl-box") || res;
+    sec.parentNode.insertBefore(b, sec);
+  }, 500);
 })();
