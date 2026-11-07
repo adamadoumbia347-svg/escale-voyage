@@ -384,7 +384,8 @@ function platforms(v) {
   const name = `escale-${new Date().toISOString().slice(0, 10)}-${LANG}-${fmt}.mp4`, mp4 = path.join(OUT, name);
   execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-framerate', String(fps), '-i', path.join(OUT, 'f', '%04d.png'), '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '21', '-preset', 'medium', '-movflags', '+faststart', mp4]);
   console.log('Vidéo :', name, (fs.statSync(mp4).size / 1e6).toFixed(1), 'Mo,', end.toFixed(1), 's');
-  if (process.env.NO_SEND) return;
+  // Sans envoi par e-mail (Chromebook) : la légende et les hashtags sont écrits à côté de la vidéo
+  if (process.env.NO_SEND) { fs.writeFileSync(mp4.replace(/\.mp4$/, '.txt'), `${v.title}\n\n${v.caption || ''}\n`); return; }
   const r = await fetch(SITE + '/api/admin?action=video', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-admin-key': process.env.ADMIN_KEY || '' },
     body: JSON.stringify({ title: v.title, caption: v.caption, platforms: platforms(v), filename: name, video: fs.readFileSync(mp4).toString('base64') }) });
   const j = await r.text(); console.log('Envoi :', r.status, j.slice(0, 200));
