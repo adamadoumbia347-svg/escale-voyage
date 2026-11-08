@@ -28,6 +28,7 @@ import * as barometre from "./barometre"
 import * as indice from "./indice"
 import * as accueil from "./accueil"
 import { sendDigest, sendNewsletter } from "./digest"
+import { indexNow } from "./indexnow"
 
 const API: Record<string, any> = { push, prix, explore, calendar, deals, geo, alert, form, admin, cron, populaires, clic, fx, grille, weekends, verdict: verdictApi, connus: accueil, compteur }
 
@@ -56,6 +57,8 @@ export default {
       return
     }
     ctx.waitUntil(cron.checkAlerts(env).then((r) => console.log("alertes", JSON.stringify(r))))
+    // IndexNow : pages modifiées depuis 2 jours signalées aux moteurs de recherche (src/indexnow.ts)
+    ctx.waitUntil(indexNow(env).then((r) => console.log("IndexNow", JSON.stringify(r))).catch((e) => console.log("IndexNow erreur", String(e))))
     // Le lundi : e-mail avec le message WhatsApp des bons plans de la semaine (src/digest.ts)
     if (new Date().getUTCDay() === 1) {
       ctx.waitUntil(sendDigest(env).then((r) => console.log("message WhatsApp", JSON.stringify(r))))
