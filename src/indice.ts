@@ -1,5 +1,6 @@
 import { Ctx, esc } from "./_lib/common"
 import { Row, rows } from "./barometre"
+import { shareBlock } from "./diffusion"
 // Indice Escale des prix (/indice-prix/ en français, /en/price-index/ en anglais) : à partir des prix relevés chaque jour pour le
 // baromètre (historique KV), la variation médiane sur 30 et 7 jours, par grande région, les plus fortes hausses et baisses,
 // et une phrase prête à citer. Aucun chiffre inventé : sans assez de relevés, la page le dit. Écrit par le serveur, en cache une journée.
@@ -50,32 +51,51 @@ export const label = (l: string, lang: Lang) => lang === "fr" ? l : l.split(" �
 const median = (a: number[]) => { if (!a.length) return null; const s = a.slice().sort((x, y) => x - y), m = s.length >> 1; return s.length % 2 ? s[m] : Math.round((s[m - 1] + s[m]) / 2) }
 const cls = (v: number) => (v <= -3 ? "bt-down" : v >= 3 ? "bt-up" : "bt-flat")
 
-export function render(list: Row[], lang: Lang = "fr") {
+// Chiffres de l'indice (partagés avec le flux RSS, le widget et le communiqué : src/diffusion.ts)
+export type Summary = { date: string; span: string; spanDays: number; n: number; med: number; up: number; down: number; quote: string
+  top: { label: string; v: number; price: number; path: string }[]; bottom: { label: string; v: number; price: number; path: string }[] }
+export function compute(list: Row[], lang: Lang = "fr"): Summary | null {
   const t = T[lang]
   const money = (n: number) => new Intl.NumberFormat(t.loc, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n)
   const sign = (v: number) => (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v) + (lang === "fr" ? " %" : "%")
   const d = new Date().toLocaleDateString(t.loc, { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Paris" })
   const use30 = list.filter((r) => r.d30 !== null).length >= 5
   const key = use30 ? "d30" : "d7"
-  const span = t.days(use30 ? 30 : 7)
   const with_ = list.filter((r) => r[key] !== null)
-  if (with_.length < 3) return `<p class="bt-lead">${esc(t.wait(d))}</p>`
+  if (with_.length < 3) return null
   const v = (r: Row) => r[key] as number
   const vals = with_.map(v)
   const med = median(vals)!
   const down = vals.filter((x) => x <= -3).length, up = vals.filter((x) => x >= 3).length
   const sorted = with_.slice().sort((a, b) => v(a) - v(b))
   const bottom = sorted.slice(0, 5).filter((r) => v(r) <= -3), top = sorted.slice(-5).reverse().filter((r) => v(r) >= 3)
+  const span = t.days(use30 ? 30 : 7)
   const trend = med >= 3 ? t.up(med) : med <= -3 ? t.down(Math.abs(med)) : t.flat(sign(med))
   let quote = t.quote(d, trend, span, with_.length)
   if (top[0]) quote += t.hi(label(top[0].label, lang), sign(v(top[0])), money(top[0].price))
   if (bottom[0]) quote += t.lo(label(bottom[0].label, lang), sign(v(bottom[0])), money(bottom[0].price))
+  const pick = (r: Row) => ({ label: label(r.label, lang), v: v(r), price: r.price, path: r.path })
+  return { date: d, span, spanDays: use30 ? 30 : 7, n: with_.length, med, up, down, quote, top: top.map(pick), bottom: bottom.map(pick) }
+}
+
+export function render(list: Row[], lang: Lang = "fr") {
+  const t = T[lang]
+  const money = (n: number) => new Intl.NumberFormat(t.loc, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n)
+  const sign = (v: number) => (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v) + (lang === "fr" ? " %" : "%")
+  const d = new Date().toLocaleDateString(t.loc, { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Paris" })
+  const s = compute(list, lang)
+  if (!s) return `<p class="bt-lead">${esc(t.wait(d))}</p>`
+  const key = s.spanDays === 30 ? "d30" : "d7"
+  const with_ = list.filter((r) => r[key] !== null)
+  const v = (r: Row) => r[key] as number
+  const { med, up, down, span, quote } = s
   const block = (title: string, codes: string[], by: "to" | "from") => {
     const g = with_.filter((r) => codes.includes(r[by]))
     const m = median(g.map(v)), p = median(g.map((r) => r.price))
     return g.length >= 2 && m !== null ? `<tr><th scope="row">${esc(title)}</th><td><span class="${cls(m)}">${sign(m)}</span></td><td>${p ? esc(money(p)) : "—"}</td><td>${g.length}</td></tr>` : ""
   }
   const li = (rs: Row[]) => rs.map((r) => `<li><a href="/${r.path}/">${esc(label(r.label, lang))}</a>${lang === "fr" ? " : " : ": "}<span class="${cls(v(r))}">${sign(v(r))}</span>, ${t.from} <strong>${esc(money(r.price))}</strong></li>`).join("")
+  const top = s.top.map((x) => with_.find((r) => r.path === x.path)!), bottom = s.bottom.map((x) => with_.find((r) => r.path === x.path)!)
   const regions = REGIONS.map((c, i) => block(t.regions[i], c, "to")).join(""), origins = ORIG.map((c, i) => block(t.origins[i], c, "from")).join("")
   const [h1, h2, h3] = t.th(span)
   const thead = `<thead><tr><th scope="col"></th><th scope="col">${esc(h1)}</th><th scope="col">${esc(h2)}</th><th scope="col">${esc(h3)}</th></tr></thead>`
@@ -94,8 +114,8 @@ export function render(list: Row[], lang: Lang = "fr") {
 // Chaque matin à 6 h UTC (après le relevé des prix), le bloc de l'indice est enregistré dans KV sous la clé du mois en cours :
 // la page du mois montre donc le dernier relevé du mois, puis reste figée quand le mois est fini. Ces pages donnent un
 // historique citable (« les prix de novembre 2026 ») que les médias et les moteurs de recherche peuvent reprendre.
-type Snap = { date: string; fr: string; en: string; med: number | null; n: number }
-const ARCH = "indice:archive:"
+export type Snap = { date: string; fr: string; en: string; med: number | null; n: number; sum?: { fr: Summary | null; en: Summary | null } }
+export const ARCH = "indice:archive:"
 const A = {
   fr: { title: (m: string) => `Indice Escale des prix des vols Europe – Afrique : ${m}`, h1: (m: string) => `Indice Escale <span>${esc(m)}</span>`, eyebrow: "Archive mensuelle · données libres",
     desc: (m: string) => `Les prix des billets d'avion Europe – Afrique en ${m} : variation médiane, par région d'arrivée et pays de départ, plus fortes hausses et baisses. Indice Escale, calculé chaque jour.`,
@@ -126,7 +146,7 @@ export async function archiveIndice(env: any, now = new Date()) {
   const with_ = list.filter((r) => r.d30 !== null).length >= 5 ? list.filter((r) => r.d30 !== null) : list.filter((r) => r.d7 !== null)
   if (with_.length < 3) return { ignore: "pas assez de relevés", trajets: list.length }
   const ym = now.toISOString().slice(0, 7)
-  const snap: Snap = { date: now.toISOString().slice(0, 10), fr: render(list, "fr"), en: render(list, "en"), med: median(with_.map((r) => (r.d30 ?? r.d7) as number)), n: with_.length }
+  const snap: Snap = { date: now.toISOString().slice(0, 10), fr: render(list, "fr"), en: render(list, "en"), med: median(with_.map((r) => (r.d30 ?? r.d7) as number)), n: with_.length, sum: { fr: compute(list, "fr"), en: compute(list, "en") } }
   await env.ESCALE.put(ARCH + ym, JSON.stringify(snap))
   return { mois: ym, trajets: snap.n, mediane: snap.med }
 }
@@ -137,7 +157,7 @@ async function archivePage(ctx: Ctx, lang: Lang, ym: string): Promise<Response> 
   const base = await ctx.env.ASSETS?.fetch(new Request(`https://escale.live${A[lang].base}`))
   if (!snap || !base || !base.ok) return ctx.next()
   const a = A[lang], m = monthName(ym, lang)
-  const block = snap[lang] + `<p><a class="btn ghost" href="${a.base}">${esc(a.current)}</a></p>` + (await archiveList(ctx.env, lang, ym))
+  const block = snap[lang] + `<p><a class="btn ghost" href="${a.base}">${esc(a.current)}</a></p>` + (await archiveList(ctx.env, lang, ym)) + shareBlock(lang, ym)
   const html = (await base.text())
     .replace(/<title>[^<]*<\/title>/, `<title>${esc(a.title(m))}</title>`)
     .replace(/(<meta name="description" content=")[^"]*(")/, `$1${esc(a.desc(m))}$2`)
@@ -169,12 +189,14 @@ export const onRequest = async (ctx: Ctx) => {
     else {
       const list = await rows(ctx)
       if (list.length) {
-        block = render(list, lang) + (await archiveList(ctx.env, lang))
+        block = render(list, lang) + (await archiveList(ctx.env, lang)) + shareBlock(lang)
         if (cache) ctx.waitUntil(cache.put(key, new Response(block, { headers: { "Cache-Control": "public, max-age=3600" } })))
       }
     }
     if (!block) return response
+    const feed = lang === "fr" ? "/barometre-prix/flux.xml" : "/en/price-index/feed.xml"
     const html = (await response.text()).replace(/<div id="indice">[\s\S]*?<\/div><!-- \/indice -->/, `<div id="indice" data-ssr="1">${block}</div><!-- /indice -->`)
+      .replace("</title>", `</title><link rel="alternate" type="application/rss+xml" title="Escale" href="https://escale.live${feed}">`)
     const headers = new Headers(response.headers)
     headers.delete("content-length")
     return new Response(html, { status: response.status, headers })

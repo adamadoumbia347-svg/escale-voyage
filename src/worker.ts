@@ -29,6 +29,7 @@ import * as barometre from "./barometre"
 import * as indice from "./indice"
 import * as accueil from "./accueil"
 import * as saisir from "./saisir"
+import * as diffusion from "./diffusion"
 import { sendDigest, sendNewsletter } from "./digest"
 import { indexNow } from "./indexnow"
 
@@ -47,6 +48,13 @@ export default {
       return handler(c)
     }
     if (path === "/barometre-prix/" || path === "/barometre-prix") return barometre.onRequest(c)
+    // Diffusion de l'indice (src/diffusion.ts) : flux RSS, widget, communiqué du mois
+    if (path === "/barometre-prix/flux.xml") return diffusion.rss(c, "fr")
+    if (path === "/en/price-index/feed.xml") return diffusion.rss(c, "en")
+    if (/^\/indice-prix\/widget\/?$/.test(path)) return diffusion.widget(c, "fr")
+    if (/^\/en\/price-index\/widget\/?$/.test(path)) return diffusion.widget(c, "en")
+    const com = path.match(/^\/(indice-prix|en\/price-index)\/(?:(\d{4}-\d{2})\/)?(communique|press)\/?$/)
+    if (com) return diffusion.communique(c, com[1] === "indice-prix" ? "fr" : "en", com[2] || null)
     // Indice des prix : page du jour et archives mensuelles (/indice-prix/2026-11/)
     if (/^\/(en\/price-index|indice-prix)(\/(\d{4}-\d{2}\/?)?)?$/.test(path)) return indice.onRequest(c)
     if (path === "/") return accueil.onRequest(c)
