@@ -150,7 +150,7 @@ function sparkline(hist: Point[], a: Advice, money: (n: number) => string): stri
   const vals = pts.map((p) => p[1]), lo = Math.min(...vals), hi = Math.max(...vals)
   const W = 320, H = 72, PAD = 6
   const x = (i: number) => PAD + (i * (W - 2 * PAD)) / Math.max(1, pts.length - 1)
-  const y = (v: number) => hi === lo ? H / 2 : PAD + ((hi - v) * (H - 2 * PAD)) / (hi - lo)
+  const y = (v: number) => hi === lo ? H / 2 : PAD + ((hi - v) * (H - 2 * PAD - 16)) / (hi - lo) // le minimum reste à 16 px du bord : la courbe se voit même quand elle est plate
   const line = pts.map((p, i) => `${x(i).toFixed(1)},${y(p[1]).toFixed(1)}`).join(" ")
   const area = `${PAD},${H - PAD} ${line} ${x(pts.length - 1).toFixed(1)},${H - PAD}`
   const last = pts[pts.length - 1]
