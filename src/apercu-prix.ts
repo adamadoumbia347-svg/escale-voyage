@@ -1,4 +1,6 @@
 import { Ctx, esc, pricesForDates } from "./_lib/common"
+import * as paye from "./paye"
+import { readPaid } from "./api/paye"
 // Pages trajets : les prix réels sont écrits directement dans la page, pour les visiteurs comme pour Google
 // (avant, ils n'apparaissaient qu'après le chargement, via route-prices.js, et les moteurs de recherche ne les voyaient pas).
 // - titre, description et aperçu des liens partagés : « … · dès 389 € »
@@ -273,11 +275,16 @@ export const onRequest = async (ctx: Ctx) => {
   const response = await ctx.next()
   try {
     if (!response.ok || !(response.headers.get("content-type") || "").includes("text/html")) return response
-    const html = await response.text()
+    let html = await response.text()
     const headers = new Headers(response.headers)
     headers.delete("content-length")
     const route = html.match(/id="route-prices" data-from="([A-Z]{3})" data-to="([A-Z]{3})"/)
     if (!route) return new Response(await fillHub(ctx, html), { status: response.status, headers })
+    // « Ce que les voyageurs ont vraiment payé » (src/paye.ts), juste après la section des prix
+    const lang = (html.match(/<html lang="([a-z]{2})"/) || [])[1] || "fr"
+    const paid = paye.render(lang, route[1], route[2], paye.stats(await readPaid(env, route[1], route[2])))
+    const at = html.indexOf("</section>", html.indexOf('id="route-prices"'))
+    if (at > 0) html = html.slice(0, at + 10) + paid + html.slice(at + 10)
     const job = routeMonths(ctx, route[1], route[2]).catch(() => null)
     const rows = await Promise.race([job, new Promise<undefined>((ok) => setTimeout(() => ok(undefined), WAIT_MS))])
     if (rows === undefined) ctx.waitUntil(job) // trop lent : la page part sans les prix, le cache se remplit pour la visite suivante
