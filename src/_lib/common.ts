@@ -11,6 +11,7 @@ export type Env = {
   TRAVELPAYOUTS_TOKEN?: string; ADMIN_KEY?: string; CRON_KEY?: string; SITE_URL?: string; DIGEST_TO?: string
   RESEND_API_KEY?: string; BREVO_API_KEY?: string; ALERT_FROM?: string
   ESCALE?: any // KVNamespace
+  ASSETS?: { fetch: (r: Request) => Promise<Response> } // fichiers du site (dossier site/)
 }
 export type Ctx = { request: Request; env: Env; waitUntil: (p: Promise<any>) => void; next: () => Promise<Response> }
 

@@ -90,12 +90,78 @@ export function render(list: Row[], lang: Lang = "fr") {
     `<h2>${esc(t.cheap)}</h2><ul class="ix-list">${li(list.slice().sort((a, b) => a.price - b.price).slice(0, 5).filter((r) => r[key] !== null))}</ul>`
 }
 
+// ---- Archives mensuelles (/indice-prix/2026-11/, /en/price-index/2026-11/) ----
+// Chaque matin à 6 h UTC (après le relevé des prix), le bloc de l'indice est enregistré dans KV sous la clé du mois en cours :
+// la page du mois montre donc le dernier relevé du mois, puis reste figée quand le mois est fini. Ces pages donnent un
+// historique citable (« les prix de novembre 2026 ») que les médias et les moteurs de recherche peuvent reprendre.
+type Snap = { date: string; fr: string; en: string; med: number | null; n: number }
+const ARCH = "indice:archive:"
+const A = {
+  fr: { title: (m: string) => `Indice Escale des prix des vols Europe – Afrique : ${m}`, h1: (m: string) => `Indice Escale <span>${esc(m)}</span>`, eyebrow: "Archive mensuelle · données libres",
+    desc: (m: string) => `Les prix des billets d'avion Europe – Afrique en ${m} : variation médiane, par région d'arrivée et pays de départ, plus fortes hausses et baisses. Indice Escale, calculé chaque jour.`,
+    archives: "Archives mensuelles", current: "Voir l'indice du jour", month: (y: number, m: number) => new Date(Date.UTC(y, m - 1, 1)).toLocaleDateString("fr-FR", { month: "long", year: "numeric", timeZone: "UTC" }), base: "/indice-prix/" },
+  en: { title: (m: string) => `Escale Price Index, Europe – Africa flights: ${m}`, h1: (m: string) => `Escale Price Index <span>${esc(m)}</span>`, eyebrow: "Monthly archive · open data",
+    desc: (m: string) => `Europe – Africa air fares in ${m}: median change, by arrival region and departure country, biggest rises and drops. Escale Price Index, computed daily.`,
+    archives: "Monthly archives", current: "See today's index", month: (y: number, m: number) => new Date(Date.UTC(y, m - 1, 1)).toLocaleDateString("en-GB", { month: "long", year: "numeric", timeZone: "UTC" }), base: "/en/price-index/" },
+}
+const monthName = (ym: string, lang: Lang) => { const [y, m] = ym.split("-").map(Number); return A[lang].month(y, m) }
+
+async function archiveList(env: any, lang: Lang, skip = ""): Promise<string> {
+  if (!env?.ESCALE) return ""
+  try {
+    const { keys } = await env.ESCALE.list({ prefix: ARCH, limit: 60 })
+    const months = keys.map((k: any) => k.name.slice(ARCH.length)).filter((m: string) => /^\d{4}-\d{2}$/.test(m) && m !== skip).sort().reverse()
+    if (!months.length) return ""
+    return `<h2>${esc(A[lang].archives)}</h2><ul class="ix-list ix-arch">${months.map((m: string) => `<li><a href="${A[lang].base}${m}/">${esc(monthName(m, lang))}</a></li>`).join("")}</ul>`
+  } catch { return "" }
+}
+
+// Appelé par le cron de 6 h UTC (src/worker.ts) : calcule l'indice du jour et le range dans l'archive du mois
+export async function archiveIndice(env: any, now = new Date()) {
+  if (!env?.ESCALE) return { erreur: "kv" }
+  const pending: Promise<any>[] = []
+  const ctx: Ctx = { request: new Request("https://escale.live/__indice-archive"), env, waitUntil: (p) => { pending.push(p) }, next: () => Promise.resolve(new Response(null, { status: 404 })) }
+  const list = await rows(ctx)
+  await Promise.allSettled(pending)
+  const with_ = list.filter((r) => r.d30 !== null).length >= 5 ? list.filter((r) => r.d30 !== null) : list.filter((r) => r.d7 !== null)
+  if (with_.length < 3) return { ignore: "pas assez de relevés", trajets: list.length }
+  const ym = now.toISOString().slice(0, 7)
+  const snap: Snap = { date: now.toISOString().slice(0, 10), fr: render(list, "fr"), en: render(list, "en"), med: median(with_.map((r) => (r.d30 ?? r.d7) as number)), n: with_.length }
+  await env.ESCALE.put(ARCH + ym, JSON.stringify(snap))
+  return { mois: ym, trajets: snap.n, mediane: snap.med }
+}
+
+// Page d'un mois : la mise en page de la page de l'indice (fichier statique), avec le bloc archivé à la place du bloc du jour
+async function archivePage(ctx: Ctx, lang: Lang, ym: string): Promise<Response> {
+  const snap: Snap | null = ctx.env.ESCALE ? await ctx.env.ESCALE.get(ARCH + ym, "json").catch(() => null) : null
+  const base = await ctx.env.ASSETS?.fetch(new Request(`https://escale.live${A[lang].base}`))
+  if (!snap || !base || !base.ok) return ctx.next()
+  const a = A[lang], m = monthName(ym, lang)
+  const block = snap[lang] + `<p><a class="btn ghost" href="${a.base}">${esc(a.current)}</a></p>` + (await archiveList(ctx.env, lang, ym))
+  const html = (await base.text())
+    .replace(/<title>[^<]*<\/title>/, `<title>${esc(a.title(m))}</title>`)
+    .replace(/(<meta name="description" content=")[^"]*(")/, `$1${esc(a.desc(m))}$2`)
+    .replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${esc(a.title(m))}$2`)
+    .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${esc(a.desc(m))}$2`)
+    .replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="https://escale.live${a.base}${ym}/">`)
+    .replace(/(<link rel="alternate" hreflang="[^"]*" href="https:\/\/escale\.live\/(?:en\/price-index|indice-prix)\/)(">)/g, `$1${ym}/$2`)
+    .replace(/<p class="eyebrow">[^<]*<\/p>(\s*<h1>)[\s\S]*?<\/h1>/, `<p class="eyebrow">${esc(a.eyebrow)}</p>$1${a.h1(m)}</h1>`)
+    .replace(/<div id="indice">[\s\S]*?<\/div><!-- \/indice -->/, `<div id="indice" data-ssr="1" data-archive="${ym}">${block}</div><!-- /indice -->`)
+  const headers = new Headers(base.headers)
+  headers.delete("content-length")
+  headers.set("Cache-Control", "public, max-age=3600")
+  return new Response(html, { status: 200, headers })
+}
+
 export const onRequest = async (ctx: Ctx) => {
+  const path = new URL(ctx.request.url).pathname
+  const lang: Lang = path.startsWith("/en/") ? "en" : "fr"
+  const arch = path.match(/\/(\d{4}-\d{2})\/?$/)
+  if (ctx.request.method === "GET" && arch) { try { return await archivePage(ctx, lang, arch[1]) } catch { return ctx.next() } }
   const response = await ctx.next()
   if (ctx.request.method !== "GET" || !response.ok) return response
-  const lang: Lang = new URL(ctx.request.url).pathname.startsWith("/en/") ? "en" : "fr"
   const cache = (globalThis as any).caches?.default
-  const key = new Request(`https://escale.live/__indice/v2/${lang}/` + new Date().toISOString().slice(0, 10))
+  const key = new Request(`https://escale.live/__indice/v3/${lang}/` + new Date().toISOString().slice(0, 10))
   try {
     let block = ""
     const hit = cache ? await cache.match(key) : null
@@ -103,7 +169,7 @@ export const onRequest = async (ctx: Ctx) => {
     else {
       const list = await rows(ctx)
       if (list.length) {
-        block = render(list, lang)
+        block = render(list, lang) + (await archiveList(ctx.env, lang))
         if (cache) ctx.waitUntil(cache.put(key, new Response(block, { headers: { "Cache-Control": "public, max-age=3600" } })))
       }
     }

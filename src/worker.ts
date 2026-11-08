@@ -45,7 +45,8 @@ export default {
       return handler(c)
     }
     if (path === "/barometre-prix/" || path === "/barometre-prix") return barometre.onRequest(c)
-    if (path === "/indice-prix/" || path === "/indice-prix" || path === "/en/price-index/" || path === "/en/price-index") return indice.onRequest(c)
+    // Indice des prix : page du jour et archives mensuelles (/indice-prix/2026-11/)
+    if (/^\/(en\/price-index|indice-prix)(\/(\d{4}-\d{2}\/?)?)?$/.test(path)) return indice.onRequest(c)
     if (path === "/") return accueil.onRequest(c)
     return apercu.onRequest(c)
   },
@@ -57,6 +58,8 @@ export default {
       return
     }
     ctx.waitUntil(cron.checkAlerts(env).then((r) => console.log("alertes", JSON.stringify(r))))
+    // Archive du mois de l'indice des prix (src/indice.ts) : le relevé du jour remplace celui de la veille, puis le mois reste figé
+    ctx.waitUntil(indice.archiveIndice(env).then((r) => console.log("indice archive", JSON.stringify(r))).catch((e) => console.log("indice archive erreur", String(e))))
     // IndexNow : pages modifiées depuis 2 jours signalées aux moteurs de recherche (src/indexnow.ts)
     ctx.waitUntil(indexNow(env).then((r) => console.log("IndexNow", JSON.stringify(r))).catch((e) => console.log("IndexNow erreur", String(e))))
     // Le lundi : e-mail avec le message WhatsApp des bons plans de la semaine (src/digest.ts)

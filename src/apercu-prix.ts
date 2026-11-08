@@ -113,6 +113,61 @@ const L: Record<string, { loc: string; from: string; hero: string; direct: strin
     chart: "Laagste prijs per vertrekmaand" },
 }
 
+// « Le bon moment pour acheter » : conseil clair déduit des relevés (prix du jour vs médiane 60 jours, et tendance sur 7 jours).
+// Jamais une promesse : les textes restent prudents et renvoient vers l'alerte prix quand il vaut mieux attendre.
+type Advice = { buy: string; wait: string; hold: string; up: string; down: string; flat: string; hist: string; min: string; max: string }
+const ADV: Record<string, Advice> = {
+  fr: { buy: "Notre conseil : c’est un bon moment pour réserver.", wait: "Notre conseil : si vos dates sont souples, attendez et créez une alerte prix.", hold: "Notre conseil : pas d’urgence, mais pas de raison d’attendre non plus.",
+    up: "Le prix a augmenté de {x} % en une semaine.", down: "Le prix a baissé de {x} % en une semaine.", flat: "Le prix est stable depuis une semaine.", hist: "Prix le plus bas relevé chaque jour, {n} derniers jours", min: "min.", max: "max." },
+  en: { buy: "Our advice: this is a good time to book.", wait: "Our advice: if your dates are flexible, wait and set a price alert.", hold: "Our advice: no rush, but no reason to wait either.",
+    up: "The price rose {x}% over the past week.", down: "The price fell {x}% over the past week.", flat: "The price has been stable for a week.", hist: "Lowest price recorded each day, last {n} days", min: "min", max: "max" },
+  es: { buy: "Nuestro consejo: es un buen momento para reservar.", wait: "Nuestro consejo: si tus fechas son flexibles, espera y crea una alerta de precio.", hold: "Nuestro consejo: sin prisa, pero tampoco hay motivo para esperar.",
+    up: "El precio subió un {x} % en una semana.", down: "El precio bajó un {x} % en una semana.", flat: "El precio está estable desde hace una semana.", hist: "Precio más bajo registrado cada día, últimos {n} días", min: "mín.", max: "máx." },
+  pt: { buy: "O nosso conselho: é um bom momento para reservar.", wait: "O nosso conselho: se as datas forem flexíveis, espere e crie um alerta de preço.", hold: "O nosso conselho: sem pressa, mas também sem razão para esperar.",
+    up: "O preço subiu {x} % numa semana.", down: "O preço desceu {x} % numa semana.", flat: "O preço está estável há uma semana.", hist: "Preço mais baixo registado cada dia, últimos {n} dias", min: "mín.", max: "máx." },
+  ar: { buy: "نصيحتنا: هذا وقت جيد للحجز.", wait: "نصيحتنا: إن كانت مواعيدك مرنة، انتظر وأنشئ تنبيهًا بالسعر.", hold: "نصيحتنا: لا عجلة، ولا سبب للانتظار أيضًا.",
+    up: "ارتفع السعر بنسبة {x}٪ خلال أسبوع.", down: "انخفض السعر بنسبة {x}٪ خلال أسبوع.", flat: "السعر مستقر منذ أسبوع.", hist: "أدنى سعر مسجل كل يوم، آخر {n} يومًا", min: "الأدنى", max: "الأعلى" },
+  it: { buy: "Il nostro consiglio: è un buon momento per prenotare.", wait: "Il nostro consiglio: se le date sono flessibili, aspetta e crea un avviso prezzo.", hold: "Il nostro consiglio: nessuna fretta, ma nemmeno motivo di aspettare.",
+    up: "Il prezzo è salito del {x} % in una settimana.", down: "Il prezzo è sceso del {x} % in una settimana.", flat: "Il prezzo è stabile da una settimana.", hist: "Prezzo più basso rilevato ogni giorno, ultimi {n} giorni", min: "min.", max: "max." },
+  de: { buy: "Unser Tipp: ein guter Zeitpunkt zum Buchen.", wait: "Unser Tipp: Bei flexiblen Daten lieber warten und einen Preisalarm anlegen.", hold: "Unser Tipp: keine Eile, aber auch kein Grund zu warten.",
+    up: "Der Preis ist in einer Woche um {x} % gestiegen.", down: "Der Preis ist in einer Woche um {x} % gesunken.", flat: "Der Preis ist seit einer Woche stabil.", hist: "Täglich erfasster Tiefstpreis, letzte {n} Tage", min: "Min.", max: "Max." },
+  nl: { buy: "Ons advies: een goed moment om te boeken.", wait: "Ons advies: zijn je data flexibel, wacht dan en stel een prijsalert in.", hold: "Ons advies: geen haast, maar ook geen reden om te wachten.",
+    up: "De prijs steeg {x} % in een week.", down: "De prijs daalde {x} % in een week.", flat: "De prijs is al een week stabiel.", hist: "Laagste prijs per dag gemeten, laatste {n} dagen", min: "min.", max: "max." },
+}
+const SPARK_DAYS = 30
+// Variation du prix du jour par rapport au relevé d'il y a environ 7 jours (à ± 2 jours près)
+function weekChange(hist: Point[], price: number): number | null {
+  const target = Date.now() - 7 * 864e5
+  let best: Point | null = null
+  for (const p of hist) { const gap = Math.abs(Date.parse(p[0]) - target) / 864e5; if (gap <= 2 && (!best || gap < Math.abs(Date.parse(best[0]) - target) / 864e5)) best = p }
+  return best ? Math.round((price / best[1] - 1) * 100) : null
+}
+// Courbe des 30 derniers relevés (SVG écrit dans la page, sans script) : la tendance se voit d'un coup d'œil
+function sparkline(hist: Point[], a: Advice, money: (n: number) => string): string {
+  const since = new Date(Date.now() - SPARK_DAYS * 864e5).toISOString().slice(0, 10)
+  const pts = hist.filter(([d]) => d >= since)
+  if (pts.length < 5) return ""
+  const vals = pts.map((p) => p[1]), lo = Math.min(...vals), hi = Math.max(...vals)
+  const W = 320, H = 72, PAD = 6
+  const x = (i: number) => PAD + (i * (W - 2 * PAD)) / Math.max(1, pts.length - 1)
+  const y = (v: number) => hi === lo ? H / 2 : PAD + ((hi - v) * (H - 2 * PAD)) / (hi - lo)
+  const line = pts.map((p, i) => `${x(i).toFixed(1)},${y(p[1]).toFixed(1)}`).join(" ")
+  const area = `${PAD},${H - PAD} ${line} ${x(pts.length - 1).toFixed(1)},${H - PAD}`
+  const last = pts[pts.length - 1]
+  const style = `<style>.ph-wrap{margin:14px 0 4px}.ph-wrap figcaption{font-size:.85rem;color:var(--muted,#5b6474);margin-bottom:6px}.ph-svg{display:block;width:100%;height:auto;color:var(--teal-d,#0b8577)}.ph-legend{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted,#5b6474);margin-top:2px}</style>`
+  return style + `<figure class="ph-wrap"><figcaption>${esc(a.hist.replace("{n}", String(SPARK_DAYS)))}</figcaption>` +
+    `<svg class="ph-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(a.hist.replace("{n}", String(SPARK_DAYS)))}">` +
+    `<polygon points="${area}" fill="currentColor" opacity=".12"/><polyline points="${line}" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>` +
+    `<circle cx="${x(pts.length - 1).toFixed(1)}" cy="${y(last[1]).toFixed(1)}" r="3.5" fill="currentColor"/></svg>` +
+    `<div class="ph-legend"><span>${esc(pts[0][0].slice(8, 10) + "/" + pts[0][0].slice(5, 7))} · ${esc(a.min)} ${esc(money(lo))}</span><span>${esc(a.max)} ${esc(money(hi))} · ${esc(last[0].slice(8, 10) + "/" + last[0].slice(5, 7))}</span></div></figure>`
+}
+// Conseil : « bon moment pour réserver » si le prix est bas ou s'il monte, « attendez » s'il est élevé ou s'il baisse nettement
+function advice(level: "low" | "mid" | "high", wk: number | null, a: Advice): string {
+  const trend = wk === null ? "" : wk >= 5 ? a.up.replace("{x}", String(wk)) : wk <= -5 ? a.down.replace("{x}", String(Math.abs(wk))) : a.flat
+  const tip = level === "low" ? a.buy : level === "high" ? a.wait : wk !== null && wk >= 5 ? a.buy : wk !== null && wk <= -5 ? a.wait : a.hold
+  return `<p class="price-advice"><strong>${esc(tip)}</strong>${trend ? " " + esc(trend) : ""}</p>`
+}
+
 // Prix le plus bas par mois de départ (6 prochains mois), depuis le cache Cloudflare ou Travelpayouts.
 // null = service indisponible (rien n'est gardé en cache) ; [] = aucun prix connu pour ce trajet.
 export const cacheKey = (from: string, to: string) => new Request(`https://escale.live/__prix-trajet/${from}-${to}`)
@@ -167,7 +222,9 @@ function render(html: string, from: string, to: string, rows: Month[], hist: Poi
     return `<div class="pc-col"><span class="pc-val">${esc(money(r.price))}</span><span class="pc-bar ${cls}" style="height:${h}%"></span><span class="pc-m">${esc(date(r.month, { month: "short" }))}</span></div>`
   }).join("") + `</div></figure>` : ""
   const v = verdict(hist, best)
-  const badge = v ? `<div class="price-verdict pv-${v.level}"><strong>${esc(t[v.level])}</strong><span>${esc(fill(t[(v.level + "Txt") as "lowTxt"], { p: money(best), x: String(v.diff), avg: money(v.median), n: String(v.days) }))}</span></div>` : ""
+  const a = ADV[lang] || ADV.fr
+  const badge = v ? `<div class="price-verdict pv-${v.level}"><strong>${esc(t[v.level])}</strong><span>${esc(fill(t[(v.level + "Txt") as "lowTxt"], { p: money(best), x: String(v.diff), avg: money(v.median), n: String(v.days) }))}</span>${advice(v.level, weekChange(hist, best), a)}</div>` : ""
+  const spark = v ? sparkline(hist, a, money) : ""
   const summary = fill(t.summary, { m: date(bestRow.month, { month: "long", year: "numeric" }), p: money(best), max: money(max), n: String(MONTHS) }) +
     " " + fill(t.updated, { d: date(new Date().toISOString().slice(0, 10), { day: "numeric", month: "long", year: "numeric" }) })
   return html
@@ -177,7 +234,7 @@ function render(html: string, from: string, to: string, rows: Month[], hist: Poi
     .replace(/(<meta property="og:description" content=")([^"]*)(")/, (_m, a, s, b) => a + esc(lead) + " — " + s + b)
     .replace(/<p class="hero-price" id="hero-price" hidden><\/p>/, `<p class="hero-price" id="hero-price">${esc(t.hero)} <strong>${esc(money(best))}</strong></p>`)
     .replace(/(<section id="route-prices" data-from="[A-Z]{3}" data-to="[A-Z]{3}") hidden>/, `$1 data-ssr="1">`)
-    .replace(/<ul class="price-list"><\/ul>/, `${badge}<p class="price-summary">${esc(summary)}</p>${bars}<ul class="price-list">${items}</ul>`)
+    .replace(/<ul class="price-list"><\/ul>/, `${badge}${spark}<p class="price-summary">${esc(summary)}</p>${bars}<ul class="price-list">${items}</ul>`)
 }
 
 // Pages « destination » (tous les vols vers une ville) : chaque ligne reçoit le prix déjà connu du trajet (cache des pages trajets).
