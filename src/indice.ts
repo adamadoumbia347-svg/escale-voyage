@@ -181,7 +181,7 @@ export const onRequest = async (ctx: Ctx) => {
   const response = await ctx.next()
   if (ctx.request.method !== "GET" || !response.ok) return response
   const cache = (globalThis as any).caches?.default
-  const key = new Request(`https://escale.live/__indice/v3/${lang}/` + new Date().toISOString().slice(0, 10))
+  const key = new Request(`https://escale.live/__indice/v4/${lang}/` + new Date().toISOString().slice(0, 10))
   try {
     let block = ""
     const hit = cache ? await cache.match(key) : null
