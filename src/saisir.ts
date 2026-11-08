@@ -2,7 +2,8 @@ import { Ctx, Env, esc } from "./_lib/common"
 import { ROUTES } from "./barometre"
 import { Point, readHistory, verdict } from "./apercu-prix"
 import { label } from "./indice"
-// « À saisir aujourd'hui » (/a-saisir/ en français, /en/deals-today/ en anglais) : les grands trajets dont le prix du jour est
+// « À saisir aujourd'hui » (/barometre-prix/a-saisir/ en français, /en/price-index/deals-today/ en anglais : adresses déjà
+// envoyées au serveur par run_worker_first dans wrangler.jsonc, aucun fichier statique n'existe à cet endroit) : les grands trajets dont le prix du jour est
 // nettement sous leur prix habituel (verdict « bon prix » : au moins 8 % sous la médiane des 60 derniers relevés).
 // Recalculé chaque heure à partir de l'historique KV (relevé quotidien, src/releve.ts). Sert aussi au bandeau de l'accueil
 // et au message WhatsApp (src/digest.ts). Page écrite par le serveur sur la mise en page du baromètre (fichier statique).
@@ -48,14 +49,14 @@ export async function deals(env: Env, waitUntil: (p: Promise<any>) => void = () 
 
 type Lang = "fr" | "en"
 const T = {
-  fr: { loc: "fr-FR", path: "/a-saisir/", other: "/en/deals-today/", eyebrow: "Mis à jour chaque heure", h1: "À saisir aujourd'hui", title: "Vols à saisir aujourd'hui : les trajets sous leur prix habituel | Escale",
+  fr: { loc: "fr-FR", path: "/barometre-prix/a-saisir/", other: "/en/price-index/deals-today/", eyebrow: "Mis à jour chaque heure", h1: "À saisir aujourd'hui", title: "Vols à saisir aujourd'hui : les trajets sous leur prix habituel | Escale",
     desc: "Chaque jour, les trajets Europe – Afrique dont le prix aller-retour est nettement sous son niveau habituel, d'après les relevés quotidiens d'Escale. Mis à jour chaque heure.",
     lead: (n: number, t: number, d: string) => n ? `Relevé du ${d} : ${n} trajet${n > 1 ? "s" : ""} sur ${t} suivis ${n > 1 ? "sont" : "est"} nettement sous ${n > 1 ? "leur" : "son"} prix habituel.` : `Relevé du ${d} : aucun des ${t} trajets suivis n'est nettement sous son prix habituel aujourd'hui. Revenez demain, ou créez une alerte prix.`,
     th: ["Trajet", "Aller-retour dès", "Sous le prix habituel", "Prix habituel", "Sur 7 jours"], how: "Comment c'est calculé",
     howTxt: "Chaque nuit, Escale relève le prix aller-retour le plus bas des 6 prochains mois pour 70 grands trajets de la diaspora. Un trajet apparaît ici quand ce prix est au moins 8 % sous la médiane de ses 60 derniers relevés (au moins 7 jours d'historique). C'est un signal, pas une promesse : le tarif exact dépend des dates et se confirme sur le site de réservation.",
     more: "Voir aussi", baro: "Le baromètre des prix (tous les trajets)", indice: "L'indice Escale des prix", alert: "Acheter maintenant ou attendre ? Le guide", since: (n: number) => `${n} jours de relevés`, go: "Voir ce trajet",
     banner: (n: number) => `🟢 ${n} trajet${n > 1 ? "s" : ""} sous ${n > 1 ? "leur" : "son"} prix habituel aujourd'hui`, bannerGo: "Voir lesquels" },
-  en: { loc: "en-GB", path: "/en/deals-today/", other: "/a-saisir/", eyebrow: "Updated hourly", h1: "Worth booking today", title: "Flights worth booking today: routes below their usual price | Escale",
+  en: { loc: "en-GB", path: "/en/price-index/deals-today/", other: "/barometre-prix/a-saisir/", eyebrow: "Updated hourly", h1: "Worth booking today", title: "Flights worth booking today: routes below their usual price | Escale",
     desc: "Every day, the Europe – Africa routes whose round-trip fare is clearly below its usual level, based on Escale's daily price records. Updated hourly.",
     lead: (n: number, t: number, d: string) => n ? `Data as of ${d}: ${n} of ${t} tracked routes ${n > 1 ? "are" : "is"} clearly below ${n > 1 ? "their" : "its"} usual price.` : `Data as of ${d}: none of the ${t} tracked routes is clearly below its usual price today. Check back tomorrow, or set a price alert.`,
     th: ["Route", "Round trip from", "Below usual price", "Usual price", "Over 7 days"], how: "How it is computed",
@@ -88,7 +89,7 @@ export function banner(d: Deals, lang: Lang = "fr"): string {
 export function whatsappLines(d: Deals, base: string): string[] {
   if (!d.items.length) return []
   const money = (n: number) => new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n)
-  return ["🟢 *Sous leur prix habituel aujourd'hui :*", ...d.items.slice(0, 5).map((r) => `• ${r.label} : *${money(r.price)}* (−${r.diff} % vs habituel)`), `   👉 ${base}/a-saisir/`, ""]
+  return ["🟢 *Sous leur prix habituel aujourd'hui :*", ...d.items.slice(0, 5).map((r) => `• ${r.label} : *${money(r.price)}* (−${r.diff} % vs habituel)`), `   👉 ${base}/barometre-prix/a-saisir/`, ""]
 }
 
 // Page complète : mise en page du baromètre (fichier statique), contenu remplacé
@@ -113,7 +114,7 @@ export async function page(ctx: Ctx, lang: Lang): Promise<Response> {
     .replace(/(<meta property="og:locale" content=")[^"]*(")/, `$1${lang === "fr" ? "fr_FR" : "en_GB"}$2`)
     .replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="https://escale.live${t.path}">`)
     .replace(/<link rel="alternate" hreflang="[^"]*" href="[^"]*">\s*/g, "")
-    .replace(/<\/title>/, `</title><link rel="alternate" hreflang="fr" href="https://escale.live/a-saisir/"><link rel="alternate" hreflang="en" href="https://escale.live/en/deals-today/"><link rel="alternate" hreflang="x-default" href="https://escale.live/a-saisir/">`)
+    .replace(/<\/title>/, `</title><link rel="alternate" hreflang="fr" href="https://escale.live/barometre-prix/a-saisir/"><link rel="alternate" hreflang="en" href="https://escale.live/en/price-index/deals-today/"><link rel="alternate" hreflang="x-default" href="https://escale.live/barometre-prix/a-saisir/">`)
     .replace(/<script type="application\/ld\+json">\{"@context": "https:\/\/schema.org", "@type": "Dataset"[\s\S]*?<\/script>/, "")
   const headers = new Headers(base.headers)
   headers.delete("content-length")
