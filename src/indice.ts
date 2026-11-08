@@ -45,7 +45,7 @@ const ORIG: string[][] = [["CDG", "ORY", "LYS", "MRS", "BRU"], ["LHR"], ["MXP", 
 // Noms des villes en anglais (les libellés du baromètre sont en français)
 const EN: Record<string, string> = { Londres: "London", "Le Caire": "Cairo", "Addis-Abeba": "Addis Ababa", Alger: "Algiers", Bruxelles: "Brussels", Maurice: "Mauritius",
   "N’Djamena": "N'Djamena", Yaoundé: "Yaoundé", Lomé: "Lomé", Marrakech: "Marrakesh" }
-const label = (l: string, lang: Lang) => lang === "fr" ? l : l.split(" → ").map((x) => EN[x] || x).join(" → ")
+export const label = (l: string, lang: Lang) => lang === "fr" ? l : l.split(" → ").map((x) => EN[x] || x).join(" → ")
 
 const median = (a: number[]) => { if (!a.length) return null; const s = a.slice().sort((x, y) => x - y), m = s.length >> 1; return s.length % 2 ? s[m] : Math.round((s[m - 1] + s[m]) / 2) }
 const cls = (v: number) => (v <= -3 ? "bt-down" : v >= 3 ? "bt-up" : "bt-flat")

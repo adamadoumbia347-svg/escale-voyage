@@ -1,6 +1,7 @@
 import { Env, esc, siteUrl } from "./_lib/common"
 import { mailerReady, sendMail, lastMailError } from "./_lib/mail"
 import { Month, Point, cacheKey } from "./apercu-prix"
+import { deals, whatsappLines } from "./saisir"
 // Message WhatsApp de la semaine : chaque lundi matin (tâche quotidienne de wrangler.jsonc), un e-mail avec le message
 // des bons plans prêt à copier dans la chaîne WhatsApp. Destinataire : variable DIGEST_TO (Cloudflare > Variables et secrets).
 // Prix : relevé du jour (historique KV des pages trajets, mis à jour chaque nuit par src/releve.ts) et dates du cache.
@@ -94,6 +95,8 @@ export async function buildMessage(env: Env, lang = "fr") {
     const link = lang === "fr" ? `${base}/${r.path}/` : `${base}/?type=vols&from=${from}&to=${to}&lang=${t.app}`
     lines.push(`${r.flag} ${t.paris} → ${city}${sep}*${t.from} ${money(r.price, t.loc)}*${dates}${tr}`, `   👉 ${link}`)
   }
+  // Trajets nettement sous leur prix habituel (src/saisir.ts), en français seulement
+  if (lang === "fr") { try { lines.push("", ...whatsappLines(await deals(env), base).slice(0, -1)) } catch {} }
   lines.push("", ...(t.ete ? [t.ete.replace("{b}", base)] : []), t.baro.replace("{b}", base), t.alert.replace("{b}", base), t.share.replace("{c}", CHANNEL), "", t.foot)
   return { count: rows.length, text: lines.join("\n") }
 }

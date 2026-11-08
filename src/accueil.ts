@@ -1,5 +1,6 @@
 import { Ctx, json, esc, IATA } from "./_lib/common"
 import { Month, Point, cacheKey, readHistory } from "./apercu-prix"
+import { banner, deals } from "./saisir"
 // Accueil : les boutons « Trajets populaires » (sous le moteur) reçoivent le prix aller-retour le plus bas déjà connu
 // (cache des pages trajets, sinon dernier relevé de l'historique KV, mis à jour chaque nuit par src/releve.ts)
 // et une flèche de tendance sur 7 jours (↓ baisse, ↑ hausse, à partir de 3 %).
@@ -63,13 +64,19 @@ export const onRequest = async (ctx: Ctx) => {
   try {
     const html = await response.text()
     const pairs = [...html.matchAll(CHIP)].map((m) => [m[1], m[2]] as [string, string])
-    const map = pairs.length ? await homePrices(ctx, pairs) : {}
+    // Bandeau « trajets sous leur prix habituel » (src/saisir.ts) : jamais plus de 400 ms d'attente, sinon la page part sans lui
+    const dealsJob = deals(ctx.env, ctx.waitUntil).catch(() => null)
+    const [map, d] = await Promise.all([pairs.length ? homePrices(ctx, pairs) : ({} as Record<string, Known>), Promise.race([dealsJob, new Promise<null>((ok) => setTimeout(() => ok(null), WAIT_MS))])])
+    if (!d) ctx.waitUntil(dealsJob)
     const headers = new Headers(response.headers)
     headers.delete("content-length")
-    return new Response(html.replace(CHIP, (all, f, t) => {
+    let out = html.replace(CHIP, (all, f, t) => {
       const k = map[`${f}-${t}`]
       return k ? `<b class="pr" data-r="${f}-${t}">${esc(money(k.price))}${arrow(k.d7)}</b>` : all
-    }), { status: response.status, headers })
+    })
+    const bn = d ? banner(d, "fr") : ""
+    if (bn) out = out.replace('<section class="block" id="recent-block"', bn + '<section class="block" id="recent-block"')
+    return new Response(out, { status: response.status, headers })
   } catch {
     return response
   }

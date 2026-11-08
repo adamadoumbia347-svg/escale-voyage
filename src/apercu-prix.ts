@@ -25,7 +25,7 @@ const TRACKED = new Set(("CDG-DSS CDG-BKO CDG-ABJ CDG-CKY CDG-DLA CDG-NSI CDG-LF
   "LIL-ALG LIL-ORN LIL-TUN LIL-OUD GVA-ABJ CDG-MPM BOD-RAK MXP-ABJ MXP-DSS FCO-DSS MXP-CMN MXP-LOS MXP-ACC " +
   "CDG-NIM CDG-NDJ CDG-OXB CDG-BJL CDG-RAI CDG-ACC CDG-LOS CDG-ADD CDG-NBO CDG-JNB CDG-KGL CDG-CAI CDG-TNR CDG-LAD CDG-MPM CDG-DAR CDG-MRU MXP-TUN MXP-CAI MXP-ADD MXP-ALG FCO-CMN FCO-TUN FCO-CAI FCO-LOS FCO-ADD FCO-ALG FCO-ACC FCO-ABJ " +
   "LHR-LOS LHR-ACC LHR-ABV LHR-NBO LHR-JNB LHR-ADD LHR-CAI LHR-CMN LHR-RAK LHR-ALG LHR-DSS LHR-ABJ LHR-FIH LHR-TUN").split(" "))
-const HIST_DAYS = 120, HIST_MIN = 7, HIST_WINDOW = 60
+const HIST_DAYS = 400, HIST_MIN = 7, HIST_WINDOW = 60 // 400 jours : permet « le prix il y a un an »
 export type Point = [string, number, string?] // [date, prix le plus bas des 6 prochains mois]
 
 export async function readHistory(ctx: Ctx, from: string, to: string): Promise<Point[]> {
@@ -191,12 +191,30 @@ export async function routeMonths(ctx: Ctx, from: string, to: string): Promise<M
     const t = (data ?? []).filter((x: any) => x.price && String(x.departure_at || "").slice(0, 10) >= today).sort((a: any, b: any) => a.price - b.price)[0]
     if (t) out.push({ month: months[i], price: t.price, dep: String(t.departure_at).slice(0, 10), ret: t.return_at ? String(t.return_at).slice(0, 10) : "", transfers: t.transfers ?? 0 })
   })
-  if (cache) ctx.waitUntil(cache.put(key, new Response(JSON.stringify(out), { headers: { "Content-Type": "application/json", "Cache-Control": `public, max-age=${CACHE_S}` } })))
+  if (cache) ctx.waitUntil(cache.put(key, new Response(JSON.stringify(out), { headers: { "Content-Type": "application/json", "Cache-Control": `public, max-age=${CACHE_S}`, "X-At": String(Date.now()) } })))
   if (out.length) { const b = out.reduce((a, c) => (c.price < a.price ? c : a)); ctx.waitUntil(recordHistory(ctx, from, to, b.price, b.month).catch(() => {})) }
   return out
 }
 
-function render(html: string, from: string, to: string, rows: Month[], hist: Point[] = []) {
+// Âge des prix (heure de mise en cache, en-tête X-At) : « vérifiés il y a 2 h »
+export async function priceAge(from: string, to: string): Promise<number | null> {
+  const cache = (globalThis as any).caches?.default
+  if (!cache) return null
+  const hit = await cache.match(cacheKey(from, to)).catch(() => null)
+  const at = hit ? Number(hit.headers.get("X-At")) : NaN
+  return Number.isFinite(at) && at > 0 ? Math.max(0, Date.now() - at) : null
+}
+const AGO: Record<string, [string, string, string]> = { fr: ["Prix vérifiés il y a moins d’une heure.", "Prix vérifiés il y a {h} h.", "Prix vérifiés il y a {d} j."], en: ["Prices checked less than an hour ago.", "Prices checked {h} h ago.", "Prices checked {d} d ago."],
+  es: ["Precios comprobados hace menos de una hora.", "Precios comprobados hace {h} h.", "Precios comprobados hace {d} d."], pt: ["Preços verificados há menos de uma hora.", "Preços verificados há {h} h.", "Preços verificados há {d} d."],
+  ar: ["تم التحقق من الأسعار منذ أقل من ساعة.", "تم التحقق من الأسعار منذ {h} س.", "تم التحقق من الأسعار منذ {d} ي."], it: ["Prezzi verificati meno di un’ora fa.", "Prezzi verificati {h} h fa.", "Prezzi verificati {d} g fa."],
+  de: ["Preise vor weniger als einer Stunde geprüft.", "Preise vor {h} Std. geprüft.", "Preise vor {d} T. geprüft."], nl: ["Prijzen minder dan een uur geleden gecontroleerd.", "Prijzen {h} u geleden gecontroleerd.", "Prijzen {d} d geleden gecontroleerd."] }
+function agoText(lang: string, ms: number | null) {
+  if (ms === null) return ""
+  const a = AGO[lang] || AGO.fr, h = Math.floor(ms / 36e5)
+  return h < 1 ? a[0] : h < 48 ? a[1].replace("{h}", String(h)) : a[2].replace("{d}", String(Math.floor(h / 24)))
+}
+
+function render(html: string, from: string, to: string, rows: Month[], hist: Point[] = [], ageMs: number | null = null) {
   const lang = (html.match(/<html lang="([a-z]{2})"/) || [])[1] || "fr"
   const t = L[lang] || L.fr
   const money = (n: number) => { try { return new Intl.NumberFormat(t.loc, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n) } catch { return Math.round(n) + " €" } }
@@ -229,6 +247,8 @@ function render(html: string, from: string, to: string, rows: Month[], hist: Poi
   const spark = v ? sparkline(hist, a, money) : ""
   const summary = fill(t.summary, { m: date(bestRow.month, { month: "long", year: "numeric" }), p: money(best), max: money(max), n: String(MONTHS) }) +
     " " + fill(t.updated, { d: date(new Date().toISOString().slice(0, 10), { day: "numeric", month: "long", year: "numeric" }) })
+  const ago = agoText(lang, ageMs)
+  const badge2 = ago ? `<p class="price-age" style="margin:-4px 0 10px;font-size:.85rem;color:var(--muted,#5b6474)">✅ ${esc(ago)}</p>` : ""
   return html
     .replace(/(<title>)([^<]*?)( \| Escale)?(<\/title>)/, (_m, a, s, b, c) => a + s + ` · ${label}` + (b || "") + c)
     .replace(/(<meta property="og:title" content=")([^"]*)(")/, (_m, a, s, b) => a + s + ` · ${label}` + b)
@@ -236,7 +256,7 @@ function render(html: string, from: string, to: string, rows: Month[], hist: Poi
     .replace(/(<meta property="og:description" content=")([^"]*)(")/, (_m, a, s, b) => a + esc(lead) + " — " + s + b)
     .replace(/<p class="hero-price" id="hero-price" hidden><\/p>/, `<p class="hero-price" id="hero-price">${esc(t.hero)} <strong>${esc(money(best))}</strong></p>`)
     .replace(/(<section id="route-prices" data-from="[A-Z]{3}" data-to="[A-Z]{3}") hidden>/, `$1 data-ssr="1">`)
-    .replace(/<ul class="price-list"><\/ul>/, `${badge}${spark}<p class="price-summary">${esc(summary)}</p>${bars}<ul class="price-list">${items}</ul>`)
+    .replace(/<ul class="price-list"><\/ul>/, `${badge2}${badge}${spark}<p class="price-summary">${esc(summary)}</p>${bars}<ul class="price-list">${items}</ul>`)
 }
 
 // Pages « destination » (tous les vols vers une ville) : chaque ligne reçoit le prix déjà connu du trajet (cache des pages trajets).
@@ -289,8 +309,8 @@ export const onRequest = async (ctx: Ctx) => {
     const rows = await Promise.race([job, new Promise<undefined>((ok) => setTimeout(() => ok(undefined), WAIT_MS))])
     if (rows === undefined) ctx.waitUntil(job) // trop lent : la page part sans les prix, le cache se remplit pour la visite suivante
     if (!rows || !rows.length) return new Response(html, { status: response.status, headers })
-    const hist = await readHistory(ctx, route[1], route[2])
-    return new Response(render(html, route[1], route[2], rows, hist), { status: response.status, headers })
+    const [hist, age] = await Promise.all([readHistory(ctx, route[1], route[2]), priceAge(route[1], route[2])])
+    return new Response(render(html, route[1], route[2], rows, hist, age), { status: response.status, headers })
   } catch {
     return response
   }

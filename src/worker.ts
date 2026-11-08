@@ -28,6 +28,7 @@ import * as apercu from "./apercu-prix"
 import * as barometre from "./barometre"
 import * as indice from "./indice"
 import * as accueil from "./accueil"
+import * as saisir from "./saisir"
 import { sendDigest, sendNewsletter } from "./digest"
 import { indexNow } from "./indexnow"
 
@@ -49,6 +50,9 @@ export default {
     // Indice des prix : page du jour et archives mensuelles (/indice-prix/2026-11/)
     if (/^\/(en\/price-index|indice-prix)(\/(\d{4}-\d{2}\/?)?)?$/.test(path)) return indice.onRequest(c)
     if (path === "/") return accueil.onRequest(c)
+    // « À saisir aujourd'hui » : page écrite par le serveur (pas de fichier statique)
+    if (path === "/a-saisir/" || path === "/a-saisir") return saisir.page(c, "fr")
+    if (path === "/en/deals-today/" || path === "/en/deals-today") return saisir.page(c, "en")
     return apercu.onRequest(c)
   },
   // Chaque matin à 6 h UTC (voir « triggers » dans wrangler.jsonc) : vérification des alertes prix ; lundi et jeudi, message WhatsApp à coller
