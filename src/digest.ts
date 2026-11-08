@@ -147,12 +147,12 @@ export async function sendDigest(env: Env) {
   if (!m.count) return { sent: false, reason: "aucun prix relevé" }
   const st = await weeklyStats(env).catch(() => null)
   const html = `<div style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:640px;color:#0d1b2e">` +
-    `<h2 style="margin:0 0 8px">Message WhatsApp de la semaine</h2>` +
+    `<h2 style="margin:0 0 8px">Message WhatsApp à coller dans la chaîne</h2>` +
     `<p>1. Sélectionnez le texte dans le cadre et copiez-le.<br>2. WhatsApp → Actualités → chaîne Escale → collez → envoyez.</p>` +
     `<pre style="white-space:pre-wrap;font:15px/1.5 system-ui,sans-serif;background:#f3f6fa;border:1px solid #dde3ec;border-radius:10px;padding:14px">${esc(m.text)}</pre>` +
     `<p><a href="${CHANNEL}">Ouvrir la chaîne WhatsApp</a> · <a href="${siteUrl(env)}/outils/whatsapp/">Préparer un autre message (Lyon, Marseille, Bruxelles…)</a></p>` +
     (st ? statsHtml(st) : "") +
-    `<p style="color:#5b6b80;font-size:13px">E-mail automatique d'Escale, envoyé chaque lundi à ${esc(to)}.</p></div>`
+    `<p style="color:#5b6b80;font-size:13px">E-mail automatique d'Escale, envoyé chaque lundi et jeudi à ${esc(to)}.</p></div>`
   const ok = await sendMail(env, to, `Message WhatsApp et bilan de la semaine${st ? ` (${st.now} clics)` : ""}`, html)
   return { sent: ok, to, count: m.count, ...(ok ? {} : { detail: lastMailError }) }
 }

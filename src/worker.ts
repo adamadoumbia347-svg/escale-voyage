@@ -51,7 +51,7 @@ export default {
     if (path === "/") return accueil.onRequest(c)
     return apercu.onRequest(c)
   },
-  // Chaque matin à 6 h UTC (voir « triggers » dans wrangler.jsonc) : vérification des alertes prix ; le lundi, message WhatsApp de la semaine
+  // Chaque matin à 6 h UTC (voir « triggers » dans wrangler.jsonc) : vérification des alertes prix ; lundi et jeudi, message WhatsApp à coller
   async scheduled(event: { cron?: string }, env: Env, ctx: { waitUntil: (p: Promise<any>) => void }) {
     // Toutes les 10 minutes entre 3 h et 6 h UTC : relevé des prix du baromètre, par tranches (src/releve.ts)
     if (event?.cron && event.cron !== "0 6 * * *") {
@@ -63,10 +63,10 @@ export default {
     ctx.waitUntil(indice.archiveIndice(env).then((r) => console.log("indice archive", JSON.stringify(r))).catch((e) => console.log("indice archive erreur", String(e))))
     // IndexNow : pages modifiées depuis 2 jours signalées aux moteurs de recherche (src/indexnow.ts)
     ctx.waitUntil(indexNow(env).then((r) => console.log("IndexNow", JSON.stringify(r))).catch((e) => console.log("IndexNow erreur", String(e))))
-    // Le lundi : e-mail avec le message WhatsApp des bons plans de la semaine (src/digest.ts)
-    if (new Date().getUTCDay() === 1) {
-      ctx.waitUntil(sendDigest(env).then((r) => console.log("message WhatsApp", JSON.stringify(r))))
-      ctx.waitUntil(sendNewsletter(env).then((r) => console.log("bons plans par e-mail", JSON.stringify(r))))
-    }
+    // Lundi et jeudi : e-mail avec le message WhatsApp des bons plans, prêt à coller dans la chaîne (src/digest.ts)
+    const day = new Date().getUTCDay()
+    if (day === 1 || day === 4) ctx.waitUntil(sendDigest(env).then((r) => console.log("message WhatsApp", JSON.stringify(r))))
+    // Le lundi seulement : e-mail des bons plans aux inscrits (une fois par semaine au plus)
+    if (day === 1) ctx.waitUntil(sendNewsletter(env).then((r) => console.log("bons plans par e-mail", JSON.stringify(r))))
   },
 }
