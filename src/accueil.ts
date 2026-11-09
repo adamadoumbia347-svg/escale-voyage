@@ -7,6 +7,8 @@ import { banner, deals } from "./saisir"
 // Rien n'est demandé à Travelpayouts ici : la page reste rapide (jamais plus de 400 ms d'attente). Prix gardés 1 heure dans le cache de Cloudflare.
 // GET /api/connus?r=CDG-DSS,ORY-CMN : mêmes prix, pour le bloc « Vos trajets » (trajets consultés, gardés dans le navigateur).
 const CHIP = /<b class="pr" data-r="([A-Z]{3})-([A-Z]{3})"><\/b>/g
+const H1_FR = "Les billets pas chers <em>pour toutes les destinations</em></h1>"
+const H1_NEW = `<span class="hero-badge" style="display:table;margin:0 0 10px;padding:6px 13px;border-radius:999px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.5);color:#fff;font-weight:700;font-size:14px;letter-spacing:0;line-height:1.2">🌍 Le comparateur de la diaspora africaine</span> Les billets pas chers <em>pour rentrer au pays</em></h1>`
 const CACHE_S = 3600
 const WAIT_MS = 400
 type Known = { price: number; d7: number | null }
@@ -78,6 +80,10 @@ export const onRequest = async (ctx: Ctx) => {
     if (bn) out = out.replace('<section class="block" id="recent-block"', bn + '<section class="block" id="recent-block"')
     // Adresses de recherche (/?type=vols&from=…) : même page que l'accueil, pas à indexer (Search Console les listait par milliers
     // en « autre page avec balise canonique correcte »). La balise canonique vers / reste ; on ajoute noindex, follow.
+    // Titre de l'accueil en français : Escale se présente comme le comparateur de la diaspora africaine. L'étiquette est dans le h1
+    // (lue par Google avec le titre) ; les autres langues gardent leur titre traduit (data-en-html, site/i18n.js), et la fin du
+    // titre reste animée par site/hero-anim.js (« pour rentrer au pays » → « pour Abidjan » → « pour Dakar »…).
+    out = out.replace(H1_FR, H1_NEW)
     if (new URL(ctx.request.url).searchParams.has("type")) out = out.replace("<head>", '<head>\n<meta name="robots" content="noindex, follow">')
     return new Response(out, { status: response.status, headers })
   } catch {
