@@ -24,6 +24,8 @@ import * as weekends from "./api/weekends"
 import * as verdictApi from "./api/verdict"
 import * as compteur from "./api/compteur"
 import * as paye from "./api/paye"
+import * as aeroApi from "./api/aeroport"
+import * as aeroport from "./aeroport"
 import * as apercu from "./apercu-prix"
 import * as barometre from "./barometre"
 import * as indice from "./indice"
@@ -34,7 +36,7 @@ import * as compagnie from "./compagnie"
 import { sendDigest, sendNewsletter } from "./digest"
 import { indexNow } from "./indexnow"
 
-const API: Record<string, any> = { push, prix, explore, calendar, deals, geo, alert, form, admin, cron, populaires, clic, fx, grille, weekends, verdict: verdictApi, connus: accueil, compteur, paye }
+const API: Record<string, any> = { push, prix, explore, calendar, deals, geo, alert, form, admin, cron, populaires, clic, fx, grille, weekends, verdict: verdictApi, connus: accueil, compteur, paye, aeroport: aeroApi }
 
 export default {
   async fetch(request: Request, env: Env & { ASSETS: { fetch: (r: Request) => Promise<Response> } }, ctx: { waitUntil: (p: Promise<any>) => void }) {
@@ -57,8 +59,10 @@ export default {
     const com = path.match(/^\/(indice-prix|en\/price-index)\/(?:(\d{4}-\d{2})\/)?(communique|press)\/?$/)
     if (com) return diffusion.communique(c, com[1] === "indice-prix" ? "fr" : "en", com[2] || null)
     // Indice des prix : page du jour et archives mensuelles (/indice-prix/2026-11/)
-    if (/^\/(en\/price-index|indice-prix)(\/(\d{4}-\d{2}\/?)?)?$/.test(path)) return indice.onRequest(c)
+    if (/^\/(en\/price-index|indice-prix)(\/(\d{4}-\d{2}\/?|(pays|country)\/[a-z-]+\/?)?)?$/.test(path)) return indice.onRequest(c)
     if (path === "/") return accueil.onRequest(c)
+    // Guides « Arriver à l'aéroport » : bloc « l'aéroport vu par les voyageurs » (src/aeroport.ts)
+    if (/^\/(arriver-aeroport-|en\/arriving-at-)/.test(path)) return aeroport.onRequest(c)
     // Pages compagnies : bloc « ce que les voyageurs ont payé » (src/compagnie.ts)
     if (/^\/(en\/airline|compagnie)\//.test(path)) return compagnie.onRequest(c)
     // « À saisir aujourd'hui » : page écrite par le serveur (pas de fichier statique)

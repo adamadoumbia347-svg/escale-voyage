@@ -48,6 +48,43 @@ const EN: Record<string, string> = { Londres: "London", "Le Caire": "Cairo", "Ad
   "N’Djamena": "N'Djamena", Yaoundé: "Yaoundé", Lomé: "Lomé", Marrakech: "Marrakesh" }
 export const label = (l: string, lang: Lang) => lang === "fr" ? l : l.split(" → ").map((x) => EN[x] || x).join(" → ")
 
+// Indice par pays d'arrivée (/indice-prix/pays/cote-d-ivoire/, /en/price-index/country/ivory-coast/) : mêmes relevés, filtrés
+// sur les aéroports du pays. Les médias d'un pays citent un chiffre qui parle de leur pays.
+export const PAYS: { fr: string; en: string; nom: string; name: string; codes: string[] }[] = [
+  { fr: "cote-d-ivoire", en: "ivory-coast", nom: "Côte d'Ivoire", name: "Ivory Coast", codes: ["ABJ"] },
+  { fr: "senegal", en: "senegal", nom: "Sénégal", name: "Senegal", codes: ["DSS"] },
+  { fr: "mali", en: "mali", nom: "Mali", name: "Mali", codes: ["BKO"] },
+  { fr: "guinee", en: "guinea", nom: "Guinée", name: "Guinea", codes: ["CKY"] },
+  { fr: "cameroun", en: "cameroon", nom: "Cameroun", name: "Cameroon", codes: ["DLA", "NSI"] },
+  { fr: "rd-congo", en: "dr-congo", nom: "RD Congo", name: "DR Congo", codes: ["FIH"] },
+  { fr: "togo", en: "togo", nom: "Togo", name: "Togo", codes: ["LFW"] },
+  { fr: "benin", en: "benin", nom: "Bénin", name: "Benin", codes: ["COO"] },
+  { fr: "burkina-faso", en: "burkina-faso", nom: "Burkina Faso", name: "Burkina Faso", codes: ["OUA"] },
+  { fr: "ghana", en: "ghana", nom: "Ghana", name: "Ghana", codes: ["ACC"] },
+  { fr: "nigeria", en: "nigeria", nom: "Nigeria", name: "Nigeria", codes: ["LOS", "ABV"] },
+  { fr: "maroc", en: "morocco", nom: "Maroc", name: "Morocco", codes: ["CMN", "RAK"] },
+  { fr: "algerie", en: "algeria", nom: "Algérie", name: "Algeria", codes: ["ALG", "ORN"] },
+  { fr: "tunisie", en: "tunisia", nom: "Tunisie", name: "Tunisia", codes: ["TUN", "DJE"] },
+  { fr: "egypte", en: "egypt", nom: "Égypte", name: "Egypt", codes: ["CAI"] },
+  { fr: "ethiopie", en: "ethiopia", nom: "Éthiopie", name: "Ethiopia", codes: ["ADD"] },
+  { fr: "kenya", en: "kenya", nom: "Kenya", name: "Kenya", codes: ["NBO"] },
+  { fr: "afrique-du-sud", en: "south-africa", nom: "Afrique du Sud", name: "South Africa", codes: ["JNB"] },
+]
+// « vers la Côte d'Ivoire », « vers le Maroc », « vers Madagascar »…
+const VERS: Record<string, string> = { "cote-d-ivoire": "la Côte d'Ivoire", senegal: "le Sénégal", mali: "le Mali", guinee: "la Guinée", cameroun: "le Cameroun", "rd-congo": "la RD Congo", togo: "le Togo", benin: "le Bénin", "burkina-faso": "le Burkina Faso", ghana: "le Ghana", nigeria: "le Nigeria", maroc: "le Maroc", algerie: "l'Algérie", tunisie: "la Tunisie", egypte: "l'Égypte", ethiopie: "l'Éthiopie", kenya: "le Kenya", "afrique-du-sud": "l'Afrique du Sud" }
+const PT = {
+  fr: { base: "/indice-prix/pays/", eyebrow: "Indice par pays · mis à jour chaque jour", h1: (n: string) => `Indice Escale <span>${esc(n)}</span>`, title: (n: string) => `Prix des vols vers ${VERS[n] || n} : l'indice Escale du jour | Escale`,
+    desc: (n: string) => `Les billets d'avion depuis l'Europe vers ${VERS[n] || n} montent-ils ou baissent-ils ? Variation médiane des prix sur les trajets suivis chaque jour par Escale, plus fortes hausses et baisses, prix les plus bas.`,
+    few: (n: string, k: number) => `${k} trajet${k > 1 ? "s" : ""} vers ${VERS[n] || n} suivi${k > 1 ? "s" : ""} chaque jour : encore trop peu pour un indice fiable. Voici les prix du moment.`, routes: "Trajets suivis", all: "Tous les pays", back: "Indice Europe – Afrique" },
+  en: { base: "/en/price-index/country/", eyebrow: "Country index · updated daily", h1: (n: string) => `Escale Price Index <span>${esc(n)}</span>`, title: (n: string) => `Air fares to ${n}: today's Escale index | Escale`,
+    desc: (n: string) => `Are flights from Europe to ${n} getting cheaper or dearer? Median change in fares on the routes Escale tracks daily, biggest rises and drops, lowest fares.`,
+    few: (n: string, k: number) => `${k} route${k > 1 ? "s" : ""} to ${n} tracked daily: not enough yet for a reliable index. Here are today's fares.`, routes: "Tracked routes", all: "All countries", back: "Europe – Africa index" },
+}
+export function countryList(lang: Lang, skip = ""): string {
+  const t = PT[lang]
+  return `<h2>${esc(lang === "fr" ? "Indice par pays d'arrivée" : "Index by arrival country")}</h2><ul class="ix-list ix-pays">${PAYS.filter((p) => p[lang] !== skip).map((p) => `<li><a href="${t.base}${p[lang]}/">${esc(lang === "fr" ? p.nom : p.name)}</a></li>`).join("")}</ul>`
+}
+
 const median = (a: number[]) => { if (!a.length) return null; const s = a.slice().sort((x, y) => x - y), m = s.length >> 1; return s.length % 2 ? s[m] : Math.round((s[m - 1] + s[m]) / 2) }
 const cls = (v: number) => (v <= -3 ? "bt-down" : v >= 3 ? "bt-up" : "bt-flat")
 
@@ -173,15 +210,46 @@ async function archivePage(ctx: Ctx, lang: Lang, ym: string): Promise<Response> 
   return new Response(html, { status: 200, headers })
 }
 
+async function countryPage(ctx: Ctx, lang: Lang, slug: string): Promise<Response> {
+  const p = PAYS.find((x) => x[lang] === slug)
+  const base = p ? await ctx.env.ASSETS?.fetch(new Request(`https://escale.live${lang === "fr" ? "/indice-prix/" : "/en/price-index/"}`)) : null
+  if (!p || !base || !base.ok) return ctx.next()
+  const t = PT[lang], name = lang === "fr" ? p.nom : p.name, key = lang === "fr" ? p.fr : p.name
+  const all = await rows(ctx)
+  const sub = all.filter((r) => p.codes.includes(r.to))
+  const money = (n: number) => new Intl.NumberFormat(T[lang].loc, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n)
+  let block: string
+  if (sub.filter((r) => r.d7 !== null).length >= 3) block = render(sub, lang)
+  else block = `<p class="bt-lead">${esc(t.few(key, sub.length))}</p>` + (sub.length ? `<ul class="ix-list">${sub.slice().sort((a, b) => a.price - b.price).map((r) => `<li><a href="/${r.path}/">${esc(label(r.label, lang))}</a>${lang === "fr" ? " : " : ": "}${T[lang].from} <strong>${esc(money(r.price))}</strong></li>`).join("")}</ul>` : "")
+  block += `<p><a class="btn ghost" href="${lang === "fr" ? "/indice-prix/" : "/en/price-index/"}">${esc(t.back)}</a></p>` + countryList(lang, slug)
+  const html = (await base.text())
+    .replace(/<title>[^<]*<\/title>/, `<title>${esc(t.title(key))}</title>`)
+    .replace(/(<meta name="description" content=")[^"]*(")/, `$1${esc(t.desc(key))}$2`)
+    .replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${esc(t.title(key).replace(/ \| Escale$/, ""))}$2`)
+    .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${esc(t.desc(key))}$2`)
+    .replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="https://escale.live${t.base}${slug}/">`)
+    .replace(/(<link rel="alternate" hreflang="fr" href=")[^"]*(")/, `$1https://escale.live${PT.fr.base}${p.fr}/$2`)
+    .replace(/(<link rel="alternate" hreflang="en" href=")[^"]*(")/, `$1https://escale.live${PT.en.base}${p.en}/$2`)
+    .replace(/(<link rel="alternate" hreflang="x-default" href=")[^"]*(")/, `$1https://escale.live${PT.fr.base}${p.fr}/$2`)
+    .replace(/<p class="eyebrow">[^<]*<\/p>(\s*<h1>)[\s\S]*?<\/h1>/, `<p class="eyebrow">${esc(t.eyebrow)}</p>$1${t.h1(name)}</h1>`)
+    .replace(/<div id="indice">[\s\S]*?<\/div><!-- \/indice -->/, `<div id="indice" data-ssr="1" data-pays="${esc(slug)}">${block}</div><!-- /indice -->`)
+  const headers = new Headers(base.headers)
+  headers.delete("content-length")
+  headers.set("Cache-Control", "public, max-age=3600")
+  return new Response(html, { status: 200, headers })
+}
+
 export const onRequest = async (ctx: Ctx) => {
   const path = new URL(ctx.request.url).pathname
   const lang: Lang = path.startsWith("/en/") ? "en" : "fr"
+  const pays = path.match(/\/(?:pays|country)\/([a-z-]+)\/?$/)
+  if (ctx.request.method === "GET" && pays) { try { return await countryPage(ctx, lang, pays[1]) } catch { return ctx.next() } }
   const arch = path.match(/\/(\d{4}-\d{2})\/?$/)
   if (ctx.request.method === "GET" && arch) { try { return await archivePage(ctx, lang, arch[1]) } catch { return ctx.next() } }
   const response = await ctx.next()
   if (ctx.request.method !== "GET" || !response.ok) return response
   const cache = (globalThis as any).caches?.default
-  const key = new Request(`https://escale.live/__indice/v4/${lang}/` + new Date().toISOString().slice(0, 10))
+  const key = new Request(`https://escale.live/__indice/v5/${lang}/` + new Date().toISOString().slice(0, 10))
   try {
     let block = ""
     const hit = cache ? await cache.match(key) : null
@@ -189,7 +257,7 @@ export const onRequest = async (ctx: Ctx) => {
     else {
       const list = await rows(ctx)
       if (list.length) {
-        block = render(list, lang) + (await archiveList(ctx.env, lang)) + shareBlock(lang)
+        block = render(list, lang) + countryList(lang) + (await archiveList(ctx.env, lang)) + shareBlock(lang)
         if (cache) ctx.waitUntil(cache.put(key, new Response(block, { headers: { "Cache-Control": "public, max-age=3600" } })))
       }
     }
