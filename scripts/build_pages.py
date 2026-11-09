@@ -593,8 +593,8 @@ def legal_pages():
     urls = []
     hero = '<h1>Mentions légales</h1>'
     body = """<section><h2>Éditeur du site</h2>
-<p>Le site Escale (__HOST__) est édité à titre non professionnel.</p>
-<p>Conformément à l'article 6, III-2 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique, l'éditeur non professionnel peut ne tenir à la disposition du public que le nom et l'adresse de son hébergeur, après lui avoir communiqué ses éléments d'identification.</p>
+<p>Escale (__HOST__) est un comparateur de voyage indépendant, édité par un particulier à titre personnel, sans société ni lien avec une compagnie ou une agence.</p>
+<p>Conformément à l'article 6, III-2 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique, une personne qui édite un site à titre personnel peut ne tenir à la disposition du public que le nom et l'adresse de son hébergeur, après lui avoir communiqué ses éléments d'identification.</p>
 <p>Contact : <a href="/contact/">formulaire de contact</a>.</p>
 </section>
 <section><h2>Hébergeur</h2>

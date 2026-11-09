@@ -1,7 +1,7 @@
 """Page « À propos » (5 langues)."""
 
 ABOUT = {
-    "fr": dict(slug="a-propos", title="À propos d’Escale", lead="Escale aide à trouver le vol, l’hôtel ou la voiture le moins cher, sans compte et gratuitement.", sections=[
+    "fr": dict(slug="a-propos", title="À propos d’Escale", lead="Escale est un comparateur de voyage indépendant : il aide à trouver le vol, l’hôtel ou la voiture le moins cher, sans compte et gratuitement.", sections=[
         ("Qui est derrière Escale ?", ["Je m’appelle Dobam. Je vis en Italie et, comme beaucoup d’entre vous, je rentre de temps en temps voir ma famille en Côte d’Ivoire.", "J’ai créé Escale pour aider mes frères et sœurs de la diaspora à trouver les billets les moins chers pour rentrer au pays : gratuitement, sans compte et sans frais ajoutés.", "Une question, une ville à ajouter ? Écrivez-moi, je lis tous les messages."]),
         ("Ce que fait Escale", ["Escale compare en direct les prix des vols de dizaines de compagnies et d’agences, et ceux des hôtels (Booking, Expedia, Agoda…), triés par prix. Vous comparez en quelques clics au lieu de tout ressaisir sur chaque site.",
                                 "Les prix affichés sur Escale (« dès 389 € », calendriers, bons plans) sont des prix réels trouvés récemment par des voyageurs, fournis par Aviasales via Travelpayouts. Le tarif exact et disponible s’affiche toujours sur le site de réservation."]),
@@ -11,7 +11,7 @@ ABOUT = {
         ("D’où viennent les informations", ["Aéroports : base publique OurAirports. Prix : Aviasales via Travelpayouts. Conseils et guides : rédigés par Escale, à titre indicatif ; les règles des compagnies et des pays changent, vérifiez toujours auprès d’eux."]),
         ("Nous écrire", ["Une erreur, une destination à ajouter, une idée ? Le formulaire de contact est fait pour ça."]),
     ], contact="Nous contacter"),
-    "en": dict(slug="en/about", title="About Escale", lead="Escale helps you find the cheapest flight, hotel or car, free and without an account.", sections=[
+    "en": dict(slug="en/about", title="About Escale", lead="Escale is an independent travel comparison site: it helps you find the cheapest flight, hotel or car, free and without an account.", sections=[
         ("Who is behind Escale?", ["My name is Dobam. I live in Italy and, like many of you, I go back to see my family in Côte d’Ivoire from time to time.", "I created Escale to help my brothers and sisters in the diaspora find the cheapest tickets to go back home: free, with no account and no added fees.", "A question, a city to add? Write to me, I read every message."]),
         ("What Escale does", ["Escale compares live flight prices from dozens of airlines and agencies, and hotel prices (Booking, Expedia, Agoda…), sorted by price. You compare in a few clicks instead of re-typing everything on each site.",
                               "Prices shown on Escale (“from €389”, calendars, deals) are real prices recently found by travellers, provided by Aviasales via Travelpayouts. The exact available fare is always shown on the booking site."]),
@@ -21,7 +21,7 @@ ABOUT = {
         ("Where the information comes from", ["Airports: OurAirports public database. Prices: Aviasales via Travelpayouts. Tips and guides: written by Escale, for guidance only; airline and country rules change, always check with them."]),
         ("Write to us", ["A mistake, a destination to add, an idea? The contact form is there for that."]),
     ], contact="Contact us"),
-    "es": dict(slug="es/acerca-de", title="Acerca de Escale", lead="Escale te ayuda a encontrar el vuelo, el hotel o el coche más barato, gratis y sin cuenta.", sections=[
+    "es": dict(slug="es/acerca-de", title="Acerca de Escale", lead="Escale es un comparador de viajes independiente: te ayuda a encontrar el vuelo, el hotel o el coche más barato, gratis y sin cuenta.", sections=[
         ("¿Quién está detrás de Escale?", ["Me llamo Dobam. Vivo en Italia y, como muchos de vosotros, vuelvo de vez en cuando a ver a mi familia en Costa de Marfil.", "Creé Escale para ayudar a mis hermanos y hermanas de la diáspora a encontrar los billetes más baratos para volver a casa: gratis, sin cuenta y sin gastos añadidos.", "¿Una pregunta, una ciudad que añadir? Escríbeme, leo todos los mensajes."]),
         ("Qué hace Escale", ["Escale compara en directo los precios de vuelos de decenas de aerolíneas y agencias, y los de hoteles (Booking, Expedia, Agoda…), ordenados por precio. Comparas en pocos clics sin volver a escribirlo todo en cada sitio.",
                              "Los precios que muestra Escale («desde 389 €», calendarios, ofertas) son precios reales encontrados recientemente por viajeros, facilitados por Aviasales a través de Travelpayouts. La tarifa exacta disponible siempre aparece en el sitio de reserva."]),
@@ -31,7 +31,7 @@ ABOUT = {
         ("De dónde viene la información", ["Aeropuertos: base pública OurAirports. Precios: Aviasales vía Travelpayouts. Consejos y guías: redactados por Escale, a título orientativo; las normas de aerolíneas y países cambian, compruébalas siempre con ellos."]),
         ("Escríbenos", ["¿Un error, un destino que añadir, una idea? El formulario de contacto está para eso."]),
     ], contact="Contactar"),
-    "pt": dict(slug="pt/sobre", title="Sobre a Escale", lead="A Escale ajuda a encontrar o voo, o hotel ou o carro mais barato, grátis e sem conta.", sections=[
+    "pt": dict(slug="pt/sobre", title="Sobre a Escale", lead="A Escale é um comparador de viagens independente: ajuda a encontrar o voo, o hotel ou o carro mais barato, grátis e sem conta.", sections=[
         ("Quem está por trás da Escale?", ["Chamo-me Dobam. Vivo em Itália e, como muitos de vocês, volto de vez em quando para ver a minha família na Costa do Marfim.", "Criei a Escale para ajudar os meus irmãos e irmãs da diáspora a encontrar os bilhetes mais baratos para voltar a casa: grátis, sem conta e sem taxas adicionais.", "Uma pergunta, uma cidade a acrescentar? Escreva-me, leio todas as mensagens."]),
         ("O que faz a Escale", ["A Escale compara ao vivo os preços de voos de dezenas de companhias e agências, e os de hotéis (Booking, Expedia, Agoda…), ordenados por preço. Compara em poucos cliques sem voltar a escrever tudo em cada site.",
                                 "Os preços mostrados na Escale («desde 389 €», calendários, promoções) são preços reais encontrados recentemente por viajantes, fornecidos pela Aviasales através da Travelpayouts. A tarifa exata disponível aparece sempre no site de reserva."]),
