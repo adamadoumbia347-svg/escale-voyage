@@ -1,6 +1,7 @@
 import { Ctx, json, esc, IATA } from "./_lib/common"
 import { Month, Point, cacheKey, readHistory } from "./apercu-prix"
 import { banner, deals } from "./saisir"
+import { ANIM } from "./accueil-anim"
 // Accueil : les boutons « Trajets populaires » (sous le moteur) reçoivent le prix aller-retour le plus bas déjà connu
 // (cache des pages trajets, sinon dernier relevé de l'historique KV, mis à jour chaque nuit par src/releve.ts)
 // et une flèche de tendance sur 7 jours (↓ baisse, ↑ hausse, à partir de 3 %).
@@ -84,6 +85,8 @@ export const onRequest = async (ctx: Ctx) => {
     // (lue par Google avec le titre) ; les autres langues gardent leur titre traduit (data-en-html, site/i18n.js), et la fin du
     // titre reste animée par site/hero-anim.js (« pour rentrer au pays » → « pour Abidjan » → « pour Dakar »…).
     out = out.replace(H1_FR, H1_NEW)
+    // Animation du titre (destinations qui défilent, Afrique d'abord) : la version du serveur remplace le fichier site/hero-anim.js
+    out = out.replace(/<script src="\/hero-anim\.js[^"]*" defer><\/script>/, () => `<script>document.addEventListener("DOMContentLoaded",function(){${ANIM}});</script>`)
     // Message de saison (« Noël au pays… ») posé sur la photo : fond blanc et texte foncé, lisible quelle que soit la photo
     out = out.replace("</head>", `<style>.has-hero .band .hero-season a{background:#fff;color:#08303a;border-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;border-radius:16px;box-shadow:0 10px 30px -14px rgb(0 0 0/.5)}</style></head>`)
     if (new URL(ctx.request.url).searchParams.has("type")) out = out.replace("<head>", '<head>\n<meta name="robots" content="noindex, follow">')

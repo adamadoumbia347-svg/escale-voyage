@@ -1,6 +1,8 @@
-// Accueil : les avantages défilent un par un sous le titre, et la fin du titre tape des destinations
-// (« pour toutes les destinations » → « pour Abidjan » → « pour Bangkok »…). Rien ne bouge si le visiteur a demandé moins
-// d'animations ou en mode léger ; le texte d'origine reste dans la page pour Google et les lecteurs d'écran.
+// Accueil : les avantages défilent un par un sous le titre, et la fin du titre fait défiler des destinations
+// (« pour rentrer au pays » → « pour Abidjan 🇨🇮 » → « pour Dakar 🇸🇳 »…) : les villes d'Afrique d'abord, puis le reste du monde.
+// Chaque destination monte et remplace la précédente dans une pastille (plus de machine à écrire). Rien ne bouge si le visiteur
+// a demandé moins d'animations ou en mode léger ; le texte d'origine reste dans la page pour Google et les lecteurs d'écran.
+// Ce fichier est aussi écrit dans la page par le serveur (src/accueil-anim.ts) : garder les deux identiques.
 (function () {
   "use strict";
   var root = document.documentElement;
@@ -24,25 +26,39 @@
     }, 2800); }, 4000);
   }
 
-  // 2. Titre : effet machine à écrire sur la fin (français et anglais)
+  // 2. Titre : les destinations défilent dans une pastille (français et anglais), Afrique d'abord
   var em = document.querySelector(".hero h1 em"), h1 = em && em.parentNode;
   var lang = (root.lang || "fr").slice(0, 2);
-  var W = { fr: ["pour Abidjan", "pour Dakar", "pour Bangkok", "pour New York", "pour Marrakech", "pour Tokyo", "pour Zanzibar"],
-    en: ["to Abidjan", "to Lagos", "to Bangkok", "to New York", "to Marrakech", "to Tokyo", "to Zanzibar"] }[lang];
-  if (!em || !W) return;
+  var AFR = [["Abidjan", "🇨🇮"], ["Dakar", "🇸🇳"], ["Bamako", "🇲🇱"], ["Douala", "🇨🇲"], ["Kinshasa", "🇨🇩"], ["Conakry", "🇬🇳"], ["Lomé", "🇹🇬"], ["Cotonou", "🇧🇯"],
+    ["Casablanca", "🇲🇦"], [lang === "en" ? "Algiers" : "Alger", "🇩🇿"], ["Tunis", "🇹🇳"], ["Lagos", "🇳🇬"], ["Accra", "🇬🇭"], ["Nairobi", "🇰🇪"]];
+  var MONDE = [["Istanbul", "🇹🇷"], [lang === "en" ? "Dubai" : "Dubaï", "🇦🇪"], ["New York", "🇺🇸"], ["Bangkok", "🇹🇭"], ["Tokyo", "🇯🇵"]];
+  if (!em || (lang !== "fr" && lang !== "en")) return;
   setTimeout(function () {
-  var first = em.textContent, words = [first].concat(W), k = 0;
-  h1.setAttribute("aria-label", h1.textContent);
-  Array.prototype.forEach.call(h1.childNodes, function (n) { if (n.nodeType === 1) n.setAttribute("aria-hidden", "true"); });
-  h1.style.minHeight = h1.offsetHeight + "px"; h1.style.textWrap = "wrap"; // le titre garde sa hauteur et sa coupure : la page ne saute pas
-  em.classList.add("typing");
-  var type = function (txt, done) { var n = 0; (function step() { em.textContent = txt.slice(0, ++n); n < txt.length ? setTimeout(step, 55) : done(); })(); };
-  var erase = function (done) { (function step() { var t = em.textContent; if (!t) return done(); em.textContent = t.slice(0, -1); setTimeout(step, 28); })(); };
-  var loop = function () {
-    setTimeout(function () {
-      erase(function () { k = (k + 1) % words.length; type(words[k], loop); });
-    }, k === 0 ? 3200 : 1700);
-  };
-  loop();
+    var full = em.textContent.trim(), cut = full.indexOf(" ");
+    if (cut < 1) return;
+    var lead = full.slice(0, cut), first = full.slice(cut + 1);
+    // Windows n'affiche pas les drapeaux (il montre deux lettres) : on les retire sur ces ordinateurs
+    var flags = !/Windows/.test(navigator.userAgent || "");
+    var words = [first].concat(AFR.concat(MONDE).map(function (w) { return flags ? w[0] + " " + w[1] : w[0]; })), k = 0;
+    h1.setAttribute("aria-label", h1.textContent);
+    Array.prototype.forEach.call(h1.childNodes, function (n) { if (n.nodeType === 1) n.setAttribute("aria-hidden", "true"); });
+    h1.style.minHeight = h1.offsetHeight + "px"; h1.style.textWrap = "wrap"; // le titre garde sa hauteur et sa coupure : la page ne saute pas
+    var st = document.createElement("style");
+    st.textContent = ".hero h1 em.roll{white-space:nowrap}.hero h1 em.roll .rl{display:inline-grid;vertical-align:bottom;overflow:hidden;margin-inline-start:.22em;padding:.07em .28em;margin-block:-.07em;border-radius:.3em;background:rgb(127 243 222/.2);box-shadow:inset 0 0 0 1px rgb(127 243 222/.45)}" +
+      ".hero h1 em.roll .rl>span{grid-area:1/1;justify-self:start;color:#fff;transition:transform .55s cubic-bezier(.2,.8,.2,1),opacity .4s ease,filter .4s ease}.hero h1 em.roll .rl>span.in{transform:translateY(105%);opacity:0;filter:blur(4px)}.hero h1 em.roll .rl>span.out{transform:translateY(-105%);opacity:0;filter:blur(4px)}" +
+      "html:not(.has-hero) .hero h1 em.roll .rl{background:rgb(11 133 119/.1);box-shadow:inset 0 0 0 1px rgb(11 133 119/.25)}html:not(.has-hero) .hero h1 em.roll .rl>span{color:inherit}";
+    document.head.appendChild(st);
+    em.textContent = lead;
+    var rl = document.createElement("span"); rl.className = "rl";
+    var cur = document.createElement("span"); cur.textContent = first; rl.appendChild(cur); em.appendChild(rl); em.classList.add("roll");
+    var next = function () {
+      k = (k + 1) % words.length;
+      var nw = document.createElement("span"); nw.className = "in"; nw.textContent = words[k]; rl.appendChild(nw);
+      void nw.offsetWidth; nw.className = ""; cur.className = "out";
+      var old = cur; cur = nw;
+      setTimeout(function () { if (old.parentNode) old.parentNode.removeChild(old); }, 600);
+      setTimeout(next, k === 0 ? 3600 : 2100);
+    };
+    setTimeout(next, 600);
   }, 3000);
 })();
