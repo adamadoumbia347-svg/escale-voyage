@@ -452,8 +452,8 @@ def fit(title, desc):
 
 # Liens du pied de page vers les rubriques récentes (baromètre, indice, à saisir, partir à plusieurs, compagnies, rentrer au pays)
 FOOT_EXTRA = {
-    "fr": '<a href="/barometre-prix/">Baromètre des prix</a><a href="/indice-prix/">Indice des prix</a><a href="/barometre-prix/a-saisir/">À saisir aujourd\'hui</a><a href="/partir-a-plusieurs/">Partir à plusieurs</a><a href="/compagnies-aeriennes-afrique/">Compagnies</a><a href="/diaspora/">Rentrer au pays</a>',
-    "en": '<a href="/barometre-prix/">Price barometer</a><a href="/en/price-index/">Price index</a><a href="/en/price-index/deals-today/">Worth booking today</a><a href="/en/travel-together/">Travelling together</a><a href="/en/airlines-europe-africa/">Airlines</a>',
+    "fr": '<a href="/barometre-prix/">Baromètre des prix</a><a href="/indice-prix/">Indice des prix</a><a href="/barometre-prix/a-saisir/">À saisir aujourd\'hui</a><a href="/partir-a-plusieurs/">Partir à plusieurs</a><a href="/compagnies-aeriennes-afrique/">Compagnies</a><a href="/diaspora/">Rentrer au pays</a><a href="/can-2027/">CAN 2027</a><a href="/evenements/">Événements</a><a href="/nouchi/">En nouchi</a>',
+    "en": '<a href="/barometre-prix/">Price barometer</a><a href="/en/price-index/">Price index</a><a href="/en/price-index/deals-today/">Worth booking today</a><a href="/en/travel-together/">Travelling together</a><a href="/en/airlines-europe-africa/">Airlines</a><a href="/en/afcon-2027/">AFCON 2027</a>',
 }
 FOOT_EXTRA.update({l: FOOT_EXTRA["en"] for l in ("es", "pt", "ar", "it", "de", "nl")})
 

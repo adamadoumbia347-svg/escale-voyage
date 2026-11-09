@@ -39,6 +39,9 @@ import diaspora  # noqa: E402
 import plusieurs  # noqa: E402
 import retour_pays  # noqa: E402
 import compagnies  # noqa: E402
+import can2027  # noqa: E402
+import evenements  # noqa: E402
+import nouchi  # noqa: E402
 import translations  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -262,7 +265,7 @@ HEAD = """<!doctype html>
 </div>
 </main>
 <footer class="wrap">
-  <nav class="foot-nav" aria-label="Pages du site"><a href="/">Comparer vols, hôtels et voitures</a><a href="/#guides">Guides des trajets</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/contact/">Contact</a><a href="/a-propos/">Qui sommes-nous</a><a href="/guides/">Guides</a><a href="/vols-fetes/">Vols pour les fêtes</a><a href="/faire-venir-sa-famille/">Faire venir sa famille</a><a href="/bons-plans/">Bons plans</a><a href="/blog/">Blog</a><a href="/barometre-prix/">Baromètre des prix</a><a href="/indice-prix/">Indice des prix</a><a href="/barometre-prix/a-saisir/">À saisir aujourd'hui</a><a href="/partir-a-plusieurs/">Partir à plusieurs</a><a href="/compagnies-aeriennes-afrique/">Compagnies</a><a href="/diaspora/">Rentrer au pays</a><a href="/retour-au-pays/">Rentrer pour de bon</a><a href="https://whatsapp.com/channel/0029VbE28kB0LKZN7ypnGj0d" target="_blank" rel="noopener">Chaîne WhatsApp</a><a href="#cookies" data-open-consent>Gérer les cookies</a></nav>
+  <nav class="foot-nav" aria-label="Pages du site"><a href="/">Comparer vols, hôtels et voitures</a><a href="/#guides">Guides des trajets</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="/contact/">Contact</a><a href="/a-propos/">Qui sommes-nous</a><a href="/guides/">Guides</a><a href="/vols-fetes/">Vols pour les fêtes</a><a href="/faire-venir-sa-famille/">Faire venir sa famille</a><a href="/bons-plans/">Bons plans</a><a href="/blog/">Blog</a><a href="/barometre-prix/">Baromètre des prix</a><a href="/indice-prix/">Indice des prix</a><a href="/barometre-prix/a-saisir/">À saisir aujourd'hui</a><a href="/partir-a-plusieurs/">Partir à plusieurs</a><a href="/compagnies-aeriennes-afrique/">Compagnies</a><a href="/diaspora/">Rentrer au pays</a><a href="/retour-au-pays/">Rentrer pour de bon</a><a href="/can-2027/">CAN 2027</a><a href="/evenements/">Événements</a><a href="/nouchi/">En nouchi</a><a href="https://whatsapp.com/channel/0029VbE28kB0LKZN7ypnGj0d" target="_blank" rel="noopener">Chaîne WhatsApp</a><a href="#cookies" data-open-consent>Gérer les cookies</a></nav>
   <p>Escale ne vend pas de billets et ne fixe aucun prix. Les durées et informations sont indicatives : les programmes des compagnies changent, vérifiez toujours sur le site de réservation.</p>
 </footer>
 <script src="/favs.js" defer></script>
@@ -762,6 +765,9 @@ def main():
     urls += plusieurs.build(SITE, ctx)  # partir à plusieurs : quelle ville de départ est la moins chère
     urls += retour_pays.build(SITE, ctx)  # rentrer au pays pour de bon
     urls += compagnies.build(SITE, ctx)  # pages compagnies (fr/en)
+    urls += can2027.build(SITE, ctx)  # CAN 2027 : villes hôtes, prix, visa (fr/en)
+    urls += evenements.build(SITE, ctx)  # grands événements africains
+    urls += nouchi.build(SITE, ctx)  # conseils en nouchi
     urls += tendances.build(SITE, ctx)  # destinations tendance 2027
     urls += pages_voyage.build(SITE, ctx)  # week-ends pas chers, premier voyage, meilleur mois
     urls += hub_urls
@@ -878,6 +884,10 @@ def main():
     # Pages écrites par le serveur Cloudflare (src/saisir.ts, src/indice.ts), sans fichier dans site/ : à saisir aujourd'hui et archives de l'indice
     ym = TODAY[:7]
     urls += [f"{DOMAIN}/barometre-prix/a-saisir/", f"{DOMAIN}/en/price-index/deals-today/", f"{DOMAIN}/indice-prix/{ym}/", f"{DOMAIN}/en/price-index/{ym}/"]
+    # Indice par pays d'arrivée (src/indice.ts, liste PAYS) : fr et en
+    PAYS_IDX = [("cote-d-ivoire", "ivory-coast"), ("senegal", "senegal"), ("mali", "mali"), ("guinee", "guinea"), ("cameroun", "cameroon"), ("rd-congo", "dr-congo"), ("togo", "togo"), ("benin", "benin"), ("burkina-faso", "burkina-faso"),
+                ("ghana", "ghana"), ("nigeria", "nigeria"), ("maroc", "morocco"), ("algerie", "algeria"), ("tunisie", "tunisia"), ("egypte", "egypt"), ("ethiopie", "ethiopia"), ("kenya", "kenya"), ("afrique-du-sud", "south-africa")]
+    urls += [f"{DOMAIN}/indice-prix/pays/{f}/" for f, _ in PAYS_IDX] + [f"{DOMAIN}/en/price-index/country/{e}/" for _, e in PAYS_IDX]
     # Date de dernière modification réelle de chaque page (empreinte du contenu gardée dans scripts/lastmod.json),
     # pour que Google fasse confiance au sitemap au lieu de voir toutes les pages « modifiées » à chaque mise en ligne.
     lm_file = ROOT / "scripts" / "lastmod.json"
