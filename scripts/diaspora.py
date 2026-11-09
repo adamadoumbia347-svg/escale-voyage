@@ -119,7 +119,7 @@ def build(site, ctx, exists):
                 '<li><a href="/faire-venir-sa-famille/">Faire venir un proche en Europe</a></li><li><a href="/visa/">Faut-il un visa ? (selon votre passeport)</a></li>'
                 '<li><a href="/bagages-compagnies-afrique/">Bagages : la franchise de chaque compagnie</a></li><li><a href="/payer-billet-avion-plusieurs-fois/">Payer son billet en plusieurs fois</a></li></ul></section>'
                 '<script src="/ete.js" defer></script><script src="/alerts.js" defer></script>')
-        title = f"Rentrer {p['au']} en {ANNEE} : Noël, Tabaski, été, fête nationale, les prix des vols | Escale"
+        title = f"Rentrer {p['au']} en {ANNEE} : les dates et les prix des vols | Escale"
         desc = f"Calendrier des retours {p['au']} en {ANNEE} : Noël, Ramadan, Tabaski, fête nationale, vacances. Pour chaque période, le prix aller-retour repéré depuis Paris et les trajets depuis la France, la Belgique, l'Italie et Londres."
         urls.append(B.write(site, path, "fr", title, desc, hero, body, "", {"fr": path}, ctx))
         index_items.append(f'<li><a href="/{path}/">{p["flag"]} {E(p["nom"])}</a></li>')
@@ -134,7 +134,7 @@ def build(site, ctx, exists):
             '<li><strong>Vacances d\'été</strong> en France : début juillet à fin août ; les dates exactes par zone sont sur <a href="https://www.education.gouv.fr/calendrier-scolaire" target="_blank" rel="noopener">education.gouv.fr</a>.</li>'
             '<li><strong>Noël 2027</strong> : les prix de décembre se réservent dès septembre.</li></ul></section>'
             f'<section><h2>Les bons plans chaque semaine</h2>{B.wa_btn("fr")}</section>')
-    urls.append(B.write(site, "diaspora", "fr", f"Rentrer au pays en {ANNEE} : calendrier et prix des vols par communauté | Escale",
+    urls.append(B.write(site, "diaspora", "fr", f"Rentrer au pays en {ANNEE} : dates et prix des vols par pays | Escale",
                         f"Côte d'Ivoire, Sénégal, Mali, Cameroun, Maroc, Algérie… Pour chaque communauté, les dates des retours au pays en {ANNEE} et le prix des billets repéré pour chaque période.",
                         hero, body, "", {"fr": "diaspora"}, ctx))
     return urls

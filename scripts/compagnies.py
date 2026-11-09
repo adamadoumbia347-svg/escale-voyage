@@ -42,15 +42,15 @@ EN = {
     "Compagnie nationale italienne": "Italy's national airline", "Compagnie à bas prix (groupe Air France-KLM)": "Low-cost airline (Air France-KLM Group)",
 }
 T = {
-    "fr": dict(dir="compagnie", idx="compagnies-aeriennes-afrique", eyebrow="Compagnie aérienne", h1="{n} : <span>vols vers l'Afrique</span>", title="{n} : vols Europe – Afrique, bagages, prix payés par les voyageurs | Escale",
+    "fr": dict(dir="compagnie", idx="compagnies-aeriennes-afrique", eyebrow="Compagnie aérienne", h1="{n} : <span>vols vers l'Afrique</span>", title="{n} : vols vers l'Afrique, bagages, prix payés | Escale",
                desc="{n} ({t}) : ce qu'elle dessert entre l'Europe et l'Afrique, où trouver les règles officielles de bagages, nos conseils et les prix réellement payés par les voyageurs d'Escale.",
                lead="{t}. {r}", based="Basée à", serves="Dessert surtout", site="Site officiel", bag="Règles bagages (site officiel)", tip="Notre conseil", paid_h="Ce que les voyageurs ont payé avec {n}",
                paid_wait="Les voyageurs d'Escale déclarent le prix payé sur les pages de trajets. Dès qu'il y aura assez de déclarations citant {n}, les chiffres s'afficheront ici.",
-               compare="Comparer les prix de tous les trajets", other="Les autres compagnies", idx_h1="Les compagnies qui relient <span>l'Europe et l'Afrique</span>", idx_title="Compagnies aériennes Europe – Afrique : qui dessert quoi | Escale",
+               compare="Comparer les prix de tous les trajets", other="Les autres compagnies", idx_h1="Les compagnies qui relient <span>l'Europe et l'Afrique</span>", idx_title="Compagnies aériennes Europe – Afrique | Escale",
                idx_desc="Air France, Royal Air Maroc, Ethiopian, Turkish, Air Côte d'Ivoire, Air Sénégal, Brussels Airlines, Corsair… : ce que chaque compagnie dessert entre l'Europe et l'Afrique, les liens officiels et les prix payés par les voyageurs.",
                idx_lead="Pour chaque compagnie : où elle est basée, ce qu'elle dessert, où lire ses règles de bagages, et ce que les voyageurs ont réellement payé.",
                note="Escale ne vend pas de billets et n'est lié à aucune compagnie. Les lignes, horaires et franchises changent : le site officiel fait foi. Les prix « payés par les voyageurs » sont déclarés par des visiteurs, non vérifiés, à titre indicatif."),
-    "en": dict(dir="en/airline", idx="en/airlines-europe-africa", eyebrow="Airline", h1="{n}: <span>flights to Africa</span>", title="{n}: Europe – Africa flights, baggage, fares travellers paid | Escale",
+    "en": dict(dir="en/airline", idx="en/airlines-europe-africa", eyebrow="Airline", h1="{n}: <span>flights to Africa</span>", title="{n}: flights to Africa, baggage, fares paid | Escale",
                desc="{n} ({t}): what it flies between Europe and Africa, where to find the official baggage rules, our tips and the fares Escale travellers actually paid.",
                lead="{t}. {r}", based="Based in", serves="Mainly flies to", site="Official website", bag="Baggage rules (official site)", tip="Our tip", paid_h="What travellers paid with {n}",
                paid_wait="Escale travellers report the fare they paid on route pages. As soon as there are enough reports naming {n}, the figures will appear here.",

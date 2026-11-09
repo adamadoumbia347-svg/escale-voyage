@@ -16,7 +16,7 @@ DEST = [("ABJ", "Abidjan"), ("DSS", "Dakar"), ("BKO", "Bamako"), ("CKY", "Conakr
 DEST_EN = {"Le Caire": "Cairo", "Addis-Abeba": "Addis Ababa", "Alger": "Algiers", "Maurice": "Mauritius", "La Réunion": "Réunion", "Marrakech": "Marrakesh"}
 
 T = {
-    "fr": dict(path="partir-a-plusieurs", title="Partir à plusieurs : depuis quelle ville le billet est-il le moins cher ? | Escale",
+    "fr": dict(path="partir-a-plusieurs", title="Partir à plusieurs : quelle ville de départ coûte le moins ? | Escale",
                desc="Vous êtes plusieurs, dans plusieurs villes d'Europe, et vous voulez vous retrouver au pays ? Comparez d'un coup le prix du vol depuis Paris, Bruxelles, Lyon, Milan, Rome, Londres… pour les mêmes dates.",
                eyebrow="Outil gratuit", h1="Partir à plusieurs : <span>qui paie le moins ?</span>",
                lead="Une destination, des dates, et le prix aller-retour repéré depuis chaque grande ville de départ, classé du moins cher au plus cher, avec le total pour le groupe.",
@@ -29,7 +29,7 @@ T = {
                     "Si vous voyagez avec des enfants, regardez la franchise bagages de la compagnie avant de choisir : <a href=\"/bagages-compagnies-afrique/\">bagages par compagnie</a>."],
                note="Prix aller-retour le plus bas repéré récemment par des voyageurs sur Aviasales (via Travelpayouts), par personne, pour le mois des dates choisies. Le tarif exact dépend des dates et se confirme sur le site de réservation.",
                alt_h="Voir aussi", alt=[("/barometre-prix/a-saisir/", "Les trajets à saisir aujourd'hui"), ("/diaspora/", "Rentrer au pays pour les fêtes : calendrier par communauté"), ("/calendrier-prix-diaspora/", "Le calendrier des prix par mois")]),
-    "en": dict(path="en/travel-together", title="Travelling together: from which city is the ticket cheapest? | Escale",
+    "en": dict(path="en/travel-together", title="Travelling together: which departure city is cheapest? | Escale",
                desc="Several of you, in several European cities, meeting back home? Compare at a glance the fare from Paris, Brussels, Lyon, Milan, Rome, London… for the same dates.",
                eyebrow="Free tool", h1="Travelling together: <span>who pays the least?</span>",
                lead="One destination, your dates, and the round-trip fare found from each major departure city, cheapest first, with the total for the group.",

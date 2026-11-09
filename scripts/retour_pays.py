@@ -86,6 +86,6 @@ def build(site, ctx):
             '<li><a href="/guides/">Tous les guides</a></li></ul></section>'
             '<p class="small">Ces repères sont généraux et ne remplacent pas un conseil adapté à votre situation (notaire, expert-comptable, consulat, déménageur). Les règles changent : les sites officiels font foi.</p>'
             + B.faq_ld(FAQ))
-    return [B.write(site, PATH, "fr", "Rentrer au pays pour de bon : démarches, déménagement, impôts, retraite, santé | Escale",
+    return [B.write(site, PATH, "fr", "Rentrer au pays pour de bon : démarches, déménagement, impôts | Escale",
                     "S'installer en Afrique après des années en Europe : les démarches à faire avant de partir, le déménagement (valises, fret, conteneur, véhicule), les impôts, la retraite, la santé, les enfants et les animaux, avec les liens officiels.",
                     hero, body, "", {"fr": PATH}, ctx)]

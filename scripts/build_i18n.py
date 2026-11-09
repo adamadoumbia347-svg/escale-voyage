@@ -389,7 +389,7 @@ HEAD = """<!doctype html>
 </div>
 </main>
 <footer class="wrap">
-  <nav class="foot-nav"><a href="/{homeq}">{home}</a><a href="/mentions-legales/">{legal}</a><a href="/confidentialite/">{privacy}</a><a href="/contact/">Contact</a><a href="/{aboutp}/">{aboutl}</a><a href="/{guidesp}/">Guides</a><a href="/{fetesp}/">{fetesl}</a><a href="/{dealsp}/">{dealsl}</a><a href="{wa}" target="_blank" rel="noopener">{wal}</a><a href="#cookies" data-open-consent>{cookies}</a></nav>
+  <nav class="foot-nav"><a href="/{homeq}">{home}</a><a href="/mentions-legales/">{legal}</a><a href="/confidentialite/">{privacy}</a><a href="/contact/">Contact</a><a href="/{aboutp}/">{aboutl}</a><a href="/{guidesp}/">Guides</a>{extra}<a href="/{fetesp}/">{fetesl}</a><a href="/{dealsp}/">{dealsl}</a><a href="{wa}" target="_blank" rel="noopener">{wal}</a><a href="#cookies" data-open-consent>{cookies}</a></nav>
   <p>{disclaimer}</p>
 </footer>
 <script src="/favs.js" defer></script>
@@ -435,11 +435,27 @@ def fit(title, desc):
     if len(title) > 65:  # « … (Schengen, Royaume-Uni, USA, Canada) » : la parenthèse finale saute en premier
         t2 = re.sub(r"\s*\([^()]*\)$", "", title)
         title = t2 if len(t2) >= 30 else title
+    # Encore trop long : on retire les derniers éléments d'une énumération (« …, prises, saison »), puis, à défaut,
+    # tout ce qui suit le dernier « : » ou « ? » si le début reste parlant (« Hôtel près de l'aéroport de Casablanca »)
+    while len(title) > 65 and ", " in title and len(title[: title.rfind(", ")]) >= 40:
+        title = title[: title.rfind(", ")].rstrip(" ,;:")
+    if len(title) > 65:
+        m = max(title.rfind(" : "), title.rfind(": "), title.rfind("? "))
+        if m >= 32:
+            title = title[: m + (1 if title[m] == "?" else 0)].rstrip(" :")
     if len(desc) > 160:
         cut = desc[:158]
         cut = cut[: cut.rfind(" ")] if " " in cut else cut
         desc = cut.rstrip(" ,;:–-") + "…"
     return title, desc
+
+
+# Liens du pied de page vers les rubriques récentes (baromètre, indice, à saisir, partir à plusieurs, compagnies, rentrer au pays)
+FOOT_EXTRA = {
+    "fr": '<a href="/barometre-prix/">Baromètre des prix</a><a href="/indice-prix/">Indice des prix</a><a href="/barometre-prix/a-saisir/">À saisir aujourd\'hui</a><a href="/partir-a-plusieurs/">Partir à plusieurs</a><a href="/compagnies-aeriennes-afrique/">Compagnies</a><a href="/diaspora/">Rentrer au pays</a>',
+    "en": '<a href="/barometre-prix/">Price barometer</a><a href="/en/price-index/">Price index</a><a href="/en/price-index/deals-today/">Worth booking today</a><a href="/en/travel-together/">Travelling together</a><a href="/en/airlines-europe-africa/">Airlines</a>',
+}
+FOOT_EXTRA.update({l: FOOT_EXTRA["en"] for l in ("es", "pt", "ar", "it", "de", "nl")})
 
 
 def write(site, path, lang, title, desc, hero, body, ld, paths, ctx, og="og-image.png"):
@@ -458,7 +474,7 @@ def write(site, path, lang, title, desc, hero, body, ld, paths, ctx, og="og-imag
         wa=WA_CHANNEL, wal=WA_LABEL[lang],
         fetesl={"fr": "Vols pour les fêtes", "en": "Holiday flights", "es": "Vuelos para las fiestas", "pt": "Voos para as festas", "ar": "رحلات الأعياد", "it": "Voli per le feste", "de": "Flüge zu den Feiertagen", "nl": "Vluchten voor de feestdagen"}[lang],
         guidesp={"fr": "guides", "en": "en/guides", "es": "es/guias", "pt": "pt/guias", "ar": "ar/guides", "it": "en/guides", "de": "en/guides", "nl": "en/guides"}[lang],
-        header=site_header(lang, path, switcher(paths, lang)), hero=hero, body=body, home=E(u["home"]), legal=E(u["legal"]), privacy=E(u["privacy"]),
+        header=site_header(lang, path, switcher(paths, lang)), hero=hero, body=body, extra=FOOT_EXTRA.get(lang, ""), home=E(u["home"]), legal=E(u["legal"]), privacy=E(u["privacy"]),
         cookies=E(u["cookies"]), disclaimer=E(u["disclaimer"]))
     d = site / path
     d.mkdir(parents=True, exist_ok=True)

@@ -159,9 +159,45 @@ def build(site, ctx):
             + (f'<img src="{photos[d[1]]["img_small"]}" alt="" width="480" height="360" loading="lazy" decoding="async">' if d[1] in photos else "")
             + f'<span class="tr-info"><strong>{E(name_of(d, lang))}</strong></span></a></li>' for d in DESTS)
         hero = f'<h1>{t["idx_h1"]}</h1><p class="hero-lead">{E(t["idx_lead"])}</p>'
-        urls.append(B.write(site, t["base"], lang, t["idx_title"], t["idx_desc"], hero, f'<ul class="tr-grid mm-idx">{cards}</ul>', "", idx_paths, ctx))
+        intro, faq = IDX_TEXT.get(lang, IDX_TEXT["en"])
+        body = (f'<ul class="tr-grid mm-idx">{cards}</ul>' + "".join(f"<section><h2>{E(h)}</h2>" + "".join(f"<p>{E(p)}</p>" for p in ps) + "</section>" for h, ps in intro)
+                + '<section class="faq"><h2>' + E({"fr": "Questions fréquentes", "en": "Frequently asked questions", "it": "Domande frequenti", "de": "Häufige Fragen"}.get(lang, "FAQ")) + "</h2>"
+                + "".join(f"<details><summary>{E(q)}</summary><p>{E(a)}</p></details>" for q, a in faq) + "</section>")
+        urls.append(B.write(site, t["base"], lang, t["idx_title"], t["idx_desc"], hero, body, B.faq_ld(faq), idx_paths, ctx))
     return urls
 
+
+# Texte de la page d'index (sinon elle ne contient que des vignettes) : comment lire les prix par mois, et une FAQ
+IDX_TEXT = {
+    "fr": ([("Comment choisir le bon mois", [
+                "Pour chaque destination, Escale montre le prix aller-retour le plus bas repéré pour chacun des 12 prochains mois, au départ de votre aéroport. Les mois en vert sont nettement sous la moyenne de la destination, les mois en rouge nettement au-dessus : en un coup d'œil, vous voyez quand partir coûte le moins cher.",
+                "Le prix ne fait pas tout : chaque page décrit aussi le climat mois par mois (saison des pluies, chaleur, meilleure période pour la plage ou les visites) et les événements qui font monter les prix, comme la Tabaski, Noël ou les vacances scolaires.",
+                "Les prix sont de vrais tarifs trouvés récemment par des voyageurs (Aviasales via Travelpayouts), par personne, en classe économique. Ils indiquent une tendance : le tarif exact dépend des dates et se confirme sur le site de réservation."])],
+            [("Quel est le mois le moins cher pour aller en Afrique de l'Ouest ?", "En général, les prix les plus bas vers Dakar, Abidjan, Bamako ou Cotonou se trouvent entre fin janvier et mars, puis en mai-juin et de mi-septembre à novembre, hors fêtes. Juillet-août et la période de Noël sont les plus chers. Vérifiez la page de votre destination : le graphique est mis à jour chaque jour."),
+             ("Faut-il réserver longtemps à l'avance ?", "Pour les grandes périodes (Noël, été, Tabaski), oui : 2 à 4 mois avant, les prix sont nettement plus bas. Hors saison, 3 à 6 semaines suffisent souvent. La page de chaque trajet indique si le prix du moment est bas, moyen ou élevé par rapport à son habitude."),
+             ("Les prix affichés sont-ils garantis ?", "Non. Ce sont des prix réels repérés récemment, qui changent plusieurs fois par jour. Ils servent à choisir le bon mois ; le tarif exact et disponible s'affiche sur le site de réservation au moment de payer.")]),
+    "en": ([("How to pick the right month", [
+                "For each destination, Escale shows the lowest round-trip fare found for each of the next 12 months from your airport. Green months are well below the destination's average, red months well above: at a glance you see when flying costs the least.",
+                "Price is not everything: each page also describes the weather month by month (rainy season, heat, best time for beaches or sightseeing) and the events that push prices up, such as Tabaski, Christmas or school holidays.",
+                "Fares are real prices recently found by travellers (Aviasales via Travelpayouts), per person, in economy. They show a trend: the exact fare depends on dates and is confirmed on the booking site."])],
+            [("What is the cheapest month to fly to West Africa?", "Usually the lowest fares to Dakar, Abidjan, Bamako or Cotonou are found from late January to March, then in May–June and from mid-September to November, outside holidays. July–August and Christmas are the most expensive. Check your destination page: the chart is updated daily."),
+             ("How far in advance should I book?", "For peak periods (Christmas, summer, Tabaski), yes: 2 to 4 months ahead fares are clearly lower. Off season, 3 to 6 weeks is often enough. Each route page tells you whether today's fare is low, typical or high compared with its usual level."),
+             ("Are the displayed prices guaranteed?", "No. They are real fares found recently, which change several times a day. They help you choose the right month; the exact available fare appears on the booking site when you pay.")]),
+    "it": ([("Come scegliere il mese giusto", [
+                "Per ogni destinazione, Escale mostra il prezzo andata e ritorno più basso trovato per ciascuno dei prossimi 12 mesi, dal tuo aeroporto. I mesi in verde sono nettamente sotto la media della destinazione, quelli in rosso nettamente sopra: a colpo d'occhio vedi quando partire costa meno.",
+                "Il prezzo non è tutto: ogni pagina descrive anche il clima mese per mese (stagione delle piogge, caldo, periodo migliore per il mare o le visite) e gli eventi che fanno salire i prezzi, come la Tabaski, il Natale o le vacanze scolastiche.",
+                "I prezzi sono tariffe reali trovate di recente da viaggiatori (Aviasales via Travelpayouts), a persona, in economica. Indicano una tendenza: la tariffa esatta dipende dalle date e si conferma sul sito di prenotazione."])],
+            [("Qual è il mese più economico per volare in Africa occidentale?", "In genere i prezzi più bassi per Dakar, Abidjan, Bamako o Cotonou si trovano tra fine gennaio e marzo, poi a maggio-giugno e da metà settembre a novembre, fuori dalle feste. Luglio-agosto e Natale sono i più cari. Controlla la pagina della tua destinazione: il grafico è aggiornato ogni giorno."),
+             ("Bisogna prenotare con molto anticipo?", "Per i grandi periodi (Natale, estate, Tabaski) sì: 2-4 mesi prima i prezzi sono nettamente più bassi. Fuori stagione bastano spesso 3-6 settimane. La pagina di ogni tratta indica se il prezzo del momento è basso, medio o alto rispetto al solito."),
+             ("I prezzi mostrati sono garantiti?", "No. Sono prezzi reali trovati di recente, che cambiano più volte al giorno. Servono a scegliere il mese giusto; la tariffa esatta e disponibile appare sul sito di prenotazione al momento del pagamento.")]),
+    "de": ([("So wählst du den richtigen Monat", [
+                "Für jedes Reiseziel zeigt Escale den niedrigsten gefundenen Hin- und Rückflugpreis für jeden der nächsten 12 Monate ab deinem Flughafen. Grüne Monate liegen deutlich unter dem Durchschnitt des Ziels, rote deutlich darüber: Auf einen Blick siehst du, wann Fliegen am wenigsten kostet.",
+                "Der Preis ist nicht alles: Jede Seite beschreibt auch das Klima Monat für Monat (Regenzeit, Hitze, beste Zeit für Strand oder Besichtigungen) und die Ereignisse, die die Preise steigen lassen, etwa Tabaski, Weihnachten oder Schulferien.",
+                "Die Preise sind echte, kürzlich von Reisenden gefundene Tarife (Aviasales über Travelpayouts), pro Person, Economy. Sie zeigen einen Trend: Der genaue Tarif hängt von den Daten ab und wird auf der Buchungsseite bestätigt."])],
+            [("Welcher Monat ist am günstigsten für Flüge nach Westafrika?", "Meist liegen die niedrigsten Preise nach Dakar, Abidjan, Bamako oder Cotonou zwischen Ende Januar und März, dann im Mai–Juni und von Mitte September bis November, außerhalb der Feiertage. Juli–August und Weihnachten sind am teuersten. Prüfe die Seite deines Ziels: Das Diagramm wird täglich aktualisiert."),
+             ("Muss ich lange im Voraus buchen?", "Für die Hauptzeiten (Weihnachten, Sommer, Tabaski) ja: 2 bis 4 Monate vorher sind die Preise deutlich niedriger. Außerhalb der Saison reichen oft 3 bis 6 Wochen. Jede Streckenseite zeigt, ob der aktuelle Preis im Vergleich zum Üblichen niedrig, normal oder hoch ist."),
+             ("Sind die angezeigten Preise garantiert?", "Nein. Es sind echte, kürzlich gefundene Preise, die sich mehrmals täglich ändern. Sie helfen, den richtigen Monat zu wählen; der genaue verfügbare Tarif erscheint beim Bezahlen auf der Buchungsseite.")]),
+}
 
 ALIAS = {"JFK": "NYC", "EWR": "NYC", "LGA": "NYC", "HND": "TYO", "NRT": "TYO", "FCO": "ROM", "CIA": "ROM", "LHR": "LON", "LGW": "LON", "STN": "LON",
          "LTN": "LON", "YUL": "YMQ", "SAW": "IST", "RMF": "RAK"}
