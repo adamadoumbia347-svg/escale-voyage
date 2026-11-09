@@ -233,7 +233,7 @@ function render(html: string, from: string, to: string, rows: Month[], hist: Poi
   const prices = rows.map((r) => r.price), best = Math.min(...prices), max = Math.max(...prices)
   const bestRow = rows.find((r) => r.price === best)!
   const label = `${t.from} ${money(best)}`
-  html = html.replace(partage.PRICE_SLOT, `data-prix="${esc(money(best))}"`)
+  html = html.replace(partage.PRICE_SLOT, `data-prix="${esc(money(best))}" data-n="${Math.round(best)}" data-r="${from}-${to}"`)
   const lead = label.charAt(0).toUpperCase() + label.slice(1)
   const app = lang === "fr" ? "" : "&lang=" + (lang === "nl" ? "en" : lang)
   const items = rows.map((r) => {
@@ -263,7 +263,8 @@ function render(html: string, from: string, to: string, rows: Month[], hist: Poi
   const badge2 = ago ? `<p class="price-age" style="margin:-4px 0 10px;font-size:.85rem;color:var(--muted,#5b6474)">✅ ${esc(ago)}</p>` : ""
   return html
     .replace(/(<title>)([^<]*?)( \| Escale)?(<\/title>)/, (_m, a, s, b, c) => a + s + ` · ${label}` + (b || "") + c)
-    .replace(/(<meta property="og:title" content=")([^"]*)(")/, (_m, a, s, b) => a + s + ` · ${label}` + b)
+    // Aperçu du lien partagé (WhatsApp, Facebook) : prix du jour et verdict (« Bon prix en ce moment »…)
+    .replace(/(<meta property="og:title" content=")([^"]*)(")/, (_m, a, s, b) => a + s + ` · ${label}` + (v ? ` · ${esc(t[v.level])}` : "") + b)
     .replace(/(<meta name="description" content=")([^"]*)(")/, (_m, a, s, b) => a + esc(lead) + " — " + s + b)
     .replace(/(<meta property="og:description" content=")([^"]*)(")/, (_m, a, s, b) => a + esc(lead) + " — " + s + b)
     .replace(/<p class="hero-price" id="hero-price" hidden><\/p>/, `<p class="hero-price" id="hero-price">${esc(t.hero)} <strong>${esc(money(best))}</strong></p>`)
@@ -317,7 +318,7 @@ export const onRequest = async (ctx: Ctx) => {
     const paid = paye.render(lang, route[1], route[2], paye.stats(await readPaid(env, route[1], route[2])))
     const at = html.indexOf("</section>", html.indexOf('id="route-prices"'))
     // puis « Envoyer ce prix à la famille » et l'inscription aux bons plans du lundi (src/partage.ts)
-    if (at > 0) html = html.slice(0, at + 10) + paid + partage.render(lang, route[1]) + html.slice(at + 10)
+    if (at > 0) html = html.slice(0, at + 10) + paid + partage.render(lang, route[1], route[2]) + html.slice(at + 10)
     const job = routeMonths(ctx, route[1], route[2]).catch(() => null)
     const rows = await Promise.race([job, new Promise<undefined>((ok) => setTimeout(() => ok(undefined), WAIT_MS))])
     if (rows === undefined) ctx.waitUntil(job) // trop lent : la page part sans les prix, le cache se remplit pour la visite suivante

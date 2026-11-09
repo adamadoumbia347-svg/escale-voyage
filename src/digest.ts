@@ -201,6 +201,26 @@ export async function unsubToken(env: Env, id: string) {
 const linkify = (t: string) => esc(t).replace(/(https?:\/\/[^\s<]+|escale\.live\/[^\s<]*)/g, (u) => `<a href="${u.startsWith("http") ? u : "https://" + u}">${u}</a>`)
   .replace(/\*([^*\n]+)\*/g, "<strong>$1</strong>").replace(/_([^_\n]+)_/g, "<em>$1</em>").replace(/\n/g, "<br>")
 
+// Ligne « ton trajet » en tête des bons plans : le trajet de la page où la personne s'est inscrite, s'il est relevé chaque nuit
+const MINE: Record<string, string> = {"fr": "🎯 Ton trajet", "en": "🎯 Your route", "es": "🎯 Tu ruta", "pt": "🎯 O seu trajeto", "ar": "🎯 رحلتك", "it": "🎯 La tua tratta", "de": "🎯 Deine Strecke", "nl": "🎯 Jouw route"}
+export async function routeLine(env: Env, lang: string, from: unknown, to: unknown) {
+  const f = String(from || "").toUpperCase(), d = String(to || "").toUpperCase()
+  const r = ROUTES.find((x) => x[0] === f && x[1] === d)
+  if (!r || !env.ESCALE) return ""
+  const hist = ((await env.ESCALE.get(`hist:${f}-${d}`, "json").catch(() => null)) as Point[] | null) || []
+  const last = hist[hist.length - 1]
+  if (!last || last[0] < new Date(Date.now() - 3 * 864e5).toISOString().slice(0, 10)) return ""
+  const t = TXT[lang] || TXT.fr, [a, b] = r[2].split(" → ").map((c) => (CITY_L[c] || {})[lang] || c)
+  const week = hist.find(([day]) => day >= new Date(Date.now() - 8 * 864e5).toISOString().slice(0, 10))
+  const trend = week && week[1] && week[0] < last[0] ? Math.round((last[1] / week[1] - 1) * 100) : null
+  const tr = trend !== null && trend <= -5 ? ` 📉 ${trend} % ${t.drop}` : ""
+  const low = isLow30(hist, last[1]) ? ` 🏆 ${LOW30[lang] || LOW30.fr}` : ""
+  const base = siteUrl(env).replace(/^https?:\/\//, "")
+  return `${MINE[lang] || MINE.fr}${lang === "fr" ? " : " : ": "}${a} → ${b}, *${t.from} ${money(last[1], t.loc)}*${tr}${low}\n   👉 ${base}/?type=vols&from=${f}&to=${d}${t.app ? "&lang=" + t.app : ""}`
+}
+// Place la ligne « ton trajet » juste après le titre du message
+const withMine = (text: string, mine: string) => (mine ? text.replace("\n\n", `\n\n${mine}\n\n`) : text)
+
 // Corps HTML commun aux bons plans du lundi et à l'e-mail de bienvenue
 async function dealsHtml(env: Env, name: string, lang: string, text: string, top = "") {
   const t = TXT[lang] || TXT.fr, base = siteUrl(env)
@@ -226,7 +246,8 @@ export async function sendWelcome(env: Env, name: string) {
   if (!m.count && origin !== "CDG") m = await buildMessage(env, lang)
   if (!m.count) return false
   const w = WELCOME[lang] || WELCOME.fr
-  if (!(await sendMail(env, email, w[0], await dealsHtml(env, name, lang, m.text, w[1])))) return false
+  const mine = await routeLine(env, lang, rec.fields.depart, rec.fields.arrivee)
+  if (!(await sendMail(env, email, w[0], await dealsHtml(env, name, lang, withMine(m.text, mine), w[1])))) return false
   rec.welcomed = new Date().toISOString()
   await env.ESCALE.put(name, JSON.stringify(rec))
   return true
@@ -253,7 +274,8 @@ export async function sendNewsletter(env: Env) {
       const lang = langOf(rec), t = TXT[lang], origin = originOf(rec.fields.depart)
       let m = await msg(lang, origin)
       if (!m.count) m = await msg(lang)
-      if (await sendMail(env, email, t.subject, await dealsHtml(env, name, lang, m.text))) {
+      const mine = await routeLine(env, lang, rec.fields.depart, rec.fields.arrivee)
+      if (await sendMail(env, email, t.subject, await dealsHtml(env, name, lang, withMine(m.text, mine)))) {
         rec.lastNewsletter = new Date().toISOString()
         await env.ESCALE.put(name, JSON.stringify(rec))
         sent++

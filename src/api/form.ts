@@ -3,7 +3,7 @@ import { unsubToken, sendWelcome } from "../digest"
 // Formulaires du site (contact, inscription aux bons plans), enregistrés dans l'espace KV ESCALE.
 // Les messages se lisent sur /admin/ (clé ADMIN_KEY). Champ piège « site-web » contre les robots.
 // « avis » : témoignage de voyageur, publié seulement après relecture (scripts/pratique_afrique.py, site/data/avis.json)
-const FORMS: Record<string, string[]> = { contact: ["nom", "email", "message"], "bons-plans": ["email", "whatsapp", "langue", "consent", "depart"],
+const FORMS: Record<string, string[]> = { contact: ["nom", "email", "message"], "bons-plans": ["email", "whatsapp", "langue", "consent", "depart", "arrivee"],
   avis: ["prenom", "ville", "trajet", "compagnie", "prix", "mois", "note", "texte", "email", "langue", "consent"],
   agence: ["agence", "ville", "pays", "aeroport", "nom", "whatsapp", "email", "site", "paiements", "message", "langue", "consent"] }
 const MAX = 3000

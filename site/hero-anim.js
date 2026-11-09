@@ -32,6 +32,10 @@
   var AFR = [["Abidjan", "🇨🇮"], ["Dakar", "🇸🇳"], ["Bamako", "🇲🇱"], ["Douala", "🇨🇲"], ["Kinshasa", "🇨🇩"], ["Conakry", "🇬🇳"], ["Lomé", "🇹🇬"], ["Cotonou", "🇧🇯"],
     ["Casablanca", "🇲🇦"], [lang === "en" ? "Algiers" : "Alger", "🇩🇿"], ["Tunis", "🇹🇳"], ["Lagos", "🇳🇬"], ["Accra", "🇬🇭"], ["Nairobi", "🇰🇪"]];
   var MONDE = [["Istanbul", "🇹🇷"], [lang === "en" ? "Dubai" : "Dubaï", "🇦🇪"], ["New York", "🇺🇸"], ["Bangkok", "🇹🇭"], ["Tokyo", "🇯🇵"]];
+  // Selon le pays du visiteur (donné par le serveur, sans cookie), les villes des communautés les plus présentes passent en premier
+  var PRIO = { IT: ["🇲🇦", "🇸🇳", "🇨🇮", "🇳🇬", "🇹🇳", "🇬🇭"], BE: ["🇨🇩", "🇲🇦", "🇨🇲", "🇬🇳", "🇸🇳"], GB: ["🇳🇬", "🇬🇭", "🇰🇪"], DE: ["🇬🇭", "🇳🇬", "🇲🇦", "🇹🇳", "🇨🇲"],
+    NL: ["🇲🇦", "🇬🇭", "🇳🇬"], ES: ["🇲🇦", "🇸🇳", "🇩🇿"], CH: ["🇨🇲", "🇨🇩", "🇹🇳"], US: ["🇳🇬", "🇬🇭", "🇰🇪"], CA: ["🇲🇦", "🇩🇿", "🇨🇲", "🇨🇮"] }[window.ESCALE_PAYS || ""];
+  if (PRIO) AFR.sort(function (a, b) { var x = PRIO.indexOf(a[1]), y = PRIO.indexOf(b[1]); return (x < 0 ? 99 : x) - (y < 0 ? 99 : y); });
   if (!em || (lang !== "fr" && lang !== "en")) return;
   setTimeout(function () {
     var full = em.textContent.trim(), cut = full.indexOf(" ");
