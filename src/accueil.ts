@@ -1,6 +1,6 @@
 import { Ctx, json, esc, IATA } from "./_lib/common"
 import { Month, Point, cacheKey, readHistory } from "./apercu-prix"
-import { banner, deals } from "./saisir"
+import { banner, deals, Deals } from "./saisir"
 import { ANIM } from "./accueil-anim"
 // Accueil : les boutons « Trajets populaires » (sous le moteur) reçoivent le prix aller-retour le plus bas déjà connu
 // (cache des pages trajets, sinon dernier relevé de l'historique KV, mis à jour chaque nuit par src/releve.ts)
@@ -9,7 +9,7 @@ import { ANIM } from "./accueil-anim"
 // GET /api/connus?r=CDG-DSS,ORY-CMN : mêmes prix, pour le bloc « Vos trajets » (trajets consultés, gardés dans le navigateur).
 const CHIP = /<b class="pr" data-r="([A-Z]{3})-([A-Z]{3})"><\/b>/g
 const H1_FR = "Les billets pas chers <em>pour toutes les destinations</em></h1>"
-const H1_NEW = `<span class="hero-badge" style="display:table;margin:0 0 10px;padding:6px 13px;border-radius:999px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.5);color:#fff;font-weight:700;font-size:14px;letter-spacing:0;line-height:1.2">🌍 Le comparateur de la diaspora africaine</span> Les billets pas chers <em>pour rentrer au pays</em></h1>`
+const H1_NEW = "Les billets pas chers <em>pour rentrer au pays</em></h1>"
 const CACHE_S = 3600
 const WAIT_MS = 400
 type Known = { price: number; d7: number | null }
@@ -61,6 +61,27 @@ async function homePrices(ctx: Ctx, pairs: [string, string][]) {
 
 const arrow = (d: number | null) => d === null || Math.abs(d) < 3 ? "" : d < 0 ? ` <i class="tr dn" title="${-d} % en 7 jours">↓</i>` : ` <i class="tr up" title="+${d} % en 7 jours">↑</i>`
 
+// « Offres du jour » au-dessus du titre : les trajets les plus en dessous de leur prix habituel (src/saisir.ts), un à la fois.
+// Les jours sans bonne affaire, les plus petits prix des trajets populaires prennent la place. Rien n'est affiché sans prix réel.
+type Offre = { label: string; price: number; diff: number | null; href: string }
+function offres(d: Deals | null, map: Record<string, Known>, html: string): string {
+  let list: Offre[] = (d?.items || []).slice().sort((a, b) => b.diff - a.diff).slice(0, 5)
+    .map((r) => ({ label: r.label, price: r.price, diff: r.diff, href: `/?type=vols&from=${r.from}&to=${r.to}` }))
+  const deal = list.length > 0
+  if (!deal) {
+    list = [...html.matchAll(/<span>([^<]+)<\/span><b class="pr" data-r="([A-Z]{3})-([A-Z]{3})">/g)]
+      .map((m) => ({ label: m[1], k: map[`${m[2]}-${m[3]}`], from: m[2], to: m[3] })).filter((x) => x.k)
+      .sort((a, b) => a.k.price - b.k.price).slice(0, 4)
+      .map((x) => ({ label: x.label, price: x.k.price, diff: null, href: `/?type=vols&from=${x.from}&to=${x.to}` }))
+  }
+  if (!list.length) return ""
+  const tag = deal ? `<b data-en="🔥 Deal of the day">🔥 Offre du jour</b>` : `<b data-en="✈️ Low fare today">✈️ Petit prix du jour</b>`
+  const items = list.map((o, i) => `<a href="${o.href}"${i ? "" : ' class="on"'}>${tag}<span>${esc(o.label)}</span><strong>${esc(money(o.price))}</strong>${o.diff ? `<i>−${o.diff} %</i>` : ""}</a>`).join("")
+  const css = `<style>.band .hero>.hero-offres:not(.hero-bg){order:0;align-self:flex-start;margin:16px 0 -6px;max-width:100%}.hero-offres{display:grid;margin:0 0 12px}.hero-offres a{grid-area:1/1;display:flex;flex-wrap:wrap;align-items:center;gap:2px 10px;padding:9px 16px 10px;border-radius:18px;background:#fff;color:#08303a;text-decoration:none;font:700 17px/1.2 var(--f-body,system-ui);box-shadow:0 12px 32px -14px rgb(0 0 0/.6);max-width:100%;opacity:0;visibility:hidden;transform:translateY(60%);transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .4s ease,visibility .4s}.hero-offres a.on{opacity:1;visibility:visible;transform:none}.hero-offres a.out{transform:translateY(-60%)}.hero-offres b{flex:0 0 100%;font-weight:800;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#b45309}.hero-offres span{white-space:nowrap}.hero-offres strong{font-weight:800;font-size:19px;color:#0b8577;white-space:nowrap}.hero-offres i{font-style:normal;font-weight:800;font-size:13px;color:#fff;background:#12a150;border-radius:7px;padding:3px 7px;white-space:nowrap}@media(max-width:360px){.hero-offres a{font-size:15px;padding:8px 13px 9px}.hero-offres strong{font-size:17px}}</style>`
+  const js = list.length > 1 ? `<script>(function(){var a=document.querySelectorAll(".hero-offres a"),i=0;if(a.length<2||(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches))return;setInterval(function(){var c=a[i];i=(i+1)%a.length;var n=a[i];c.classList.remove("on");c.classList.add("out");n.classList.remove("out");void n.offsetWidth;n.classList.add("on");setTimeout(function(){c.classList.remove("out")},600)},3400)})()</script>` : ""
+  return `${css}<p class="hero-offres">${items}</p>${js}`
+}
+
 export const onRequest = async (ctx: Ctx) => {
   const response = await ctx.next()
   if (ctx.request.method !== "GET" || !response.ok || !(response.headers.get("content-type") || "").includes("text/html")) return response
@@ -81,11 +102,13 @@ export const onRequest = async (ctx: Ctx) => {
     if (bn) out = out.replace('<section class="block" id="recent-block"', bn + '<section class="block" id="recent-block"')
     // Adresses de recherche (/?type=vols&from=…) : même page que l'accueil, pas à indexer (Search Console les listait par milliers
     // en « autre page avec balise canonique correcte »). La balise canonique vers / reste ; on ajoute noindex, follow.
-    // Titre de l'accueil en français : Escale se présente comme le comparateur de la diaspora africaine. L'étiquette est dans le h1
-    // (lue par Google avec le titre) ; les autres langues gardent leur titre traduit (data-en-html, site/i18n.js), et la fin du
+    // Titre de l'accueil en français : « Les billets pas chers pour rentrer au pays ». Les autres langues gardent leur titre traduit
+    // (data-en-html, site/i18n.js), et la fin du
     // titre reste animée par site/hero-anim.js (« pour rentrer au pays » → « pour Abidjan » → « pour Dakar »…).
     const pays = String(((ctx.request as any).cf || {}).country || "")
     out = out.replace(H1_FR, H1_NEW)
+    // Offres du jour juste au-dessus du titre (à la place de l'étiquette « comparateur de la diaspora »)
+    out = out.replace(/<h1 data-en-html="Cheap flights/, () => offres(d, map, html) + '<h1 data-en-html="Cheap flights')
     // Animation du titre (destinations qui défilent, Afrique d'abord) : la version du serveur remplace le fichier site/hero-anim.js
     out = out.replace(/<script src="\/hero-anim\.js[^"]*" defer><\/script>/, () => `<script>window.ESCALE_PAYS=${JSON.stringify(/^[A-Z]{2}$/.test(pays) ? pays : "")};document.addEventListener("DOMContentLoaded",function(){${ANIM}});</script>`)
     // Message de saison (« Noël au pays… ») posé sur la photo : fond blanc et texte foncé, lisible quelle que soit la photo
