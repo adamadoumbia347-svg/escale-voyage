@@ -1,6 +1,7 @@
 import { Env, esc, siteUrl } from "./_lib/common"
 import { mailerReady, sendMail, lastMailError } from "./_lib/mail"
-import { Month, Point, cacheKey } from "./apercu-prix"
+import { Month, Point, cacheKey, isLow30, LOW30 } from "./apercu-prix"
+import { ROUTES } from "./barometre"
 import { deals, whatsappLines } from "./saisir"
 // Message WhatsApp de la semaine : chaque lundi matin (tâche quotidienne de wrangler.jsonc), un e-mail avec le message
 // des bons plans prêt à copier dans la chaîne WhatsApp. Destinataire : variable DIGEST_TO (Cloudflare > Variables et secrets).
@@ -58,19 +59,45 @@ const TXT: Record<string, Txt> = {
     share: "📢 Deel het kanaal met je familie: {c}", foot: "_Onlangs gevonden prijzen, per persoon. Het exacte tarief zie je op de boekingssite._",
     subject: "✈️ De vluchtdeals van de week", cta: "Live prijzen vergelijken", why: "Je ontvangt deze e-mail omdat je je hebt aangemeld voor de deals van Escale.", unsub: "Met één klik afmelden", app: "en" },
 }
+
+// E-mail de bienvenue envoyé dès l'inscription aux bons plans : [objet, première ligne]
+const WELCOME: Record<string, [string, string]> = {
+  fr: ["Bienvenue sur Escale ✈️", "Bienvenue ! Voici les bons plans du moment. Le prochain message arrive lundi."],
+  en: ["Welcome to Escale ✈️", "Welcome! Here are the current deals. The next message arrives on Monday."],
+  es: ["Bienvenido a Escale ✈️", "¡Bienvenido! Estas son las ofertas del momento. El próximo mensaje llega el lunes."],
+  pt: ["Bem-vindo à Escale ✈️", "Bem-vindo! Aqui estão as promoções do momento. A próxima mensagem chega na segunda-feira."],
+  ar: ["مرحبًا بك في Escale ✈️", "مرحبًا! هذه عروض اللحظة. الرسالة القادمة تصل يوم الاثنين."],
+  it: ["Benvenuto su Escale ✈️", "Benvenuto! Ecco le offerte del momento. Il prossimo messaggio arriva lunedì."],
+  de: ["Willkommen bei Escale ✈️", "Willkommen! Hier sind die aktuellen Angebote. Die nächste Nachricht kommt am Montag."],
+  nl: ["Welkom bij Escale ✈️", "Welkom! Dit zijn de deals van dit moment. Het volgende bericht komt maandag."],
+}
+// Villes de départ proposées dans les bons plans : celles qui ont assez de trajets relevés chaque nuit (src/barometre.ts). Paris par défaut.
+const ORIGINS = ["LHR", "MXP", "FCO"]
+export const originOf = (code: unknown) => (ORIGINS.includes(String(code || "").toUpperCase()) ? String(code).toUpperCase() : "CDG")
+const FLAGS: Record<string, string> = { LOS: "🇳🇬", ABV: "🇳🇬", ACC: "🇬🇭", NBO: "🇰🇪", ADD: "🇪🇹", CAI: "🇪🇬", JNB: "🇿🇦", CPT: "🇿🇦", CMN: "🇲🇦", DSS: "🇸🇳", ABJ: "🇨🇮", TUN: "🇹🇳", ALG: "🇩🇿", RAK: "🇲🇦", DLA: "🇨🇲", FIH: "🇨🇩", BKO: "🇲🇱", CKY: "🇬🇳", EBB: "🇺🇬", DAR: "🇹🇿", KGL: "🇷🇼", LAD: "🇦🇴", FNA: "🇸🇱", BJL: "🇬🇲", HRE: "🇿🇼", LUN: "🇿🇲", MRU: "🇲🇺", ZNZ: "🇹🇿", TNG: "🇲🇦", AGA: "🇲🇦", FEZ: "🇲🇦", ORN: "🇩🇿", DJE: "🇹🇳" }
 // Noms de villes qui changent selon la langue (les autres restent identiques)
 const CITY_L: Record<string, Record<string, string>> = {
   Alger: { en: "Algiers", es: "Argel", pt: "Argel", ar: "الجزائر", it: "Algeri", de: "Algier", nl: "Algiers" },
   Tunis: { es: "Túnez", pt: "Tunes", ar: "تونس", it: "Tunisi" }, Dakar: { ar: "داكار" }, Abidjan: { ar: "أبيدجان", es: "Abiyán" },
   Casablanca: { ar: "الدار البيضاء" }, Marrakech: { ar: "مراكش", de: "Marrakesch", en: "Marrakesh" }, Oran: { ar: "وهران", es: "Orán", it: "Orano" },
+  "Le Caire": { en: "Cairo", es: "El Cairo", pt: "Cairo", ar: "القاهرة", it: "Il Cairo", de: "Kairo", nl: "Caïro" },
+  "Addis-Abeba": { en: "Addis Ababa", es: "Adís Abeba", pt: "Adis Abeba", ar: "أديس أبابا", it: "Addis Abeba", de: "Addis Abeba", nl: "Addis Abeba" },
+  Johannesburg: { es: "Johannesburgo", pt: "Joanesburgo", ar: "جوهانسبرغ" }, Lagos: { ar: "لاغوس" }, Accra: { ar: "أكرا" }, Nairobi: { ar: "نيروبي" }, Abuja: { ar: "أبوجا", es: "Abuya" },
+  Londres: { en: "London", ar: "لندن", it: "Londra", de: "London", nl: "Londen" }, Milan: { es: "Milán", pt: "Milão", ar: "ميلانو", it: "Milano", de: "Mailand", nl: "Milaan" },
+  Rome: { es: "Roma", pt: "Roma", ar: "روما", it: "Roma", de: "Rom" },
   Bamako: { ar: "باماكو" }, Kinshasa: { ar: "كينشاسا", es: "Kinsasa" }, Djerba: { ar: "جربة", es: "Yerba", it: "Gerba" },
 }
 
-export async function buildMessage(env: Env, lang = "fr") {
+export async function buildMessage(env: Env, lang = "fr", origin = "CDG") {
   const t = TXT[lang] || TXT.fr
+  // Paris : la liste historique ; Londres, Milan, Rome : les trajets relevés chaque nuit au départ de cette ville
+  const paris = origin === "CDG"
+  const list: [string, string, string, string, string][] = paris ? DEST : ROUTES.filter((r) => r[0] === origin).map(([from, to, label, path]) => [from, to, label.split(" → ")[1] || to, FLAGS[to] || "✈️", path])
+  const homeFr = ROUTES.find((r) => r[0] === origin)?.[2].split(" → ")[0] || origin
+  const home = paris ? t.paris : ((CITY_L[homeFr] || {})[lang] || homeFr)
   const cache = (globalThis as any).caches?.default
   const since = new Date(Date.now() - 3 * 864e5).toISOString().slice(0, 10)
-  const rows = (await Promise.all(DEST.map(async ([from, to, city, flag, path]) => {
+  const rows = (await Promise.all(list.map(async ([from, to, city, flag, path]) => {
     const hist = ((await env.ESCALE?.get(`hist:${from}-${to}`, "json")) as Point[] | null) || []
     const last = hist.length ? hist[hist.length - 1] : null
     const hit = cache ? await cache.match(cacheKey(from, to)) : null
@@ -80,20 +107,21 @@ export async function buildMessage(env: Env, lang = "fr") {
     if (!price) return null
     const week = hist.find(([d]) => d >= new Date(Date.now() - 8 * 864e5).toISOString().slice(0, 10))
     const trend = week && week[1] && week[0] < since ? Math.round((price / week[1] - 1) * 100) : null
-    return { city, flag, path, price, best, trend }
+    return { city, flag, path, price, best, trend, from, to, low: isLow30(hist, price) }
   }))).filter(Boolean).sort((a: any, b: any) => a.price - b.price) as any[]
   const today = new Date().toLocaleDateString(t.loc, { day: "numeric", month: "long", timeZone: "Europe/Paris" })
   const base = siteUrl(env).replace(/^https?:\/\//, "")
   const sep = lang === "fr" ? " : " : ": "
-  const lines = [t.head.replace("{d}", today), "", t.intro, ""]
+  const lines = [t.head.replace("{d}", today), "", t.intro.replace(`*${t.paris}*`, `*${home}*`), ""]
   for (const r of rows) {
     const dates = r.best && r.best.ret ? ` (${day(r.best.dep, t.loc)} → ${day(r.best.ret, t.loc)})` : ""
     const tr = r.trend !== null && r.trend <= -5 ? ` 📉 ${r.trend} % ${t.drop}` : ""
     const city = (CITY_L[r.city] || {})[lang] || r.city
     // En français : la page trajet ; dans les autres langues : la recherche, déjà dans la bonne langue
-    const [from, to] = DEST.find((d) => d[4] === r.path)!.slice(0, 2)
-    const link = lang === "fr" ? `${base}/${r.path}/` : `${base}/?type=vols&from=${from}&to=${to}&lang=${t.app}`
-    lines.push(`${r.flag} ${t.paris} → ${city}${sep}*${t.from} ${money(r.price, t.loc)}*${dates}${tr}`, `   👉 ${link}`)
+    const { from, to } = r
+    const link = lang === "fr" && paris ? `${base}/${r.path}/` : `${base}/?type=vols&from=${from}&to=${to}${t.app ? "&lang=" + t.app : ""}`
+    const low = r.low ? ` 🏆 ${LOW30[lang] || LOW30.fr}` : ""
+    lines.push(`${r.flag} ${home} → ${city}${sep}*${t.from} ${money(r.price, t.loc)}*${dates}${tr}${low}`, `   👉 ${link}`)
   }
   // Trajets nettement sous leur prix habituel (src/saisir.ts), en français seulement
   if (lang === "fr") { try { lines.push("", ...whatsappLines(await deals(env), base).slice(0, -1)) } catch {} }
@@ -173,12 +201,43 @@ export async function unsubToken(env: Env, id: string) {
 const linkify = (t: string) => esc(t).replace(/(https?:\/\/[^\s<]+|escale\.live\/[^\s<]*)/g, (u) => `<a href="${u.startsWith("http") ? u : "https://" + u}">${u}</a>`)
   .replace(/\*([^*\n]+)\*/g, "<strong>$1</strong>").replace(/_([^_\n]+)_/g, "<em>$1</em>").replace(/\n/g, "<br>")
 
+// Corps HTML commun aux bons plans du lundi et à l'e-mail de bienvenue
+async function dealsHtml(env: Env, name: string, lang: string, text: string, top = "") {
+  const t = TXT[lang] || TXT.fr, base = siteUrl(env)
+  const unsub = `${base}/api/form?action=desinscription&id=${encodeURIComponent(name)}&t=${await unsubToken(env, name)}`
+  const home = lang === "fr" ? `${base}/` : `${base}/?lang=${t.app}`
+  return `<div dir="${lang === "ar" ? "rtl" : "ltr"}" lang="${lang}" style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:620px;color:#0d1b2e;font-size:15px;line-height:1.55">` +
+    (top ? `<p style="font-weight:700">${esc(top)}</p>` : "") +
+    `<p>${linkify(text)}</p>` +
+    `<p style="margin-top:24px"><a href="${home}" style="background:#1a56db;color:#fff;padding:10px 18px;border-radius:999px;text-decoration:none;font-weight:700">${esc(t.cta)}</a></p>` +
+    `<p style="color:#5b6b80;font-size:12px;margin-top:28px">${esc(t.why)} ` +
+    `<a href="${unsub}" style="color:#5b6b80">${esc(t.unsub)}</a>.</p></div>`
+}
+const langOf = (rec: any) => (TXT[String(rec?.fields?.langue || "").slice(0, 2)] ? String(rec.fields.langue).slice(0, 2) : "fr")
+
+// E-mail de bienvenue : envoyé dès l'inscription (src/api/form.ts), avec les bons plans du moment au départ de la ville de l'inscrit
+export async function sendWelcome(env: Env, name: string) {
+  if (!mailerReady(env) || !env.ESCALE) return false
+  const rec: any = await env.ESCALE.get(name, "json")
+  const email = rec?.fields?.email
+  if (!email || !/^\S+@\S+\.\S+$/.test(email) || !rec.fields.consent || rec.unsubscribed || rec.welcomed) return false
+  const lang = langOf(rec), origin = originOf(rec.fields.depart)
+  let m = await buildMessage(env, lang, origin)
+  if (!m.count && origin !== "CDG") m = await buildMessage(env, lang)
+  if (!m.count) return false
+  const w = WELCOME[lang] || WELCOME.fr
+  if (!(await sendMail(env, email, w[0], await dealsHtml(env, name, lang, m.text, w[1])))) return false
+  rec.welcomed = new Date().toISOString()
+  await env.ESCALE.put(name, JSON.stringify(rec))
+  return true
+}
+
 export async function sendNewsletter(env: Env) {
   if (!mailerReady(env) || !env.ESCALE) return { sent: 0, reason: "envoi d'e-mails non configuré" }
   const msgs: Record<string, Awaited<ReturnType<typeof buildMessage>>> = {}
-  const msg = async (l: string) => (msgs[l] ||= await buildMessage(env, l))
+  const msg = async (l: string, o = "CDG") => (msgs[l + o] ||= await buildMessage(env, l, o))
   if (!(await msg("fr")).count) return { sent: 0, reason: "aucun prix relevé" }
-  const base = siteUrl(env), now = Date.now()
+  const now = Date.now()
   let sent = 0, cursor: string | undefined
   do {
     const page: any = await env.ESCALE.list({ prefix: "form:bons-plans:", cursor, limit: 1000 })
@@ -188,16 +247,13 @@ export async function sendNewsletter(env: Env) {
       const email = rec?.fields?.email, consent = rec?.fields?.consent
       if (!email || !/^\S+@\S+\.\S+$/.test(email) || !consent || rec.unsubscribed) continue
       if (rec.lastNewsletter && now - Date.parse(rec.lastNewsletter) < 6 * 864e5) continue
-      // Langue de l'inscrit (page où il s'est inscrit) ; français par défaut
-      const lang = TXT[String(rec?.fields?.langue || "").slice(0, 2)] ? String(rec.fields.langue).slice(0, 2) : "fr", t = TXT[lang], m = await msg(lang)
-      const unsub = `${base}/api/form?action=desinscription&id=${encodeURIComponent(name)}&t=${await unsubToken(env, name)}`
-      const home = lang === "fr" ? `${base}/` : `${base}/?lang=${t.app}`
-      const html = `<div dir="${lang === "ar" ? "rtl" : "ltr"}" lang="${lang}" style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:620px;color:#0d1b2e;font-size:15px;line-height:1.55">` +
-        `<p>${linkify(m.text)}</p>` +
-        `<p style="margin-top:24px"><a href="${home}" style="background:#1a56db;color:#fff;padding:10px 18px;border-radius:999px;text-decoration:none;font-weight:700">${esc(t.cta)}</a></p>` +
-        `<p style="color:#5b6b80;font-size:12px;margin-top:28px">${esc(t.why)} ` +
-        `<a href="${unsub}" style="color:#5b6b80">${esc(t.unsub)}</a>.</p></div>`
-      if (await sendMail(env, email, t.subject, html)) {
+      // Inscrit depuis moins de 2 jours : il vient de recevoir les mêmes prix dans l'e-mail de bienvenue
+      if (rec.welcomed && now - Date.parse(rec.welcomed) < 2 * 864e5) continue
+      // Langue et ville de départ de l'inscrit (page où il s'est inscrit) ; français et Paris par défaut
+      const lang = langOf(rec), t = TXT[lang], origin = originOf(rec.fields.depart)
+      let m = await msg(lang, origin)
+      if (!m.count) m = await msg(lang)
+      if (await sendMail(env, email, t.subject, await dealsHtml(env, name, lang, m.text))) {
         rec.lastNewsletter = new Date().toISOString()
         await env.ESCALE.put(name, JSON.stringify(rec))
         sent++

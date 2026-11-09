@@ -1,9 +1,9 @@
 import { Ctx, json, sameKey } from "../_lib/common"
-import { unsubToken } from "../digest"
+import { unsubToken, sendWelcome } from "../digest"
 // Formulaires du site (contact, inscription aux bons plans), enregistrés dans l'espace KV ESCALE.
 // Les messages se lisent sur /admin/ (clé ADMIN_KEY). Champ piège « site-web » contre les robots.
 // « avis » : témoignage de voyageur, publié seulement après relecture (scripts/pratique_afrique.py, site/data/avis.json)
-const FORMS: Record<string, string[]> = { contact: ["nom", "email", "message"], "bons-plans": ["email", "whatsapp", "langue", "consent"],
+const FORMS: Record<string, string[]> = { contact: ["nom", "email", "message"], "bons-plans": ["email", "whatsapp", "langue", "consent", "depart"],
   avis: ["prenom", "ville", "trajet", "compagnie", "prix", "mois", "note", "texte", "email", "langue", "consent"],
   agence: ["agence", "ville", "pays", "aeroport", "nom", "whatsapp", "email", "site", "paiements", "message", "langue", "consent"] }
 const MAX = 3000
@@ -29,7 +29,19 @@ export const onRequestPost = async (ctx: Ctx) => {
   if (form === "agence" && (!fields.agence.trim() || !fields.ville.trim() || (!/^\S+@\S+\.\S+$/.test(fields.email) && !/^\+?[0-9 ]{8,20}$/.test(fields.whatsapp)) || !fields.consent)) return done(false, form)
   if (!env.ESCALE) return done(false, form)
   const at = new Date().toISOString()
-  await env.ESCALE.put(`form:${form}:${at}:${crypto.randomUUID().slice(0, 8)}`, JSON.stringify({ form, at, fields }))
+  const key = `form:${form}:${at}:${crypto.randomUUID().slice(0, 8)}`
+  await env.ESCALE.put(key, JSON.stringify({ form, at, fields }))
+  // Bons plans : e-mail de bienvenue tout de suite, sans faire attendre la réponse (src/digest.ts)
+  // Garde-fous contre les abus : un seul e-mail de bienvenue par adresse et par semaine, trois au plus par visiteur et par jour
+  if (form === "bons-plans" && /^\S+@\S+\.\S+$/.test(fields.email)) ctx.waitUntil((async () => {
+    const mailKey = `nlw:${fields.email.trim().toLowerCase().slice(0, 200)}`
+    const ipKey = `nlip:${request.headers.get("CF-Connecting-IP") || "?"}:${at.slice(0, 10)}`
+    const [seen, n] = await Promise.all([env.ESCALE.get(mailKey), env.ESCALE.get(ipKey)])
+    if (seen || Number(n || 0) >= 3) return
+    await env.ESCALE.put(mailKey, "1", { expirationTtl: 7 * 86400 })
+    await env.ESCALE.put(ipKey, String(Number(n || 0) + 1), { expirationTtl: 86400 })
+    await sendWelcome(env, key)
+  })().catch(() => {}))
   return done(true, form)
 }
 

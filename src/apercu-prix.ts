@@ -45,6 +45,15 @@ async function recordHistory(ctx: Ctx, from: string, to: string, price: number, 
   await ctx.env.ESCALE.put(`hist:${from}-${to}`, JSON.stringify(hist.slice(-HIST_DAYS)))
 }
 
+// « Plus bas depuis 30 jours » : le prix du jour est inférieur ou égal à tous les prix relevés les 30 jours précédents (au moins 14 jours de relevés)
+export function isLow30(hist: Point[], price: number) {
+  const since = new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10), today = new Date().toISOString().slice(0, 10)
+  const past = hist.filter(([d]) => d >= since && d < today).map(([, v]) => v)
+  return past.length >= 14 && price <= Math.min(...past)
+}
+export const LOW30: Record<string, string> = { fr: "Prix le plus bas relevé depuis 30 jours", en: "Lowest price recorded in 30 days", es: "El precio más bajo registrado en 30 días", pt: "O preço mais baixo registado em 30 dias",
+  ar: "أدنى سعر مسجّل منذ 30 يومًا", it: "Il prezzo più basso rilevato da 30 giorni", de: "Niedrigster erfasster Preis seit 30 Tagen", nl: "Laagste gemeten prijs in 30 dagen" }
+
 // « Bas », « normal » ou « élevé » : prix du jour comparé à la médiane des 60 derniers jours (au moins 7 jours de données)
 export function verdict(hist: Point[], price: number) {
   const since = new Date(Date.now() - HIST_WINDOW * 864e5).toISOString().slice(0, 10)
@@ -250,6 +259,7 @@ function render(html: string, from: string, to: string, rows: Month[], hist: Poi
   const summary = fill(t.summary, { m: date(bestRow.month, { month: "long", year: "numeric" }), p: money(best), max: money(max), n: String(MONTHS) }) +
     " " + fill(t.updated, { d: date(new Date().toISOString().slice(0, 10), { day: "numeric", month: "long", year: "numeric" }) })
   const ago = agoText(lang, ageMs)
+  const low30 = isLow30(hist, best) ? `<p class="price-low30" style="margin:0 0 10px;font-weight:700;color:#18794e">🏆 ${esc(LOW30[lang] || LOW30.fr)}</p>` : ""
   const badge2 = ago ? `<p class="price-age" style="margin:-4px 0 10px;font-size:.85rem;color:var(--muted,#5b6474)">✅ ${esc(ago)}</p>` : ""
   return html
     .replace(/(<title>)([^<]*?)( \| Escale)?(<\/title>)/, (_m, a, s, b, c) => a + s + ` · ${label}` + (b || "") + c)
@@ -258,7 +268,7 @@ function render(html: string, from: string, to: string, rows: Month[], hist: Poi
     .replace(/(<meta property="og:description" content=")([^"]*)(")/, (_m, a, s, b) => a + esc(lead) + " — " + s + b)
     .replace(/<p class="hero-price" id="hero-price" hidden><\/p>/, `<p class="hero-price" id="hero-price">${esc(t.hero)} <strong>${esc(money(best))}</strong></p>`)
     .replace(/(<section id="route-prices" data-from="[A-Z]{3}" data-to="[A-Z]{3}") hidden>/, `$1 data-ssr="1">`)
-    .replace(/<ul class="price-list"><\/ul>/, `${badge2}${badge}${spark}<p class="price-summary">${esc(summary)}</p>${bars}<ul class="price-list">${items}</ul>`)
+    .replace(/<ul class="price-list"><\/ul>/, `${badge2}${low30}${badge}${spark}<p class="price-summary">${esc(summary)}</p>${bars}<ul class="price-list">${items}</ul>`)
 }
 
 // Pages « destination » (tous les vols vers une ville) : chaque ligne reçoit le prix déjà connu du trajet (cache des pages trajets).
@@ -307,7 +317,7 @@ export const onRequest = async (ctx: Ctx) => {
     const paid = paye.render(lang, route[1], route[2], paye.stats(await readPaid(env, route[1], route[2])))
     const at = html.indexOf("</section>", html.indexOf('id="route-prices"'))
     // puis « Envoyer ce prix à la famille » et l'inscription aux bons plans du lundi (src/partage.ts)
-    if (at > 0) html = html.slice(0, at + 10) + paid + partage.render(lang) + html.slice(at + 10)
+    if (at > 0) html = html.slice(0, at + 10) + paid + partage.render(lang, route[1]) + html.slice(at + 10)
     const job = routeMonths(ctx, route[1], route[2]).catch(() => null)
     const rows = await Promise.race([job, new Promise<undefined>((ok) => setTimeout(() => ok(undefined), WAIT_MS))])
     if (rows === undefined) ctx.waitUntil(job) // trop lent : la page part sans les prix, le cache se remplit pour la visite suivante
