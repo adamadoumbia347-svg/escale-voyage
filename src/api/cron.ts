@@ -1,6 +1,7 @@
 import { Ctx, Env, json, sameKey, siteUrl } from "../_lib/common"
 import { mailerReady, sendMail, cheapestRoundTrip } from "../_lib/mail"
-import { TXT, fill } from "../_lib/alert-texts"
+import { TXT, USUAL, fill, layout, cityName, cityCode } from "../_lib/alert-texts"
+import { verdict, Point } from "../apercu-prix"
 import { sendPush } from "../_lib/webpush"
 // Vérification quotidienne des alertes prix : lancée chaque matin par Cloudflare (« triggers » dans wrangler.jsonc),
 // ou à la main avec POST /api/cron et l'en-tête « x-cron-key: <CRON_KEY> ». Au plus un e-mail tous les 3 jours par alerte.
@@ -28,10 +29,18 @@ export async function checkAlerts(env: Env) {
     const fmtM = (n: number) => new Intl.NumberFormat(rec.lang === "ar" ? "ar-u-nu-latn" : rec.lang, { style: "currency", currency: rec.currency, maximumFractionDigits: 0 }).format(n)
     const t = TXT[rec.lang] || TXT.fr
     const id = name.slice("alert:".length)
-    const v = { a: rec.from, b: rec.to, price: fmtM(price), max: fmtM(rec.max),
+    const v = { a: cityCode(rec.from), b: cityCode(rec.to), price: fmtM(price), max: fmtM(rec.max),
       search: `${base}/?type=vols&from=${rec.from}&to=${rec.to}${rec.lang === "fr" ? "" : "&lang=" + rec.lang}`,
       unsub: `${base}/api/alert?action=unsubscribe&id=${id}&token=${rec.token}` }
-    if (await sendMail(env, rec.email, fill(t.dropSubject, v), fill(t.dropBody, v) + fill(t.footer, v))) {
+    // Prix habituel : seulement pour les trajets suivis chaque nuit, dont l'historique est en euros
+    let usual = ""
+    if (rec.currency === "EUR") {
+      const hist = ((await kv.get(`hist:${rec.from}-${rec.to}`, "json").catch(() => null)) as Point[] | null) || []
+      const vd = verdict(hist, price)
+      if (vd) usual = `<p>${fill(USUAL[rec.lang] || USUAL.fr, { avg: fmtM(vd.median), n: String(vd.days) })}</p>`
+    }
+    const subject = fill(t.dropSubject, { ...v, a: cityName(rec.from), b: cityName(rec.to) })
+    if (await sendMail(env, rec.email, subject, layout(rec.lang, fill(t.dropBody, v) + usual, fill(t.footer, v), v.search))) {
       rec.lastSent = new Date().toISOString(); rec.lastPrice = price
       const left = Math.max(86400, Math.round((Date.parse(rec.created) + 365 * 864e5 - now) / 1000))
       await kv.put(name, JSON.stringify(rec), { expirationTtl: left })
@@ -69,7 +78,7 @@ async function checkPush(env: Env, cache: Map<string, number | null>) {
     if (price == null || price > rec.max) continue
     const loc = rec.lang === "ar" ? "ar-u-nu-latn" : rec.lang
     const fmtM = (n: number) => new Intl.NumberFormat(loc, { style: "currency", currency: rec.currency, maximumFractionDigits: 0 }).format(n)
-    const t = PT[rec.lang] || PT.fr, v = { a: rec.from, b: rec.to, price: fmtM(price), max: fmtM(rec.max) }
+    const t = PT[rec.lang] || PT.fr, v = { a: cityName(rec.from), b: cityName(rec.to), price: fmtM(price), max: fmtM(rec.max) }
     const msg = { title: fill(t[0], v), body: fill(t[1], v), url: `/?type=vols&from=${rec.from}&to=${rec.to}${rec.lang === "fr" ? "" : "&lang=" + rec.lang}` }
     await kv.put(`pmsg:${rec.eid}`, JSON.stringify(msg), { expirationTtl: 7 * 86400 })
     const status = await sendPush(kv, rec.endpoint, base).catch(() => 0)

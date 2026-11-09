@@ -1,6 +1,6 @@
 import { Ctx, json, IATA, CURRENCIES, siteUrl, esc } from "../_lib/common"
 import { mailerReady, sendMail, lastMailError } from "../_lib/mail"
-import { TXT, fill, page } from "../_lib/alert-texts"
+import { TXT, fill, page, layout, cityName, cityCode } from "../_lib/alert-texts"
 // Alertes prix par e-mail (stockées dans l'espace KV ESCALE, clé alert:<id>).
 //  GET  /api/alert?action=status                    -> { enabled }
 //  POST /api/alert {email, from, to, max, lang, currency, consent} -> alerte « en attente » + e-mail de confirmation
@@ -49,8 +49,8 @@ export const onRequest = async (ctx: Ctx) => {
   const base = siteUrl(env, request)
   const money = new Intl.NumberFormat(lang === "ar" ? "ar-u-nu-latn" : lang, { style: "currency", currency, maximumFractionDigits: 0 }).format(max)
   const t = TXT[lang]
-  const v = { a: from, b: to, max: money, link: `${base}/api/alert?action=confirm&id=${id}&token=${token}`, unsub: `${base}/api/alert?action=unsubscribe&id=${id}&token=${token}` }
-  const ok = await sendMail(env, email, fill(t.confirmSubject, v), fill(t.confirmBody, v) + fill(t.footer, v))
+  const v = { a: cityCode(from), b: cityCode(to), max: money, link: `${base}/api/alert?action=confirm&id=${id}&token=${token}`, unsub: `${base}/api/alert?action=unsubscribe&id=${id}&token=${token}` }
+  const ok = await sendMail(env, email, fill(t.confirmSubject, { ...v, a: cityName(from), b: cityName(to) }), layout(lang, fill(t.confirmBody, v), fill(t.footer, v), v.link))
   if (!ok) { await kv.delete(`alert:${id}`); await kv.delete(lim); return json({ error: "mail", detail: lastMailError }, { status: 502 }) }
   return json({ ok: true, email: esc(email) })
 }

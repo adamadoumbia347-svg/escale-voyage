@@ -1,3 +1,4 @@
+import { ROUTES } from "../barometre"
 // Textes des e-mails et pages d'alerte (5 langues)
 export const TXT: Record<string, Record<string, string>> = {
   fr: {
@@ -50,6 +51,30 @@ export const TXT: Record<string, Record<string, string>> = {
     unsubscribed: "تم حذف التنبيه مع بريدك الإلكتروني.",
     invalid: "هذا الرابط لم يعد صالحًا.", back: "العودة إلى Escale",
   },
+}
+
+// Noms de villes pour les e-mails et notifications d'alerte : tirés des trajets suivis (src/barometre.ts) ; à défaut, le code de l'aéroport.
+const CITY: Record<string, string> = {}
+for (const [from, to, label] of ROUTES) { const [a, b] = label.split(" → "); if (a && !CITY[from]) CITY[from] = a; if (b && !CITY[to]) CITY[to] = b }
+export const cityName = (code: string) => CITY[code] || code
+// « Paris (CDG) » quand la ville est connue, sinon « CDG »
+export const cityCode = (code: string) => (CITY[code] ? `${CITY[code]} (${code})` : code)
+
+// Prix habituel du trajet, ajouté à l'e-mail de baisse quand l'historique existe (trajets suivis, en euros)
+export const USUAL: Record<string, string> = {
+  fr: "Prix habituel sur ce trajet : <b>{avg}</b> (médiane des {n} derniers jours relevés).",
+  en: "Usual price on this route: <b>{avg}</b> (median over the last {n} days tracked).",
+  es: "Precio habitual en esta ruta: <b>{avg}</b> (mediana de los últimos {n} días registrados).",
+  pt: "Preço habitual nesta rota: <b>{avg}</b> (mediana dos últimos {n} dias registados).",
+  ar: "السعر المعتاد لهذه الرحلة: <b>{avg}</b> (وسيط آخر {n} يومًا مسجّلًا).",
+}
+
+// Habillage commun des e-mails d'alerte : en-tête Escale, texte lisible, lien principal transformé en bouton
+const BTN = "display:inline-block;background:#0b8577;color:#fff;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:700;font-size:16px"
+export function layout(lang: string, body: string, footer: string, mainLink: string) {
+  const inner = body.replace(`<a href="${mainLink}">`, `<a href="${mainLink}" style="${BTN}">`)
+  return `<div dir="${lang === "ar" ? "rtl" : "ltr"}" lang="${lang}" style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:560px;color:#0d1b2e;font-size:16px;line-height:1.55">` +
+    `<p style="font-size:20px;font-weight:800;color:#0b8577;margin:0 0 12px">✈️ Escale</p>${inner}${footer}</div>`
 }
 
 export const fill = (s: string, v: Record<string, string>) => s.replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m))
