@@ -1543,8 +1543,18 @@ if(!t)return;var e=document.getElementById("hero-season");e.innerHTML='<a href="
     }[lang] || null;
     if (!M) M = ["Cookies partenaires", "Avec votre accord, nos partenaires Travelpayouts et Stay22 utilisent des cookies pour savoir que vous venez d’Escale quand vous réservez. Cela nous permet de rester gratuits. Refuser ne change rien aux recherches.", "Politique de confidentialité", "Refuser", "Accepter"];
     bar.setAttribute("aria-label", M[0]);
+    // Sur petit écran, une phrase courte : le bandeau ne doit pas cacher le bouton « Rechercher »
+    var SHORT = { fr: "Nos partenaires (Travelpayouts, Stay22) utilisent des cookies pour savoir que vous venez d’Escale quand vous réservez. Refuser ne change rien.",
+      en: "Our partners (Travelpayouts, Stay22) use cookies to know you came from Escale when you book. Declining changes nothing.",
+      es: "Nuestros socios (Travelpayouts, Stay22) usan cookies para saber que vienes de Escale al reservar. Rechazar no cambia nada.",
+      pt: "Os nossos parceiros (Travelpayouts, Stay22) usam cookies para saber que veio da Escale ao reservar. Recusar não muda nada.",
+      ar: "يستخدم شريكانا (Travelpayouts وStay22) ملفات تعريف الارتباط ليعرفا أنك جئت من Escale عند الحجز. الرفض لا يغيّر شيئًا.",
+      it: "I nostri partner (Travelpayouts, Stay22) usano cookie per sapere che arrivi da Escale quando prenoti. Rifiutare non cambia nulla.",
+      de: "Unsere Partner (Travelpayouts, Stay22) nutzen Cookies, um zu erkennen, dass du bei einer Buchung von Escale kommst. Ablehnen ändert nichts.",
+      nl: "Onze partners (Travelpayouts, Stay22) gebruiken cookies om te weten dat je via Escale boekt. Weigeren verandert niets." };
+    var txt = (window.innerWidth <= 600 && SHORT[lang]) ? SHORT[lang] : M[1];
     bar.innerHTML =
-      '<div class="cc-in"><p class="cc-txt"><strong>' + M[0] + "</strong>" + M[1] + " " +
+      '<div class="cc-in"><p class="cc-txt"><strong>' + M[0] + "</strong>" + txt + " " +
       '<a href="/confidentialite/">' + M[2] + "</a></p>" +
       '<div class="cc-btns"><button type="button" class="cc-btn" data-cc="refuse">' + M[3] + "</button>" +
       '<button type="button" class="cc-btn" data-cc="accept">' + M[4] + "</button></div></div>";
