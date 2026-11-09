@@ -81,7 +81,7 @@ export function banner(d: Deals, lang: Lang = "fr"): string {
   if (!d.items.length) return ""
   const t = T[lang]
   const top = d.items.slice(0, 3).map((r) => `${label(r.label, lang)} −${r.diff}${lang === "fr" ? " %" : "%"}`).join(" · ")
-  return `<style>.sz{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:0 auto 14px;padding:10px 16px;border-radius:14px;background:#edf8f1;border:1px solid #bfe3cd;color:#0f5132}.sz strong{font-weight:700}.sz small{color:#2b6a45}.sz a{margin-inline-start:auto;font-weight:700;color:#0b8577;white-space:nowrap}:root:not([data-theme="light"]) .sz{background:rgb(24 121 78/.18);border-color:rgb(24 121 78/.4);color:#bfe3cd}:root:not([data-theme="light"]) .sz small{color:#9ccfb0}</style>` +
+  return `<style>.sz{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:0 auto 14px;padding:10px 16px;border-radius:14px;background:#edf8f1;border:1px solid #bfe3cd;color:#0f5132}.sz strong{font-weight:700}.sz small{color:#2b6a45}.sz a{margin-inline-start:auto;font-weight:700;color:#0b8577;white-space:nowrap}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .sz{background:rgb(24 121 78/.18);border-color:rgb(24 121 78/.4);color:#bfe3cd}:root:not([data-theme="light"]) .sz small{color:#9ccfb0}}:root[data-theme="dark"] .sz{background:rgb(24 121 78/.18);border-color:rgb(24 121 78/.4);color:#bfe3cd}:root[data-theme="dark"] .sz small{color:#9ccfb0}</style>` +
     `<div class="wrap"><p class="sz"><strong>${esc(t.banner(d.items.length))}</strong><small>${esc(top)}</small><a href="${t.path}">${esc(t.bannerGo)} →</a></p></div>`
 }
 
