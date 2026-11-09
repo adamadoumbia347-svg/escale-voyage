@@ -76,6 +76,9 @@ export const onRequest = async (ctx: Ctx) => {
     })
     const bn = d ? banner(d, "fr") : ""
     if (bn) out = out.replace('<section class="block" id="recent-block"', bn + '<section class="block" id="recent-block"')
+    // Adresses de recherche (/?type=vols&from=…) : même page que l'accueil, pas à indexer (Search Console les listait par milliers
+    // en « autre page avec balise canonique correcte »). La balise canonique vers / reste ; on ajoute noindex, follow.
+    if (new URL(ctx.request.url).searchParams.has("type")) out = out.replace("<head>", '<head>\n<meta name="robots" content="noindex, follow">')
     return new Response(out, { status: response.status, headers })
   } catch {
     return response
