@@ -84,6 +84,8 @@ export const onRequest = async (ctx: Ctx) => {
     // (lue par Google avec le titre) ; les autres langues gardent leur titre traduit (data-en-html, site/i18n.js), et la fin du
     // titre reste animée par site/hero-anim.js (« pour rentrer au pays » → « pour Abidjan » → « pour Dakar »…).
     out = out.replace(H1_FR, H1_NEW)
+    // Message de saison (« Noël au pays… ») posé sur la photo : fond blanc et texte foncé, lisible quelle que soit la photo
+    out = out.replace("</head>", `<style>.has-hero .band .hero-season a{background:#fff;color:#08303a;border-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;border-radius:16px;box-shadow:0 10px 30px -14px rgb(0 0 0/.5)}</style></head>`)
     if (new URL(ctx.request.url).searchParams.has("type")) out = out.replace("<head>", '<head>\n<meta name="robots" content="noindex, follow">')
     return new Response(out, { status: response.status, headers })
   } catch {
