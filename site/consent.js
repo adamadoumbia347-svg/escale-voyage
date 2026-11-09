@@ -44,7 +44,8 @@
     ".cc-btn{appearance:none;cursor:pointer;font:700 15px/1 var(--f-body,system-ui,sans-serif);padding:12px 18px;border-radius:10px;" +
     "border:1px solid var(--ink,#141a24);background:var(--surface,#fff);color:var(--ink,#141a24);min-width:120px}" +
     ".cc-btn:hover{background:var(--ink,#141a24);color:var(--surface,#fff)}" +
-    ".cc-btn:focus-visible{outline:3px solid var(--focus,#0b5cd6);outline-offset:2px}";
+    ".cc-btn:focus-visible{outline:3px solid var(--focus,#0b5cd6);outline-offset:2px}" +
+    "@media(max-width:600px){.cc-bar{padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));font-size:12.5px;line-height:1.35}.cc-in{gap:8px 12px}.cc-txt{flex-basis:100%}.cc-txt strong{display:inline;font-size:13px;margin-right:6px}.cc-btns{width:100%;justify-content:flex-end}.cc-btn{padding:9px 14px;min-width:0;font-size:14px}}";
 
   var bar = null;
   function show() {
