@@ -2639,6 +2639,94 @@
 "3193f356bc259aac",
 "2026-11-06"
 ],
+"/compagnie/air-algerie/": [
+"a03231c75c8c0e76",
+"2026-11-09"
+],
+"/compagnie/air-cote-d-ivoire/": [
+"86e79ee129f3f240",
+"2026-11-09"
+],
+"/compagnie/air-france/": [
+"cbabc0cbc0ab3256",
+"2026-11-09"
+],
+"/compagnie/air-peace/": [
+"4a041d11d1ba7344",
+"2026-11-09"
+],
+"/compagnie/air-senegal/": [
+"779d71a784591b39",
+"2026-11-09"
+],
+"/compagnie/asky-airlines/": [
+"67b95826c47d9c41",
+"2026-11-09"
+],
+"/compagnie/brussels-airlines/": [
+"716b1ff176823b81",
+"2026-11-09"
+],
+"/compagnie/corsair/": [
+"af837894be1ce68c",
+"2026-11-09"
+],
+"/compagnie/egyptair/": [
+"8680d66cffaea59f",
+"2026-11-09"
+],
+"/compagnie/emirates/": [
+"aee5f884f9e92810",
+"2026-11-09"
+],
+"/compagnie/ethiopian-airlines/": [
+"0eae9113cf2c5b8c",
+"2026-11-09"
+],
+"/compagnie/iberia/": [
+"47197de8e7cb7d36",
+"2026-11-09"
+],
+"/compagnie/ita-airways/": [
+"ae9533cd8f57a6f1",
+"2026-11-09"
+],
+"/compagnie/kenya-airways/": [
+"579886ec0af532ad",
+"2026-11-09"
+],
+"/compagnie/qatar-airways/": [
+"85e628cb2e095428",
+"2026-11-09"
+],
+"/compagnie/royal-air-maroc/": [
+"a88d630d6c0113f2",
+"2026-11-09"
+],
+"/compagnie/rwandair/": [
+"6d1fe42888c22657",
+"2026-11-09"
+],
+"/compagnie/tap-air-portugal/": [
+"326718416027105f",
+"2026-11-09"
+],
+"/compagnie/transavia/": [
+"f17d72f6054f1efa",
+"2026-11-09"
+],
+"/compagnie/tunisair/": [
+"34502c9cdab8fdd1",
+"2026-11-09"
+],
+"/compagnie/turkish-airlines/": [
+"1bd439ed828328a9",
+"2026-11-09"
+],
+"/compagnies-aeriennes-afrique/": [
+"b77beff803953325",
+"2026-11-09"
+],
 "/confidentialite/": [
 "146a91aa3a756092",
 "2026-11-06"
@@ -3747,6 +3835,58 @@
 "1aa2a035831f4ab1",
 "2026-11-05"
 ],
+"/diaspora/": [
+"0a65fdef5c6949fe",
+"2026-11-09"
+],
+"/diaspora/algerie/": [
+"976065781c8aeb1d",
+"2026-11-09"
+],
+"/diaspora/benin/": [
+"b0ae900add0922e2",
+"2026-11-09"
+],
+"/diaspora/burkina-faso/": [
+"e8679af841d4e4e5",
+"2026-11-09"
+],
+"/diaspora/cameroun/": [
+"ecafb8335b80120d",
+"2026-11-09"
+],
+"/diaspora/cote-d-ivoire/": [
+"03d61b27afda52a9",
+"2026-11-09"
+],
+"/diaspora/guinee/": [
+"f2a1f3b2a4a0cffa",
+"2026-11-09"
+],
+"/diaspora/mali/": [
+"01b1ea02c4b2fa7c",
+"2026-11-09"
+],
+"/diaspora/maroc/": [
+"ea2def0897f80d4c",
+"2026-11-09"
+],
+"/diaspora/rd-congo/": [
+"4276620c21f2641e",
+"2026-11-09"
+],
+"/diaspora/senegal/": [
+"07a52b821621d847",
+"2026-11-09"
+],
+"/diaspora/togo/": [
+"9ac8255f00c18b06",
+"2026-11-09"
+],
+"/diaspora/tunisie/": [
+"22dd93808437ff5f",
+"2026-11-09"
+],
 "/dossier-visa/": [
 "4c6fbbaa60ee3d13",
 "2026-11-06"
@@ -3762,6 +3902,94 @@
 "/en/about/": [
 "46534e9cece06785",
 "2026-11-05"
+],
+"/en/airline/air-algerie/": [
+"b4749ee4adf62e24",
+"2026-11-09"
+],
+"/en/airline/air-cote-d-ivoire/": [
+"55c7d8a1fdbe5f9b",
+"2026-11-09"
+],
+"/en/airline/air-france/": [
+"88f4ea43948013ea",
+"2026-11-09"
+],
+"/en/airline/air-peace/": [
+"0a282d4da5c9a8fe",
+"2026-11-09"
+],
+"/en/airline/air-senegal/": [
+"dfe83bbe7f84bc2b",
+"2026-11-09"
+],
+"/en/airline/asky-airlines/": [
+"b3d76dcc6f1ddc02",
+"2026-11-09"
+],
+"/en/airline/brussels-airlines/": [
+"203e40e5ebea3c3f",
+"2026-11-09"
+],
+"/en/airline/corsair/": [
+"e16257a452e30046",
+"2026-11-09"
+],
+"/en/airline/egyptair/": [
+"4e3035248be849f8",
+"2026-11-09"
+],
+"/en/airline/emirates/": [
+"3ef73e8930b732c6",
+"2026-11-09"
+],
+"/en/airline/ethiopian-airlines/": [
+"1b7b343c091f762e",
+"2026-11-09"
+],
+"/en/airline/iberia/": [
+"9582d13ec4176eb2",
+"2026-11-09"
+],
+"/en/airline/ita-airways/": [
+"3c56bb5b2f5b9a47",
+"2026-11-09"
+],
+"/en/airline/kenya-airways/": [
+"0fd57c700cecb8c9",
+"2026-11-09"
+],
+"/en/airline/qatar-airways/": [
+"a4c15ed08dd53a10",
+"2026-11-09"
+],
+"/en/airline/royal-air-maroc/": [
+"bc54978ce5502ba2",
+"2026-11-09"
+],
+"/en/airline/rwandair/": [
+"4660844291f25879",
+"2026-11-09"
+],
+"/en/airline/tap-air-portugal/": [
+"7f63632294b0a045",
+"2026-11-09"
+],
+"/en/airline/transavia/": [
+"9384d9432ad8e806",
+"2026-11-09"
+],
+"/en/airline/tunisair/": [
+"3f620bda518c3c30",
+"2026-11-09"
+],
+"/en/airline/turkish-airlines/": [
+"8122122850596f63",
+"2026-11-09"
+],
+"/en/airlines-europe-africa/": [
+"988901c3d6fb6714",
+"2026-11-09"
 ],
 "/en/airport-hotels/": [
 "f561f1eab6987a66",
@@ -9163,6 +9391,10 @@
 "e5502242f4900048",
 "2026-11-06"
 ],
+"/en/travel-together/": [
+"a1c94136da49444d",
+"2026-11-09"
+],
 "/en/traveller-reviews/": [
 "b9afcdae4ec6d2cc",
 "2026-11-05"
@@ -13567,6 +13799,10 @@
 "51d799f98eb79a9c",
 "2026-11-06"
 ],
+"/partir-a-plusieurs/": [
+"c1af10d1f25b1c3e",
+"2026-11-09"
+],
 "/partout/": [
 "05d2a3e8d4bc21c8",
 "2026-11-05"
@@ -16082,6 +16318,10 @@
 "/quiz-destination/": [
 "84c02ce7d078b6eb",
 "2026-11-06"
+],
+"/retour-au-pays/": [
+"4649d5b44bc0daad",
+"2026-11-09"
 ],
 "/sans-visa/": [
 "914dc7dbb63cb1f8",

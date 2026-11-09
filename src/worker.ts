@@ -30,6 +30,7 @@ import * as indice from "./indice"
 import * as accueil from "./accueil"
 import * as saisir from "./saisir"
 import * as diffusion from "./diffusion"
+import * as compagnie from "./compagnie"
 import { sendDigest, sendNewsletter } from "./digest"
 import { indexNow } from "./indexnow"
 
@@ -58,6 +59,8 @@ export default {
     // Indice des prix : page du jour et archives mensuelles (/indice-prix/2026-11/)
     if (/^\/(en\/price-index|indice-prix)(\/(\d{4}-\d{2}\/?)?)?$/.test(path)) return indice.onRequest(c)
     if (path === "/") return accueil.onRequest(c)
+    // Pages compagnies : bloc « ce que les voyageurs ont payé » (src/compagnie.ts)
+    if (/^\/(en\/airline|compagnie)\//.test(path)) return compagnie.onRequest(c)
     // « À saisir aujourd'hui » : page écrite par le serveur (pas de fichier statique)
     if (path === "/barometre-prix/a-saisir/" || path === "/barometre-prix/a-saisir") return saisir.page(c, "fr")
     if (path === "/en/price-index/deals-today/" || path === "/en/price-index/deals-today") return saisir.page(c, "en")

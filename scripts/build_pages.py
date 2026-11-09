@@ -35,6 +35,10 @@ import explore_pages  # noqa: E402
 import hubs  # noqa: E402
 import villes  # noqa: E402
 import routes_extra  # noqa: E402
+import diaspora  # noqa: E402
+import plusieurs  # noqa: E402
+import retour_pays  # noqa: E402
+import compagnies  # noqa: E402
 import translations  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -754,6 +758,10 @@ def main():
     urls += afrique_themes.build(SITE, ctx, route_paths)  # Hajj/Omra, études, commerce : vols au départ de l'Afrique
     urls += aeroports.build(SITE, ctx, HUBS)  # guides « Arriver à l'aéroport de … » (fr/en)
     urls += pratique_afrique.build(SITE, ctx)  # billet urgent, bagages par compagnie, avis des voyageurs
+    urls += diaspora.build(SITE, ctx, lambda p: (SITE / p / "index.html").exists())  # rentrer au pays pour les fêtes, par communauté
+    urls += plusieurs.build(SITE, ctx)  # partir à plusieurs : quelle ville de départ est la moins chère
+    urls += retour_pays.build(SITE, ctx)  # rentrer au pays pour de bon
+    urls += compagnies.build(SITE, ctx)  # pages compagnies (fr/en)
     urls += tendances.build(SITE, ctx)  # destinations tendance 2027
     urls += pages_voyage.build(SITE, ctx)  # week-ends pas chers, premier voyage, meilleur mois
     urls += hub_urls
