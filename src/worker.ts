@@ -32,6 +32,7 @@ import * as indice from "./indice"
 import * as accueil from "./accueil"
 import * as saisir from "./saisir"
 import * as bonsplans from "./bonsplans"
+import * as actus from "./actus"
 import * as diffusion from "./diffusion"
 import * as compagnie from "./compagnie"
 import { sendDigest, sendNewsletter } from "./digest"
@@ -52,6 +53,7 @@ export default {
       return handler(c)
     }
     // Bons plans par ville de départ et par mois (src/bonsplans.ts) : pages écrites par le serveur à partir des relevés
+    if (/^\/barometre-prix\/actus(\/|$)/.test(path)) return actus.onRequest(c)
     if (/^\/barometre-prix\/(depuis|mois)(\/|$)/.test(path) || path === "/barometre-prix/plan.xml") return bonsplans.onRequest(c)
     if (path === "/barometre-prix/" || path === "/barometre-prix") {
       const r = await barometre.onRequest(c)

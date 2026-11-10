@@ -72,13 +72,13 @@ const dateFr = () => new Date().toLocaleDateString("fr-FR", { day: "numeric", mo
 const prixDuMois = (r: Row, ym: string) => r.months.find((m) => m.month === ym) || null
 
 // Liens vers ces pages, ajoutés au baromètre et à « À saisir aujourd'hui »
-export const LIENS = `<section><h2>Bons plans par ville de départ et par mois</h2>${STYLE}${puces([["/barometre-prix/depuis/", "Par ville de départ"], ["/barometre-prix/mois/", "Par mois"], ["/barometre-prix/a-saisir/", "À saisir aujourd'hui"]])}</section>`
+export const LIENS = `<section><h2>Bons plans par ville de départ et par mois</h2>${STYLE}${puces([["/barometre-prix/depuis/", "Par ville de départ"], ["/barometre-prix/mois/", "Par mois"], ["/barometre-prix/a-saisir/", "À saisir aujourd'hui"], ["/barometre-prix/actus/", "Les actus de la semaine"]])}</section>`
 
-type Page = { path: string; title: string; desc: string; eyebrow: string; h1: string; body: string; index: boolean }
-async function shell(ctx: Ctx, p: Page): Promise<Response> {
+export type Page = { path: string; title: string; desc: string; eyebrow: string; h1: string; body: string; index: boolean; article?: boolean }
+export async function shell(ctx: Ctx, p: Page): Promise<Response> {
   const base = await ctx.env.ASSETS?.fetch(new Request("https://escale.live/barometre-prix/"))
   if (!base || !base.ok) return ctx.next()
-  const main = `<main>\n<div class="board"><div class="wrap">\n  <p class="eyebrow">${esc(p.eyebrow)}</p><h1>${esc(p.h1)}</h1><p class="hero-lead">${esc(p.desc)}</p>\n</div></div>\n<div class="wrap">\n${STYLE}${p.body}${METHODE}</div>\n</main>`
+  const main = `<main>\n<div class="board"><div class="wrap">\n  <p class="eyebrow">${esc(p.eyebrow)}</p><h1>${esc(p.h1)}</h1><p class="hero-lead">${esc(p.desc)}</p>\n</div></div>\n<div class="wrap">\n${STYLE}${p.body}${p.article ? "" : METHODE}</div>\n</main>`
   let html = await base.text()
   html = html.slice(0, html.indexOf("<main>")) + main + html.slice(html.indexOf("</main>") + 7)
   html = html
@@ -132,10 +132,12 @@ function pageMois(s: Snap, ms: string): Page | null {
     desc: `Les prix pour ${nom} ne sont pas encore relevés : Escale suit les 6 prochains mois. Voici les mois disponibles.`, body: `<section><p class="bt-lead">Les relevés d'Escale couvrent les 6 prochains mois. Les prix pour ${esc(nom)} apparaîtront ici dès que ce mois entrera dans cette période.</p></section>` + autres, index: false }
   // Prix du mois pour chaque trajet ; à défaut de prix par mois, les trajets dont c'est le mois le moins cher
   const avec = s.rows.map((r) => ({ r, m: prixDuMois(r, ym) })).filter((x) => x.m) as { r: Row; m: Month }[]
-  const liste2 = avec.length ? avec.map(({ r, m }) => ({ r, prix: m.price, dep: m.dep, ret: m.ret, mini: Math.min(...r.months.map((k) => k.price)) })) : s.rows.filter((r) => r.best === ym).map((r) => ({ r, prix: r.price, dep: "", ret: "", mini: r.price }))
+  // Mois le moins cher de chaque trajet : pris dans les mêmes prix par mois (et non dans l'historique), pour comparer ce qui est comparable
+  const moinsCher = (r: Row) => r.months.reduce((a, c) => (c.price < a.price ? c : a))
+  const liste2 = avec.length ? avec.map(({ r, m }) => ({ r, prix: m.price, dep: m.dep, ret: m.ret, mini: moinsCher(r).price, mm: moinsCher(r).month })) : s.rows.filter((r) => r.best === ym).map((r) => ({ r, prix: r.price, dep: "", ret: "", mini: r.price, mm: ym }))
   liste2.sort((x, y) => x.prix - y.prix)
-  const lignes = liste2.map(({ r, prix, dep, ret, mini }) => `<tr><th scope="row">${lienTrajet(r, `${r.a} → ${r.b}`)}</th><td><strong>${esc(money(prix))}</strong></td><td>${dep && ret ? `${esc(jour(dep))} → ${esc(jour(ret))}` : "—"}</td>` +
-    `<td>${prix <= mini ? `<span class="bt-down">Le mois le moins cher</span>` : `<span class="bt-flat">+${Math.round((prix / mini - 1) * 100)} % par rapport à ${r.best ? esc(moisNom(r.best)) : "son mois le moins cher"}</span>`}</td></tr>`)
+  const lignes = liste2.map(({ r, prix, dep, ret, mini, mm }) => `<tr><th scope="row">${lienTrajet(r, `${r.a} → ${r.b}`)}</th><td><strong>${esc(money(prix))}</strong></td><td>${dep && ret ? `${esc(jour(dep))} → ${esc(jour(ret))}` : "—"}</td>` +
+    `<td>${prix <= mini ? `<span class="bt-down">Le mois le moins cher</span>` : `<span class="bt-flat">+${Math.round((prix / mini - 1) * 100)} % par rapport à ${esc(moisNom(mm))}</span>`}</td></tr>`)
   const dests = destinations(s).map(([d, n]) => ({ d, n, c: avec.filter((x) => slug(x.r.b) === d).length })).filter((x) => x.c >= 2).sort((x, y) => x.n.localeCompare(y.n, "fr"))
   const min = liste2[0], champions = liste2.filter((x) => x.prix <= x.mini).length
   const body = (liste2.length ? `<section><p class="bt-lead">Relevé du ${esc(dateFr())} : ${liste2.length} trajet${liste2.length > 1 ? "s" : ""} avec un prix repéré pour ${esc(moisNom(ym))}, à partir de ${esc(money(min.prix))} l'aller-retour (${esc(min.r.a)} → ${esc(min.r.b)}). ${champions ? `Pour ${champions} d'entre eux, ${esc(nom)} est le mois le moins cher des six prochains mois.` : ""}</p>` +
@@ -180,12 +182,15 @@ function pageListeMois(s: Snap): Page {
     body: `<section><p class="bt-lead">Relevé du ${esc(dateFr())}. Escale suit les six prochains mois.</p>${table(["Mois", "Trajets avec un prix", "Prix le plus bas"], lignes)}</section><section><h2>Par ville de départ</h2>${puces(villes(s).map(([v, n]) => [`/barometre-prix/depuis/${v}/`, `Depuis ${n}`]))}</section>` }
 }
 
+// Autres pages écrites par le serveur à ajouter au plan (les actus, src/actus.ts)
+export const AUTRES: ((ctx: Ctx) => Promise<string[]>)[] = []
 // Adresses à faire connaître aux moteurs : seulement les pages qui ont assez de prix réels
 export async function urls(ctx: Ctx): Promise<string[]> {
   const s = await snapshot(ctx), out = ["/barometre-prix/depuis/", "/barometre-prix/mois/"]
   for (const [v] of villes(s)) { const p = pageDepuis(s, v); if (p?.index) out.push(p.path) }
   for (const ym of fenetre()) { const ms = MSLUG[Number(ym.slice(5, 7)) - 1], p = pageMois(s, ms); if (p?.index) out.push(p.path)
     for (const [d] of destinations(s)) { const q = pageDestMois(s, ms, d); if (q?.index) out.push(q.path) } }
+  for (const f of AUTRES) { try { out.push(...(await f(ctx))) } catch {} }
   return out.map((u) => "https://escale.live" + u)
 }
 
