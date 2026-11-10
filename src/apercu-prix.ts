@@ -2,6 +2,7 @@ import { Ctx, esc, pricesForDates } from "./_lib/common"
 import * as paye from "./paye"
 import * as partage from "./partage"
 import * as autresVilles from "./autres-villes"
+import * as bonsplans from "./bonsplans"
 import { readPaid } from "./api/paye"
 // Pages trajets : les prix réels sont écrits directement dans la page, pour les visiteurs comme pour Google
 // (avant, ils n'apparaissaient qu'après le chargement, via route-prices.js, et les moteurs de recherche ne les voyaient pas).
@@ -294,26 +295,37 @@ const t2 = (lang: string) => ({ fr: "dès", en: "from", es: "desde", pt: "desde"
 async function fillHub(ctx: Ctx, html: string) {
   const cache = (globalThis as any).caches?.default
   const cells = [...html.matchAll(/<td class="hub-price" data-from="([A-Z]{3})" data-to="([A-Z]{3})" data-label="([^"]*)"><\/td>/g)]
-  if (!cells.length || !cache) return html
+  if (!cells.length) return html
   const lang = (html.match(/<html lang="([a-z]{2})"/) || [])[1] || "fr"
   const t = L[lang] || L.fr
   const money = (n: number) => { try { return new Intl.NumberFormat(t.loc, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n) } catch { return Math.round(n) + " €" } }
-  const found = await Promise.all(cells.map(async (m) => { const hit = await cache.match(cacheKey(m[1], m[2])); return hit ? (await hit.json()) as Month[] : null }))
-  const missing = cells.filter((_, i) => found[i] === null).slice(0, 3)
+  // Une page ne peut faire qu'un nombre limité d'opérations : le cache n'est interrogé que pour les 36 premiers trajets,
+  // et deux trajets au plus sont préparés en arrière-plan. Les autres prix arrivent dans le navigateur (site/hub.js).
+  const found = await Promise.all(cells.map(async (m, i) => { const hit = cache && i < 36 ? await cache.match(cacheKey(m[1], m[2])).catch(() => null) : null; return hit ? (await hit.json()) as Month[] : null }))
+  const missing = cells.filter((_, i) => found[i] === null).slice(0, 2)
   if (missing.length) ctx.waitUntil(Promise.all(missing.map((m) => routeMonths(ctx, m[1], m[2]).catch(() => null))))
-  // Prix le plus bas de la page dans le titre (onglet, Google, aperçu des liens partagés) : « Cheap flights to Tunis from €74 – … »
-  const all = found.flat().filter(Boolean) as Month[]
+  // Trajets sans prix en cache à cet endroit du réseau : le relevé de la nuit (KV, src/bonsplans.ts) prend le relais pour les trajets
+  // suivis. Le prix arrive ainsi dans le titre même quand la page est lue par un robot loin des visiteurs habituels.
+  const snap = await Promise.race([bonsplans.snapshotLeger(ctx).catch(() => null), new Promise<null>((ok) => setTimeout(() => ok(null), 300))])
+  const releve = new Map((snap?.rows || []).map((r) => [`${r.from}-${r.to}`, r.price]))
+  const prices = cells.map((m, i) => (found[i] && found[i]!.length ? Math.min(...found[i]!.map((r) => r.price)) : releve.get(`${m[1]}-${m[2]}`) ?? null))
+  // Prix le plus bas de la page dans le titre et la description (onglet, Google, aperçu des liens partagés) : « Cheap flights to Tunis from €74 – … »
+  const all = prices.filter((x): x is number => typeof x === "number")
   if (all.length) {
-    const best = money(Math.min(...all.map((r) => r.price)))
-    const add = (t: string) => lang === "en" && / – /.test(t) ? t.replace(" – ", ` from ${best} – `) : t.replace(/ \| Escale$/, "") + ` · ${t2(lang)} ${best}` + (/ \| Escale$/.test(t) ? " | Escale" : "")
+    const best = money(Math.min(...all))
+    // Le prix se place avant les deux-points du titre (« Vols pas chers pour Dakar dès 353 € : comparer… »), sinon à la fin
+    const add = (t: string) => / ?: /.test(t) ? t.replace(/( ?: )/, ` ${t2(lang)} ${best}$1`) : lang === "en" && / – /.test(t) ? t.replace(" – ", ` from ${best} – `) : t.replace(/ \| Escale$/, "") + ` · ${t2(lang)} ${best}` + (/ \| Escale$/.test(t) ? " | Escale" : "")
+    const lead = `${t2(lang).charAt(0).toUpperCase()}${t2(lang).slice(1)} ${best}`
     html = html.replace(/<title>([^<]*)<\/title>/, (_m, t) => `<title>${add(t)}</title>`)
       .replace(/(<meta property="og:title" content=")([^"]*)(")/, (_m, a, t, c) => a + add(t) + c)
+      .replace(/(<meta name="description" content=")([^"]*)(")/, (_m, a, s, c) => a + esc(lead) + " — " + s + c)
+      .replace(/(<meta property="og:description" content=")([^"]*)(")/, (_m, a, s, c) => a + esc(lead) + " — " + s + c)
   }
   let i = 0
   return html.replace(/<td class="hub-price" data-from="([A-Z]{3})" data-to="([A-Z]{3})" data-label="([^"]*)"><\/td>/g, (all, _f, _t, label) => {
-    const rows = found[i++]
-    if (!rows || !rows.length) return all
-    return all.replace('"></td>', `" data-ssr="1">${label} <strong>${esc(money(Math.min(...rows.map((r) => r.price))))}</strong></td>`)
+    const price = prices[i++]
+    if (price === null) return all
+    return all.replace('"></td>', `" data-ssr="1">${label} <strong>${esc(money(price))}</strong></td>`)
   })
 }
 
@@ -322,11 +334,13 @@ export const onRequest = async (ctx: Ctx) => {
   const path = new URL(request.url).pathname
   if (request.method !== "GET" || !PAGES.test(path) || !env.TRAVELPAYOUTS_TOKEN) return ctx.next()
   const response = await ctx.next()
+  if (!response.ok || !(response.headers.get("content-type") || "").includes("text/html")) return response
+  // La page d'origine est gardée : si un enrichissement échoue, elle part telle quelle (la réponse déjà lue ne peut pas être renvoyée)
+  const origine = await response.text()
+  const headers = new Headers(response.headers)
+  headers.delete("content-length")
   try {
-    if (!response.ok || !(response.headers.get("content-type") || "").includes("text/html")) return response
-    let html = await response.text()
-    const headers = new Headers(response.headers)
-    headers.delete("content-length")
+    let html = origine
     const route = html.match(/id="route-prices" data-from="([A-Z]{3})" data-to="([A-Z]{3})"/)
     if (!route) return new Response(await fillHub(ctx, html), { status: response.status, headers })
     // « Ce que les voyageurs ont vraiment payé » (src/paye.ts), juste après la section des prix
@@ -345,7 +359,8 @@ export const onRequest = async (ctx: Ctx) => {
     ctx.waitUntil(saveMonths(env, route[1], route[2], rows).catch(() => {}))
     const [hist, age] = await Promise.all([readHistory(ctx, route[1], route[2]), priceAge(route[1], route[2])])
     return new Response(render(html, route[1], route[2], rows, hist, age), { status: response.status, headers })
-  } catch {
-    return response
+  } catch (e) {
+    headers.set("X-Escale-Repli", String((e as any)?.message || e).slice(0, 120).replace(/[^\x20-\x7e]/g, "?"))
+    return new Response(origine, { status: response.status, headers })
   }
 }

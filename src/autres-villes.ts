@@ -1,5 +1,5 @@
 import { Ctx, esc } from "./_lib/common"
-import { snapshot, Row } from "./bonsplans"
+import { snapshotLeger, Row } from "./bonsplans"
 // Pages trajets : « Depuis une autre ville » — le prix du jour vers la même destination au départ des autres villes relevées
 // chaque nuit (Abidjan : Paris, Milan, Rome, Bruxelles…), avec l'écart par rapport au trajet de la page. Aide à voir d'un coup
 // d'œil si un autre aéroport de départ fait baisser le prix. Données : relevés du jour (src/bonsplans.ts, gardés une heure).
@@ -18,7 +18,8 @@ const L: Record<string, T> = {
 const fill = (s: string, o: Record<string, string>) => s.replace(/\{(\w+)\}/g, (_, k) => o[k])
 
 export async function render(ctx: Ctx, lang: string, from: string, to: string): Promise<string> {
-  const s = await snapshot(ctx)
+  const s = await snapshotLeger(ctx)
+  if (!s) return ""
   const ici = s.rows.find((r) => r.from === from && r.to === to)
   if (!ici) return ""
   // Une ligne par autre ville (Paris a deux aéroports : on garde le moins cher)

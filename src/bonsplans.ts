@@ -42,13 +42,29 @@ async function compute(env: Env): Promise<Snap> {
   return { date: today, rows }
 }
 
+// Le relevé du jour est gardé à deux endroits : le cache Cloudflare (une heure, propre à chaque centre de données) et une seule
+// clé KV (snap:v1, lisible partout en une opération). Les pages qui ont peu de marge (pages destination, pages trajets) lisent
+// seulement ces copies avec snapshotLeger() ; le calcul complet (une lecture par trajet) est réservé aux pages de bons plans
+// et à la tâche du matin.
+const SNAP_KEY = "snap:v1"
+const cacheReq = () => new Request("https://escale.live/__bonsplans/v4/" + new Date().toISOString().slice(0, 13))
 export async function snapshot(ctx: Ctx): Promise<Snap> {
-  const cache = (globalThis as any).caches?.default
-  const key = new Request("https://escale.live/__bonsplans/v3/" + new Date().toISOString().slice(0, 13))
+  const cache = (globalThis as any).caches?.default, key = cacheReq()
   if (cache) { const hit = await cache.match(key); if (hit) return hit.json() }
-  const s = await compute(ctx.env)
+  const kv = ctx.env.ESCALE
+  const garde = kv ? ((await kv.get(SNAP_KEY, "json").catch(() => null)) as (Snap & { ts?: number }) | null) : null
+  const frais = garde && garde.ts && Date.now() - garde.ts < CACHE_S * 1000
+  const s: Snap = frais ? { date: garde!.date, rows: garde!.rows } : await compute(ctx.env)
+  if (!frais && kv && s.rows.length) ctx.waitUntil(kv.put(SNAP_KEY, JSON.stringify({ ...s, ts: Date.now() })).catch(() => {}))
   if (cache && s.rows.length) ctx.waitUntil(cache.put(key, new Response(JSON.stringify(s), { headers: { "Cache-Control": `public, max-age=${CACHE_S}` } })))
   return s
+}
+// Copie déjà prête du relevé (cache, sinon la clé KV si elle date de moins de 26 heures) : deux opérations au plus, jamais de calcul
+export async function snapshotLeger(ctx: Ctx): Promise<Snap | null> {
+  const cache = (globalThis as any).caches?.default
+  if (cache) { const hit = await cache.match(cacheReq()); if (hit) return hit.json() }
+  const garde = ctx.env.ESCALE ? ((await ctx.env.ESCALE.get(SNAP_KEY, "json").catch(() => null)) as (Snap & { ts?: number }) | null) : null
+  return garde && garde.ts && Date.now() - garde.ts < 26 * 3600e3 ? { date: garde.date, rows: garde.rows } : null
 }
 
 
