@@ -204,6 +204,38 @@ HOTELS = [
      "L'aéroport de Bole est proche du centre et sert de grande plateforme de correspondance : pour une escale longue, un hôtel dans le quartier de Bole limite les trajets.", "ADD"),
 ]
 
+# Contenu détaillé en français pour les villes où Google affiche déjà la page hôtels (Search Console 11/2026) : même fond que la version anglaise
+HOTELS_FR = {
+    "Bamako": dict(
+        intro="Bamako s'étend sur les deux rives du Niger. La plupart des visiteurs logent à ACI 2000 ou à l'Hippodrome pour les affaires et les restaurants, ou près du fleuve pour plus de calme. L'aéroport Modibo-Keïta est à environ 15 km au sud du centre.",
+        tips=["Choisissez une chambre avec groupe électrogène et climatisation : les coupures de courant arrivent et la chaleur est très forte de mars à mai.",
+              "Les appartements meublés et résidences sont nombreux, et souvent avantageux pour un séjour d'une semaine ou plus.",
+              "Demandez à l'hôtel d'organiser le transfert depuis l'aéroport, surtout pour une arrivée tard le soir."],
+        faq=[("Quel est le meilleur quartier pour loger à Bamako ?", "ACI 2000 et l'Hippodrome sont pratiques pour les affaires, les restaurants et les sorties ; les quartiers au bord du fleuve sont plus calmes."),
+             ("Y a-t-il des appartements meublés à Bamako ?", "Oui : beaucoup d'hôtels et de résidences proposent des appartements avec cuisine, souvent avantageux pour les longs séjours."),
+             ("À quelle distance est l'aéroport de Bamako ?", "L'aéroport Modibo-Keïta est à environ 15 km au sud du centre : à peu près 30 minutes en voiture hors heures de pointe."),
+             ("Quelle est la meilleure période pour aller à Bamako ?", "De novembre à février, il fait plus frais et sec. De mars à mai, il fait très chaud, et la saison des pluies va à peu près de juin à septembre."),
+             ("Peut-on voyager au Mali en sécurité ?", "Consultez les conseils aux voyageurs de votre ministère des Affaires étrangères avant de réserver : ils changent avec la situation. Préférez l'annulation gratuite et laissez les détails de votre séjour à un proche.")],
+        more=[("Les quartiers en bref", "ACI 2000 : quartier moderne, hôtels d'affaires et bureaux. Hippodrome : animé, avec restaurants et bars. Badalabougou et la rive droite : plus calmes, souvent moins chers, près du fleuve."),
+              ("Hôtel ou appartement ?", "Pour une ou deux nuits, l'hôtel est plus simple : groupe électrogène, gardiennage, petit-déjeuner. À partir d'une semaine, un appartement meublé avec cuisine revient souvent moins cher par nuit, ce qui convient aux familles et aux séjours de travail."),
+              ("Depuis l'aéroport", "Demandez un accueil à votre hôtel ou réservez un transfert avant d'atterrir, surtout la nuit. En taxi, mettez-vous d'accord sur le prix avant de monter."),
+              ("Argent et connexion", "La monnaie est le franc CFA (XOF). L'argent liquide reste très utilisé : gardez-en pour le taxi. Une eSIM permet d'avoir Internet dès l'atterrissage.")]),
+    "Douala": dict(
+        intro="Douala est la capitale économique du Cameroun et son principal port. Akwa et Bonanjo sont les quartiers d'affaires où se trouvent la plupart des hôtels ; Bonapriso est plus calme et résidentiel. L'aéroport est proche du centre : 15 à 30 minutes en voiture selon la circulation.",
+        tips=["La circulation est très dense aux heures de pointe : choisissez un hôtel proche de vos rendez-vous.",
+              "Il pleut beaucoup, surtout de juillet à septembre : prévoyez du temps en plus pour vos trajets.",
+              "Beaucoup d'hôtels proposent le transfert depuis l'aéroport : réservez-le à l'avance pour une arrivée de nuit."],
+        faq=[("Où loger à Douala ?", "Akwa et Bonanjo pour les affaires et le côté pratique ; Bonapriso pour un quartier résidentiel plus calme."),
+             ("À quelle distance est l'aéroport de Douala du centre ?", "À quelques kilomètres seulement : 15 à 30 minutes en voiture selon la circulation."),
+             ("Quelle est la meilleure période pour aller à Douala ?", "De décembre à février, c'est la période la plus sèche. La saison des pluies est longue et forte, surtout de juillet à septembre."),
+             ("Trouve-t-on des appartements à louer à Douala ?", "Oui : appartements meublés et résidences sont courants à Bonapriso, Akwa et Bonamoussadi, et souvent plus avantageux pour les longs séjours.")],
+        more=[("Les quartiers en bref", "Akwa : commerces, restaurants et beaucoup d'hôtels de milieu de gamme. Bonanjo : quartier administratif et d'affaires, près du port et du fleuve. Bonapriso : résidentiel et plus calme, avec hôtels haut de gamme et appartements."),
+              ("Se déplacer", "Les embouteillages sont fréquents aux heures de pointe : le bon quartier fait gagner des heures. Les taxis sont bon marché mais partagés ; pour une première visite, demandez à l'hôtel de réserver une voiture."),
+              ("Arriver de nuit", "Réservez le transfert depuis l'aéroport à l'avance et donnez l'adresse de l'hôtel à un proche. L'aéroport est proche du centre : un hôtel central convient même pour une arrivée tardive."),
+              ("Argent et connexion", "La monnaie est le franc CFA (XAF). Le mobile money est très utilisé ; une eSIM permet d'avoir Internet dès l'atterrissage.")]),
+}
+
+
 def hotel_slug(h):
     return f"hotel-pas-cher-{slug(h[0])}"
 
@@ -553,6 +585,11 @@ def hotel_page(h):
         (f"Comment trouver un hôtel pas cher à {city} ?", "Comparez plusieurs sites pour les mêmes dates, triez par prix, choisissez l'annulation gratuite et réservez tôt pour les périodes de fêtes. Regardez aussi les appartements, souvent avantageux à partir de 3 nuits."),
         ("Faut-il réserver avec annulation gratuite ?", "Oui, surtout si vos billets d'avion ne sont pas encore pris : vous pourrez rebasculer sur une meilleure offre si le prix baisse."),
     ]
+    hfr = HOTELS_FR.get(city)
+    if hfr:
+        faq = hfr["faq"] + faq
+    savoir = (f'<section class="trajet"><h2>Séjourner à {E(city)} : ce qu\'il faut savoir</h2><p>{E(hfr["intro"])}</p><ul class="plain">'
+              + "".join(f"<li>{E(x)}</li>" for x in hfr["tips"]) + "</ul>" + "".join(f"<h3>{E(t)}</h3><p>{E(x)}</p>" for t, x in hfr["more"]) + "</section>") if hfr else ""
     ld = '<script type="application/ld+json">' + __import__("json").dumps({
         "@context": "https://schema.org", "@type": "FAQPage",
         "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]
@@ -563,7 +600,7 @@ def hotel_page(h):
   <div class="cta-row"><a class="btn" href="{E(app)}">Comparer les prix des hôtels</a>{f'<a class="btn ghost" href="/{route_slug(flights[0])}/">Vols vers {E(city)}</a>' if flights else ''}{build_i18n.fav_btn("fr", s, f"Hôtels à {city}", country, "hotel")}</div>"""
     areas_html = "".join(f"<div><dt>{E(a)}</dt><dd>{E(b[0].upper() + b[1:])}</dd></div>" for a, b in areas)
     body = f"""<section><h2>Où dormir à {E(city)}</h2><dl class="facts">{areas_html}</dl></section>
-{build_i18n.hotel_map("fr", city, f"{build_i18n.city(city, 'en')}, {build_i18n.tr(build_i18n.TR.COUNTRIES, country, 'en')}")}
+{build_i18n.hotel_map("fr", city, f"{build_i18n.city(city, 'en')}, {build_i18n.tr(build_i18n.TR.COUNTRIES, country, 'en')}")}{savoir}
 <section><h2>Notre conseil</h2><p>{E(tip)}</p></section>
 <section><h2>Comment payer moins cher</h2>
 <ol class="steps">
