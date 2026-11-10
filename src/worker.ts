@@ -31,6 +31,7 @@ import * as barometre from "./barometre"
 import * as indice from "./indice"
 import * as accueil from "./accueil"
 import * as saisir from "./saisir"
+import * as bonsplans from "./bonsplans"
 import * as diffusion from "./diffusion"
 import * as compagnie from "./compagnie"
 import { sendDigest, sendNewsletter } from "./digest"
@@ -50,7 +51,14 @@ export default {
       if (!handler) return json({ error: "Méthode non autorisée" }, { status: 405 })
       return handler(c)
     }
-    if (path === "/barometre-prix/" || path === "/barometre-prix") return barometre.onRequest(c)
+    // Bons plans par ville de départ et par mois (src/bonsplans.ts) : pages écrites par le serveur à partir des relevés
+    if (/^\/barometre-prix\/(depuis|mois)(\/|$)/.test(path) || path === "/barometre-prix/plan.xml") return bonsplans.onRequest(c)
+    if (path === "/barometre-prix/" || path === "/barometre-prix") {
+      const r = await barometre.onRequest(c)
+      if (!r.ok || !(r.headers.get("content-type") || "").includes("text/html")) return r
+      const h = new Headers(r.headers); h.delete("content-length")
+      return new Response((await r.text()).replace("</main>", `<div class="wrap">${bonsplans.LIENS}</div></main>`), { status: r.status, headers: h })
+    }
     // Diffusion de l'indice (src/diffusion.ts) : flux RSS, widget, communiqué du mois
     if (path === "/barometre-prix/flux.xml") return diffusion.rss(c, "fr")
     if (path === "/en/price-index/feed.xml") return diffusion.rss(c, "en")
@@ -81,7 +89,8 @@ export default {
     // Archive du mois de l'indice des prix (src/indice.ts) : le relevé du jour remplace celui de la veille, puis le mois reste figé
     ctx.waitUntil(indice.archiveIndice(env).then((r) => console.log("indice archive", JSON.stringify(r))).catch((e) => console.log("indice archive erreur", String(e))))
     // IndexNow : pages modifiées depuis 2 jours signalées aux moteurs de recherche (src/indexnow.ts)
-    ctx.waitUntil(indexNow(env).then((r) => console.log("IndexNow", JSON.stringify(r))).catch((e) => console.log("IndexNow erreur", String(e))))
+    const cx: Ctx = { request: new Request("https://escale.live/__cron"), env, waitUntil: (p) => ctx.waitUntil(p), next: () => Promise.resolve(new Response(null, { status: 404 })) }
+    ctx.waitUntil(bonsplans.urls(cx).catch(() => [] as string[]).then((extra) => indexNow(env, Date.now(), extra)).then((r) => console.log("IndexNow", JSON.stringify(r))).catch((e) => console.log("IndexNow erreur", String(e))))
     // Lundi et jeudi : e-mail avec le message WhatsApp des bons plans, prêt à coller dans la chaîne (src/digest.ts)
     const day = new Date().getUTCDay()
     if (day === 1 || day === 4) ctx.waitUntil(sendDigest(env).then((r) => console.log("message WhatsApp", JSON.stringify(r))))

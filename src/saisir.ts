@@ -101,7 +101,7 @@ export async function page(ctx: Ctx, lang: Lang): Promise<Response> {
   const main = `<main>\n<div class="board"><div class="wrap">\n  <p class="eyebrow">${esc(t.eyebrow)}</p><h1>${esc(t.h1)}</h1><p class="hero-lead">${esc(t.desc)}</p>\n</div></div>\n<div class="wrap">\n` +
     `<section><div id="saisir" data-ssr="1">${renderList(d, lang)}</div></section>` +
     `<section><h2>${esc(t.how)}</h2><p>${esc(t.howTxt)}</p></section>` +
-    `<section><h2>${esc(t.more)}</h2><ul><li><a href="/barometre-prix/">${esc(t.baro)}</a></li><li><a href="${lang === "fr" ? "/indice-prix/" : "/en/price-index/"}">${esc(t.indice)}</a></li><li><a href="/${lang === "fr" ? "acheter-ou-attendre" : "en/buy-or-wait"}/">${esc(t.alert)}</a></li></ul></section>` +
+    `<section><h2>${esc(t.more)}</h2><ul><li><a href="/barometre-prix/">${esc(t.baro)}</a></li>${lang === "fr" ? `<li><a href="/barometre-prix/depuis/">Les bons plans par ville de départ</a></li><li><a href="/barometre-prix/mois/">Les bons plans mois par mois</a></li>` : ""}<li><a href="${lang === "fr" ? "/indice-prix/" : "/en/price-index/"}">${esc(t.indice)}</a></li><li><a href="/${lang === "fr" ? "acheter-ou-attendre" : "en/buy-or-wait"}/">${esc(t.alert)}</a></li></ul></section>` +
     `</div>\n</main>`
   let html = await base.text()
   html = html.slice(0, html.indexOf("<main>")) + main + html.slice(html.indexOf("</main>") + 7)

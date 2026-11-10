@@ -34,6 +34,20 @@ export async function readHistory(ctx: Ctx, from: string, to: string): Promise<P
   try { return ((await ctx.env.ESCALE.get(`hist:${from}-${to}`, "json")) as Point[]) || [] } catch { return [] }
 }
 
+// Prix par mois (mois:FROM-TO) : gardés une fois par jour pour les trajets suivis, pour les pages « bons plans par mois »
+// (src/bonsplans.ts). Écrit au relevé de la nuit, ou à la première visite du jour d'une page trajet.
+export type Saved = { d: string; rows: Month[] }
+export async function readMonths(env: any, from: string, to: string): Promise<Saved | null> {
+  if (!env?.ESCALE || !TRACKED.has(`${from}-${to}`)) return null
+  try { return (await env.ESCALE.get(`mois:${from}-${to}`, "json")) as Saved | null } catch { return null }
+}
+export async function saveMonths(env: any, from: string, to: string, rows: Month[], check = true) {
+  if (!env?.ESCALE || !rows.length || !TRACKED.has(`${from}-${to}`)) return
+  const today = new Date().toISOString().slice(0, 10)
+  if (check) { const cur = await readMonths(env, from, to); if (cur && cur.d === today) return }
+  await env.ESCALE.put(`mois:${from}-${to}`, JSON.stringify({ d: today, rows }), { expirationTtl: 14 * 86400 })
+}
+
 // Le mois le moins cher est gardé avec le prix : le baromètre lit tout dans KV, sans ouvrir le cache de chaque trajet
 async function recordHistory(ctx: Ctx, from: string, to: string, price: number, month: string) {
   if (!ctx.env.ESCALE || !TRACKED.has(`${from}-${to}`)) return
@@ -203,6 +217,7 @@ export async function routeMonths(ctx: Ctx, from: string, to: string): Promise<M
   })
   if (cache) ctx.waitUntil(cache.put(key, new Response(JSON.stringify(out), { headers: { "Content-Type": "application/json", "Cache-Control": `public, max-age=${CACHE_S}`, "X-At": String(Date.now()) } })))
   if (out.length) { const b = out.reduce((a, c) => (c.price < a.price ? c : a)); ctx.waitUntil(recordHistory(ctx, from, to, b.price, b.month).catch(() => {})) }
+  if (out.length) ctx.waitUntil(saveMonths(ctx.env, from, to, out, false).catch(() => {}))
   return out
 }
 
@@ -323,6 +338,8 @@ export const onRequest = async (ctx: Ctx) => {
     const rows = await Promise.race([job, new Promise<undefined>((ok) => setTimeout(() => ok(undefined), WAIT_MS))])
     if (rows === undefined) ctx.waitUntil(job) // trop lent : la page part sans les prix, le cache se remplit pour la visite suivante
     if (!rows || !rows.length) return new Response(html, { status: response.status, headers })
+    // Prix par mois du jour pour les pages « bons plans » (une écriture par trajet et par jour au plus)
+    ctx.waitUntil(saveMonths(env, route[1], route[2], rows).catch(() => {}))
     const [hist, age] = await Promise.all([readHistory(ctx, route[1], route[2]), priceAge(route[1], route[2])])
     return new Response(render(html, route[1], route[2], rows, hist, age), { status: response.status, headers })
   } catch {
