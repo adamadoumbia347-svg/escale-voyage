@@ -2,5 +2,8 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /admin/
+Disallow: /recherche/?
+Disallow: /?type=
+Disallow: /hotels-en-direct/?
 
 Sitemap: https://escale.live/sitemap.xml
