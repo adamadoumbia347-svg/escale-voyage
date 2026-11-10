@@ -54,7 +54,7 @@ export default {
     }
     // Bons plans par ville de départ et par mois (src/bonsplans.ts) : pages écrites par le serveur à partir des relevés
     if (/^\/barometre-prix\/actus(\/|$)/.test(path)) return actus.onRequest(c)
-    if (/^\/barometre-prix\/(depuis|mois)(\/|$)/.test(path) || path === "/barometre-prix/plan.xml") return bonsplans.onRequest(c)
+    if (bonsplans.ROUTE.test(path) || path === "/barometre-prix/plan.xml") return bonsplans.onRequest(c)
     if (path === "/barometre-prix/" || path === "/barometre-prix") {
       const r = await barometre.onRequest(c)
       if (!r.ok || !(r.headers.get("content-type") || "").includes("text/html")) return r

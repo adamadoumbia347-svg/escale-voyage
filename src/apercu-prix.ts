@@ -1,6 +1,7 @@
 import { Ctx, esc, pricesForDates } from "./_lib/common"
 import * as paye from "./paye"
 import * as partage from "./partage"
+import * as autresVilles from "./autres-villes"
 import { readPaid } from "./api/paye"
 // Pages trajets : les prix réels sont écrits directement dans la page, pour les visiteurs comme pour Google
 // (avant, ils n'apparaissaient qu'après le chargement, via route-prices.js, et les moteurs de recherche ne les voyaient pas).
@@ -333,7 +334,9 @@ export const onRequest = async (ctx: Ctx) => {
     const paid = paye.render(lang, route[1], route[2], paye.stats(await readPaid(env, route[1], route[2])))
     const at = html.indexOf("</section>", html.indexOf('id="route-prices"'))
     // puis « Envoyer ce prix à la famille » et l'inscription aux bons plans du lundi (src/partage.ts)
-    if (at > 0) html = html.slice(0, at + 10) + paid + partage.render(lang, route[1], route[2]) + html.slice(at + 10)
+    // « Depuis une autre ville » (src/autres-villes.ts) : jamais plus de 300 ms d'attente, sinon la page part sans ce bloc
+    const av = await Promise.race([autresVilles.render(ctx, lang, route[1], route[2]).catch(() => ""), new Promise<string>((ok) => setTimeout(() => ok(""), 300))])
+    if (at > 0) html = html.slice(0, at + 10) + paid + av + partage.render(lang, route[1], route[2]) + html.slice(at + 10)
     const job = routeMonths(ctx, route[1], route[2]).catch(() => null)
     const rows = await Promise.race([job, new Promise<undefined>((ok) => setTimeout(() => ok(undefined), WAIT_MS))])
     if (rows === undefined) ctx.waitUntil(job) // trop lent : la page part sans les prix, le cache se remplit pour la visite suivante
