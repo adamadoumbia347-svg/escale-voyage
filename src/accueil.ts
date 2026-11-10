@@ -8,8 +8,6 @@ import { ANIM } from "./accueil-anim"
 // Rien n'est demandé à Travelpayouts ici : la page reste rapide (jamais plus de 400 ms d'attente). Prix gardés 1 heure dans le cache de Cloudflare.
 // GET /api/connus?r=CDG-DSS,ORY-CMN : mêmes prix, pour le bloc « Vos trajets » (trajets consultés, gardés dans le navigateur).
 const CHIP = /<b class="pr" data-r="([A-Z]{3})-([A-Z]{3})"><\/b>/g
-const H1_FR = "Les billets pas chers <em>pour toutes les destinations</em></h1>"
-const H1_NEW = "Les billets pas chers <em>pour rentrer au pays</em></h1>"
 const CACHE_S = 3600
 const WAIT_MS = 400
 type Known = { price: number; d7: number | null }
@@ -64,8 +62,11 @@ const arrow = (d: number | null) => d === null || Math.abs(d) < 3 ? "" : d < 0 ?
 // « Offres du jour » au-dessus du titre : les trajets les plus en dessous de leur prix habituel (src/saisir.ts), un à la fois.
 // Les jours sans bonne affaire, les plus petits prix des trajets populaires prennent la place. Rien n'est affiché sans prix réel.
 type Offre = { label: string; price: number; diff: number | null; href: string }
-function offres(d: Deals | null, map: Record<string, Known>, html: string): string {
-  let list: Offre[] = (d?.items || []).slice().sort((a, b) => b.diff - a.diff).slice(0, 5)
+// Pays des aéroports de départ relevés chaque nuit : les offres au départ du pays du visiteur passent en premier
+const PAYS_DEPART: Record<string, string> = { CDG: "FR", ORY: "FR", LYS: "FR", MRS: "FR", BRU: "BE", LHR: "GB", MXP: "IT", FCO: "IT" }
+function offres(d: Deals | null, map: Record<string, Known>, html: string, pays = ""): string {
+  const ici = (r: { from: string }) => (pays && PAYS_DEPART[r.from] === pays ? 1 : 0)
+  let list: Offre[] = (d?.items || []).slice().sort((a, b) => ici(b) - ici(a) || b.diff - a.diff).slice(0, 5)
     .map((r) => ({ label: r.label, price: r.price, diff: r.diff, href: `/?type=vols&from=${r.from}&to=${r.to}` }))
   const deal = list.length > 0
   if (!deal) {
@@ -102,13 +103,10 @@ export const onRequest = async (ctx: Ctx) => {
     if (bn) out = out.replace('<section class="block" id="recent-block"', bn + '<section class="block" id="recent-block"')
     // Adresses de recherche (/?type=vols&from=…) : même page que l'accueil, pas à indexer (Search Console les listait par milliers
     // en « autre page avec balise canonique correcte »). La balise canonique vers / reste ; on ajoute noindex, follow.
-    // Titre de l'accueil en français : « Les billets pas chers pour rentrer au pays ». Les autres langues gardent leur titre traduit
-    // (data-en-html, site/i18n.js), et la fin du
-    // titre reste animée par site/hero-anim.js (« pour rentrer au pays » → « pour Abidjan » → « pour Dakar »…).
+    // Pays du visiteur (donné par Cloudflare, sans cookie) : ordre des villes du titre animé et des offres du jour
     const pays = String(((ctx.request as any).cf || {}).country || "")
-    out = out.replace(H1_FR, H1_NEW)
     // Offres du jour juste au-dessus du titre (à la place de l'étiquette « comparateur de la diaspora »)
-    out = out.replace(/<h1 data-en-html="Cheap flights/, () => offres(d, map, html) + '<h1 data-en-html="Cheap flights')
+    out = out.replace(/<h1 data-en-html="Cheap flights/, () => offres(d, map, html, pays) + '<h1 data-en-html="Cheap flights')
     // Animation du titre (destinations qui défilent, Afrique d'abord) : la version du serveur remplace le fichier site/hero-anim.js
     out = out.replace(/<script src="\/hero-anim\.js[^"]*" defer><\/script>/, () => `<script>window.ESCALE_PAYS=${JSON.stringify(/^[A-Z]{2}$/.test(pays) ? pays : "")};document.addEventListener("DOMContentLoaded",function(){${ANIM}});</script>`)
     // Message de saison (« Noël au pays… ») posé sur la photo : fond blanc et texte foncé, lisible quelle que soit la photo
