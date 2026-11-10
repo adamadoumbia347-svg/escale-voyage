@@ -110,10 +110,26 @@
           if (b.getAttribute("aria-pressed") === "true") return;
           Array.prototype.forEach.call(sw.children, function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
           fr.src = base + "&viewmode=" + v[0];
+          zoom(v[0] === "listview");
         });
         sw.appendChild(b);
       });
-      box.appendChild(sw); box.appendChild(fr); box.hidden = false;
+      // Téléphone, vue liste : les fiches Stay22 ont une largeur fixe (≈ 295 px) dans le cadre. On agrandit donc tout le cadre
+      // (comme un zoom) pour que la fiche occupe presque toute la largeur de l'écran : photos et textes plus grands.
+      var wrap = document.createElement("div"); wrap.className = "s22-wrap"; wrap.appendChild(fr);
+      var zoomOn = true;
+      var zoom = function (on) {
+        zoomOn = on;
+        var vw = document.documentElement.clientWidth;
+        if (!on || vw > 700 || vw < 345) { wrap.classList.remove("zoom"); fr.style.cssText = ""; return; }
+        wrap.classList.add("zoom");
+        var k = vw / 340, h = wrap.clientHeight || Math.round(window.innerHeight * 0.88);
+        fr.style.cssText = "width:366px;max-width:none;min-height:0;height:" + Math.round(h / k) + "px;margin:0 0 0 " + (-13 * k).toFixed(1) +
+          "px;transform:scale(" + k.toFixed(4) + ");transform-origin:0 0;border-radius:0";
+      };
+      box.appendChild(sw); box.appendChild(wrap); box.hidden = false;
+      zoom(true);
+      window.addEventListener("resize", function () { zoom(zoomOn); });
       // Partenaire Trip.com (lien rémunéré) pour les villes dont on connaît l'identifiant Trip.com :
       // au-dessus de la carte en Asie et à Dubaï (souvent moins cher là-bas), en dessous ailleurs.
       var TRIP = { abidjan: 3265, dakar: 856, casablanca: 809, marrakech: 1360, marrakesh: 1360, "le caire": 332, cairo: 332, "il cairo": 332, lagos: 783, accra: 1274,

@@ -422,6 +422,7 @@ span.rs-arr { opacity: .35; }
 @media (max-width: 700px) {
   .s22-frame { height: 560px; }
   .s22-frame.big { width: 100vw; max-width: none; margin-inline: calc(50% - 50vw); border-radius: 0; height: 88vh; height: 88svh; min-height: 560px; }
+  .s22-wrap.zoom { direction: ltr; overflow: hidden; width: 100vw; margin-inline: calc(50% - 50vw); height: 88vh; height: 88svh; min-height: 560px; }
   .hl-q #hl-live { min-height: calc(max(560px, 88vh) + 64px); min-height: calc(max(560px, 88svh) + 64px); }
 }
 
