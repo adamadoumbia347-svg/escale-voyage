@@ -72,7 +72,17 @@ T = {
 # Versions anglaise et arabe des départs du Maghreb (Search Console : beaucoup de recherches en anglais depuis la Tunisie et l'Algérie)
 EXTRA = {"tn": {"en": ("en/flights-from-tunisia", "Tunisia", "Tunisian dinars"), "ar": ("ar/flights-from-tunisia", "تونس", "الدينار التونسي")},
          "dz": {"en": ("en/flights-from-algeria", "Algeria", "Algerian dinars"), "ar": ("ar/flights-from-algeria", "الجزائر", "الدينار الجزائري")},
-         "ma": {"en": ("en/flights-from-morocco", "Morocco", "Moroccan dirhams"), "ar": ("ar/flights-from-morocco", "المغرب", "الدرهم المغربي")}}
+         "ma": {"en": ("en/flights-from-morocco", "Morocco", "Moroccan dirhams"), "ar": ("ar/flights-from-morocco", "المغرب", "الدرهم المغربي")},
+         # Pays francophones : version anglaise (Google teste Escale sur « cheap flights » dans les pays d'Afrique, Search Console 11/2026)
+         "ci": {"en": ("en/flights-from-ivory-coast", "Ivory Coast", "CFA franc")},
+         "sn": {"en": ("en/flights-from-senegal", "Senegal", "CFA franc")},
+         "ml": {"en": ("en/flights-from-mali", "Mali", "CFA franc")},
+         "cm": {"en": ("en/flights-from-cameroon", "Cameroon", "CFA franc")},
+         "gn": {"en": ("en/flights-from-guinea", "Guinea", "Guinean franc")},
+         "bf": {"en": ("en/flights-from-burkina-faso", "Burkina Faso", "CFA franc")},
+         "tg": {"en": ("en/flights-from-togo", "Togo", "CFA franc")},
+         "bj": {"en": ("en/flights-from-benin", "Benin", "CFA franc")},
+         "cd": {"en": ("en/flights-from-dr-congo", "DR Congo", "Congolese franc")}}
 T["ar"] = dict(
     title="رحلات طيران رخيصة من {pays} | Escale", h1="رحلات رخيصة <span>من {pays}</span>",
     desc="رحلات رخيصة من {villes} إلى {dests}: أسعار مباشرة مع ما يعادلها بـ{cur}.",
@@ -122,7 +132,13 @@ def build(site, ctx, route_paths):
             q = urllib.parse.urlencode({"type": "vols", "from": origins[0], **({"lang": lang} if lang != "fr" else {})})
             visa_href = ("/visa/" if lang == "fr" else "/en/visa/") + "?p=" + code.upper()
             tips = "".join(f"<li>{E(x.format(cur=curn))}</li>" for x in t["tips"])
-            others = " · ".join(f'<a href="/{c}/">{p[1]} {E(EN_NAME.get(c, p[0]) if lang == "en" else p[0])}</a>' for c, p in PAYS.items() if c != code)
+            # Autres pays : dans la langue de la page quand la version existe (sinon la page d'origine du pays)
+            def _autre(c, p):
+                if p[2] == lang or lang not in EXTRA.get(c, {}):
+                    return f'<a href="/{c}/">{p[1]} {E(EN_NAME.get(c, p[0]) if lang == "en" else p[0])}</a>'
+                v = EXTRA[c][lang]
+                return f'<a href="/{v[0]}/">{p[1]} {E(v[1])}</a>'
+            others = " · ".join(_autre(c, p) for c, p in PAYS.items() if c != code)
             tl = "fr" if lang == "fr" else "en"
             hero = (f'<p class="eyebrow">{flag} {E(pname)}</p><h1>{t["h1"].format(pays=E(pform))}</h1>'
                     f'<p class="hero-lead">{E(t["lead"].format(villes=villes, cur=curn))}</p>'
