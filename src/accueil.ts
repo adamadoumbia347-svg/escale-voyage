@@ -115,6 +115,8 @@ export const onRequest = async (ctx: Ctx) => {
     out = out.replace(/<script src="\/hero-anim\.js[^"]*" defer><\/script>/, () => `<script>window.ESCALE_PAYS=${JSON.stringify(/^[A-Z]{2}$/.test(pays) ? pays : "")};document.addEventListener("DOMContentLoaded",function(){${ANIM}});</script>`)
     // Message de saison (« Noël au pays… ») posé sur la photo : fond blanc et texte foncé, lisible quelle que soit la photo
     out = out.replace("</head>", `<style>.has-hero .band .hero-season a{background:#fff;color:#08303a;border-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;border-radius:16px;box-shadow:0 10px 30px -14px rgb(0 0 0/.5)}</style></head>`)
+    // Noms du site déclarés à Google : « Escale Live » est ce que les vidéos demandent de taper
+    out = out.replace('"alternateName":["Escale Comparateur","Escale Voyage"]', '"alternateName":["Escale Live","escale.live","Escale Comparateur","Escale Voyage"]')
     if (new URL(ctx.request.url).searchParams.has("type")) out = out.replace("<head>", '<head>\n<meta name="robots" content="noindex, follow">')
     return new Response(out, { status: response.status, headers })
   } catch {
