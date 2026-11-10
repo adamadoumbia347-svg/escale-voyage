@@ -912,6 +912,11 @@ def build_fetes(site, ctx):
                      f'<h2>{E(BD[0])}</h2><p class="small" data-tpl="{E(BD[1])}"></p><ul class="bd-list"></ul></section>')
             body += f'<section><h2>{E(u["book_h"])}</h2><ul>' + "".join(f"<li>{E(x)}</li>" for x in d["book"]) + "</ul></section>"
             body += f'<section><h2>{E(u["alert_h"])}</h2><p>{E(u["alert_p"])}</p></section>'
+            # Questions fréquentes de la fête (facultatif, scripts/fetes.py) : affichées sur la page et décrites pour les moteurs (FAQPage)
+            faq = d.get("faq") or []
+            if faq:
+                body += (f'<section><h2>{E({"fr": "Questions fréquentes", "en": "Frequently asked questions"}.get(lang, "FAQ"))}</h2>' +
+                         "".join(f"<h3>{E(q)}</h3><p>{E(a)}</p>" for q, a in faq) + "</section>")
             if f["key"] == "ete" and lang == "fr":
                 import ete as ETE
                 body += ('<section><h2>Par destination</h2><p>Prix par période, aéroport de départ, climat et conseils pour chaque pays :</p><ul class="route-links">' +
@@ -923,6 +928,9 @@ def build_fetes(site, ctx):
             ld = '<script type="application/ld+json">' + json.dumps({
                 "@context": "https://schema.org", "@type": "Article", "headline": d["title"], "description": d["desc"],
                 "inLanguage": lang, "author": {"@type": "Organization", "name": "Escale"}}, ensure_ascii=False) + "</script>"
+            if faq:
+                ld += '<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+                    {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]}, ensure_ascii=False) + "</script>"
             urls.append(write(site, d["slug"], lang, d["title"] + " | Escale", d["desc"], hero, body, ld, paths, ctx))
     ipaths = dict(F.INDEX_SLUG)
     for lang in ALL:
