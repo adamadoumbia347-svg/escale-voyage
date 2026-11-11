@@ -1,4 +1,4 @@
-import { Ctx, esc } from "./_lib/common"
+import { Ctx, esc, keysOf } from "./_lib/common"
 import { rows } from "./barometre"
 import { ARCH, Snap, Summary, compute } from "./indice"
 import { deals } from "./saisir"
@@ -37,8 +37,8 @@ const cdata = (s: string) => `<![CDATA[${s.replace(/]]>/g, "]]]]><![CDATA[>")}]]
 async function archives(env: any): Promise<[string, Snap][]> {
   if (!env?.ESCALE) return []
   try {
-    const { keys } = await env.ESCALE.list({ prefix: ARCH, limit: 60 })
-    const months = keys.map((k: any) => k.name.slice(ARCH.length)).filter((m: string) => /^\d{4}-\d{2}$/.test(m)).sort().reverse().slice(0, 12)
+    const keys = await keysOf(env, ARCH)
+    const months = keys.map((k) => k.slice(ARCH.length)).filter((m: string) => /^\d{4}-\d{2}$/.test(m)).sort().reverse().slice(0, 12)
     const snaps = await Promise.all(months.map((m: string) => env.ESCALE.get(ARCH + m, "json").catch(() => null)))
     return months.map((m: string, i: number) => [m, snaps[i]] as [string, Snap]).filter((x: [string, Snap]) => x[1])
   } catch { return [] }

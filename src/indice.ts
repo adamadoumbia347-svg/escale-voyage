@@ -1,4 +1,4 @@
-import { Ctx, esc } from "./_lib/common"
+import { Ctx, esc, keysOf } from "./_lib/common"
 import { Row, rows } from "./barometre"
 import { shareBlock } from "./diffusion"
 // Indice Escale des prix (/indice-prix/ en français, /en/price-index/ en anglais) : à partir des prix relevés chaque jour pour le
@@ -166,8 +166,8 @@ const monthName = (ym: string, lang: Lang) => { const [y, m] = ym.split("-").map
 async function archiveList(env: any, lang: Lang, skip = ""): Promise<string> {
   if (!env?.ESCALE) return ""
   try {
-    const { keys } = await env.ESCALE.list({ prefix: ARCH, limit: 60 })
-    const months = keys.map((k: any) => k.name.slice(ARCH.length)).filter((m: string) => /^\d{4}-\d{2}$/.test(m) && m !== skip).sort().reverse()
+    const keys = await keysOf(env, ARCH)
+    const months = keys.map((k) => k.slice(ARCH.length)).filter((m: string) => /^\d{4}-\d{2}$/.test(m) && m !== skip).sort().reverse()
     if (!months.length) return ""
     return `<h2>${esc(A[lang].archives)}</h2><ul class="ix-list ix-arch">${months.map((m: string) => `<li><a href="${A[lang].base}${m}/">${esc(monthName(m, lang))}</a></li>`).join("")}</ul>`
   } catch { return "" }

@@ -1,4 +1,4 @@
-import { Ctx, esc } from "./_lib/common"
+import { Ctx, esc, keysOf } from "./_lib/common"
 import { Paid } from "./paye"
 import { ROUTES } from "./barometre"
 // Pages compagnies (/compagnie/air-france/, /en/airline/air-france/) : le bloc « ce que les voyageurs ont payé » est rempli
@@ -13,13 +13,7 @@ const LABEL: Record<string, string> = Object.fromEntries(ROUTES.map(([f, t, l]) 
 async function aggregate(env: any): Promise<Agg> {
   const out: Record<string, { all: number[]; routes: Record<string, number[]> }> = {}
   if (!env?.ESCALE) return {}
-  let cursor: string | undefined
-  const keys: string[] = []
-  do {
-    const page: any = await env.ESCALE.list({ prefix: "paye:", cursor, limit: 1000 })
-    for (const k of page.keys) keys.push(k.name)
-    cursor = page.list_complete ? undefined : page.cursor
-  } while (cursor && keys.length < 3000)
+  const keys = await keysOf(env, "paye:")
   const lists = await Promise.all(keys.map((k) => env.ESCALE.get(k, "json").catch(() => null) as Promise<Paid[] | null>))
   keys.forEach((k, i) => {
     const route = k.slice(5)

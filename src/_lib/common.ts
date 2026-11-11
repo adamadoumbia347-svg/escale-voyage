@@ -67,3 +67,26 @@ export function sameKey(a: string, b: string) {
   for (let i = 0; i < a.length; i++) r |= a.charCodeAt(i) ^ b.charCodeAt(i)
   return r === 0
 }
+
+// Noms des clés d'un préfixe, gardés 6 heures dans une seule clé KV (idx:<préfixe>). L'opération « list » de KV est limitée à
+// 1 000 par jour sur la formule gratuite : sans cette copie, chaque centre de données en refaisait une toutes les 10 minutes.
+// En cas de refus (quota atteint), on rend la dernière copie connue plutôt qu'une erreur.
+export async function keysOf(env: any, prefix: string, waitUntil?: (p: Promise<any>) => void, max = 3000): Promise<string[]> {
+  const kv = env?.ESCALE
+  if (!kv) return []
+  const ik = "idx:" + prefix
+  const cur = (await kv.get(ik, "json").catch(() => null)) as { ts: number; keys: string[] } | null
+  if (cur && Array.isArray(cur.keys) && Date.now() - cur.ts < 6 * 3600e3) return cur.keys
+  try {
+    const keys: string[] = []
+    let cursor: string | undefined
+    do {
+      const page: any = await kv.list({ prefix, cursor, limit: 1000 })
+      for (const k of page.keys) keys.push(k.name)
+      cursor = page.list_complete ? undefined : page.cursor
+    } while (cursor && keys.length < max)
+    const p = kv.put(ik, JSON.stringify({ ts: Date.now(), keys })).catch(() => {})
+    if (waitUntil) waitUntil(p); else await p
+    return keys
+  } catch { return cur?.keys || [] }
+}

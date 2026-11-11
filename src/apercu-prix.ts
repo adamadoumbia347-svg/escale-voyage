@@ -219,7 +219,7 @@ export async function routeMonths(ctx: Ctx, from: string, to: string): Promise<M
   })
   if (cache) ctx.waitUntil(cache.put(key, new Response(JSON.stringify(out), { headers: { "Content-Type": "application/json", "Cache-Control": `public, max-age=${CACHE_S}`, "X-At": String(Date.now()) } })))
   if (out.length) { const b = out.reduce((a, c) => (c.price < a.price ? c : a)); ctx.waitUntil(recordHistory(ctx, from, to, b.price, b.month).catch(() => {})) }
-  if (out.length) ctx.waitUntil(saveMonths(ctx.env, from, to, out, false).catch(() => {}))
+  if (out.length) ctx.waitUntil(saveMonths(ctx.env, from, to, out).catch(() => {})) // une écriture par jour au plus (KV gratuit : 1 000 écritures par jour)
   return out
 }
 

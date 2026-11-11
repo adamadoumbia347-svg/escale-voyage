@@ -1,4 +1,4 @@
-import { Ctx, esc } from "./_lib/common"
+import { Ctx, esc, keysOf } from "./_lib/common"
 import { shell, AUTRES } from "./bonsplans"
 // « Les actus de la semaine » : articles publiés sans remise en ligne des fichiers du site.
 //   /barometre-prix/actus/          → liste des articles, du plus récent au plus ancien
@@ -16,8 +16,8 @@ export async function liste(ctx: Ctx): Promise<Actu[]> {
   const cache = (globalThis as any).caches?.default
   const key = new Request("https://escale.live/__actus/v1/" + Math.floor(Date.now() / 600000)) // gardé 10 minutes
   if (cache) { const hit = await cache.match(key); if (hit) return hit.json() }
-  const page: any = await kv.list({ prefix: "actu:", limit: 200 })
-  const all = (await Promise.all(page.keys.map((k: any) => kv.get(k.name, "json").catch(() => null)))).filter((a: any) => a && SLUG.test(a.slug || "") && a.title && a.body && /^\d{4}-\d{2}-\d{2}$/.test(a.date || "")) as Actu[]
+  const names = (await keysOf(ctx.env, "actu:", (p) => ctx.waitUntil(p), 200)).slice(0, 200)
+  const all = (await Promise.all(names.map((k) => kv.get(k, "json").catch(() => null)))).filter((a: any) => a && SLUG.test(a.slug || "") && a.title && a.body && /^\d{4}-\d{2}-\d{2}$/.test(a.date || "")) as Actu[]
   all.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : a.slug.localeCompare(b.slug)))
   if (cache && all.length) ctx.waitUntil(cache.put(key, new Response(JSON.stringify(all), { headers: { "Cache-Control": "public, max-age=600" } })))
   return all
