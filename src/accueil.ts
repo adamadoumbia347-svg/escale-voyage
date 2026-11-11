@@ -1,4 +1,5 @@
 import { lot, histDe } from "./lot"
+import { ROUTES as BARO } from "./barometre"
 import { Ctx, json, esc, IATA } from "./_lib/common"
 import { Month, Point, cacheKey, readHistory } from "./apercu-prix"
 import { banner, deals, Deals } from "./saisir"
@@ -120,6 +121,19 @@ export const onRequest = async (ctx: Ctx) => {
     // Pays du visiteur (donné par Cloudflare, sans cookie) : ordre des villes du titre animé et des offres du jour
     const pays = String(((ctx.request as any).cf || {}).country || "")
     // Offres du jour juste au-dessus du titre (à la place de l'étiquette « comparateur de la diaspora »)
+    // Trajets populaires sous le moteur : pour un visiteur d'un pays où Escale suit des départs (hors France, déjà la liste de départ),
+    // les trajets de son pays avec leur prix du jour remplacent ceux de Paris (demande de Dobam, 11 novembre 2026)
+    if (PAYS_SUIVIS.has(pays) && pays !== "FR") {
+      // Villes de départ du pays à tour de rôle (Milan, Rome, Milan, Rome…) pour qu'aucune ne remplisse la liste à elle seule
+      const parVille: Record<string, typeof BARO> = {}
+      for (const r of BARO) if (PAYS_DEPART[r[0]] === pays) (parVille[r[0]] ||= []).push(r)
+      const files = Object.values(parVille), loc: typeof BARO = []
+      for (let i = 0; loc.length < 12 && files.some((f) => f[i]); i++) for (const f of files) if (f[i] && loc.length < 12) loc.push(f[i])
+      const prix = await Promise.race([knownPrices(ctx, loc.map((r) => [r[0], r[1]] as [string, string])).catch(() => ({} as Record<string, Known>)), new Promise<Record<string, Known>>((ok) => setTimeout(() => ok({}), WAIT_MS))])
+      const chips = loc.filter((r) => prix[`${r[0]}-${r[1]}`]).map((r) => { const k = prix[`${r[0]}-${r[1]}`]
+        return `<a class="pop-chip" href="/recherche/" data-wl="${r[0]}-${r[1]}"><span>${esc(r[2])}</span><b class="pr" data-r="${r[0]}-${r[1]}">${esc(money(k.price))}${arrow(k.d7)}</b></a>` })
+      if (chips.length >= 2) out = out.replace(/(<div class="pop-row" id="pop-hero-row">)[\s\S]*?(<\/div>)/, (_m, a, z) => a + chips.join("") + z)
+    }
     let petits: Offre[] = []
     if (PAYS_SUIVIS.has(pays) && !(d?.items || []).some((r) => PAYS_DEPART[r.from] === pays)) {
       const snap = await Promise.race([snapshotLeger(ctx).catch(() => null), new Promise<null>((ok) => setTimeout(() => ok(null), WAIT_MS))])

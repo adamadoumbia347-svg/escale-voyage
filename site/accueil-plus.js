@@ -48,6 +48,10 @@
     if (!it.length) return;
     var from = (window.ESCALE_FROM && window.ESCALE_FROM.code) || "CDG";
     var mine = it.filter(function (x) { return same(x.from, from); });
+    // Pays du visiteur (window.ESCALE_PAYS, donné par le serveur) : s'il fait partie des pays suivis, on ne montre que ses offres
+    var PD = { CDG: "FR", ORY: "FR", LYS: "FR", MRS: "FR", BRU: "BE", LHR: "GB", MXP: "IT", FCO: "IT", GVA: "CH", MAD: "ES", BCN: "ES", FRA: "DE", LIS: "PT", YUL: "CA" };
+    var pays = window.ESCALE_PAYS || "", suivi = Object.keys(PD).some(function (k) { return PD[k] === pays; });
+    if (!mine.length && suivi) { mine = it.filter(function (x) { return PD[x.from] === pays; }); if (!mine.length) return; }
     var x = (mine.length ? mine : it).sort(function (a, b) { return b.diff - a.diff; })[0];
     names().then(function (n) {
       var a = lang === "fr" ? x.label.split(" → ")[0] : (n[x.from] || x.label.split(" → ")[0]);
