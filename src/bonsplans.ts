@@ -314,6 +314,9 @@ export const onRequest = async (ctx: Ctx): Promise<Response> => {
   // Adresse sans barre finale : renvoi vers l'adresse officielle
   if (!path.endsWith("/")) return Response.redirect(new URL(path + "/", ctx.request.url).toString(), 301)
   const s = await snapshot(ctx), { l } = hit
+  // Relevés illisibles pour l'instant (quota de lectures atteint, panne) : « réessayez plus tard » plutôt que « page introuvable »,
+  // pour que Google ne retire pas ces pages de son index
+  if (!s.rows.length) return new Response("Relevés momentanément indisponibles. Réessayez dans une heure.", { status: 503, headers: { "Retry-After": "3600", "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" } })
   const p = hit.ville ? (hit.b ? null : hit.a ? pageDepuis(s, l, hit.a) : pageListeVilles(s, l)) : hit.b ? pageDestMois(s, l, hit.a!, hit.b) : hit.a ? pageMois(s, l, hit.a) : pageListeMois(s, l)
   return p ? shell(ctx, p) : ctx.next()
 }
