@@ -1,3 +1,4 @@
+import { lot, histDe } from "./lot"
 import { Ctx, json, esc, IATA } from "./_lib/common"
 import { Month, Point, cacheKey, readHistory } from "./apercu-prix"
 import { banner, deals, Deals } from "./saisir"
@@ -32,10 +33,11 @@ export async function knownPrices(ctx: Ctx, pairs: [string, string][]) {
   const cache = (globalThis as any).caches?.default
   const since = iso(3)
   const out: Record<string, Known> = {}
+  const L = await lot(ctx).catch(() => undefined) // trajets suivis : une seule lecture KV (src/lot.ts)
   await Promise.all(pairs.map(async ([from, to]) => {
     const c = cache ? await cache.match(cacheKey(from, to)) : null
     const months: Month[] = c ? await c.json() : []
-    const hist: Point[] = await readHistory(ctx, from, to)
+    const hist: Point[] = await histDe(ctx, from, to, L)
     const last = hist[hist.length - 1]
     const price = months.length ? Math.min(...months.map((m) => m.price)) : last && last[0] >= since ? last[1] : null
     if (!price) return

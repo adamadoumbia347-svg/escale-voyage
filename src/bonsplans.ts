@@ -1,3 +1,4 @@
+import { lot } from "./lot"
 import { Ctx, Env, esc } from "./_lib/common"
 import { ROUTES } from "./barometre"
 import { Month, Point, readHistory, readMonths, verdict } from "./apercu-prix"
@@ -30,8 +31,9 @@ function weekAgo(hist: Point[]) {
 async function compute(env: Env): Promise<Snap> {
   const ctx: Ctx = { request: new Request("https://escale.live/__bonsplans"), env, waitUntil: () => {}, next: () => Promise.resolve(new Response(null, { status: 404 })) }
   const since = iso(2), today = iso(0)
+  const L = await lot(ctx) // une seule lecture KV pour tous les trajets (src/lot.ts)
   const rows = (await Promise.all(ROUTES.map(async ([from, to, lab, path]) => {
-    const [hist, saved] = await Promise.all([readHistory(ctx, from, to), readMonths(env, from, to)])
+    const hist = L.h[`${from}-${to}`] || [], saved = L.m[`${from}-${to}`] || null
     const last = hist[hist.length - 1]
     if (!last || last[0] < since) return null
     const v = verdict(hist, last[1]), w = weekAgo(hist), [a, b] = lab.split(" → ")

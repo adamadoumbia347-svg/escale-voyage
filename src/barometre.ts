@@ -1,3 +1,4 @@
+import { lot } from "./lot"
 import { Ctx, esc } from "./_lib/common"
 import { Month, Point, cacheKey, readHistory, routeMonths } from "./apercu-prix"
 // Baromètre des prix (/barometre-prix/) : pour les grands trajets de la diaspora, le prix aller-retour le plus bas des
@@ -54,10 +55,11 @@ export type Row = { label: string; path: string; from: string; to: string; price
 export async function rows(ctx: Ctx): Promise<Row[]> {
   const cache = (globalThis as any).caches?.default
   let budget = 15
+  const L = await lot(ctx) // une seule lecture KV pour tous les trajets (src/lot.ts)
   const out = await Promise.all(ROUTES.map(async ([from, to, label, path]) => {
     // D'abord l'historique (KV, relevé du jour ou de la veille) ; le cache du trajet seulement s'il n'y a rien de récent,
     // et pour 15 trajets au plus : une visite Cloudflare (offre gratuite) est limitée à 50 sous-requêtes
-    const hist = await readHistory(ctx, from, to)
+    const hist = L.h[`${from}-${to}`] || []
     const last = hist.length ? hist[hist.length - 1] : null
     let price: number | null = null, month: Month | null = null
     if (last && last[0] >= iso(1)) { price = last[1]; month = last[2] ? ({ month: last[2] } as Month) : null }

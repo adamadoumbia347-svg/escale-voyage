@@ -1,3 +1,4 @@
+import { lot } from "./lot"
 import { Ctx, Env, esc } from "./_lib/common"
 import { ROUTES } from "./barometre"
 import { Point, readHistory, verdict } from "./apercu-prix"
@@ -23,8 +24,9 @@ async function compute(env: Env): Promise<Deals> {
   const ctx: Ctx = { request: new Request("https://escale.live/__saisir"), env, waitUntil: () => {}, next: () => Promise.resolve(new Response(null, { status: 404 })) }
   const since = iso(1)
   let total = 0
+  const L = await lot(ctx) // une seule lecture KV pour tous les trajets (src/lot.ts)
   const items = (await Promise.all(ROUTES.map(async ([from, to, lab, path]) => {
-    const hist = await readHistory(ctx, from, to)
+    const hist = L.h[`${from}-${to}`] || []
     const last = hist[hist.length - 1]
     if (!last || last[0] < since) return null
     total++

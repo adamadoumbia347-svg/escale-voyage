@@ -36,6 +36,7 @@ import * as actus from "./actus"
 import * as diffusion from "./diffusion"
 import * as compagnie from "./compagnie"
 import { sendDigest, sendNewsletter } from "./digest"
+import { buildLot } from "./lot"
 import { indexNow } from "./indexnow"
 
 const API: Record<string, any> = { push, prix, explore, calendar, deals, geo, alert, form, admin, cron, populaires, clic, fx, grille, weekends, verdict: verdictApi, connus: accueil, compteur, paye, aeroport: aeroApi }
@@ -87,6 +88,8 @@ export default {
       ctx.waitUntil(releve(env).then((r) => console.log("relevé des prix", JSON.stringify(r))))
       return
     }
+    // Copie groupée des relevés (src/lot.ts) : refaite une fois par jour, juste après le relevé de la nuit
+    ctx.waitUntil(buildLot(env).then((l) => console.log("copie groupée des relevés", Object.keys(l.h).length)).catch((e) => console.log("copie groupée erreur", String(e))))
     ctx.waitUntil(cron.checkAlerts(env).then((r) => console.log("alertes", JSON.stringify(r))))
     // Archive du mois de l'indice des prix (src/indice.ts) : le relevé du jour remplace celui de la veille, puis le mois reste figé
     ctx.waitUntil(indice.archiveIndice(env).then((r) => console.log("indice archive", JSON.stringify(r))).catch((e) => console.log("indice archive erreur", String(e))))
