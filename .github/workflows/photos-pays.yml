@@ -1,0 +1,41 @@
+# Photos libres pour les vidéos « Un pays en 40 secondes » (Wikimedia Commons, licences libres).
+# Se lance quand la demande video/demandes/photos-pays.json change sur main, ou à la main.
+# Les photos ne vont pas dans main (elles l'alourdiraient) : elles sont rangées dans la branche « photos-pays »,
+# remplacée à chaque fois (une seule série à la fois).
+name: Photos des vidéos pays
+on:
+  push:
+    branches: [main]
+    paths: ["video/demandes/photos-pays.json"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: photos-pays
+  cancel-in-progress: true
+
+jobs:
+  photos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Chercher et télécharger les photos
+        run: python3 scripts/photos_pays.py
+      - name: Ranger dans la branche photos-pays
+        run: |
+          mkdir -p /tmp/sortie && cp -r photos-pays/. /tmp/sortie/ && cp video/demandes/photos-pays.json /tmp/sortie/demande.json
+          git config user.name "escale-photos"
+          git config user.email "escale-photos@users.noreply.github.com"
+          git checkout --orphan photos-pays-nouveau
+          git rm -rf --cached . > /dev/null
+          git clean -fdx > /dev/null
+          cp -r /tmp/sortie/. .
+          git add -A
+          git commit -q -m "Photos pays (Wikimedia Commons, licences libres)"
+          git push -f origin photos-pays-nouveau:photos-pays

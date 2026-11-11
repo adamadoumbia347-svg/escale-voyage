@@ -1,0 +1,47 @@
+# Publication automatique du site sur Cloudflare à chaque envoi sur main qui touche le site ou le serveur.
+# Il faut deux secrets dans GitHub (Settings → Secrets and variables → Actions) : CLOUDFLARE_API_TOKEN et CLOUDFLARE_ACCOUNT_ID.
+# Tant qu'ils ne sont pas définis, cette tâche ne fait rien (elle n'échoue pas) et la publication reste manuelle.
+name: Publication sur Cloudflare
+on:
+  push:
+    branches: [main]
+    paths: ["site/**", "src/**", "wrangler.jsonc", "package.json"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publication
+  cancel-in-progress: false
+
+jobs:
+  publier:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - name: Secrets présents ?
+        id: pret
+        run: |
+          if [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$CLOUDFLARE_ACCOUNT_ID" ]; then echo "ok=oui" >> "$GITHUB_OUTPUT"
+          else echo "Secrets Cloudflare absents : rien n'est publié." | tee -a "$GITHUB_STEP_SUMMARY"; fi
+      - uses: actions/checkout@v4
+        if: steps.pret.outputs.ok == 'oui'
+      - uses: actions/setup-node@v4
+        if: steps.pret.outputs.ok == 'oui'
+        with:
+          node-version: "22"
+      - name: Publier
+        if: steps.pret.outputs.ok == 'oui'
+        run: npx --yes wrangler@4 deploy
+      - name: Vérifier le site après publication
+        if: steps.pret.outputs.ok == 'oui'
+        run: |
+          sleep 20
+          for P in / /vol-paris-abidjan/ /barometre-prix/ /hotels-en-direct/; do
+            C=$(curl -s -o /dev/null -m 40 -w '%{http_code}' "https://escale.live$P"); echo "$C $P" | tee -a "$GITHUB_STEP_SUMMARY"
+            [ "$C" = "200" ] || exit 1
+          done

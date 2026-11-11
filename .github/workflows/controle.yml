@@ -1,0 +1,37 @@
+# Contrôle quotidien du site en ligne : pages principales, prix affichés, offres du jour.
+# Chaque matin (8 h 23, heure d'Italie en hiver) et à la demande. En cas d'échec, GitHub prévient le propriétaire du dépôt par e-mail.
+name: Contrôle du site
+on:
+  schedule:
+    - cron: "23 7 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  SITE: https://escale.live
+
+jobs:
+  controle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Pages et prix
+        run: |
+          ko=0
+          note() { echo "$1" | tee -a "$GITHUB_STEP_SUMMARY"; }
+          note "### Contrôle du $(date -u '+%d/%m/%Y %H:%M') UTC"
+          for P in / /vol-paris-abidjan/ /it/voli-milano-tunisi/ /vols-pour-dakar/ /en/flights-paris-abidjan/ /recherche/ /hotels-en-direct/ /barometre-prix/ /barometre-prix/a-saisir/ /barometre-prix/depuis/paris/ /barometre-prix/mois/ /barometre-prix/actus/ /indice-prix/ /guides/bagages-avion/ /sitemap.xml /robots.txt; do
+            C=$(curl -s -o /dev/null -m 40 -w '%{http_code}' "$SITE$P")
+            if [ "$C" = "200" ]; then note "- OK $P"; else note "- **ÉCHEC $P : code $C**"; ko=1; fi
+          done
+          H=$(curl -s -m 40 "$SITE/")
+          N=$(echo "$H" | grep -o '<b class="pr" data-r="[A-Z-]*">[^<]' | wc -l)
+          if [ "$N" -ge 4 ]; then note "- OK accueil : $N prix de trajets populaires"; else note "- **ÉCHEC accueil : seulement $N prix de trajets populaires**"; ko=1; fi
+          if echo "$H" | grep -q 'class="hero-offres"'; then note "- OK accueil : bandeau des offres du jour présent"; else note "- **ÉCHEC accueil : bandeau des offres du jour absent**"; ko=1; fi
+          T=$(curl -s -m 40 "$SITE/vol-paris-abidjan/" | grep -o '<title>[^<]*')
+          if echo "$T" | grep -q '€'; then note "- OK page trajet : prix dans le titre"; else note "- **ÉCHEC page trajet : pas de prix dans le titre ($T)**"; ko=1; fi
+          B=$(curl -s -m 40 "$SITE/barometre-prix/" | grep -c 'class="bt-lead"')
+          if [ "$B" -ge 1 ]; then note "- OK baromètre : tableau rempli"; else note "- **ÉCHEC baromètre : tableau vide**"; ko=1; fi
+          [ "$ko" = "0" ] && note "" && note "Tout est bon." || { note ""; note "Au moins un contrôle a échoué."; exit 1; }
