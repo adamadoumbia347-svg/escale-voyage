@@ -44,7 +44,7 @@ const REGIONS: string[][] = [
 ]
 const ORIG: string[][] = [["CDG", "ORY", "LYS", "MRS", "BRU"], ["LHR"], ["MXP", "FCO"]]
 // Noms des villes en anglais (les libellés du baromètre sont en français)
-const EN: Record<string, string> = { Londres: "London", "Le Caire": "Cairo", "Addis-Abeba": "Addis Ababa", Alger: "Algiers", Bruxelles: "Brussels", Maurice: "Mauritius",
+const EN: Record<string, string> = { Genève: "Geneva", Francfort: "Frankfurt", Lisbonne: "Lisbon", Barcelone: "Barcelona", Montréal: "Montreal", Londres: "London", "Le Caire": "Cairo", "Addis-Abeba": "Addis Ababa", Alger: "Algiers", Bruxelles: "Brussels", Maurice: "Mauritius",
   "N’Djamena": "N'Djamena", Yaoundé: "Yaoundé", Lomé: "Lomé", Marrakech: "Marrakesh" }
 export const label = (l: string, lang: Lang) => lang === "fr" ? l : l.split(" → ").map((x) => EN[x] || x).join(" → ")
 

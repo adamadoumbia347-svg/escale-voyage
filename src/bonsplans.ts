@@ -77,7 +77,8 @@ const CFG: Record<Lang, { loc: string; base: string; ville: string; mois: string
   it: { loc: "it-IT", base: "/it", ville: "voli-da", mois: "voli-mese", tpl: "/it/comprare-o-aspettare/", og: "it_IT", noms: ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"] },
 }
 // Noms de villes qui changent selon la langue (les autres restent identiques)
-const VILLES: Record<string, { en?: string; it?: string }> = { Londres: { en: "London", it: "Londra" }, Milan: { it: "Milano" }, Rome: { it: "Roma" }, Bruxelles: { en: "Brussels" }, Marseille: { it: "Marsiglia" }, Lyon: { it: "Lione" }, Paris: { it: "Parigi" },
+const VILLES: Record<string, { en?: string; it?: string }> = { Genève: { en: "Geneva", it: "Ginevra" }, Francfort: { en: "Frankfurt", it: "Francoforte" }, Lisbonne: { en: "Lisbon", it: "Lisbona" }, Barcelone: { en: "Barcelona", it: "Barcellona" }, Montréal: { en: "Montreal" },
+  Londres: { en: "London", it: "Londra" }, Milan: { it: "Milano" }, Rome: { it: "Roma" }, Bruxelles: { en: "Brussels" }, Marseille: { it: "Marsiglia" }, Lyon: { it: "Lione" }, Paris: { it: "Parigi" },
   Alger: { en: "Algiers", it: "Algeri" }, "Le Caire": { en: "Cairo", it: "Il Cairo" }, Tunis: { it: "Tunisi" }, "Addis-Abeba": { en: "Addis Ababa", it: "Addis Abeba" }, Marrakech: { en: "Marrakesh" }, Oran: { it: "Orano" }, Djerba: { it: "Gerba" },
   Tanger: { en: "Tangier", it: "Tangeri" }, Le: {}, "Le Cap": { en: "Cape Town", it: "Città del Capo" }, Maurice: { en: "Mauritius", it: "Mauritius" }, "La Réunion": { en: "Réunion", it: "Riunione" }, Yaoundé: {}, Lomé: {}, Djeddah: { en: "Jeddah", it: "Gedda" } }
 const nom = (v: string, l: Lang) => (l === "fr" ? v : VILLES[v]?.[l] || v)

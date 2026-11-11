@@ -36,7 +36,7 @@ PAGES = [
     dict(slug="acheter-ou-attendre", titre="J'achète maintenant ou j'attends ?", ref="/acheter-ou-attendre/", ref_l="la page Acheter ou attendre (version complète)",
          lead="La question que tout le monde se pose devant le prix. Escale te donne une vraie réponse, trajet par trajet.",
          sections=[
-             ("Comment ça marche", ["Chaque nuit, Escale relève le prix de 70 grands trajets Europe – Afrique. Sur la page du trajet, tu vois si le prix du jour est bas, moyen ou élevé par rapport à d'habitude, et notre conseil : c'est le moment, ou attends.", "Tu vois aussi la courbe des 30 derniers jours : si ça monte, tu sais ; si ça descend, tu sais aussi."]),
+             ("Comment ça marche", ["Chaque nuit, Escale relève le prix de 90 grands trajets Europe – Afrique. Sur la page du trajet, tu vois si le prix du jour est bas, moyen ou élevé par rapport à d'habitude, et notre conseil : c'est le moment, ou attends.", "Tu vois aussi la courbe des 30 derniers jours : si ça monte, tu sais ; si ça descend, tu sais aussi."]),
              ("Le matin, regarde « À saisir aujourd'hui »", ["C'est la liste des trajets qui sont nettement sous leur prix habituel ce jour-là. Quand ton trajet y est, c'est le moment de ne pas dormir."]),
              ("Mais attention", ["C'est un signal, pas une promesse. Le prix exact dépend de tes dates et se confirme sur le site de réservation."]),
          ]),

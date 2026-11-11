@@ -65,12 +65,14 @@ const arrow = (d: number | null) => d === null || Math.abs(d) < 3 ? "" : d < 0 ?
 // Les jours sans bonne affaire, les plus petits prix des trajets populaires prennent la place. Rien n'est affiché sans prix réel.
 type Offre = { label: string; price: number; diff: number | null; href: string }
 // Pays des aéroports de départ relevés chaque nuit : les offres au départ du pays du visiteur passent en premier
-const PAYS_DEPART: Record<string, string> = { CDG: "FR", ORY: "FR", LYS: "FR", MRS: "FR", BRU: "BE", LHR: "GB", MXP: "IT", FCO: "IT" }
+const PAYS_DEPART: Record<string, string> = { CDG: "FR", ORY: "FR", LYS: "FR", MRS: "FR", BRU: "BE", LHR: "GB", MXP: "IT", FCO: "IT",
+  GVA: "CH", MAD: "ES", BCN: "ES", FRA: "DE", LIS: "PT", YUL: "CA" }
 // Pays où Escale suit des départs : le visiteur n'y voit que les offres au départ de son pays (demande de Dobam, 11 novembre 2026).
 // Ailleurs (Suisse, Espagne, Afrique…), toutes les offres restent affichées.
 const PAYS_SUIVIS = new Set(Object.values(PAYS_DEPART))
 function offres(d: Deals | null, map: Record<string, Known>, html: string, pays = "", petits: Offre[] = []): string {
-  const local = PAYS_SUIVIS.has(pays)
+  // « local » : on a de quoi montrer quelque chose pour ce pays (une offre ou un petit prix) ; sinon toutes les offres, comme ailleurs
+  const local = PAYS_SUIVIS.has(pays) && (petits.length > 0 || (d?.items || []).some((r) => PAYS_DEPART[r.from] === pays))
   let list: Offre[] = (d?.items || []).filter((r) => !local || PAYS_DEPART[r.from] === pays).sort((a, b) => b.diff - a.diff).slice(0, 5)
     .map((r) => ({ label: r.label, price: r.price, diff: r.diff, href: `/?type=vols&from=${r.from}&to=${r.to}` }))
   const deal = list.length > 0
