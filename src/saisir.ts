@@ -100,6 +100,9 @@ export async function page(ctx: Ctx, lang: Lang): Promise<Response> {
   const base = await ctx.env.ASSETS?.fetch(new Request("https://escale.live/barometre-prix/"))
   if (!base || !base.ok) return ctx.next()
   const d = await deals(ctx.env, ctx.waitUntil)
+  // Relevés illisibles pour l'instant (quota de lectures atteint, panne) : « réessayez plus tard » plutôt qu'une page qui annonce
+  // à tort « aucun des 0 trajets suivis »
+  if (!d.total) return new Response(lang === "fr" ? "Relevés momentanément indisponibles. Réessayez dans une heure." : "Fares temporarily unavailable. Please try again in an hour.", { status: 503, headers: { "Retry-After": "3600", "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" } })
   const main = `<main>\n<div class="board"><div class="wrap">\n  <p class="eyebrow">${esc(t.eyebrow)}</p><h1>${esc(t.h1)}</h1><p class="hero-lead">${esc(t.desc)}</p>\n</div></div>\n<div class="wrap">\n` +
     `<section><div id="saisir" data-ssr="1">${renderList(d, lang)}</div></section>` +
     `<section><h2>${esc(t.how)}</h2><p>${esc(t.howTxt)}</p></section>` +
