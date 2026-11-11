@@ -3,6 +3,7 @@ import { Month, Point, cacheKey, readHistory } from "./apercu-prix"
 import { banner, deals, Deals } from "./saisir"
 import { ANIM } from "./accueil-anim"
 import { dernier } from "./actus"
+import { snapshotLeger } from "./bonsplans"
 // Accueil : les boutons « Trajets populaires » (sous le moteur) reçoivent le prix aller-retour le plus bas déjà connu
 // (cache des pages trajets, sinon dernier relevé de l'historique KV, mis à jour chaque nuit par src/releve.ts)
 // et une flèche de tendance sur 7 jours (↓ baisse, ↑ hausse, à partir de 3 %).
@@ -65,12 +66,17 @@ const arrow = (d: number | null) => d === null || Math.abs(d) < 3 ? "" : d < 0 ?
 type Offre = { label: string; price: number; diff: number | null; href: string }
 // Pays des aéroports de départ relevés chaque nuit : les offres au départ du pays du visiteur passent en premier
 const PAYS_DEPART: Record<string, string> = { CDG: "FR", ORY: "FR", LYS: "FR", MRS: "FR", BRU: "BE", LHR: "GB", MXP: "IT", FCO: "IT" }
-function offres(d: Deals | null, map: Record<string, Known>, html: string, pays = ""): string {
-  const ici = (r: { from: string }) => (pays && PAYS_DEPART[r.from] === pays ? 1 : 0)
-  let list: Offre[] = (d?.items || []).slice().sort((a, b) => ici(b) - ici(a) || b.diff - a.diff).slice(0, 5)
+// Pays où Escale suit des départs : le visiteur n'y voit que les offres au départ de son pays (demande de Dobam, 11 novembre 2026).
+// Ailleurs (Suisse, Espagne, Afrique…), toutes les offres restent affichées.
+const PAYS_SUIVIS = new Set(Object.values(PAYS_DEPART))
+function offres(d: Deals | null, map: Record<string, Known>, html: string, pays = "", petits: Offre[] = []): string {
+  const local = PAYS_SUIVIS.has(pays)
+  let list: Offre[] = (d?.items || []).filter((r) => !local || PAYS_DEPART[r.from] === pays).sort((a, b) => b.diff - a.diff).slice(0, 5)
     .map((r) => ({ label: r.label, price: r.price, diff: r.diff, href: `/?type=vols&from=${r.from}&to=${r.to}` }))
   const deal = list.length > 0
-  if (!deal) {
+  // Aucune offre au départ de ce pays aujourd'hui : ses petits prix du jour (relevé de la nuit), sans pourcentage
+  if (!deal && local && petits.length) list = petits
+  else if (!deal) {
     list = [...html.matchAll(/<span>([^<]+)<\/span><b class="pr" data-r="([A-Z]{3})-([A-Z]{3})">/g)]
       .map((m) => ({ label: m[1], k: map[`${m[2]}-${m[3]}`], from: m[2], to: m[3] })).filter((x) => x.k)
       .sort((a, b) => a.k.price - b.k.price).slice(0, 4)
@@ -110,7 +116,13 @@ export const onRequest = async (ctx: Ctx) => {
     // Pays du visiteur (donné par Cloudflare, sans cookie) : ordre des villes du titre animé et des offres du jour
     const pays = String(((ctx.request as any).cf || {}).country || "")
     // Offres du jour juste au-dessus du titre (à la place de l'étiquette « comparateur de la diaspora »)
-    out = out.replace(/<h1 data-en-html="Cheap flights/, () => offres(d, map, html, pays) + '<h1 data-en-html="Cheap flights')
+    let petits: Offre[] = []
+    if (PAYS_SUIVIS.has(pays) && !(d?.items || []).some((r) => PAYS_DEPART[r.from] === pays)) {
+      const snap = await Promise.race([snapshotLeger(ctx).catch(() => null), new Promise<null>((ok) => setTimeout(() => ok(null), WAIT_MS))])
+      petits = (snap?.rows || []).filter((r) => PAYS_DEPART[r.from] === pays && r.price > 0).sort((x, y) => x.price - y.price).slice(0, 4)
+        .map((r) => ({ label: `${r.a} → ${r.b}`, price: r.price, diff: null, href: `/?type=vols&from=${r.from}&to=${r.to}` }))
+    }
+    out = out.replace(/<h1 data-en-html="Cheap flights/, () => offres(d, map, html, pays, petits) + '<h1 data-en-html="Cheap flights')
     // Animation du titre (destinations qui défilent, Afrique d'abord) : la version du serveur remplace le fichier site/hero-anim.js
     out = out.replace(/<script src="\/hero-anim\.js[^"]*" defer><\/script>/, () => `<script>window.ESCALE_PAYS=${JSON.stringify(/^[A-Z]{2}$/.test(pays) ? pays : "")};document.addEventListener("DOMContentLoaded",function(){${ANIM}});</script>`)
     // Message de saison (« Noël au pays… ») posé sur la photo : fond blanc et texte foncé, lisible quelle que soit la photo

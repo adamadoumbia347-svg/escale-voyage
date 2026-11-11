@@ -48,7 +48,7 @@
     Array.prototype.forEach.call(h1.childNodes, function (n) { if (n.nodeType === 1) n.setAttribute("aria-hidden", "true"); });
     h1.style.minHeight = h1.offsetHeight + "px"; h1.style.textWrap = "wrap"; // le titre garde sa hauteur et sa coupure : la page ne saute pas
     var st = document.createElement("style");
-    st.textContent = ".hero h1 em.roll{white-space:nowrap}.hero h1 em.roll .rl{display:inline-grid;vertical-align:bottom;overflow:hidden;margin-inline-start:.22em;padding:.07em .28em;margin-block:-.07em;border-radius:.3em;background:rgb(127 243 222/.2);box-shadow:inset 0 0 0 1px rgb(127 243 222/.45)}" +
+    st.textContent = ".hero h1 em.roll .rl{white-space:nowrap;max-width:100%;display:inline-grid;vertical-align:bottom;overflow:hidden;margin-inline-start:.22em;padding:.07em .28em;margin-block:-.07em;border-radius:.3em;background:rgb(127 243 222/.2);box-shadow:inset 0 0 0 1px rgb(127 243 222/.45)}" +
       ".hero h1 em.roll .rl>span{grid-area:1/1;justify-self:start;color:#fff;transition:transform .55s cubic-bezier(.2,.8,.2,1),opacity .4s ease,filter .4s ease}.hero h1 em.roll .rl>span.in{transform:translateY(105%);opacity:0;filter:blur(4px)}.hero h1 em.roll .rl>span.out{transform:translateY(-105%);opacity:0;filter:blur(4px)}" +
       "html:not(.has-hero) .hero h1 em.roll .rl{background:rgb(11 133 119/.1);box-shadow:inset 0 0 0 1px rgb(11 133 119/.25)}html:not(.has-hero) .hero h1 em.roll .rl>span{color:inherit}";
     document.head.appendChild(st);
