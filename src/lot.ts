@@ -6,7 +6,7 @@ import { Point, Saved, readHistory, readMonths } from "./apercu-prix"
 // par calcul, refait chaque heure dans chaque centre Cloudflare) ; le 11 novembre 2026, le plafond gratuit de 100 000 lectures par
 // jour a été dépassé. Avec cette copie, un calcul coûte une lecture.
 // Les relevés ne changent qu'entre 3 h et 6 h UTC (src/releve.ts) : la copie est refaite par la tâche de 6 h UTC (src/worker.ts)
-// et reste valable jusqu'au lendemain 6 h. Si la tâche n'a pas tourné, la première visite après 6 h la refait.
+// et reste valable jusqu'au lendemain 6 h. (Depuis le 11 novembre 2026, chaque envoi sur GitHub publie le site tout seul : .github/workflows/deploiement.yml.) Si la tâche n'a pas tourné, la première visite après 6 h la refait.
 export type Lot = { ts: number; h: Record<string, Point[]>; m: Record<string, Saved | null> }
 const KEY = "lot:v1", GARDE = 70
 const cacheReq = () => new Request("https://escale.live/__lot/v1/" + new Date().toISOString().slice(0, 13))
