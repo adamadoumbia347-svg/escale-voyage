@@ -1159,6 +1159,10 @@ a { text-underline-offset: 3px; }
 .hero .ruban a { background: color-mix(in srgb, var(--surface) 94%, transparent); border-color: transparent; padding: 7px 14px; box-shadow: 0 6px 18px -10px rgb(0 0 0 / .5); }
 .ruban a b { margin-inline-start: 8px; padding-inline-start: 8px; border-inline-start: 1px solid var(--line); color: var(--teal-d); font-weight: 800; }
 .ruban a:hover b { color: inherit; }
+/* Bas de « Surprends-moi » : deux rubans, le second défile dans l'autre sens et plus vite (il est plus court) */
+.sp-plus { margin-top: 40px; }
+.sp-plus .rb-l { margin: 14px 0 0; font-weight: 700; color: var(--muted); font-size: .95rem; }
+.sp-plus .ruban { margin: 8px -16px 0; }
 /* Barre de lecture, bouton « haut », apparitions */
 .mo-bar { height: 4px; }
 .haut { position: fixed; right: 16px; bottom: 156px; z-index: 45; width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: 1.2rem; cursor: pointer; box-shadow: var(--shadow); opacity: 0; transform: translateY(20px) scale(.8); pointer-events: none; transition: opacity .3s, transform .4s var(--ressort); }
@@ -1171,7 +1175,7 @@ a { text-underline-offset: 3px; }
   @keyframes plane-bob { 0%, 100% { transform: rotate(45deg) translate(0, 0); } 50% { transform: rotate(38deg) translate(1px, -2px) scale(1.08); } }
   .board::before { animation: flotte 14s ease-in-out infinite; } .board::after { animation: flotte 18s ease-in-out -4s infinite; }
   @keyframes flotte { 0%, 100% { transform: translate(0, 0) rotate(0); } 33% { transform: translate(18px, -22px) rotate(8deg); } 66% { transform: translate(-14px, 12px) rotate(-6deg); } }
-  .ruban .piste { animation: defile 60s linear infinite; } .ruban:hover .piste, .ruban:focus-within .piste { animation-play-state: paused; }
+  .ruban .piste { animation: defile 60s linear infinite; } .ruban.inv .piste { animation-direction: reverse; } .ruban.court .piste { animation-duration: 38s; } .ruban:hover .piste, .ruban:focus-within .piste { animation-play-state: paused; }
   @keyframes defile { to { transform: translateX(-50%); } }
 }
 @media (prefers-reduced-motion: reduce) { .ruban { overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; } .ruban::-webkit-scrollbar { display: none; } }
