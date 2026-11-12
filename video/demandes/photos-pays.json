@@ -1,16 +1,16 @@
 {
- "code": "tokyo",
+ "code": "newyork",
  "lieux": {
-  "shibuya": "Shibuya Crossing night",
-  "sensoji": "Senso-ji Asakusa Kaminarimon",
-  "fuji": "Mount Fuji Chureito pagoda",
-  "skytree": "Tokyo Skytree skyline",
-  "tower": "Tokyo Tower night",
-  "sakura": "Chidorigafuchi cherry blossom",
-  "shinjuku": "Shinjuku Kabukicho neon night",
-  "meiji": "Meiji Shrine torii",
-  "sushi": "sushi nigiri plate Tokyo",
-  "shinkansen": "Shinkansen Mount Fuji"
+  "liberty": "Statue of Liberty New York harbor",
+  "times": "Times Square night",
+  "brooklyn": "Brooklyn Bridge Manhattan skyline",
+  "central": "Central Park aerial autumn",
+  "empire": "Empire State Building skyline sunset",
+  "highline": "High Line park New York",
+  "grand": "Grand Central Terminal main concourse",
+  "skyline": "Manhattan skyline night from Brooklyn",
+  "taxi": "New York yellow taxi street",
+  "dumbo": "Dumbo Manhattan Bridge Washington Street"
  },
- "demande": "2026-11-12T17:27:57"
+ "demande": "2026-11-12T17:38:12"
 }
