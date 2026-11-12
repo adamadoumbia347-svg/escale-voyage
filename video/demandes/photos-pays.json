@@ -1,22 +1,22 @@
 {
- "code": "c1",
+ "code": "c2",
  "lieux": {
-  "fr-paris": "Eiffel Tower Paris Trocadero",
-  "fr-montstmichel": "Mont Saint-Michel",
-  "fr-versailles": "Palace of Versailles Hall of Mirrors gardens",
-  "fr-nice": "Nice Promenade des Anglais Baie des Anges",
-  "fr-lyon": "Lyon Fourvière Saône",
-  "fr-marseille": "Marseille Vieux-Port Notre-Dame de la Garde",
-  "fr-chamonix": "Mont Blanc Chamonix",
-  "fr-bordeaux": "Bordeaux Place de la Bourse miroir d'eau",
-  "es-barcelone": "Sagrada Familia Barcelona",
-  "es-madrid": "Madrid Plaza Mayor",
-  "es-seville": "Plaza de España Seville",
-  "es-grenade": "Alhambra Granada",
-  "es-valence": "Ciudad de las Artes y las Ciencias Valencia",
-  "es-cordoue": "Mezquita Cordoba interior",
-  "es-majorque": "Mallorca cala beach",
-  "es-bilbao": "Guggenheim Museum Bilbao"
+  "pt-lisbonne": "Lisbon tram 28 Alfama",
+  "pt-belem": "Belém Tower Lisbon",
+  "pt-porto": "Porto Ribeira Dom Luís bridge",
+  "pt-sintra": "Pena Palace Sintra",
+  "pt-algarve": "Ponta da Piedade Lagos Algarve",
+  "pt-madere": "Madeira Funchal",
+  "pt-obidos": "Óbidos Portugal",
+  "pt-douro": "Douro valley vineyards",
+  "tr-istanbul": "Hagia Sophia Istanbul",
+  "tr-mosqueebleue": "Blue Mosque Istanbul",
+  "tr-cappadoce": "Cappadocia balloons Göreme",
+  "tr-pamukkale": "Pamukkale travertines",
+  "tr-ephese": "Library of Celsus Ephesus",
+  "tr-antalya": "Antalya old harbour Kaleiçi",
+  "tr-bodrum": "Bodrum castle harbour",
+  "tr-bosphore": "Bosphorus Ortaköy mosque bridge"
  },
- "demande": "2026-11-12T21:12:17"
+ "demande": "2026-11-12T21:15:45"
 }
