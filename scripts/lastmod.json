@@ -1,6 +1,6 @@
 {
 "/": [
-"67020b9bbe31125e",
+"5065523d36e78203",
 "2026-11-12"
 ],
 "/a-propos/": [
@@ -2811,6 +2811,10 @@
 "2759b1c3b4acfad3",
 "2026-11-09"
 ],
+"/compte-a-rebours/": [
+"b28707e4454e5a3d",
+"2026-11-12"
+],
 "/confidentialite/": [
 "abac9c416f189f7f",
 "2026-11-09"
@@ -3918,6 +3922,10 @@
 "/de/zu-viel-bezahlt/": [
 "866f9a40846c9588",
 "2026-11-09"
+],
+"/deces-rapatriement/": [
+"ea36fa11a9db3f6f",
+"2026-11-12"
 ],
 "/diaspora/": [
 "558aee91b956fe80",
@@ -12223,6 +12231,26 @@
 "c12c0f3fc2b0a1ea",
 "2026-11-09"
 ],
+"/escale-longue-addis-abeba/": [
+"96377a566a02a8a1",
+"2026-11-12"
+],
+"/escale-longue-casablanca/": [
+"5d67c961bada4f1e",
+"2026-11-12"
+],
+"/escale-longue-istanbul/": [
+"610ccaa8c4e1910f",
+"2026-11-12"
+],
+"/escale-longue-lisbonne/": [
+"66cdbe257f9b5902",
+"2026-11-12"
+],
+"/escale-longue/": [
+"8abb1fc791c6442c",
+"2026-11-12"
+],
 "/esim/": [
 "e430bc4389db8faf",
 "2026-11-09"
@@ -14334,6 +14362,10 @@
 "/payer-billet-avion-plusieurs-fois/": [
 "ea2f07251b5e71b0",
 "2026-11-09"
+],
+"/ponts-2027/": [
+"641cf08892771c99",
+"2026-11-12"
 ],
 "/premier-voyage-bali/": [
 "e52e58b095c4dfac",
@@ -21851,12 +21883,16 @@
 "b41998f221fe7d3e",
 "2026-11-10"
 ],
+"/voyager-parent-age-enfant-seul/": [
+"9756df11f023c6ea",
+"2026-11-12"
+],
 "/week-end-pas-cher/": [
 "fddaf5999fdd3765",
 "2026-11-09"
 ],
 "/widget/": [
-"93b74ee55117311d",
+"b49d197f92328054",
 "2026-11-12"
 ]
 }

@@ -71,6 +71,18 @@ export function isLow30(hist: Point[], price: number) {
 export const LOW30: Record<string, string> = { fr: "Prix le plus bas relevé depuis 30 jours", en: "Lowest price recorded in 30 days", es: "El precio más bajo registrado en 30 días", pt: "O preço mais baixo registado em 30 dias",
   ar: "أدنى سعر مسجّل منذ 30 يومًا", it: "Il prezzo più basso rilevato da 30 giorni", de: "Niedrigster erfasster Preis seit 30 Tagen", nl: "Laagste gemeten prijs in 30 dagen" }
 
+// « Record » : le prix du jour est inférieur ou égal à TOUS les prix relevés depuis le début de l'historique gardé pour ce trajet,
+// quand cet historique couvre au moins 45 jours (au moins 40 relevés). Renvoie le nombre de jours couverts, sinon 0.
+// On écrit « depuis N jours » et jamais « jamais » : l'historique ne remonte pas plus loin que nos relevés.
+export function recordDays(hist: Point[], price: number) {
+  const today = new Date().toISOString().slice(0, 10), past = hist.filter(([d]) => d < today)
+  if (past.length < 40) return 0
+  const n = Math.round((Date.parse(today) - Date.parse(past[0][0])) / 864e5)
+  return n >= 45 && price <= Math.min(...past.map(([, v]) => v)) ? n : 0
+}
+export const RECORD: Record<string, string> = { fr: "Record : prix le plus bas relevé depuis {n} jours", en: "Record: lowest price recorded in {n} days", es: "Récord: el precio más bajo registrado en {n} días",
+  pt: "Recorde: o preço mais baixo registado em {n} dias", ar: "رقم قياسي: أدنى سعر مسجّل منذ {n} يومًا", it: "Record: il prezzo più basso rilevato da {n} giorni", de: "Rekord: niedrigster erfasster Preis seit {n} Tagen", nl: "Record: laagste gemeten prijs in {n} dagen" }
+
 // « Bas », « normal » ou « élevé » : prix du jour comparé à la médiane des 60 derniers jours (au moins 7 jours de données)
 export function verdict(hist: Point[], price: number) {
   const since = new Date(Date.now() - HIST_WINDOW * 864e5).toISOString().slice(0, 10)
@@ -277,7 +289,9 @@ function render(html: string, from: string, to: string, rows: Month[], hist: Poi
   const summary = fill(t.summary, { m: date(bestRow.month, { month: "long", year: "numeric" }), p: money(best), max: money(max), n: String(MONTHS) }) +
     " " + fill(t.updated, { d: date(new Date().toISOString().slice(0, 10), { day: "numeric", month: "long", year: "numeric" }) })
   const ago = agoText(lang, ageMs)
-  const low30 = isLow30(hist, best) ? `<p class="price-low30" style="margin:0 0 10px;font-weight:700;color:#18794e">🏆 ${esc(LOW30[lang] || LOW30.fr)}</p>` : ""
+  const rec = recordDays(hist, best)
+  const low30 = rec ? `<p class="price-low30 price-record" style="margin:0 0 10px;padding:8px 12px;border-radius:12px;background:#fff6d6;font-weight:800;color:#7a4b00">🏆 ${esc((RECORD[lang] || RECORD.fr).replace("{n}", String(rec)))}</p>`
+    : isLow30(hist, best) ? `<p class="price-low30" style="margin:0 0 10px;font-weight:700;color:#18794e">🏆 ${esc(LOW30[lang] || LOW30.fr)}</p>` : ""
   const badge2 = ago ? `<p class="price-age" style="margin:-4px 0 10px;font-size:.85rem;color:var(--muted,#5b6474)">✅ ${esc(ago)}</p>` : ""
   return html
     .replace(/(<title>)([^<]*?)( \| Escale)?(<\/title>)/, (_m, a, s, b, c) => a + s + ` · ${label}` + (b || "") + c)
