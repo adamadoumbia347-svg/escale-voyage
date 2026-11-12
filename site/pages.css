@@ -844,3 +844,5 @@ main > section:nth-of-type(n+3), main .wrap > section:nth-of-type(n+3), body > f
 .et-total { font-size: 1.1rem; padding: 12px 14px; border-radius: 14px; background: rgba(18, 179, 160, .1); }
 .fav-move { border: 1px solid var(--line); border-radius: 18px; padding: 16px; margin: 18px 0; background: var(--surface); } .fav-move h2 { font-size: 1.05rem; margin: 0 0 6px; }
 .fav-move .btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; } .fav-move .ok { font-weight: 700; color: var(--brand, #0b8577); }
+/* Emplacement réservé à la carte « Pour toute la famille » (remplie par site/famille.js) : évite le saut de page */
+#fam-slot:empty { min-height: 265px; box-sizing: border-box; } @media (min-width: 640px) { #fam-slot:empty { min-height: 190px; } }

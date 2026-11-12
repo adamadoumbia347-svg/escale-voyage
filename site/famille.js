@@ -15,7 +15,7 @@
     de: ["👨‍👩‍👧‍👦 Für die ganze Familie", "Erwachsene", "Kinder", "≈ {t} hin und zurück", "Auf WhatsApp teilen", "{r} für {a} Erwachsene und {c} Kind(er): etwa {t} hin und zurück (ab {p} pro Person). Daten kostenlos vergleichen:", "Schätzung: Preis pro Person × Reisende. Kinder zahlen oft etwas weniger."],
     nl: ["👨‍👩‍👧‍👦 Voor het hele gezin", "Volwassenen", "Kinderen", "≈ {t} retour", "Delen op WhatsApp", "{r} voor {a} volwassene(n) en {c} kind(eren): ongeveer {t} retour (vanaf {p} per persoon). Vergelijk gratis de data:", "Schatting: prijs per persoon × reizigers. Kinderen betalen vaak iets minder."]
   }[lang] || null;
-  if (!L) return;
+  if (!L) { var s0 = document.getElementById("fam-slot"); if (s0) s0.remove(); return; }
   var loc = { fr: "fr-FR", en: "en-GB", es: "es-ES", pt: "pt-PT", ar: "ar-u-nu-latn", it: "it-IT", de: "de-DE", nl: "nl-NL" }[lang];
   var money = function (n) { try { return new Intl.NumberFormat(loc, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n); } catch (e) { return Math.round(n) + " €"; } };
   var tries = 0;
@@ -25,7 +25,8 @@
     if (!p) { if (++tries < 20) setTimeout(start, 500); return; }
     var route = (document.querySelector("h1") || {}).textContent || "";
     var opt = function (n, sel) { var h = ""; for (var i = 0; i <= n; i++) h += "<option" + (i === sel ? " selected" : "") + ">" + i + "</option>"; return h; };
-    var box = document.createElement("div"); box.className = "fam";
+    // Emplacement réservé par le serveur (#fam-slot, src/apercu-prix.ts) : la carte s'y installe sans faire sauter la page
+    var slot = document.getElementById("fam-slot"), box = slot || document.createElement("div"); box.className = "fam";
     box.innerHTML = "<p class=\"fam-h\"></p><div class=\"fam-row\"><label><span></span><select class=\"fam-a\">" + opt(8, 2).replace("<option>0</option>", "") + "</select></label>" +
       "<label><span></span><select class=\"fam-c\">" + opt(8, 2) + "</select></label><strong class=\"fam-t\"></strong></div>" +
       "<a class=\"fam-wa\" target=\"_blank\" rel=\"noopener\" data-k=\"partage-famille\"></a><p class=\"fam-n small\"></p>";
@@ -39,7 +40,7 @@
       box.querySelector(".fam-wa").href = "https://wa.me/?text=" + encodeURIComponent(msg);
     };
     box.addEventListener("change", upd); upd();
-    hero.parentNode.insertBefore(box, hero.nextSibling);
+    if (!slot) hero.parentNode.insertBefore(box, hero.nextSibling);
   };
   start();
 })();

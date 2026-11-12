@@ -285,7 +285,7 @@ function render(html: string, from: string, to: string, rows: Month[], hist: Poi
     .replace(/(<meta property="og:title" content=")([^"]*)(")/, (_m, a, s, b) => a + s + ` · ${label}` + (v ? ` · ${esc(t[v.level])}` : "") + b)
     .replace(/(<meta name="description" content=")([^"]*)(")/, (_m, a, s, b) => a + esc(lead) + " — " + s + b)
     .replace(/(<meta property="og:description" content=")([^"]*)(")/, (_m, a, s, b) => a + esc(lead) + " — " + s + b)
-    .replace(/<p class="hero-price" id="hero-price" hidden><\/p>/, `<p class="hero-price" id="hero-price">${esc(t.hero)} <strong>${esc(money(best))}</strong></p>`)
+    .replace(/<p class="hero-price" id="hero-price" hidden><\/p>/, `<p class="hero-price" id="hero-price">${esc(t.hero)} <strong>${esc(money(best))}</strong></p><div class="fam" id="fam-slot"></div>`)
     .replace(/(<section id="route-prices" data-from="[A-Z]{3}" data-to="[A-Z]{3}") hidden>/, `$1 data-ssr="1">`)
     .replace(/<ul class="price-list"><\/ul>/, `${badge2}${low30}${badge}${spark}<p class="price-summary">${esc(summary)}</p>${bars}<ul class="price-list">${items}</ul>`)
 }

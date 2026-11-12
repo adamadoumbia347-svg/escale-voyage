@@ -15,7 +15,7 @@
   var country = function (cc) { try { return new Intl.DisplayNames([lang], { type: "region" }).of(cc); } catch (e) { return cc; } };
   var ym = function (k) { var d = new Date(); d.setDate(1); d.setMonth(d.getMonth() + k); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-01"; };
   var ALIAS = { TFS: "TCI", KEF: "REK", CPT: "CPT", FNC: "FNC", JFK: "NYC", DPS: "DPS" };
-  var db = Promise.all([get("/data/airports.json"), get("/data/photos.json"), lang === "fr" ? Promise.resolve({}) : get("/data/noms/" + lang + ".json")]);
+  var db = Promise.all([get("/data/airports.json"), get("/data/photos.json"), lang === "fr" ? Promise.resolve({ MLA: "La Valette", GYD: "Bakou", SVQ: "Séville", ADB: "Izmir", SPC: "Santa Cruz de La Palma", LIS: "Lisbonne", BCN: "Barcelone", LON: "Londres" }) : get("/data/noms/" + lang + ".json")]);
   var from = window.ESCALE_FETE_FROM ? window.ESCALE_FETE_FROM.then(function (f) { return { code: f.code === "PAR" ? "CDG" : f.code, name: f.name || (f.code === "CDG" || f.code === "PAR" ? "Paris" : f.code) }; }) : Promise.resolve({ code: "CDG", name: "Paris" });
   var ans = [];
 

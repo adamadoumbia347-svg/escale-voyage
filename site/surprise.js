@@ -19,7 +19,7 @@
   var iso = function (d) { return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0"); };
   var calm = false; try { calm = matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
   var ALIAS = { LHR: "LON", LGW: "LON", STN: "LON", LTN: "LON", MXP: "MIL", LIN: "MIL", BGY: "MIL", FCO: "ROM", CIA: "ROM", ORY: "CDG", BVA: "CDG", SAW: "IST", EWR: "JFK", DKR: "DSS" };
-  var db = Promise.all([get("/data/airports.json"), get("/data/photos.json"), lang === "fr" ? Promise.resolve({}) : get("/data/noms/" + lang + ".json")]);
+  var db = Promise.all([get("/data/airports.json"), get("/data/photos.json"), lang === "fr" ? Promise.resolve({ MLA: "La Valette", GYD: "Bakou", SVQ: "Séville", ADB: "Izmir", SPC: "Santa Cruz de La Palma", LIS: "Lisbonne", BCN: "Barcelone", LON: "Londres" }) : get("/data/noms/" + lang + ".json")]);
   var months = []; for (var i = 0; i < 3; i++) { var d = new Date(); d.setDate(1); d.setMonth(d.getMonth() + i); months.push(iso(d)); }
 
   // Ville : ?from=, sinon la dernière choisie sur Escale, sinon Paris
@@ -57,6 +57,10 @@
       var ph = {}; photos.forEach(function (p) { ph[p.code] = p; });
       var nm = function (it) { var a = ap[it.to] || ap[it.city_code]; return names[it.to] || names[it.city_code] || (a ? a[1] : it.city_code || it.to); };
       var ok = P.items.filter(function (it) { return !max || it.price <= max; });
+      // Le plus souvent, le tirage se fait parmi les destinations qui ont une photo (quand il y en a assez) : la fiche est plus parlante.
+      // Une fois sur cinq, toutes les destinations du budget restent possibles.
+      var withPhoto = ok.filter(function (it) { return ph[it.to] || ph[ALIAS[it.to]] || ph[it.city_code] || ph[ALIAS[it.city_code]]; });
+      if (withPhoto.length >= 4 && Math.random() < 0.8) ok = withPhoto;
       if (!ok.length) { stage.innerHTML = '<p class="sp-wait">' + esc(T.none) + "</p>"; go.disabled = false; return; }
       var pick = ok[Math.floor(Math.random() * ok.length)];
       if (ok.length > 1 && last && pick.to === last) pick = ok.filter(function (x) { return x.to !== last; })[Math.floor(Math.random() * (ok.length - 1))];

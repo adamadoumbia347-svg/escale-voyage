@@ -66,7 +66,8 @@
           if (!noted) {
             noted = true;
             var box = s.closest("#route-prices, .hub, .board");
-            var target = box && box.id === "route-prices" ? box : document.querySelector(".hub") || box;
+            // La note va en bas du bloc des prix (sous la liste), jamais dans le haut de page : ajoutée après coup, elle faisait sauter la page
+            var target = document.getElementById("route-prices") || (box && box.id === "route-prices" ? box : document.querySelector(".hub") || box);
             if (target) {
               var p = document.createElement("p");
               p.className = "small fx-note";
