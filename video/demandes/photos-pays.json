@@ -1,16 +1,16 @@
 {
- "code": "bali",
+ "code": "tokyo",
  "lieux": {
-  "ulundanu": "Pura Ulun Danu Bratan",
-  "tegallalang": "Tegallalang rice terrace",
-  "uluwatu": "Uluwatu temple cliff",
-  "tanahlot": "Tanah Lot temple",
-  "kecak": "Kecak dance Bali",
-  "nusapenida": "Kelingking beach Nusa Penida",
-  "batur": "Mount Batur sunrise",
-  "monkey": "Ubud Monkey Forest",
-  "lempuyang": "Pura Lempuyang gate",
-  "plage": "Bali beach surfing Kuta"
+  "shibuya": "Shibuya Crossing night",
+  "sensoji": "Senso-ji Asakusa Kaminarimon",
+  "fuji": "Mount Fuji Chureito pagoda",
+  "skytree": "Tokyo Skytree skyline",
+  "tower": "Tokyo Tower night",
+  "sakura": "Chidorigafuchi cherry blossom",
+  "shinjuku": "Shinjuku Kabukicho neon night",
+  "meiji": "Meiji Shrine torii",
+  "sushi": "sushi nigiri plate Tokyo",
+  "shinkansen": "Shinkansen Mount Fuji"
  },
- "demande": "2026-11-12T17:19:57"
+ "demande": "2026-11-12T17:27:57"
 }
