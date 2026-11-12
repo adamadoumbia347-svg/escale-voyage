@@ -91,6 +91,8 @@ export default {
     }
     // Copie groupée des relevés (src/lot.ts) : refaite une fois par jour, juste après le relevé de la nuit
     ctx.waitUntil(buildLot(env).then((l) => console.log("copie groupée des relevés", Object.keys(l.h).length)).catch((e) => console.log("copie groupée erreur", String(e))))
+    // Gains réels Travelpayouts pour le bilan du lundi (src/gains.ts) : une requête par jour, résumé dans la clé gains:v1
+    ctx.waitUntil(gains.gains(env).then((r) => console.log("gains", JSON.stringify(r))).catch((e) => console.log("gains erreur", String(e))))
     ctx.waitUntil(cron.checkAlerts(env).then((r) => console.log("alertes", JSON.stringify(r))))
     // Archive du mois de l'indice des prix (src/indice.ts) : le relevé du jour remplace celui de la veille, puis le mois reste figé
     ctx.waitUntil(indice.archiveIndice(env).then((r) => console.log("indice archive", JSON.stringify(r))).catch((e) => console.log("indice archive erreur", String(e))))

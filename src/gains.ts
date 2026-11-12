@@ -13,24 +13,38 @@ async function sha(s: string) {
 }
 const appel = async (env: Env, chemin: string, corps?: unknown) => {
   const r = await fetch(BASE + chemin, { method: corps ? "POST" : "GET", headers: { "X-Access-Token": env.TRAVELPAYOUTS_TOKEN || "", "Content-Type": "application/json" }, body: corps ? JSON.stringify(corps) : undefined })
-  return { status: r.status, text: (await r.text()).slice(0, 60000) }
+  return { status: r.status, text: await r.text() }
 }
 const depuis = (j: number) => new Date(Date.now() - j * 864e5).toISOString().slice(0, 10)
 
-// Exploration : réponses brutes de l'API dans une clé de diagnostic, pour connaître les vrais champs
-export async function diag(env: Env) {
-  const out: Record<string, unknown> = { ts: Date.now() }
-  out.champs = await appel(env, "/get_fields_list")
-  out.agreges = await appel(env, "/get_fields_list?data_type=aggregated")
-  out.q100 = await appel(env, "/execute_query", { fields: ["action_id", "sub_id", "price_usd", "paid_profit_usd", "state", "date"], filters: [{ field: "type", op: "eq", value: "action" }, { field: "campaign_id", op: "eq", value: 100 }, { field: "date", op: "ge", value: depuis(45) }], sort: [{ field: "date", order: "asc" }], offset: 0, limit: 200 })
-  out.qtout = await appel(env, "/execute_query", { fields: ["action_id", "campaign_id", "sub_id", "price_usd", "paid_profit_usd", "state", "date"], filters: [{ field: "date", op: "ge", value: depuis(45) }], sort: [{ field: "date", order: "asc" }], offset: 0, limit: 200 })
-  await env.ESCALE.put("gains:diag", JSON.stringify(out), { expirationTtl: 86400 })
-  return { ok: true }
+// Résumé des réservations des 90 derniers jours, par programme et par semaine (lundi), toutes marques confondues.
+// Une seule requête par jour. États : paid (commission acquise), processing (en attente), cancelled (annulée).
+export type Gains = { ts: number; monnaie: "USD"; depuis: string; lignes: { semaine: string; programme: string; id: number; reservations: number; annulees: number; ventes: number; payees: number; attente: number }[] }
+export async function gains(env: Env): Promise<{ ok: boolean; status?: number; lignes?: number }> {
+  const r = await appel(env, "/execute_query", { fields: ["campaign_id", "campaign_name_en", "date", "price_usd", "paid_profit_usd", "processing_profit_usd", "state"],
+    filters: [{ field: "type", op: "eq", value: "action" }, { field: "date", op: "ge", value: depuis(90) }], sort: [{ field: "date", order: "asc" }], offset: 0, limit: 2000 })
+  if (r.status !== 200) return { ok: false, status: r.status }
+  let rows: any[]
+  try { rows = JSON.parse(r.text).results || [] } catch { return { ok: false, status: 0 } }
+  const map: Record<string, Gains["lignes"][number]> = {}
+  for (const x of rows) {
+    const d = new Date(String(x.date) + "T00:00:00Z"); if (isNaN(+d)) continue
+    d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 6) % 7))
+    const semaine = d.toISOString().slice(0, 10), id = Number(x.campaign_id) || 0, k = semaine + "|" + id
+    const l = (map[k] ||= { semaine, programme: String(x.campaign_name_en || id).slice(0, 40), id, reservations: 0, annulees: 0, ventes: 0, payees: 0, attente: 0 })
+    if (x.state === "cancelled") { l.annulees++; continue }
+    l.reservations++; l.ventes += Number(x.price_usd) || 0; l.payees += Number(x.paid_profit_usd) || 0; l.attente += Number(x.processing_profit_usd) || 0
+  }
+  const lignes = Object.values(map).sort((a, b) => a.semaine.localeCompare(b.semaine) || a.id - b.id)
+  for (const l of lignes) { l.ventes = Math.round(l.ventes * 100) / 100; l.payees = Math.round(l.payees * 100) / 100; l.attente = Math.round(l.attente * 100) / 100 }
+  const out: Gains = { ts: Date.now(), monnaie: "USD", depuis: depuis(90), lignes }
+  await env.ESCALE.put("gains:v1", JSON.stringify(out))
+  return { ok: true, lignes: lignes.length }
 }
 
 export const onRequest = async (ctx: Ctx) => {
   const k = new URL(ctx.request.url).searchParams.get("k") || ""
   if (!k || (await sha(k)) !== EMPREINTE) return json({ error: "unauthorized" }, { status: 401 })
   if (!ctx.env.ESCALE || !ctx.env.TRAVELPAYOUTS_TOKEN) return json({ error: "non configuré" }, { status: 503 })
-  return json(await diag(ctx.env))
+  return json(await gains(ctx.env))
 }
