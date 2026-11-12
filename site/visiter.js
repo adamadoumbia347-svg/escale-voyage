@@ -48,12 +48,13 @@
   var cta = $(".vx-cta[data-air]");
   if (cta && "IntersectionObserver" in window) {
     var VILLES = { PAR: "Paris", LYS: "Lyon", MRS: "Marseille", NCE: "Nice", TLS: "Toulouse", BRU: "Bruxelles", GVA: "Genève", MIL: "Milan", ROM: "Rome", LON: "Londres", MAD: "Madrid", AMS: "Amsterdam", FRA: "Francfort", YMQ: "Montréal", NYC: "New York" };
+    var AERO = { PAR: "CDG", MIL: "MXP", ROM: "FCO", LON: "LHR", YMQ: "YUL", NYC: "JFK" }; // aéroport connu du moteur, pour le lien de recherche
     var PAYS = { FR: "PAR", BE: "BRU", CH: "GVA", IT: "MIL", GB: "LON", ES: "MAD", NL: "AMS", DE: "FRA", CA: "YMQ", US: "NYC", LU: "BRU" };
     var out = $(".vx-prix", cta), sel = $("select", cta), air = cta.dataset.air, MOIS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
     var jour = function (d) { var p = d.split("-"); return +p[2] + " " + MOIS[+p[1] - 1]; };
-    Object.keys(VILLES).forEach(function (c) { if (c !== air) { var o = document.createElement("option"); o.value = c; o.textContent = VILLES[c]; sel.appendChild(o); } });
+    Object.keys(VILLES).forEach(function (c) { if ((AERO[c] || c) !== air) { var o = document.createElement("option"); o.value = c; o.textContent = VILLES[c]; sel.appendChild(o); } });
     var charger = function (from) {
-      if (!from || from === air) { out.textContent = ""; return; }
+      if (!from || (AERO[from] || from) === air) { out.textContent = ""; return; }
       out.textContent = "Recherche du prix du moment…";
       var d = new Date(), mois = [1, 2, 3].map(function (i) { var x = new Date(d.getFullYear(), d.getMonth() + i, 1); return x.getFullYear() + "-" + ("0" + (x.getMonth() + 1)).slice(-2); });
       Promise.all(mois.map(function (m) { return fetch("/api/calendar?from=" + from + "&to=" + air + "&month=" + m + "&currency=EUR").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }); })).then(function (rs) {
@@ -62,14 +63,14 @@
         if (!best) { out.textContent = "Pas de prix repéré depuis " + VILLES[from] + " pour l'instant : lancez la recherche pour voir les vols."; return; }
         out.innerHTML = "<strong>" + esc(VILLES[from]) + " → " + esc(cta.dataset.ville) + " : dès " + Math.round(best.price).toLocaleString("fr-FR") + " € aller-retour</strong> (" + jour(best.dep) + " → " + jour(best.ret) +
           "). Prix repéré récemment, il peut changer.";
-        var a = $("a.btn", cta); if (a) a.href = "/?type=vols&from=" + from + "&to=" + air + "&dep=" + best.dep + "&ret=" + best.ret;
+        var a = $("a.btn", cta); if (a) a.href = "/?type=vols&from=" + (AERO[from] || from) + "&to=" + air + "&dep=" + best.dep + "&ret=" + best.ret;
       });
     };
     sel.addEventListener("change", function () { try { localStorage.setItem("escale.depart", sel.value); } catch (e) {} charger(sel.value); });
     var io = new IntersectionObserver(function (es) {
       if (!es[0].isIntersecting) return; io.disconnect();
       var memo = null; try { memo = localStorage.getItem("escale.depart"); } catch (e) {}
-      var go = function (c) { if (c && VILLES[c] && c !== air) { sel.value = c; charger(c); } };
+      var go = function (c) { if (c && VILLES[c] && (AERO[c] || c) !== air) { sel.value = c; charger(c); } };
       if (memo) return go(memo);
       fetch("/api/geo").then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; }).then(function (g) { go(PAYS[g.country] || "PAR"); });
     }, { rootMargin: "500px 0px" });

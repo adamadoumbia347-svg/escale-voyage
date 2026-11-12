@@ -916,7 +916,7 @@ def main():
                  for pp, nom, fl, k, m in visiter.liens(SITE))
     if vz:
         vz = '<div class="vz-row">' + vz + '<a class="vz-all" href="/visiter/">Tous les pays →</a></div>'
-    rb = "".join(f'<a href="/{pp}/">{fl} {E(nom)}</a>' for pp, nom, fl, k, m in visiter.liens(SITE))
+    rb = "".join(f'<a href="/{pp}/" data-cc="{k[:2]}" data-ville="{E(next(p["ville"] for p in visiter.PAYS if p["cc"] == k[:2]))}">{fl} {E(nom)}</a>' for pp, nom, fl, k, m in visiter.liens(SITE))
     if rb:
         rb = ('<div class="ruban" aria-label="Pays à explorer"><div class="piste">' + rb + rb.replace("<a ", '<a tabindex="-1" aria-hidden="true" ') + "</div></div>")
     s = re.sub(r"<!-- RUBAN:START -->.*?<!-- RUBAN:END -->", lambda m: "<!-- RUBAN:START -->\n    " + rb + "\n    <!-- RUBAN:END -->", s, flags=re.S)

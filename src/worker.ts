@@ -17,6 +17,7 @@ import * as cron from "./api/cron"
 import { releve } from "./releve"
 import * as push from "./api/push"
 import * as populaires from "./api/populaires"
+import * as ruban from "./api/ruban"
 import * as clic from "./api/clic"
 import * as fx from "./api/fx"
 import * as grille from "./api/grille"
@@ -40,7 +41,7 @@ import { buildLot } from "./lot"
 import { indexNow } from "./indexnow"
 import * as gains from "./gains"
 
-const API: Record<string, any> = { push, prix, explore, calendar, deals, geo, alert, form, admin, cron, populaires, clic, fx, grille, weekends, verdict: verdictApi, connus: accueil, compteur, paye, aeroport: aeroApi, gains }
+const API: Record<string, any> = { push, prix, explore, calendar, deals, geo, alert, form, admin, cron, populaires, ruban, clic, fx, grille, weekends, verdict: verdictApi, connus: accueil, compteur, paye, aeroport: aeroApi, gains }
 
 export default {
   async fetch(request: Request, env: Env & { ASSETS: { fetch: (r: Request) => Promise<Response> } }, ctx: { waitUntil: (p: Promise<any>) => void }) {
