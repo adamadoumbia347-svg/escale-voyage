@@ -1,6 +1,7 @@
 import { Ctx, json, IATA, pricesForDates, edgeCached } from "../_lib/common"
 // Ruban de pays de l'accueil : pour la ville de départ du visiteur, le prix aller-retour le plus bas repéré (mois prochain et
 // suivant) vers la grande ville de chaque pays de la rubrique « Que visiter ». GET /api/ruban?from=CDG  (prix en euros)
+// Sert aussi aux pages pays, à la carte et au comparateur de la rubrique (site/visiter*.js).
 // Deux demandes groupées à Travelpayouts (toutes les destinations du mois), puis une demande par pays resté sans prix.
 // Rien n'est inventé : un pays sans prix repéré n'affiche rien. Gardé 12 heures dans le cache de Cloudflare (aucune écriture KV).
 // Liste à garder en accord avec scripts/visiter.py (codes pays → villes d'arrivée, la première sert au lien de recherche).
@@ -10,6 +11,7 @@ const PAYS: Record<string, string[]> = {
   ke: ["NBO", "NBO"], tz: ["ZNZ", "ZNZ", "DAR"], za: ["CPT", "CPT", "JNB"], fr: ["CDG", "PAR", "ORY"], it: ["FCO", "ROM", "MIL", "MXP"], es: ["BCN", "BCN", "MAD"], pt: ["LIS", "LIS"],
   gr: ["ATH", "ATH"], nl: ["AMS", "AMS"], tr: ["IST", "IST"], ae: ["DXB", "DXB"], jp: ["NRT", "TYO", "HND"], th: ["BKK", "BKK"], id: ["DPS", "DPS"], us: ["JFK", "NYC", "EWR"],
   mx: ["MEX", "MEX"], br: ["GIG", "RIO"],
+  ml: ["BKO", "BKO"], gn: ["CKY", "CKY"], bj: ["COO", "COO"], tg: ["LFW", "LFW"], bf: ["OUA", "OUA"], cd: ["FIH", "FIH"], ga: ["LBV", "LBV"], ng: ["LOS", "LOS", "ABV"],
 }
 type Prix = { to: string; price: number; dep: string; ret: string | null }
 

@@ -912,11 +912,18 @@ def main():
                + __import__("json").dumps(season, ensure_ascii=False).replace("</", "<\\/") + '</script><!-- SAISON:END -->', s, flags=re.S)
     s = re.sub(r"<!-- FETES:START -->.*?<!-- FETES:END -->", lambda m: '<!-- FETES:START -->\n    <div class="city-grid fete-grid">' + "".join(fcards) + '</div>\n    <!-- FETES:END -->', s, flags=re.S)
     grid = villes.cards(SITE, HUBS, airports)
-    vz = "".join(f'<a href="/{pp}/"><img src="/img/visiter/{k}-640.webp" width="640" height="{round(640 * m["h"] / m["w"])}" alt="{E(nom)}" loading="lazy" decoding="async"><b>{E(nom)} {fl}</b></a>'
-                 for pp, nom, fl, k, m in visiter.liens(SITE))
+    _vl = visiter.liens(SITE)
+    _jh = lambda d: E(json.dumps(d, ensure_ascii=False))
+    _nm = lambda x, suf="": (f' data-en="{E(x["nom"]["en"] + suf)}"' if "en" in x["nom"] else "") + (f' data-it="{E(x["nom"]["it"] + suf)}"' if "it" in x["nom"] else "")
+    vz = "".join(f'<a href="{x["href"]["fr"]}" data-hrefs="{_jh(x["href"])}"><img src="/img/visiter/{x["key"]}-640.webp" width="640" height="{round(640 * x["m"]["h"] / x["m"]["w"])}" alt="{E(x["nom"]["fr"])}" loading="lazy" decoding="async">'
+                 f'<b{_nm(x, " " + x["flag"])}>{E(x["nom"]["fr"])} {x["flag"]}</b></a>' for x in _vl)
     if vz:
-        vz = '<div class="vz-row">' + vz + '<a class="vz-all" href="/visiter/">Tous les pays →</a></div>'
-    rb = "".join(f'<a href="/{pp}/" data-cc="{k[:2]}" data-ville="{E(next(p["ville"] for p in visiter.PAYS if p["cc"] == k[:2]))}">{fl} {E(nom)}</a>' for pp, nom, fl, k, m in visiter.liens(SITE))
+        _hub = {l: "/" + visiter.BASE[l] + "/" for l in visiter.LANGS if any(l in x["href"] for x in _vl)}
+        vz = ('<div class="vz-row">' + vz + f'<a class="vz-all" href="/visiter/" data-hrefs="{_jh(_hub)}"><span data-en="All countries →" data-it="Tutti i paesi →">Tous les pays →</span></a></div>')
+    rb = "".join(f'<a href="{x["href"]["fr"]}" data-hrefs="{_jh(x["href"])}" data-cc="{x["cc"]}" data-ville="{E(x["ville"]["fr"])}"'
+                 + "".join(f' data-ville-{l}="{E(x["ville"][l])}"' for l in ("en", "it") if l in x["ville"])
+                 + f'><span data-en="{E(x["flag"] + " " + x["nom"].get("en", x["nom"]["fr"]))}"' + (f' data-it="{E(x["flag"] + " " + x["nom"]["it"])}"' if "it" in x["nom"] else "")
+                 + f'>{x["flag"]} {E(x["nom"]["fr"])}</span></a>' for x in _vl)
     if rb:
         rb = ('<div class="ruban" aria-label="Pays à explorer"><div class="piste">' + rb + rb.replace("<a ", '<a tabindex="-1" aria-hidden="true" ') + "</div></div>")
     s = re.sub(r"<!-- RUBAN:START -->.*?<!-- RUBAN:END -->", lambda m: "<!-- RUBAN:START -->\n    " + rb + "\n    <!-- RUBAN:END -->", s, flags=re.S)

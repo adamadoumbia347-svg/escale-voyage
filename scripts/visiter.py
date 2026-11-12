@@ -258,12 +258,112 @@ PAYS += [
                 P("br", "lencois", "Lençóis Maranhenses", "Paysage", "Des dunes blanches semées de lagons d'eau de pluie. Classé à l'<strong>UNESCO depuis 2024</strong>."),
                 P("br", "saopaulo", "São Paulo", "Ville", "La plus grande ville du pays et d'Amérique du Sud. Ici le parc d'Ibirapuera et, derrière, les tours.")]),
 ]
-ORDRE = ["ci", "sn", "cm", "gh", "ma", "tn", "eg", "ke", "tz", "za", "fr", "it", "es", "pt", "gr", "nl", "tr", "ae", "jp", "th", "id", "us", "mx", "br"]
+import visiter_afrique as _AF  # noqa: E402
+PAYS += _AF.PAYS
+ORDRE = ["ci", "sn", "ml", "gn", "bf", "bj", "tg", "ng", "cm", "ga", "cd", "gh", "ma", "tn", "eg", "ke", "tz", "za", "fr", "it", "es", "pt", "gr", "nl", "tr", "ae", "jp", "th", "id", "us", "mx", "br"]
 PAYS.sort(key=lambda p: ORDRE.index(p["cc"]))
 REGIONS = ["Afrique", "Europe", "Asie", "Amériques"]
-HEART = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.4 8.300 2.300 4.500 6 4.500c2 0 3.400 1 4.300 2.300.300.500 1.100.500 1.400 0C12.600 5.500 14 4.500 16 4.500c3.700 0 5.600 3.800 4 7.200C19.500 16.400 12 21 12 21z"/></svg>'
-ENVIES = ('<section id="vx-envies" class="vx-envies" hidden><h2>Mes envies <span data-envies-n></span></h2><p class="small">Les lieux que vous avez marqués d\'un cœur. Ils restent dans ce téléphone, sans compte.</p><ul></ul></section>')
-PATH = lambda p: f"visiter/{p['slug']}"
+
+# ---------------------------------------------------------------------------------------------------------------
+# Langues : le français est écrit ci-dessus ; l'anglais et l'italien sont dans scripts/visiter_en.py et visiter_it.py
+# (mêmes clés). Un pays sans traduction complète n'est pas publié dans cette langue.
+# ---------------------------------------------------------------------------------------------------------------
+LANGS = ["fr", "en", "it"]
+BASE = {"fr": "visiter", "en": "en/what-to-visit", "it": "it/cosa-visitare"}
+SUB = {"jeu": {"fr": "jeu", "en": "game", "it": "gioco"}, "comparer": {"fr": "comparer", "en": "compare", "it": "confronta"}}
+TR = {}
+for _l in ("en", "it"):
+    try:
+        TR[_l] = __import__("visiter_" + _l)
+    except ImportError:
+        pass
+for _l, (_p, _x) in _AF.TR.items():  # pays ajoutés dans scripts/visiter_afrique.py : traductions fusionnées
+    if _l in TR:
+        TR[_l].PAYS.update(_p)
+        TR[_l].LIEUX.update(_x)
+_K = lambda en, it: {"en": en, "it": it}
+KINDS = {"Antiquité": _K("Ancient site", "Antichità"), "Bord de mer": _K("Seaside", "Mare"), "Capitale": _K("Capital", "Capitale"), "Château": _K("Palace", "Reggia"),
+         "Culture": _K("Culture", "Cultura"), "Désert": _K("Desert", "Deserto"), "Histoire": _K("History", "Storia"), "Jardin": _K("Garden", "Giardino"),
+         "Monastères": _K("Monasteries", "Monasteri"), "Montagne": _K("Mountain", "Montagna"), "Monument": _K("Landmark", "Monumento"), "Musée": _K("Museum", "Museo"),
+         "Mémoire": _K("Memorial", "Memoria"), "Nature": _K("Nature", "Natura"), "Nil": _K("Nile", "Nilo"), "Océan": _K("Ocean", "Oceano"), "Palais": _K("Palace", "Palazzo"),
+         "Patrimoine": _K("Heritage", "Patrimonio"), "Paysage": _K("Scenery", "Paesaggio"), "Plage": _K("Beach", "Spiaggia"), "Quartier": _K("District", "Quartiere"),
+         "Safari": _K("Safari", "Safari"), "Sanctuaire": _K("Shrine", "Santuario"), "Spiritualité": _K("Holy city", "Spiritualità"), "Temple": _K("Temple", "Tempio"),
+         "Village": _K("Village", "Villaggio"), "Ville": _K("City", "Città"), "Ville d'art": _K("City of art", "Città d'arte"), "Ville historique": _K("Historic town", "Città storica"),
+         "Ville impériale": _K("Imperial city", "Città imperiale"), "Ville médiévale": _K("Medieval town", "Città medievale"), "Ville sainte": _K("Holy city", "Città santa"),
+         "Volcan": _K("Volcano", "Vulcano"), "Île": _K("Island", "Isola"), "Îles": _K("Islands", "Isole"), "Cascade": _K("Waterfall", "Cascata"), "Fleuve": _K("River", "Fiume"),
+         "Forêt": _K("Forest", "Foresta"), "Lac": _K("Lake", "Lago")}
+REG = {"Afrique": _K("Africa", "Africa"), "Europe": _K("Europe", "Europa"), "Asie": _K("Asia", "Asia"), "Amériques": _K("Americas", "Americhe")}
+
+U = {
+    "fr": dict(eyebrow="Explorer le monde", h1="Que visiter {en}", lead="{n} villes et lieux à voir, en photos.", sub="{n} lieux à voir", photo="Photo",
+               title="Que visiter {en} : {n} villes et lieux à voir | Escale", desc="{nom} en photos : {lieux}… Les villes et les lieux à voir, avec de vraies photos, et les vols pour {ville}.",
+               like="Ajouter {n} à mes envies", carte="Carte postale", cta="Envie de partir {en} ?", cta_p="Comparez les vols pour {ville} et choisissez vos dates.",
+               dep="Je pars de", dep0="choisir une ville", vols="Voir les vols pour {ville}", partout="Voir les prix partout dans le monde", share="Partager cette page",
+               share_t="Que visiter {en} : {n} villes et lieux à voir, en photos",
+               budget="Calculer le budget du voyage", b_vol="Vol aller-retour, par personne (€)", b_pers="Voyageurs", b_nuits="Nuits sur place", b_log="Logement, par nuit (€)",
+               b_jour="Dépenses sur place, par jour et par personne (€)", b_note="Le prix du vol est celui repéré récemment depuis votre ville ; le logement et les dépenses sont vos propres chiffres. Escale n'invente aucun prix.",
+               envies="Mes envies", envies_p="Les lieux que vous avez marqués d'un cœur. Ils restent dans ce téléphone, sans compte.",
+               suite="Continuer le voyage", n_lieux="{n} lieux à voir", tous="Tous les pays à explorer", jeu="🎯 Jeu : devine le pays", comparer="⚖️ Comparer deux pays",
+               note="Ces repères sont généraux et ne remplacent pas un guide. Avant de partir, vérifiez les conditions d'entrée du pays avec <a href=\"/visa/\">l'outil visa</a> et lisez les "
+                    "<a href=\"https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/\" target=\"_blank\" rel=\"noopener\">conseils aux voyageurs</a> de votre ministère des Affaires étrangères. "
+                    "Photos : Wikimedia Commons, licences libres, <a href=\"/credits-photos/\">tous les crédits</a>.",
+               hub_h1="Que visiter, <span>pays par pays</span>", hub_lead="Pas seulement les capitales : pour chaque pays, ses villes et ses lieux à voir, avec de vraies photos. {n} pays, et d'autres arrivent.",
+               hub_title="Que visiter : le monde pays par pays, en photos | Escale", hub_desc="Explorez le monde pays par pays : les villes et les lieux à voir, avec de vraies photos. {noms}…",
+               q="Chercher un pays ou un lieu", q_ph="Japon, Kyoto, plage, safari…", map_h="Sur la carte", map_p="Touchez un point pour voir le pays et le prix du vol depuis votre ville.",
+               zoom=["Monde", "Afrique", "Europe", "Asie", "Amériques"], partir="Et pour partir",
+               l_partout=("/partout/", "Les prix des vols partout dans le monde"), l_surp=("/surprends-moi/", "Surprends-moi : une destination au hasard selon votre budget"),
+               l_quiz=("/quiz-destination/", "Quiz : quelle destination est faite pour moi ?"), credits="Photos : Wikimedia Commons, licences libres, <a href=\"/credits-photos/\">tous les crédits</a>.",
+               jeu_title="Jeu : devine le pays en photo | Escale", jeu_desc="Une vraie photo, quatre pays : saurez-vous reconnaître Zanzibar, Kyoto ou Grand-Bassam ? Dix photos, un score à partager.",
+               jeu_h1="Devine <span>le pays</span>", jeu_lead="Une vraie photo, quatre réponses. Dix photos, un score à partager.", jeu_go="Jouer",
+               cmp_title="Comparer deux pays : prix du vol et lieux à voir | Escale", cmp_desc="Sénégal ou Maroc ? Japon ou Thaïlande ? Comparez deux pays côte à côte : prix du vol depuis votre ville et lieux à voir.",
+               cmp_h1="Comparer <span>deux pays</span>", cmp_lead="Choisissez deux pays : le prix du vol depuis votre ville et les lieux à voir, côte à côte.", cmp_a="Premier pays", cmp_b="Deuxième pays"),
+    "en": dict(eyebrow="Explore the world", h1="What to visit {en}", lead="{n} cities and places to see, in photos.", sub="{n} places to see", photo="Photo",
+               title="What to visit {en}: {n} cities and places to see | Escale", desc="{nom} in photos: {lieux}… The cities and places to see, with real photos, and flights to {ville}.",
+               like="Add {n} to my wishlist", carte="Postcard", cta="Ready to go?", cta_p="Compare flights to {ville} and pick your dates.",
+               dep="I'm leaving from", dep0="choose a city", vols="See flights to {ville}", partout="See prices everywhere in the world", share="Share this page",
+               share_t="What to visit {en}: {n} cities and places to see, in photos",
+               budget="Work out the trip budget", b_vol="Return flight, per person (€)", b_pers="Travellers", b_nuits="Nights there", b_log="Accommodation, per night (€)",
+               b_jour="Spending there, per day and per person (€)", b_note="The flight price is the one spotted recently from your city; accommodation and spending are your own figures. Escale never makes up a price.",
+               envies="My wishlist", envies_p="The places you marked with a heart. They stay on this phone, no account needed.",
+               suite="Keep exploring", n_lieux="{n} places to see", tous="All countries to explore", jeu="🎯 Game: guess the country", comparer="⚖️ Compare two countries",
+               note="These pointers are general and do not replace a guidebook. Before you travel, check the country's entry requirements with <a href=\"/en/visa/\">the visa tool</a> and read your government's "
+                    "<a href=\"https://www.gov.uk/foreign-travel-advice\" target=\"_blank\" rel=\"noopener\">travel advice</a>. "
+                    "Photos: Wikimedia Commons, free licences, <a href=\"/credits-photos/\">all credits</a>.",
+               hub_h1="What to visit, <span>country by country</span>", hub_lead="Not just capitals: each country's cities and places to see, with real photos. {n} countries, and more to come.",
+               hub_title="What to visit: the world country by country, in photos | Escale", hub_desc="Explore the world country by country: the cities and places to see, with real photos. {noms}…",
+               q="Search for a country or a place", q_ph="Japan, Kyoto, beach, safari…", map_h="On the map", map_p="Tap a dot to see the country and the flight price from your city.",
+               zoom=["World", "Africa", "Europe", "Asia", "Americas"], partir="And to get there",
+               l_partout=("/en/anywhere/", "Flight prices everywhere in the world"), l_surp=("/en/surprise-me/", "Surprise me: a random destination within your budget"),
+               l_quiz=("/en/destination-quiz/", "Quiz: which destination suits me?"), credits="Photos: Wikimedia Commons, free licences, <a href=\"/credits-photos/\">all credits</a>.",
+               jeu_title="Game: guess the country from a photo | Escale", jeu_desc="One real photo, four countries: can you recognise Zanzibar, Kyoto or Grand-Bassam? Ten photos, a score to share.",
+               jeu_h1="Guess <span>the country</span>", jeu_lead="One real photo, four answers. Ten photos, a score to share.", jeu_go="Play",
+               cmp_title="Compare two countries: flight price and places to see | Escale", cmp_desc="Senegal or Morocco? Japan or Thailand? Compare two countries side by side: flight price from your city and places to see.",
+               cmp_h1="Compare <span>two countries</span>", cmp_lead="Pick two countries: the flight price from your city and the places to see, side by side.", cmp_a="First country", cmp_b="Second country"),
+    "it": dict(eyebrow="Esplora il mondo", h1="Cosa visitare {en}", lead="{n} città e luoghi da vedere, in foto.", sub="{n} luoghi da vedere", photo="Foto",
+               title="Cosa visitare {en}: {n} città e luoghi da vedere | Escale", desc="{nom} in foto: {lieux}… Le città e i luoghi da vedere, con foto vere, e i voli per {ville}.",
+               like="Aggiungi {n} ai miei desideri", carte="Cartolina", cta="Voglia di partire?", cta_p="Confronta i voli per {ville} e scegli le date.",
+               dep="Parto da", dep0="scegli una città", vols="Vedi i voli per {ville}", partout="Vedi i prezzi in tutto il mondo", share="Condividi questa pagina",
+               share_t="Cosa visitare {en}: {n} città e luoghi da vedere, in foto",
+               budget="Calcola il budget del viaggio", b_vol="Volo andata e ritorno, a persona (€)", b_pers="Viaggiatori", b_nuits="Notti sul posto", b_log="Alloggio, a notte (€)",
+               b_jour="Spese sul posto, al giorno e a persona (€)", b_note="Il prezzo del volo è quello rilevato di recente dalla tua città; alloggio e spese sono le tue cifre. Escale non inventa nessun prezzo.",
+               envies="I miei desideri", envies_p="I luoghi che hai segnato con un cuore. Restano su questo telefono, senza account.",
+               suite="Continua il viaggio", n_lieux="{n} luoghi da vedere", tous="Tutti i paesi da esplorare", jeu="🎯 Gioco: indovina il paese", comparer="⚖️ Confronta due paesi",
+               note="Queste indicazioni sono generali e non sostituiscono una guida. Prima di partire, verifica le condizioni d'ingresso del paese e leggi le schede di "
+                    "<a href=\"https://www.viaggiaresicuri.it/\" target=\"_blank\" rel=\"noopener\">Viaggiare Sicuri</a> del Ministero degli Affari Esteri. "
+                    "Foto: Wikimedia Commons, licenze libere, <a href=\"/credits-photos/\">tutti i crediti</a>.",
+               hub_h1="Cosa visitare, <span>paese per paese</span>", hub_lead="Non solo le capitali: per ogni paese, le città e i luoghi da vedere, con foto vere. {n} paesi, e altri in arrivo.",
+               hub_title="Cosa visitare: il mondo paese per paese, in foto | Escale", hub_desc="Esplora il mondo paese per paese: le città e i luoghi da vedere, con foto vere. {noms}…",
+               q="Cerca un paese o un luogo", q_ph="Giappone, Kyoto, spiaggia, safari…", map_h="Sulla mappa", map_p="Tocca un punto per vedere il paese e il prezzo del volo dalla tua città.",
+               zoom=["Mondo", "Africa", "Europa", "Asia", "Americhe"], partir="E per partire",
+               l_partout=("/en/anywhere/", "I prezzi dei voli in tutto il mondo (in inglese)"), l_surp=("/it/sorprendimi/", "Sorprendimi: una meta a caso secondo il tuo budget"),
+               l_quiz=("/it/quiz-destinazione/", "Quiz: quale meta fa per me?"), credits="Foto: Wikimedia Commons, licenze libere, <a href=\"/credits-photos/\">tutti i crediti</a>.",
+               jeu_title="Gioco: indovina il paese dalla foto | Escale", jeu_desc="Una foto vera, quattro paesi: sai riconoscere Zanzibar, Kyoto o Grand-Bassam? Dieci foto, un punteggio da condividere.",
+               jeu_h1="Indovina <span>il paese</span>", jeu_lead="Una foto vera, quattro risposte. Dieci foto, un punteggio da condividere.", jeu_go="Gioca",
+               cmp_title="Confronta due paesi: prezzo del volo e luoghi da vedere | Escale", cmp_desc="Senegal o Marocco? Giappone o Thailandia? Confronta due paesi fianco a fianco: prezzo del volo dalla tua città e luoghi da vedere.",
+               cmp_h1="Confronta <span>due paesi</span>", cmp_lead="Scegli due paesi: il prezzo del volo dalla tua città e i luoghi da vedere, fianco a fianco.", cmp_a="Primo paese", cmp_b="Secondo paese"),
+}
+HEART = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.4 8.3 2.3 4.5 6 4.5c2 0 3.4 1 4.3 2.3.3.5 1.1.5 1.4 0C12.6 5.5 14 4.5 16 4.5c3.700 0 5.600 3.800 4 7.200C19.500 16.400 12 21 12 21z"/></svg>'
+W_MAP, K_MAP, TOP_MAP, H_MAP = 2000, 2000 / 360, 84, 789  # même projection que site/partout.js (img/world.svg)
 
 
 def photos(site):
@@ -271,18 +371,19 @@ def photos(site):
     return json.loads(f.read_text(encoding="utf-8")) if f.exists() else {}
 
 
-def img(ph, key, cls="", eager=False, sizes="(min-width:700px) 440px, 100vw"):
+def img(ph, key, alt, eager=False, sizes="(min-width:700px) 440px, 100vw"):
     m = ph[key]
-    return (f'<img src="/img/visiter/{key}.webp" srcset="/img/visiter/{key}-640.webp 640w, /img/visiter/{key}.webp {m["w"]}w" sizes="{sizes}" width="{m["w"]}" height="{m["h"]}" alt="{E(m["alt"])}"'
-            + (' fetchpriority="high"' if eager else ' loading="lazy" decoding="async"') + (f' class="{cls}"' if cls else "") + ">")
+    return (f'<img src="/img/visiter/{key}.webp" srcset="/img/visiter/{key}-640.webp 640w, /img/visiter/{key}.webp {m["w"]}w" sizes="{sizes}" width="{m["w"]}" height="{m["h"]}" alt="{E(alt)}"'
+            + (' fetchpriority="high"' if eager else ' loading="lazy" decoding="async"') + ">")
 
 
-def cred(ph, key):
+def cred(ph, key, lang="fr"):
     m = ph[key]
-    return f'<p class="vx-cred">Photo : <a href="{E(m["page"])}" target="_blank" rel="noopener">{E(m["author"])}</a>, {E(m["license"])}, Wikimedia Commons</p>'
+    return f'<p class="vx-cred">{U[lang]["photo"]} : <a href="{E(m["page"])}" target="_blank" rel="noopener">{E(m["author"])}</a>, {E(m["license"])}, Wikimedia Commons</p>'
 
 
 def publies(site):
+    """Pays publiés en français : ceux qui ont au moins 5 lieux en photo (les lieux sans photo sont retirés)."""
     ph = photos(site)
     out = []
     for p in PAYS:
@@ -292,56 +393,134 @@ def publies(site):
     return out, ph
 
 
-def build(site, ctx):
+def loc(p, lang):
+    """Un pays (déjà filtré par publies) dans une langue ; None si la traduction manque."""
+    if lang == "fr":
+        return dict(p, region_l=p["region"])
+    t = TR.get(lang)
+    if not t or p["cc"] not in t.PAYS or any(l["key"] not in t.LIEUX for l in p["lieux"]):
+        return None
+    d = t.PAYS[p["cc"]]
+    return dict(p, slug=d["slug"], nom=d["nom"], en=d["en"], ville=d["ville"], accroche=d["accroche"], region_l=REG[p["region"]][lang],
+                lieux=[dict(l, nom=t.LIEUX[l["key"]][0], txt=t.LIEUX[l["key"]][1], kind=KINDS[l["kind"]][lang]) for l in p["lieux"]])
+
+
+def par_langue(site):
+    """{langue: [pays localisés]} et les photos ; chaque pays garde le même ordre dans toutes les langues."""
     pays, ph = publies(site)
-    if not pays:
+    out = {}
+    for lang in LANGS:
+        L = [x for x in (loc(p, lang) for p in pays) if x]
+        if L:
+            out[lang] = L
+    return out, ph
+
+
+PATH = lambda p, lang="fr": f"{BASE[lang]}/{p['slug']}"
+
+
+def _coord(site):
+    return {a[0]: (a[5], a[6]) for a in json.loads((site / "data" / "airports.json").read_text(encoding="utf-8"))}
+
+
+def build(site, ctx):
+    PL, ph = par_langue(site)
+    if "fr" not in PL:
         return []
-    for p in pays:
-        for l in p["lieux"]:
-            ph[l["key"]]["alt"] = f"{l['nom']}, {p['nom']}"
+    coord = _coord(site)
     urls = []
-    for i, p in enumerate(pays):
-        L = p["lieux"]
-        hero = (f'<div class="vx"><p class="eyebrow">Explorer le monde · {E(p["region"])}</p><h1>Que visiter {E(p["en"])} <span>{p["flag"]}</span></h1>'
-                f'<p class="hero-lead">{E(p["accroche"])} {len(L)} villes et lieux à voir, en photos.</p></div>')
-        chips = '<nav class="vx-chips" aria-label="Lieux">' + "".join(f'<a href="#{l["key"]}">{E(l["nom"])}</a>' for l in L) + "</nav>"
-        top = (f'<figure class="vx-hero">{img(ph, L[0]["key"], eager=True, sizes="(min-width:860px) 828px, 100vw")}<figcaption><span class="vx-title">{E(p["nom"])}</span>'
-               f'<span class="vx-sub">{len(L)} lieux à voir · {E(", ".join(l["nom"] for l in L[:4]))}…</span></figcaption></figure>')
-        cards = "".join(f'<article class="vx-card" id="{l["key"]}"><div class="vx-ph"><span class="vx-kind">{E(l["kind"])}</span><span class="vx-n">{n}</span>{img(ph, l["key"])}<button type="button" class="vx-like" data-k="{l["key"]}" data-n="{E(l["nom"])}" data-p="{E(p["nom"])}" aria-pressed="false" aria-label="Ajouter {E(l["nom"])} à mes envies">{HEART}</button></div>'
-                        f'<div class="vx-tx"><h2>{E(l["nom"])}</h2><p>{l["txt"]}</p>{cred(ph, l["key"])}</div></article>' for n, l in enumerate(L, 1))
-        autres = [pays[(i + k) % len(pays)] for k in (1, 2, 3)]
-        cta = (f'<section class="vx-cta" data-air="{p["air"]}" data-ville="{E(p["ville"])}"><h2>Envie de partir {E(p["en"])} ?</h2><p>Comparez les vols pour {E(p["ville"])} et choisissez vos dates.</p>'
-               '<p class="vx-dep"><label>Je pars de <select aria-label="Ville de départ"><option value="">choisir une ville</option></select></label></p><p class="vx-prix" role="status"></p>'
-               f'<a class="btn" href="/?type=vols&amp;to={p["air"]}">Voir les vols pour {E(p["ville"])}</a><a class="btn ghost" href="/partout/">Voir les prix partout dans le monde</a>'
-               f'<button type="button" class="btn ghost" id="vx-share" data-t="Que visiter {E(p["en"])} : {len(L)} villes et lieux à voir, en photos">Partager cette page</button></section>')
-        suite = ('<section><h2>Continuer le voyage</h2><div class="vx-hub">' + "".join(
-            f'<a href="/{PATH(a)}/">{img(ph, a["lieux"][0]["key"], sizes="(min-width:700px) 270px, 50vw")}<span class="vx-hl"><h3>{E(a["nom"])} {a["flag"]}</h3><small>{len(a["lieux"])} lieux à voir</small></span></a>' for a in autres)
-            + '</div><p><a href="/visiter/">Tous les pays à explorer</a></p></section>')
-        note = ('<p class="small">Ces repères sont généraux et ne remplacent pas un guide. Avant de partir, vérifiez les conditions d\'entrée du pays avec '
-                '<a href="/visa/">l\'outil visa</a> et auprès des autorités. Photos : Wikimedia Commons, licences libres, <a href="/credits-photos/">tous les crédits</a>.</p>')
-        ld = '<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", "@type": "ItemList", "name": f"Que visiter {p['en']}", "itemListElement": [
-            {"@type": "ListItem", "position": n, "name": l["nom"], "url": f"{ctx['domain']}/{PATH(p)}/#{l['key']}"} for n, l in enumerate(L, 1)]}, ensure_ascii=False) + "</script>"
-        body = top + cred(ph, L[0]["key"]) + chips + f'<div class="vx-list">{cards}</div>' + cta + ENVIES + suite + note + '<script src="/visiter.js" defer></script>'
-        urls.append(B.write(site, PATH(p), "fr", f"Que visiter {p['en']} : {len(L)} villes et lieux à voir | Escale",
-                            f"{p['nom']} en photos : {', '.join(l['nom'] for l in L[:6])}… Les villes et les lieux à voir, avec de vraies photos, et les vols pour {p['ville']}.",
-                            hero, body, ld, {"fr": PATH(p)}, ctx, og=f"img/visiter/{L[0]['key']}.webp"))
-    # --- sommaire
-    hero = ('<div class="vx"><p class="eyebrow">Explorer le monde</p><h1>Que visiter, <span>pays par pays</span></h1>'
-            f'<p class="hero-lead">Pas seulement les capitales : pour chaque pays, ses villes et ses lieux à voir, avec de vraies photos. {len(pays)} pays, et d\'autres arrivent.</p></div>')
-    body = ('<p class="vx-search"><label for="vx-q">Chercher un pays ou un lieu</label><input id="vx-q" type="search" placeholder="Japon, Kyoto, plage, safari…" autocomplete="off"><span id="vx-q-msg" class="small" role="status"></span></p>' + ENVIES)
-    for r in REGIONS:
-        ps = [p for p in pays if p["region"] == r]
-        if not ps:
-            continue
-        body += f'<h2 class="vx-reg">{E(r)}</h2><div class="vx-hub">' + "".join(
-            f'<a href="/{PATH(p)}/" data-mots="{E(p["nom"] + " " + p["region"] + " " + " ".join(l["nom"] + " " + l["kind"] for l in p["lieux"]))}">{img(ph, p["lieux"][0]["key"], sizes="(min-width:700px) 270px, 50vw", eager=(r == REGIONS[0] and k < 2))}<span class="vx-hl"><h3>{E(p["nom"])} {p["flag"]}</h3>'
-            f'<small>{E(", ".join(l["nom"] for l in p["lieux"][:3]))}…</small></span></a>' for k, p in enumerate(ps)) + "</div>"
-    body += ('<section><h2>Et pour partir</h2><ul><li><a href="/partout/">Les prix des vols partout dans le monde</a></li><li><a href="/surprends-moi/">Surprends-moi : une destination au hasard selon votre budget</a></li>'
-             '<li><a href="/quiz-destination/">Quiz : quelle destination est faite pour moi ?</a></li></ul></section>'
-             '<p class="small">Photos : Wikimedia Commons, licences libres, <a href="/credits-photos/">tous les crédits</a>.</p><script src="/visiter.js" defer></script>')
-    urls.append(B.write(site, "visiter", "fr", "Que visiter : le monde pays par pays, en photos | Escale",
-                        "Explorez le monde pays par pays : les villes et les lieux à voir, avec de vraies photos. " + ", ".join(p["nom"] for p in pays[:8]) + "…",
-                        hero, body, "", {"fr": "visiter"}, ctx))
+    # chemins de chaque pays dans chaque langue (pour les liens entre langues)
+    chem = {}
+    for lang, L in PL.items():
+        for p in L:
+            chem.setdefault(p["cc"], {})[lang] = PATH(p, lang)
+    hubs = {lang: BASE[lang] for lang in PL}
+    subs = {k: {lang: f"{BASE[lang]}/{v[lang]}" for lang in PL} for k, v in SUB.items()}
+    for lang, pays in PL.items():
+        u = U[lang]
+        A = lambda cle: "/" + subs[cle][lang] + "/"
+        # --- données pour les outils (jeu, comparateur, carte, envies) : un petit fichier par langue
+        data = {"base": "/" + BASE[lang] + "/", "pays": [
+            {"cc": p["cc"], "slug": p["slug"], "nom": p["nom"], "flag": p["flag"], "ville": p["ville"], "air": p["air"], "region": p["region_l"],
+             "lat": coord.get(p["air"], (0, 0))[0], "lon": coord.get(p["air"], (0, 0))[1],
+             "lieux": [{"k": l["key"], "n": l["nom"], "a": ph[l["key"]]["author"], "l": ph[l["key"]]["license"]} for l in p["lieux"]]} for p in pays]}
+        (site / "data" / f"visiter-{lang}.json").write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+        attrs = f'data-vx-base="/{BASE[lang]}/" data-vx-data="/data/visiter-{lang}.json"'
+        envies = (f'<section id="vx-envies" class="vx-envies" hidden><h2>{u["envies"]} <span data-envies-n></span></h2><p class="small">{u["envies_p"]}</p><ul></ul>'
+                  '<div id="vx-alertes"></div></section>')
+        for i, p in enumerate(pays):
+            L = p["lieux"]
+            n = len(L)
+            hero = (f'<div class="vx" {attrs}><p class="eyebrow">{u["eyebrow"]} · {E(p["region_l"])}</p><h1>{E(u["h1"].format(en=p["en"]))} <span>{p["flag"]}</span></h1>'
+                    f'<p class="hero-lead">{E(p["accroche"])} {u["lead"].format(n=n)}</p></div>')
+            chips = '<nav class="vx-chips" aria-label="' + u["sub"].format(n=n) + '">' + "".join(f'<a href="#{l["key"]}">{E(l["nom"])}</a>' for l in L) + "</nav>"
+            top = (f'<figure class="vx-hero">{img(ph, L[0]["key"], L[0]["nom"] + ", " + p["nom"], eager=True, sizes="(min-width:860px) 828px, 100vw")}<figcaption><span class="vx-title">{E(p["nom"])}</span>'
+                   f'<span class="vx-sub">{u["sub"].format(n=n)} · {E(", ".join(l["nom"] for l in L[:4]))}…</span></figcaption></figure>')
+            cards = "".join(
+                f'<article class="vx-card" id="{l["key"]}"><div class="vx-ph"><span class="vx-kind">{E(l["kind"])}</span><span class="vx-n">{k}</span>{img(ph, l["key"], l["nom"] + ", " + p["nom"])}'
+                f'<button type="button" class="vx-like" data-k="{l["key"]}" data-n="{E(l["nom"])}" data-p="{E(p["nom"])}" data-cc="{p["cc"]}" aria-pressed="false" aria-label="{E(u["like"].format(n=l["nom"]))}">{HEART}</button></div>'
+                f'<div class="vx-tx"><h2>{E(l["nom"])}</h2><p>{l["txt"]}</p>{cred(ph, l["key"], lang)}'
+                f'<p class="vx-acts"><button type="button" class="vx-pc" data-k="{l["key"]}" data-n="{E(l["nom"])}" data-p="{E(p["nom"])}" data-f="{p["flag"]}" data-a="{E(ph[l["key"]]["author"])}" data-l="{E(ph[l["key"]]["license"])}">🖼 {u["carte"]}</button></p>'
+                f'</div></article>' for k, l in enumerate(L, 1))
+            autres = [pays[(i + k) % len(pays)] for k in (1, 2, 3)]
+            cta = (f'<section class="vx-cta" data-air="{p["air"]}" data-ville="{E(p["ville"])}" data-cc="{p["cc"]}"><h2>{E(u["cta"].format(en=p["en"]))}</h2><p>{E(u["cta_p"].format(ville=p["ville"]))}</p>'
+                   f'<p class="vx-dep"><label>{u["dep"]} <select aria-label="{u["dep"]}"><option value="">{u["dep0"]}</option></select></label></p><p class="vx-prix" role="status"></p>'
+                   f'<a class="btn" href="/?type=vols&amp;to={p["air"]}{"" if lang == "fr" else "&amp;lang=" + lang}">{E(u["vols"].format(ville=p["ville"]))}</a>'
+                   f'<a class="btn ghost" href="{u["l_partout"][0]}">{u["partout"]}</a>'
+                   f'<button type="button" class="btn ghost" id="vx-share" data-t="{E(u["share_t"].format(en=p["en"], n=n))}">{u["share"]}</button>'
+                   f'<details class="vx-budget"><summary>{u["budget"]}</summary><div class="vx-bgrid">'
+                   f'<label><span>{u["b_vol"]}</span><input type="number" id="vb-vol" min="0" step="1" inputmode="numeric"></label>'
+                   f'<label><span>{u["b_pers"]}</span><input type="number" id="vb-pers" min="1" max="12" step="1" value="2" inputmode="numeric"></label>'
+                   f'<label><span>{u["b_nuits"]}</span><input type="number" id="vb-nuits" min="0" max="90" step="1" value="7" inputmode="numeric"></label>'
+                   f'<label><span>{u["b_log"]}</span><input type="number" id="vb-log" min="0" step="1" inputmode="numeric"></label>'
+                   f'<label><span>{u["b_jour"]}</span><input type="number" id="vb-jour" min="0" step="1" inputmode="numeric"></label></div>'
+                   f'<p class="vx-btot" id="vb-tot" role="status"></p><p class="vx-bnote">{u["b_note"]}</p></details></section>')
+            suite = (f'<section><h2>{u["suite"]}</h2><div class="vx-hub">' + "".join(
+                f'<a href="/{PATH(a, lang)}/">{img(ph, a["lieux"][0]["key"], a["nom"], sizes="(min-width:700px) 270px, 50vw")}<span class="vx-hl"><h3>{E(a["nom"])} {a["flag"]}</h3><small>{u["n_lieux"].format(n=len(a["lieux"]))}</small></span></a>' for a in autres)
+                + f'</div><p class="vx-more"><a href="/{BASE[lang]}/">{u["tous"]}</a> · <a href="{A("jeu")}">{u["jeu"]}</a> · <a href="{A("comparer")}?a={p["cc"]}">{u["comparer"]}</a></p></section>')
+            ld = '<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", "@type": "ItemList", "name": u["h1"].format(en=p["en"]), "itemListElement": [
+                {"@type": "ListItem", "position": k, "name": l["nom"], "url": f"{ctx['domain']}/{PATH(p, lang)}/#{l['key']}"} for k, l in enumerate(L, 1)]}, ensure_ascii=False) + "</script>"
+            body = (top + cred(ph, L[0]["key"], lang) + chips + f'<div class="vx-list">{cards}</div>' + cta + envies + suite + f'<p class="small">{u["note"]}</p>'
+                    + '<script src="/visiter.js" defer></script>')
+            urls.append(B.write(site, PATH(p, lang), lang, u["title"].format(en=p["en"], n=n),
+                                u["desc"].format(nom=p["nom"], lieux=", ".join(l["nom"] for l in L[:6]), ville=p["ville"]),
+                                hero, body, ld, chem[p["cc"]], ctx, og=f"img/visiter/{L[0]['key']}.webp"))
+        # --- sommaire : recherche, envies, carte, pays par région
+        hero = f'<div class="vx" {attrs}><p class="eyebrow">{u["eyebrow"]}</p><h1>{u["hub_h1"]}</h1><p class="hero-lead">{u["hub_lead"].format(n=len(pays))}</p></div>'
+        pins = "".join(
+            f'<a class="vx-pin" href="/{PATH(p, lang)}/" data-cc="{p["cc"]}" style="left:{(coord[p["air"]][1] + 180) * K_MAP / W_MAP * 100:.2f}%;top:{(TOP_MAP - coord[p["air"]][0]) * K_MAP / H_MAP * 100:.2f}%" '
+            f'aria-label="{E(p["nom"])}"><i>{p["flag"]}</i></a>' for p in pays if p["air"] in coord)
+        zooms = "".join(f'<button type="button" data-z="{k}"{" aria-pressed=true" if k == 1 else ""}>{z}</button>' for k, z in enumerate(u["zoom"]))
+        body = (f'<p class="vx-search"><label for="vx-q">{u["q"]}</label><input id="vx-q" type="search" placeholder="{u["q_ph"]}" autocomplete="off"><span id="vx-q-msg" class="small" role="status"></span></p>'
+                f'<p class="vx-tools"><a class="btn ghost" href="{A("jeu")}">{u["jeu"]}</a><a class="btn ghost" href="{A("comparer")}">{u["comparer"]}</a></p>' + envies
+                + f'<section class="vx-mapbox"><h2>{u["map_h"]}</h2><p class="small">{u["map_p"]}</p><div class="vx-zoom" role="group">{zooms}</div>'
+                  f'<div class="vx-map" id="vx-map"><div class="vx-map-in"><img src="/img/world.svg" alt="" width="2000" height="789" loading="lazy" decoding="async">{pins}</div></div>'
+                  f'<div id="vx-map-card" class="vx-map-card" role="status"></div></section>')
+        for r in REGIONS:
+            ps = [p for p in pays if p["region"] == r]
+            if not ps:
+                continue
+            body += f'<h2 class="vx-reg">{E(ps[0]["region_l"])}</h2><div class="vx-hub">' + "".join(
+                f'<a href="/{PATH(p, lang)}/" data-mots="{E(p["nom"] + " " + p["region_l"] + " " + " ".join(l["nom"] + " " + l["kind"] for l in p["lieux"]))}">'
+                f'{img(ph, p["lieux"][0]["key"], p["nom"], sizes="(min-width:700px) 270px, 50vw")}<span class="vx-hl"><h3>{E(p["nom"])} {p["flag"]}</h3>'
+                f'<small>{E(", ".join(l["nom"] for l in p["lieux"][:3]))}…</small></span></a>' for p in ps) + "</div>"
+        body += (f'<section><h2>{u["partir"]}</h2><ul>' + "".join(f'<li><a href="{h}">{E(t)}</a></li>' for h, t in (u["l_partout"], u["l_surp"], u["l_quiz"])) + '</ul></section>'
+                 f'<p class="small">{u["credits"]}</p><script src="/visiter.js" defer></script><script src="/visiter-carte.js" defer></script>')
+        urls.append(B.write(site, BASE[lang], lang, u["hub_title"], u["hub_desc"].format(noms=", ".join(p["nom"] for p in pays[:8])), hero, body, "", hubs, ctx))
+        # --- jeu « devine le pays »
+        hero = f'<div class="vx" {attrs}><p class="eyebrow">{u["eyebrow"]}</p><h1>{u["jeu_h1"]}</h1><p class="hero-lead">{u["jeu_lead"]}</p></div>'
+        body = (f'<div id="vx-jeu" class="vx-jeu"><p><button type="button" class="btn" id="vj-go">{u["jeu_go"]}</button></p></div>'
+                f'<p class="vx-more"><a href="/{BASE[lang]}/">{u["tous"]}</a> · <a href="{A("comparer")}">{u["comparer"]}</a></p><p class="small">{u["credits"]}</p>'
+                '<script src="/visiter-jeu.js" defer></script>')
+        urls.append(B.write(site, subs["jeu"][lang], lang, u["jeu_title"], u["jeu_desc"], hero, body, "", subs["jeu"], ctx))
+        # --- comparateur de deux pays
+        hero = f'<div class="vx" {attrs}><p class="eyebrow">{u["eyebrow"]}</p><h1>{u["cmp_h1"]}</h1><p class="hero-lead">{u["cmp_lead"]}</p></div>'
+        opts = "".join(f'<option value="{p["cc"]}">{p["flag"]} {E(p["nom"])}</option>' for p in pays)
+        body = (f'<div class="vx-cmp-form"><label><span>{u["cmp_a"]}</span><select id="vc-a">{opts}</select></label><label><span>{u["cmp_b"]}</span><select id="vc-b">{opts}</select></label>'
+                f'<label><span>{u["dep"]}</span><select id="vc-from"><option value="">{u["dep0"]}</option></select></label></div><div id="vx-cmp" class="vx-cmp" role="status"></div>'
+                f'<p class="vx-more"><a href="/{BASE[lang]}/">{u["tous"]}</a> · <a href="{A("jeu")}">{u["jeu"]}</a></p><p class="small">{u["credits"]}</p>'
+                '<script src="/visiter.js" defer></script><script src="/visiter-comparer.js" defer></script>')
+        urls.append(B.write(site, subs["comparer"][lang], lang, u["cmp_title"], u["cmp_desc"], hero, body, "", subs["comparer"], ctx))
     return urls
 
 
@@ -356,6 +535,12 @@ def credits(site):
 
 
 def liens(site):
-    """Pays publiés, pour l'accueil et le pied de page."""
-    pays, ph = publies(site)
-    return [(PATH(p), p["nom"], p["flag"], p["lieux"][0]["key"], ph[p["lieux"][0]["key"]]) for p in pays]
+    """Pays publiés, pour l'accueil : chemins et noms dans chaque langue, drapeau, ville, première photo."""
+    PL, ph = par_langue(site)
+    out = []
+    for i, p in enumerate(PL.get("fr", [])):
+        autres = {lang: next((x for x in L if x["cc"] == p["cc"]), None) for lang, L in PL.items()}
+        out.append(dict(cc=p["cc"], flag=p["flag"], key=p["lieux"][0]["key"], m=ph[p["lieux"][0]["key"]],
+                        href={lang: "/" + PATH(x, lang) + "/" for lang, x in autres.items() if x},
+                        nom={lang: x["nom"] for lang, x in autres.items() if x}, ville={lang: x["ville"] for lang, x in autres.items() if x}))
+    return out

@@ -37,3 +37,10 @@ Une tâche planifiée de Claude ajoute une nouveauté au site tous les 2 jours, 
 - `/visiter/` : 24 pays, 192 villes et lieux en photos (scripts/visiter.py, photos dans site/img/visiter, crédits dans site/data/visiter-photos.json).
 - Style « serein » (bloc en fin de site/pages.css et dans site/index.html) : titres Fraunces, texte Nunito, animations ; couleurs d'Escale conservées.
 - Accueil : le titre reste fixe, un ruban de pays défile dessous (site/motion.js, site/hero-anim.js et sa copie src/accueil-anim.ts).
+
+## 13 novembre 2026 : « Que visiter » en trois langues, 8 pays d'Afrique de plus, 6 outils
+- 32 pays, 253 lieux, en français (`/visiter/`), anglais (`/en/what-to-visit/`) et italien (`/it/cosa-visitare/`). Textes : scripts/visiter.py (fr),
+  visiter_en.py, visiter_it.py ; pays ajoutés (Mali, Guinée, Bénin, Togo, Burkina Faso, RD Congo, Gabon, Nigeria) dans visiter_afrique.py, trois langues ensemble.
+- Outils : jeu « Devine le pays » (visiter-jeu.js), carte postale à partager, carte du monde cliquable avec prix (visiter-carte.js),
+  comparateur de deux pays (visiter-comparer.js), alerte prix depuis « Mes envies », budget du voyage (visiter.js).
+- Prix : /api/ruban (src/api/ruban.ts), aller-retour le plus bas repéré depuis la ville du visiteur ; rien n'est affiché sans prix repéré.
