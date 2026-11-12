@@ -27,8 +27,8 @@
   var lset = function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
   // Compteur anonyme (même service que site/clics.js) : pastille affichée, ouverte, alerte créée
   var compte = function (k) { var b = JSON.stringify({ k: k, p: "recherche" }); try { if (navigator.sendBeacon && navigator.sendBeacon("/api/clic", b)) return; } catch (e) {} try { fetch("/api/clic", { method: "POST", body: b, keepalive: true }); } catch (e) {} };
-  // Les e-mails d'alerte existent en français, anglais, espagnol, portugais et arabe : l'italien et l'allemand reçoivent l'anglais
-  var MAIL = { it: "en", de: "en" }[LG] || LG;
+  // Les e-mails d'alerte existent dans les 7 langues de cette pastille (src/_lib/alert-texts.ts)
+  var MAIL = LG;
   var shown = false;
   function compter() {
     var s = parse(); if (!s) return;

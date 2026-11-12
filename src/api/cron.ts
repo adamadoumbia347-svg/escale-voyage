@@ -29,7 +29,7 @@ export async function checkAlerts(env: Env) {
     const fmtM = (n: number) => new Intl.NumberFormat(rec.lang === "ar" ? "ar-u-nu-latn" : rec.lang, { style: "currency", currency: rec.currency, maximumFractionDigits: 0 }).format(n)
     const t = TXT[rec.lang] || TXT.fr
     const id = name.slice("alert:".length)
-    const v = { a: cityCode(rec.from), b: cityCode(rec.to), price: fmtM(price), max: fmtM(rec.max),
+    const v = { a: cityCode(rec.from, rec.lang), b: cityCode(rec.to, rec.lang), price: fmtM(price), max: fmtM(rec.max),
       search: `${base}/?type=vols&from=${rec.from}&to=${rec.to}${rec.lang === "fr" ? "" : "&lang=" + rec.lang}`,
       unsub: `${base}/api/alert?action=unsubscribe&id=${id}&token=${rec.token}` }
     // Prix habituel : seulement pour les trajets suivis chaque nuit, dont l'historique est en euros
@@ -39,7 +39,7 @@ export async function checkAlerts(env: Env) {
       const vd = verdict(hist, price)
       if (vd) usual = `<p>${fill(USUAL[rec.lang] || USUAL.fr, { avg: fmtM(vd.median), n: String(vd.days) })}</p>`
     }
-    const subject = fill(t.dropSubject, { ...v, a: cityName(rec.from), b: cityName(rec.to) })
+    const subject = fill(t.dropSubject, { ...v, a: cityName(rec.from, rec.lang), b: cityName(rec.to, rec.lang) })
     if (await sendMail(env, rec.email, subject, layout(rec.lang, fill(t.dropBody, v) + usual, fill(t.footer, v), v.search))) {
       rec.lastSent = new Date().toISOString(); rec.lastPrice = price
       const left = Math.max(86400, Math.round((Date.parse(rec.created) + 365 * 864e5 - now) / 1000))
@@ -78,7 +78,7 @@ async function checkPush(env: Env, cache: Map<string, number | null>) {
     if (price == null || price > rec.max) continue
     const loc = rec.lang === "ar" ? "ar-u-nu-latn" : rec.lang
     const fmtM = (n: number) => new Intl.NumberFormat(loc, { style: "currency", currency: rec.currency, maximumFractionDigits: 0 }).format(n)
-    const t = PT[rec.lang] || PT.fr, v = { a: cityName(rec.from), b: cityName(rec.to), price: fmtM(price), max: fmtM(rec.max) }
+    const t = PT[rec.lang] || PT.fr, v = { a: cityName(rec.from, rec.lang), b: cityName(rec.to, rec.lang), price: fmtM(price), max: fmtM(rec.max) }
     const msg = { title: fill(t[0], v), body: fill(t[1], v), url: `/?type=vols&from=${rec.from}&to=${rec.to}${rec.lang === "fr" ? "" : "&lang=" + rec.lang}` }
     await kv.put(`pmsg:${rec.eid}`, JSON.stringify(msg), { expirationTtl: 7 * 86400 })
     const status = await sendPush(kv, rec.endpoint, base).catch(() => 0)

@@ -7,7 +7,7 @@ import { TXT, fill, page, layout, cityName, cityCode } from "../_lib/alert-texts
 //  GET  /api/alert?action=confirm&id=…&token=…      -> active l'alerte
 //  GET  /api/alert?action=unsubscribe&id=…&token=…  -> supprime l'alerte et l'adresse
 const EMAIL = /^[^\s@]{1,64}@[^\s@]{1,190}\.[a-z]{2,24}$/i
-const LANGS = ["fr", "en", "es", "pt", "ar"]
+const LANGS = ["fr", "en", "es", "pt", "ar", "it", "de"]
 
 export const onRequest = async (ctx: Ctx) => {
   const { request, env } = ctx
@@ -49,8 +49,8 @@ export const onRequest = async (ctx: Ctx) => {
   const base = siteUrl(env, request)
   const money = new Intl.NumberFormat(lang === "ar" ? "ar-u-nu-latn" : lang, { style: "currency", currency, maximumFractionDigits: 0 }).format(max)
   const t = TXT[lang]
-  const v = { a: cityCode(from), b: cityCode(to), max: money, link: `${base}/api/alert?action=confirm&id=${id}&token=${token}`, unsub: `${base}/api/alert?action=unsubscribe&id=${id}&token=${token}` }
-  const ok = await sendMail(env, email, fill(t.confirmSubject, { ...v, a: cityName(from), b: cityName(to) }), layout(lang, fill(t.confirmBody, v), fill(t.footer, v), v.link))
+  const v = { a: cityCode(from, lang), b: cityCode(to, lang), max: money, link: `${base}/api/alert?action=confirm&id=${id}&token=${token}`, unsub: `${base}/api/alert?action=unsubscribe&id=${id}&token=${token}` }
+  const ok = await sendMail(env, email, fill(t.confirmSubject, { ...v, a: cityName(from, lang), b: cityName(to, lang) }), layout(lang, fill(t.confirmBody, v), fill(t.footer, v), v.link))
   if (!ok) { await kv.delete(`alert:${id}`); await kv.delete(lim); return json({ error: "mail", detail: lastMailError }, { status: 502 }) }
   return json({ ok: true, email: esc(email) })
 }

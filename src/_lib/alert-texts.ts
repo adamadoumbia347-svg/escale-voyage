@@ -1,5 +1,5 @@
 import { ROUTES } from "../barometre"
-// Textes des e-mails et pages d'alerte (5 langues)
+// Textes des e-mails et pages d'alerte (7 langues : italien et allemand ajoutés le 12 novembre 2026)
 export const TXT: Record<string, Record<string, string>> = {
   fr: {
     confirmSubject: "Confirmez votre alerte prix {a} → {b}",
@@ -51,14 +51,40 @@ export const TXT: Record<string, Record<string, string>> = {
     unsubscribed: "تم حذف التنبيه مع بريدك الإلكتروني.",
     invalid: "هذا الرابط لم يعد صالحًا.", back: "العودة إلى Escale",
   },
+  it: {
+    confirmSubject: "Conferma il tuo avviso prezzo {a} → {b}",
+    confirmBody: "<p>Ciao,</p><p>Hai chiesto di essere avvisato quando un andata e ritorno <b>{a} → {b}</b> scende sotto <b>{max}</b>.</p><p><a href=\"{link}\">Conferma il mio avviso</a></p><p>Se non hai fatto tu questa richiesta, ignora questo messaggio: non verrà creato nessun avviso.</p>",
+    dropSubject: "Prezzo in calo: {a} → {b} da {price}",
+    dropBody: "<p>Buone notizie: è stato trovato un andata e ritorno <b>{a} → {b}</b> a <b>{price}</b>, sotto la tua soglia di {max}.</p><p><a href=\"{search}\">Vedi i voli</a></p><p>I prezzi cambiano in fretta: verifica la tariffa finale sul sito di prenotazione.</p>",
+    footer: "<p style=\"color:#666;font-size:12px\">Escale · <a href=\"{unsub}\">Annulla questo avviso</a></p>",
+    confirmed: "Il tuo avviso prezzo è confermato. Ti scriveremo quando il prezzo scenderà sotto la tua soglia.",
+    unsubscribed: "Il tuo avviso è stato cancellato, insieme al tuo indirizzo e-mail.",
+    invalid: "Questo link non è più valido.", back: "Torna a Escale",
+  },
+  de: {
+    confirmSubject: "Bestätige deinen Preisalarm {a} → {b}",
+    confirmBody: "<p>Hallo,</p><p>du möchtest benachrichtigt werden, sobald ein Hin- und Rückflug <b>{a} → {b}</b> unter <b>{max}</b> fällt.</p><p><a href=\"{link}\">Meinen Preisalarm bestätigen</a></p><p>Falls diese Anfrage nicht von dir stammt, ignoriere diese Nachricht: Es wird kein Alarm angelegt.</p>",
+    dropSubject: "Preis gesunken: {a} → {b} ab {price}",
+    dropBody: "<p>Gute Nachricht: Ein Hin- und Rückflug <b>{a} → {b}</b> wurde für <b>{price}</b> gefunden, unter deiner Grenze von {max}.</p><p><a href=\"{search}\">Flüge ansehen</a></p><p>Preise ändern sich schnell: Prüfe den Endpreis auf der Buchungsseite.</p>",
+    footer: "<p style=\"color:#666;font-size:12px\">Escale · <a href=\"{unsub}\">Diesen Preisalarm abbestellen</a></p>",
+    confirmed: "Dein Preisalarm ist bestätigt. Wir schreiben dir, sobald der Preis unter deine Grenze fällt.",
+    unsubscribed: "Dein Preisalarm wurde gelöscht, zusammen mit deiner E-Mail-Adresse.",
+    invalid: "Dieser Link ist nicht mehr gültig.", back: "Zurück zu Escale",
+  },
 }
 
 // Noms de villes pour les e-mails et notifications d'alerte : tirés des trajets suivis (src/barometre.ts) ; à défaut, le code de l'aéroport.
 const CITY: Record<string, string> = {}
 for (const [from, to, label] of ROUTES) { const [a, b] = label.split(" → "); if (a && !CITY[from]) CITY[from] = a; if (b && !CITY[to]) CITY[to] = b }
-export const cityName = (code: string) => CITY[code] || code
+// Noms des villes les plus courantes en italien et en allemand (les autres gardent le nom français, souvent identique)
+const CITY_L: Record<string, Record<string, string>> = {
+  it: { MXP: "Milano", LIN: "Milano", BGY: "Bergamo", FCO: "Roma", CIA: "Roma", CDG: "Parigi", ORY: "Parigi", LHR: "Londra", GVA: "Ginevra", LYS: "Lione", MRS: "Marsiglia", FRA: "Francoforte", LIS: "Lisbona",
+    BCN: "Barcellona", TUN: "Tunisi", ALG: "Algeri", CAI: "Il Cairo", ADD: "Addis Abeba" },
+  de: { MXP: "Mailand", LIN: "Mailand", FCO: "Rom", CIA: "Rom", LHR: "London", GVA: "Genf", BRU: "Brüssel", LIS: "Lissabon", FRA: "Frankfurt", ALG: "Algier", CAI: "Kairo", ADD: "Addis Abeba", LYS: "Lyon", MRS: "Marseille" },
+}
+export const cityName = (code: string, lang = "fr") => (CITY_L[lang] && CITY_L[lang][code]) || CITY[code] || code
 // « Paris (CDG) » quand la ville est connue, sinon « CDG »
-export const cityCode = (code: string) => (CITY[code] ? `${CITY[code]} (${code})` : code)
+export const cityCode = (code: string, lang = "fr") => { const n = (CITY_L[lang] && CITY_L[lang][code]) || CITY[code]; return n ? `${n} (${code})` : code }
 
 // Prix habituel du trajet, ajouté à l'e-mail de baisse quand l'historique existe (trajets suivis, en euros)
 export const USUAL: Record<string, string> = {
@@ -67,6 +93,8 @@ export const USUAL: Record<string, string> = {
   es: "Precio habitual en esta ruta: <b>{avg}</b> (mediana de los últimos {n} días registrados).",
   pt: "Preço habitual nesta rota: <b>{avg}</b> (mediana dos últimos {n} dias registados).",
   ar: "السعر المعتاد لهذه الرحلة: <b>{avg}</b> (وسيط آخر {n} يومًا مسجّلًا).",
+  it: "Prezzo abituale su questa tratta: <b>{avg}</b> (mediana degli ultimi {n} giorni rilevati).",
+  de: "Üblicher Preis auf dieser Strecke: <b>{avg}</b> (Median der letzten {n} erfassten Tage).",
 }
 
 // Habillage commun des e-mails d'alerte : en-tête Escale, texte lisible, lien principal transformé en bouton
