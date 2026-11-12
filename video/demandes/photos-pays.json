@@ -1,19 +1,26 @@
 {
- "code": "c7",
+ "code": "e1",
  "lieux": {
-  "cm-douala": "Douala Bonanjo",
-  "cm-douala2": "Douala pont du Wouri",
-  "cm-douala3": "Douala ville vue aérienne",
-  "cm-kribi": "Kribi",
-  "cm-kribi2": "Lobé falls",
-  "cm-waza": "Waza giraffe Cameroon",
-  "cm-montcameroun": "Mount Cameroon Buea",
-  "gh-kumasi": "Kumasi",
-  "gh-kumasi2": "Kejetia market",
-  "gh-kumasi3": "Manhyia Palace Museum",
-  "cm-yaounde": "Yaoundé",
-  "cm-yaounde2": "Yaoundé Cameroun monument de la Réunification",
-  "cm-yaounde3": "Yaoundé centre ville"
+  "ml-bamako": "Bamako fleuve Niger",
+  "ml-bamako2": "Bamako Mali ville",
+  "ml-djenne": "Great Mosque of Djenné",
+  "ml-tombouctou": "Timbuktu Djinguereber mosque",
+  "ml-tombouctou2": "Sankore mosque Timbuktu",
+  "ml-dogon": "Bandiagara escarpment Dogon",
+  "ml-segou": "Ségou Niger",
+  "ml-mopti": "Mopti port",
+  "ml-hombori": "Hombori Tondo",
+  "ml-fatima": "Main de Fatima Mali",
+  "gn-conakry": "Conakry",
+  "gn-conakry2": "Conakry Guinée ville",
+  "gn-loos": "Îles de Loos",
+  "gn-fouta": "Fouta Djallon",
+  "gn-dalaba": "Dalaba Guinée",
+  "gn-kindia": "Voile de la Mariée Kindia",
+  "gn-kambadaga": "Chutes de Kambadaga",
+  "gn-ditinn": "Chutes de Ditinn",
+  "gn-nimba": "Mount Nimba Guinea",
+  "gn-kinkon": "Chutes de Kinkon"
  },
- "demande": "2026-11-12T21:31:01"
+ "demande": "2026-11-12T22:48:10"
 }
