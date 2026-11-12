@@ -1,4 +1,139 @@
 {
+ "ae-abudhabi": {
+  "author": "Guilhem Vellut",
+  "file": "File:Sheikh Zayed Grand Mosque @ Abu Dhabi (15856602738).jpg",
+  "h": 825,
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Sheikh_Zayed_Grand_Mosque_@_Abu_Dhabi_(15856602738).jpg",
+  "w": 1100
+ },
+ "ae-burjalarab": {
+  "author": "Yacine Hary",
+  "file": "File:Burj Al Arab and Jumeirah Beach (9601659067).jpg",
+  "h": 625,
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Burj_Al_Arab_and_Jumeirah_Beach_(9601659067).jpg",
+  "w": 1100
+ },
+ "ae-desert": {
+  "author": "Gfilip",
+  "file": "File:Dubai desert dunes 1.jpg",
+  "h": 733,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Dubai_desert_dunes_1.jpg",
+  "w": 1100
+ },
+ "ae-dubai": {
+  "author": "Tim Reckmann",
+  "file": "File:Dubai Skyline mit Burj Khalifa (18241030269).jpg",
+  "h": 733,
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Dubai_Skyline_mit_Burj_Khalifa_(18241030269).jpg",
+  "w": 1100
+ },
+ "ae-louvre": {
+  "author": "Francesco Bini",
+  "file": "File:Louvre abu dhabi, interno, cortile coperto 02.jpg",
+  "h": 733,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Louvre_abu_dhabi,_interno,_cortile_coperto_02.jpg",
+  "w": 1100
+ },
+ "ae-marina": {
+  "author": "Norlando Pobre",
+  "file": "File:Dubai Marina Skyline.jpg",
+  "h": 733,
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Dubai_Marina_Skyline.jpg",
+  "w": 1100
+ },
+ "ae-palm": {
+  "author": "giggel",
+  "file": "File:Vereinigte Arabische Emirate - Dubai - Palm Jumeirah und Dubai Marina - im Vordergrund das Hotel Atlantis - panoramio.jpg",
+  "h": 596,
+  "license": "CC BY 3.0",
+  "license_url": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Vereinigte_Arabische_Emirate_-_Dubai_-_Palm_Jumeirah_und_Dubai_Marina_-_im_Vordergrund_das_Hotel_Atlantis_-_panoramio.jpg",
+  "w": 1100
+ },
+ "br-amazonie": {
+  "author": "James Martins",
+  "file": "File:Amazon rainforest manaus APA Margem Esquerda do Rio Negro - panoramio.jpg",
+  "h": 733,
+  "license": "CC BY 3.0",
+  "license_url": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Amazon_rainforest_manaus_APA_Margem_Esquerda_do_Rio_Negro_-_panoramio.jpg",
+  "w": 1100
+ },
+ "br-copacabana": {
+  "author": "Donatas Dabravolskas",
+  "file": "File:Top Down View of Copacabana Mosaic and Palm Trees 3.jpg",
+  "h": 733,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Top_Down_View_of_Copacabana_Mosaic_and_Palm_Trees_3.jpg",
+  "w": 1100
+ },
+ "br-iguacu": {
+  "author": "Acediscovery",
+  "file": "File:Iguazu-Falls-January-2013.jpg",
+  "h": 797,
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Iguazu-Falls-January-2013.jpg",
+  "w": 1100
+ },
+ "br-lencois": {
+  "author": "Paulo Cattelan",
+  "file": "File:Parque Nacional dos Lençóis Maranhenses Paulo Cattelan (03).jpg",
+  "h": 734,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Parque_Nacional_dos_Len%C3%A7%C3%B3is_Maranhenses_Paulo_Cattelan_(03).jpg",
+  "w": 1100
+ },
+ "br-painsucre": {
+  "author": "Donatas Dabravolskas",
+  "file": "File:Sweet Bread Mountain.jpg",
+  "h": 734,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Sweet_Bread_Mountain.jpg",
+  "w": 1100
+ },
+ "br-rio": {
+  "author": "Donatas Dabravolskas",
+  "file": "File:Redentor Over Clouds 1.jpg",
+  "h": 733,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Redentor_Over_Clouds_1.jpg",
+  "w": 1100
+ },
+ "br-salvador": {
+  "author": "Paul R. Burley",
+  "file": "File:Largo do Pelourinho Salvador 2019-9754 (cropped).jpg",
+  "h": 651,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Largo_do_Pelourinho_Salvador_2019-9754_(cropped).jpg",
+  "w": 1100
+ },
+ "br-saopaulo": {
+  "author": "Sérgio Valle Duarte",
+  "file": "File:Parque Ibirapuera com Avenida Paulista.jpg",
+  "h": 825,
+  "license": "CC BY 3.0",
+  "license_url": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Parque_Ibirapuera_com_Avenida_Paulista.jpg",
+  "w": 1100
+ },
  "ci-abidjan": {
   "author": "RyansWorld",
   "file": "File:Plateau 2010, Abidjan.jpg",
@@ -80,6 +215,78 @@
   "page": "https://commons.wikimedia.org/wiki/File:Ta%C3%AF_National_Park_(24148248710).jpg",
   "w": 1100
  },
+ "cm-douala": {
+  "author": "Olivier Charly1",
+  "file": "File:Quarter Bali à Douala Cameroun.jpg",
+  "h": 825,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Quarter_Bali_%C3%A0_Douala_Cameroun.jpg",
+  "w": 1100
+ },
+ "cm-foumban": {
+  "author": "Elin",
+  "file": "File:The Sultans Palace, Foumban.jpg",
+  "h": 825,
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:The_Sultans_Palace,_Foumban.jpg",
+  "w": 1100
+ },
+ "cm-kribi": {
+  "author": "Blaizo 237",
+  "file": "File:Les chutes de la lobé kribi cameroon1.jpg",
+  "h": 825,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Les_chutes_de_la_lob%C3%A9_kribi_cameroon1.jpg",
+  "w": 1100
+ },
+ "cm-limbe": {
+  "author": "Blaizo 237",
+  "file": "File:Seme beach limbe Cameroon.jpg",
+  "h": 825,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Seme_beach_limbe_Cameroon.jpg",
+  "w": 1100
+ },
+ "cm-montcameroun": {
+  "author": "Adesolive",
+  "file": "File:Mount Cameroon on a sunny day 05.jpg",
+  "h": 825,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Mount_Cameroon_on_a_sunny_day_05.jpg",
+  "w": 1100
+ },
+ "cm-rhumsiki": {
+  "author": "2ddanga",
+  "file": "File:Les monts Kapsiki dans l'Extrême nord2.jpg",
+  "h": 825,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Les_monts_Kapsiki_dans_l%27Extr%C3%AAme_nord2.jpg",
+  "w": 1100
+ },
+ "cm-waza": {
+  "author": "Albert Backer",
+  "file": "File:Waza-NP-Giraffes.jpg",
+  "h": 620,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Waza-NP-Giraffes.jpg",
+  "w": 1100
+ },
+ "cm-yaounde": {
+  "author": "Ryanvanhuyssteen",
+  "file": "File:The Star Building, Yaoundé, Cameroon.jpg",
+  "h": 825,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:The_Star_Building,_Yaound%C3%A9,_Cameroon.jpg",
+  "w": 1100
+ },
  "eg-abousimbel": {
   "author": "Diego Delso",
   "file": "File:Templo de Ramsés II, Abu Simbel, Egipto, 2022-04-02, DD 03.jpg",
@@ -150,6 +357,294 @@
   "license": "CC BY-SA 4.0",
   "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
   "page": "https://commons.wikimedia.org/wiki/File:Great_Sphinx_of_Giza_(2).jpg",
+  "w": 1100
+ },
+ "es-barcelone": {
+  "author": "Didier Descouens",
+  "file": "File:Barcelona - Exterior of the Apse of the Sagrada Família - Western exposure.jpg",
+  "h": 733,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Barcelona_-_Exterior_of_the_Apse_of_the_Sagrada_Fam%C3%ADlia_-_Western_exposure.jpg",
+  "w": 1100
+ },
+ "es-bilbao": {
+  "author": "José Ligero Loarte",
+  "file": "File:Museo Guggenheim -- 2021 -- Bilbao, Euskadi, España.jpg",
+  "h": 688,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Museo_Guggenheim_--_2021_--_Bilbao,_Euskadi,_Espa%C3%B1a.jpg",
+  "w": 1100
+ },
+ "es-cordoue": {
+  "author": "Martinvl",
+  "file": "File:Mezquita-Catedral de Córdoba - Blending of Christian and Moorish architecture.jpg",
+  "h": 859,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Mezquita-Catedral_de_C%C3%B3rdoba_-_Blending_of_Christian_and_Moorish_architecture.jpg",
+  "w": 1100
+ },
+ "es-grenade": {
+  "author": "Jebulon",
+  "file": "File:Alhambra in the evening.jpg",
+  "h": 389,
+  "license": "Public domain",
+  "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Alhambra_in_the_evening.jpg",
+  "w": 1100
+ },
+ "es-madrid": {
+  "author": "Carlos Delgado",
+  "file": "File:Plaza Mayor de Madrid - 01.jpg",
+  "h": 825,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Plaza_Mayor_de_Madrid_-_01.jpg",
+  "w": 1100
+ },
+ "es-majorque": {
+  "author": "dronepicr",
+  "file": "File:Cala Mesquida beach in Mallorca, Spain (47988460597).jpg",
+  "h": 732,
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Cala_Mesquida_beach_in_Mallorca,_Spain_(47988460597).jpg",
+  "w": 1100
+ },
+ "es-seville": {
+  "author": "Dmitry Dzhus",
+  "file": "File:Seville, Plaza de España (38625005691) (edited).jpg",
+  "h": 872,
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Seville,_Plaza_de_Espa%C3%B1a_(38625005691)_(edited).jpg",
+  "w": 1100
+ },
+ "es-valence": {
+  "author": "Elemaki",
+  "file": "File:Ciudad de las Artes y las Ciencias1-edit.jpg",
+  "h": 643,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Ciudad_de_las_Artes_y_las_Ciencias1-edit.jpg",
+  "w": 1100
+ },
+ "fr-bordeaux": {
+  "author": "Gzen92",
+  "file": "File:Miroir d'eau et place de la Bourse (Bordeaux) (6).jpg",
+  "h": 825,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Miroir_d%27eau_et_place_de_la_Bourse_(Bordeaux)_(6).jpg",
+  "w": 1100
+ },
+ "fr-chamonix": {
+  "author": "Alexandre Buisse",
+  "file": "File:Dôme du Goûter depuis la gare des glaciers.jpg",
+  "h": 731,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:D%C3%B4me_du_Go%C3%BBter_depuis_la_gare_des_glaciers.jpg",
+  "w": 1100
+ },
+ "fr-lyon": {
+  "author": "Herbert Frank",
+  "file": "File:Lyon, an der Saône, Cathédrale Saint-Jean-Baptiste (12.), hinten Notre-Dame de Fourvière (19.) (41976209714).jpg",
+  "h": 733,
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Lyon,_an_der_Sa%C3%B4ne,_Cath%C3%A9drale_Saint-Jean-Baptiste_(12.),_hinten_Notre-Dame_de_Fourvi%C3%A8re_(19.)_(41976209714).jpg",
+  "w": 1100
+ },
+ "fr-marseille": {
+  "author": "Zairon",
+  "file": "File:Marseille Basilique Notre-Dame-de-la-Garde Vue sur le Vieux-Port 3.jpg",
+  "h": 821,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Marseille_Basilique_Notre-Dame-de-la-Garde_Vue_sur_le_Vieux-Port_3.jpg",
+  "w": 1100
+ },
+ "fr-montstmichel": {
+  "author": "Eric Kilby",
+  "file": "File:Mont Saint Michel and sheep - 2026.jpg",
+  "h": 659,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Mont_Saint_Michel_and_sheep_-_2026.jpg",
+  "w": 1100
+ },
+ "fr-nice": {
+  "author": "Cayambe",
+  "file": "File:Nice Baie des anges 02.jpg",
+  "h": 705,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Nice_Baie_des_anges_02.jpg",
+  "w": 1100
+ },
+ "fr-paris": {
+  "author": "Rijin S",
+  "file": "File:Eiffel tower (369).JPG",
+  "h": 757,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Eiffel_tower_(369).JPG",
+  "w": 1100
+ },
+ "fr-versailles": {
+  "author": "Dennis G. Jarvis",
+  "file": "File:France-000368 - Hall of Mirrors (14848478673).jpg",
+  "h": 733,
+  "license": "CC BY-SA 2.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:France-000368_-_Hall_of_Mirrors_(14848478673).jpg",
+  "w": 1100
+ },
+ "gh-accra": {
+  "author": "Kwaku Berko",
+  "file": "File:Black star square (ii-(3).jpg",
+  "h": 619,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Black_star_square_(ii-(3).jpg",
+  "w": 1100
+ },
+ "gh-capecoast": {
+  "author": "Rjruiziii",
+  "file": "File:Cape Coast Castle, Cape Coast, Ghana.JPG",
+  "h": 826,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Cape_Coast_Castle,_Cape_Coast,_Ghana.JPG",
+  "w": 1100
+ },
+ "gh-elmina": {
+  "author": "Damien Halleux Radermecker",
+  "file": "File:Elmina Castle - Ghana.jpg",
+  "h": 733,
+  "license": "CC BY-SA 2.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Elmina_Castle_-_Ghana.jpg",
+  "w": 1100
+ },
+ "gh-kakum": {
+  "author": "Ibnali1",
+  "file": "File:Canopy walkway in Kakum National Park.jpg",
+  "h": 825,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Canopy_walkway_in_Kakum_National_Park.jpg",
+  "w": 1100
+ },
+ "gh-kumasi": {
+  "author": "Afus199620",
+  "file": "File:Kejetia-Markt.jpg",
+  "h": 825,
+  "license": "CC0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Kejetia-Markt.jpg",
+  "w": 1100
+ },
+ "gh-mole": {
+  "author": "Matti Blume",
+  "file": "File:Mole National Park, West Gonja (P1100448).jpg",
+  "h": 825,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Mole_National_Park,_West_Gonja_(P1100448).jpg",
+  "w": 1100
+ },
+ "gh-nkrumah": {
+  "author": "Fquasie",
+  "file": "File:Kwame Nkrumah Memorial Park & Mausoleum 5.jpg",
+  "h": 733,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Kwame_Nkrumah_Memorial_Park_%26_Mausoleum_5.jpg",
+  "w": 1100
+ },
+ "gh-volta": {
+  "author": "Jdjdiwla",
+  "file": "File:Spirit of Ghana Wli Waterfalls 01.jpg",
+  "h": 733,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Spirit_of_Ghana_Wli_Waterfalls_01.jpg",
+  "w": 1100
+ },
+ "gr-athenes": {
+  "author": "A.Savin",
+  "file": "File:Attica 06-13 Athens 50 View from Philopappos - Acropolis Hill.jpg",
+  "h": 688,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Attica_06-13_Athens_50_View_from_Philopappos_-_Acropolis_Hill.jpg",
+  "w": 1100
+ },
+ "gr-crete": {
+  "author": "Mwchalmers",
+  "file": "File:BalosLagoonCreta.jpg",
+  "h": 825,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:BalosLagoonCreta.jpg",
+  "w": 1100
+ },
+ "gr-delphes": {
+  "author": "Bernard Gagnon",
+  "file": "File:Tholos of Delphi 03.jpg",
+  "h": 785,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Tholos_of_Delphi_03.jpg",
+  "w": 1100
+ },
+ "gr-meteores": {
+  "author": "Bernard Gagnon",
+  "file": "File:Roussanou Monastery, Meteora.jpg",
+  "h": 733,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Roussanou_Monastery,_Meteora.jpg",
+  "w": 1100
+ },
+ "gr-mykonos": {
+  "author": "Bernard Gagnon",
+  "file": "File:Windmills in Mykonos 02.jpg",
+  "h": 713,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Windmills_in_Mykonos_02.jpg",
+  "w": 1100
+ },
+ "gr-rhodes": {
+  "author": "Vadim Indeikin",
+  "file": "File:Главные ворота. Palace of the Grand Master of the Knights of Rhodes. Old town. Rhodes. Greece. Июнь 2014 - panoramio.jpg",
+  "h": 733,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:%D0%93%D0%BB%D0%B0%D0%B2%D0%BD%D1%8B%D0%B5_%D0%B2%D0%BE%D1%80%D0%BE%D1%82%D0%B0._Palace_of_the_Grand_Master_of_the_Knights_of_Rhodes._Old_town._Rhodes._Greece._%D0%98%D1%8E%D0%BD%D1%8C_2014_-_panoramio.jpg",
+  "w": 1100
+ },
+ "gr-santorin": {
+  "author": "Giles Laurent",
+  "file": "File:1000 Three domes of Oia in Santorini Photo by Giles Laurent.jpg",
+  "h": 733,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:1000_Three_domes_of_Oia_in_Santorini_Photo_by_Giles_Laurent.jpg",
+  "w": 1100
+ },
+ "gr-zakynthos": {
+  "author": "kallerna",
+  "file": "File:Navagio beach Zakynthos 1.jpg",
+  "h": 733,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Navagio_beach_Zakynthos_1.jpg",
   "w": 1100
  },
  "id-borobudur": {
@@ -656,6 +1151,78 @@
   "page": "https://commons.wikimedia.org/wiki/File:Lisse,_veld_met_tulpen_bij_de_Zwartelaan_IMG_8946_2021-04-27_11.19.jpg",
   "w": 1100
  },
+ "pt-algarve": {
+  "author": "Dronepicr",
+  "file": "File:Ponta da Piedade Algarve Portugal.jpg",
+  "h": 733,
+  "license": "CC BY 3.0",
+  "license_url": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Ponta_da_Piedade_Algarve_Portugal.jpg",
+  "w": 1100
+ },
+ "pt-belem": {
+  "author": "Norbert Nagel",
+  "file": "File:Torre de Belém and wooden bridge - landscape view - Lisbon - 2026-05-14.jpg",
+  "h": 736,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Torre_de_Bel%C3%A9m_and_wooden_bridge_-_landscape_view_-_Lisbon_-_2026-05-14.jpg",
+  "w": 1100
+ },
+ "pt-douro": {
+  "author": "Marco Varisco",
+  "file": "File:Douro valley (3913521736).jpg",
+  "h": 733,
+  "license": "CC BY-SA 2.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Douro_valley_(3913521736).jpg",
+  "w": 1100
+ },
+ "pt-lisbonne": {
+  "author": "Romazur",
+  "file": "File:Tram 28 Lisbon.jpg",
+  "h": 733,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Tram_28_Lisbon.jpg",
+  "w": 1100
+ },
+ "pt-madere": {
+  "author": "Ximonic (Simo Räsänen)",
+  "file": "File:Road ER 109 at Trapiche and Laranjal in Santo António, Funchal, Madeira, 2023 May.jpg",
+  "h": 730,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Road_ER_109_at_Trapiche_and_Laranjal_in_Santo_Ant%C3%B3nio,_Funchal,_Madeira,_2023_May.jpg",
+  "w": 1100
+ },
+ "pt-obidos": {
+  "author": "Diego Delso",
+  "file": "File:Castillo de Óbidos, Óbidos, Portugal, 2021-09-09, DD 32.jpg",
+  "h": 692,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Castillo_de_%C3%93bidos,_%C3%93bidos,_Portugal,_2021-09-09,_DD_32.jpg",
+  "w": 1100
+ },
+ "pt-porto": {
+  "author": "Krzysztof Golik",
+  "file": "File:Ribeira from Dom Luis I bridge (1).jpg",
+  "h": 742,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Ribeira_from_Dom_Luis_I_bridge_(1).jpg",
+  "w": 1100
+ },
+ "pt-sintra": {
+  "author": "CEphoto, Uwe Aranas",
+  "file": "File:Sintra Portugal Palácio da Pena-01.jpg",
+  "h": 733,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Sintra_Portugal_Pal%C3%A1cio_da_Pena-01.jpg",
+  "w": 1100
+ },
  "sn-casamance": {
   "author": "XDurang",
   "file": "File:PlageCapSkirringKafountine.jpg",
@@ -800,6 +1367,222 @@
   "page": "https://commons.wikimedia.org/wiki/File:Phuket_-_Kata_Beach_001.jpg",
   "w": 1100
  },
+ "tn-carthage": {
+  "author": "Bernard Gagnon",
+  "file": "File:Antonine Baths.jpg",
+  "h": 816,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Antonine_Baths.jpg",
+  "w": 1100
+ },
+ "tn-djerba": {
+  "author": "Philippe HECKEL",
+  "file": "File:Houmt Souk-02-kleche.jpg",
+  "h": 620,
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Houmt_Souk-02-kleche.jpg",
+  "w": 1100
+ },
+ "tn-eljem": {
+  "author": "Skander zarrad",
+  "file": "File:Amphithéâtre d’El Jem vue aerienne (2023) 1.jpg",
+  "h": 733,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Amphith%C3%A9%C3%A2tre_d%E2%80%99El_Jem_vue_aerienne_(2023)_1.jpg",
+  "w": 1100
+ },
+ "tn-kairouan": {
+  "author": "Monaam Ben Fredj",
+  "file": "File:The Minaret of the Great Mosque Okba of Kairouan, Tunisia.jpg",
+  "h": 733,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:The_Minaret_of_the_Great_Mosque_Okba_of_Kairouan,_Tunisia.jpg",
+  "w": 1100
+ },
+ "tn-sidibou": {
+  "author": "Habib M'henni",
+  "file": "File:Sidi Bou Said, Tunisia, 19 March 2018 DSC 8004.jpg",
+  "h": 730,
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Sidi_Bou_Said,_Tunisia,_19_March_2018_DSC_8004.jpg",
+  "w": 1100
+ },
+ "tn-sousse": {
+  "author": "Christian Manhart",
+  "file": "File:Medina of Sousse-130323.jpg",
+  "h": 825,
+  "license": "CC BY-SA 3.0 igo",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/igo/",
+  "page": "https://commons.wikimedia.org/wiki/File:Medina_of_Sousse-130323.jpg",
+  "w": 1100
+ },
+ "tn-tozeur": {
+  "author": "Houss 2020",
+  "file": "File:Chebika Tozeur 13.jpg",
+  "h": 825,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Chebika_Tozeur_13.jpg",
+  "w": 1100
+ },
+ "tn-tunis": {
+  "author": "Eirik Newth",
+  "file": "File:Rue Mosquée Zitouna - Médina de Tunis.jpg",
+  "h": 825,
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Rue_Mosqu%C3%A9e_Zitouna_-_M%C3%A9dina_de_Tunis.jpg",
+  "w": 1100
+ },
+ "tr-antalya": {
+  "author": "REHBER0770",
+  "file": "File:Antalya kaleiçi 2.jpg",
+  "h": 825,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Antalya_kalei%C3%A7i_2.jpg",
+  "w": 1100
+ },
+ "tr-bodrum": {
+  "author": "Mustang Joe",
+  "file": "File:Bodrum Castle, Turkey.jpg",
+  "h": 734,
+  "license": "CC0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Bodrum_Castle,_Turkey.jpg",
+  "w": 1100
+ },
+ "tr-bosphore": {
+  "author": "Darwinek",
+  "file": "File:Ortaköy Mosque and Bosphorus Bridge, Istanbul 2008.jpg",
+  "h": 825,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Ortak%C3%B6y_Mosque_and_Bosphorus_Bridge,_Istanbul_2008.jpg",
+  "w": 1100
+ },
+ "tr-cappadoce": {
+  "author": "MusikAnimal",
+  "file": "File:Hot air balloons over valleys near Göreme, Cappadocia at dawn 2.JPG",
+  "h": 733,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Hot_air_balloons_over_valleys_near_G%C3%B6reme,_Cappadocia_at_dawn_2.JPG",
+  "w": 1100
+ },
+ "tr-ephese": {
+  "author": "Benh LIEU SONG",
+  "file": "File:Ephesus Celsus Library Façade.jpg",
+  "h": 852,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Ephesus_Celsus_Library_Fa%C3%A7ade.jpg",
+  "w": 1100
+ },
+ "tr-istanbul": {
+  "author": "Arild Vågen",
+  "file": "File:Hagia Sophia Mars 2013.jpg",
+  "h": 734,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Hagia_Sophia_Mars_2013.jpg",
+  "w": 1100
+ },
+ "tr-mosqueebleue": {
+  "author": "Benh LIEU SONG",
+  "file": "File:Blue Mosque Courtyard Dusk Wikimedia Commons.jpg",
+  "h": 773,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Blue_Mosque_Courtyard_Dusk_Wikimedia_Commons.jpg",
+  "w": 1100
+ },
+ "tr-pamukkale": {
+  "author": "Slyronit",
+  "file": "File:The Travertine terraces of Pamukkale.jpg",
+  "h": 825,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:The_Travertine_terraces_of_Pamukkale.jpg",
+  "w": 1100
+ },
+ "tz-dar": {
+  "author": "Chen Hualin",
+  "file": "File:The waterfront of Dar es Salaam.JPG",
+  "h": 825,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:The_waterfront_of_Dar_es_Salaam.JPG",
+  "w": 1100
+ },
+ "tz-kilimandjaro": {
+  "author": "Sergey Pesterev",
+  "file": "File:Kilimanjaro from Amboseli.jpg",
+  "h": 736,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Kilimanjaro_from_Amboseli.jpg",
+  "w": 1100
+ },
+ "tz-manyara": {
+  "author": "Eric Kilby",
+  "file": "File:Elephant Parade.jpg",
+  "h": 733,
+  "license": "CC BY-SA 2.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Elephant_Parade.jpg",
+  "w": 1100
+ },
+ "tz-natron": {
+  "author": "Richard Mortel",
+  "file": "File:Ol Doinyo Lengai volcano near Lake Natron (2) (27974173943).jpg",
+  "h": 728,
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Ol_Doinyo_Lengai_volcano_near_Lake_Natron_(2)_(27974173943).jpg",
+  "w": 1100
+ },
+ "tz-ngorongoro": {
+  "author": "Diego Delso",
+  "file": "File:Paisaje en la zona de conservación de Ngorongoro, Tanzania, 2024-05-27, DD 57.jpg",
+  "h": 389,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Paisaje_en_la_zona_de_conservaci%C3%B3n_de_Ngorongoro,_Tanzania,_2024-05-27,_DD_57.jpg",
+  "w": 1100
+ },
+ "tz-plage": {
+  "author": "Jang Woo Lee",
+  "file": "File:Nungwi,Zanzibar - panoramio.jpg",
+  "h": 730,
+  "license": "CC BY 3.0",
+  "license_url": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Nungwi,Zanzibar_-_panoramio.jpg",
+  "w": 1100
+ },
+ "tz-serengeti": {
+  "author": "shankar s.",
+  "file": "File:Wildebeest migration (7513594286).jpg",
+  "h": 733,
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Wildebeest_migration_(7513594286).jpg",
+  "w": 1100
+ },
+ "tz-zanzibar": {
+  "author": "Timothy A. Gonsalves",
+  "file": "File:Beach Stone Town Zanzibar Oct26 A7CR 14408.jpg",
+  "h": 733,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Beach_Stone_Town_Zanzibar_Oct26_A7CR_14408.jpg",
+  "w": 1100
+ },
  "us-brooklyn": {
   "author": "Christian David",
   "file": "File:Brooklyn Bridge and the Lower Manhattan skyline from Pebble Beach, New York.jpg",
@@ -870,6 +1653,78 @@
   "license": "CC BY-SA 4.0",
   "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
   "page": "https://commons.wikimedia.org/wiki/File:Times_Square_20190726.jpg",
+  "w": 1100
+ },
+ "za-blyde": {
+  "author": "Claudirene",
+  "file": "File:Three Rondavels, Blyde River Canyon Nature Reserve, Mpumalanga, South Africa.jpg",
+  "h": 733,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Three_Rondavels,_Blyde_River_Canyon_Nature_Reserve,_Mpumalanga,_South_Africa.jpg",
+  "w": 1100
+ },
+ "za-bokaap": {
+  "author": "Dietmar Rabich",
+  "file": "File:Cape Town (ZA), Wale Street -- 2024 -- 3544.jpg",
+  "h": 619,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Cape_Town_(ZA),_Wale_Street_--_2024_--_3544.jpg",
+  "w": 1100
+ },
+ "za-boulders": {
+  "author": "Satdeep Gill",
+  "file": "File:Penguins at Boulders Beach 04.jpg",
+  "h": 734,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Penguins_at_Boulders_Beach_04.jpg",
+  "w": 1100
+ },
+ "za-capbonne": {
+  "author": "Dietmar Rabich",
+  "file": "File:Cape Town (ZA), Cape Peninsula National Park, Cape of Good Hope -- 2024 -- 3326.jpg",
+  "h": 733,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Cape_Town_(ZA),_Cape_Peninsula_National_Park,_Cape_of_Good_Hope_--_2024_--_3326.jpg",
+  "w": 1100
+ },
+ "za-drakensberg": {
+  "author": "PhilippN",
+  "file": "File:Amphitheatre Drakensberg View.jpg",
+  "h": 653,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Amphitheatre_Drakensberg_View.jpg",
+  "w": 1100
+ },
+ "za-johannesburg": {
+  "author": "Mark Hillary",
+  "file": "File:Johannesburg skyline 2017.jpg",
+  "h": 430,
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Johannesburg_skyline_2017.jpg",
+  "w": 1100
+ },
+ "za-kruger": {
+  "author": "Dietmar Rabich",
+  "file": "File:Kruger National Park (ZA), Elefanten -- 2024 -- 0137.jpg",
+  "h": 733,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Kruger_National_Park_(ZA),_Elefanten_--_2024_--_0137.jpg",
+  "w": 1100
+ },
+ "za-lecap": {
+  "author": "Dietmar Rabich",
+  "file": "File:Cape Town (ZA), Table Mountain -- 2024 -- 3437.jpg",
+  "h": 619,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Cape_Town_(ZA),_Table_Mountain_--_2024_--_3437.jpg",
   "w": 1100
  }
 }
