@@ -331,7 +331,7 @@ def recherche_page():
             '<p class="eyebrow">Prix en direct</p><h1>Recherche de vols en direct</h1>'
             '<p class="hero-lead">Les prix en temps réel de dizaines de compagnies et d\'agences, comparés pour vous. '
             'Choisissez votre vol puis réservez directement sur le site de la compagnie ou de l\'agence.</p>'
-            '<div id="rs-bar" class="rs-bar"></div><script src="/recherche-barre.js" defer></script>')
+            '<div id="rs-bar" class="rs-bar"></div><script src="/recherche-barre.js" defer></script><script src="/alerte-dates.js" defer></script>')
     body = ('<section class="wl-box wl-form"><div id="tpwl-search"></div></section>'
             '<section class="wl-box"><div id="tpwl-tickets"></div></section>' + WL_SCRIPT +
             '<section id="wl-hotels" class="wl-box" hidden><h2></h2><p class="small"></p></section><script src="/carte-hotels.js" defer></script>'
