@@ -44,3 +44,10 @@ Une tâche planifiée de Claude ajoute une nouveauté au site tous les 2 jours, 
 - Outils : jeu « Devine le pays » (visiter-jeu.js), carte postale à partager, carte du monde cliquable avec prix (visiter-carte.js),
   comparateur de deux pays (visiter-comparer.js), alerte prix depuis « Mes envies », budget du voyage (visiter.js).
 - Prix : /api/ruban (src/api/ruban.ts), aller-retour le plus bas repéré depuis la ville du visiteur ; rien n'est affiché sans prix repéré.
+
+## 13 novembre 2026 : lieux retirés de « Que visiter » (zones déconseillées)
+- Règle (demande de Dobam) : un lieu situé dans une zone déconseillée par les conseils aux voyageurs de France Diplomatie n'est pas mis en avant.
+- Pays retirés en entier : Mali, Burkina Faso, RD Congo. Lieux retirés : Rhumsiki, Waza, mont Cameroun, Limbé ; Yankari, Zuma Rock ; Pendjari, Tata Somba ;
+  Koutammakou ; parc de Taï ; monts Nimba ; Lamu ; Tozeur (Chebika). Liste et raisons : `PAYS_RETIRES` et `RETIRES` dans scripts/visiter.py.
+- Relevé fait à partir d'extraits des fiches officielles (site non joignable depuis la session) : à revérifier sur diplomatie.gouv.fr avant de remettre un lieu
+  ou d'en ajouter dans ces pays. Restent 29 pays et 217 lieux ; un pays est publié à partir de 4 lieux.

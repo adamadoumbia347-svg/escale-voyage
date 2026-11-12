@@ -3,7 +3,8 @@
   /visiter/<pays>/     un pays : ses villes et ses lieux à voir, chacun avec une vraie photo créditée
 Photos : Wikimedia Commons, licences libres ; auteur et licence dans site/data/visiter-photos.json (repris sur /credits-photos/).
 Règles : aucun prix, aucune règle de visa, de santé ou de sécurité ; uniquement des repères stables (lieu, ce qu'on y voit, classement UNESCO).
-Un lieu sans photo n'est pas publié ; un pays avec moins de 5 lieux en photo n'est pas publié."""
+Un lieu sans photo n'est pas publié ; un pays avec moins de 4 lieux en photo n'est pas publié.
+Les lieux situés dans des zones déconseillées par les conseils aux voyageurs officiels ne sont pas publiés (voir RETIRES plus bas)."""
 import html
 import json
 
@@ -138,7 +139,7 @@ PAYS = [
 ]
 PAYS += [
     dict(cc="cm", slug="cameroun", nom="Cameroun", en="au Cameroun", de="du Cameroun", flag="🇨🇲", air="DLA", ville="Douala", region="Afrique",
-         accroche="« L'Afrique en miniature » : plages de l'Atlantique, volcan, chefferies de l'Ouest et savanes du Nord.",
+         accroche="Le grand port de Douala, la capitale sur ses collines, les plages de Kribi et le palais des sultans bamoun.",
          lieux=[P("cm", "douala", "Douala", "Ville", "La capitale économique et le grand port du pays, sur l'estuaire du Wouri. Ici le quartier Bali."),
                 P("cm", "yaounde", "Yaoundé", "Capitale", "La capitale politique, bâtie sur des collines. Ici l'<strong>Immeuble Étoile</strong>, dans le quartier administratif."),
                 P("cm", "kribi", "Kribi", "Plage", "La station balnéaire du sud : plages de sable et <strong>chutes de la Lobé</strong>, qui se jettent directement dans l'océan."),
@@ -158,7 +159,7 @@ PAYS += [
                 P("gh", "mole", "Parc de Mole", "Safari", "Dans le nord, la plus grande réserve du pays, connue pour ses éléphants."),
                 P("gh", "volta", "Chutes de Wli", "Nature", "Dans la région de la Volta, près de la frontière du Togo : les plus hautes chutes du pays.")]),
     dict(cc="tn", slug="tunisie", nom="Tunisie", en="en Tunisie", de="de la Tunisie", flag="🇹🇳", air="TUN", ville="Tunis", region="Afrique",
-         accroche="Villages bleu et blanc, ruines antiques, médinas classées et oasis aux portes du désert.",
+         accroche="Villages bleu et blanc, ruines antiques, médinas classées et l'île de Djerba.",
          lieux=[P("tn", "sidibou", "Sidi Bou Saïd", "Village", "Au-dessus de la mer, un village aux murs blancs et aux portes bleues, à quelques kilomètres de Tunis."),
                 P("tn", "tunis", "Tunis", "Capitale", "La médina, ses souks et la mosquée Zitouna. Classée à l'<strong>UNESCO depuis 1979</strong>."),
                 P("tn", "carthage", "Carthage", "Antiquité", "Les vestiges de la grande rivale de Rome, face à la mer : les thermes d'Antonin. Site classé à l'UNESCO depuis 1979."),
@@ -382,13 +383,41 @@ def cred(ph, key, lang="fr"):
     return f'<p class="vx-cred">{U[lang]["photo"]} : <a href="{E(m["page"])}" target="_blank" rel="noopener">{E(m["author"])}</a>, {E(m["license"])}, Wikimedia Commons</p>'
 
 
+# ---------------------------------------------------------------------------------------------------------------
+# Lieux et pays retirés (demande de Dobam, 13 novembre 2026) : on ne met pas en avant un lieu situé dans une zone que
+# les « Conseils aux voyageurs » de France Diplomatie déconseillent formellement (rouge) ou déconseillent sauf raison
+# impérative (orange). Relevé fait le 13 novembre 2026 à partir d'extraits des fiches officielles (le site lui-même
+# n'était pas joignable) : à refaire sur diplomatie.gouv.fr avant de remettre un lieu. Les textes restent dans le code,
+# les photos sont supprimées. Rien de tout cela n'est écrit sur le site : les pages renvoient aux conseils officiels.
+# ---------------------------------------------------------------------------------------------------------------
+PAYS_RETIRES = {
+    "ml": "Mali : tout le territoire est formellement déconseillé",
+    "bf": "Burkina Faso : tout déplacement est formellement déconseillé",
+    "cd": "RD Congo : voyages touristiques déconseillés sur l'ensemble du territoire, est du pays formellement déconseillé",
+}
+RETIRES = {
+    "cm-rhumsiki": "Extrême-Nord, formellement déconseillé (monts Mandara compris)", "cm-waza": "Extrême-Nord, formellement déconseillé",
+    "cm-montcameroun": "la fiche déconseille de s'y rendre (troubles dans le Sud-Ouest)", "cm-limbe": "région du Sud-Ouest, par prudence (non confirmé pour la ville)",
+    "ng-yankari": "nord-est du Nigeria, à éviter absolument", "ng-zuma": "État de Niger, sur l'axe Abuja-Kaduna déconseillé sauf raison impérative",
+    "bj-pendjari": "parc de la Pendjari, formellement déconseillé", "bj-tata": "centre de l'Atacora (Natitingou, Boukoumbé), déconseillé sauf raison impérative",
+    "tg-koutammakou": "frontière du Bénin, face à l'Atacora, par prudence (non confirmé pour la préfecture)",
+    "ci-tai": "zone frontalière du Liberia (Taï), déconseillée sauf raison impérative",
+    "gn-nimba": "zone frontalière de la Côte d'Ivoire, par prudence",
+    "ke-lamu": "comté de Lamu, proche de la frontière somalienne, par prudence",
+    "tn-tozeur": "la photo et le texte montrent Chebika, dans la bande frontalière avec l'Algérie",
+}
+MIN_LIEUX = 4
+
+
 def publies(site):
-    """Pays publiés en français : ceux qui ont au moins 5 lieux en photo (les lieux sans photo sont retirés)."""
+    """Pays publiés en français : ceux qui ont au moins MIN_LIEUX lieux en photo (les lieux sans photo ou retirés ne comptent pas)."""
     ph = photos(site)
     out = []
     for p in PAYS:
-        lieux = [l for l in p["lieux"] if l["key"] in ph]
-        if len(lieux) >= 5:
+        if p["cc"] in PAYS_RETIRES:
+            continue
+        lieux = [l for l in p["lieux"] if l["key"] in ph and l["key"] not in RETIRES]
+        if len(lieux) >= MIN_LIEUX:
             out.append(dict(p, lieux=lieux))
     return out, ph
 

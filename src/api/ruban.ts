@@ -11,7 +11,7 @@ const PAYS: Record<string, string[]> = {
   ke: ["NBO", "NBO"], tz: ["ZNZ", "ZNZ", "DAR"], za: ["CPT", "CPT", "JNB"], fr: ["CDG", "PAR", "ORY"], it: ["FCO", "ROM", "MIL", "MXP"], es: ["BCN", "BCN", "MAD"], pt: ["LIS", "LIS"],
   gr: ["ATH", "ATH"], nl: ["AMS", "AMS"], tr: ["IST", "IST"], ae: ["DXB", "DXB"], jp: ["NRT", "TYO", "HND"], th: ["BKK", "BKK"], id: ["DPS", "DPS"], us: ["JFK", "NYC", "EWR"],
   mx: ["MEX", "MEX"], br: ["GIG", "RIO"],
-  ml: ["BKO", "BKO"], gn: ["CKY", "CKY"], bj: ["COO", "COO"], tg: ["LFW", "LFW"], bf: ["OUA", "OUA"], cd: ["FIH", "FIH"], ga: ["LBV", "LBV"], ng: ["LOS", "LOS", "ABV"],
+  gn: ["CKY", "CKY"], bj: ["COO", "COO"], tg: ["LFW", "LFW"], ga: ["LBV", "LBV"], ng: ["LOS", "LOS", "ABV"],
 }
 type Prix = { to: string; price: number; dep: string; ret: string | null }
 

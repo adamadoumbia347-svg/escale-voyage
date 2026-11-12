@@ -62,78 +62,6 @@
   "page": "https://commons.wikimedia.org/wiki/File:Vereinigte_Arabische_Emirate_-_Dubai_-_Palm_Jumeirah_und_Dubai_Marina_-_im_Vordergrund_das_Hotel_Atlantis_-_panoramio.jpg",
   "w": 1100
  },
- "bf-banfora": {
-  "author": "Maarten van der Bent",
-  "file": "File:Cascades de Karfiguela (12567794645).jpg",
-  "h": 596,
-  "license": "CC BY-SA 2.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Cascades_de_Karfiguela_(12567794645).jpg",
-  "w": 1100
- },
- "bf-bobo": {
-  "author": "Jurgen",
-  "file": "File:Bobo-Dioulasso Mosque.jpg",
-  "h": 825,
-  "license": "CC BY 2.0",
-  "license_url": "https://creativecommons.org/licenses/by/2.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Bobo-Dioulasso_Mosque.jpg",
-  "w": 1100
- },
- "bf-domes": {
-  "author": "Marco Schmidt",
-  "file": "File:Domes de Fabedougou MS 4589.jpg",
-  "h": 733,
-  "license": "CC BY-SA 3.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Domes_de_Fabedougou_MS_4589.jpg",
-  "w": 1100
- },
- "bf-laongo": {
-  "author": "Phovicom",
-  "file": "File:TR Sculture sur granite de Laongo 03.jpg",
-  "h": 736,
-  "license": "CC BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:TR_Sculture_sur_granite_de_Laongo_03.jpg",
-  "w": 1100
- },
- "bf-loropeni": {
-  "author": "Rik Schuiling",
-  "file": "File:2016.05-441-131ap wall Loropéni Ruins nr.Loropéni(Poni Prv.),BF sun15may2016-1106h.jpg",
-  "h": 733,
-  "license": "CC BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:2016.05-441-131ap_wall_Lorop%C3%A9ni_Ruins_nr.Lorop%C3%A9ni(Poni_Prv.),BF_sun15may2016-1106h.jpg",
-  "w": 1100
- },
- "bf-ouaga": {
-  "author": "The black photographer",
-  "file": "File:DSC 0597-10.jpg",
-  "h": 733,
-  "license": "CC0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:DSC_0597-10.jpg",
-  "w": 1100
- },
- "bf-sindou": {
-  "author": "Stefan Dressler",
-  "file": "File:Pics de Sindou WP32 SDr9756.JPG",
-  "h": 825,
-  "license": "CC BY-SA 2.5",
-  "license_url": "https://creativecommons.org/licenses/by-sa/2.5/",
-  "page": "https://commons.wikimedia.org/wiki/File:Pics_de_Sindou_WP32_SDr9756.JPG",
-  "w": 1100
- },
- "bf-tiebele": {
-  "author": "c.hug",
-  "file": "File:Tiebele traditional house decoration Burkina Faso.jpg",
-  "h": 825,
-  "license": "CC BY-SA 2.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Tiebele_traditional_house_decoration_Burkina_Faso.jpg",
-  "w": 1100
- },
  "bj-abomey": {
   "author": "Karalyn Monteil",
   "file": "File:Royal Palaces of Abomey-133470.jpg",
@@ -179,15 +107,6 @@
   "page": "https://commons.wikimedia.org/wiki/File:Vue_de_nuit_la_porte_du_non_retour_a_Ouidah_01.jpg",
   "w": 1100
  },
- "bj-pendjari": {
-  "author": "Martin Wegmann",
-  "file": "File:Pendjari.JPG",
-  "h": 825,
-  "license": "CC BY-SA 3.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Pendjari.JPG",
-  "w": 1100
- },
  "bj-portonovo": {
   "author": "Gildaskiki",
   "file": "File:Grande Mosquée de Porto-Novo au Bénin 03.jpg",
@@ -204,15 +123,6 @@
   "license": "CC BY-SA 4.0",
   "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
   "page": "https://commons.wikimedia.org/wiki/File:Temple_des_Pythons_de_Ouidah_02.jpg",
-  "w": 1100
- },
- "bj-tata": {
-  "author": "Justin ABADJAYE",
-  "file": "File:Tata somba, la maison traditionnelle à étage.jpg",
-  "h": 826,
-  "license": "CC BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Tata_somba,_la_maison_traditionnelle_%C3%A0_%C3%A9tage.jpg",
   "w": 1100
  },
  "br-amazonie": {
@@ -287,87 +197,6 @@
   "page": "https://commons.wikimedia.org/wiki/File:Parque_Ibirapuera_com_Avenida_Paulista.jpg",
   "w": 1100
  },
- "cd-fleuve": {
-  "author": "EdwinAlden.1995",
-  "file": "File:A view of Congo River from Kinshasa, Democratic Republic of the Congo (DRC).jpg",
-  "h": 825,
-  "license": "CC BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:A_view_of_Congo_River_from_Kinshasa,_Democratic_Republic_of_the_Congo_(DRC).jpg",
-  "w": 1100
- },
- "cd-goma": {
-  "author": "WINEUR",
-  "file": "File:LAC KIVU. 05.jpg",
-  "h": 825,
-  "license": "CC0",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:LAC_KIVU._05.jpg",
-  "w": 1100
- },
- "cd-kahuzi": {
-  "author": "Forest Service, USDA",
-  "file": "File:Kahuzi-Biega National Park (39423247252).jpg",
-  "h": 619,
-  "license": "Public domain",
-  "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Kahuzi-Biega_National_Park_(39423247252).jpg",
-  "w": 1100
- },
- "cd-kinshasa": {
-  "author": "MONUSCO / Myriam Asmani",
-  "file": "File:Boulevard du 30 juin, Kinshasa.jpg",
-  "h": 733,
-  "license": "CC BY-SA 2.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Boulevard_du_30_juin,_Kinshasa.jpg",
-  "w": 1100
- },
- "cd-kisangani": {
-  "author": "Ad Meskens",
-  "file": "File:Zaire kisangani stroom 14 copy.jpg",
-  "h": 734,
-  "license": "CC BY-SA 3.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Zaire_kisangani_stroom_14_copy.jpg",
-  "w": 1100
- },
- "cd-lubumbashi": {
-  "author": "T. Thielemans",
-  "file": "File:Square in Lubumbashi, 2011.jpg",
-  "h": 730,
-  "license": "CC BY 3.0",
-  "license_url": "https://creativecommons.org/licenses/by/3.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Square_in_Lubumbashi,_2011.jpg",
-  "w": 1100
- },
- "cd-nyiragongo": {
-  "author": "Cai Tjeenk Willink",
-  "file": "File:Lava Lake Nyiragongo 2.jpg",
-  "h": 718,
-  "license": "CC BY-SA 3.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Lava_Lake_Nyiragongo_2.jpg",
-  "w": 1100
- },
- "cd-virunga": {
-  "author": "Cai Tjeenk Willink",
-  "file": "File:Virunga Mountain Gorilla.jpg",
-  "h": 733,
-  "license": "CC BY-SA 3.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Virunga_Mountain_Gorilla.jpg",
-  "w": 1100
- },
- "cd-zongo": {
-  "author": "fabricewonga",
-  "file": "File:Zongo Falls 8 (chutes de Zongo) - panoramio.jpg",
-  "h": 825,
-  "license": "CC BY-SA 3.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Zongo_Falls_8_(chutes_de_Zongo)_-_panoramio.jpg",
-  "w": 1100
- },
  "ci-abidjan": {
   "author": "RyansWorld",
   "file": "File:Plateau 2010, Abidjan.jpg",
@@ -440,15 +269,6 @@
   "page": "https://commons.wikimedia.org/wiki/File:Cath%C3%A9drale_Saint-Paul_d%27Abidjan_en_vue_panoramique.jpg",
   "w": 1100
  },
- "ci-tai": {
-  "author": "Alexey Yakovlev",
-  "file": "File:Taï National Park (24148248710).jpg",
-  "h": 734,
-  "license": "CC BY-SA 2.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Ta%C3%AF_National_Park_(24148248710).jpg",
-  "w": 1100
- },
  "cm-douala": {
   "author": "Olivier Charly1",
   "file": "File:Quarter Bali à Douala Cameroun.jpg",
@@ -474,42 +294,6 @@
   "license": "CC BY-SA 4.0",
   "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
   "page": "https://commons.wikimedia.org/wiki/File:Les_chutes_de_la_lob%C3%A9_kribi_cameroon1.jpg",
-  "w": 1100
- },
- "cm-limbe": {
-  "author": "Blaizo 237",
-  "file": "File:Seme beach limbe Cameroon.jpg",
-  "h": 825,
-  "license": "CC BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Seme_beach_limbe_Cameroon.jpg",
-  "w": 1100
- },
- "cm-montcameroun": {
-  "author": "Adesolive",
-  "file": "File:Mount Cameroon on a sunny day 05.jpg",
-  "h": 825,
-  "license": "CC BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Mount_Cameroon_on_a_sunny_day_05.jpg",
-  "w": 1100
- },
- "cm-rhumsiki": {
-  "author": "2ddanga",
-  "file": "File:Les monts Kapsiki dans l'Extrême nord2.jpg",
-  "h": 825,
-  "license": "CC BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Les_monts_Kapsiki_dans_l%27Extr%C3%AAme_nord2.jpg",
-  "w": 1100
- },
- "cm-waza": {
-  "author": "Albert Backer",
-  "file": "File:Waza-NP-Giraffes.jpg",
-  "h": 620,
-  "license": "CC BY-SA 3.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Waza-NP-Giraffes.jpg",
   "w": 1100
  },
  "cm-yaounde": {
@@ -926,15 +710,6 @@
   "page": "https://commons.wikimedia.org/wiki/File:Visite_des_%C3%AEles_de_loos_28.jpg",
   "w": 1100
  },
- "gn-nimba": {
-  "author": "Yakoo1986",
-  "file": "File:Mount Nimba rainforest.jpg",
-  "h": 733,
-  "license": "CC BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Mount_Nimba_rainforest.jpg",
-  "w": 1100
- },
  "gr-athenes": {
   "author": "A.Savin",
   "file": "File:Attica 06-13 Athens 50 View from Philopappos - Acropolis Hill.jpg",
@@ -1241,15 +1016,6 @@
   "page": "https://commons.wikimedia.org/wiki/File:Kenya_Diani_Beach_23_BG.jpg",
   "w": 1100
  },
- "ke-lamu": {
-  "author": "Abubakarsule533",
-  "file": "File:Usita wa Mui street Lamu Old Town.jpg",
-  "h": 733,
-  "license": "CC BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Usita_wa_Mui_street_Lamu_Old_Town.jpg",
-  "w": 1100
- },
  "ke-mara": {
   "author": "Benh LIEU SONG",
   "file": "File:Lions Family Portrait Masai Mara.jpg",
@@ -1365,60 +1131,6 @@
   "license": "CC BY-SA 4.0",
   "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
   "page": "https://commons.wikimedia.org/wiki/File:Rabat_-_Hassan_Tower_-_20170909103739.jpg",
-  "w": 1100
- },
- "ml-bamako": {
-  "author": "Carolinerre",
-  "file": "File:Fleuve Niger - Environs de Bamako, MALI.jpg",
-  "h": 733,
-  "license": "CC BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Fleuve_Niger_-_Environs_de_Bamako,_MALI.jpg",
-  "w": 1100
- },
- "ml-djenne": {
-  "author": "Ruud Zwart",
-  "file": "File:Djenne great mud mosque.jpg",
-  "h": 731,
-  "license": "CC BY-SA 3.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Djenne_great_mud_mosque.jpg",
-  "w": 1100
- },
- "ml-dogon": {
-  "author": "Kirua",
-  "file": "File:Villagedogon.jpg",
-  "h": 736,
-  "license": "CC BY-SA 3.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Villagedogon.jpg",
-  "w": 1100
- },
- "ml-hombori": {
-  "author": "Timm Guenther ( Timm Busshaus )",
-  "file": "File:Hand der Fatima.jpg",
-  "h": 825,
-  "license": "CC BY-SA 3.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Hand_der_Fatima.jpg",
-  "w": 1100
- },
- "ml-mopti": {
-  "author": "Jeanne Menjoulet",
-  "file": "File:Mali, le port de Mopti et ses pinasses (8438033803).jpg",
-  "h": 536,
-  "license": "CC BY 2.0",
-  "license_url": "https://creativecommons.org/licenses/by/2.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Mali,_le_port_de_Mopti_et_ses_pinasses_(8438033803).jpg",
-  "w": 1100
- },
- "ml-tombouctou": {
-  "author": "Anne and David",
-  "file": "File:2007 Sankore Mosque Timbuktu 02.jpg",
-  "h": 825,
-  "license": "Public domain",
-  "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:2007_Sankore_Mosque_Timbuktu_02.jpg",
   "w": 1100
  },
  "mx-cancun": {
@@ -1554,24 +1266,6 @@
   "license": "CC BY-SA 4.0",
   "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
   "page": "https://commons.wikimedia.org/wiki/File:The_Osun_Osogbo_sacred_grove_01.jpg",
-  "w": 1100
- },
- "ng-yankari": {
-  "author": "Kambai Akau",
-  "file": "File:Wikki Warm Spring Spring in Yankari Game Reserve 01.jpg",
-  "h": 619,
-  "license": "CC BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Wikki_Warm_Spring_Spring_in_Yankari_Game_Reserve_01.jpg",
-  "w": 1100
- },
- "ng-zuma": {
-  "author": "LeonardIbong",
-  "file": "File:Zuma Rock Road.jpg",
-  "h": 733,
-  "license": "CC BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Zuma_Rock_Road.jpg",
   "w": 1100
  },
  "nl-canaux": {
@@ -1799,15 +1493,6 @@
   "page": "https://commons.wikimedia.org/wiki/File:Aneho_Miadjo%C3%A9_04.jpg",
   "w": 1100
  },
- "tg-koutammakou": {
-  "author": "Kalyss",
-  "file": "File:Alyssa K. Barry Koutammakou,Togo.jpg",
-  "h": 662,
-  "license": "CC BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Alyssa_K._Barry_Koutammakou,Togo.jpg",
-  "w": 1100
- },
  "tg-kpalime": {
   "author": "Etechnopole",
   "file": "File:Kpalimé 6 (cropped).jpg",
@@ -1968,15 +1653,6 @@
   "license": "CC BY-SA 3.0 igo",
   "license_url": "https://creativecommons.org/licenses/by-sa/3.0/igo/",
   "page": "https://commons.wikimedia.org/wiki/File:Medina_of_Sousse-130323.jpg",
-  "w": 1100
- },
- "tn-tozeur": {
-  "author": "Houss 2020",
-  "file": "File:Chebika Tozeur 13.jpg",
-  "h": 825,
-  "license": "CC BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "page": "https://commons.wikimedia.org/wiki/File:Chebika_Tozeur_13.jpg",
   "w": 1100
  },
  "tn-tunis": {
