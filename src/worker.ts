@@ -38,8 +38,9 @@ import * as compagnie from "./compagnie"
 import { sendDigest, sendNewsletter } from "./digest"
 import { buildLot } from "./lot"
 import { indexNow } from "./indexnow"
+import * as gains from "./gains"
 
-const API: Record<string, any> = { push, prix, explore, calendar, deals, geo, alert, form, admin, cron, populaires, clic, fx, grille, weekends, verdict: verdictApi, connus: accueil, compteur, paye, aeroport: aeroApi }
+const API: Record<string, any> = { push, prix, explore, calendar, deals, geo, alert, form, admin, cron, populaires, clic, fx, grille, weekends, verdict: verdictApi, connus: accueil, compteur, paye, aeroport: aeroApi, gains }
 
 export default {
   async fetch(request: Request, env: Env & { ASSETS: { fetch: (r: Request) => Promise<Response> } }, ctx: { waitUntil: (p: Promise<any>) => void }) {
