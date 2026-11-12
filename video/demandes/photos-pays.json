@@ -1,22 +1,22 @@
 {
- "code": "c3",
+ "code": "c4",
  "lieux": {
-  "gr-athenes": "Acropolis Athens Parthenon",
-  "gr-santorin": "Santorini Oia",
-  "gr-mykonos": "Mykonos windmills",
-  "gr-meteores": "Meteora monastery",
-  "gr-delphes": "Delphi Tholos Athena Pronaia",
-  "gr-crete": "Balos lagoon Crete",
-  "gr-rhodes": "Rhodes old town Palace of the Grand Master",
-  "gr-zakynthos": "Navagio beach Zakynthos",
-  "tn-sidibou": "Sidi Bou Said",
-  "tn-tunis": "Tunis medina Zitouna",
-  "tn-carthage": "Carthage Antonine baths",
-  "tn-eljem": "Amphitheatre of El Jem",
-  "tn-djerba": "Djerba Houmt Souk",
-  "tn-kairouan": "Great Mosque of Kairouan",
-  "tn-sousse": "Sousse ribat medina",
-  "tn-tozeur": "Tozeur oasis Chebika"
+  "cm-douala": "Douala Cameroun",
+  "cm-yaounde": "Yaoundé monument de la Réunification",
+  "cm-kribi": "Kribi plage chutes de la Lobé",
+  "cm-limbe": "Limbe Cameroon beach",
+  "cm-montcameroun": "Mount Cameroon",
+  "cm-foumban": "Foumban palais des sultans Bamoun",
+  "cm-rhumsiki": "Rhumsiki Kapsiki",
+  "cm-waza": "Waza National Park",
+  "gh-accra": "Accra Independence Arch Black Star Square",
+  "gh-nkrumah": "Kwame Nkrumah Mausoleum Accra",
+  "gh-capecoast": "Cape Coast Castle",
+  "gh-elmina": "Elmina Castle",
+  "gh-kakum": "Kakum canopy walkway",
+  "gh-kumasi": "Kumasi Manhyia Palace Kejetia",
+  "gh-mole": "Mole National Park elephants",
+  "gh-volta": "Wli waterfalls Ghana"
  },
- "demande": "2026-11-12T21:18:50"
+ "demande": "2026-11-12T21:22:00"
 }
