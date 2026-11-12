@@ -1,15 +1,16 @@
 {
- "code": "rdcongo",
+ "code": "mexique",
  "lieux": {
-  "kinshasa": "Kinshasa skyline Congo river",
-  "bonobo": "Lola ya Bonobo sanctuary",
-  "zongo": "Zongo Falls Kongo Central",
-  "fleuve": "Congo River boat Democratic Republic",
-  "wagenia": "Wagenia fishermen Kisangani",
-  "lubumbashi": "Lubumbashi city",
-  "virunga": "Virunga National Park landscape",
-  "nyiragongo": "Nyiragongo lava lake",
-  "kivu": "Lake Kivu Goma",
-  "okapi": "Okapi Wildlife Reserve"
- }
+  "chichen": "Chichen Itza El Castillo pyramid",
+  "teotihuacan": "Teotihuacan Pyramid of the Sun",
+  "tulum": "Tulum ruins beach",
+  "cenote": "Cenote Ik Kil",
+  "guanajuato": "Guanajuato city colorful view",
+  "bellasartes": "Palacio de Bellas Artes Mexico City",
+  "muertos": "Día de Muertos Mexico altar catrina",
+  "tacos": "Tacos al pastor Mexico",
+  "oaxaca": "Oaxaca Santo Domingo church",
+  "cancun": "Cancun beach Caribbean"
+ },
+ "demande": "2026-11-12T16:59:13"
 }
