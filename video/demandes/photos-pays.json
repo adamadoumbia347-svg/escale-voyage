@@ -1,16 +1,16 @@
 {
- "code": "mexique",
+ "code": "kenya",
  "lieux": {
-  "chichen": "Chichen Itza El Castillo pyramid",
-  "teotihuacan": "Teotihuacan Pyramid of the Sun",
-  "tulum": "Tulum ruins beach",
-  "cenote": "Cenote Ik Kil",
-  "guanajuato": "Guanajuato city colorful view",
-  "bellasartes": "Palacio de Bellas Artes Mexico City",
-  "muertos": "Día de Muertos Mexico altar catrina",
-  "tacos": "Tacos al pastor Mexico",
-  "oaxaca": "Oaxaca Santo Domingo church",
-  "cancun": "Cancun beach Caribbean"
+  "mara": "Maasai Mara wildebeest migration",
+  "lions": "Maasai Mara lion",
+  "amboseli": "Amboseli elephants Kilimanjaro",
+  "nairobi": "Nairobi National Park giraffe skyline",
+  "nakuru": "Lake Nakuru flamingos",
+  "mountkenya": "Mount Kenya peak",
+  "lamu": "Lamu Old Town",
+  "diani": "Diani Beach Kenya",
+  "maasai": "Maasai people Kenya traditional",
+  "giraffe": "Giraffe Centre Nairobi"
  },
- "demande": "2026-11-12T16:59:13"
+ "demande": "2026-11-12T17:08:55"
 }
