@@ -1,6 +1,6 @@
 {
 "/": [
-"bc211fd793006e3b",
+"cd57a4fceab4756c",
 "2026-11-12"
 ],
 "/a-propos/": [
@@ -12,63 +12,63 @@
 "2026-11-09"
 ],
 "/aller-a-l-aeroport/": [
-"eb5fba8ea17c5bcc",
+"3ca52a588b87aa36",
 "2026-11-12"
 ],
 "/aller-aeroport-barcelone/": [
-"ec4bb5191ba9b098",
+"2be715a9655e3fc2",
 "2026-11-12"
 ],
 "/aller-aeroport-bruxelles/": [
-"37ebe4228662ffcb",
+"fd38ae1116a3da9c",
 "2026-11-12"
 ],
 "/aller-aeroport-francfort/": [
-"2b2261a8490a57b2",
+"13b8a50f07e7bd21",
 "2026-11-12"
 ],
 "/aller-aeroport-geneve/": [
-"fa726de406fc5283",
+"82d37dd4502a3c65",
 "2026-11-12"
 ],
 "/aller-aeroport-lisbonne/": [
-"87e680d77f3923e9",
+"47446e8a3a85695e",
 "2026-11-12"
 ],
 "/aller-aeroport-londres-heathrow/": [
-"00c674080ed58555",
+"f96be093b0e321e7",
 "2026-11-12"
 ],
 "/aller-aeroport-lyon/": [
-"51da983b25647338",
+"113195d3ad128c2e",
 "2026-11-12"
 ],
 "/aller-aeroport-madrid/": [
-"46f0a6a6780396f3",
+"5e3163514e7e9215",
 "2026-11-12"
 ],
 "/aller-aeroport-marseille/": [
-"c85cb3374e01c777",
+"a44925a3b3bba6bb",
 "2026-11-12"
 ],
 "/aller-aeroport-milan-malpensa/": [
-"84067ca43dad21e9",
+"200e5688fce126f0",
 "2026-11-12"
 ],
 "/aller-aeroport-montreal/": [
-"1c8c33b484c27915",
+"7e01b2a9ec63719b",
 "2026-11-12"
 ],
 "/aller-aeroport-paris-cdg/": [
-"281c18fc3ca328ac",
+"a9dbdae06b4d51c4",
 "2026-11-12"
 ],
 "/aller-aeroport-paris-orly/": [
-"b117b6f5a159bf66",
+"9204252ce0371332",
 "2026-11-12"
 ],
 "/aller-aeroport-rome-fiumicino/": [
-"d30d5c2dda8764f2",
+"99f4372114172660",
 "2026-11-12"
 ],
 "/ar/": [
@@ -9463,6 +9463,66 @@
 "83fdd2a1a02dc860",
 "2026-11-09"
 ],
+"/en/getting-to-barcelona-airport/": [
+"1a81ba3ee071e7df",
+"2026-11-12"
+],
+"/en/getting-to-brussels-airport/": [
+"f6dafc1f916725de",
+"2026-11-12"
+],
+"/en/getting-to-frankfurt-airport/": [
+"d114628e55a7f041",
+"2026-11-12"
+],
+"/en/getting-to-geneva-airport/": [
+"5512204d1ba75731",
+"2026-11-12"
+],
+"/en/getting-to-lisbon-airport/": [
+"700a17f8e1ce6cba",
+"2026-11-12"
+],
+"/en/getting-to-london-heathrow-airport/": [
+"faac752091ccf764",
+"2026-11-12"
+],
+"/en/getting-to-lyon-airport/": [
+"b15288fb5a1110a4",
+"2026-11-12"
+],
+"/en/getting-to-madrid-airport/": [
+"64bd86ab90a24dd4",
+"2026-11-12"
+],
+"/en/getting-to-marseille-airport/": [
+"87181d4bcbe657e0",
+"2026-11-12"
+],
+"/en/getting-to-milan-malpensa-airport/": [
+"56b74defbdcae47b",
+"2026-11-12"
+],
+"/en/getting-to-montreal-airport/": [
+"ec8ed13ab08be4d0",
+"2026-11-12"
+],
+"/en/getting-to-paris-cdg-airport/": [
+"e73306165b0ea8c5",
+"2026-11-12"
+],
+"/en/getting-to-paris-orly-airport/": [
+"7208712b36798203",
+"2026-11-12"
+],
+"/en/getting-to-rome-fiumicino-airport/": [
+"3e56c34c7249c586",
+"2026-11-12"
+],
+"/en/getting-to-the-airport/": [
+"5e19f44859c80620",
+"2026-11-12"
+],
 "/en/guides/": [
 "201080e72755acec",
 "2026-11-09"
@@ -9506,6 +9566,10 @@
 "/en/meet-halfway/": [
 "c446ffefcce6c2fa",
 "2026-11-09"
+],
+"/en/multi-city-flights/": [
+"cb420f5477555178",
+"2026-11-12"
 ],
 "/en/offline-travel-kit/": [
 "264ca466b84b38ae",
@@ -9603,6 +9667,14 @@
 "da39a3ee5e6b4b0d",
 "2026-11-09"
 ],
+"/en/send-money-home/": [
+"0f25cbe61a252232",
+"2026-11-12"
+],
+"/en/send-parcel-home/": [
+"03095e9346f3d109",
+"2026-11-12"
+],
 "/en/student-flights-from-africa/": [
 "31c12e5c042cb9d1",
 "2026-11-09"
@@ -9656,11 +9728,11 @@
 "2026-11-09"
 ],
 "/envoyer-argent-au-pays/": [
-"5d8b4a5b177c5542",
+"63c18809de3e81d5",
 "2026-11-12"
 ],
 "/envoyer-colis-au-pays/": [
-"f10498ae585fcc5f",
+"d85d66a52f5bdff5",
 "2026-11-12"
 ],
 "/es/": [
@@ -12571,6 +12643,66 @@
 "5b0bf7fd74bf6118",
 "2026-11-09"
 ],
+"/it/arrivare-aeroporto-barcellona/": [
+"c41f6da23ddb6730",
+"2026-11-12"
+],
+"/it/arrivare-aeroporto-bruxelles/": [
+"5476a63e0f45b763",
+"2026-11-12"
+],
+"/it/arrivare-aeroporto-francoforte/": [
+"58082f2bf1e41228",
+"2026-11-12"
+],
+"/it/arrivare-aeroporto-ginevra/": [
+"f947c130dc59c302",
+"2026-11-12"
+],
+"/it/arrivare-aeroporto-lione/": [
+"20bbe633315d76e4",
+"2026-11-12"
+],
+"/it/arrivare-aeroporto-lisbona/": [
+"cec68ab76021e8fb",
+"2026-11-12"
+],
+"/it/arrivare-aeroporto-londra-heathrow/": [
+"a36fc1ee8df56b48",
+"2026-11-12"
+],
+"/it/arrivare-aeroporto-madrid/": [
+"b6ed32f54c63fb0d",
+"2026-11-12"
+],
+"/it/arrivare-aeroporto-marsiglia/": [
+"adad19755c2455b3",
+"2026-11-12"
+],
+"/it/arrivare-aeroporto-milano-malpensa/": [
+"55c21395ee84aa2f",
+"2026-11-12"
+],
+"/it/arrivare-aeroporto-montreal/": [
+"b4f50bfce9b9ddd3",
+"2026-11-12"
+],
+"/it/arrivare-aeroporto-parigi-cdg/": [
+"973814ea096c296b",
+"2026-11-12"
+],
+"/it/arrivare-aeroporto-parigi-orly/": [
+"0573190d683eba6d",
+"2026-11-12"
+],
+"/it/arrivare-aeroporto-roma-fiumicino/": [
+"0d41d52f40e58f0c",
+"2026-11-12"
+],
+"/it/arrivare-in-aeroporto/": [
+"91b72918554d75c3",
+"2026-11-12"
+],
 "/it/budget-viaggio-famiglia/": [
 "384d33a46945493a",
 "2026-11-09"
@@ -12819,6 +12951,10 @@
 "9e9dc33d6a84f904",
 "2026-11-09"
 ],
+"/it/inviare-soldi-a-casa/": [
+"f440cadeabbf002d",
+"2026-11-12"
+],
 "/it/kit-viaggio-offline/": [
 "cad3b23d034d19ad",
 "2026-11-09"
@@ -13027,6 +13163,10 @@
 "83de13b9461955dd",
 "2026-11-09"
 ],
+"/it/spedire-pacchi-a-casa/": [
+"2fc743772420aa2e",
+"2026-11-12"
+],
 "/it/tendenze-2027/": [
 "c7df1eedff2b1304",
 "2026-11-09"
@@ -13034,6 +13174,10 @@
 "/it/verifica-biglietto-aereo/": [
 "87023bdfd0741a22",
 "2026-11-09"
+],
+"/it/viaggio-multi-tratta/": [
+"2ae478a57adb3571",
+"2026-11-12"
 ],
 "/it/voli-bergamo-abidjan/": [
 "03910b5a7d0e3642",
@@ -20800,7 +20944,7 @@
 "2026-11-09"
 ],
 "/vol-plusieurs-etapes/": [
-"56a21d27deaff373",
+"4679027dbde281bc",
 "2026-11-12"
 ],
 "/vol-pointe-noire-addis-abeba/": [
@@ -21712,7 +21856,7 @@
 "2026-11-09"
 ],
 "/widget/": [
-"f0b285ae0b77136c",
+"caa30b365fccb1ce",
 "2026-11-12"
 ]
 }

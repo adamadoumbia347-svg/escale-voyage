@@ -39,6 +39,7 @@ import diaspora  # noqa: E402
 import plusieurs  # noqa: E402
 import retour_pays  # noqa: E402
 import diaspora_plus  # noqa: E402
+import diaspora_plus_i18n  # noqa: E402
 import compagnies  # noqa: E402
 import can2027  # noqa: E402
 import evenements  # noqa: E402
@@ -803,6 +804,7 @@ def main():
     urls += plusieurs.build(SITE, ctx)  # partir à plusieurs : quelle ville de départ est la moins chère
     urls += retour_pays.build(SITE, ctx)  # rentrer au pays pour de bon
     urls += diaspora_plus.build(SITE, ctx)  # argent, colis, vol à étapes, aéroports de départ
+    urls += diaspora_plus_i18n.build(SITE, ctx)  # les mêmes en anglais et en italien
     urls += compagnies.build(SITE, ctx)  # pages compagnies (fr/en)
     urls += can2027.build(SITE, ctx)  # CAN 2027 : villes hôtes, prix, visa (fr/en)
     urls += evenements.build(SITE, ctx)  # grands événements africains

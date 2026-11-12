@@ -11,6 +11,16 @@ import build_i18n as B
 
 E = html.escape
 CHECKED = "novembre 2026"
+# Adresses par langue (versions anglaise et italienne : scripts/diaspora_plus_i18n.py)
+PATHS = {"argent": {"fr": "envoyer-argent-au-pays", "en": "en/send-money-home", "it": "it/inviare-soldi-a-casa"},
+         "colis": {"fr": "envoyer-colis-au-pays", "en": "en/send-parcel-home", "it": "it/spedire-pacchi-a-casa"},
+         "etapes": {"fr": "vol-plusieurs-etapes", "en": "en/multi-city-flights", "it": "it/viaggio-multi-tratta"},
+         "hub": {"fr": "aller-a-l-aeroport", "en": "en/getting-to-the-airport", "it": "it/arrivare-in-aeroporto"}}
+SLUG_EN = {"paris-cdg": "paris-cdg", "paris-orly": "paris-orly", "lyon": "lyon", "marseille": "marseille", "bruxelles": "brussels", "londres-heathrow": "london-heathrow", "milan-malpensa": "milan-malpensa",
+           "rome-fiumicino": "rome-fiumicino", "geneve": "geneva", "madrid": "madrid", "barcelone": "barcelona", "francfort": "frankfurt", "lisbonne": "lisbon", "montreal": "montreal"}
+SLUG_IT = {"paris-cdg": "parigi-cdg", "paris-orly": "parigi-orly", "lyon": "lione", "marseille": "marsiglia", "bruxelles": "bruxelles", "londres-heathrow": "londra-heathrow", "milan-malpensa": "milano-malpensa",
+           "rome-fiumicino": "roma-fiumicino", "geneve": "ginevra", "madrid": "madrid", "barcelone": "barcellona", "francfort": "francoforte", "lisbonne": "lisbona", "montreal": "montreal"}
+A_PATHS = lambda slug: {"fr": f"aller-aeroport-{slug}", "en": f"en/getting-to-{SLUG_EN[slug]}-airport", "it": f"it/arrivare-aeroporto-{SLUG_IT[slug]}"}
 EXT = lambda u, t: f'<a href="{u}" target="_blank" rel="noopener">{t}</a>'
 ul = lambda items: "<ul>" + "".join(f"<li>{x}</li>" for x in items) + "</ul>"
 faq_html = lambda faq: "".join(f"<details><summary>{E(q)}</summary><p>{E(r)}</p></details>" for q, r in faq)
@@ -74,7 +84,7 @@ def argent(site, ctx):
         '<p class="small">Escale ne vend pas de transfert d\'argent et n\'affiche aucun tarif ici, parce qu\'ils changent chaque jour. Les sites officiels font foi.</p>' + B.faq_ld(ARGENT_FAQ))
     return B.write(site, "envoyer-argent-au-pays", "fr", "Envoyer de l'argent au pays : comment comparer | Escale",
                    "Wise, Remitly, WorldRemit, Sendwave, Taptap Send, Western Union : la méthode pour comparer le montant vraiment reçu, les comparateurs publics gratuits et les pièges du taux de change.",
-                   hero, body, "", {"fr": "envoyer-argent-au-pays"}, ctx)
+                   hero, body, "", PATHS["argent"], ctx)
 
 
 # ---------------------------------------------------------------- colis
@@ -132,7 +142,7 @@ def colis(site, ctx):
         '<p class="small">Escale ne transporte pas de colis et n\'affiche aucun tarif ici : demandez toujours un devis écrit. Les règles de douane changent : les sites officiels font foi.</p>' + B.faq_ld(COLIS_FAQ))
     return B.write(site, "envoyer-colis-au-pays", "fr", "Envoyer un colis ou des valises au pays : que choisir | Escale",
                    "Bagage supplémentaire, colis postal, fret aérien ou groupage maritime vers l'Afrique : quelle solution selon le poids et l'urgence, la douane, ce qu'on n'envoie pas et les questions à poser au transitaire.",
-                   hero, body, "", {"fr": "envoyer-colis-au-pays"}, ctx)
+                   hero, body, "", PATHS["colis"], ctx)
 
 
 # ---------------------------------------------------------------- vol à plusieurs étapes
@@ -174,7 +184,7 @@ def etapes(site, ctx):
             '<script src="/ac-mini.js" defer></script><script src="/etapes.js" defer></script>')
     return B.write(site, "vol-plusieurs-etapes", "fr", "Vol à plusieurs étapes : préparer un voyage multi-villes | Escale",
                    "Outil gratuit pour un voyage en 2 à 4 étapes (par exemple Milan, Abidjan, Dakar, Milan) : une recherche par étape, le prix le plus bas repéré ce mois-là et les précautions des billets séparés.",
-                   hero, body, "", {"fr": "vol-plusieurs-etapes"}, ctx)
+                   hero, body, "", PATHS["etapes"], ctx)
 
 
 # ---------------------------------------------------------------- rejoindre l'aéroport de départ
@@ -285,7 +295,7 @@ def aeroports(site, ctx):
                 '<p class="small">Ces repères sont généraux. Les lignes, les arrêts et les terminaux peuvent changer : le site officiel de l\'aéroport fait foi.</p>' + B.faq_ld(faq))
         urls.append(B.write(site, A_PATH(slug), "fr", f"Aller à l'aéroport {nom} ({code}) : train, métro, bus | Escale",
                             f"Comment rejoindre l'aéroport {nom} ({code}) avant un vol : les trains, métros et bus qui le desservent, le parking, quoi vérifier la veille, avec le lien vers le site officiel.",
-                            hero, body, "", {"fr": A_PATH(slug)}, ctx))
+                            hero, body, "", A_PATHS(slug), ctx))
     liste = "".join(f'<li><a href="/{A_PATH(a[0])}/">{E(a[1])} ({a[3]})</a></li>' for a in AERO)
     faq = A_FAQ(("", "l'aéroport"))
     hero = ('<p class="eyebrow">Guides · relus en ' + CHECKED + '</p><h1>Rejoindre son <span>aéroport de départ</span></h1>'
@@ -300,7 +310,7 @@ def aeroports(site, ctx):
             f'<section class="faq"><h2>Questions fréquentes</h2>{faq_html(faq)}</section>' + PLUS + B.faq_ld(faq))
     urls.append(B.write(site, "aller-a-l-aeroport", "fr", "Rejoindre son aéroport de départ : train, métro, bus | Escale",
                         "Comment aller à l'aéroport avant un vol : Paris CDG et Orly, Lyon, Marseille, Bruxelles, Londres Heathrow, Milan Malpensa, Rome Fiumicino, Genève, Madrid, Barcelone, Francfort, Lisbonne, Montréal.",
-                        hero, body, "", {"fr": "aller-a-l-aeroport"}, ctx))
+                        hero, body, "", PATHS["hub"], ctx))
     return urls
 
 
