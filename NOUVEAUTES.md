@@ -32,3 +32,8 @@ Une tâche planifiée de Claude ajoute une nouveauté au site tous les 2 jours, 
 | 2026-11-01 | Guide « Vol de nuit : bien dormir et arriver en forme » en 5 langues (`/guides/vol-de-nuit/`) — prochain : nouveaux trajets |
 | 2026-11-03 | 14 trajets depuis Barcelone (Dakar, Casablanca, Marrakech, Tanger, Alger, Oran, Bamako) et Francfort (Addis-Abeba, Accra, Lagos, Casablanca, Tunis, Istanbul, Dakar) en 5 langues, avec images de partage — prochain : page hôtels |
 | 2026-11-05 | Page « Hôtel pas cher à Addis-Abeba » en 5 langues (`/hotel-pas-cher-addis-abeba/`) — prochain : guide pratique |
+
+## 12-13 novembre 2026 : rubrique « Que visiter » et nouveau style
+- `/visiter/` : 24 pays, 192 villes et lieux en photos (scripts/visiter.py, photos dans site/img/visiter, crédits dans site/data/visiter-photos.json).
+- Style « serein » (bloc en fin de site/pages.css et dans site/index.html) : titres Fraunces, texte Nunito, animations ; couleurs d'Escale conservées.
+- Accueil : le titre reste fixe, un ruban de pays défile dessous (site/motion.js, site/hero-anim.js et sa copie src/accueil-anim.ts).
