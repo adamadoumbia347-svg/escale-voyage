@@ -1,16 +1,22 @@
 {
- "code": "b6",
+ "code": "c1",
  "lieux": {
-  "ci-abidjan": "Abidjan Plateau",
-  "ci-abidjan2": "Abidjan skyline",
-  "ci-abidjan3": "Abidjan lagune Ébrié",
-  "ci-korhogo": "Korhogo",
-  "ci-korhogo2": "Sénoufo Korhogo village",
-  "ci-tai": "Parc national de Taï",
-  "ci-sassandra": "Sassandra plage",
-  "ci-assinie": "Assinie-Mafia",
-  "ci-jacqueville": "Jacqueville plage",
-  "ci-yakro": "Yamoussoukro lac caïmans"
+  "fr-paris": "Eiffel Tower Paris Trocadero",
+  "fr-montstmichel": "Mont Saint-Michel",
+  "fr-versailles": "Palace of Versailles Hall of Mirrors gardens",
+  "fr-nice": "Nice Promenade des Anglais Baie des Anges",
+  "fr-lyon": "Lyon Fourvière Saône",
+  "fr-marseille": "Marseille Vieux-Port Notre-Dame de la Garde",
+  "fr-chamonix": "Mont Blanc Chamonix",
+  "fr-bordeaux": "Bordeaux Place de la Bourse miroir d'eau",
+  "es-barcelone": "Sagrada Familia Barcelona",
+  "es-madrid": "Madrid Plaza Mayor",
+  "es-seville": "Plaza de España Seville",
+  "es-grenade": "Alhambra Granada",
+  "es-valence": "Ciudad de las Artes y las Ciencias Valencia",
+  "es-cordoue": "Mezquita Cordoba interior",
+  "es-majorque": "Mallorca cala beach",
+  "es-bilbao": "Guggenheim Museum Bilbao"
  },
- "demande": "2026-11-12T20:57:28"
+ "demande": "2026-11-12T21:12:17"
 }
