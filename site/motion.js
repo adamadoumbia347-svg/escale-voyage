@@ -32,10 +32,12 @@
   }
 
   // 3. Parallaxe de la photo d'ouverture et des photos de cartes (transform uniquement : aucun recalcul de mise en page)
+  var haut = document.createElement("button"); haut.className = "haut"; haut.type = "button"; haut.setAttribute("aria-label", "Revenir en haut"); haut.textContent = "↑";
+  haut.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); }); document.body.appendChild(haut);
   var hero = document.querySelector(".vx-hero img"), cards = [].slice.call(document.querySelectorAll(".vx-card .vx-ph img")), tick = false;
   function frame() {
     tick = false;
-    var y = window.scrollY || 0;
+    var y = window.scrollY || 0; haut.classList.toggle("visible", y > 900);
     if (bar) bar.style.transform = "scaleX(" + Math.min(1, y / Math.max(1, document.documentElement.scrollHeight - vh)) + ")";
     if (hero && y < vh * 1.2) hero.style.transform = "translate3d(0," + (y * 0.18).toFixed(1) + "px,0) scale(" + (1.06 + y / 6000).toFixed(4) + ")";
     for (var i = 0; i < cards.length; i++) {

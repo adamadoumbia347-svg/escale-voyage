@@ -39,7 +39,7 @@
 <link rel="alternate" hreflang="de" href="https://escale.live/de/">
 <link rel="alternate" hreflang="x-default" href="https://escale.live/">
 <meta property="og:url" content="https://escale.live/de/">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#fffaf4">
 <script>try{var t=localStorage.getItem("escale.theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="icon" href="/favicon.ico?v=2" sizes="48x48"><link rel="icon" href="/icon-192.png?v=2" sizes="192x192" type="image/png"><link rel="icon" href="/icon.svg?v=2" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 
@@ -59,7 +59,7 @@
 <script type="application/ld+json" id="faq-ld"></script>
 <!-- Polices hébergées sur le site (site/fonts) : pas de Google Fonts, affichage plus rapide -->
 <script>(function(){try{var d=document.documentElement;if(d.lang!=="fr"||location.search||location.hash||/bot|crawl|spider|slurp|google|bing|yandex|baidu|duckduck|facebookexternalhit|whatsapp|telegram|twitter|linkedin|preview|lighthouse|pagespeed|headless/i.test(navigator.userAgent))return;var c=localStorage.getItem("escale.lang"),L=["en","es","pt","ar","it","de"],w=null;if(c){w=L.indexOf(c)>=0?c:null}else{var n=(navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||""]).map(function(x){return String(x).slice(0,2).toLowerCase()});for(var i=0;i<n.length;i++){if(n[i]==="fr")return;if(L.indexOf(n[i])>=0){w=n[i];break}}if(!w)w="en"}if(w)location.replace("/"+w+"/")}catch(e){}})();</script>
-<script>(function(){try{var d=document.documentElement,s=localStorage.getItem("escale.lite"),c=navigator.connection||{},z="";try{z=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}if(s==="1"||(s!=="0"&&(c.saveData||/2g|3g/.test(c.effectiveType||"")||z.indexOf("Africa/")===0)))d.classList.add("lite");else{var l=document.createElement("link");l.rel="preload";l.as="font";l.type="font/woff2";l.crossOrigin="anonymous";l.href="/fonts/plus-jakarta-sans-latin-7660bd.woff2";document.head.appendChild(l);var h=document.createElement("link");h.rel="preload";h.as="image";h.setAttribute("fetchpriority","high");h.setAttribute("imagesrcset","/img/villes/zanzibar.webp 800w, /img/villes/zanzibar-1280.webp 1280w");h.setAttribute("imagesizes","100vw");h.href="/img/villes/zanzibar.webp";document.head.appendChild(h)}}catch(e){}})();</script>
+<script>(function(){try{var d=document.documentElement,s=localStorage.getItem("escale.lite"),c=navigator.connection||{},z="";try{z=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}if(s==="1"||(s!=="0"&&(c.saveData||/2g|3g/.test(c.effectiveType||"")||z.indexOf("Africa/")===0)))d.classList.add("lite");else{var l=document.createElement("link");l.rel="preload";l.as="font";l.type="font/woff2";l.crossOrigin="anonymous";l.href="/fonts/nunito-latin-166202.woff2";document.head.appendChild(l);var h=document.createElement("link");h.rel="preload";h.as="image";h.setAttribute("fetchpriority","high");h.setAttribute("imagesrcset","/img/villes/zanzibar.webp 800w, /img/villes/zanzibar-1280.webp 1280w");h.setAttribute("imagesizes","100vw");h.href="/img/villes/zanzibar.webp";document.head.appendChild(h)}}catch(e){}})();</script>
 
 <style>
 /* Polices du site écrites ici (copie des règles utiles de /fonts/fonts.css) : une requête bloquante en moins */
@@ -1100,6 +1100,99 @@ html:not(.has-hero) .hero-season a { background: var(--mint, #e9faf5); border-co
   .band .hero > .hero-season, .band .hero > .hero-deal { margin-top: 14px; }
   .has-hero .band { padding-bottom: 18px; }
 }
+/* ============================================================================================================
+   THÈME « SEREIN » (13 novembre 2026, demande de Dobam : même esprit que son site Parents Sereins)
+   Fond crème, corail + vert d'eau, titres Fraunces (mots en italique), texte Nunito, formes douces, animations « ressort ».
+   Tout passe par les variables : pour revenir en arrière, il suffit de retirer ce bloc.
+   ============================================================================================================ */
+@font-face{font-family:'Fraunces';font-style:italic;font-weight:500 700;font-display:swap;src:url(/fonts/fraunces-italic-latin-ext-53f886.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Fraunces';font-style:italic;font-weight:500 700;font-display:swap;src:url(/fonts/fraunces-italic-latin-fa7ce0.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Fraunces';font-style:normal;font-weight:500 700;font-display:swap;src:url(/fonts/fraunces-latin-ext-a04d35.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Fraunces';font-style:normal;font-weight:500 700;font-display:swap;src:url(/fonts/fraunces-latin-069cb9.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Nunito';font-style:normal;font-weight:400 800;font-display:swap;src:url(/fonts/nunito-latin-ext-ffdc8b.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Nunito';font-style:normal;font-weight:400 800;font-display:swap;src:url(/fonts/nunito-latin-166202.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face { font-family: "Nunito Fallback"; font-weight: 100 500; src: local("Arial"), local("ArialMT"), local("Helvetica"), local("Roboto"), local("Liberation Sans"); size-adjust: 100%; }
+@font-face { font-family: "Nunito Fallback"; font-weight: 600 900; src: local("Arial Bold"), local("Arial-BoldMT"), local("Helvetica Bold"), local("Helvetica-Bold"), local("Roboto Bold"), local("Roboto-Bold"), local("Liberation Sans Bold"); size-adjust: 96%; }
+@font-face { font-family: "Fraunces Fallback"; font-weight: 100 900; src: local("Times New Roman Bold"), local("TimesNewRomanPS-BoldMT"), local("Times-Bold"), local("Liberation Serif Bold"), local("Noto Serif Bold"); size-adjust: 109%; }
+:root {
+  --bg: #fffaf4; --surface: #ffffff; --soft: #fdf1e6; --ink: #2b2530; --muted: #6d6573; --line: #f0e3d6;
+  --board: #fffaf4; --board-ink: #2b2530;
+  --sign: #bd4f37; --sign-ink: #ffffff; --accent: #bd4f37; --accent-ink: #ffffff; --focus: #bd4f37; --curve: #bd4f37;
+  --teal: #d65f45; --teal-d: #bd4f37; --teal-ink: #ffffff; --mint: #fdeee8; --mint-2: #fadfd5;
+  --second: #2f8f84; --second-clair: #e2f3f0; --jaune: #ffedc7; --lavande: #ece6ff;
+  --shadow: 0 10px 30px -12px rgb(80 45 30 / .18); --shadow-forte: 0 22px 50px -18px rgb(80 45 30 / .35);
+  --ressort: cubic-bezier(.34, 1.56, .64, 1); --doux-sortie: cubic-bezier(.22, 1, .36, 1);
+  --f-display: "Fraunces", "Fraunces Fallback", Georgia, serif;
+  --f-body: "Nunito", "Nunito Fallback", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "Nunito", "Nunito Fallback", "Segoe UI", system-ui, sans-serif;
+}
+:root.lite { --f-display: Georgia, "Times New Roman", serif; --f-body: "Nunito Fallback", "Segoe UI", system-ui, sans-serif; --f-mono: "Nunito Fallback", "Segoe UI", system-ui, sans-serif; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #19161d; --surface: #26222c; --soft: #221e27; --ink: #f3eef6; --muted: #b8b0be; --line: #3a3442; --board: #19161d; --board-ink: #f3eef6;
+  --sign: #f28c74; --sign-ink: #2a1410; --accent: #f28c74; --accent-ink: #2a1410; --focus: #f28c74; --curve: #f28c74;
+  --teal: #f28c74; --teal-d: #f7a690; --teal-ink: #2a1410; --mint: #3a2620; --mint-2: #4a2f27;
+  --second: #6ccabd; --second-clair: #1f3a37; --jaune: #3d3322; --lavande: #2e2840;
+  --shadow: 0 10px 30px -12px rgb(0 0 0 / .5); --shadow-forte: 0 22px 50px -18px rgb(0 0 0 / .7); } }
+:root[data-theme="dark"] {
+  --bg: #19161d; --surface: #26222c; --soft: #221e27; --ink: #f3eef6; --muted: #b8b0be; --line: #3a3442; --board: #19161d; --board-ink: #f3eef6;
+  --sign: #f28c74; --sign-ink: #2a1410; --accent: #f28c74; --accent-ink: #2a1410; --focus: #f28c74; --curve: #f28c74;
+  --teal: #f28c74; --teal-d: #f7a690; --teal-ink: #2a1410; --mint: #3a2620; --mint-2: #4a2f27;
+  --second: #6ccabd; --second-clair: #1f3a37; --jaune: #3d3322; --lavande: #2e2840;
+  --shadow: 0 10px 30px -12px rgb(0 0 0 / .5); --shadow-forte: 0 22px 50px -18px rgb(0 0 0 / .7); }
+/* Titres en Fraunces (sauf en arabe, qui garde sa police), mots forts en italique corail */
+html:root:not([lang="ar"]) :is(h1, h2, h3, .brand, .vx-title, .section-titre) { font-family: var(--f-display); font-weight: 600; letter-spacing: -.012em; font-optical-sizing: auto; }
+html:root:not([lang="ar"]) :is(h1 em, .vx h1 span) { font-style: italic; color: var(--teal-d); }
+html:root:not([lang="ar"]) .hero h1 em { color: inherit; }
+html:root:not([lang="ar"]) .brand span { font-style: italic; }
+::selection { background: var(--jaune); }
+a { text-underline-offset: 3px; }
+/* Boutons : pilule, léger rebond, reflet qui passe */
+.btn, .gf-go, .go { position: relative; overflow: hidden; transition: transform .35s var(--ressort), box-shadow .3s, filter .2s; }
+.btn::before { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 30%, rgb(255 255 255 / .35) 50%, transparent 70%); transform: translateX(-120%); transition: transform .7s var(--doux-sortie); pointer-events: none; }
+@media (hover: hover) { .btn:hover { transform: translateY(-3px) scale(1.02); } .btn:hover::before { transform: translateX(120%); } }
+.btn:active { transform: scale(.97); }
+/* Cartes : coins doux, ombre chaude, elles se soulèvent */
+.vx-card, .vx-hub a, .vz-row a, .tool-card, .city-card, .guide-card, .inspi-card, .deal, .tr-card { transition: transform .45s var(--doux-sortie), box-shadow .45s, border-color .3s; }
+@media (hover: hover) { :is(.tool-card, .city-card, .guide-card, .inspi-card, .deal, .tr-card):hover { transform: translateY(-6px) rotate(-.4deg); box-shadow: var(--shadow-forte); } }
+.tool-card, .guide-card { border-radius: 18px; }
+/* En-tête : crème translucide ; l'avion du logo se balance */
+.site-head { background: color-mix(in srgb, var(--bg) 96%, transparent); border-bottom-color: var(--line); }
+.extra .logo[style*="#0b5cd6"] { background: var(--second) !important; border-radius: 12px; font-family: var(--f-display); }
+.site-head .brand { color: var(--ink); } .site-head .brand-icon { color: var(--teal); }
+.main-nav a.nav-explore, .main-nav a[aria-current="page"] { color: var(--teal-d); background: var(--mint); }
+/* Formes douces qui flottent derrière le haut des pages */
+.board { position: relative; overflow: hidden; isolation: isolate; }
+.board::before, .board::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; filter: blur(2px); opacity: .6; pointer-events: none; }
+.board::before { width: 300px; height: 300px; background: var(--jaune); top: -110px; right: -70px; }
+.board::after { width: 190px; height: 190px; background: var(--second-clair); bottom: -90px; left: -70px; }
+.eyebrow { color: var(--second); }
+/* Ruban de pays qui défile (accueil) */
+.ruban { overflow: hidden; padding: 14px 0; border-block: 1px solid var(--line); background: var(--soft); margin: 26px 0 6px; mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.ruban .piste { display: flex; gap: 12px; width: max-content; }
+.ruban a { white-space: nowrap; text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); padding: 8px 16px; border-radius: 999px; font-weight: 700; font-size: .95rem; transition: background .2s, color .2s; }
+.ruban a:hover { background: var(--teal); color: var(--teal-ink); }
+/* Barre de lecture, bouton « haut », apparitions */
+.mo-bar { height: 4px; background: linear-gradient(90deg, var(--teal), var(--second)); }
+.haut { position: fixed; right: 16px; bottom: 156px; z-index: 45; width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: 1.2rem; cursor: pointer; box-shadow: var(--shadow); opacity: 0; transform: translateY(20px) scale(.8); pointer-events: none; transition: opacity .3s, transform .4s var(--ressort); }
+.haut.visible { opacity: 1; transform: none; pointer-events: auto; }
+.mo .rv { transform: translate3d(0, 36px, 0); transition: opacity .8s var(--doux-sortie) var(--rv-d, 0ms), transform .8s var(--doux-sortie) var(--rv-d, 0ms); }
+.mo .rv.rv-in { transform: none; }
+.vx-cta, .vz-row .vz-all { background: linear-gradient(135deg, #2f8f84, #bd4f37); box-shadow: var(--shadow-forte); }
+main .vx-cta .btn:not(.ghost) { background: #fff; color: #2b2530; }
+.vx-n { background: var(--second); color: #fff; }
+.city-card.no-img { background: linear-gradient(135deg, #2f8f84, #bd4f37); }
+.rs-ico, .rs-edit, .rs-fb { background: var(--accent); color: var(--accent-ink); }
+.visa-badge.v1 { color: var(--second); }
+@media (prefers-reduced-motion: no-preference) {
+  .brand-icon { animation: plane-bob 3.5s ease-in-out infinite; }
+  @keyframes plane-bob { 0%, 100% { transform: rotate(45deg) translate(0, 0); } 50% { transform: rotate(38deg) translate(1px, -2px) scale(1.08); } }
+  .board::before { animation: flotte 14s ease-in-out infinite; } .board::after { animation: flotte 18s ease-in-out -4s infinite; }
+  @keyframes flotte { 0%, 100% { transform: translate(0, 0) rotate(0); } 33% { transform: translate(18px, -22px) rotate(8deg); } 66% { transform: translate(-14px, 12px) rotate(-6deg); } }
+  .ruban .piste { animation: defile 60s linear infinite; } .ruban:hover .piste, .ruban:focus-within .piste { animation-play-state: paused; }
+  @keyframes defile { to { transform: translateX(-50%); } }
+}
+@media (prefers-reduced-motion: reduce) { .ruban { overflow-x: auto; } }
+/* FIN DU THÈME « SEREIN » */
 </style>
 <script src="/langue.js?v=0b33c8f2"></script>
 </head>
@@ -1356,6 +1449,9 @@ if(!t)return;var e=document.getElementById("hero-season");e.innerHTML='<a href="
     <div class="city-grid fete-grid"><a class="city-card" href="/vols-noel/" data-hrefs="{&quot;fr&quot;: &quot;/vols-noel/&quot;, &quot;en&quot;: &quot;/en/flights-christmas/&quot;, &quot;es&quot;: &quot;/es/vuelos-navidad/&quot;, &quot;pt&quot;: &quot;/pt/voos-natal/&quot;, &quot;ar&quot;: &quot;/ar/flights-christmas/&quot;}"><img src="/img/villes/abidjan-480.webp" srcset="/img/villes/abidjan-480.webp 480w, /img/villes/abidjan.webp 800w" sizes="(max-width: 600px) 46vw, 300px" width="480" height="360" alt="" loading="lazy" decoding="async"><span class="city-info"><strong data-names="{&quot;en&quot;: &quot;Christmas &amp; New Year&quot;, &quot;es&quot;: &quot;Navidad y Año Nuevo&quot;, &quot;pt&quot;: &quot;Natal e Ano Novo&quot;, &quot;ar&quot;: &quot;عيد الميلاد ورأس السنة&quot;, &quot;it&quot;: &quot;Natale e Capodanno&quot;, &quot;de&quot;: &quot;Weihnachten und Neujahr&quot;}">Noël et Nouvel An</strong><small data-names="{&quot;en&quot;: &quot;19 Dec → 3 Jan&quot;, &quot;es&quot;: &quot;19 dic. → 3 ene.&quot;, &quot;pt&quot;: &quot;19 dez. → 3 jan.&quot;, &quot;ar&quot;: &quot;19 ديسمبر – 3 يناير&quot;, &quot;it&quot;: &quot;19 dic → 3 gen&quot;, &quot;de&quot;: &quot;19. Dez. → 3. Jan.&quot;}">19 déc. → 3 janv.</small></span></a><a class="city-card" href="/vols-vacances-hiver/" data-hrefs="{&quot;fr&quot;: &quot;/vols-vacances-hiver/&quot;, &quot;en&quot;: &quot;/en/flights-winter-holidays/&quot;, &quot;es&quot;: &quot;/es/vuelos-vacaciones-invierno/&quot;, &quot;pt&quot;: &quot;/pt/voos-ferias-inverno/&quot;, &quot;ar&quot;: &quot;/ar/flights-winter-holidays/&quot;}"><img src="/img/villes/marrakech-480.webp" srcset="/img/villes/marrakech-480.webp 480w, /img/villes/marrakech.webp 800w" sizes="(max-width: 600px) 46vw, 300px" width="480" height="360" alt="" loading="lazy" decoding="async"><span class="city-info"><strong data-names="{&quot;en&quot;: &quot;Winter sun holidays&quot;, &quot;es&quot;: &quot;Vacaciones de invierno al sol&quot;, &quot;pt&quot;: &quot;Férias de inverno ao sol&quot;, &quot;ar&quot;: &quot;عطلة الشتاء في الشمس&quot;, &quot;it&quot;: &quot;Vacanze invernali al sole&quot;, &quot;de&quot;: &quot;Winterferien in der Sonne&quot;}">Vacances d’hiver au soleil</strong><small data-names="{&quot;en&quot;: &quot;13 → 27 Feb&quot;, &quot;es&quot;: &quot;13 → 27 feb.&quot;, &quot;pt&quot;: &quot;13 → 27 fev.&quot;, &quot;ar&quot;: &quot;13 – 27 فبراير&quot;, &quot;it&quot;: &quot;13 → 27 feb&quot;, &quot;de&quot;: &quot;13. → 27. Feb.&quot;}">13 → 27 févr.</small></span></a><a class="city-card" href="/vols-ramadan-aid-el-fitr/" data-hrefs="{&quot;fr&quot;: &quot;/vols-ramadan-aid-el-fitr/&quot;, &quot;en&quot;: &quot;/en/flights-eid-al-fitr/&quot;, &quot;es&quot;: &quot;/es/vuelos-eid-al-fitr/&quot;, &quot;pt&quot;: &quot;/pt/voos-eid-al-fitr/&quot;, &quot;ar&quot;: &quot;/ar/flights-eid-al-fitr/&quot;}"><img src="/img/villes/casablanca-480.webp" srcset="/img/villes/casablanca-480.webp 480w, /img/villes/casablanca.webp 800w" sizes="(max-width: 600px) 46vw, 300px" width="480" height="360" alt="" loading="lazy" decoding="async"><span class="city-info"><strong data-names="{&quot;en&quot;: &quot;Ramadan &amp; Eid al-Fitr&quot;, &quot;es&quot;: &quot;Ramadán y Eid al-Fitr&quot;, &quot;pt&quot;: &quot;Ramadão e Eid al-Fitr&quot;, &quot;ar&quot;: &quot;رمضان وعيد الفطر&quot;, &quot;it&quot;: &quot;Ramadan e Eid al-Fitr&quot;, &quot;de&quot;: &quot;Ramadan und Eid al-Fitr&quot;}">Ramadan et Aïd el-Fitr</strong><small data-names="{&quot;en&quot;: &quot;4 → 18 Mar&quot;, &quot;es&quot;: &quot;4 → 18 mar.&quot;, &quot;pt&quot;: &quot;4 → 18 mar.&quot;, &quot;ar&quot;: &quot;4 – 18 مارس&quot;, &quot;it&quot;: &quot;4 → 18 mar&quot;, &quot;de&quot;: &quot;4. → 18. März&quot;}">4 → 18 mars</small></span></a><a class="city-card" href="/vols-vacances-paques/" data-hrefs="{&quot;fr&quot;: &quot;/vols-vacances-paques/&quot;, &quot;en&quot;: &quot;/en/flights-easter-holidays/&quot;, &quot;es&quot;: &quot;/es/vuelos-vacaciones-primavera/&quot;, &quot;pt&quot;: &quot;/pt/voos-ferias-pascoa/&quot;, &quot;ar&quot;: &quot;/ar/flights-easter-holidays/&quot;}"><img src="/img/villes/lisbonne-480.webp" srcset="/img/villes/lisbonne-480.webp 480w, /img/villes/lisbonne.webp 800w" sizes="(max-width: 600px) 46vw, 300px" width="480" height="360" alt="" loading="lazy" decoding="async"><span class="city-info"><strong data-names="{&quot;en&quot;: &quot;Easter holidays&quot;, &quot;es&quot;: &quot;Vacaciones de primavera&quot;, &quot;pt&quot;: &quot;Férias da Páscoa&quot;, &quot;ar&quot;: &quot;عطلة الربيع&quot;, &quot;it&quot;: &quot;Vacanze di Pasqua&quot;, &quot;de&quot;: &quot;Osterferien&quot;}">Vacances de Pâques</strong><small data-names="{&quot;en&quot;: &quot;10 → 24 Apr&quot;, &quot;es&quot;: &quot;10 → 24 abr.&quot;, &quot;pt&quot;: &quot;10 → 24 abr.&quot;, &quot;ar&quot;: &quot;10 – 24 أبريل&quot;, &quot;it&quot;: &quot;10 → 24 apr&quot;, &quot;de&quot;: &quot;10. → 24. Apr.&quot;}">10 → 24 avril</small></span></a><a class="city-card" href="/vols-tabaski/" data-hrefs="{&quot;fr&quot;: &quot;/vols-tabaski/&quot;, &quot;en&quot;: &quot;/en/flights-tabaski-eid-al-adha/&quot;, &quot;es&quot;: &quot;/es/vuelos-tabaski/&quot;, &quot;pt&quot;: &quot;/pt/voos-tabaski/&quot;, &quot;ar&quot;: &quot;/ar/flights-eid-al-adha/&quot;}"><img src="/img/villes/dakar-480.webp" srcset="/img/villes/dakar-480.webp 480w, /img/villes/dakar.webp 800w" sizes="(max-width: 600px) 46vw, 300px" width="480" height="360" alt="" loading="lazy" decoding="async"><span class="city-info"><strong data-names="{&quot;en&quot;: &quot;Tabaski (Eid al-Adha)&quot;, &quot;es&quot;: &quot;Tabaski (Eid al-Adha)&quot;, &quot;pt&quot;: &quot;Tabaski (Eid al-Adha)&quot;, &quot;ar&quot;: &quot;عيد الأضحى (تاباسكي)&quot;, &quot;it&quot;: &quot;Tabaski (Eid al-Adha)&quot;, &quot;de&quot;: &quot;Tabaski (Eid al-Adha)&quot;}">Tabaski (Aïd el-Kébir)</strong><small data-names="{&quot;en&quot;: &quot;12 → 24 May&quot;, &quot;es&quot;: &quot;12 → 24 may.&quot;, &quot;pt&quot;: &quot;12 → 24 mai.&quot;, &quot;ar&quot;: &quot;12 – 24 مايو&quot;, &quot;it&quot;: &quot;12 → 24 mag&quot;, &quot;de&quot;: &quot;12. → 24. Mai&quot;}">12 → 24 mai</small></span></a><a class="city-card" href="/vols-vacances-ete/" data-hrefs="{&quot;fr&quot;: &quot;/vols-vacances-ete/&quot;, &quot;en&quot;: &quot;/en/flights-summer-holidays/&quot;, &quot;es&quot;: &quot;/es/vuelos-verano/&quot;, &quot;pt&quot;: &quot;/pt/voos-ferias-verao/&quot;, &quot;ar&quot;: &quot;/ar/flights-summer/&quot;}"><img src="/img/villes/djerba-480.webp" srcset="/img/villes/djerba-480.webp 480w, /img/villes/djerba.webp 800w" sizes="(max-width: 600px) 46vw, 300px" width="480" height="360" alt="" loading="lazy" decoding="async"><span class="city-info"><strong data-names="{&quot;en&quot;: &quot;Summer holidays&quot;, &quot;es&quot;: &quot;Vacaciones de verano&quot;, &quot;pt&quot;: &quot;Férias de verão&quot;, &quot;ar&quot;: &quot;العطلة الصيفية&quot;, &quot;it&quot;: &quot;Vacanze estive&quot;, &quot;de&quot;: &quot;Sommerferien&quot;}">Vacances d’été</strong><small data-names="{&quot;en&quot;: &quot;4 Jul → 1 Aug&quot;, &quot;es&quot;: &quot;4 jul. → 1 ago.&quot;, &quot;pt&quot;: &quot;4 jul. → 1 ago.&quot;, &quot;ar&quot;: &quot;4 يوليو – 1 أغسطس&quot;, &quot;it&quot;: &quot;4 lug → 1 ago&quot;, &quot;de&quot;: &quot;4. Juli → 1. Aug.&quot;}">4 juil. → 1er août</small></span></a></div>
     <!-- FETES:END -->
   </section>
+  <!-- RUBAN:START -->
+  <div class="ruban" aria-label="Pays à explorer"><div class="piste"><a href="/visiter/cote-d-ivoire/">🇨🇮 Côte d&#x27;Ivoire</a><a href="/visiter/senegal/">🇸🇳 Sénégal</a><a href="/visiter/cameroun/">🇨🇲 Cameroun</a><a href="/visiter/ghana/">🇬🇭 Ghana</a><a href="/visiter/maroc/">🇲🇦 Maroc</a><a href="/visiter/tunisie/">🇹🇳 Tunisie</a><a href="/visiter/egypte/">🇪🇬 Égypte</a><a href="/visiter/kenya/">🇰🇪 Kenya</a><a href="/visiter/tanzanie/">🇹🇿 Tanzanie</a><a href="/visiter/afrique-du-sud/">🇿🇦 Afrique du Sud</a><a href="/visiter/france/">🇫🇷 France</a><a href="/visiter/italie/">🇮🇹 Italie</a><a href="/visiter/espagne/">🇪🇸 Espagne</a><a href="/visiter/portugal/">🇵🇹 Portugal</a><a href="/visiter/grece/">🇬🇷 Grèce</a><a href="/visiter/pays-bas/">🇳🇱 Pays-Bas</a><a href="/visiter/turquie/">🇹🇷 Turquie</a><a href="/visiter/emirats-arabes-unis/">🇦🇪 Émirats arabes unis</a><a href="/visiter/japon/">🇯🇵 Japon</a><a href="/visiter/thailande/">🇹🇭 Thaïlande</a><a href="/visiter/indonesie/">🇮🇩 Indonésie</a><a href="/visiter/etats-unis/">🇺🇸 États-Unis</a><a href="/visiter/mexique/">🇲🇽 Mexique</a><a href="/visiter/bresil/">🇧🇷 Brésil</a><a tabindex="-1" aria-hidden="true" href="/visiter/cote-d-ivoire/">🇨🇮 Côte d&#x27;Ivoire</a><a tabindex="-1" aria-hidden="true" href="/visiter/senegal/">🇸🇳 Sénégal</a><a tabindex="-1" aria-hidden="true" href="/visiter/cameroun/">🇨🇲 Cameroun</a><a tabindex="-1" aria-hidden="true" href="/visiter/ghana/">🇬🇭 Ghana</a><a tabindex="-1" aria-hidden="true" href="/visiter/maroc/">🇲🇦 Maroc</a><a tabindex="-1" aria-hidden="true" href="/visiter/tunisie/">🇹🇳 Tunisie</a><a tabindex="-1" aria-hidden="true" href="/visiter/egypte/">🇪🇬 Égypte</a><a tabindex="-1" aria-hidden="true" href="/visiter/kenya/">🇰🇪 Kenya</a><a tabindex="-1" aria-hidden="true" href="/visiter/tanzanie/">🇹🇿 Tanzanie</a><a tabindex="-1" aria-hidden="true" href="/visiter/afrique-du-sud/">🇿🇦 Afrique du Sud</a><a tabindex="-1" aria-hidden="true" href="/visiter/france/">🇫🇷 France</a><a tabindex="-1" aria-hidden="true" href="/visiter/italie/">🇮🇹 Italie</a><a tabindex="-1" aria-hidden="true" href="/visiter/espagne/">🇪🇸 Espagne</a><a tabindex="-1" aria-hidden="true" href="/visiter/portugal/">🇵🇹 Portugal</a><a tabindex="-1" aria-hidden="true" href="/visiter/grece/">🇬🇷 Grèce</a><a tabindex="-1" aria-hidden="true" href="/visiter/pays-bas/">🇳🇱 Pays-Bas</a><a tabindex="-1" aria-hidden="true" href="/visiter/turquie/">🇹🇷 Turquie</a><a tabindex="-1" aria-hidden="true" href="/visiter/emirats-arabes-unis/">🇦🇪 Émirats arabes unis</a><a tabindex="-1" aria-hidden="true" href="/visiter/japon/">🇯🇵 Japon</a><a tabindex="-1" aria-hidden="true" href="/visiter/thailande/">🇹🇭 Thaïlande</a><a tabindex="-1" aria-hidden="true" href="/visiter/indonesie/">🇮🇩 Indonésie</a><a tabindex="-1" aria-hidden="true" href="/visiter/etats-unis/">🇺🇸 États-Unis</a><a tabindex="-1" aria-hidden="true" href="/visiter/mexique/">🇲🇽 Mexique</a><a tabindex="-1" aria-hidden="true" href="/visiter/bresil/">🇧🇷 Brésil</a></div></div>
+  <!-- RUBAN:END -->
   <section class="block world" id="world">
     <h2 data-en="Explore the world" data-fr="Explorer le monde">Die Welt entdecken</h2>
     <p class="lead" data-en="Where to go next? Prices from your city, updated every day." data-fr="Où partir ? Les prix depuis ta ville, mis à jour chaque jour.">Wohin als Nächstes? Preise ab deiner Stadt, täglich aktualisiert.</p>
@@ -1489,7 +1585,7 @@ if(!t)return;var e=document.getElementById("hero-season");e.innerHTML='<a href="
   } catch (e) {}
 })();
 </script>
-<script src="/motion.js?v=1c71b7fb" defer></script>
+<script src="/motion.js?v=6ded277f" defer></script>
 <!-- CONSENT:START -->
 <script>
 // Bandeau de consentement aux cookies (Escale).

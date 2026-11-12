@@ -373,7 +373,7 @@ HEAD = """<!doctype html>
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preload" href="/fonts/plus-jakarta-sans-latin-7660bd.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/nunito-latin-166202.woff2" as="font" type="font/woff2" crossorigin>
 {arpreload}
 <link rel="stylesheet" href="/pages.css">
 {ld}

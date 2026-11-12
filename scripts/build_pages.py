@@ -285,7 +285,7 @@ HEAD = """<!doctype html>
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preload" href="/fonts/plus-jakarta-sans-latin-7660bd.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/nunito-latin-166202.woff2" as="font" type="font/woff2" crossorigin>
 
 <link rel="stylesheet" href="/pages.css">
 {ld}
@@ -722,12 +722,12 @@ DISTANCES = {}
 # Mode léger (réseaux lents, économie de données, visiteurs en Afrique) : un petit script en tête de chaque page ajoute la classe
 # « lite » à <html> ; sans elle, il précharge la police du site. En mode léger : police du système, pas de photos décoratives,
 # grille et courbe des prix chargées à la demande (pages.css, site/grille.js, site/courbe.js). Choix modifiable en bas de page (clics.js).
-FONT_PRELOAD = '<link rel="preload" href="/fonts/plus-jakarta-sans-latin-7660bd.woff2" as="font" type="font/woff2" crossorigin>'
+FONT_PRELOAD = '<link rel="preload" href="/fonts/nunito-latin-166202.woff2" as="font" type="font/woff2" crossorigin>'
 LITE_JS = ('<script>(function(){try{var d=document.documentElement,s=localStorage.getItem("escale.lite"),c=navigator.connection||{},z="";'
            'try{z=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}'
            'if(s==="1"||(s!=="0"&&(c.saveData||/2g|3g/.test(c.effectiveType||"")||z.indexOf("Africa/")===0)))d.classList.add("lite");'
            'else{var l=document.createElement("link");l.rel="preload";l.as="font";l.type="font/woff2";l.crossOrigin="anonymous";'
-           'l.href="/fonts/plus-jakarta-sans-latin-7660bd.woff2";document.head.appendChild(l)}}catch(e){}})();</script>')
+           'l.href="/fonts/nunito-latin-166202.woff2";document.head.appendChild(l)}}catch(e){}})();</script>')
 
 
 def lite_mode(site):
@@ -916,6 +916,10 @@ def main():
                  for pp, nom, fl, k, m in visiter.liens(SITE))
     if vz:
         vz = '<div class="vz-row">' + vz + '<a class="vz-all" href="/visiter/">Tous les pays →</a></div>'
+    rb = "".join(f'<a href="/{pp}/">{fl} {E(nom)}</a>' for pp, nom, fl, k, m in visiter.liens(SITE))
+    if rb:
+        rb = ('<div class="ruban" aria-label="Pays à explorer"><div class="piste">' + rb + rb.replace("<a ", '<a tabindex="-1" aria-hidden="true" ') + "</div></div>")
+    s = re.sub(r"<!-- RUBAN:START -->.*?<!-- RUBAN:END -->", lambda m: "<!-- RUBAN:START -->\n  " + rb + "\n  <!-- RUBAN:END -->", s, flags=re.S)
     s = re.sub(r"<!-- VISITER:START -->.*?<!-- VISITER:END -->", lambda m: "<!-- VISITER:START -->\n    " + vz + "\n    <!-- VISITER:END -->", s, flags=re.S)
     s = re.sub(r"<!-- VILLES:START -->.*?<!-- VILLES:END -->", lambda m: "<!-- VILLES:START -->\n    " + grid + "\n    <!-- VILLES:END -->", s, flags=re.S)
     s = re.sub(r'<div class="dests" id="dests"[^>]*>', lambda m: '<div class="dests" id="dests" data-photos="' + E(json.dumps(villes.dest_photos(SITE))) + '">', s)
