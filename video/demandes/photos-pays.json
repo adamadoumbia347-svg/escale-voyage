@@ -1,16 +1,16 @@
 {
- "code": "kenya",
+ "code": "bali",
  "lieux": {
-  "mara": "Maasai Mara wildebeest migration",
-  "lions": "Maasai Mara lion",
-  "amboseli": "Amboseli elephants Kilimanjaro",
-  "nairobi": "Nairobi National Park giraffe skyline",
-  "nakuru": "Lake Nakuru flamingos",
-  "mountkenya": "Mount Kenya peak",
-  "lamu": "Lamu Old Town",
-  "diani": "Diani Beach Kenya",
-  "maasai": "Maasai people Kenya traditional",
-  "giraffe": "Giraffe Centre Nairobi"
+  "ulundanu": "Pura Ulun Danu Bratan",
+  "tegallalang": "Tegallalang rice terrace",
+  "uluwatu": "Uluwatu temple cliff",
+  "tanahlot": "Tanah Lot temple",
+  "kecak": "Kecak dance Bali",
+  "nusapenida": "Kelingking beach Nusa Penida",
+  "batur": "Mount Batur sunrise",
+  "monkey": "Ubud Monkey Forest",
+  "lempuyang": "Pura Lempuyang gate",
+  "plage": "Bali beach surfing Kuta"
  },
- "demande": "2026-11-12T17:08:55"
+ "demande": "2026-11-12T17:19:57"
 }
