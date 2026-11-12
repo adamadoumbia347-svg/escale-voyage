@@ -859,3 +859,74 @@ main > section:nth-of-type(n+3), main .wrap > section:nth-of-type(n+3), body > f
 .ad-ok { font-weight: 700; color: var(--accent, #0b8577); }
 /* Ponts 2027 (site/ponts.js) */
 .pt-table td { vertical-align: top; } a.pt-go { font-weight: 700; white-space: nowrap; } a.pt-go.pt-off { color: var(--muted); font-weight: 600; }
+
+/* ---------- Animations (motion.js) : la classe .mo n'existe que si les animations sont permises ---------- */
+.mo .rv { opacity: 0; transform: translate3d(0, 26px, 0) scale(.985); transition: opacity .6s cubic-bezier(.2,.7,.2,1) var(--rv-d, 0ms), transform .7s cubic-bezier(.2,.7,.2,1) var(--rv-d, 0ms); will-change: opacity, transform; }
+.mo .rv.rv-in { opacity: 1; transform: none; }
+.mo-bar { position: fixed; left: 0; right: 0; top: 0; height: 3px; z-index: 60; background: linear-gradient(90deg, var(--accent), #19c7b1); transform: scaleX(0); transform-origin: 0 50%; pointer-events: none; }
+html[dir="rtl"] .mo-bar { transform-origin: 100% 50%; }
+
+/* ---------- « Que visiter » : un pays, ses villes et ses lieux, en photos (scripts/visiter.py) ---------- */
+.vx h1, .vx-card h2, .vx-hub h3, .vx-title { font-family: "Bricolage Grotesque", "Bricolage Fallback", var(--f-body); }
+.vx-hero { position: relative; margin: 14px 0 0; border-radius: 26px; overflow: hidden; aspect-ratio: 16 / 10; background: var(--soft); box-shadow: 0 30px 60px -30px rgb(15 23 42 / .45); }
+.vx-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.06); will-change: transform; }
+.vx-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(4 18 22 / 0) 35%, rgb(4 18 22 / .82)); }
+.vx-hero figcaption { position: absolute; z-index: 1; left: 20px; right: 20px; bottom: 18px; color: #fff; }
+.vx-hero .vx-title { display: block; font-weight: 800; font-size: clamp(34px, 9vw, 64px); line-height: 1; letter-spacing: -.035em; text-shadow: 0 4px 24px rgb(0 0 0 / .5); }
+.vx-hero .vx-sub { display: block; margin-top: 8px; font-weight: 600; font-size: 16px; opacity: .95; }
+.vx-cred { font-size: 12px; color: var(--muted); margin: 6px 2px 0; }
+.vx-cred a { color: inherit; }
+.vx-chips { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 10px; margin: 18px 0 0; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.vx-chips::-webkit-scrollbar { display: none; }
+.vx-chips a { flex: none; padding: 9px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); text-decoration: none; font-weight: 600; font-size: 14px; transition: transform .2s, border-color .2s, background .2s; }
+.vx-chips a:hover { border-color: var(--accent); transform: translateY(-2px); }
+.vx-list { display: grid; gap: 26px; margin-top: 22px; counter-reset: vx; }
+.vx-card { position: relative; border-radius: 24px; overflow: hidden; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); transition: transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s; transform-style: preserve-3d; scroll-margin-top: 84px; }
+.vx-card:hover { box-shadow: 0 30px 60px -28px rgb(15 23 42 / .45); }
+.vx-card::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .25s; background: radial-gradient(420px circle at var(--gx, 50%) var(--gy, 50%), rgb(255 255 255 / .22), transparent 60%); }
+.vx-card:hover::after { opacity: 1; }
+.vx-ph { position: relative; aspect-ratio: 3 / 2; overflow: hidden; background: var(--soft); }
+.vx-ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; will-change: transform; }
+.vx-kind { position: absolute; z-index: 1; left: 14px; top: 14px; padding: 6px 12px; border-radius: 999px; background: rgb(255 255 255 / .92); color: #0f172a; font-weight: 700; font-size: 12.5px; letter-spacing: .02em; box-shadow: 0 6px 18px -6px rgb(0 0 0 / .4); }
+.vx-n { position: absolute; z-index: 1; right: 14px; top: 14px; min-width: 38px; height: 38px; padding: 0 8px; display: grid; place-items: center; border-radius: 999px; background: #19c7b1; color: #06282c; font-weight: 800; font-size: 15px; box-shadow: 0 6px 18px -6px rgb(0 0 0 / .45); }
+.vx-tx { padding: 16px 18px 18px; }
+.vx-card h2 { margin: 0 0 6px; font-weight: 800; font-size: clamp(24px, 6vw, 32px); line-height: 1.08; letter-spacing: -.025em; }
+.vx-card p { margin: 0; font-size: 16.5px; line-height: 1.6; }
+.vx-card p.vx-cred { margin: 10px 0 0; font-size: 12px; line-height: 1.45; }
+.vx h1 { font-weight: 800; font-size: clamp(30px, 8.4vw, 46px); line-height: 1.05; letter-spacing: -.03em; }
+.vx-cta { margin-top: 30px; padding: 22px 20px; border-radius: 24px; color: #fff; background: linear-gradient(135deg, #0b8577, #1a56db); box-shadow: 0 30px 60px -30px rgb(26 86 219 / .7); }
+.vx-cta h2 { margin: 0 0 6px; color: #fff; font: 800 26px/1.15 "Bricolage Grotesque", "Bricolage Fallback", var(--f-body); letter-spacing: -.02em; }
+.vx-cta p { margin: 0 0 14px; opacity: .95; }
+main .vx-cta .btn { background: #fff; color: #0f172a; margin: 0 8px 8px 0; }
+main .vx-cta .btn.ghost { background: rgb(255 255 255 / .16); color: #fff; border: 1px solid rgb(255 255 255 / .5); }
+.vx-hub { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+.vx-hub a { position: relative; display: block; aspect-ratio: 4 / 5; border-radius: 22px; overflow: hidden; color: #fff; text-decoration: none; background: var(--soft); box-shadow: var(--shadow); transition: transform .25s cubic-bezier(.2,.7,.2,1); }
+.vx-hub img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.vx-hub a:hover img { transform: scale(1.08); }
+.vx-hub a::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(4 18 22 / 0) 40%, rgb(4 18 22 / .85)); }
+.vx-hub .vx-hl { position: absolute; z-index: 1; left: 14px; right: 12px; bottom: 12px; }
+.vx-hub h3 { margin: 0; font-weight: 800; font-size: clamp(20px, 5.4vw, 28px); line-height: 1.05; letter-spacing: -.025em; color: #fff; }
+.vx-hub small { display: block; margin-top: 4px; font-size: 12.5px; font-weight: 600; opacity: .92; }
+.vx-reg { margin: 30px 0 0; font: 800 22px/1.2 "Bricolage Grotesque", "Bricolage Fallback", var(--f-body); letter-spacing: -.02em; }
+@media (min-width: 700px) { .vx-hub { grid-template-columns: repeat(3, minmax(0, 1fr)); } .vx-list { gap: 34px; } .vx-card { display: grid; grid-template-columns: 1.15fr 1fr; align-items: stretch; } .vx-card:nth-child(even) .vx-ph { order: 2; } .vx-ph { aspect-ratio: auto; min-height: 300px; } .vx-tx { padding: 26px 26px; align-self: center; } }
+
+.vx-like { position: absolute; z-index: 2; right: 12px; bottom: 12px; width: 46px; height: 46px; display: grid; place-items: center; border: 0; border-radius: 50%; background: rgb(255 255 255 / .94); color: #0f172a; cursor: pointer; box-shadow: 0 8px 20px -8px rgb(0 0 0 / .5); transition: transform .2s; }
+.vx-like svg { fill: none; stroke: currentColor; stroke-width: 2; transition: fill .2s, stroke .2s; }
+.vx-like[aria-pressed="true"] svg { fill: #e11d48; stroke: #e11d48; }
+.vx-like:hover { transform: scale(1.08); }
+@media (prefers-reduced-motion: no-preference) { .vx-like.pop { animation: vx-pop .45s cubic-bezier(.2,1.6,.4,1); } @keyframes vx-pop { 0% { transform: scale(.7); } 60% { transform: scale(1.25); } 100% { transform: scale(1); } } }
+.vx-envies ul { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 8px; }
+.vx-envies li { display: flex; align-items: center; gap: 8px; max-width: none; border: 1px solid var(--line); border-radius: 16px; padding: 6px; background: var(--surface); }
+.vx-envies li a { flex: 1; display: flex; align-items: center; gap: 12px; color: var(--ink); text-decoration: none; min-width: 0; }
+.vx-envies img { width: 56px; height: 56px; border-radius: 12px; object-fit: cover; flex: none; }
+.vx-envies small { display: block; color: var(--muted); }
+.vx-rm { flex: none; width: 40px; height: 40px; border: 0; border-radius: 50%; background: var(--soft); color: var(--ink); font-size: 20px; cursor: pointer; }
+[data-envies-n] { display: inline-grid; place-items: center; min-width: 26px; height: 26px; padding: 0 7px; border-radius: 999px; background: #e11d48; color: #fff; font: 700 13px/1 var(--f-body); vertical-align: middle; }
+.vx-search { margin: 14px 0 0; }
+.vx-search label { display: block; font-weight: 700; margin-bottom: 6px; }
+.vx-search input { width: 100%; padding: 13px 16px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: 500 16px/1.2 var(--f-body); }
+.vx-search span { display: block; margin-top: 6px; min-height: 1.4em; }
+.vx-dep { margin: 0 0 8px; font-weight: 600; }
+.vx-dep select { margin-left: 6px; padding: 8px 10px; border-radius: 10px; border: 0; font: 600 15px/1.2 var(--f-body); background: #fff; color: #0f172a; }
+.vx-prix { min-height: 3.2em; }
+main .vx-cta button.btn { cursor: pointer; font: inherit; font-weight: 700; }

@@ -41,6 +41,7 @@ import retour_pays  # noqa: E402
 import diaspora_plus  # noqa: E402
 import diaspora_plus_i18n  # noqa: E402
 import idees_nov  # noqa: E402
+import visiter  # noqa: E402
 import compagnies  # noqa: E402
 import can2027  # noqa: E402
 import evenements  # noqa: E402
@@ -304,6 +305,7 @@ HEAD = """<!doctype html>
   <p>Escale ne vend pas de billets et ne fixe aucun prix. Les durées et informations sont indicatives : les programmes des compagnies changent, vérifiez toujours sur le site de réservation.</p>
 </footer>
 <script src="/favs.js" defer></script>
+<script src="/motion.js" defer></script>
 <script src="/clics.js" defer></script>
 </body>
 </html>
@@ -807,6 +809,7 @@ def main():
     urls += diaspora_plus.build(SITE, ctx)  # argent, colis, vol à étapes, aéroports de départ
     urls += diaspora_plus_i18n.build(SITE, ctx)  # les mêmes en anglais et en italien
     urls += idees_nov.build(SITE, ctx)  # escales longues, ponts 2027, parent âgé ou enfant seul, deuil, compte à rebours
+    urls += visiter.build(SITE, ctx)  # « Que visiter » : un pays, ses villes et ses lieux, en photos
     urls += compagnies.build(SITE, ctx)  # pages compagnies (fr/en)
     urls += can2027.build(SITE, ctx)  # CAN 2027 : villes hôtes, prix, visa (fr/en)
     urls += evenements.build(SITE, ctx)  # grands événements africains
@@ -834,7 +837,7 @@ def main():
                              lambda p: (SITE / p / "index.html").exists(), lambda p: (SITE / p / "index.html").exists(), build_i18n.wa_btn)
     urls += famille_pages.build(page, E, build_i18n.alert_btn, lambda p: (SITE / p / "index.html").exists(), build_i18n.wa_btn)
     urls.append(page("credits-photos", "Crédits des photos | Escale", "Auteurs et licences des photos de villes utilisées sur Escale (Wikimedia Commons).",
-                     "<h1>Crédits des photos</h1>", villes.credits_body(SITE)))
+                     "<h1>Crédits des photos</h1>", villes.credits_body(SITE) + visiter.credits(SITE)))
 
     # Liste des guides sur la page d'accueil
     idx = SITE / "index.html"
@@ -909,6 +912,11 @@ def main():
                + __import__("json").dumps(season, ensure_ascii=False).replace("</", "<\\/") + '</script><!-- SAISON:END -->', s, flags=re.S)
     s = re.sub(r"<!-- FETES:START -->.*?<!-- FETES:END -->", lambda m: '<!-- FETES:START -->\n    <div class="city-grid fete-grid">' + "".join(fcards) + '</div>\n    <!-- FETES:END -->', s, flags=re.S)
     grid = villes.cards(SITE, HUBS, airports)
+    vz = "".join(f'<a href="/{pp}/"><img src="/img/visiter/{k}-640.webp" width="640" height="{round(640 * m["h"] / m["w"])}" alt="{E(nom)}" loading="lazy" decoding="async"><b>{E(nom)} {fl}</b></a>'
+                 for pp, nom, fl, k, m in visiter.liens(SITE))
+    if vz:
+        vz = '<div class="vz-row">' + vz + '<a class="vz-all" href="/visiter/">Tous les pays →</a></div>'
+    s = re.sub(r"<!-- VISITER:START -->.*?<!-- VISITER:END -->", lambda m: "<!-- VISITER:START -->\n    " + vz + "\n    <!-- VISITER:END -->", s, flags=re.S)
     s = re.sub(r"<!-- VILLES:START -->.*?<!-- VILLES:END -->", lambda m: "<!-- VILLES:START -->\n    " + grid + "\n    <!-- VILLES:END -->", s, flags=re.S)
     s = re.sub(r'<div class="dests" id="dests"[^>]*>', lambda m: '<div class="dests" id="dests" data-photos="' + E(json.dumps(villes.dest_photos(SITE))) + '">', s)
     idx.write_text(s, encoding="utf-8")

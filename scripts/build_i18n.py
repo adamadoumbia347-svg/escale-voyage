@@ -394,6 +394,7 @@ HEAD = """<!doctype html>
 </footer>
 <script src="/favs.js" defer></script>
 <script src="/clics.js" defer></script>
+<script src="/motion.js" defer></script>
 </body>
 </html>
 """
