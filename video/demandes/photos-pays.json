@@ -1,21 +1,22 @@
 {
- "code": "b1",
+ "code": "b2",
  "lieux": {
-  "jp-kyoto": "Fushimi Inari torii gates Kyoto",
-  "jp-kinkakuji": "Kinkaku-ji golden pavilion",
-  "jp-osaka": "Osaka Castle",
-  "jp-nara": "Nara deer Todai-ji",
-  "jp-miyajima": "Itsukushima shrine torii Miyajima",
-  "us-grandcanyon": "Grand Canyon South Rim",
-  "us-sanfrancisco": "Golden Gate Bridge San Francisco",
-  "us-losangeles": "Hollywood Sign Los Angeles",
-  "us-miami": "Miami Beach Ocean Drive",
-  "us-chicago": "Chicago skyline Lake Michigan",
-  "id-borobudur": "Borobudur temple sunrise",
-  "id-komodo": "Komodo National Park Padar island",
-  "id-bromo": "Mount Bromo sunrise",
-  "id-jakarta": "Jakarta Monas skyline",
-  "nl-lahaye": "The Hague Binnenhof Hofvijver"
+  "ci-abidjan": "Abidjan Plateau skyline lagune",
+  "ci-basilique": "Basilique Notre-Dame de la Paix Yamoussoukro",
+  "ci-bassam": "Grand-Bassam colonial",
+  "ci-assinie": "Assinie plage",
+  "ci-man": "Man Côte d'Ivoire cascade",
+  "ci-sanpedro": "San-Pédro Côte d'Ivoire plage",
+  "ci-korhogo": "Korhogo Côte d'Ivoire",
+  "ci-stpaul": "Cathédrale Saint-Paul Abidjan",
+  "sn-dakar": "Monument de la Renaissance africaine Dakar",
+  "sn-goree": "Île de Gorée",
+  "sn-lacrose": "Lac Rose Retba Sénégal",
+  "sn-saintlouis": "Saint-Louis Sénégal pont Faidherbe",
+  "sn-saloum": "Sine Saloum delta",
+  "sn-casamance": "Cap Skirring plage",
+  "sn-touba": "Grande Mosquée de Touba",
+  "sn-saly": "Saly Sénégal plage"
  },
- "demande": "2026-11-12T20:41:12"
+ "demande": "2026-11-12T20:44:18"
 }
