@@ -1,22 +1,19 @@
 {
- "code": "c6",
+ "code": "c7",
  "lieux": {
-  "ae-dubai": "Burj Khalifa Dubai skyline",
-  "ae-marina": "Dubai Marina",
-  "ae-palm": "Palm Jumeirah aerial",
-  "ae-abudhabi": "Sheikh Zayed Grand Mosque",
-  "ae-louvre": "Louvre Abu Dhabi",
-  "ae-desert": "Dubai desert dunes",
-  "ae-vieuxdubai": "Dubai Creek abra Al Fahidi",
-  "ae-burjalarab": "Burj Al Arab",
-  "br-rio": "Christ the Redeemer Rio de Janeiro",
-  "br-painsucre": "Sugarloaf Mountain Rio",
-  "br-iguacu": "Iguazu Falls Brazil",
-  "br-salvador": "Pelourinho Salvador",
-  "br-amazonie": "Amazon river Manaus",
-  "br-saopaulo": "São Paulo skyline Avenida Paulista",
-  "br-lencois": "Lençóis Maranhenses",
-  "br-copacabana": "Copacabana beach"
+  "cm-douala": "Douala Bonanjo",
+  "cm-douala2": "Douala pont du Wouri",
+  "cm-douala3": "Douala ville vue aérienne",
+  "cm-kribi": "Kribi",
+  "cm-kribi2": "Lobé falls",
+  "cm-waza": "Waza giraffe Cameroon",
+  "cm-montcameroun": "Mount Cameroon Buea",
+  "gh-kumasi": "Kumasi",
+  "gh-kumasi2": "Kejetia market",
+  "gh-kumasi3": "Manhyia Palace Museum",
+  "cm-yaounde": "Yaoundé",
+  "cm-yaounde2": "Yaoundé Cameroun monument de la Réunification",
+  "cm-yaounde3": "Yaoundé centre ville"
  },
- "demande": "2026-11-12T21:27:48"
+ "demande": "2026-11-12T21:31:01"
 }
