@@ -1,7 +1,7 @@
 {
 "/": [
-"9e54b859bc913040",
-"2026-11-11"
+"bc211fd793006e3b",
+"2026-11-12"
 ],
 "/a-propos/": [
 "f1504321e4c88017",
@@ -10,6 +10,66 @@
 "/acheter-ou-attendre/": [
 "61f8da874ef13b20",
 "2026-11-09"
+],
+"/aller-a-l-aeroport/": [
+"eb5fba8ea17c5bcc",
+"2026-11-12"
+],
+"/aller-aeroport-barcelone/": [
+"ec4bb5191ba9b098",
+"2026-11-12"
+],
+"/aller-aeroport-bruxelles/": [
+"37ebe4228662ffcb",
+"2026-11-12"
+],
+"/aller-aeroport-francfort/": [
+"2b2261a8490a57b2",
+"2026-11-12"
+],
+"/aller-aeroport-geneve/": [
+"fa726de406fc5283",
+"2026-11-12"
+],
+"/aller-aeroport-lisbonne/": [
+"87e680d77f3923e9",
+"2026-11-12"
+],
+"/aller-aeroport-londres-heathrow/": [
+"00c674080ed58555",
+"2026-11-12"
+],
+"/aller-aeroport-lyon/": [
+"51da983b25647338",
+"2026-11-12"
+],
+"/aller-aeroport-madrid/": [
+"46f0a6a6780396f3",
+"2026-11-12"
+],
+"/aller-aeroport-marseille/": [
+"c85cb3374e01c777",
+"2026-11-12"
+],
+"/aller-aeroport-milan-malpensa/": [
+"84067ca43dad21e9",
+"2026-11-12"
+],
+"/aller-aeroport-montreal/": [
+"1c8c33b484c27915",
+"2026-11-12"
+],
+"/aller-aeroport-paris-cdg/": [
+"281c18fc3ca328ac",
+"2026-11-12"
+],
+"/aller-aeroport-paris-orly/": [
+"b117b6f5a159bf66",
+"2026-11-12"
+],
+"/aller-aeroport-rome-fiumicino/": [
+"d30d5c2dda8764f2",
+"2026-11-12"
 ],
 "/ar/": [
 "a85fb22eb9166725",
@@ -9594,6 +9654,14 @@
 "/en/where-to-go-for-500-euros/": [
 "8c7fe8986cc0702d",
 "2026-11-09"
+],
+"/envoyer-argent-au-pays/": [
+"5d8b4a5b177c5542",
+"2026-11-12"
+],
+"/envoyer-colis-au-pays/": [
+"f10498ae585fcc5f",
+"2026-11-12"
 ],
 "/es/": [
 "f6126be5a0cc376b",
@@ -20731,6 +20799,10 @@
 "e1dec6d9f2f24851",
 "2026-11-09"
 ],
+"/vol-plusieurs-etapes/": [
+"56a21d27deaff373",
+"2026-11-12"
+],
 "/vol-pointe-noire-addis-abeba/": [
 "b31bf87e2fb215cd",
 "2026-11-09"
@@ -21640,7 +21712,7 @@
 "2026-11-09"
 ],
 "/widget/": [
-"ec21df50cef7bc53",
-"2026-11-10"
+"f0b285ae0b77136c",
+"2026-11-12"
 ]
 }

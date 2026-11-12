@@ -38,6 +38,7 @@ import routes_extra  # noqa: E402
 import diaspora  # noqa: E402
 import plusieurs  # noqa: E402
 import retour_pays  # noqa: E402
+import diaspora_plus  # noqa: E402
 import compagnies  # noqa: E402
 import can2027  # noqa: E402
 import evenements  # noqa: E402
@@ -801,6 +802,7 @@ def main():
     urls += diaspora.build(SITE, ctx, lambda p: (SITE / p / "index.html").exists())  # rentrer au pays pour les fêtes, par communauté
     urls += plusieurs.build(SITE, ctx)  # partir à plusieurs : quelle ville de départ est la moins chère
     urls += retour_pays.build(SITE, ctx)  # rentrer au pays pour de bon
+    urls += diaspora_plus.build(SITE, ctx)  # argent, colis, vol à étapes, aéroports de départ
     urls += compagnies.build(SITE, ctx)  # pages compagnies (fr/en)
     urls += can2027.build(SITE, ctx)  # CAN 2027 : villes hôtes, prix, visa (fr/en)
     urls += evenements.build(SITE, ctx)  # grands événements africains
@@ -847,7 +849,7 @@ def main():
     links = group("Partir d’Afrique : vols au départ de chaque pays", [f'<li><a href="/{c}/">{p[1]} Vols au départ {E(pays_accueil.DU.get(c, "du " + p[0]))}</a></li>' for c, p in pays_accueil.PAYS.items()]
                   + [f'<li><a href="/{p}/">{E(t)}</a></li>' for p, t in afrique_themes.links("fr")] + ['<li><a href="/visa/">Faut-il un visa avec mon passeport ?</a></li>',
                      '<li><a href="/billet-avion-urgent/">Partir en urgence au pays (décès, maladie)</a></li>', '<li><a href="/payer-billet-avion-mobile-money/">Payer son billet avec Orange Money, Wave ou MTN MoMo</a></li>', '<li><a href="/payer-billet-avion-plusieurs-fois/">Payer son billet en plusieurs fois (3x, 4x, 10x)</a></li>', '<li><a href="/bagages-compagnies-afrique/">Bagages : la franchise de chaque compagnie</a></li>',
-                     '<li><a href="/avis-voyageurs/">Avis des voyageurs</a></li>']
+                     '<li><a href="/avis-voyageurs/">Avis des voyageurs</a></li>'] + [f'<li><a href="/{p}/">{E(t)}</a></li>' for p, t in diaspora_plus.LIENS]
                   + [f'<li><a href="/{aeroports.path(c, "fr")}/">Arriver à l’aéroport {E(aeroports.de(a[0]))}</a></li>' for c, a in aeroports.A.items()])
     links += "".join(group(f"Vols au départ de {E(o)}", items) for o, items in by_origin.items())
     links += group("Hôtels pas chers", [f'<li><a href="/{hotel_slug(h)}/">Hôtel pas cher à {E(h[0])}</a></li>' for h in HOTELS] + ['<li><a href="/hotels-en-direct/">Hôtels en direct : liste et carte, partout dans le monde</a></li>'])

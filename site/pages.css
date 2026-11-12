@@ -835,3 +835,12 @@ main > section:nth-of-type(n+3), main .wrap > section:nth-of-type(n+3), body > f
 .pf-list li { border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; background: var(--surface); }
 .pf-list h3 { margin: 0 0 4px; }
 .pf-list p { margin: 4px 0; }
+/* Vol à plusieurs étapes (site/etapes.js) et transfert des favoris (site/favs.js) */
+.et-row + .et-row, #et-more .et-row { border-top: 1px dashed var(--line); padding-top: 12px; }
+.et-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; } .et-pax { font-weight: 600; font-size: .9rem; } .et-pax select { font: inherit; padding: 8px 10px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+.et-list { list-style: none; padding: 0; margin: 10px 0; display: grid; gap: 10px; counter-reset: et; }
+.et-list li { counter-increment: et; display: flex; gap: 12px; align-items: center; justify-content: space-between; border: 1px solid var(--line); border-radius: 16px; padding: 14px; background: var(--surface); }
+.et-list li > div { display: flex; flex-direction: column; gap: 2px; min-width: 0; } .et-list li > div > strong:first-child::before { content: counter(et) ". "; color: var(--brand, #0b8577); }
+.et-total { font-size: 1.1rem; padding: 12px 14px; border-radius: 14px; background: rgba(18, 179, 160, .1); }
+.fav-move { border: 1px solid var(--line); border-radius: 18px; padding: 16px; margin: 18px 0; background: var(--surface); } .fav-move h2 { font-size: 1.05rem; margin: 0 0 6px; }
+.fav-move .btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; } .fav-move .ok { font-weight: 700; color: var(--brand, #0b8577); }
