@@ -1172,7 +1172,8 @@ a { text-underline-offset: 3px; }
   .ruban .piste { animation: defile 60s linear infinite; } .ruban:hover .piste, .ruban:focus-within .piste { animation-play-state: paused; }
   @keyframes defile { to { transform: translateX(-50%); } }
 }
-@media (prefers-reduced-motion: reduce) { .ruban { overflow-x: auto; } }
+@media (prefers-reduced-motion: reduce) { .ruban { overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; } .ruban::-webkit-scrollbar { display: none; } }
+.lite .ruban { overflow-x: auto; scrollbar-width: none; } .lite .ruban .piste { animation: none; }
 /* FIN DU THÈME « SEREIN » */
 </style>
 </head>
