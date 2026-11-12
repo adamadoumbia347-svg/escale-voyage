@@ -1,22 +1,16 @@
 {
- "code": "b5",
+ "code": "b6",
  "lieux": {
-  "th-bangkok": "Wat Arun Bangkok",
-  "th-palais": "Grand Palace Bangkok",
-  "th-chiangmai": "Wat Phra That Doi Suthep",
-  "th-phuket": "Phuket beach Kata",
-  "th-phiphi": "Phi Phi islands Maya Bay",
-  "th-ayutthaya": "Ayutthaya Wat Chaiwatthanaram",
-  "th-krabi": "Railay beach Krabi",
-  "th-chiangrai": "Wat Rong Khun white temple",
-  "eg-gizeh": "Giza pyramids",
-  "eg-sphinx": "Great Sphinx of Giza",
-  "eg-louxor": "Karnak temple Luxor",
-  "eg-abousimbel": "Abu Simbel temple",
-  "eg-caire": "Cairo skyline Nile",
-  "eg-assouan": "Aswan Nile Philae temple",
-  "eg-alexandrie": "Alexandria Qaitbay citadel",
-  "eg-merrouge": "Hurghada Red Sea beach"
+  "ci-abidjan": "Abidjan Plateau",
+  "ci-abidjan2": "Abidjan skyline",
+  "ci-abidjan3": "Abidjan lagune Ébrié",
+  "ci-korhogo": "Korhogo",
+  "ci-korhogo2": "Sénoufo Korhogo village",
+  "ci-tai": "Parc national de Taï",
+  "ci-sassandra": "Sassandra plage",
+  "ci-assinie": "Assinie-Mafia",
+  "ci-jacqueville": "Jacqueville plage",
+  "ci-yakro": "Yamoussoukro lac caïmans"
  },
- "demande": "2026-11-12T20:53:49"
+ "demande": "2026-11-12T20:57:28"
 }
