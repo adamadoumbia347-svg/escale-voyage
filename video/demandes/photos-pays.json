@@ -1,22 +1,22 @@
 {
- "code": "b4",
+ "code": "b5",
  "lieux": {
-  "it-rome": "Colosseum Rome",
-  "it-venise": "Venice Grand Canal Rialto",
-  "it-florence": "Florence Duomo skyline",
-  "it-milan": "Milan Duomo facade",
-  "it-cinqueterre": "Cinque Terre Manarola",
-  "it-amalfi": "Positano Amalfi coast",
-  "it-pise": "Leaning Tower of Pisa",
-  "it-pompei": "Pompeii ruins Vesuvius",
-  "mx-chichen": "Chichen Itza El Castillo",
-  "mx-teotihuacan": "Teotihuacan Pyramid of the Sun",
-  "mx-tulum": "Tulum ruins beach",
-  "mx-mexico": "Palacio de Bellas Artes Mexico City",
-  "mx-oaxaca": "Santo Domingo Oaxaca",
-  "mx-guanajuato": "Guanajuato city view",
-  "mx-cancun": "Cancun beach hotel zone",
-  "mx-cenote": "Cenote Ik Kil"
+  "th-bangkok": "Wat Arun Bangkok",
+  "th-palais": "Grand Palace Bangkok",
+  "th-chiangmai": "Wat Phra That Doi Suthep",
+  "th-phuket": "Phuket beach Kata",
+  "th-phiphi": "Phi Phi islands Maya Bay",
+  "th-ayutthaya": "Ayutthaya Wat Chaiwatthanaram",
+  "th-krabi": "Railay beach Krabi",
+  "th-chiangrai": "Wat Rong Khun white temple",
+  "eg-gizeh": "Giza pyramids",
+  "eg-sphinx": "Great Sphinx of Giza",
+  "eg-louxor": "Karnak temple Luxor",
+  "eg-abousimbel": "Abu Simbel temple",
+  "eg-caire": "Cairo skyline Nile",
+  "eg-assouan": "Aswan Nile Philae temple",
+  "eg-alexandrie": "Alexandria Qaitbay citadel",
+  "eg-merrouge": "Hurghada Red Sea beach"
  },
- "demande": "2026-11-12T20:50:43"
+ "demande": "2026-11-12T20:53:49"
 }
