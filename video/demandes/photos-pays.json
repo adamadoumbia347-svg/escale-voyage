@@ -1,22 +1,22 @@
 {
- "code": "c5",
+ "code": "c6",
  "lieux": {
-  "za-lecap": "Cape Town Table Mountain",
-  "za-bokaap": "Bo-Kaap Cape Town",
-  "za-capbonne": "Cape of Good Hope",
-  "za-kruger": "Kruger National Park elephants",
-  "za-johannesburg": "Johannesburg skyline",
-  "za-drakensberg": "Drakensberg Amphitheatre",
-  "za-blyde": "Blyde River Canyon Three Rondavels",
-  "za-boulders": "Boulders Beach penguins",
-  "tz-zanzibar": "Stone Town Zanzibar",
-  "tz-plage": "Nungwi beach Zanzibar",
-  "tz-serengeti": "Serengeti wildebeest migration",
-  "tz-ngorongoro": "Ngorongoro Crater",
-  "tz-kilimandjaro": "Mount Kilimanjaro",
-  "tz-dar": "Dar es Salaam skyline",
-  "tz-manyara": "Tarangire baobab elephants",
-  "tz-natron": "Ol Doinyo Lengai Lake Natron"
+  "ae-dubai": "Burj Khalifa Dubai skyline",
+  "ae-marina": "Dubai Marina",
+  "ae-palm": "Palm Jumeirah aerial",
+  "ae-abudhabi": "Sheikh Zayed Grand Mosque",
+  "ae-louvre": "Louvre Abu Dhabi",
+  "ae-desert": "Dubai desert dunes",
+  "ae-vieuxdubai": "Dubai Creek abra Al Fahidi",
+  "ae-burjalarab": "Burj Al Arab",
+  "br-rio": "Christ the Redeemer Rio de Janeiro",
+  "br-painsucre": "Sugarloaf Mountain Rio",
+  "br-iguacu": "Iguazu Falls Brazil",
+  "br-salvador": "Pelourinho Salvador",
+  "br-amazonie": "Amazon river Manaus",
+  "br-saopaulo": "São Paulo skyline Avenida Paulista",
+  "br-lencois": "Lençóis Maranhenses",
+  "br-copacabana": "Copacabana beach"
  },
- "demande": "2026-11-12T21:24:52"
+ "demande": "2026-11-12T21:27:48"
 }
