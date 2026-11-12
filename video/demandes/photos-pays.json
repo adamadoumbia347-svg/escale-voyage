@@ -1,22 +1,22 @@
 {
- "code": "c4",
+ "code": "c5",
  "lieux": {
-  "cm-douala": "Douala Cameroun",
-  "cm-yaounde": "Yaoundé monument de la Réunification",
-  "cm-kribi": "Kribi plage chutes de la Lobé",
-  "cm-limbe": "Limbe Cameroon beach",
-  "cm-montcameroun": "Mount Cameroon",
-  "cm-foumban": "Foumban palais des sultans Bamoun",
-  "cm-rhumsiki": "Rhumsiki Kapsiki",
-  "cm-waza": "Waza National Park",
-  "gh-accra": "Accra Independence Arch Black Star Square",
-  "gh-nkrumah": "Kwame Nkrumah Mausoleum Accra",
-  "gh-capecoast": "Cape Coast Castle",
-  "gh-elmina": "Elmina Castle",
-  "gh-kakum": "Kakum canopy walkway",
-  "gh-kumasi": "Kumasi Manhyia Palace Kejetia",
-  "gh-mole": "Mole National Park elephants",
-  "gh-volta": "Wli waterfalls Ghana"
+  "za-lecap": "Cape Town Table Mountain",
+  "za-bokaap": "Bo-Kaap Cape Town",
+  "za-capbonne": "Cape of Good Hope",
+  "za-kruger": "Kruger National Park elephants",
+  "za-johannesburg": "Johannesburg skyline",
+  "za-drakensberg": "Drakensberg Amphitheatre",
+  "za-blyde": "Blyde River Canyon Three Rondavels",
+  "za-boulders": "Boulders Beach penguins",
+  "tz-zanzibar": "Stone Town Zanzibar",
+  "tz-plage": "Nungwi beach Zanzibar",
+  "tz-serengeti": "Serengeti wildebeest migration",
+  "tz-ngorongoro": "Ngorongoro Crater",
+  "tz-kilimandjaro": "Mount Kilimanjaro",
+  "tz-dar": "Dar es Salaam skyline",
+  "tz-manyara": "Tarangire baobab elephants",
+  "tz-natron": "Ol Doinyo Lengai Lake Natron"
  },
- "demande": "2026-11-12T21:22:00"
+ "demande": "2026-11-12T21:24:52"
 }
