@@ -30,7 +30,7 @@
   }
   var remplir = function () {
     var from = code(); if (!from || from === fait) return; fait = from;
-    fetch("/api/ruban?from=" + from).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }).then(function (j) {
+    fetch("/api/ruban?v=2&from=" + from).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }).then(function (j) {
       if (code() !== from) return;
       P = (j && j.available && j.prix) || {}; de = from; peindre();
     });

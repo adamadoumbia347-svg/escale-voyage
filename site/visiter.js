@@ -48,7 +48,7 @@
   };
   var cachePrix = {};
   var prix = function (ville) { // prix aller-retour les plus bas repérés vers chaque pays, depuis cette ville (/api/ruban)
-    if (!cachePrix[ville]) cachePrix[ville] = fetch("/api/ruban?from=" + aero(ville)).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
+    if (!cachePrix[ville]) cachePrix[ville] = fetch("/api/ruban?v=2&from=" + aero(ville)).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
       .then(function (j) { return (j && j.available && j.prix) || {}; });
     return cachePrix[ville];
   };
