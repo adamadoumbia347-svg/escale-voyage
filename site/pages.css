@@ -984,6 +984,10 @@ a { text-underline-offset: 3px; }
 .ruban .piste { display: flex; gap: 12px; width: max-content; }
 .ruban a { white-space: nowrap; text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); padding: 8px 16px; border-radius: 999px; font-weight: 700; font-size: .95rem; transition: background .2s, color .2s; }
 .ruban a:hover { background: var(--teal); color: var(--teal-ink); }
+/* Dans le haut de l'accueil, le ruban passe sous le titre, par-dessus la photo */
+.hero .ruban { background: none; border: 0; margin: 0 -16px 12px; padding: 4px 0; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.band .hero > .ruban:not(.hero-bg) { order: 1; align-self: stretch; max-width: none; }
+.hero .ruban a { background: color-mix(in srgb, var(--surface) 94%, transparent); border-color: transparent; padding: 7px 14px; box-shadow: 0 6px 18px -10px rgb(0 0 0 / .5); }
 /* Barre de lecture, bouton « haut », apparitions */
 .mo-bar { height: 4px; }
 .haut { position: fixed; right: 16px; bottom: 156px; z-index: 45; width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: 1.2rem; cursor: pointer; box-shadow: var(--shadow); opacity: 0; transform: translateY(20px) scale(.8); pointer-events: none; transition: opacity .3s, transform .4s var(--ressort); }

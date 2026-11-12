@@ -919,7 +919,7 @@ def main():
     rb = "".join(f'<a href="/{pp}/">{fl} {E(nom)}</a>' for pp, nom, fl, k, m in visiter.liens(SITE))
     if rb:
         rb = ('<div class="ruban" aria-label="Pays à explorer"><div class="piste">' + rb + rb.replace("<a ", '<a tabindex="-1" aria-hidden="true" ') + "</div></div>")
-    s = re.sub(r"<!-- RUBAN:START -->.*?<!-- RUBAN:END -->", lambda m: "<!-- RUBAN:START -->\n  " + rb + "\n  <!-- RUBAN:END -->", s, flags=re.S)
+    s = re.sub(r"<!-- RUBAN:START -->.*?<!-- RUBAN:END -->", lambda m: "<!-- RUBAN:START -->\n    " + rb + "\n    <!-- RUBAN:END -->", s, flags=re.S)
     s = re.sub(r"<!-- VISITER:START -->.*?<!-- VISITER:END -->", lambda m: "<!-- VISITER:START -->\n    " + vz + "\n    <!-- VISITER:END -->", s, flags=re.S)
     s = re.sub(r"<!-- VILLES:START -->.*?<!-- VILLES:END -->", lambda m: "<!-- VILLES:START -->\n    " + grid + "\n    <!-- VILLES:END -->", s, flags=re.S)
     s = re.sub(r'<div class="dests" id="dests"[^>]*>', lambda m: '<div class="dests" id="dests" data-photos="' + E(json.dumps(villes.dest_photos(SITE))) + '">', s)
