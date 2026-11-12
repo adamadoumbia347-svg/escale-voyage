@@ -1,22 +1,22 @@
 {
- "code": "b2",
+ "code": "b3",
  "lieux": {
-  "ci-abidjan": "Abidjan Plateau skyline lagune",
-  "ci-basilique": "Basilique Notre-Dame de la Paix Yamoussoukro",
-  "ci-bassam": "Grand-Bassam colonial",
-  "ci-assinie": "Assinie plage",
-  "ci-man": "Man Côte d'Ivoire cascade",
-  "ci-sanpedro": "San-Pédro Côte d'Ivoire plage",
-  "ci-korhogo": "Korhogo Côte d'Ivoire",
-  "ci-stpaul": "Cathédrale Saint-Paul Abidjan",
-  "sn-dakar": "Monument de la Renaissance africaine Dakar",
-  "sn-goree": "Île de Gorée",
-  "sn-lacrose": "Lac Rose Retba Sénégal",
-  "sn-saintlouis": "Saint-Louis Sénégal pont Faidherbe",
-  "sn-saloum": "Sine Saloum delta",
-  "sn-casamance": "Cap Skirring plage",
-  "sn-touba": "Grande Mosquée de Touba",
-  "sn-saly": "Saly Sénégal plage"
+  "ma-marrakech": "Jemaa el-Fna Marrakech",
+  "ma-chefchaouen": "Chefchaouen blue street",
+  "ma-fes": "Fes tannery Chouara",
+  "ma-casablanca": "Hassan II Mosque Casablanca",
+  "ma-merzouga": "Erg Chebbi dunes Merzouga",
+  "ma-essaouira": "Essaouira ramparts",
+  "ma-aitbenhaddou": "Ait Benhaddou",
+  "ma-rabat": "Hassan Tower Rabat",
+  "ke-mara": "Maasai Mara lions",
+  "ke-amboseli": "Amboseli elephants Kilimanjaro",
+  "ke-nairobi": "Nairobi National Park giraffe skyline",
+  "ke-nakuru": "Lake Nakuru flamingos",
+  "ke-mountkenya": "Mount Kenya peaks",
+  "ke-lamu": "Lamu old town",
+  "ke-diani": "Diani Beach",
+  "ke-mombasa": "Fort Jesus Mombasa"
  },
- "demande": "2026-11-12T20:44:18"
+ "demande": "2026-11-12T20:47:22"
 }
