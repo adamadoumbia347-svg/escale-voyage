@@ -1,26 +1,21 @@
 {
- "code": "connus",
+ "code": "b1",
  "lieux": {
-  "id-ulundanu": "Pura Ulun Danu Bratan",
-  "id-tegallalang": "Tegallalang rice terrace",
-  "id-tanahlot": "Tanah Lot temple",
-  "id-nusapenida": "Kelingking beach Nusa Penida",
-  "id-kecak": "Kecak dance Bali",
-  "jp-shibuya": "Shibuya Crossing night",
-  "jp-sensoji": "Senso-ji Asakusa Kaminarimon",
-  "jp-fuji": "Mount Fuji Chureito pagoda",
-  "jp-shinjuku": "Shinjuku Kabukicho neon night",
-  "us-liberty": "Statue of Liberty New York harbor",
-  "us-times": "Times Square night",
-  "us-brooklyn": "Brooklyn Bridge Manhattan skyline",
-  "us-empire": "Empire State Building skyline sunset",
-  "nl-canaux": "Amsterdam canal houses",
-  "nl-kinderdijk": "Kinderdijk windmills",
-  "nl-keukenhof": "Keukenhof tulips",
-  "nl-tulipes": "tulip fields Netherlands Lisse",
-  "nl-rijks": "Rijksmuseum Amsterdam",
-  "nl-giethoorn": "Giethoorn canal",
-  "nl-rotterdam": "Rotterdam cube houses"
+  "jp-kyoto": "Fushimi Inari torii gates Kyoto",
+  "jp-kinkakuji": "Kinkaku-ji golden pavilion",
+  "jp-osaka": "Osaka Castle",
+  "jp-nara": "Nara deer Todai-ji",
+  "jp-miyajima": "Itsukushima shrine torii Miyajima",
+  "us-grandcanyon": "Grand Canyon South Rim",
+  "us-sanfrancisco": "Golden Gate Bridge San Francisco",
+  "us-losangeles": "Hollywood Sign Los Angeles",
+  "us-miami": "Miami Beach Ocean Drive",
+  "us-chicago": "Chicago skyline Lake Michigan",
+  "id-borobudur": "Borobudur temple sunrise",
+  "id-komodo": "Komodo National Park Padar island",
+  "id-bromo": "Mount Bromo sunrise",
+  "id-jakarta": "Jakarta Monas skyline",
+  "nl-lahaye": "The Hague Binnenhof Hofvijver"
  },
- "demande": "2026-11-12T20:36:24"
+ "demande": "2026-11-12T20:41:12"
 }
