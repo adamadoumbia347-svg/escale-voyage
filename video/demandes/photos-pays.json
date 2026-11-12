@@ -1,22 +1,22 @@
 {
- "code": "b3",
+ "code": "b4",
  "lieux": {
-  "ma-marrakech": "Jemaa el-Fna Marrakech",
-  "ma-chefchaouen": "Chefchaouen blue street",
-  "ma-fes": "Fes tannery Chouara",
-  "ma-casablanca": "Hassan II Mosque Casablanca",
-  "ma-merzouga": "Erg Chebbi dunes Merzouga",
-  "ma-essaouira": "Essaouira ramparts",
-  "ma-aitbenhaddou": "Ait Benhaddou",
-  "ma-rabat": "Hassan Tower Rabat",
-  "ke-mara": "Maasai Mara lions",
-  "ke-amboseli": "Amboseli elephants Kilimanjaro",
-  "ke-nairobi": "Nairobi National Park giraffe skyline",
-  "ke-nakuru": "Lake Nakuru flamingos",
-  "ke-mountkenya": "Mount Kenya peaks",
-  "ke-lamu": "Lamu old town",
-  "ke-diani": "Diani Beach",
-  "ke-mombasa": "Fort Jesus Mombasa"
+  "it-rome": "Colosseum Rome",
+  "it-venise": "Venice Grand Canal Rialto",
+  "it-florence": "Florence Duomo skyline",
+  "it-milan": "Milan Duomo facade",
+  "it-cinqueterre": "Cinque Terre Manarola",
+  "it-amalfi": "Positano Amalfi coast",
+  "it-pise": "Leaning Tower of Pisa",
+  "it-pompei": "Pompeii ruins Vesuvius",
+  "mx-chichen": "Chichen Itza El Castillo",
+  "mx-teotihuacan": "Teotihuacan Pyramid of the Sun",
+  "mx-tulum": "Tulum ruins beach",
+  "mx-mexico": "Palacio de Bellas Artes Mexico City",
+  "mx-oaxaca": "Santo Domingo Oaxaca",
+  "mx-guanajuato": "Guanajuato city view",
+  "mx-cancun": "Cancun beach hotel zone",
+  "mx-cenote": "Cenote Ik Kil"
  },
- "demande": "2026-11-12T20:47:22"
+ "demande": "2026-11-12T20:50:43"
 }
