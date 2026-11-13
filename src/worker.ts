@@ -115,11 +115,12 @@ export default {
   async fetch(request: Request, env: any, ctx: { waitUntil: (p: Promise<any>) => void }) {
     if (request.headers.get("X-Escale-Diag") !== "1" || !env.ESCALE) return escale.fetch(request, env, ctx)
     const n: Record<string, number> = { get: 0, put: 0, list: 0, delete: 0 }, fond: Promise<any>[] = []
-    const kv = new Proxy(env.ESCALE, { get: (t: any, k: string) => (typeof t[k] === "function" ? (...a: any[]) => { if (k in n) n[k]++; return t[k](...a) } : t[k]) })
+    const cles: Record<string, number> = {}
+    const kv = new Proxy(env.ESCALE, { get: (t: any, k: string) => (typeof t[k] === "function" ? (...a: any[]) => { if (k in n) { n[k]++; const c = k + " " + String(a[0]?.prefix ?? a[0]).split(":")[0]; cles[c] = (cles[c] || 0) + 1 } return t[k](...a) } : t[k]) })
     const r = await escale.fetch(request, { ...env, ESCALE: kv }, { waitUntil: (p) => { fond.push(Promise.resolve(p).catch(() => {})); ctx.waitUntil(p) } })
     await Promise.race([Promise.all(fond), new Promise((ok) => setTimeout(ok, 8000))])
     const h = new Headers(r.headers)
-    h.set("X-Escale-KV", `get=${n.get} put=${n.put} list=${n.list} delete=${n.delete}`)
+    h.set("X-Escale-KV", `get=${n.get} put=${n.put} list=${n.list} delete=${n.delete}` + (Object.keys(cles).length ? " (" + Object.entries(cles).map(([c, v]) => `${c} x${v}`).join(", ").replace(/[^\x20-\x7e]/g, "?").slice(0, 300) + ")" : ""))
     return new Response(r.body, { status: r.status, headers: h })
   },
   scheduled: escale.scheduled,
