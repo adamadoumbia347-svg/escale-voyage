@@ -1,6 +1,6 @@
 {
 "/": [
-"d65d3b12dd93b21e",
+"bf4c45be4a40e9b7",
 "2026-11-13"
 ],
 "/a-propos/": [
@@ -2593,6 +2593,10 @@
 ],
 "/ar/hotels-zanzibar/": [
 "c6b2c5409887ab92",
+"2026-11-13"
+],
+"/ar/split-trip-costs/": [
+"78cf8704910b75af",
 "2026-11-13"
 ],
 "/arriver-aeroport-abidjan/": [
@@ -9823,6 +9827,10 @@
 "aa1aeb3b6f16912a",
 "2026-11-12"
 ],
+"/en/split-trip-costs/": [
+"4e1ae1d088f7ab98",
+"2026-11-13"
+],
 "/en/student-flights-from-africa/": [
 "045ee7c350e65f3d",
 "2026-11-12"
@@ -10018,6 +10026,10 @@
 "/es/acerca-de/": [
 "0009c3dcdf2511da",
 "2026-11-12"
+],
+"/es/dividir-gastos-viaje/": [
+"afab7626cedd9dee",
+"2026-11-13"
 ],
 "/es/explorar/": [
 "620a8cb6955f8c5e",
@@ -14891,6 +14903,10 @@
 "0333f717f65b57d2",
 "2026-11-12"
 ],
+"/partage-frais-voyage/": [
+"a2eaaad744584485",
+"2026-11-13"
+],
 "/partir-a-plusieurs/": [
 "c50cdb9a040e62e0",
 "2026-11-12"
@@ -14925,6 +14941,10 @@
 ],
 "/pt/": [
 "0eb2e35cec06cb19",
+"2026-11-13"
+],
+"/pt/dividir-despesas-viagem/": [
+"1da8e88290e65be6",
 "2026-11-13"
 ],
 "/pt/explorar/": [

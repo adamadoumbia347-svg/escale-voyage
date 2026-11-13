@@ -1123,3 +1123,36 @@ html:not([lang="fr"]) .ruban [data-only="fr"] { display: none; }
 .as-item h2 { margin: 0 0 6px; font-size: 1.2rem; }
 .as-item p { margin: 0 0 8px; }
 .as-n { flex: 0 0 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: #0f9d8c; color: #fff; font: 700 18px/1 var(--f-body); }
+
+/* Partage des frais du voyage (site/frais.js) */
+.pf-chips, .pf-exp, .pf-pay { list-style: none; padding: 0; margin: 12px 0 0; }
+.pf-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.pf-chips li { display: inline-flex; align-items: center; gap: 4px; padding: 4px 6px 4px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--soft); font-weight: 600; }
+.pf-chips button, .pf-exp button { border: 0; background: none; color: var(--muted); font: inherit; font-size: 20px; line-height: 1; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; flex: none; }
+.pf-chips button:hover, .pf-exp button:hover { background: var(--line); color: var(--ink); }
+.pf-for { border: 0; padding: 0; margin: 0 0 14px; min-width: 0; }
+.pf-for legend { font-weight: 600; font-size: .9rem; padding: 0; margin-bottom: 6px; }
+#pf-for { display: flex; flex-wrap: wrap; gap: 8px; }
+#pf-for label { position: relative; cursor: pointer; }
+#pf-for input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+#pf-for span { display: block; padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-weight: 600; font-size: .9rem; }
+#pf-for input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+#pf-for input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+.pf-exp li { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.pf-exp div { flex: 1; min-width: 0; }
+.pf-exp strong, .pf-exp small { display: block; overflow-wrap: anywhere; }
+.pf-exp small { color: var(--muted); }
+.pf-exp b { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.pf-total { font-size: 1.05rem; }
+.pf-pay li { padding: 14px 16px; margin-bottom: 8px; border: 1px solid var(--line); border-radius: 16px; background: var(--soft); font-size: 1.05rem; overflow-wrap: anywhere; }
+.pf-pay b { white-space: nowrap; }
+.pf-ok { font-weight: 700; color: var(--ok); }
+.pf-scroll { overflow-x: auto; margin-top: 14px; }
+.pf-table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+.pf-table th, .pf-table td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: end; white-space: nowrap; }
+.pf-table tbody th, .pf-table thead td { text-align: start; }
+.pf-table thead th { font-size: .85rem; color: var(--muted); font-weight: 600; }
+.pf-pos { color: var(--ok); font-weight: 700; }
+.pf-neg { font-weight: 700; }
+.pf-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.pf-btns button { font: inherit; font-weight: 700; cursor: pointer; }
