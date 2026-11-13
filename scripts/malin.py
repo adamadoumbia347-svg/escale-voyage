@@ -26,15 +26,18 @@ def build(page, wa_btn):
     faq = [("D'où viennent ces prix ?", "Escale relève chaque jour, pour chaque trajet suivi, le prix aller-retour le plus bas des six prochains mois. La date du relevé est affichée sous le classement. Le tarif exact se confirme sur le site de réservation."),
            ("Pourquoi partir d'une autre ville peut coûter moins cher ?", "Chaque aéroport a ses compagnies, ses vols directs et sa concurrence. Sur un même jour, l'écart entre deux villes de départ peut dépasser le prix du train ou du car pour y aller."),
            ("Faut-il compter le trajet jusqu'à l'aéroport ?", "Oui : ajoutez le train, le car ou l'essence, et parfois une nuit d'hôtel. Le match est gagné seulement si l'écart reste intéressant après ces frais."),
-           ("Ma ville de départ n'est pas dans la liste ?", "Le classement ne montre que les trajets suivis chaque jour. Pour n'importe quelle autre ville, lancez une recherche : l'option « aéroports proches » compare aussi les aéroports voisins.")]
+           ("Ma ville de départ n'est pas dans la liste ?", "Écrivez votre ville ou votre aéroport dans le champ « Je pars de » : il entre dans le classement avec le prix le plus bas repéré pour les six prochains mois. S'il n'y a pas encore de prix repéré, lancez une recherche.")]
     hero = ('<p class="eyebrow">Outil gratuit · prix relevés chaque jour</p><h1>Le match <span>des aéroports</span></h1>'
-            '<p class="hero-lead">Choisissez votre destination : Escale classe les villes de départ, de la moins chère à la plus chère, avec les vrais prix relevés aujourd\'hui.</p>')
+            '<p class="hero-lead">Choisissez votre destination et écrivez votre aéroport de départ : Escale classe les villes de départ, de la moins chère à la plus chère, avec de vrais prix relevés.</p>')
     body = ('<section><h2 id="mh-h">Où allez-vous ?</h2><div class="chips mh-dest" id="mh-dest" role="group" aria-labelledby="mh-h"></div>'
+            '<label class="mh-dep"><span>Je pars de</span><input type="text" id="mh-from" inputmode="search" enterkeyhint="search" autocomplete="off" spellcheck="false" placeholder="ville ou aéroport"></label>'
+            '<p class="small mh-me-msg" id="mh-me" role="status"></p>'
             '<div id="mh-box" class="mh-box" aria-live="polite"><p class="pr-wait">Chargement des prix…</p></div>'
             '<p class="small" id="mh-note" hidden>Prix aller-retour le plus bas des six prochains mois, par personne, relevé le <span id="mh-date"></span>. '
             'Le tarif exact se confirme sur le site de réservation. N\'oubliez pas le coût du trajet jusqu\'à l\'aéroport.</p>'
             '<p class="cta-row"><button type="button" class="btn ghost" id="mh-share" hidden>Partager ce match</button></p></section>'
             '<section><h2>Comment lire le classement</h2><ul>'
+            '<li>Écrivez votre ville ou votre aéroport dans « Je pars de » : votre départ entre dans le match, marqué « Votre départ ».</li>'
             '<li>Le <strong>vainqueur</strong> est la ville de départ avec le prix relevé le plus bas pour cette destination.</li>'
             '<li>La barre montre l\'écart avec le vainqueur : plus elle est longue, plus le billet est cher.</li>'
             '<li>Touchez une ligne pour voir les vols de ce trajet, avec le calendrier des prix jour par jour.</li></ul></section>'

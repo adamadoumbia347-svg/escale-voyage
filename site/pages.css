@@ -1097,6 +1097,14 @@ html:not([lang="fr"]) .ruban [data-only="fr"] { display: none; }
 
 /* ===== Match des aéroports et page des 4 astuces (13/11/2026) ===== */
 .mh-dest button { text-transform: none; }
+.mh-dest button[aria-pressed="true"] { background: var(--teal-fond, #0b8577); color: var(--teal-ink, #fff); border-color: transparent; }
+.mh-dep { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-weight: 700; margin: 6px 0 4px; position: relative; z-index: 6; }
+.mh-dep .ac-wrap { flex: 1 1 220px; max-width: 360px; font-weight: 500; }
+.mh-dep input { width: 100%; box-sizing: border-box; padding: 11px 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: 600 16px/1.2 var(--f-body); }
+.mh-dep > input { flex: 1 1 220px; max-width: 360px; width: auto; }
+.mh-me-msg { min-height: 1.4em; margin: 0 0 8px; }
+.mh-tag { font: 700 12px/1 var(--f-body); font-style: normal; padding: 3px 8px; border-radius: 999px; background: #1a56db; color: #fff; margin-inline-start: 6px; vertical-align: 2px; }
+.mh-me a { border-color: #1a56db; }
 .mh-box { min-height: 320px; }
 .mh-sum { font-size: 1.05rem; margin: 10px 0 14px; }
 .mh-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
