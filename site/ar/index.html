@@ -1160,7 +1160,8 @@ a { text-underline-offset: 3px; }
 .ruban a b { margin-inline-start: 8px; padding-inline-start: 8px; border-inline-start: 1px solid var(--line); color: var(--teal-d); font-weight: 800; }
 .ruban a:hover b { color: inherit; }
 /* Bas de « Surprends-moi » : deux rubans, le second défile dans l'autre sens et plus vite (il est plus court) */
-.sp-plus { margin-top: 40px; }
+/* Tant que le bloc est loin de l'écran, le navigateur ne le dessine pas et ses rubans ne tournent pas */
+.sp-plus { margin-top: 40px; content-visibility: auto; contain-intrinsic-size: auto 250px; }
 .sp-plus .rb-l { margin: 14px 0 0; font-weight: 700; color: var(--muted); font-size: .95rem; }
 .sp-plus .ruban { margin: 8px -16px 0; }
 /* Les outils qui n'existent qu'en français ne sont proposés qu'aux lecteurs du français */
@@ -1177,7 +1178,7 @@ html:not([lang="fr"]) .ruban [data-only="fr"] { display: none; }
   @keyframes plane-bob { 0%, 100% { transform: rotate(45deg) translate(0, 0); } 50% { transform: rotate(38deg) translate(1px, -2px) scale(1.08); } }
   .board::before { animation: flotte 14s ease-in-out 2; } .board::after { animation: flotte 18s ease-in-out 2; }
   @keyframes flotte { 0%, 100% { transform: translate(0, 0) rotate(0); } 33% { transform: translate(18px, -22px) rotate(8deg); } 66% { transform: translate(-14px, 12px) rotate(-6deg); } }
-  .ruban .piste { animation: defile 60s linear infinite; } .ruban.inv .piste { animation-direction: reverse; } .ruban.court .piste { animation-duration: 38s; } .ruban:hover .piste, .ruban:focus-within .piste { animation-play-state: paused; }
+  .ruban .piste { animation: defile 60s linear infinite; } .ruban.inv .piste { animation-direction: reverse; } .hero .ruban .piste { animation-delay: 2.5s; } .ruban.court .piste { animation-duration: 38s; } .ruban:hover .piste, .ruban:focus-within .piste { animation-play-state: paused; }
   @keyframes defile { to { transform: translateX(-50%); } }
 }
 @media (prefers-reduced-motion: reduce) { .ruban { overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; } .ruban::-webkit-scrollbar { display: none; } }
