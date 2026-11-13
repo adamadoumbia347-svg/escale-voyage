@@ -252,6 +252,7 @@ HOTELS_FR = {
               ("Argent et connexion", "La monnaie est le franc CFA (XOF). L'argent liquide reste très utilisé et le mobile money est courant ; une eSIM permet d'avoir Internet dès l'atterrissage.")]),
 }
 
+import malin  # noqa: E402
 import hotels_plus  # noqa: E402  (six villes ajoutées le 13/11/2026)
 HOTELS += hotels_plus.HOTELS
 HOTELS_FR.update(hotels_plus.FR)
@@ -853,6 +854,7 @@ def main():
     urls += diaspora_plus.build(SITE, ctx)  # argent, colis, vol à étapes, aéroports de départ
     urls += diaspora_plus_i18n.build(SITE, ctx)  # les mêmes en anglais et en italien
     urls += idees_nov.build(SITE, ctx)  # escales longues, ponts 2027, parent âgé ou enfant seul, deuil, compte à rebours
+    urls += malin.build(page, build_i18n.wa_btn)  # match des aéroports, les 4 astuces (visiteurs venus des vidéos)
     urls += visiter.build(SITE, ctx)  # « Que visiter » : un pays, ses villes et ses lieux, en photos
     urls += compagnies.build(SITE, ctx)  # pages compagnies (fr/en)
     urls += can2027.build(SITE, ctx)  # CAN 2027 : villes hôtes, prix, visa (fr/en)
@@ -974,7 +976,7 @@ def main():
     # Accueil : ruban des nouveautés sous le moteur de recherche, ruban des pays en bas de page (demandes de Dobam, 13 novembre 2026)
     _vb = {l: "/" + visiter.BASE[l] + "/" for l in ("fr", "en", "it")}
     _sub = lambda cle, anc="": {l: _vb[l] + visiter.SUB[cle][l] + "/" + anc for l in _vb}
-    NOUV = [("🎯 Jeu : devine le pays", "🎯 Game: guess the country", _sub("jeu")), ("⚖️ Comparer deux pays", "⚖️ Compare two countries", _sub("comparer")),
+    NOUV = [("🏆 Match des aéroports", None, {"fr": "/match-des-aeroports/"}), ("💡 Billets moins chers : les 4 astuces", None, {"fr": "/astuces-billets-afrique/"}), ("🎯 Jeu : devine le pays", "🎯 Game: guess the country", _sub("jeu")), ("⚖️ Comparer deux pays", "⚖️ Compare two countries", _sub("comparer")),
             ("🗺️ La carte du monde", "🗺️ The world map", {l: _vb[l] + "#vx-map" for l in _vb}), ("🌍 Que visiter, pays par pays", "🌍 What to visit, country by country", _vb),
             ("🎲 Surprends-moi", "🎲 Surprise me", {"fr": "/surprends-moi/", "en": "/en/surprise-me/", "it": "/it/sorprendimi/", "de": "/de/ueberrasch-mich/"}),
             ("🧭 Quiz : quelle destination pour toi ?", "🧭 Quiz: which destination suits you?", {"fr": "/quiz-destination/", "en": "/en/destination-quiz/", "it": "/it/quiz-destinazione/", "de": "/de/reiseziel-quiz/"}),

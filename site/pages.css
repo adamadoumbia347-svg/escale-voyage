@@ -1084,3 +1084,24 @@ html:not([lang="fr"]) .ruban [data-only="fr"] { display: none; }
 @media (prefers-reduced-motion: reduce) { .ruban { overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; } .ruban::-webkit-scrollbar { display: none; } }
 .lite .ruban { overflow-x: auto; scrollbar-width: none; } .lite .ruban .piste { animation: none; }
 /* FIN DU THÈME « SEREIN » */
+
+/* ===== Match des aéroports et page des 4 astuces (13/11/2026) ===== */
+.mt-dest button { text-transform: none; }
+.mt-box { min-height: 320px; }
+.mt-sum { font-size: 1.05rem; margin: 10px 0 14px; }
+.mt-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.mt-row a { display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 16px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); text-decoration: none; }
+.mt-rank { flex: 0 0 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--soft); font: 700 15px/1 var(--f-body); }
+.mt-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+.mt-main small { color: var(--muted); }
+.mt-bar { display: block; height: 8px; border-radius: 999px; background: var(--soft); overflow: hidden; }
+.mt-bar i { display: block; height: 100%; border-radius: 999px; background: #f59e0b; }
+.mt-win a { border-color: #0f9d8c; box-shadow: 0 0 0 2px color-mix(in srgb, #0f9d8c 25%, transparent); }
+.mt-win .mt-bar i { background: #0f9d8c; }
+.mt-win .mt-rank { background: color-mix(in srgb, #0f9d8c 16%, transparent); }
+.mt-price { font-size: 1.2rem; white-space: nowrap; }
+.as-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.as-item { display: flex; gap: 14px; padding: 16px; border-radius: 18px; border: 1px solid var(--line); background: var(--surface); }
+.as-item h2 { margin: 0 0 6px; font-size: 1.2rem; }
+.as-item p { margin: 0 0 8px; }
+.as-n { flex: 0 0 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: #0f9d8c; color: #fff; font: 700 18px/1 var(--f-body); }
