@@ -11,19 +11,19 @@
       tot: "Total : {t} · {pp} par personne", det: "Vols {a} + logement {b} + sur place {c}", pc_top: "PROCHAINE ESCALE", pc_share: "Partager", pc_dl: "Télécharger l'image", pc_x: "Fermer", pc_txt: "Ma prochaine escale : {n} ({p})",
       al_btn: "🔔 M'alerter si le vol pour {v} baisse", al_h: "Alerte prix : {v}", al_p: "Recevez un e-mail quand l'aller-retour passe sous votre budget. Gratuit, désinscription en un clic.", al_from: "Je pars de", al_email: "Votre e-mail",
       al_max: "Budget maximum (€)", al_consent: "J'accepte de recevoir des e-mails pour cette alerte. Mon adresse ne sert qu'à cela.", al_go: "Créer mon alerte", al_ok: "C'est noté : ouvrez l'e-mail envoyé à {e} pour confirmer l'alerte.",
-      al_err: "Vérifiez la ville de départ, l'e-mail, le budget, et cochez la case.", al_fail: "L'alerte n'a pas pu être créée. Réessayez plus tard.", al_vu: "Prix repéré récemment : {p}.", choisir: "choisir une ville" },
+      al_err: "Vérifiez la ville de départ, l'e-mail, le budget, et cochez la case.", al_fail: "L'alerte n'a pas pu être créée. Réessayez plus tard.", al_vu: "Prix repéré récemment : {p}.", choisir: "choisir une ville", ou: "ville ou aéroport" },
     en: { add: "Add to my wishlist", rm: "Remove from my wishlist", retirer: "Remove", cherche: "Looking for the current price…", aucun: "No price spotted from {v} yet: run the search to see flights.",
       prix: "{a} → {b}: from {p} return", dates: "({d1} → {d2})", note: "Price spotted recently, it can change.", n1: "{n} country matches", nx: "{n} countries match", n0: "No country matches this search yet.",
       tot: "Total: {t} · {pp} per person", det: "Flights {a} + accommodation {b} + spending {c}", pc_top: "NEXT STOP", pc_share: "Share", pc_dl: "Download the image", pc_x: "Close", pc_txt: "My next stop: {n} ({p})",
       al_btn: "🔔 Alert me if flights to {v} get cheaper", al_h: "Price alert: {v}", al_p: "Get an email when the return fare drops below your budget. Free, one-click unsubscribe.", al_from: "I'm leaving from", al_email: "Your email",
       al_max: "Maximum budget (€)", al_consent: "I agree to receive emails for this alert. My address is used for nothing else.", al_go: "Create my alert", al_ok: "Done: open the email sent to {e} to confirm the alert.",
-      al_err: "Check the departure city, the email, the budget, and tick the box.", al_fail: "The alert could not be created. Try again later.", al_vu: "Price spotted recently: {p}.", choisir: "choose a city" },
+      al_err: "Check the departure city, the email, the budget, and tick the box.", al_fail: "The alert could not be created. Try again later.", al_vu: "Price spotted recently: {p}.", choisir: "choose a city", ou: "city or airport" },
     it: { add: "Aggiungi ai miei desideri", rm: "Togli dai miei desideri", retirer: "Togli", cherche: "Cerco il prezzo del momento…", aucun: "Nessun prezzo rilevato da {v} per ora: avvia la ricerca per vedere i voli.",
       prix: "{a} → {b}: da {p} andata e ritorno", dates: "({d1} → {d2})", note: "Prezzo rilevato di recente, può cambiare.", n1: "{n} paese corrisponde", nx: "{n} paesi corrispondono", n0: "Nessun paese per questa ricerca, per ora.",
       tot: "Totale: {t} · {pp} a persona", det: "Voli {a} + alloggio {b} + sul posto {c}", pc_top: "PROSSIMO SCALO", pc_share: "Condividi", pc_dl: "Scarica l'immagine", pc_x: "Chiudi", pc_txt: "Il mio prossimo scalo: {n} ({p})",
       al_btn: "🔔 Avvisami se il volo per {v} scende", al_h: "Avviso prezzo: {v}", al_p: "Ricevi un'e-mail quando l'andata e ritorno scende sotto il tuo budget. Gratis, cancellazione in un clic.", al_from: "Parto da", al_email: "La tua e-mail",
       al_max: "Budget massimo (€)", al_consent: "Accetto di ricevere e-mail per questo avviso. Il mio indirizzo serve solo a questo.", al_go: "Crea il mio avviso", al_ok: "Fatto: apri l'e-mail inviata a {e} per confermare l'avviso.",
-      al_err: "Controlla la città di partenza, l'e-mail, il budget e spunta la casella.", al_fail: "Non è stato possibile creare l'avviso. Riprova più tardi.", al_vu: "Prezzo rilevato di recente: {p}.", choisir: "scegli una città" }
+      al_err: "Controlla la città di partenza, l'e-mail, il budget e spunta la casella.", al_fail: "Non è stato possibile creare l'avviso. Riprova più tardi.", al_vu: "Prezzo rilevato di recente: {p}.", choisir: "scegli una città", ou: "città o aeroporto" }
   }[lang];
   var KEY = "escale.envies", $ = function (s, r) { return (r || document).querySelector(s); }, $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
   var esc = function (t) { return String(t).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
@@ -55,7 +55,29 @@
   var remplirVilles = function (sel, sauf) { Object.keys(VILLES).forEach(function (c) { if (aero(c) !== sauf) { var o = document.createElement("option"); o.value = c; o.textContent = VILLES[c]; sel.appendChild(o); } }); };
   var donnees = null, charger = function () { if (!donnees) donnees = fetch(dataUrl).then(function (r) { return r.json(); }).catch(function () { return { pays: [] }; }); return donnees; };
   var lienVols = function (ville, air, x) { return "/?type=vols&from=" + aero(ville) + "&to=" + air + (x ? "&dep=" + x.dep + (x.ret ? "&ret=" + x.ret : "") : "") + (lang === "fr" ? "" : "&lang=" + lang); };
-  window.VX = { lang: lang, T: T, VILLES: VILLES, aero: aero, depart: depart, prix: prix, money: money, jour: jour, esc: esc, fmt: fmt, base: base, data: charger, remplirVilles: remplirVilles, lienVols: lienVols,
+  // Champ « ville ou aéroport de départ » écrit par le visiteur (suggestions de site/ac-mini.js, chargé au premier toucher).
+  // champDepart(champ, choisi(code, nom)) ; dernierDepart() rend [code, nom] du dernier départ écrit sur cet appareil, ou null.
+  var acP = null, chargerAC = function () {
+    if (!acP) acP = new Promise(function (ok) {
+      if (window.EscaleAC) return ok();
+      var sc = document.createElement("script"); sc.src = "/ac-mini.js"; sc.onload = ok; sc.onerror = ok; document.head.appendChild(sc);
+    }).then(function () { return window.EscaleAC ? window.EscaleAC.ready : null; });
+    return acP;
+  };
+  var dernierDepart = function () { var m = (lget("escale.aeroport") || "").split("|"); return /^[A-Z]{3}$/.test(m[0]) && m[1] ? m : null; };
+  var champDepart = function (inp, choisi) {
+    var p = null, go = function () {
+      if (!p) p = chargerAC().then(function () {
+        if (!window.EscaleAC) return;
+        var actif = document.activeElement === inp; // attach déplace le champ dans la page : il perdrait la saisie en cours
+        window.EscaleAC.attach(inp, function (code, nom) { lset("escale.aeroport", code + "|" + nom); if (VILLES[code]) lset("escale.depart", code); choisi(code, nom); });
+        if (actif) { inp.focus(); try { inp.setSelectionRange(inp.value.length, inp.value.length); } catch (e) {} }
+        if (inp.value.trim().length >= 2 && !inp.dataset.code) inp.dispatchEvent(new Event("input")); // ce qui a été tapé pendant le chargement
+      });
+    };
+    inp.addEventListener("focus", go); inp.addEventListener("input", function () { go(); if (!inp.value.trim()) choisi("", ""); });
+  };
+  window.VX = { lang: lang, T: T, VILLES: VILLES, aero: aero, depart: depart, prix: prix, money: money, jour: jour, esc: esc, fmt: fmt, base: base, data: charger, remplirVilles: remplirVilles, lienVols: lienVols, champDepart: champDepart, dernierDepart: dernierDepart,
     setDepart: function (c) { lset("escale.depart", c); } };
 
   // ---- 1. Envies : cœur sur chaque lieu, liste, alerte prix par pays
@@ -96,29 +118,30 @@
     var old = $(".vx-alform"); if (old) old.remove();
     var f = document.createElement("form"); f.className = "vx-alform"; f.noValidate = true;
     f.innerHTML = "<h3>" + esc(fmt(T.al_h, { v: b.dataset.ville })) + "</h3><p class='small'>" + esc(T.al_p) + "</p>" +
-      "<label><span>" + esc(T.al_from) + "</span><select name='from'><option value=''>" + esc(T.choisir) + "</option></select></label>" +
+      "<label><span>" + esc(T.al_from) + "</span><input type='text' name='from' inputmode='search' autocomplete='off' spellcheck='false' placeholder='" + esc(T.ou) + "'></label>" +
       "<label><span>" + esc(T.al_email) + "</span><input type='email' name='email' autocomplete='email' required></label>" +
       "<label><span>" + esc(T.al_max) + "</span><input type='number' name='max' min='1' step='1' inputmode='numeric' required></label><p class='small vx-alvu' hidden></p>" +
       "<label class='vx-alc'><input type='checkbox' name='consent' required> <span>" + esc(T.al_consent) + "</span></label>" +
       "<p><button type='submit' class='btn'>" + esc(T.al_go) + "</button></p><p class='small vx-almsg' role='status'></p>";
     b.insertAdjacentElement("afterend", f);
-    remplirVilles(f.from, b.dataset.air);
+    var dep = "";
     var proposer = function () {
-      if (!f.from.value) return;
-      prix(f.from.value).then(function (P) { var x = P[b.dataset.cc], vu = $(".vx-alvu", f);
+      if (!dep) return;
+      var d0 = dep;
+      prix(dep).then(function (P) { if (dep !== d0) return; var x = P[b.dataset.cc], vu = $(".vx-alvu", f);
         if (x && x.price > 0) { vu.textContent = fmt(T.al_vu, { p: money(x.price) }); vu.hidden = false; if (!f.max.value || f.max.dataset.auto) { f.max.value = Math.max(1, Math.floor(x.price * 0.9 / 10) * 10); f.max.dataset.auto = "1"; } }
         else vu.hidden = true; });
     };
     f.max.addEventListener("input", function () { delete f.max.dataset.auto; });
-    f.from.addEventListener("change", function () { if (f.from.value) lset("escale.depart", f.from.value); proposer(); });
-    depart(function (c) { if (VILLES[c] && aero(c) !== b.dataset.air) { f.from.value = c; proposer(); } });
+    champDepart(f.from, function (code) { dep = code; if (code) proposer(); else $(".vx-alvu", f).hidden = true; });
+    var der = dernierDepart(); if (der && aero(der[0]) !== b.dataset.air) { f.from.value = der[1] + " (" + der[0] + ")"; f.from.dataset.code = der[0]; dep = der[0]; proposer(); }
     f.addEventListener("submit", function (ev) {
       ev.preventDefault();
       var msg = $(".vx-almsg", f), email = f.email.value.trim(), max = Number(f.max.value);
-      if (!f.from.value || !/^\S+@\S+\.\S+$/.test(email) || !(max > 0) || !f.consent.checked) { msg.textContent = T.al_err; return; }
+      if (!dep || aero(dep) === b.dataset.air || !/^\S+@\S+\.\S+$/.test(email) || !(max > 0) || !f.consent.checked) { msg.textContent = T.al_err; return; }
       var go = f.querySelector("button"); go.disabled = true;
       fetch("/api/alert", { method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email, max: max, from: aero(f.from.value), to: b.dataset.air, lang: lang, currency: "EUR", consent: true }) })
+        body: JSON.stringify({ email: email, max: max, from: aero(dep), to: b.dataset.air, lang: lang, currency: "EUR", consent: true }) })
         .then(function (r) { return r.ok; }).catch(function () { return false; }).then(function (ok) {
           if (!ok) { msg.textContent = T.al_fail; go.disabled = false; return; }
           var done = []; try { done = JSON.parse(lget("escale.envies-alertes") || "[]"); } catch (e2) {}
@@ -160,23 +183,12 @@
         if (vol && (!vol.value || vol.dataset.auto)) { vol.value = Math.round(x.price); vol.dataset.auto = "1"; budget(); }
       });
     };
-    var acP = null, ac = function () { // recherche de ville ou d'aéroport (site/ac-mini.js), chargée une seule fois
-      if (!acP) acP = new Promise(function (ok) {
-        if (window.EscaleAC) return ok();
-        var sc = document.createElement("script"); sc.src = "/ac-mini.js"; sc.onload = ok; sc.onerror = ok; document.head.appendChild(sc);
-      }).then(function () { return window.EscaleAC ? window.EscaleAC.ready : null; }).then(function () {
-        if (!window.EscaleAC) return;
-        window.EscaleAC.attach(inp, function (code, nom) { lset("escale.aeroport", code + "|" + nom); if (VILLES[code]) lset("escale.depart", code); afficher(code, nom); });
-        if (inp.value.trim().length >= 2 && !inp.dataset.code) inp.dispatchEvent(new Event("input")); // ce qui a été tapé pendant le chargement
-      });
-      return acP;
-    };
     if (inp) {
-      inp.addEventListener("focus", ac); inp.addEventListener("input", function () { ac(); if (!inp.value.trim()) afficher("", ""); });
+      champDepart(inp, afficher);
       var io = new IntersectionObserver(function (es) {
         if (!es[0].isIntersecting) return; io.disconnect();
-        var m = (lget("escale.aeroport") || "").split("|"); // dernier départ écrit par ce visiteur (reste dans son appareil)
-        if (/^[A-Z]{3}$/.test(m[0]) && m[1] && aero(m[0]) !== air) { inp.value = m[1] + " (" + m[0] + ")"; inp.dataset.code = m[0]; afficher(m[0], m[1]); }
+        var m = dernierDepart(); // dernier départ écrit par ce visiteur (reste dans son appareil)
+        if (m && aero(m[0]) !== air) { inp.value = m[1] + " (" + m[0] + ")"; inp.dataset.code = m[0]; afficher(m[0], m[1]); }
       }, { rootMargin: "500px 0px" });
       io.observe(cta);
     }

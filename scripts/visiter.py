@@ -553,7 +553,7 @@ def build(site, ctx):
         hero = f'<div class="vx" {attrs}><p class="eyebrow">{u["eyebrow"]}</p><h1>{u["cmp_h1"]}</h1><p class="hero-lead">{u["cmp_lead"]}</p></div>'
         opts = "".join(f'<option value="{p["cc"]}">{p["flag"]} {E(p["nom"])}</option>' for p in pays)
         body = (f'<div class="vx-cmp-form"><label><span>{u["cmp_a"]}</span><select id="vc-a">{opts}</select></label><label><span>{u["cmp_b"]}</span><select id="vc-b">{opts}</select></label>'
-                f'<label><span>{u["dep"]}</span><select id="vc-from"><option value="">{u["dep0"]}</option></select></label></div><div id="vx-cmp" class="vx-cmp" role="status"></div>'
+                f'<label><span>{u["dep"]}</span><input type="text" id="vc-from" inputmode="search" enterkeyhint="search" autocomplete="off" spellcheck="false" placeholder="{u["dep_ph"]}"></label></div><div id="vx-cmp" class="vx-cmp" role="status"></div>'
                 f'<p class="vx-more"><a href="/{BASE[lang]}/">{u["tous"]}</a> · <a href="{A("jeu")}">{u["jeu"]}</a></p><p class="small">{u["credits"]}</p>'
                 '<script src="/visiter.js" defer></script><script src="/visiter-comparer.js" defer></script>')
         urls.append(B.write(site, subs["comparer"][lang], lang, u["cmp_title"], u["cmp_desc"], hero, body, "", subs["comparer"], ctx))
