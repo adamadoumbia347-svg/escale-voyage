@@ -134,7 +134,6 @@
         g.air.map(function (a) { return '<button type="button" class="rp-row sub" data-code="' + a[0] + '"><span class="i" aria-hidden="true">✈</span><span class="m"><b>' + esc(nomAero(a)) + '</b></span><span class="c">' + a[0] + "</span></button>"; }).join("");
     }).join("");
   }
-  var POP = { from: ["CDG", "LYS", "MRS", "BRU", "GVA", "MXP", "FCO", "LHR", "MAD", "YUL"], to: ["DSS", "ABJ", "CMN", "ALG", "TUN", "CKY", "DLA", "RAK", "LOS", "ACC", "IST", "DXB"] };
   function lieu(champ, quoi) {
     var t = T();
     ouvrir('<div class="rp-top"><button type="button" class="rp-back" aria-label="' + esc(t.back) + '">←</button>' +
@@ -145,14 +144,7 @@
     var peindre = function () {
       var v = inp.value.trim();
       if (!DB) { liste.innerHTML = '<p class="rp-empty">' + esc(t.load) + "</p>"; return; }
-      if (!v) {
-        var par = {}; DB.forEach(function (a) { par[a[0]] = a; });
-        liste.innerHTML = (quoi === "from" && $("f-near") ? '<button type="button" class="rp-row" data-near="1"><span class="i" aria-hidden="true">📍</span><span class="m"><b>' + esc(t.near) + "</b></span></button>" : "") +
-          '<p class="rp-h">' + esc(quoi === "from" ? t.popFrom : t.popTo) + "</p>" +
-          POP[quoi].filter(function (c) { return par[c]; }).map(function (c) { var a = par[c];
-            return '<button type="button" class="rp-row" data-code="' + c + '"><span class="i" aria-hidden="true">' + drapeau(a[3]) + '</span><span class="m"><b>' + esc(a[1]) + "</b><small>" + esc(pays(a[3])) + '</small></span><span class="c">' + c + "</span></button>"; }).join("");
-        return;
-      }
+      if (!v) { liste.innerHTML = ""; return; } // écran vide : le visiteur écrit directement (demande de Dobam, 13/11/2026)
       var gs = chercher(v);
       liste.innerHTML = gs.length ? rendreGroupes(gs) : '<p class="rp-empty">' + esc(t.none) + "</p>";
       liste.scrollTop = 0;
@@ -163,12 +155,12 @@
     inp.addEventListener("keydown", function (e) { if (e.key === "Enter") { var b = liste.querySelector(".rp-row[data-code]"); if (b && inp.value.trim()) { e.preventDefault(); b.click(); } } });
     liste.addEventListener("click", function (e) {
       var b = e.target.closest(".rp-row"); if (!b) return;
-      if (b.dataset.near) { fermer(); setTimeout(function () { $("f-near").click(); }, 60); return; }
       var a = null; DB.forEach(function (x) { if (x[0] === b.dataset.code) a = x; }); if (!a) return;
       champ.value = etiquette(a); fermer(); fire(champ, ["input", "change"]);
     });
     peindre(); base().then(peindre); setTimeout(peindre, 900); // 900 ms : les noms officiels sont arrivés entre-temps
-    setTimeout(function () { inp.focus(); }, 30);
+    inp.focus(); // tout de suite, dans le geste du visiteur : le clavier du téléphone s'ouvre sans second toucher
+    setTimeout(function () { if (ouvert && document.activeElement !== inp) inp.focus(); }, 60);
   }
   [[fFrom, "from"], [fTo, "to"]].forEach(function (x) {
     x[0].addEventListener("focus", function (e) { if (!petit() || ouvert || !e.isTrusted) return; x[0].blur(); lieu(x[0], x[1]); });
