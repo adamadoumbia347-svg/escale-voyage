@@ -1,19 +1,11 @@
 {
- "code": "couleurs",
+ "code": "villes6",
  "lieux": {
-  "jaipur": "Hawa Mahal Jaipur",
-  "jaipur2": "Jaipur pink city gate street",
-  "izamal": "Izamal convent yellow",
-  "izamal2": "Izamal Yucatán yellow street",
-  "oia": "Oia Santorini",
-  "oia2": "Santorini blue dome church caldera",
-  "burano": "Burano colorful houses canal",
-  "burano2": "Burano island houses",
-  "bokaap": "Bo-Kaap Cape Town colourful houses",
-  "jodhpur": "Jodhpur blue city view from Mehrangarh",
-  "nyhavn": "Nyhavn Copenhagen"
+  "rw-kigali": "Kigali skyline",
+  "rw-kigali2": "Kigali Convention Centre",
+  "cg-brazzaville": "Brazzaville skyline Congo river",
+  "cg-brazzaville2": "Basilique Sainte-Anne du Congo Brazzaville"
  },
- "demande": "2026-11-13T08:57:59",
- "largeur": 1920,
+ "demande": "2026-11-13T12:44:26",
  "max": 5
 }
