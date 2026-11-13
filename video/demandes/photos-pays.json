@@ -1,20 +1,20 @@
 {
- "code": "insolites",
+ "code": "plages",
  "lieux": {
-  "uyuni": "Salar de Uyuni mirror",
-  "uyuni2": "Salar de Uyuni salt flat",
-  "deadvlei": "Deadvlei Namibia",
-  "geants": "Giant's Causeway basalt columns",
-  "danxia": "Zhangye Danxia landform",
-  "prismatic": "Grand Prismatic Spring aerial",
-  "antelope": "Antelope Canyon",
-  "pamukkale": "Pamukkale travertine terraces",
-  "cappadoce": "Cappadocia hot air balloons",
-  "paques": "Ahu Tongariki moai Easter Island",
-  "zhangjiajie": "Zhangjiajie sandstone pillars",
-  "chocolate": "Chocolate Hills Bohol",
-  "vinicunca": "Vinicunca Rainbow Mountain Peru",
-  "moeraki": "Moeraki Boulders"
+  "elafonissi": "Elafonisi beach Crete",
+  "mayabay": "Maya Bay Phi Phi Leh",
+  "nungwi": "Nungwi beach Zanzibar",
+  "zanzibar": "Zanzibar beach dhow turquoise",
+  "whitehaven": "Whitehaven Beach Hill Inlet",
+  "sourceargent": "Anse Source d'Argent La Digue",
+  "navagio": "Navagio beach Zakynthos",
+  "goloritze": "Cala Goloritzé",
+  "matira": "Matira beach Bora Bora",
+  "borabora": "Bora Bora lagoon Mount Otemanu",
+  "lemorne": "Le Morne beach Mauritius",
+  "marinha": "Praia da Marinha Algarve"
  },
- "demande": "2026-11-13T08:09:13"
+ "demande": "2026-11-13T08:35:06",
+ "largeur": 1920,
+ "max": 5
 }
