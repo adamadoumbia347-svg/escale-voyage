@@ -150,6 +150,7 @@ export async function weeklyStats(env: Env) {
   const links: Record<string, [number, number]> = {}, pages: Record<string, number> = {}
   let now = 0, before = 0
   rows.forEach((r: any, i) => { for (const [id, n] of Object.entries(r || {})) {
+    if (id.startsWith("@")) continue // pages d'où partent les clics partenaires (api/clic.ts), pas des liens
     const [k, p] = id.split("|"), v = n as number, o = links[k] || (links[k] = [0, 0])
     if (i < 7) { o[0] += v; now += v; pages[p] = (pages[p] || 0) + v } else { o[1] += v; before += v }
   } })

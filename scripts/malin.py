@@ -29,11 +29,11 @@ def build(page, wa_btn):
            ("Ma ville de départ n'est pas dans la liste ?", "Le classement ne montre que les trajets suivis chaque jour. Pour n'importe quelle autre ville, lancez une recherche : l'option « aéroports proches » compare aussi les aéroports voisins.")]
     hero = ('<p class="eyebrow">Outil gratuit · prix relevés chaque jour</p><h1>Le match <span>des aéroports</span></h1>'
             '<p class="hero-lead">Choisissez votre destination : Escale classe les villes de départ, de la moins chère à la plus chère, avec les vrais prix relevés aujourd\'hui.</p>')
-    body = ('<section><h2 id="mt-h">Où allez-vous ?</h2><div class="chips mt-dest" id="mt-dest" role="group" aria-labelledby="mt-h"></div>'
-            '<div id="mt-box" class="mt-box" aria-live="polite"><p class="pr-wait">Chargement des prix…</p></div>'
-            '<p class="small" id="mt-note" hidden>Prix aller-retour le plus bas des six prochains mois, par personne, relevé le <span id="mt-date"></span>. '
+    body = ('<section><h2 id="mh-h">Où allez-vous ?</h2><div class="chips mh-dest" id="mh-dest" role="group" aria-labelledby="mh-h"></div>'
+            '<div id="mh-box" class="mh-box" aria-live="polite"><p class="pr-wait">Chargement des prix…</p></div>'
+            '<p class="small" id="mh-note" hidden>Prix aller-retour le plus bas des six prochains mois, par personne, relevé le <span id="mh-date"></span>. '
             'Le tarif exact se confirme sur le site de réservation. N\'oubliez pas le coût du trajet jusqu\'à l\'aéroport.</p>'
-            '<p class="cta-row"><button type="button" class="btn ghost" id="mt-share" hidden>Partager ce match</button></p></section>'
+            '<p class="cta-row"><button type="button" class="btn ghost" id="mh-share" hidden>Partager ce match</button></p></section>'
             '<section><h2>Comment lire le classement</h2><ul>'
             '<li>Le <strong>vainqueur</strong> est la ville de départ avec le prix relevé le plus bas pour cette destination.</li>'
             '<li>La barre montre l\'écart avec le vainqueur : plus elle est longue, plus le billet est cher.</li>'

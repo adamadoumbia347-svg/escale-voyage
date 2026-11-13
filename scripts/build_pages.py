@@ -782,6 +782,9 @@ def _langue_inline(site):
     return LANGUE_MARQUE + js + "</script>"
 
 
+NOFOLLOW_RX = re.compile(r'<a (?![^>]*\brel=)([^>]*href="/\?type=)')
+
+
 def langue_auto(site):
     n = 0
     tag = _langue_inline(site)
@@ -793,6 +796,8 @@ def langue_auto(site):
         if "</head>" not in t:
             continue
         u = LANGUE_RX.sub("", t)  # ancienne version (fichier séparé ou copie précédente) retirée
+        # Recherches préremplies : les robots n'ont pas à suivre ces liens (déjà interdits dans robots.txt, 35 % des appels au Worker le 13/11/2026)
+        u = NOFOLLOW_RX.sub(r'<a rel="nofollow" \1', u)
         if "hreflang=" in u:
             u = u.replace("</head>", tag + "\n</head>", 1)
             n += 1

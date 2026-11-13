@@ -520,11 +520,11 @@ th > a, td > a.fete-alert { display: inline-block; padding-block: 6px; }
 .push-box h3 { margin: 0 0 4px; font-size: 1.05rem; }
 
 /* ===== Style « frais » (clair, vert d'eau et turquoise, cartes pastel) — remplace l'en-tête bleu nuit ===== */
-:root { --mint: #e9faf5; --mint-2: #d5f4ea; --teal: #12b3a0; --teal-d: #0b8577; --teal-ink: #ffffff; --peach: #fff1e6; --lav: #f1edff; --sun: #fff7d6;
+:root { --mint: #e9faf5; --mint-2: #d5f4ea; --teal: #12b3a0; --teal-d: #0b8577; --teal-fond: #0b8577; --teal-ink: #ffffff; --peach: #fff1e6; --lav: #f1edff; --sun: #fff7d6;
   --accent: #0b8577; --sign: #0b8577; --focus: #12b3a0; --navy: #ffffff; --on-navy: var(--muted); }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --mint: #0f2622; --mint-2: #143430; --teal: #2fd0ba; --teal-d: #5fe0cc; --teal-ink: #05221e;
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --mint: #0f2622; --mint-2: #143430; --teal: #2fd0ba; --teal-d: #5fe0cc; --teal-fond: #2fd0ba; --teal-ink: #05221e;
   --peach: #2a1f17; --lav: #1e1a2e; --sun: #2a2614; --accent: #5fe0cc; --sign: #5fe0cc; --focus: #2fd0ba; --navy: #0d1117; } }
-:root[data-theme="dark"] { --mint: #0f2622; --mint-2: #143430; --teal: #2fd0ba; --teal-d: #5fe0cc; --teal-ink: #05221e;
+:root[data-theme="dark"] { --mint: #0f2622; --mint-2: #143430; --teal: #2fd0ba; --teal-d: #5fe0cc; --teal-fond: #2fd0ba; --teal-ink: #05221e;
   --peach: #2a1f17; --lav: #1e1a2e; --sun: #2a2614; --accent: #5fe0cc; --sign: #5fe0cc; --focus: #2fd0ba; --navy: #0d1117; }
 .site-head { background: color-mix(in srgb, var(--bg) 94%, transparent); border-bottom: 1px solid var(--line); backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px); }
 .site-head .brand { color: var(--ink); }
@@ -534,7 +534,7 @@ th > a, td > a.fete-alert { display: inline-block; padding-block: 6px; }
 .main-nav a[aria-current="page"], .lang-nav a[aria-current="page"] { color: var(--teal-d); background: var(--mint); }
 .main-nav a.nav-explore { color: var(--teal-d); background: var(--mint); }
 .site-head .cur-select, .site-head .theme-btn { background: var(--surface); color: var(--ink); border-color: var(--line); }
-.btn:not(.ghost):not(.wa-btn) { background: var(--teal); color: var(--teal-ink); border-color: transparent; border-radius: 999px; box-shadow: 0 10px 24px -12px color-mix(in srgb, var(--teal) 80%, transparent); }
+.btn:not(.ghost):not(.wa-btn) { background: var(--teal-fond, var(--teal)); color: var(--teal-ink); border-color: transparent; border-radius: 999px; box-shadow: 0 10px 24px -12px color-mix(in srgb, var(--teal) 80%, transparent); }
 .btn:not(.ghost):not(.wa-btn):hover { filter: brightness(1.04); }
 .btn.ghost { border-radius: 999px; }
 .eyebrow { color: var(--teal-d); letter-spacing: .08em; text-transform: uppercase; font-weight: 700; }
@@ -1047,7 +1047,7 @@ a { text-underline-offset: 3px; }
 .ruban { direction: ltr; }
 .ruban .piste { display: flex; gap: 12px; width: max-content; }
 .ruban a { white-space: nowrap; text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); padding: 8px 16px; border-radius: 999px; font-weight: 700; font-size: .95rem; transition: background .2s, color .2s; }
-.ruban a:hover { background: var(--teal); color: var(--teal-ink); }
+.ruban a:hover { background: var(--teal-fond, var(--teal)); color: var(--teal-ink); }
 /* Dans le haut de l'accueil, le ruban passe sous le titre, par-dessus la photo */
 .hero .ruban { background: none; border: 0; margin: 0 -16px 12px; padding: 4px 0; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
 .band .hero > .ruban:not(.hero-bg) { order: 1; align-self: stretch; max-width: none; }
@@ -1086,20 +1086,20 @@ html:not([lang="fr"]) .ruban [data-only="fr"] { display: none; }
 /* FIN DU THÈME « SEREIN » */
 
 /* ===== Match des aéroports et page des 4 astuces (13/11/2026) ===== */
-.mt-dest button { text-transform: none; }
-.mt-box { min-height: 320px; }
-.mt-sum { font-size: 1.05rem; margin: 10px 0 14px; }
-.mt-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
-.mt-row a { display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 16px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); text-decoration: none; }
-.mt-rank { flex: 0 0 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--soft); font: 700 15px/1 var(--f-body); }
-.mt-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
-.mt-main small { color: var(--muted); }
-.mt-bar { display: block; height: 8px; border-radius: 999px; background: var(--soft); overflow: hidden; }
-.mt-bar i { display: block; height: 100%; border-radius: 999px; background: #f59e0b; }
-.mt-win a { border-color: #0f9d8c; box-shadow: 0 0 0 2px color-mix(in srgb, #0f9d8c 25%, transparent); }
-.mt-win .mt-bar i { background: #0f9d8c; }
-.mt-win .mt-rank { background: color-mix(in srgb, #0f9d8c 16%, transparent); }
-.mt-price { font-size: 1.2rem; white-space: nowrap; }
+.mh-dest button { text-transform: none; }
+.mh-box { min-height: 320px; }
+.mh-sum { font-size: 1.05rem; margin: 10px 0 14px; }
+.mh-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.mh-row a { display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 16px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); text-decoration: none; }
+.mh-rank { flex: 0 0 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--soft); font: 700 15px/1 var(--f-body); }
+.mh-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+.mh-main small { color: var(--muted); }
+.mh-bar { display: block; height: 8px; border-radius: 999px; background: var(--soft); overflow: hidden; }
+.mh-bar i { display: block; height: 100%; border-radius: 999px; background: #f59e0b; }
+.mh-win a { border-color: #0f9d8c; box-shadow: 0 0 0 2px color-mix(in srgb, #0f9d8c 25%, transparent); }
+.mh-win .mh-bar i { background: #0f9d8c; }
+.mh-win .mh-rank { background: color-mix(in srgb, #0f9d8c 16%, transparent); }
+.mh-price { font-size: 1.2rem; white-space: nowrap; }
 .as-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
 .as-item { display: flex; gap: 14px; padding: 16px; border-radius: 18px; border: 1px solid var(--line); background: var(--surface); }
 .as-item h2 { margin: 0 0 6px; font-size: 1.2rem; }

@@ -2,9 +2,9 @@
 // Données : /api/verdict (dernier relevé de chaque grand trajet). Aucun prix n'est écrit dans la page.
 (function () {
   "use strict";
-  var box = document.getElementById("mt-box"), chips = document.getElementById("mt-dest");
+  var box = document.getElementById("mh-box"), chips = document.getElementById("mh-dest");
   if (!box || !chips) return;
-  var note = document.getElementById("mt-note"), dateEl = document.getElementById("mt-date"), share = document.getElementById("mt-share");
+  var note = document.getElementById("mh-note"), dateEl = document.getElementById("mh-date"), share = document.getElementById("mh-share");
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
   var money = function (n) { try { return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n); } catch (e) { return Math.round(n) + " €"; } };
   var day = function (iso) { var p = iso.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" }); };
@@ -17,17 +17,17 @@
     Array.prototype.forEach.call(chips.querySelectorAll("button"), function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-to") === to)); });
     var rows = g.rows.slice().sort(function (a, b) { return a.price - b.price; });
     var min = rows[0].price, max = rows[rows.length - 1].price;
-    var html = '<ol class="mt-list">' + rows.map(function (r, i) {
+    var html = '<ol class="mh-list">' + rows.map(function (r, i) {
       var w = Math.round(28 + 72 * (max > min ? (r.price - min) / (max - min) : 0));
       var diff = r.price - min;
-      return '<li class="mt-row' + (i === 0 ? " mt-win" : "") + '"><a href="/' + esc(r.path) + '/">' +
-        '<span class="mt-rank" aria-hidden="true">' + (i === 0 ? "🏆" : i + 1) + "</span>" +
-        '<span class="mt-main"><strong>' + esc(r.city) + '</strong><span class="mt-bar"><i style="width:' + w + '%"></i></span>' +
+      return '<li class="mh-row' + (i === 0 ? " mh-win" : "") + '"><a href="/' + esc(r.path) + '/">' +
+        '<span class="mh-rank" aria-hidden="true">' + (i === 0 ? "🏆" : i + 1) + "</span>" +
+        '<span class="mh-main"><strong>' + esc(r.city) + '</strong><span class="mh-bar"><i style="width:' + w + '%"></i></span>' +
         "<small>" + (i === 0 ? "Vainqueur du match" : "+ " + esc(money(diff)) + " par rapport à " + esc(rows[0].city)) + "</small></span>" +
-        '<b class="mt-price">' + esc(money(r.price)) + "</b></a></li>";
+        '<b class="mh-price">' + esc(money(r.price)) + "</b></a></li>";
     }).join("") + "</ol>";
     if (rows.length > 1 && max > min) {
-      html = '<p class="mt-sum">Pour <strong>' + esc(g.name) + "</strong>, partir de <strong>" + esc(rows[0].city) + "</strong> coûte <strong>" + esc(money(max - min)) +
+      html = '<p class="mh-sum">Pour <strong>' + esc(g.name) + "</strong>, partir de <strong>" + esc(rows[0].city) + "</strong> coûte <strong>" + esc(money(max - min)) +
         "</strong> de moins que de " + esc(rows[rows.length - 1].city) + ".</p>" + html;
     }
     box.innerHTML = html;
