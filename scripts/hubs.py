@@ -174,7 +174,14 @@ def _from_home():
     except Exception:
         return {}
 FROM_HOME = _from_home()
-FROM_L = {"fr": ("Vous partez de {b} ? Les vols au départ de {b}",), "en": ("Flying from {b}? Cheap flights from {b}",),
+# Bloc « au départ de » (Search Console 11/2026 : « cheap flights », tapée en Tunisie et en Algérie, affiche ces pages à des gens
+# qui veulent PARTIR de Tunis ou d'Alger) : titre, sous-titre, en-têtes du tableau, lien vers la page complète
+FROM_T = {
+    "fr": ("Vous partez {db} ? Les vols au départ {db}", "Prix aller-retour les plus bas repérés récemment au départ {db}.", ("Trajet", "Prix repéré"), "Tous les vols au départ {db}"),
+    "en": ("Flying from {b}? Cheap flights from {b}", "Lowest round-trip prices recently found for flights leaving {b}.", ("Route", "Price found"), "All flights from {b}"),
+    "ar": ("تسافر من {b}؟ رحلات رخيصة من {b}", "أقل أسعار الذهاب والعودة التي عُثر عليها مؤخرًا للرحلات المغادرة من {b}.", ("الخط", "السعر"), "كل الرحلات من {b}"),
+}
+FROM_L = {"fr": ("Vous partez {db} ? Les vols au départ {db}",), "en": ("Flying from {b}? Cheap flights from {b}",),
           "es": ("¿Sales de {b}? Vuelos desde {b}",), "pt": ("Parte de {b}? Voos a partir de {b}",), "ar": ("تسافر من {b}؟ رحلات من {b}",),
           "it": ("Parti da {b}? Voli da {b}",), "de": ("Abflug ab {b}? Flüge ab {b}",)}
 
@@ -288,7 +295,24 @@ def build_hubs(site, ctx, route_paths, hotel_paths):
                 if fl:
                     import pays_accueil as PA
                     dest = PA.EXTRA.get(pc, {}).get(lang, (pc,))[0]
-                    hero += f'<p class="hub-from"><a class="btn ghost" href="/{dest}/">{E(fl[0].format(b=b))} →</a></p>'
+                    db = PA.de(b) if lang == "fr" else b  # « d'Alger », « de Tunis »
+                    hero += f'<p class="hub-from"><a class="btn ghost" href="/{dest}/">{E(fl[0].format(b=b, db=db))} →</a></p>'
+                    ft = FROM_T.get(lang)
+                    # départs de la ville qui ont une page dans cette langue : l'Europe d'abord, puis le Golfe et l'Amérique, puis l'Afrique
+                    dep = [r for r in routes if r[0] in PA.PAYS[pc][3] and lang in route_paths.get(r, {})]
+                    dep.sort(key=lambda r: (0 if r[4] in PA.EUROPE else 1 if r[4] in PA.LOIN else 2))
+                    if ft and len(dep) >= 3:
+                        lignes = "".join(
+                            f'<tr><th scope="row"><a href="/{route_paths[r][lang]}/"><bdi>{E(loc(TR.CITIES, r[2], lang))} → {E(loc(TR.CITIES, r[3], lang))}</bdi></a> <span class="hub-code" dir="ltr">{r[0]}–{r[1]}</span></th>'
+                            f'<td class="hub-price" data-from="{r[0]}" data-to="{r[1]}" data-label="{E(h["from_"])}"></td>'
+                            f'<td><a class="price-go" href="/{route_paths[r][lang]}/">{E(h["see"])}</a></td></tr>' for r in dep[:10])
+                        # sur téléphone : le trajet à gauche, le prix dessous, le bouton à droite (le tableau n'a que trois colonnes)
+                        bloc = ('<style>@media (max-width:600px){#depart .hub-table th{grid-column:1;grid-row:1}#depart .hub-table .hub-price{grid-column:1;grid-row:2;text-align:start}'
+                                '#depart .hub-table td:last-child{grid-column:2;grid-row:1/span 2;align-self:center}}</style>'
+                                f'<section class="hub" id="depart"><h2>{E(ft[0].format(b=b, db=db))}</h2><p class="small">{E(ft[1].format(b=b, db=db))}</p>'
+                                f'<table class="hub-table"><thead><tr><th scope="col">{E(ft[2][0])}</th><th scope="col">{E(ft[2][1])}</th><td></td></tr></thead><tbody>{lignes}</tbody></table>'
+                                f'<p><a href="/{dest}/">{E(ft[3].format(b=b, db=db))} →</a></p></section>')
+                        body = body.replace("</dl>", "</dl>" + bloc, 1)  # juste après les repères (aéroport, durée, périodes chères)
                 if lang == "en":
                     title = f"Cheap flights to & from {b}: live prices"
                     desc = f"Cheap flights to and from {b} ({code}): live prices from {some} and more, the cheapest days, flight times. Flying from {b}? See departures too."

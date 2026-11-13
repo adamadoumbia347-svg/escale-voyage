@@ -151,13 +151,16 @@ def build(site, ctx, hubs_paths=None):
             hub = (hubs_paths or {}).get(a[0], {}).get(lang)
             fl = f'/{hub}/' if hub else (f"/?type=vols&to={code}" + ("" if lang == "fr" else "&lang=en"))
             others = " · ".join(f'<a href="/{path(k, lang)}/">{E(v[0] if lang == "fr" else v[1])}</a>' for k, v in A.items() if k != code)
+            hh = next((h for h in ctx.get("hotels", []) if h[0] == a[0]), None)  # page hôtels de la ville, si elle existe
+            hp = (ctx["hotel_slug"](hh) if lang == "fr" else B.hotel_path(hh, "en")) if hh else None
+            hotel_li = f'<li><a href="/{hp}/">{E(("Hôtels pas chers à " if lang == "fr" else "Cheap hotels in ") + c)}</a></li>' if hp else ""
             hero = f'<p class="eyebrow">{E(a[4] if lang == "fr" else a[5])}</p><h1>{t["h1"].format(c=E(c), dc=E(de(c)))}</h1><p class="hero-lead">{E(t["lead"].format(ap=ap, code=code))}</p>'
             body = (f'<section><h2>{E(t["city_h"])}</h2><ul>' + "".join(f"<li>{E(x)}</li>" for x in a[8][lang]) + "</ul></section>"
                     f'<section><h2>{E(t["sim_h"])}</h2><p>{E(t["sim"].format(ops=a[11]))}</p></section>'
                     f'<section><h2>{E(t["money_h"])}</h2><p>{E(t["money"].format(cur=cur))}</p></section>'
                     f'<section><h2>{E(t["traps_h"])}</h2><ul>' + "".join(f"<li>{E(x)}</li>" for x in t["traps"]) + "</ul></section>"
                     f'<section><h2>{E(t["book_h"])}</h2><ul class="links"><li><a href="{TRANSFER}" target="_blank" rel="sponsored noopener">{E(t["transfer"])}</a></li>'
-                    f'<li><a href="{ESIM}" target="_blank" rel="sponsored noopener">{E(t["esim"])}</a></li><li><a href="{E(fl)}">{E(t["flights"].format(c=c))}</a></li></ul></section>'
+                    f'<li><a href="{ESIM}" target="_blank" rel="sponsored noopener">{E(t["esim"])}</a></li><li><a href="{E(fl)}">{E(t["flights"].format(c=c))}</a></li>{hotel_li}</ul></section>'
                     f'<p class="small">⚠️ {E(t["warn"].format(m=CHECKED[lang]))}</p>'
                     f'<section><h2>{E(t["others"])}</h2><p class="pays-links">{others}</p></section>')
             urls.append(B.write(site, paths[lang], lang, t["title"].format(c=c, dc=de(c)), t["desc"].format(c=c, dc=de(c), code=code, m=CHECKED[lang]), hero, body, "", paths, ctx))

@@ -67,7 +67,12 @@ DEST = {
             "Ci sono spesso voli low cost diretti da diversi aeroporti italiani: controlla il prezzo con la valigia inclusa e confronta anche Agadir e Fès."),
     "ABV": ("Abuja", "Nigeria", "Aeroporto internazionale Nnamdi Azikiwe", "Natale e le vacanze estive",
             "Confronta anche Lagos (LOS): l'offerta di voli è più ampia e a volte il prezzo è più basso, poi un volo interno o la strada."),
+    # Mauritius : ricerche italiane viste in Search Console (11/2026) senza nessuna partenza dall'Italia sul sito
+    "MRU": ("Mauritius", "Mauritius", "Aeroporto internazionale Sir Seewoosagur Ramgoolam", "luglio, agosto e le feste di fine anno",
+            "Dall'Italia si vola spesso con uno scalo (per esempio a Dubai, Istanbul, Parigi o Addis Abeba): confronta la durata totale del viaggio, non solo il prezzo."),
 }
+# Scali da confrontare, quando non sono quelli dell'Africa occidentale e del Maghreb
+SCALI = {"MRU": "Dubai, Istanbul, Parigi o Addis Abeba"}
 ROUTES = [("MXP", d) for d in ("DSS", "CMN", "LOS", "ACC", "ABJ", "CAI", "TUN")] + \
          [("FCO", d) for d in ("DSS", "CMN", "TUN", "CAI", "LOS", "ADD", "ALG")] + \
          [("BLQ", d) for d in ("CMN", "DSS", "ACC", "TUN", "LOS")] + [("TRN", d) for d in ("CMN", "DSS", "TUN", "ABJ")] + \
@@ -77,7 +82,8 @@ ROUTES = [("MXP", d) for d in ("DSS", "CMN", "LOS", "ACC", "ABJ", "CAI", "TUN")]
          [(o, d) for o in ("MXP", "FCO") for d in ("BKO", "OUA", "DLA", "LFW", "COO", "CKY", "RAK", "ABV")] + \
          [("BGY", d) for d in ("DSS", "ABJ", "ACC", "OUA", "RAK")] + [("BLQ", d) for d in ("ABJ", "OUA", "RAK")] + \
          [("VCE", d) for d in ("ABJ", "LOS", "OUA")] + [("TRN", d) for d in ("ACC", "LOS")] + [("NAP", "ABJ")] + \
-         [("VRN", d) for d in ("DSS", "ABJ", "ACC", "CMN", "OUA")]
+         [("VRN", d) for d in ("DSS", "ABJ", "ACC", "CMN", "OUA")] + \
+         [("MXP", "MRU"), ("FCO", "MRU")]
 
 
 def slug(t):
@@ -136,7 +142,7 @@ def build(site, ctx):
 <section><h2>Come pagare di meno</h2>
 <ol class="steps">
 <li><strong>Usa le date flessibili.</strong> Spostare la partenza di un giorno o due cambia spesso il prezzo più della scelta del sito.</li>
-<li><strong>Confronta i voli con scalo.</strong> Casablanca, Istanbul, Tunisi o Addis Abeba sono spesso più economici del volo diretto.</li>
+<li><strong>Confronta i voli con scalo.</strong> {SCALI.get(to, "Casablanca, Istanbul, Tunisi o Addis Abeba")} sono spesso più economici del volo diretto.</li>
 <li><strong>Controlla il bagaglio.</strong> Aggiungi il prezzo della valigia prima di confrontare due tariffe.</li>
 <li><strong>Attiva un avviso prezzo</strong> se parti tra qualche mese: ricevi un'e-mail quando il prezzo scende.</li>
 </ol>
@@ -166,4 +172,4 @@ def build(site, ctx):
     return urls
 
 
-DEST_EN = {"BKO": "Bamako", "OUA": "Ouagadougou", "DLA": "Douala", "LFW": "Lomé", "COO": "Cotonou", "CKY": "Conakry", "RAK": "Marrakech", "ABV": "Abuja", "DSS": "Dakar", "CMN": "Casablanca", "TUN": "Tunis", "CAI": "Cairo", "LOS": "Lagos", "ACC": "Accra", "ABJ": "Abidjan", "ADD": "Addis Ababa", "ALG": "Algiers"}
+DEST_EN = {"MRU": "Mauritius", "BKO": "Bamako", "OUA": "Ouagadougou", "DLA": "Douala", "LFW": "Lomé", "COO": "Cotonou", "CKY": "Conakry", "RAK": "Marrakech", "ABV": "Abuja", "DSS": "Dakar", "CMN": "Casablanca", "TUN": "Tunis", "CAI": "Cairo", "LOS": "Lagos", "ACC": "Accra", "ABJ": "Abidjan", "ADD": "Addis Ababa", "ALG": "Algiers"}

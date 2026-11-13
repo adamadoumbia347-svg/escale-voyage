@@ -83,3 +83,20 @@ Une tâche planifiée de Claude ajoute une nouveauté au site tous les 2 jours, 
   une page d'un trajet non suivi de 1 ou 2 lectures à 0.
 - `/api/verdict` (« Acheter ou attendre ? ») : 1 lecture (copie groupée) au lieu de 90 à chaque calcul.
 - À surveiller : les écritures (531 sur 1 000 par jour) : relevé de la nuit, une écriture par trajet suivi et par jour, compteur de clics.
+
+## 13 novembre 2026 : trois chantiers tirés de la Search Console (4 semaines de données, 15 oct. – 10 nov.)
+Données : 16 492 affichages, 97 clics ; les pages trajets font les deux tiers des affichages en position moyenne 45 ; la moitié des clics
+arrivent sur l'accueil. Trois endroits où la demande existait et où la page y répondait mal :
+- **Hôtels à Bamako, Douala, Lomé** (positions 11 à 18) : bloc détaillé pour Lomé en français (`HOTELS_FR`, scripts/build_pages.py) et en
+  anglais (scripts/trajets_en.py), au niveau de Bamako et Douala ; vraie photo créditée en haut de toutes les pages hôtels
+  (`hotel_photo`, scripts/build_i18n.py : photos.json, sinon une photo de « Que visiter » pour Douala et Lomé) ; liens croisés entre la
+  page hôtels et le guide « arriver à l'aéroport » de la ville (français et anglais).
+- **Italie → Maurice** (« voli per mauritius », position 23, page sans départ italien) : nouvelles pages `it/voli-milano-mauritius` et
+  `it/voli-roma-mauritius` (scripts/italia.py), listées en tête de `it/voli-per-mauritius`. Durées estimées d'après la distance, comme
+  les autres trajets italiens ; aucune information de visa ou de santé ajoutée.
+- **« cheap flights » tapée en Tunisie et en Algérie** (1 041 affichages en position 7,5, aucun clic, sur les pages « vols pour Tunis /
+  Alger ») : ces pages montrent maintenant, juste sous l'en-tête, les vols AU DÉPART de la ville avec leurs prix (scripts/hubs.py,
+  `FROM_T`). Le bloc vaut pour toutes les villes qui ont une page « au départ de » (42 pages en français, anglais et arabe).
+  « Vous partez de Alger » corrigé en « d'Alger ».
+- À revoir dans trois ou quatre semaines avec un nouvel export : position des pages hôtels, clics sur « cheap flights », affichages de
+  `it/voli-*-mauritius`.

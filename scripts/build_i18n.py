@@ -233,6 +233,35 @@ def route_path(r, lang):
     return f"{lang}/{UI[lang]['flight_slug']}-{slug_city(r[2], lang)}-{slug_city(r[3], lang)}"
 
 
+# Photo de la ville en haut des pages hôtels : vraie photo créditée (site/data/photos.json, Wikimedia Commons). Pour les villes
+# qui n'y sont pas, une photo de la rubrique « Que visiter » prise dans la même ville (site/data/visiter-photos.json).
+PHOTO_L = {"fr": "Photo", "en": "Photo", "es": "Foto", "pt": "Foto", "it": "Foto", "de": "Foto", "nl": "Foto", "ar": "الصورة"}
+PHOTO_VISITER = {"DLA": "cm-douala", "LFW": "tg-lome"}
+_PH = {}
+
+
+def hotel_photo(site, code, alt, lang):
+    if not _PH:
+        _PH["v"] = {p["code"]: p for p in json.loads((site / "data" / "photos.json").read_text(encoding="utf-8"))}
+        f = site / "data" / "visiter-photos.json"
+        _PH["x"] = json.loads(f.read_text(encoding="utf-8")) if f.exists() else {}
+    p = _PH["v"].get(code)
+    if p:
+        big = p["img"].replace(".webp", "-1280.webp")
+        src, w = (big, 1280) if (site / big.lstrip("/")).exists() else (p["img"], 800)
+        srcset = f' srcset="{p["img_small"]} 480w, {src} {w}w"' if p.get("img_small") else ""
+        author, lic = p["author"], p["license"]
+    else:
+        k = PHOTO_VISITER.get(code)
+        x = _PH["x"].get(k) if k else None
+        if not x or not (site / "img" / "visiter" / f"{k}.webp").exists():
+            return ""
+        src, srcset = f"/img/visiter/{k}.webp", f' srcset="/img/visiter/{k}-640.webp 640w, /img/visiter/{k}.webp 1100w"'
+        author, lic = x["author"], x["license"]
+    return (f'<img class="pv-hero" src="{src}"{srcset} sizes="(max-width: 700px) 92vw, 760px" alt="{E(alt)}" width="1280" height="560" fetchpriority="high">'
+            f'<p class="pv-cred small">{PHOTO_L.get(lang, "Photo")} : {E(author[:50])}, {E(lic)} · Wikimedia Commons</p>')
+
+
 def hotel_path(h, lang):
     slug = UI[lang].get("hotel_slug") or RX.UI[lang]["hotel_slug"]
     return f"{lang}/{slug}-{slug_city(h[0], lang)}"
@@ -585,13 +614,19 @@ def build(site, ctx):
   <h1>{u["h1_hotel"].format(c=E(c))}</h1>
   <p class="codes"><span dir="ltr">{code}</span> · {E(u["hotel_codes"])}</p>
   <div class="cta-row"><a class="btn" href="{E(app)}">{E(u["hotel_cta"])}</a>{f'<a class="btn ghost" href="/{route_paths[flights[0]][lang]}/">{E(u["flights_to"].format(c=c))}</a>' if flights else ''}{fav_btn(lang, hotel_paths[h[0]][lang], u["h1_hotel"].format(c=c), cn, "hotel")}</div>"""
+            hero += hotel_photo(site, code, c, lang)
+            guide = ""
+            if lang == "en":  # guide « arriver à l'aéroport » (français et anglais seulement)
+                import aeroports
+                if code in aeroports.A:
+                    guide = f'<p>Before you land: <a href="/{aeroports.path(code, "en")}/">arriving at {E(c)} airport (taxi, SIM card, money)</a>.</p>'
             areas_html = "".join(f"<div><dt>{E(n)}</dt><dd>{E(d[0].upper() + d[1:])}</dd></div>" for n, d in area_items)
             fl_html = ""
             if flights:
                 fl_html = f'<section><h2>{E(u["flights_to"].format(c=c))}</h2><ul class="route-links">' + "".join(
                     f'<li><a href="/{route_paths[r][lang]}/">{E(city(r[2], lang))} {u["arrow"]} {E(city(r[3], lang))}</a></li>' for r in flights) + "</ul></section>"
             body = f"""<section><h2>{E(u["where_h"].format(c=c))}</h2><dl class="facts">{areas_html}</dl></section>{hotel_map(lang, c, f"{city(cname, 'en')}, {tr(TR.COUNTRIES, country, 'en')}")}{TEN.hotel_html(hen, c, {p["key"]: p for p in partners(site)}) if hen else ""}
-<section><h2>{E(u["our_tip"])}</h2><p>{E(RX.HOTEL_TIPS[cname][RX.COLX[lang]] if itde else TR.HOTEL_TIPS[cname][COL[lang]])}</p></section>
+<section><h2>{E(u["our_tip"])}</h2><p>{E(RX.HOTEL_TIPS[cname][RX.COLX[lang]] if itde else TR.HOTEL_TIPS[cname][COL[lang]])}</p>{guide}</section>
 <section><h2>{E(u["cheap_h"])}</h2>
 <ol class="steps">{"".join(f"<li>{s}</li>" for s in u["hsteps"])}</ol>
 <p><a class="btn" href="{E(app)}">{E(u["hlaunch"].format(c=c))}</a></p>

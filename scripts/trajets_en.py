@@ -441,7 +441,10 @@ HOTELS.update({
                  "Cotonou and Accra are a few hours by road: compare flights to the three cities.",
                  "Hotels by the beach are pleasant but can be noisy at weekends."],
                 [("Where to stay in Lomé?", "The centre or along the beach for convenience; residential areas for a quieter stay."),
-                 ("Is the airport far from Lomé?", "No, it is close to the city: about 15 to 20 minutes.")]),
+                 ("Is the airport far from Lomé?", "No, it is close to the city: about 15 to 20 minutes."),
+                 ("How do I find a cheap hotel in Lomé?", "Compare several sites for the same dates, look a little away from the seafront, and choose free cancellation so you can rebook if the price drops."),
+                 ("Are there apartments for rent in Lomé?", "Yes: furnished apartments and residences are common, and often better value than a hotel for a stay of a week or more."),
+                 ("When is the best time to visit Lomé?", "The main dry season runs roughly from November to March. It rains most from April to July, and again around September and October.")]),
     "Dubaï": _h("Downtown (Burj Khalifa) and Dubai Marina are the most popular; Deira and Bur Dubai are older and cheaper, close to the airport and the metro.",
                 ["Deira and Bur Dubai offer the best value and are close to DXB.",
                  "The metro links the airport, Downtown and the Marina.",
@@ -467,3 +470,11 @@ HOTELS.update({
                    [("Where to stay in Montreal?", "Downtown or the Old Port for convenience; the Plateau for a local atmosphere."),
                     ("How to get from the airport to downtown?", "By the 747 express bus (24/7) or taxi, about 30 to 45 minutes.")]),
 })
+
+# Lomé : même niveau de détail que Bamako et Douala (la page sort déjà dans Google, Search Console 11/2026)
+HOTELS["Lomé"]["more"] = [
+    ("Areas at a glance", "City centre: around the main market, with shops and mid-range hotels. Seafront and Bè: the beach, bars and open-air restaurants, lively at weekends. Administrative district: calm, close to ministries and embassies, with business hotels."),
+    ("Hotel or apartment?", "For one or two nights a hotel is simpler, with breakfast and a reception open at night. From a week, a furnished apartment with a kitchen often costs less per night, which suits families and business stays."),
+    ("Arriving at night", "The airport is close to the city, about 15 to 20 minutes by car. Ask your hotel for a pick-up or book a transfer in advance, and agree the fare before getting into a taxi."),
+    ("Money and connectivity", "The currency is the CFA franc (XOF). Cash is widely used and mobile money is common; an eSIM gets you online as soon as you land."),
+]

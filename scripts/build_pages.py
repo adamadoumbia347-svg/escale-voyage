@@ -237,6 +237,19 @@ HOTELS_FR = {
               ("Se déplacer", "Les embouteillages sont fréquents aux heures de pointe : le bon quartier fait gagner des heures. Les taxis sont bon marché mais partagés ; pour une première visite, demandez à l'hôtel de réserver une voiture."),
               ("Arriver de nuit", "Réservez le transfert depuis l'aéroport à l'avance et donnez l'adresse de l'hôtel à un proche. L'aéroport est proche du centre : un hôtel central convient même pour une arrivée tardive."),
               ("Argent et connexion", "La monnaie est le franc CFA (XAF). Le mobile money est très utilisé ; une eSIM permet d'avoir Internet dès l'atterrissage.")]),
+    "Lomé": dict(
+        intro="À Lomé, on loge dans le centre, le long du boulevard du bord de mer ou dans des quartiers résidentiels plus calmes. L'aéroport Gnassingbé-Eyadéma est proche de la ville : 15 à 20 minutes en voiture.",
+        tips=["Lomé est la base de la compagnie ASKY : pratique pour continuer vers une autre ville de la région.",
+              "Cotonou et Accra sont à quelques heures de route : comparez les vols vers les trois villes.",
+              "Les hôtels en bord de mer sont agréables, mais peuvent être bruyants le week-end."],
+        faq=[("Où loger à Lomé ?", "Dans le centre ou le long de la plage pour le côté pratique ; dans un quartier résidentiel pour un séjour plus calme."),
+             ("L'aéroport est-il loin de Lomé ?", "Non, il est proche de la ville : 15 à 20 minutes en voiture."),
+             ("Trouve-t-on des appartements à louer à Lomé ?", "Oui : appartements meublés et résidences sont courants, et souvent plus avantageux qu'un hôtel pour un séjour d'une semaine ou plus."),
+             ("Quelle est la meilleure période pour aller à Lomé ?", "La grande saison sèche va à peu près de novembre à mars. Il pleut surtout d'avril à juillet, puis de nouveau vers septembre et octobre.")],
+        more=[("Les quartiers en bref", "Centre-ville : autour du grand marché, commerces et hôtels de milieu de gamme. Bord de mer et Bè : la plage, les bars et les maquis, animés le week-end. Quartier administratif : calme, proche des ministères et des ambassades, avec des hôtels d'affaires."),
+              ("Hôtel ou appartement ?", "Pour une ou deux nuits, l'hôtel est plus simple : petit-déjeuner, réception ouverte la nuit. À partir d'une semaine, un appartement meublé avec cuisine revient souvent moins cher par nuit, ce qui convient aux familles et aux séjours de travail."),
+              ("Arriver de nuit", "L'aéroport est proche de la ville. Demandez un accueil à votre hôtel ou réservez un transfert à l'avance, et mettez-vous d'accord sur le prix avant de monter dans un taxi."),
+              ("Argent et connexion", "La monnaie est le franc CFA (XOF). L'argent liquide reste très utilisé et le mobile money est courant ; une eSIM permet d'avoir Internet dès l'atterrissage.")]),
 }
 
 
@@ -603,10 +616,13 @@ def hotel_page(h):
   <h1>Hôtel pas cher à <span>{E(city)}</span></h1>
   <p class="codes">{code} · {"hôtels, riads, appartements" if country == "Maroc" else "hôtels et appartements"}</p>
   <div class="cta-row"><a class="btn" href="{E(app)}">Comparer les prix des hôtels</a>{f'<a class="btn ghost" href="/{route_slug(flights[0])}/">Vols vers {E(city)}</a>' if flights else ''}{build_i18n.fav_btn("fr", s, f"Hôtels à {city}", country, "hotel")}</div>"""
+    hero += build_i18n.hotel_photo(SITE, code, city, "fr")
+    guide = (f'<p>À lire avant d\'atterrir : <a href="/{aeroports.path(code, "fr")}/">arriver à l\'aéroport {E(aeroports.de(city))} (taxi, carte SIM, argent)</a>.</p>'
+             if code in aeroports.A else "")
     areas_html = "".join(f"<div><dt>{E(a)}</dt><dd>{E(b[0].upper() + b[1:])}</dd></div>" for a, b in areas)
     body = f"""<section><h2>Où dormir à {E(city)}</h2><dl class="facts">{areas_html}</dl></section>
 {build_i18n.hotel_map("fr", city, f"{build_i18n.city(city, 'en')}, {build_i18n.tr(build_i18n.TR.COUNTRIES, country, 'en')}")}{savoir}
-<section><h2>Notre conseil</h2><p>{E(tip)}</p></section>
+<section><h2>Notre conseil</h2><p>{E(tip)}</p>{guide}</section>
 <section><h2>Comment payer moins cher</h2>
 <ol class="steps">
   <li><strong>Comparez au moins trois sites.</strong> Le même hôtel n'a pas toujours le même prix sur Booking, Hotels.com ou Agoda.</li>
