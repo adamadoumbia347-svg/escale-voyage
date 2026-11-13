@@ -27,6 +27,7 @@ VILLES = {
     "FIH": ("Kinshasa", "RD Congo", "kinshasa", "L'aéroport de N'Djili est à environ 25 km du centre de Kinshasa : prévoyez le transfert, surtout pour une arrivée de nuit."),
     "LFW": ("Lomé", "Togo", "lome", "Lomé est aussi la base d'ASKY Airlines : beaucoup de correspondances vers l'Afrique de l'Ouest et centrale y passent."),
     "COO": ("Cotonou", "Bénin", "cotonou", "Comparez aussi l'arrivée à Lomé (LFW), à environ trois heures de route : le vol est parfois bien moins cher."),
+    "BJL": ("Banjul", "Gambie", "banjul", "Peu de vols directs depuis l'Europe : comparez les trajets avec escale (Casablanca, Dakar, Bruxelles, Lisbonne…) et l'arrivée à Dakar si votre famille est près de la frontière."),
     "TUN": ("Tunis", "Tunisie", "tunis", "Comparez aussi Monastir, Enfidha et Djerba : selon votre famille, un autre aéroport peut être moins cher."),
 }
 
@@ -44,7 +45,8 @@ FETES = [
     dict(key="tabaski", slug="vols-tabaski-2027", nom="la Tabaski", court="Tabaski", parent="vols-tabaski",
          date="vers le dimanche 16 mai 2027",
          dates_txt="La Tabaski (Aïd el-Kébir, Aïd el-Adha) 2027 devrait tomber vers le dimanche 16 mai 2027, le 16 ou le 17 selon les pays. La date exacte est fixée par l'observation de la lune, quelques jours avant.",
-         villes=["DSS", "BKO", "CKY", "ABJ", "OUA", "NKC"],
+         villes=["DSS", "BKO", "CKY", "ABJ", "OUA", "NKC", "BJL", "LFW", "COO", "DLA"],
+         cal=["2027-04", "2027-05", "2027-06"],
          periodes=[("2027-05", "2027-05", "2027-05-09", "2027-05-23", "Départ début mai, retour fin mai", "Arriver une semaine avant la fête : le plus demandé."),
                    ("2027-04", "2027-05", "2027-04-30", "2027-05-20", "Départ fin avril, retour après la fête", "Partir plus tôt coûte souvent moins cher."),
                    ("2027-05", "2027-06", "2027-05-12", "2027-06-02", "Départ mi-mai, retour en juin", "Rester après la fête : les retours de juin sont plus calmes.")],
@@ -105,7 +107,10 @@ def build(page, E, extras_html, alert_btn, route_exists, hub_exists, wa_btn):
                     f'<table class="fete-table ete-table">{thead.format("Période (depuis Paris)")}<tbody>{rows}</tbody></table>'
                     f'<p class="small">Prix aller-retour le plus bas repéré récemment pour chaque période, par personne. Les dates indiquées sont celles du vol trouvé ; le tarif exact se confirme sur le site de réservation. '
                     f'S\'il n\'y a pas encore de prix, c\'est que peu de voyageurs ont déjà cherché ces dates : créez une alerte pour être prévenu.</p></section>'
-                    f'<section><h2>Depuis quel aéroport partir ?</h2>'
+                    + (f'<section id="route-calendar" data-from="CDG" data-to="{code}" data-months="{",".join(f["cal"])}" hidden><h2>Les prix jour par jour, depuis Paris</h2>'
+                       '<p class="small">Prix aller-retour le plus bas repéré pour chaque jour de départ. Touchez un jour pour voir les vols.</p>'
+                       '<div class="chips cal-months" role="group" aria-label="Mois"></div><div class="cal-grid" dir="ltr"></div><p class="small cal-legend"></p></section>' if f.get("cal") else "")
+                    + f'<section><h2>Depuis quel aéroport partir ?</h2>'
                     f'<table class="fete-table ete-table">{thead.format("Trajet (départ et retour pendant le mois de la fête)")}<tbody>{orig}</tbody></table></section>'
                     f'<section id="price-alert" class="price-alert" data-from="CDG" data-to="{code}" hidden></section>'
                     f'<section><h2>À savoir pour {E(f["nom"])} {f.get("annee", ANNEE)}</h2><ul><li>{E(f["conseil_fete"])}</li><li>{E(arrivee)}</li>'
@@ -123,7 +128,7 @@ def build(page, E, extras_html, alert_btn, route_exists, hub_exists, wa_btn):
                     + f'<li><a href="/{f["slug"]}/">{E(f["court"])} {f.get("annee", ANNEE)} : toutes nos pages par destination</a></li></ul></section>'
                     + f'<section><h2>Autres destinations pour {E(f["nom"])}</h2><ul class="links">'
                     + "".join(f'<li><a href="/{path(f, o)}/">Vol pour {E(VILLES[o][0])} · {E(f["court"])} {f.get("annee", ANNEE)}</a></li>' for o in f["villes"] if o != code) + "</ul></section>"
-                    + '<script src="/ete.js" defer></script><script src="/alerts.js" defer></script>')
+                    + '<script src="/ete.js" defer></script><script src="/alerts.js" defer></script>' + ('<script src="/route-calendar.js" defer></script>' if f.get("cal") else ""))
             faq = [(f"Quelle est la date de {f['nom']} {f.get("annee", ANNEE)} ?", f["dates_txt"]), (f"Quand acheter un billet pour {v} pour {f['nom']} {f.get("annee", ANNEE)} ?", f["reserver"])]
             ld = ('<script type="application/ld+json">' + json.dumps({
                 "@context": "https://schema.org", "@type": "FAQPage",

@@ -10,6 +10,7 @@ import build_i18n as B
 import climat
 
 E = html.escape
+B.PHOTO_VISITER.update({"COO": "bj-cotonou", "CKY": "gn-conakry"})
 
 
 def hero_src(site, img):
@@ -34,6 +35,11 @@ DESTS = [
     ("FDF", "FDF", "martinique", "martinique", "la Martinique", "Martinique"), ("PUJ", "PUJ", "punta-cana", "punta-cana", "Punta Cana", "Punta Cana"),
     ("CUN", "CUN", "cancun", "cancun", "Cancún", "Cancún"), ("BKK", "BKK", "bangkok", "bangkok", "Bangkok", "Bangkok"),
     ("DPS", "DPS", "bali", "bali", "Bali", "Bali"), ("TYO", "HND", "tokyo", "tokyo", "Tokyo", "Tokyo"),
+    # Ajoutées le 13/11/2026 : villes de la diaspora (les pages « meilleur mois » sortent en première page de Google sur les questions)
+    ("BKO", "BKO", "bamako", "bamako", "Bamako", "Bamako"), ("CKY", "CKY", "conakry", "conakry", "Conakry", "Conakry"),
+    ("COO", "COO", "cotonou", "cotonou", "Cotonou", "Cotonou"), ("LFW", "LFW", "lome", "lome", "Lomé", "Lomé"),
+    ("DLA", "DLA", "douala", "douala", "Douala", "Douala"), ("FIH", "FIH", "kinshasa", "kinshasa", "Kinshasa", "Kinshasa"),
+    ("OUA", "OUA", "ouagadougou", "ouagadougou", "Ouagadougou", "Ouagadougou"),
 ]
 PRE = {"l'île Maurice": "à", "La Réunion": "à", "la Guadeloupe": "en", "la Martinique": "en"}
 
@@ -54,6 +60,10 @@ ITDE = {
     "FDF": ("martinica", "in Martinica", "Martinica", "martinique", "Martinique"), "PUJ": ("punta-cana", "a Punta Cana", "Punta Cana", "punta-cana", "Punta Cana"),
     "CUN": ("cancun", "a Cancún", "Cancún", "cancun", "Cancún"), "BKK": ("bangkok", "a Bangkok", "Bangkok", "bangkok", "Bangkok"),
     "DPS": ("bali", "a Bali", "Bali", "bali", "Bali"), "TYO": ("tokyo", "a Tokyo", "Tokyo", "tokio", "Tokio"),
+    "BKO": ("bamako", "a Bamako", "Bamako", "bamako", "Bamako"), "CKY": ("conakry", "a Conakry", "Conakry", "conakry", "Conakry"),
+    "COO": ("cotonou", "a Cotonou", "Cotonou", "cotonou", "Cotonou"), "LFW": ("lome", "a Lomé", "Lomé", "lome", "Lomé"),
+    "DLA": ("douala", "a Douala", "Douala", "douala", "Douala"), "FIH": ("kinshasa", "a Kinshasa", "Kinshasa", "kinshasa", "Kinshasa"),
+    "OUA": ("ouagadougou", "a Ouagadougou", "Ouagadougou", "ouagadougou", "Ouagadougou"),
 }
 
 
@@ -139,7 +149,7 @@ def build(site, ctx):
             q = "" if lang == "fr" else f"?lang={lang}"
             p = photos.get(pcode)
             img = (f'<img class="pv-hero" src="{hero_src(site, p["img"])}" alt="{E(name_of(d0, lang))}" width="1280" height="960" fetchpriority="high">'
-                   f'<p class="pv-cred small">{E(t["photo"])} : {E(p["author"][:50])}, {E(p["license"])}</p>') if p else ""
+                   f'<p class="pv-cred small">{E(t["photo"])} : {E(p["author"][:50])}, {E(p["license"])}</p>') if p else B.hotel_photo(site, pcode, name_of(d0, lang), lang if lang in ("fr", "en") else "en")
             tj = E(json.dumps({k: t[k] for k in ("loading", "none", "same", "best", "dear")}, ensure_ascii=False))
             others = "".join(f'<li><a href="/{T[lang]["base"]}/{slug_of(d, lang)}/">{E(name_of(d, lang))}</a></li>' for d in DESTS if d[0] != code)
             body = (f'<p>{E(t["from_l"])} <strong class="mm-from">…</strong> · <a href="/{q}">{E(t["change"])}</a></p>'

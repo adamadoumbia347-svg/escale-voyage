@@ -45,6 +45,14 @@ DATA = {
     "BKK": ("SSCCCPPPPPSS", "HHmbbbmmbbmH", ["monsoon"]),
     "DPS": ("PPPSSSSSSSMP", "bbbmmmHHmmbH", ["monsoon"]),
     "TYO": ("FFMSSPCCMSSF", "bbHHmbHHbmHm", ["sakura", "tsuyu"]),
+    # Ajoutées le 13/11/2026 (villes de la diaspora)
+    "BKO": ("SSCCCPPPPMSS", "HmmmmmHHbbmH", ["diaspora", "sahel", "conseils"]),
+    "OUA": ("SSCCCPPPPMSS", "HmmmmmHHbbmH", ["diaspora", "sahel", "conseils"]),
+    "CKY": ("SSSSMPPPPPMS", "HmmmmmHHbbmH", ["diaspora", "rain_long"]),
+    "COO": ("SSSPPPPMPPMS", "HmmmmmHHbbmH", ["diaspora", "two_rains_gulf"]),
+    "LFW": ("SSSPPPPMPPMS", "HmmmmmHHbbmH", ["diaspora", "two_rains_gulf"]),
+    "DLA": ("SSMPPPPPPPMS", "HmmmmmHHbbmH", ["diaspora", "rain_long"]),
+    "FIH": ("PPPPMSSSSPPP", "HmmmmmHHbbmH", ["diaspora", "dry_mid", "conseils"]),
 }
 
 MONTHS = {
@@ -228,3 +236,12 @@ def faq_ld(items):
 def faq_html(items, lang):
     h = {"fr": "Questions fréquentes", "en": "Frequently asked questions", "it": "Domande frequenti", "de": "Häufige Fragen"}[lang]
     return f'<section class="faq"><h2>{E(h)}</h2>' + "".join(f"<details><summary>{E(q)}</summary><p>{E(r)}</p></details>" for q, r in items) + "</section>"
+
+
+# Conseils ajoutés le 13/11/2026 pour les villes de la diaspora
+_TIPS_PLUS = {'fr': {'sahel': 'De mars à mai, la chaleur dépasse souvent 40 °C ; les pluies tombent surtout de juin à septembre.', 'rain_long': 'La saison des pluies est longue et les averses sont très fortes en juillet et en août : les déplacements sont plus lents.', 'two_rains_gulf': "Deux saisons des pluies : la grande d'avril à juillet, la petite en septembre-octobre, avec une accalmie en août.", 'dry_mid': "Ici, la saison sèche va de juin à septembre : c'est l'inverse de l'Afrique de l'Ouest.", 'conseils': 'Avant de réserver, lis les conseils aux voyageurs du ministère des Affaires étrangères de ton pays et préfère un billet modifiable.'},
+              'en': {'sahel': 'From March to May the heat often exceeds 40 °C; the rains fall mostly from June to September.', 'rain_long': 'The rainy season is long and downpours are very heavy in July and August: getting around is slower.', 'two_rains_gulf': 'Two rainy seasons: the main one from April to July, a shorter one in September–October, with a lull in August.', 'dry_mid': 'Here the dry season runs from June to September: the opposite of West Africa.', 'conseils': "Before booking, read your foreign ministry's travel advice and prefer a ticket you can change."},
+              'it': {'sahel': 'Da marzo a maggio il caldo supera spesso i 40 °C; le piogge cadono soprattutto da giugno a settembre.', 'rain_long': 'La stagione delle piogge è lunga e i rovesci sono molto forti a luglio e agosto: gli spostamenti sono più lenti.', 'two_rains_gulf': 'Due stagioni delle piogge: la grande da aprile a luglio, la piccola a settembre-ottobre, con una pausa ad agosto.', 'dry_mid': "Qui la stagione secca va da giugno a settembre: il contrario dell'Africa occidentale.", 'conseils': 'Prima di prenotare, leggi i consigli di viaggio del Ministero degli Esteri del tuo paese e scegli un biglietto modificabile.'},
+              'de': {'sahel': 'Von März bis Mai steigt die Hitze oft über 40 °C; der Regen fällt vor allem von Juni bis September.', 'rain_long': 'Die Regenzeit ist lang, im Juli und August sind die Schauer sehr heftig: Fahrten dauern länger.', 'two_rains_gulf': 'Zwei Regenzeiten: die große von April bis Juli, die kleine im September und Oktober, mit einer Pause im August.', 'dry_mid': 'Hier dauert die Trockenzeit von Juni bis September: umgekehrt wie in Westafrika.', 'conseils': 'Lies vor der Buchung die Reisehinweise deines Außenministeriums und wähle ein umbuchbares Ticket.'}}
+for _l, _d in _TIPS_PLUS.items():
+    T[_l]["tips"].update(_d)

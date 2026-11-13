@@ -197,6 +197,15 @@
   "page": "https://commons.wikimedia.org/wiki/File:Parque_Ibirapuera_com_Avenida_Paulista.jpg",
   "w": 1100
  },
+ "cg-brazzaville": {
+  "author": "Henri van der Noot",
+  "file": "File:Brazzaville - Basilique Sainte-Anne-du-Congo.jpg",
+  "h": 833,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Brazzaville_-_Basilique_Sainte-Anne-du-Congo.jpg",
+  "w": 1100
+ },
  "ci-abidjan": {
   "author": "RyansWorld",
   "file": "File:Plateau 2010, Abidjan.jpg",
@@ -1410,6 +1419,15 @@
   "license": "CC BY-SA 3.0",
   "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
   "page": "https://commons.wikimedia.org/wiki/File:Sintra_Portugal_Pal%C3%A1cio_da_Pena-01.jpg",
+  "w": 1100
+ },
+ "rw-kigali": {
+  "author": "Emmanuelkwizera",
+  "file": "File:High Angle View Of Kigali City Street on November 29, 2018. Emmanuel Kwizera.jpg",
+  "h": 757,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:High_Angle_View_Of_Kigali_City_Street_on_November_29,_2018._Emmanuel_Kwizera.jpg",
   "w": 1100
  },
  "sn-casamance": {

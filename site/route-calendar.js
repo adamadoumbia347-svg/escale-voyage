@@ -27,6 +27,9 @@
   var compact = function (n) { return n >= 10000 ? Math.round(n / 1000) + "k" : String(Math.round(n)); };
   var now = new Date(), today = now.getFullYear() + "-" + pad(now.getMonth() + 1) + "-" + pad(now.getDate());
   var months = [0, 1, 2].map(function (i) { var d = new Date(now.getFullYear(), now.getMonth() + i, 1); return d.getFullYear() + "-" + pad(d.getMonth() + 1); });
+  // Pages de fêtes : data-months="2027-04,2027-05,2027-06" impose les mois (ceux déjà passés sont retirés)
+  var fixed = (box.getAttribute("data-months") || "").split(",").filter(function (m) { return /^\d{4}-\d{2}$/.test(m) && m >= months[0]; });
+  if (fixed.length) months = fixed;
   var cache = {}, current = months[0];
 
   function load(m) {
@@ -36,7 +39,7 @@
   function paintMonths() {
     monthsEl.innerHTML = months.map(function (m) {
       var p = m.split("-");
-      var label = new Date(+p[0], +p[1] - 1, 1).toLocaleDateString(L.loc, { month: "long" });
+      var label = new Date(+p[0], +p[1] - 1, 1).toLocaleDateString(L.loc, +p[0] === now.getFullYear() ? { month: "long" } : { month: "long", year: "numeric" });
       return '<button type="button" data-m="' + m + '" aria-pressed="' + (m === current) + '">' + esc(label) + "</button>";
     }).join("");
   }

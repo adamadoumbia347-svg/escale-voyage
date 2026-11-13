@@ -14,7 +14,7 @@ Une tâche planifiée de Claude ajoute une nouveauté au site tous les 2 jours, 
   assurance voyage, voyager enceinte,
   droits en cas de retard (règlement européen 261/2004), envoyer des colis au pays.
 - Trajets : nouvelles villes de départ (Toulouse vers l'Afrique de l'Ouest, Clermont-Ferrand, Amsterdam, Zurich… ; Milan est déjà couvert par les pages en italien) vers l'Afrique et le Maghreb.
-- Hôtels : Libreville, Yaoundé, Niamey, Ouagadougou, Nouakchott.
+- Hôtels : Niamey, Ouagadougou, Nouakchott.
 
 ## Journal
 | Date | Nouveauté |
@@ -100,3 +100,4 @@ arrivent sur l'accueil. Trois endroits où la demande existait et où la page y 
   « Vous partez de Alger » corrigé en « d'Alger ».
 - À revoir dans trois ou quatre semaines avec un nouvel export : position des pages hôtels, clics sur « cheap flights », affichages de
   `it/voli-*-mauritius`.
+| 2026-11-13 | À la demande de Dobam (« Fais tout », lot 1) : pages hôtels de Yaoundé, Libreville, Kigali, Abuja, Brazzaville et Zanzibar en 7 langues (`scripts/hotels_plus.py`, photos Wikimedia de Kigali et Brazzaville) ; pages « Meilleur mois pour partir » de Bamako, Conakry, Cotonou, Lomé, Douala, Kinshasa et Ouagadougou en 4 langues (renvoi aux conseils aux voyageurs pour le Mali, le Burkina Faso et la RD Congo) ; Tabaski 2027 : Banjul, Lomé, Cotonou et Douala ajoutées, et calendrier des prix jour par jour (avril à juin 2027, `data-months` dans `site/route-calendar.js`) |

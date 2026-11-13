@@ -252,6 +252,11 @@ HOTELS_FR = {
               ("Argent et connexion", "La monnaie est le franc CFA (XOF). L'argent liquide reste très utilisé et le mobile money est courant ; une eSIM permet d'avoir Internet dès l'atterrissage.")]),
 }
 
+import hotels_plus  # noqa: E402  (six villes ajoutées le 13/11/2026)
+HOTELS += hotels_plus.HOTELS
+HOTELS_FR.update(hotels_plus.FR)
+build_i18n.PHOTO_VISITER.update(hotels_plus.PHOTOS)
+
 
 def hotel_slug(h):
     return f"hotel-pas-cher-{slug(h[0])}"
