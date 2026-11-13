@@ -1,15 +1,13 @@
 {
  "code": "capvert",
  "lieux": {
-  "santamaria": "Santa Maria Sal Cape Verde beach pier",
-  "pedralume": "Pedra de Lume salt crater Sal",
-  "boavista": "Boa Vista Cape Verde dunes Deserto de Viana",
-  "fogo": "Pico do Fogo volcano Chã das Caldeiras",
-  "santoantao": "Santo Antão Paul valley Cape Verde",
-  "mindelo": "Mindelo São Vicente Cape Verde bay",
-  "cidadevelha": "Cidade Velha Santiago Cape Verde",
-  "tarrafal": "Tarrafal Santiago Cape Verde beach"
+  "salplage": "Praia de Santa Maria Sal Cabo Verde",
+  "salponton": "Santa Maria pier Sal island",
+  "viana": "Deserto de Viana",
+  "chaves": "Praia de Chaves Boa Vista",
+  "salrei": "Sal Rei Boa Vista Cabo Verde",
+  "santamonica": "Praia de Santa Mónica Boa Vista"
  },
- "demande": "2026-11-13T13:04:26",
+ "demande": "2026-11-13T13:06:50",
  "largeur": 1920
 }
