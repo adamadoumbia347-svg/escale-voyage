@@ -272,3 +272,36 @@ export const onRequest = async (ctx: Ctx) => {
     return response
   }
 }
+
+
+// ---------- Série quotidienne de l'indice en données libres : /indice-prix/donnees.csv (CC BY 4.0), ajoutée le 13 novembre 2026.
+// Uniquement des statistiques calculées par Escale (médianes par périmètre), jamais le prix d'un trajet ou d'un vendeur.
+// Une ligne par jour et par périmètre : ensemble des trajets, région d'arrivée, pays de départ. Fenêtre : les 70 derniers jours
+// de relevés (copie groupée, src/lot.ts : une lecture KV au plus). Gardé 6 heures.
+import { lot } from "./lot"
+import { edgeCached } from "./_lib/common"
+const SCOPES: [string, string, (from: string, to: string) => boolean][] = [
+  ["all", "Europe-Africa (all tracked routes)", () => true],
+  ...REGIONS.map((c, i) => ["arrival_region", T.en.regions[i], (_f: string, to: string) => c.includes(to)] as [string, string, (from: string, to: string) => boolean]),
+  ...ORIG.map((c, i) => ["departure_area", T.en.origins[i].replace(/^From /, ""), (from: string) => c.includes(from)] as [string, string, (from: string, to: string) => boolean]),
+]
+export const donneesCsv = (ctx: Ctx) => edgeCached(ctx, 21600, async () => {
+  const L = await lot(ctx)
+  const routes = Object.keys(L.h).map((k) => { const [from, to] = k.split("-"); return { from, to, byDay: new Map(L.h[k].map((p) => [p[0], p[1]] as [string, number])) } })
+  const days = [...new Set(routes.flatMap((r) => [...r.byDay.keys()]))].sort()
+  const before = (d: string, n: number) => new Date(Date.parse(d + "T00:00:00Z") - n * 864e5).toISOString().slice(0, 10)
+  const change = (rs: typeof routes, d: string, n: number) => {
+    const v: number[] = []
+    for (const r of rs) { const a = r.byDay.get(d), b = r.byDay.get(before(d, n)); if (a && b) v.push(Math.round((a / b - 1) * 100)) }
+    return v.length >= 3 ? median(v) : null // moins de 3 trajets comparables : pas de chiffre
+  }
+  const out = ["date,scope_type,scope,routes_with_fare,median_lowest_return_fare_eur,median_change_7d_pct,median_change_30d_pct"]
+  for (const d of days) for (const [type, name, test] of SCOPES) {
+    const rs = routes.filter((r) => test(r.from, r.to)), fares = rs.map((r) => r.byDay.get(d)).filter((x): x is number => !!x)
+    if (fares.length < 3) continue
+    const c7 = change(rs, d, 7), c30 = change(rs, d, 30)
+    out.push([d, type, `"${name}"`, fares.length, median(fares), c7 === null ? "" : c7, c30 === null ? "" : c30].join(","))
+  }
+  return new Response(out.join("\n") + "\n", { headers: { "Content-Type": "text/csv; charset=utf-8", "Content-Disposition": 'inline; filename="escale-price-index.csv"',
+    "Access-Control-Allow-Origin": "*", "Cache-Control": "public, max-age=21600", "X-Robots-Tag": "noindex" } })
+})

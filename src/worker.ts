@@ -71,6 +71,7 @@ const escale = {
     if (/^\/en\/price-index\/widget\/?$/.test(path)) return diffusion.widget(c, "en")
     const com = path.match(/^\/(indice-prix|en\/price-index)\/(?:(\d{4}-\d{2})\/)?(communique|press)\/?$/)
     if (com) return diffusion.communique(c, com[1] === "indice-prix" ? "fr" : "en", com[2] || null)
+    if (path === "/indice-prix/donnees.csv" || path === "/en/price-index/data.csv") return indice.donneesCsv(c) // série quotidienne en données libres
     // Indice des prix : page du jour et archives mensuelles (/indice-prix/2026-11/)
     if (/^\/(en\/price-index|indice-prix)(\/(\d{4}-\d{2}\/?|(pays|country)\/[a-z-]+\/?)?)?$/.test(path)) return indice.onRequest(c)
     if (path === "/") return accueil.onRequest(c)

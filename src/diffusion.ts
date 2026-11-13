@@ -143,8 +143,8 @@ export async function communique(ctx: Ctx, lang: Lang, ym: string | null): Promi
 export function shareBlock(lang: Lang, ym: string | null = null): string {
   const t = T[lang]
   const embed = `<iframe src="${SITE}${lang === "fr" ? "/indice-prix/widget/" : "/en/price-index/widget/"}" title="${esc(t.wTitle)}" width="320" height="170" loading="lazy" style="border:0;max-width:100%"></iframe>`
-  const L = lang === "fr" ? { h: "Diffuser l'indice", press: "Image du mois prête à poster (communiqué)", feed: "Flux RSS (trajets à saisir et archives)", widget: "Intégrer l'indice sur votre site : copiez ce code" }
-    : { h: "Spread the index", press: "Ready-to-post monthly image (press kit)", feed: "RSS feed (deals of the day and archives)", widget: "Embed the index on your site: copy this code" }
-  return `<h2>${esc(L.h)}</h2><ul class="ix-list"><li><a href="${t.index}${ym ? ym + "/" : ""}${lang === "fr" ? "communique" : "press"}/">${esc(L.press)}</a></li><li><a href="${t.feed}">${esc(L.feed)}</a></li></ul>` +
+  const L = lang === "fr" ? { h: "Diffuser l'indice", data: "Télécharger la série quotidienne de l'indice (CSV, données libres CC BY 4.0)", press: "Image du mois prête à poster (communiqué)", feed: "Flux RSS (trajets à saisir et archives)", widget: "Intégrer l'indice sur votre site : copiez ce code" }
+    : { h: "Spread the index", data: "Download the daily index series (CSV, open data CC BY 4.0)", press: "Ready-to-post monthly image (press kit)", feed: "RSS feed (deals of the day and archives)", widget: "Embed the index on your site: copy this code" }
+  return `<h2>${esc(L.h)}</h2><ul class="ix-list"><li><a href="${lang === "fr" ? "/indice-prix/donnees.csv" : "/en/price-index/data.csv"}" rel="nofollow">${esc(L.data)}</a></li><li><a href="${t.index}${ym ? ym + "/" : ""}${lang === "fr" ? "communique" : "press"}/">${esc(L.press)}</a></li><li><a href="${t.feed}">${esc(L.feed)}</a></li></ul>` +
     `<p class="small">${esc(L.widget)}</p><pre class="small" style="white-space:pre-wrap;word-break:break-all;background:var(--soft,#f4f6f8);border-radius:10px;padding:10px 12px">${esc(embed)}</pre><p>${embed}</p>`
 }

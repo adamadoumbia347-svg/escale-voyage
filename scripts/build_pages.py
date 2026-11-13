@@ -462,6 +462,7 @@ def indice_page():
         "url": f"{DOMAIN}/indice-prix/", "creator": {"@type": "Organization", "name": "Escale", "url": f"{DOMAIN}/"},
         "isAccessibleForFree": True, "inLanguage": "fr", "temporalCoverage": "2026/..", "spatialCoverage": "Europe, Afrique",
         "variableMeasured": "Variation médiane du prix aller-retour (%)",
+        "distribution": [{"@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": f"{DOMAIN}/indice-prix/donnees.csv"}],
         "license": "https://creativecommons.org/licenses/by/4.0/"}, ensure_ascii=False) + "</script>"
     return page("indice-prix", "Indice Escale des prix des vols Europe – Afrique, chaque jour | Escale",
                 "Les billets d'avion vers l'Afrique montent-ils ? La variation médiane des prix sur 30 jours, par région et pays de départ, calculée chaque jour. Données libres (CC BY).",
@@ -493,7 +494,9 @@ def indice_page_en(ctx):
         "description": "Median change, over 30 and 7 days, in the lowest round-trip fare recorded daily on around fifty major routes between Europe, Africa and North Africa, by arrival region and departure country.",
         "url": f"{DOMAIN}/en/price-index/", "creator": {"@type": "Organization", "name": "Escale", "url": f"{DOMAIN}/"},
         "isAccessibleForFree": True, "inLanguage": "en", "temporalCoverage": "2026/..", "spatialCoverage": "Europe, Africa",
-        "variableMeasured": "Median change in round-trip fare (%)", "license": "https://creativecommons.org/licenses/by/4.0/"}, ensure_ascii=False) + "</script>"
+        "variableMeasured": "Median change in round-trip fare (%)",
+        "distribution": [{"@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": f"{DOMAIN}/en/price-index/data.csv"}],
+        "license": "https://creativecommons.org/licenses/by/4.0/"}, ensure_ascii=False) + "</script>"
     return build_i18n.write(SITE, "en/price-index", "en", "Escale Price Index: flights Europe – Africa, updated daily",
                             "Are flights to Africa getting more expensive? The median change in fares over 30 days, by region and departure country, computed daily. Open data (CC BY).",
                             hero, body, ld, {"fr": "indice-prix", "en": "en/price-index"}, ctx)
