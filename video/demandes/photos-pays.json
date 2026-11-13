@@ -1,19 +1,19 @@
 {
- "code": "devine",
+ "code": "couleurs",
  "lieux": {
-  "chefchaouen": "Chefchaouen blue street",
-  "chefchaouen2": "Chefchaouen medina",
-  "fuji": "Chureito pagoda Mount Fuji",
-  "fuji2": "Mount Fuji cherry blossom lake Kawaguchi",
-  "machu": "Machu Picchu",
-  "machu2": "Machu Picchu llama",
-  "basilique": "Basilique Notre-Dame de la Paix Yamoussoukro",
-  "basilique2": "Yamoussoukro basilica",
-  "gizeh": "Giza pyramids sphinx",
-  "goree": "Île de Gorée Sénégal",
-  "rio": "Christ the Redeemer Rio de Janeiro Sugarloaf"
+  "jaipur": "Hawa Mahal Jaipur",
+  "jaipur2": "Jaipur pink city gate street",
+  "izamal": "Izamal convent yellow",
+  "izamal2": "Izamal Yucatán yellow street",
+  "oia": "Oia Santorini",
+  "oia2": "Santorini blue dome church caldera",
+  "burano": "Burano colorful houses canal",
+  "burano2": "Burano island houses",
+  "bokaap": "Bo-Kaap Cape Town colourful houses",
+  "jodhpur": "Jodhpur blue city view from Mehrangarh",
+  "nyhavn": "Nyhavn Copenhagen"
  },
- "demande": "2026-11-13T08:50:48",
+ "demande": "2026-11-13T08:57:59",
  "largeur": 1920,
  "max": 5
 }
