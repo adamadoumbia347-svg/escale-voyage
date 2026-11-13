@@ -5,13 +5,13 @@ Une tâche planifiée de Claude ajoute une nouveauté au site tous les 2 jours, 
 
 ## Règles
 - Une seule nouveauté par passage, utile aux voyageurs et bonne pour Google, en 5 langues (fr, en, es, pt, ar).
-- Tourner entre les types, dans cet ordre : **guide pratique** → **nouveaux trajets** → **page hôtels d'une ville** → guide pratique…
+- Tourner entre les types : **guide pratique** → **page hôtels d'une ville** → guide pratique… Chaque guide répond à UNE question précise que la diaspora tape vraiment, avec la question dans le titre (depuis le 13 novembre 2026 : les pages qui répondent à une question précise montent dans Google, les pages trajets génériques restent loin ; plus de nouveaux trajets génériques sauf demande de Dobam).
 - Rien d'inventé : pas de prix, d'horaires ou de règles précises qu'on ne peut pas vérifier ; rester général et renvoyer aux sources officielles.
 - Toujours lancer `python3 scripts/build_pages.py` (et `node scripts/make_og.js` si de nouveaux trajets) avant d'envoyer.
 
 ## Idées en réserve
 - Guides : visa et passeport (généralités), voyager pendant le ramadan / la Tabaski,
-  assurance voyage, voyager enceinte,
+  assurance voyage,
   droits en cas de retard (règlement européen 261/2004), envoyer des colis au pays.
 - Trajets : nouvelles villes de départ (Toulouse vers l'Afrique de l'Ouest, Clermont-Ferrand, Amsterdam, Zurich… ; Milan est déjà couvert par les pages en italien) vers l'Afrique et le Maghreb.
 - Hôtels : Niamey, Ouagadougou, Nouakchott.
@@ -115,3 +115,4 @@ arrivent sur l'accueil. Trois endroits où la demande existait et où la page y 
 | 2026-11-13 | Indice des prix : série quotidienne téléchargeable en données libres (`/indice-prix/donnees.csv`, `/en/price-index/data.csv`, CC BY 4.0) : médianes par jour et par périmètre (ensemble, région d'arrivée, zone de départ), calculées par Escale, sans prix de trajet ni de vendeur ; lien sous l'indice et `distribution` dans les données structurées. Sert de base au dépôt sur les plateformes de données ouvertes |
 | 2026-11-13 | Message WhatsApp : liens cliquables (adresses complètes en https://, et adresse courte `/v/LYS-ALG` qui redirige vers la recherche préremplie, `src/worker.ts`), à la demande de Dobam : WhatsApp ne rendait cliquable ni « escale.live/… » sans https, ni la fin d'une adresse coupée après « ? » |
 | 2026-11-13 | Message WhatsApp, suite : l'e-mail du lundi et du jeudi a un bouton vert qui ouvre `/outils/whatsapp/?auto=1` (message préparé tout de suite, gros bouton « Copier le message » et lien vers la chaîne) ; la page outil écrit elle aussi des liens complets et courts (`https://escale.live/v/LYS-ALG`). Dobam n'arrivait pas à coller le message depuis l'e-mail |
+| 2026-11-13 | Reprise de la tâche « nouveauté tous les 2 jours » (arrêtée le 7 novembre, accès GitHub coupé) : guide « Prendre l'avion enceinte : jusqu'à quand peut-on voyager ? » en 5 langues (`/guides/avion-enceinte/`) — prochain : page hôtels |

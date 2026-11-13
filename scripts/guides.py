@@ -936,6 +936,139 @@ GUIDES = [
             ],
             note="نصائح عامة: إذا كانت لديك مشكلة صحية (الدورة الدموية، الحمل، علاج)، استشر طبيبك قبل الرحلات الطويلة."),
     },
+    {
+        "key": "enceinte",
+        "fr": dict(
+            slug="guides/avion-enceinte", title="Prendre l’avion enceinte : jusqu’à quand peut-on voyager ?",
+            desc="Certificat médical, terme de la grossesse, confort à bord, vaccins et assurance : ce qu’il faut vérifier avant de prendre l’avion enceinte vers l’Afrique ou ailleurs.",
+            intro="En général, on peut prendre l’avion pendant une grossesse qui se passe bien, mais chaque compagnie fixe ses propres limites en fin de grossesse. Vérifiez-les avant de réserver, et parlez du voyage à votre médecin ou à votre sage-femme.",
+            sections=[
+                ("Ce que demandent les compagnies", [
+                    "Chaque compagnie a ses règles. Beaucoup demandent un certificat médical récent à partir d’un certain terme, et refusent l’embarquement dans les dernières semaines de grossesse. Les limites sont souvent plus strictes pour une grossesse multiple.",
+                    "Lisez la page « femmes enceintes » ou « assistance médicale » de la compagnie avant de payer, pour l’aller comme pour le retour : c’est la date du vol retour qui pose le plus souvent problème.",
+                ]),
+                ("Avant de réserver", [
+                    "- Parlez du voyage à votre médecin ou à votre sage-femme : il ou elle saura si votre grossesse permet ce trajet et à quelle période.",
+                    "- Renseignez-vous sur les vaccins et traitements conseillés pour la destination : certains ne sont pas recommandés pendant la grossesse, d’où l’importance d’en parler avant.",
+                    "- Vérifiez que votre assurance voyage couvre la grossesse, les soins sur place et un éventuel rapatriement.",
+                    "- Préférez un billet modifiable : il sera plus simple de décaler le voyage si besoin.",
+                ]),
+                ("Pendant le vol", [
+                    "- Choisissez si possible un siège côté couloir pour vous lever facilement.",
+                    "- Buvez régulièrement, marchez un peu et bougez les jambes : demandez à votre médecin si des bas de contention sont conseillés pour vous.",
+                    "- Attachez la ceinture sous le ventre, au niveau des hanches.",
+                    "- Gardez dans le sac cabine votre dossier de grossesse, le certificat éventuel et vos médicaments.",
+                ]),
+                ("Sur place", [
+                    "Notez l’adresse d’une clinique ou d’un hôpital près de votre lieu de séjour, et gardez le numéro de votre assurance à portée de main.",
+                ]),
+            ],
+            note="Informations générales : elles ne remplacent pas l’avis de votre médecin ni les règles de votre compagnie, à vérifier avant chaque voyage."),
+        "en": dict(
+            slug="en/guides/flying-pregnant", title="Flying while pregnant: how late can you travel?",
+            desc="Medical certificate, stage of pregnancy, comfort on board, vaccines and insurance: what to check before flying while pregnant to Africa or elsewhere.",
+            intro="Flying during a healthy pregnancy is generally possible, but each airline sets its own limits late in pregnancy. Check them before booking, and talk to your doctor or midwife about the trip.",
+            sections=[
+                ("What airlines ask for", [
+                    "Each airline has its own rules. Many ask for a recent medical certificate from a certain stage, and refuse boarding in the last weeks of pregnancy. Limits are often stricter for a multiple pregnancy.",
+                    "Read the airline’s “pregnant passengers” or “medical assistance” page before paying, for the outbound and the return: the return date is the one that most often causes problems.",
+                ]),
+                ("Before booking", [
+                    "- Talk to your doctor or midwife about the trip: they will know whether your pregnancy allows it and when.",
+                    "- Ask about the vaccines and treatments advised for the destination: some are not recommended during pregnancy, so discuss it early.",
+                    "- Check that your travel insurance covers pregnancy, care abroad and possible repatriation.",
+                    "- Prefer a changeable ticket: it will be easier to move the trip if needed.",
+                ]),
+                ("During the flight", [
+                    "- If you can, choose an aisle seat so you can get up easily.",
+                    "- Drink regularly, walk a little and move your legs: ask your doctor whether compression stockings are advised for you.",
+                    "- Fasten the seatbelt below your bump, across your hips.",
+                    "- Keep your pregnancy notes, any certificate and your medication in your cabin bag.",
+                ]),
+                ("At your destination", [
+                    "Note the address of a clinic or hospital near where you are staying, and keep your insurer’s phone number to hand.",
+                ]),
+            ],
+            note="General information: it does not replace your doctor’s advice or your airline’s rules, which you should check before every trip."),
+        "es": dict(
+            slug="es/guias/volar-embarazada", title="Volar embarazada: ¿hasta cuándo se puede viajar?",
+            desc="Certificado médico, semanas de embarazo, comodidad a bordo, vacunas y seguro: qué revisar antes de volar embarazada a África o a otro destino.",
+            intro="En general se puede volar durante un embarazo sin complicaciones, pero cada aerolínea fija sus propios límites al final del embarazo. Consúltalos antes de reservar y habla del viaje con tu médico o tu matrona.",
+            sections=[
+                ("Lo que piden las aerolíneas", [
+                    "Cada aerolínea tiene sus normas. Muchas piden un certificado médico reciente a partir de cierta semana y no permiten embarcar en las últimas semanas de embarazo. Los límites suelen ser más estrictos en un embarazo múltiple.",
+                    "Lee la página «pasajeras embarazadas» o «asistencia médica» de la aerolínea antes de pagar, para la ida y la vuelta: la fecha de vuelta es la que más problemas da.",
+                ]),
+                ("Antes de reservar", [
+                    "- Habla del viaje con tu médico o tu matrona: sabrá si tu embarazo lo permite y en qué periodo.",
+                    "- Infórmate sobre las vacunas y tratamientos aconsejados para el destino: algunos no se recomiendan durante el embarazo, por eso conviene hablarlo antes.",
+                    "- Comprueba que tu seguro de viaje cubre el embarazo, la atención en destino y una posible repatriación.",
+                    "- Elige un billete modificable: será más fácil cambiar el viaje si hace falta.",
+                ]),
+                ("Durante el vuelo", [
+                    "- Si puedes, elige un asiento de pasillo para levantarte fácilmente.",
+                    "- Bebe con regularidad, camina un poco y mueve las piernas: pregunta a tu médico si te conviene usar medias de compresión.",
+                    "- Abróchate el cinturón por debajo de la barriga, a la altura de las caderas.",
+                    "- Lleva en el equipaje de mano tu historial del embarazo, el certificado si lo tienes y tus medicamentos.",
+                ]),
+                ("En destino", [
+                    "Anota la dirección de una clínica o un hospital cerca de tu alojamiento y ten a mano el teléfono de tu seguro.",
+                ]),
+            ],
+            note="Información general: no sustituye la opinión de tu médico ni las normas de tu aerolínea, que debes consultar antes de cada viaje."),
+        "pt": dict(
+            slug="pt/guias/voar-gravida", title="Voar grávida: até quando se pode viajar?",
+            desc="Atestado médico, semanas de gravidez, conforto a bordo, vacinas e seguro: o que verificar antes de voar grávida para África ou outro destino.",
+            intro="Em geral, é possível voar durante uma gravidez sem complicações, mas cada companhia fixa os seus próprios limites no fim da gravidez. Verifique-os antes de reservar e fale da viagem com o seu médico ou a sua parteira.",
+            sections=[
+                ("O que as companhias pedem", [
+                    "Cada companhia tem as suas regras. Muitas pedem um atestado médico recente a partir de certa semana e recusam o embarque nas últimas semanas de gravidez. Os limites costumam ser mais rigorosos numa gravidez múltipla.",
+                    "Leia a página «passageiras grávidas» ou «assistência médica» da companhia antes de pagar, para a ida e para o regresso: é a data do regresso que mais vezes causa problemas.",
+                ]),
+                ("Antes de reservar", [
+                    "- Fale da viagem com o seu médico ou a sua parteira: saberá se a gravidez o permite e em que período.",
+                    "- Informe-se sobre as vacinas e tratamentos aconselhados para o destino: alguns não são recomendados durante a gravidez, por isso fale disso antes.",
+                    "- Confirme que o seguro de viagem cobre a gravidez, os cuidados no local e um eventual repatriamento.",
+                    "- Prefira um bilhete alterável: será mais fácil mudar a viagem se for preciso.",
+                ]),
+                ("Durante o voo", [
+                    "- Se puder, escolha um lugar no corredor para se levantar facilmente.",
+                    "- Beba regularmente, ande um pouco e mexa as pernas: pergunte ao médico se as meias de compressão são aconselhadas no seu caso.",
+                    "- Aperte o cinto por baixo da barriga, à altura das ancas.",
+                    "- Leve na bagagem de mão o boletim da gravidez, o atestado se o tiver e os seus medicamentos.",
+                ]),
+                ("No destino", [
+                    "Anote a morada de uma clínica ou de um hospital perto do alojamento e tenha à mão o número do seguro.",
+                ]),
+            ],
+            note="Informação geral: não substitui o conselho do seu médico nem as regras da companhia, a confirmar antes de cada viagem."),
+        "ar": dict(
+            slug="ar/guides/flying-pregnant", title="السفر بالطائرة أثناء الحمل: حتى متى يمكن السفر؟",
+            desc="الشهادة الطبية، مرحلة الحمل، الراحة على متن الطائرة، اللقاحات والتأمين: ما يجب التحقق منه قبل السفر بالطائرة أثناء الحمل إلى أفريقيا أو غيرها.",
+            intro="يمكن عمومًا السفر بالطائرة خلال حمل طبيعي، لكن لكل شركة طيران حدودها الخاصة في الأسابيع الأخيرة من الحمل. تحقّقي منها قبل الحجز، وتحدّثي عن الرحلة مع طبيبك أو قابلتك.",
+            sections=[
+                ("ما تطلبه شركات الطيران", [
+                    "لكل شركة قواعدها. كثير منها يطلب شهادة طبية حديثة ابتداءً من مرحلة معينة، ويرفض الصعود في الأسابيع الأخيرة من الحمل. وتكون الحدود غالبًا أشد في حالة الحمل بأكثر من جنين.",
+                    "اقرئي صفحة «المسافرات الحوامل» أو «المساعدة الطبية» لدى الشركة قبل الدفع، لرحلة الذهاب والعودة معًا: تاريخ العودة هو الذي يسبب المشاكل غالبًا.",
+                ]),
+                ("قبل الحجز", [
+                    "- تحدّثي عن الرحلة مع طبيبك أو قابلتك: سيعرف إن كان حملك يسمح بها ومتى.",
+                    "- استعلمي عن اللقاحات والعلاجات الموصى بها للوجهة: بعضها غير موصى به أثناء الحمل، لذا ناقشي الأمر مبكرًا.",
+                    "- تأكدي أن تأمين السفر يغطي الحمل والعلاج في البلد وإمكانية الإعادة إلى الوطن.",
+                    "- فضّلي تذكرة قابلة للتعديل: سيكون تغيير موعد الرحلة أسهل عند الحاجة.",
+                ]),
+                ("أثناء الرحلة", [
+                    "- اختاري إن أمكن مقعدًا بجانب الممر لتنهضي بسهولة.",
+                    "- اشربي بانتظام وامشي قليلًا وحرّكي ساقيك: اسألي طبيبك إن كانت الجوارب الضاغطة مناسبة لك.",
+                    "- اربطي حزام الأمان تحت البطن، عند مستوى الوركين.",
+                    "- احتفظي في حقيبة اليد بملف الحمل والشهادة إن وُجدت وأدويتك.",
+                ]),
+                ("في الوجهة", [
+                    "دوّني عنوان عيادة أو مستشفى قريب من مكان إقامتك، واحتفظي برقم التأمين في متناول يدك.",
+                ]),
+            ],
+            note="معلومات عامة: لا تغني عن رأي طبيبك ولا عن قواعد شركة الطيران، التي يجب التحقق منها قبل كل رحلة."),
+    },
 ]
 
 INDEX = {
