@@ -1043,6 +1043,8 @@ a { text-underline-offset: 3px; }
 .board::after { width: 190px; height: 190px; background: var(--second-clair); bottom: -90px; left: -70px; }
 /* Ruban de pays qui défile (accueil) */
 .ruban { overflow: hidden; padding: 14px 0; border-block: 1px solid var(--line); background: var(--soft); margin: 26px 0 6px; mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+/* Le défilement se fait toujours de gauche à droite, même sur les pages en arabe (le texte de chaque pastille garde son sens) */
+.ruban { direction: ltr; }
 .ruban .piste { display: flex; gap: 12px; width: max-content; }
 .ruban a { white-space: nowrap; text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); padding: 8px 16px; border-radius: 999px; font-weight: 700; font-size: .95rem; transition: background .2s, color .2s; }
 .ruban a:hover { background: var(--teal); color: var(--teal-ink); }
@@ -1059,6 +1061,11 @@ a { text-underline-offset: 3px; }
 .sp-plus .ruban { margin: 8px -16px 0; }
 /* Les outils qui n'existent qu'en français ne sont proposés qu'aux lecteurs du français */
 html:not([lang="fr"]) .ruban [data-only="fr"] { display: none; }
+/* Accueil : ruban des nouveautés sous le moteur de recherche (sur la photo), message de saison en bas de page */
+.band .hero > .ruban.nv-hero:not(.hero-bg) { order: 3; margin-top: 14px; margin-bottom: 0; }
+.ruban .rb-t { white-space: nowrap; padding: 7px 14px; border-radius: 999px; background: #ffd166; color: #10262b; font-weight: 800; font-size: .95rem; }
+.saison-bas .hero-season { margin: 40px 0 0; }
+.saison-bas .hero-season a { display: block; padding: 14px 16px; border-radius: 18px; background: var(--mint); border: 1px solid var(--line); color: var(--ink); font: 700 16px/1.4 var(--f-body); -webkit-backdrop-filter: none; backdrop-filter: none; }
 /* Barre de lecture, bouton « haut », apparitions */
 .mo-bar { height: 4px; }
 .haut { position: fixed; right: 16px; bottom: 156px; z-index: 45; width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: 1.2rem; cursor: pointer; box-shadow: var(--shadow); opacity: 0; transform: translateY(20px) scale(.8); pointer-events: none; transition: opacity .3s, transform .4s var(--ressort); }

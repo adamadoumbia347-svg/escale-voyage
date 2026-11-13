@@ -950,7 +950,7 @@ def main():
                  + f'>{x["flag"]} {E(x["nom"]["fr"])}</span></a>' for x in _vl)
     if rb:
         rb = ('<div class="ruban" aria-label="Pays à explorer"><div class="piste">' + rb + rb.replace("<a ", '<a tabindex="-1" aria-hidden="true" ') + "</div></div>")
-    # Bas de l'accueil : deux rubans qui défilent, les nouveautés puis les pays (demande de Dobam, 13 novembre 2026)
+    # Accueil : ruban des nouveautés sous le moteur de recherche, ruban des pays en bas de page (demandes de Dobam, 13 novembre 2026)
     _vb = {l: "/" + visiter.BASE[l] + "/" for l in ("fr", "en", "it")}
     _sub = lambda cle, anc="": {l: _vb[l] + visiter.SUB[cle][l] + "/" + anc for l in _vb}
     NOUV = [("🎯 Jeu : devine le pays", "🎯 Game: guess the country", _sub("jeu")), ("⚖️ Comparer deux pays", "⚖️ Compare two countries", _sub("comparer")),
@@ -969,8 +969,11 @@ def main():
     nv1 = "".join(_a(*x) for x in NOUV)
     nv2 = "".join(f'<a href="{x["href"]["fr"]}" data-hrefs="{_jh(x["href"])}"><span data-en="{E(x["flag"] + " " + x["nom"].get("en", x["nom"]["fr"]))}"' + (f' data-it="{E(x["flag"] + " " + x["nom"]["it"])}"' if "it" in x["nom"] else "")
                   + f'>{x["flag"]} {E(x["nom"]["fr"])}</span></a>' for x in _vl) + _a("🌍 Tous les pays", "🌍 All countries", _vb)
+    # Les nouveautés défilent sous le moteur de recherche (à la place du message de saison, descendu en bas de page) ; en bas, les pays
+    nvh = ('<div class="ruban court inv nv-hero" aria-label="Nouveautés"><div class="piste"><span class="rb-t" data-en="✨ New">✨ Nouveautés</span>' + nv1
+           + '<span class="rb-t" aria-hidden="true" data-en="✨ New">✨ Nouveautés</span>' + nv1.replace("<a ", '<a tabindex="-1" aria-hidden="true" ') + "</div></div>") if _vl else ""
+    s = re.sub(r"<!-- NOUV-HAUT:START -->.*?<!-- NOUV-HAUT:END -->", lambda m: "<!-- NOUV-HAUT:START -->\n" + nvh + "\n<!-- NOUV-HAUT:END -->", s, flags=re.S)
     nv = ('<section class="block sp-plus" id="nouveautes" aria-labelledby="nv-h"><h2 id="nv-h" data-en="Feel like exploring?">Envie d\'explorer ?</h2>'
-          '<p class="rb-l" data-en="New on Escale">Les nouveautés d\'Escale</p><div class="ruban court" aria-label="Nouveautés">' + _piste(nv1) + '</div>'
           '<p class="rb-l" data-en="Countries, with their cities and places to see">Les pays, avec leurs villes et leurs lieux à voir</p><div class="ruban inv" aria-label="Pays à explorer">' + _piste(nv2) + '</div></section>') if _vl else ""
     s = re.sub(r"<!-- NOUVEAUTES:START -->.*?<!-- NOUVEAUTES:END -->", lambda m: "<!-- NOUVEAUTES:START -->\n  " + nv + "\n  <!-- NOUVEAUTES:END -->", s, flags=re.S)
     s = re.sub(r"<!-- RUBAN:START -->.*?<!-- RUBAN:END -->", lambda m: "<!-- RUBAN:START -->\n    " + rb + "\n    <!-- RUBAN:END -->", s, flags=re.S)
