@@ -803,8 +803,11 @@ def langue_auto(site):
         u = LANGUE_RX.sub("", t)  # ancienne version (fichier séparé ou copie précédente) retirée
         # Recherches préremplies : les robots n'ont pas à suivre ces liens (déjà interdits dans robots.txt, 35 % des appels au Worker le 13/11/2026)
         u = NOFOLLOW_RX.sub(r'<a rel="nofollow" \1', u)
-        # Polices du haut de page demandées dès le début (sinon le navigateur ne les découvre qu'après la feuille de style : texte retardé)
-        if "rel=\"preload\" as=\"font\"" not in u and ' lang="ar"' not in u[:300]:
+        # Polices du haut de page demandées dès le début du chargement, sur les accueils seulement
+        # Mesuré le 13/11/2026 : utile sur les accueils (feuille de style dans la page : premier affichage 0,3 s plus tôt), mais sur les
+        # autres pages les polices passent devant pages.css et retardent le premier texte de 0,15 s : on ne précharge donc que là.
+        u = u.replace(FONT_PRELOAD, "")
+        if 'href="/pages.css' not in u and ' lang="ar"' not in u[:300]:
             u = VIEWPORT_RX.sub(lambda m: m.group(0) + FONT_PRELOAD, u, 1)
         if "hreflang=" in u:
             u = u.replace("</head>", tag + "\n</head>", 1)
