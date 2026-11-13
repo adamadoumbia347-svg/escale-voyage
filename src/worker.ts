@@ -43,7 +43,7 @@ import * as gains from "./gains"
 
 const API: Record<string, any> = { push, prix, explore, calendar, deals, geo, alert, form, admin, cron, populaires, ruban, clic, fx, grille, weekends, verdict: verdictApi, connus: accueil, compteur, paye, aeroport: aeroApi, gains }
 
-export default {
+const escale = {
   async fetch(request: Request, env: Env & { ASSETS: { fetch: (r: Request) => Promise<Response> } }, ctx: { waitUntil: (p: Promise<any>) => void }) {
     const c: Ctx = { request, env, waitUntil: (p) => ctx.waitUntil(p), next: () => env.ASSETS.fetch(request) }
     const path = new URL(request.url).pathname
@@ -106,4 +106,21 @@ export default {
     // Le lundi seulement : e-mail des bons plans aux inscrits (une fois par semaine au plus)
     if (day === 1) ctx.waitUntil(sendNewsletter(env).then((r) => console.log("bons plans par e-mail", JSON.stringify(r))))
   },
+}
+
+// Diagnostic de consommation : une requête envoyée avec l'en-tête « X-Escale-Diag: 1 » reçoit en retour, dans « X-Escale-KV »,
+// le nombre d'opérations KV qu'elle a coûtées (lectures, écritures, listes, suppressions), tâches de fond comprises.
+// Sans cet en-tête, rien ne change. Sert à savoir quelles pages consomment le quota gratuit de KV (100 000 lectures par jour).
+export default {
+  async fetch(request: Request, env: any, ctx: { waitUntil: (p: Promise<any>) => void }) {
+    if (request.headers.get("X-Escale-Diag") !== "1" || !env.ESCALE) return escale.fetch(request, env, ctx)
+    const n: Record<string, number> = { get: 0, put: 0, list: 0, delete: 0 }, fond: Promise<any>[] = []
+    const kv = new Proxy(env.ESCALE, { get: (t: any, k: string) => (typeof t[k] === "function" ? (...a: any[]) => { if (k in n) n[k]++; return t[k](...a) } : t[k]) })
+    const r = await escale.fetch(request, { ...env, ESCALE: kv }, { waitUntil: (p) => { fond.push(Promise.resolve(p).catch(() => {})); ctx.waitUntil(p) } })
+    await Promise.race([Promise.all(fond), new Promise((ok) => setTimeout(ok, 8000))])
+    const h = new Headers(r.headers)
+    h.set("X-Escale-KV", `get=${n.get} put=${n.put} list=${n.list} delete=${n.delete}`)
+    return new Response(r.body, { status: r.status, headers: h })
+  },
+  scheduled: escale.scheduled,
 }
