@@ -60,3 +60,12 @@ Une tâche planifiée de Claude ajoute une nouveauté au site tous les 2 jours, 
 - « Que visiter » : les cartes annoncent 70 % de la largeur d'écran (version 640 px sur les téléphones courants) ; les photos d'ouverture ont une
   version 820 px (`<clé>-820.webp`, à créer pour tout nouveau pays : PIL, largeur 820, qualité 66).
 - Animations décoratives (formes du haut de page, avion du logo) : quelques secondes puis repos.
+
+## 13 novembre 2026 : copie de secours des relevés (alerte « erreur serveur 5xx » de Google)
+- Le 12 novembre, la Search Console a signalé des « erreurs serveur (5xx) » sur des pages du sitemap. Cause : le 11 novembre, le quota
+  gratuit de KV a été dépassé (100 000 lectures à 15 h 32 UTC, puis écritures et listes) ; jusqu'à minuit UTC, les pages écrites à partir
+  des relevés (245 pages « bons plans » par ville et par mois, « à saisir » en français et en anglais) ont répondu 503.
+- src/lot.ts : la copie groupée des relevés est aussi gardée 30 heures dans le cache de chaque centre de données (`__lot/v1/secours`).
+  Si KV refuse les lectures, ces pages continuent d'afficher le relevé du matin au lieu de répondre 503. Sans copie (centre de données
+  qui n'a pas vu les relevés depuis 30 heures), la réponse reste 503 avec « Retry-After ».
+- Contrôle du 13 novembre : les 245 adresses de /barometre-prix/plan.xml et 11 autres pages écrites par le serveur répondent 200.
