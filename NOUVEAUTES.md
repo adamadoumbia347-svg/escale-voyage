@@ -69,3 +69,17 @@ Une tâche planifiée de Claude ajoute une nouveauté au site tous les 2 jours, 
   Si KV refuse les lectures, ces pages continuent d'afficher le relevé du matin au lieu de répondre 503. Sans copie (centre de données
   qui n'a pas vu les relevés depuis 30 heures), la réponse reste 503 avec « Retry-After ».
 - Contrôle du 13 novembre : les 245 adresses de /barometre-prix/plan.xml et 11 autres pages écrites par le serveur répondent 200.
+
+## 13 novembre 2026 : consommation Cloudflare mesurée, lectures KV des pages trajets supprimées
+- Mesure sur 24 heures (journaux du Worker, API Cloudflare) : 22 900 appels du Worker (plafond gratuit : 100 000 par jour), dont 41 % de
+  pages trajets et 35 % d'accueil avec une recherche préremplie (`/?type=vols&from=…`, presque uniquement des robots). Plus de la moitié
+  des appels viennent de robots (Yandex 17 %, aperçus Meta, Bing, Semrush, Amazon, Exa, MJ12…). KV : 35 600 lectures (plafond 100 000),
+  531 écritures (plafond 1 000), 25 listes.
+- Diagnostic : une requête envoyée avec l'en-tête `X-Escale-Diag: 1` reçoit dans `X-Escale-KV` le détail des opérations KV qu'elle a
+  coûtées (src/worker.ts). Sans cet en-tête, rien ne change.
+- Pages trajets : la clé `paye:FROM-TO` n'est lue que si le trajet a une déclaration (inventaire gardé 10 minutes, src/api/paye.ts) ;
+  le relevé « léger » lu dans KV est gardé 30 minutes dans le cache du centre de données (src/bonsplans.ts) ; les prix par mois ne sont
+  plus revérifiés quand le relevé de la nuit les a déjà écrits (copie groupée). Une page d'un trajet suivi passe de 3 ou 4 lectures à 1,
+  une page d'un trajet non suivi de 1 ou 2 lectures à 0.
+- `/api/verdict` (« Acheter ou attendre ? ») : 1 lecture (copie groupée) au lieu de 90 à chaque calcul.
+- À surveiller : les écritures (531 sur 1 000 par jour) : relevé de la nuit, une écriture par trajet suivi et par jour, compteur de clics.

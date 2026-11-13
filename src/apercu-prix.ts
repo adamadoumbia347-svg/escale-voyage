@@ -3,7 +3,8 @@ import * as paye from "./paye"
 import * as partage from "./partage"
 import * as autresVilles from "./autres-villes"
 import * as bonsplans from "./bonsplans"
-import { readPaid } from "./api/paye"
+import { readPaidPage } from "./api/paye"
+import { lot } from "./lot"
 // Pages trajets : les prix réels sont écrits directement dans la page, pour les visiteurs comme pour Google
 // (avant, ils n'apparaissaient qu'après le chargement, via route-prices.js, et les moteurs de recherche ne les voyaient pas).
 // - titre, description et aperçu des liens partagés : « … · dès 389 € »
@@ -360,7 +361,7 @@ export const onRequest = async (ctx: Ctx) => {
     if (!route) return new Response(await fillHub(ctx, html), { status: response.status, headers })
     // « Ce que les voyageurs ont vraiment payé » (src/paye.ts), juste après la section des prix
     const lang = (html.match(/<html lang="([a-z]{2})"/) || [])[1] || "fr"
-    const paid = paye.render(lang, route[1], route[2], paye.stats(await readPaid(env, route[1], route[2])))
+    const paid = paye.render(lang, route[1], route[2], paye.stats(await readPaidPage(ctx, route[1], route[2])))
     const at = html.indexOf("</section>", html.indexOf('id="route-prices"'))
     // puis « Envoyer ce prix à la famille » et l'inscription aux bons plans du lundi (src/partage.ts)
     // « Depuis une autre ville » (src/autres-villes.ts) : jamais plus de 300 ms d'attente, sinon la page part sans ce bloc
@@ -371,7 +372,9 @@ export const onRequest = async (ctx: Ctx) => {
     if (rows === undefined) ctx.waitUntil(job) // trop lent : la page part sans les prix, le cache se remplit pour la visite suivante
     if (!rows || !rows.length) return new Response(html, { status: response.status, headers })
     // Prix par mois du jour pour les pages « bons plans » (une écriture par trajet et par jour au plus)
-    ctx.waitUntil(saveMonths(env, route[1], route[2], rows).catch(() => {}))
+    // Trajets du baromètre : le relevé de la nuit les a déjà écrits, la copie groupée (src/lot.ts) le dit sans lecture KV de plus
+    const deja = await lot(ctx).then((L) => L.m[`${route[1]}-${route[2]}`]?.d === new Date().toISOString().slice(0, 10)).catch(() => false)
+    if (!deja) ctx.waitUntil(saveMonths(env, route[1], route[2], rows).catch(() => {}))
     const [hist, age] = await Promise.all([readHistory(ctx, route[1], route[2]), priceAge(route[1], route[2])])
     return new Response(render(html, route[1], route[2], rows, hist, age), { status: response.status, headers })
   } catch (e) {

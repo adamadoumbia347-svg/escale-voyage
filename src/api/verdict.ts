@@ -1,12 +1,15 @@
 import { Ctx, json, edgeCached } from "../_lib/common"
-import { readHistory, verdict } from "../apercu-prix"
+import { verdict } from "../apercu-prix"
+import { lot } from "../lot"
 import { ROUTES } from "../barometre"
 // « Acheter maintenant ou attendre ? » : pour chaque grand trajet du baromètre, le dernier prix relevé (le plus bas des
 // 6 prochains mois), comparé à la médiane des 60 derniers jours (verdict d'apercu-prix.ts) + les 45 derniers relevés.
-// GET /api/verdict — gardé 1 heure.
+// GET /api/verdict — gardé 1 heure. Les historiques viennent de la copie groupée des relevés (src/lot.ts) : une lecture KV au plus,
+// au lieu d'une par trajet (90 lectures à chaque calcul jusqu'au 13 novembre 2026).
 export const onRequestGet = (ctx: Ctx) => edgeCached(ctx, 3600, async () => {
+  const L = await lot(ctx)
   const items = (await Promise.all(ROUTES.map(async ([from, to, label, path]) => {
-    const hist = await readHistory(ctx, from, to)
+    const hist = L.h[`${from}-${to}`] || []
     if (!hist.length) return null
     const last = hist[hist.length - 1]
     const v = verdict(hist, last[1])

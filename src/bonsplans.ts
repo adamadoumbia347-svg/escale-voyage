@@ -62,11 +62,21 @@ export async function snapshot(ctx: Ctx): Promise<Snap> {
   return s
 }
 // Copie déjà prête du relevé (cache, sinon la clé KV si elle date de moins de 26 heures) : deux opérations au plus, jamais de calcul
+// La copie lue dans KV est gardée 30 minutes dans le cache du centre de données, sous une adresse à part (celle de snapshot() reste
+// réservée au calcul frais). Avant le 13 novembre 2026, chaque visite d'une page trajet relisait la clé KV dans les centres de
+// données où aucune page « bons plans » n'avait été vue dans l'heure : plusieurs milliers de lectures par jour, surtout des robots.
+const legerReq = () => new Request("https://escale.live/__bonsplans/v4/leger")
+let legerMemo: { s: Snap | null; at: number } | null = null
 export async function snapshotLeger(ctx: Ctx): Promise<Snap | null> {
   const cache = (globalThis as any).caches?.default
   if (cache) { const hit = await cache.match(cacheReq()); if (hit) return hit.json() }
+  if (legerMemo && Date.now() - legerMemo.at < 300e3) return legerMemo.s
+  if (cache) { const hit = await cache.match(legerReq()).catch(() => null); if (hit) { const s = (await hit.json().catch(() => null)) as Snap | null; if (s) { legerMemo = { s, at: Date.now() }; return s } } }
   const garde = ctx.env.ESCALE ? ((await ctx.env.ESCALE.get(SNAP_KEY, "json").catch(() => null)) as (Snap & { ts?: number }) | null) : null
-  return garde && garde.ts && Date.now() - garde.ts < 26 * 3600e3 ? { date: garde.date, rows: garde.rows } : null
+  const s = garde && garde.ts && Date.now() - garde.ts < 26 * 3600e3 ? { date: garde.date, rows: garde.rows } : null
+  legerMemo = { s, at: Date.now() }
+  if (cache && s) ctx.waitUntil(Promise.resolve(cache.put(legerReq(), new Response(JSON.stringify(s), { headers: { "Cache-Control": "public, max-age=1800" } }))).catch(() => {}))
+  return s
 }
 
 

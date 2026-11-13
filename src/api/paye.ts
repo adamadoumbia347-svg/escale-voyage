@@ -1,4 +1,4 @@
-import { Ctx, IATA, MONTH, json } from "../_lib/common"
+import { Ctx, IATA, MONTH, json, keysOf } from "../_lib/common"
 import { KEY, MAX_KEEP, Paid, stats } from "../paye"
 // Prix réellement payés par les voyageurs (bloc « Ce que les voyageurs ont vraiment payé » des pages trajets, src/paye.ts).
 // POST /api/paye {from,to,prix,compagnie,mois} : ajoute une déclaration anonyme (1 par jour et par adresse IP pour un même trajet).
@@ -16,6 +16,34 @@ export async function readPaid(env: any, from: string, to: string): Promise<Paid
   try { return ((await env.ESCALE.get(KEY(from, to), "json")) as Paid[]) || [] } catch { return [] }
 }
 
+// Trajets qui ont au moins une déclaration. Liste gardée 10 minutes (mémoire du processus, puis cache du centre de données) et tirée
+// de l'inventaire des clés « paye: » (keysOf : une clé KV, refaite toutes les 6 heures). Avant le 13 novembre 2026, chaque visite
+// d'une page trajet lisait la clé paye:FROM-TO, presque toujours vide : environ 9 000 lectures KV par jour, surtout des robots.
+let declares: { s: Set<string>; at: number } | null = null
+export async function trajetsDeclares(ctx: Ctx): Promise<Set<string>> {
+  if (declares && Date.now() - declares.at < 600e3) return declares.s
+  const cache = (globalThis as any).caches?.default, req = new Request("https://escale.live/__paye/idx/v1")
+  let keys: string[] | null = null
+  if (cache) { const hit = await cache.match(req).catch(() => null); if (hit) keys = (await hit.json().catch(() => null)) as string[] | null }
+  if (!Array.isArray(keys)) {
+    keys = await keysOf(ctx.env, "paye:", ctx.waitUntil)
+    if (cache) ctx.waitUntil(Promise.resolve(cache.put(req, new Response(JSON.stringify(keys), { headers: { "Cache-Control": "public, max-age=600" } }))).catch(() => {}))
+  }
+  declares = { s: new Set(keys), at: Date.now() }
+  return declares.s
+}
+// Déclarations d'un trajet pour sa page : lecture KV seulement s'il figure dans la liste (en cas de doute, lecture directe)
+export async function readPaidPage(ctx: Ctx, from: string, to: string): Promise<Paid[]> {
+  const connus = await trajetsDeclares(ctx).catch(() => null)
+  return !connus || connus.has(KEY(from, to)) ? readPaid(ctx.env, from, to) : []
+}
+// Nouvelle déclaration : le trajet est ajouté tout de suite à l'inventaire (sinon son bloc n'apparaîtrait qu'au prochain inventaire)
+async function noterDeclare(env: any, key: string) {
+  const ik = "idx:paye:", cur = (await env.ESCALE.get(ik, "json").catch(() => null)) as { ts: number; keys: string[] } | null
+  if (cur && Array.isArray(cur.keys) && !cur.keys.includes(key)) await env.ESCALE.put(ik, JSON.stringify({ ts: cur.ts, keys: [...cur.keys, key] })).catch(() => {})
+  declares = null
+}
+
 export const onRequestGet = async ({ request, env }: Ctx) => {
   const q = new URL(request.url).searchParams
   const from = (q.get("from") || "").toUpperCase(), to = (q.get("to") || "").toUpperCase()
@@ -24,7 +52,7 @@ export const onRequestGet = async ({ request, env }: Ctx) => {
   return json({ from, to, stats: s }, { headers: { "Cache-Control": "public, max-age=600" } })
 }
 
-export const onRequestPost = async ({ request, env }: Ctx) => {
+export const onRequestPost = async ({ request, env, waitUntil }: Ctx) => {
   let d: Record<string, string> = {}
   try {
     if ((request.headers.get("content-type") || "").includes("application/json")) d = await request.json() as Record<string, string>
@@ -46,5 +74,6 @@ export const onRequestPost = async ({ request, env }: Ctx) => {
     env.ESCALE.put(KEY(from, to), JSON.stringify(list.slice(-MAX_KEEP))),
     env.ESCALE.put(ik, "1", { expirationTtl: 86400 }),
   ])
+  waitUntil(noterDeclare(env, KEY(from, to)).catch(() => {}))
   return json({ ok: true, n: list.length })
 }
