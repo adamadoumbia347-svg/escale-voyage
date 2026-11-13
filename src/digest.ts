@@ -182,7 +182,9 @@ export async function sendDigest(env: Env) {
   const st = await weeklyStats(env).catch(() => null)
   const html = `<div style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:640px;color:#0d1b2e">` +
     `<h2 style="margin:0 0 8px">Message WhatsApp à coller dans la chaîne</h2>` +
-    `<p>1. Sélectionnez le texte dans le cadre et copiez-le.<br>2. WhatsApp → Actualités → chaîne Escale → collez → envoyez.</p>` +
+    `<p style="margin:14px 0"><a href="${siteUrl(env)}/outils/whatsapp/?auto=1" style="display:inline-block;background:#0b8577;color:#fff;text-decoration:none;font-weight:700;font-size:17px;padding:14px 20px;border-radius:12px">📋 Ouvrir le message avec le bouton « Copier »</a></p>` +
+    `<p>1. Touchez le bouton vert ci-dessus : le message s'ouvre sur Escale, avec un bouton « Copier ».<br>2. WhatsApp → Actualités → chaîne Escale → collez → envoyez.</p>` +
+    `<p style="color:#5b6b80;font-size:13px">Le même message, si vous préférez le sélectionner à la main :</p>` +
     `<pre style="white-space:pre-wrap;font:15px/1.5 system-ui,sans-serif;background:#f3f6fa;border:1px solid #dde3ec;border-radius:10px;padding:14px">${esc(m.text)}</pre>` +
     `<p><a href="${CHANNEL}">Ouvrir la chaîne WhatsApp</a> · <a href="${siteUrl(env)}/outils/whatsapp/">Préparer un autre message (Lyon, Marseille, Bruxelles…)</a></p>` +
     (st ? statsHtml(st) : "") +
