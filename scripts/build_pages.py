@@ -785,6 +785,11 @@ def _langue_inline(site):
 NOFOLLOW_RX = re.compile(r'<a (?![^>]*\brel=)([^>]*href="/\?type=)')
 
 
+VIEWPORT_RX = re.compile(r'<meta name="viewport"[^>]*>')
+FONT_PRELOAD = "".join(f'\n<link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/{f}">'
+                       for f in ("nunito-latin-166202.woff2", "fraunces-600-latin-77ea58.woff2", "fraunces-italic-600-latin-d23b87.woff2"))
+
+
 def langue_auto(site):
     n = 0
     tag = _langue_inline(site)
@@ -798,6 +803,9 @@ def langue_auto(site):
         u = LANGUE_RX.sub("", t)  # ancienne version (fichier séparé ou copie précédente) retirée
         # Recherches préremplies : les robots n'ont pas à suivre ces liens (déjà interdits dans robots.txt, 35 % des appels au Worker le 13/11/2026)
         u = NOFOLLOW_RX.sub(r'<a rel="nofollow" \1', u)
+        # Polices du haut de page demandées dès le début (sinon le navigateur ne les découvre qu'après la feuille de style : texte retardé)
+        if "rel=\"preload\" as=\"font\"" not in u and ' lang="ar"' not in u[:300]:
+            u = VIEWPORT_RX.sub(lambda m: m.group(0) + FONT_PRELOAD, u, 1)
         if "hreflang=" in u:
             u = u.replace("</head>", tag + "\n</head>", 1)
             n += 1
@@ -1059,6 +1067,9 @@ def main():
     print("liens Noël en/it :", fetes_intl.link_pages(SITE, XMAS_LINKS))
     lite_mode(SITE)
     print(f"langue automatique : {langue_auto(SITE)} pages")
+    _acc = SITE / "index.html"; _t = _acc.read_text(encoding="utf-8")  # l'accueil n'est pas dans la boucle ci-dessus
+    if 'rel="preload" as="font"' not in _t:
+        _acc.write_text(VIEWPORT_RX.sub(lambda m: m.group(0) + FONT_PRELOAD, _t, 1), encoding="utf-8")
     bust_cache(SITE)
     print(f"{len(urls)} pages dans le sitemap")
 

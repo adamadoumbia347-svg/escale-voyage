@@ -38,6 +38,22 @@ export async function readHistory(ctx: Ctx, from: string, to: string): Promise<P
   try { return ((await ctx.env.ESCALE.get(`hist:${from}-${to}`, "json")) as Point[]) || [] } catch { return [] }
 }
 
+// Pages trajets : l'historique ne change qu'une fois par jour, mais chaque visite le relisait dans KV (une lecture par page vue,
+// mesuré le 13 novembre 2026). Il est gardé 30 minutes dans le cache du centre de données (hors KV, sans quota).
+const histReq = (from: string, to: string) => new Request(`https://escale.live/__hist/v1/${from}-${to}`)
+const histPut = (ctx: Ctx, from: string, to: string, hist: Point[]) => {
+  const cache = (globalThis as any).caches?.default
+  if (cache && hist.length) ctx.waitUntil(Promise.resolve(cache.put(histReq(from, to), new Response(JSON.stringify(hist), { headers: { "Cache-Control": "public, max-age=1800" } }))).catch(() => {}))
+}
+export async function readHistoryCached(ctx: Ctx, from: string, to: string): Promise<Point[]> {
+  if (!ctx.env.ESCALE || !TRACKED.has(`${from}-${to}`)) return []
+  const cache = (globalThis as any).caches?.default
+  if (cache) { const hit = await cache.match(histReq(from, to)).catch(() => null); if (hit) { const h = (await hit.json().catch(() => null)) as Point[] | null; if (Array.isArray(h)) return h } }
+  const hist = await readHistory(ctx, from, to)
+  histPut(ctx, from, to, hist)
+  return hist
+}
+
 // Prix par mois (mois:FROM-TO) : gardés une fois par jour pour les trajets suivis, pour les pages « bons plans par mois »
 // (src/bonsplans.ts). Écrit au relevé de la nuit, ou à la première visite du jour d'une page trajet.
 export type Saved = { d: string; rows: Month[] }
@@ -61,6 +77,7 @@ async function recordHistory(ctx: Ctx, from: string, to: string, price: number, 
   if (last && last[0] === today) { if (last[2]) return; last[2] = month } // relevé du jour déjà fait (on complète le mois s'il manquait)
   else hist.push([today, Math.round(price), month])
   await ctx.env.ESCALE.put(`hist:${from}-${to}`, JSON.stringify(hist.slice(-HIST_DAYS)))
+  histPut(ctx, from, to, hist.slice(-HIST_DAYS))
 }
 
 // « Plus bas depuis 30 jours » : le prix du jour est inférieur ou égal à tous les prix relevés les 30 jours précédents (au moins 14 jours de relevés)
@@ -375,7 +392,7 @@ export const onRequest = async (ctx: Ctx) => {
     // Trajets du baromètre : le relevé de la nuit les a déjà écrits, la copie groupée (src/lot.ts) le dit sans lecture KV de plus
     const deja = await lot(ctx).then((L) => L.m[`${route[1]}-${route[2]}`]?.d === new Date().toISOString().slice(0, 10)).catch(() => false)
     if (!deja) ctx.waitUntil(saveMonths(env, route[1], route[2], rows).catch(() => {}))
-    const [hist, age] = await Promise.all([readHistory(ctx, route[1], route[2]), priceAge(route[1], route[2])])
+    const [hist, age] = await Promise.all([readHistoryCached(ctx, route[1], route[2]), priceAge(route[1], route[2])])
     return new Response(render(html, route[1], route[2], rows, hist, age), { status: response.status, headers })
   } catch (e) {
     headers.set("X-Escale-Repli", String((e as any)?.message || e).slice(0, 120).replace(/[^\x20-\x7e]/g, "?"))
