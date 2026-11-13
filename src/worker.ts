@@ -55,6 +55,9 @@ const escale = {
       if (!handler) return json({ error: "Méthode non autorisée" }, { status: 405 })
       return handler(c)
     }
+    // Adresse courte d'une recherche préremplie, pour les messages WhatsApp : /v/LYS-ALG (ou /v/LYS-ALG-en) -> /?type=vols&from=LYS&to=ALG
+    const court = path.match(/^\/v\/([A-Za-z]{3})-([A-Za-z]{3})(?:-([a-z]{2}))?\/?$/)
+    if (court) return new Response(null, { status: 302, headers: { Location: `/?type=vols&from=${court[1].toUpperCase()}&to=${court[2].toUpperCase()}${court[3] ? "&lang=" + court[3] : ""}`, "X-Robots-Tag": "noindex", "Cache-Control": "public, max-age=3600" } })
     // Bons plans par ville de départ et par mois (src/bonsplans.ts) : pages écrites par le serveur à partir des relevés
     if (/^\/barometre-prix\/actus(\/|$)/.test(path)) return actus.onRequest(c)
     if (bonsplans.ROUTE.test(path) || path === "/barometre-prix/plan.xml") return bonsplans.onRequest(c)

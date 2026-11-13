@@ -4,6 +4,7 @@ Disallow: /api/
 Disallow: /admin/
 Disallow: /recherche/?
 Disallow: /?type=
+Disallow: /v/
 Disallow: /hotels-en-direct/?
 
 Sitemap: https://escale.live/sitemap.xml

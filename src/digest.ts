@@ -110,7 +110,9 @@ export async function buildMessage(env: Env, lang = "fr", origin = "CDG") {
     return { city, flag, path, price, best, trend, from, to, low: isLow30(hist, price) }
   }))).filter(Boolean).sort((a: any, b: any) => a.price - b.price) as any[]
   const today = new Date().toLocaleDateString(t.loc, { day: "numeric", month: "long", timeZone: "Europe/Paris" })
-  const base = siteUrl(env).replace(/^https?:\/\//, "")
+  // Adresses complètes (https://) et courtes : WhatsApp ne rend cliquable ni « escale.live/… » sans https, ni la fin d'une
+  // adresse coupée après « ? ». Les recherches préremplies passent par /v/LYS-ALG (redirection, src/worker.ts).
+  const base = siteUrl(env)
   const sep = lang === "fr" ? " : " : ": "
   const lines = [t.head.replace("{d}", today), "", t.intro.replace(`*${t.paris}*`, `*${home}*`), ""]
   for (const r of rows) {
@@ -119,7 +121,7 @@ export async function buildMessage(env: Env, lang = "fr", origin = "CDG") {
     const city = (CITY_L[r.city] || {})[lang] || r.city
     // En français : la page trajet ; dans les autres langues : la recherche, déjà dans la bonne langue
     const { from, to } = r
-    const link = lang === "fr" && paris ? `${base}/${r.path}/` : `${base}/?type=vols&from=${from}&to=${to}${t.app ? "&lang=" + t.app : ""}`
+    const link = lang === "fr" && paris ? `${base}/${r.path}/` : `${base}/v/${from}-${to}${t.app ? "-" + t.app : ""}`
     const low = r.low ? ` 🏆 ${LOW30[lang] || LOW30.fr}` : ""
     lines.push(`${r.flag} ${home} → ${city}${sep}*${t.from} ${money(r.price, t.loc)}*${dates}${tr}${low}`, `   👉 ${link}`)
   }
@@ -216,8 +218,8 @@ export async function routeLine(env: Env, lang: string, from: unknown, to: unkno
   const trend = week && week[1] && week[0] < last[0] ? Math.round((last[1] / week[1] - 1) * 100) : null
   const tr = trend !== null && trend <= -5 ? ` 📉 ${trend} % ${t.drop}` : ""
   const low = isLow30(hist, last[1]) ? ` 🏆 ${LOW30[lang] || LOW30.fr}` : ""
-  const base = siteUrl(env).replace(/^https?:\/\//, "")
-  return `${MINE[lang] || MINE.fr}${lang === "fr" ? " : " : ": "}${a} → ${b}, *${t.from} ${money(last[1], t.loc)}*${tr}${low}\n   👉 ${base}/?type=vols&from=${f}&to=${d}${t.app ? "&lang=" + t.app : ""}`
+  const base = siteUrl(env)
+  return `${MINE[lang] || MINE.fr}${lang === "fr" ? " : " : ": "}${a} → ${b}, *${t.from} ${money(last[1], t.loc)}*${tr}${low}\n   👉 ${base}/v/${f}-${d}${t.app ? "-" + t.app : ""}`
 }
 // Place la ligne « ton trajet » juste après le titre du message
 const withMine = (text: string, mine: string) => (mine ? text.replace("\n\n", `\n\n${mine}\n\n`) : text)
