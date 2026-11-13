@@ -355,15 +355,27 @@ def recherche_page():
             'Choisissez votre vol puis réservez directement sur le site de la compagnie ou de l\'agence.</p>'
             '<div id="rs-bar" class="rs-bar"></div><script src="/recherche-barre.js" defer></script><script src="/alerte-dates.js" defer></script>')
     body = ('<section class="wl-box wl-form"><div id="tpwl-search"></div></section>'
-            '<section class="wl-box"><div id="tpwl-tickets"></div></section>' + WL_SCRIPT +
+            '<section class="wl-box"><div id="tpwl-tickets"></div></section>'
+            # Le moteur est lancé ici même, dans la page (contenu de site/wl.js), au lieu d'attendre le téléchargement des scripts différés :
+            # mesuré le 13/11/2026, il ne commençait à se charger qu'environ 1,3 s après l'ouverture de la page.
+            + '<link rel="preconnect" href="https://tpemb.com" crossorigin><script>' + (SITE / "wl.js").read_text(encoding="utf-8").replace("</script", "<\\/script") + '</script>' +
             '<section id="wl-hotels" class="wl-box" hidden><h2></h2><p class="small"></p></section><script src="/carte-hotels.js" defer></script>'
             '<section id="avant-partir" hidden></section><script src="/avant.js" defer></script>' +
             '<section><p class="small">Moteur fourni par notre partenaire Travelpayouts (Aviasales). Escale ne vend pas de billets : '
             'le prix final et les conditions (bagages, modification) s\'affichent sur le site de réservation. '
             'Escale peut toucher une commission si vous réservez, sans frais pour vous.</p></section>')
-    return page("recherche", "Recherche de vols en direct : prix en temps réel | Escale",
-                "Comparez en direct les prix des vols de dizaines de compagnies et d'agences, vers l'Afrique, le Maghreb et le monde entier.",
-                hero, body)
+    url = page("recherche", "Recherche de vols en direct : prix en temps réel | Escale",
+               "Comparez en direct les prix des vols de dizaines de compagnies et d'agences, vers l'Afrique, le Maghreb et le monde entier.",
+               hero, body)
+    # Le moteur est demandé tout en haut de la page, avant la feuille de style : sinon le navigateur attend pages.css pour exécuter
+    # le script qui le lance (environ 0,7 s sur un réseau mobile lent, mesuré le 13/11/2026).
+    f = SITE / "recherche" / "index.html"
+    t = f.read_text(encoding="utf-8")
+    haut = ('<link rel="preconnect" href="https://tpemb.com" crossorigin>'
+            '<link rel="modulepreload" href="https://tpemb.com/wl_web/main.js?wl_id=24006">')
+    assert "<head>" in t
+    f.write_text(t.replace("<head>", "<head>\n" + haut, 1), encoding="utf-8")
+    return url
 
 
 def hotels_live_page():
