@@ -1,5 +1,5 @@
 /* « Que visiter » : carte du monde des pays (sommaire). Les points sont déjà dans la page (liens vers chaque pays) ;
-   ce script ajoute le zoom par région, le prix du vol depuis la ville du visiteur et une fiche au toucher d'un point.
+   ce script ajoute le zoom par région, le prix du vol depuis la ville ou l'aéroport écrit par le visiteur et une fiche au toucher d'un point.
    Même projection que la carte « Partout » (site/partout.js, img/world.svg). Dépend de visiter.js (window.VX). */
 (function () {
   "use strict";
@@ -26,13 +26,23 @@
   cadrer(); window.addEventListener("resize", cadrer);
   var P = {}, ville = "", pays = {};
   VX.data().then(function (d) { d.pays.forEach(function (p) { pays[p.cc] = p; }); });
-  VX.depart(function (c) { ville = c; VX.prix(c).then(function (x) { P = x; [].forEach.call(map.querySelectorAll(".vx-pin"), function (a) { a.classList.toggle("has", !!P[a.dataset.cc]); }); }); });
+  // Départ écrit par le visiteur (ville ou aéroport) ; jusqu'au 13 novembre 2026, il était déduit de son pays.
+  var nomV = "", F = document.getElementById("vx-map-from");
+  var partir = function (c, nom) {
+    ville = c; nomV = nom || ""; card.classList.remove("on");
+    if (!c) { P = {}; [].forEach.call(map.querySelectorAll(".vx-pin"), function (a) { a.classList.remove("has"); }); return; }
+    VX.prix(c).then(function (x) { if (ville !== c) return; P = x; [].forEach.call(map.querySelectorAll(".vx-pin"), function (a) { a.classList.toggle("has", !!P[a.dataset.cc]); }); });
+  };
+  if (F) {
+    VX.champDepart(F, partir);
+    var der = VX.dernierDepart(); if (der) { F.value = der[1] + " (" + der[0] + ")"; F.dataset.code = der[0]; partir(der[0], der[1]); }
+  }
   map.addEventListener("click", function (e) {
     var a = e.target.closest && e.target.closest(".vx-pin"); if (!a) return;
     var p = pays[a.dataset.cc]; if (!p) return; // sans les données, le lien ouvre simplement la page du pays
     e.preventDefault();
     [].forEach.call(map.querySelectorAll(".vx-pin.on"), function (o) { o.classList.remove("on"); }); a.classList.add("on");
-    var x = P[p.cc], nomV = VX.VILLES[ville] || "";
+    var x = P[p.cc];
     card.innerHTML = '<img src="/img/visiter/' + VX.esc(p.lieux[0].k) + '-640.webp" alt="" width="96" height="96" loading="lazy"><div><h3>' + p.flag + " " + VX.esc(p.nom) + "</h3><p>" +
       (x && x.price > 0 ? "<strong>" + VX.esc(VX.fmt(T.des, { v: p.ville, p: VX.money(x.price), a: nomV })) + "</strong>" + (x.ret ? " (" + VX.esc(VX.jour(x.dep)) + " → " + VX.esc(VX.jour(x.ret)) + "). " : ". ") + VX.esc(VX.T.note)
         : (nomV ? VX.esc(VX.fmt(T.sans, { a: nomV })) : "")) + '</p><p class="small">' + VX.esc(VX.fmt(T.lieux, { n: p.lieux.length })) + " : " + VX.esc(p.lieux.slice(0, 4).map(function (l) { return l.n; }).join(", ")) + "…</p>" +

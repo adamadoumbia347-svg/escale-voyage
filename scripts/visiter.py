@@ -311,7 +311,7 @@ U = {
                     "Photos : Wikimedia Commons, licences libres, <a href=\"/credits-photos/\">tous les crédits</a>.",
                hub_h1="Que visiter, <span>pays par pays</span>", hub_lead="Pas seulement les capitales : pour chaque pays, ses villes et ses lieux à voir, avec de vraies photos. {n} pays, et d'autres arrivent.",
                hub_title="Que visiter : le monde pays par pays, en photos | Escale", hub_desc="Explorez le monde pays par pays : les villes et les lieux à voir, avec de vraies photos. {noms}…",
-               q="Chercher un pays ou un lieu", q_ph="Japon, Kyoto, plage, safari…", map_h="Sur la carte", map_p="Touchez un point pour voir le pays et le prix du vol depuis votre ville.",
+               q="Chercher un pays ou un lieu", q_ph="Japon, Kyoto, plage, safari…", map_h="Sur la carte", map_p="Écrivez votre ville ou votre aéroport de départ, puis touchez un point pour voir le pays et le prix du vol.",
                zoom=["Monde", "Afrique", "Europe", "Asie", "Amériques"], partir="Et pour partir",
                l_partout=("/partout/", "Les prix des vols partout dans le monde"), l_surp=("/surprends-moi/", "Surprends-moi : une destination au hasard selon votre budget"),
                l_quiz=("/quiz-destination/", "Quiz : quelle destination est faite pour moi ?"), credits="Photos : Wikimedia Commons, licences libres, <a href=\"/credits-photos/\">tous les crédits</a>.",
@@ -333,7 +333,7 @@ U = {
                     "Photos: Wikimedia Commons, free licences, <a href=\"/credits-photos/\">all credits</a>.",
                hub_h1="What to visit, <span>country by country</span>", hub_lead="Not just capitals: each country's cities and places to see, with real photos. {n} countries, and more to come.",
                hub_title="What to visit: the world country by country, in photos | Escale", hub_desc="Explore the world country by country: the cities and places to see, with real photos. {noms}…",
-               q="Search for a country or a place", q_ph="Japan, Kyoto, beach, safari…", map_h="On the map", map_p="Tap a dot to see the country and the flight price from your city.",
+               q="Search for a country or a place", q_ph="Japan, Kyoto, beach, safari…", map_h="On the map", map_p="Type your departure city or airport, then tap a dot to see the country and the flight price.",
                zoom=["World", "Africa", "Europe", "Asia", "Americas"], partir="And to get there",
                l_partout=("/en/anywhere/", "Flight prices everywhere in the world"), l_surp=("/en/surprise-me/", "Surprise me: a random destination within your budget"),
                l_quiz=("/en/destination-quiz/", "Quiz: which destination suits me?"), credits="Photos: Wikimedia Commons, free licences, <a href=\"/credits-photos/\">all credits</a>.",
@@ -355,7 +355,7 @@ U = {
                     "Foto: Wikimedia Commons, licenze libere, <a href=\"/credits-photos/\">tutti i crediti</a>.",
                hub_h1="Cosa visitare, <span>paese per paese</span>", hub_lead="Non solo le capitali: per ogni paese, le città e i luoghi da vedere, con foto vere. {n} paesi, e altri in arrivo.",
                hub_title="Cosa visitare: il mondo paese per paese, in foto | Escale", hub_desc="Esplora il mondo paese per paese: le città e i luoghi da vedere, con foto vere. {noms}…",
-               q="Cerca un paese o un luogo", q_ph="Giappone, Kyoto, spiaggia, safari…", map_h="Sulla mappa", map_p="Tocca un punto per vedere il paese e il prezzo del volo dalla tua città.",
+               q="Cerca un paese o un luogo", q_ph="Giappone, Kyoto, spiaggia, safari…", map_h="Sulla mappa", map_p="Scrivi la tua città o il tuo aeroporto di partenza, poi tocca un punto per vedere il paese e il prezzo del volo.",
                zoom=["Mondo", "Africa", "Europa", "Asia", "Americhe"], partir="E per partire",
                l_partout=("/en/anywhere/", "I prezzi dei voli in tutto il mondo (in inglese)"), l_surp=("/it/sorprendimi/", "Sorprendimi: una meta a caso secondo il tuo budget"),
                l_quiz=("/it/quiz-destinazione/", "Quiz: quale meta fa per me?"), credits="Foto: Wikimedia Commons, licenze libere, <a href=\"/credits-photos/\">tutti i crediti</a>.",
@@ -529,7 +529,9 @@ def build(site, ctx):
         zooms = "".join(f'<button type="button" data-z="{k}"{" aria-pressed=true" if k == 1 else ""}>{z}</button>' for k, z in enumerate(u["zoom"]))
         body = (f'<p class="vx-search"><label for="vx-q">{u["q"]}</label><input id="vx-q" type="search" placeholder="{u["q_ph"]}" autocomplete="off"><span id="vx-q-msg" class="small" role="status"></span></p>'
                 f'<p class="vx-tools"><a class="btn ghost" href="{A("jeu")}">{u["jeu"]}</a><a class="btn ghost" href="{A("comparer")}">{u["comparer"]}</a></p>' + envies
-                + f'<section class="vx-mapbox"><h2>{u["map_h"]}</h2><p class="small">{u["map_p"]}</p><div class="vx-zoom" role="group">{zooms}</div>'
+                + f'<section class="vx-mapbox"><h2>{u["map_h"]}</h2><p class="small">{u["map_p"]}</p>'
+                  f'<label class="vx-map-dep"><span>{u["dep"]}</span><input type="text" id="vx-map-from" inputmode="search" enterkeyhint="search" autocomplete="off" spellcheck="false" placeholder="{u["dep_ph"]}"></label>'
+                  f'<div class="vx-zoom" role="group">{zooms}</div>'
                   f'<div class="vx-map" id="vx-map"><div class="vx-map-in"><img src="/img/world.svg" alt="" width="2000" height="789" fetchpriority="high">{pins}</div></div>'
                   f'<div id="vx-map-card" class="vx-map-card" role="status"></div></section>')
         for r in REGIONS:
