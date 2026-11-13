@@ -373,8 +373,8 @@ def recherche_page():
     t = f.read_text(encoding="utf-8")
     haut = ('<link rel="preconnect" href="https://tpemb.com" crossorigin>'
             '<link rel="modulepreload" href="https://tpemb.com/wl_web/main.js?wl_id=24006">')
-    assert "<head>" in t
-    f.write_text(t.replace("<head>", "<head>\n" + haut, 1), encoding="utf-8")
+    assert '<meta charset="utf-8">' in t  # la déclaration d'encodage reste en premier
+    f.write_text(t.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n' + haut, 1), encoding="utf-8")
     return url
 
 
