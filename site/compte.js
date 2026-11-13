@@ -10,7 +10,7 @@
   date.min = new Date(today.getTime() - today.getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
   window.EscaleAC.attach(to); window.EscaleAC.attach(from);
   var flag = function (cc) { return cc && cc.length === 2 ? String.fromCodePoint.apply(null, cc.toUpperCase().split("").map(function (c) { return 127397 + c.charCodeAt(0); })) : "✈️"; };
-  var FONT = '"Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif';
+  var FONT = '"Nunito", "Segoe UI", system-ui, sans-serif';
   function fit(ctx, text, max, size, weight) { do { ctx.font = weight + " " + size + "px " + FONT; size -= 4; } while (ctx.measureText(text).width > max && size > 40); }
   function dessiner(o) {
     var c = cv.getContext("2d"), W = 1080, H = 1920;

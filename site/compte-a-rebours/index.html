@@ -44,9 +44,49 @@
 <meta name="twitter:card" content="summary_large_image">
 <script>(function(){try{var d=document.documentElement,s=localStorage.getItem("escale.lite"),c=navigator.connection||{},z="";try{z=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}if(s==="1"||(s!=="0"&&(c.saveData||/2g|3g/.test(c.effectiveType||"")||z.indexOf("Africa/")===0)))d.classList.add("lite");else{var l=document.createElement("link");l.rel="preload";l.as="font";l.type="font/woff2";l.crossOrigin="anonymous";l.href="/fonts/nunito-latin-166202.woff2";document.head.appendChild(l)}}catch(e){}})();</script>
 
-<link rel="stylesheet" href="/pages.css?v=2dd4b902">
+<link rel="stylesheet" href="/pages.css?v=f704edd9">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://escale.live/"}, {"@type": "ListItem", "position": 2, "name": "Compte à rebours avant le départ", "item": "https://escale.live/compte-a-rebours/"}]}</script>
-<script src="/langue.js?v=0b33c8f2"></script>
+<script>/*langue*/(function () {
+"use strict";
+try {
+var d = document, html = d.documentElement;
+var here = (html.getAttribute("lang") || "fr").slice(0, 2).toLowerCase();
+var get = function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } };
+var set = function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} };
+var alt = {};
+[].forEach.call(d.querySelectorAll('link[rel="alternate"][hreflang]'), function (l) {
+var h = l.getAttribute("hreflang").slice(0, 2).toLowerCase();
+if (h !== "x-" && !alt[h]) alt[h] = l.getAttribute("href");
+});
+var norm = function (u) { try { var x = new URL(u, location.href); return x.pathname.replace(/\/index\.html$/, "/"); } catch (e) { return ""; } };
+var byPath = {}; Object.keys(alt).forEach(function (k) { byPath[norm(alt[k])] = k; });
+d.addEventListener("click", function (e) {
+var a = e.target.closest && e.target.closest("a[href]"); if (!a) return;
+var k = a.getAttribute("hreflang") || byPath[norm(a.getAttribute("href"))];
+if (k && norm(a.getAttribute("href")) !== norm(location.href)) set("escale.lang", k.slice(0, 2));
+}, true);
+var qp = new URLSearchParams(location.search).get("lang");
+if (qp) { set("escale.lang", qp.slice(0, 2)); return; }
+var ua = navigator.userAgent || "";
+if (/bot|crawl|spider|slurp|google|bing|yandex|baidu|duckduck|facebookexternalhit|whatsapp|telegram|twitter|linkedin|preview|lighthouse|pagespeed|headless/i.test(ua)) return;
+if (!Object.keys(alt).length) return;
+var chosen = get("escale.lang");
+var nav = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""])
+.map(function (l) { return String(l).slice(0, 2).toLowerCase(); });
+var want = null;
+if (chosen) want = alt[chosen] ? chosen : (chosen !== "fr" && here !== "en" && alt.en ? "en" : null);
+else {
+for (var i = 0; i < nav.length; i++) { if (nav[i] === here) return; if (alt[nav[i]]) { want = nav[i]; break; } }
+if (!want && nav.indexOf("fr") < 0 && here !== "en" && alt.en) want = "en";
+}
+if (!want || want === here) return;
+var target = norm(alt[want]);
+if (norm(target) === norm(location.href)) return;
+var key = "escale.lr." + location.pathname;
+try { if (sessionStorage.getItem(key)) return; sessionStorage.setItem(key, "1"); } catch (e) { return; }
+location.replace(target + location.search.replace(/([?&])lang=[^&]*/g, "$1") + location.hash);
+} catch (e) {}
+})();</script>
 </head>
 <body>
 <header class="site-head"><div class="wrap head-row"><a class="brand" href="/" aria-label="Escale, accueil"><svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" fill="currentColor"/></svg><span>escale</span></a><nav class="main-nav" aria-label="Menu principal"><a href="/">Vols</a><a href="/#hotels">Hôtels</a><a href="/#voitures">Voitures</a><a class="nav-explore" href="/partout/">🌍 <span>Explorer</span></a><a href="/bons-plans/">Bons plans</a><a href="/vols-fetes/">Fêtes</a><a href="/guides/">Guides</a><a class="nav-fav" href="/favoris/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.8 6.6 19.7l1.1-6.1L3.2 9.4l6.1-.8z" fill="currentColor"/></svg><span>Favoris</span><b class="fav-count" data-fav-count hidden></b></a></nav><nav class="lang-nav" aria-label="Langue / Language"><a href="/compte-a-rebours/" hreflang="fr" lang="fr" title="Français" aria-current="page">FR</a></nav></div></header>
@@ -55,7 +95,7 @@
   <p class="eyebrow">Outil gratuit</p><h1>Compte à rebours <span>avant le départ</span></h1><p class="hero-lead">« J-45 avant Abidjan » : créez votre image en dix secondes et partagez-la sur votre statut WhatsApp.</p>
 </div></div>
 <div class="wrap">
-<section><h2>Votre voyage</h2><form id="cr-form" class="tool-form" novalidate><div class="tool-grid"><label><span>Destination</span><input id="cr-to" placeholder="Ville ou aéroport" autocomplete="off"></label><label><span>Date du départ</span><input id="cr-date" type="date"></label><label><span>Ville de départ (facultatif)</span><input id="cr-from" placeholder="Pour afficher le prix du moment" autocomplete="off"></label></div><p><button type="submit" class="btn">Créer mon image</button></p><p id="cr-msg" class="small" role="status"></p></form><div id="cr-out" hidden><canvas id="cr-canvas" width="1080" height="1920" style="width:min(100%,320px);height:auto;border-radius:18px;box-shadow:0 20px 50px -20px rgba(0,0,0,.5)"></canvas><p class="cr-btns" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px"><button type="button" class="btn" id="cr-share">Partager</button><a class="btn ghost" id="cr-dl" download="escale-compte-a-rebours.jpg">Télécharger l'image</a><a class="btn ghost" id="cr-wa" target="_blank" rel="noopener">Envoyer sur WhatsApp</a></p></div></section><section><h2>Et en attendant le départ</h2><ul><li><a href="/controle-avant-vol/">Contrôle avant le vol : passeport, visa, documents</a></li><li><a href="/guides/check-list-depart/">Check-list du départ</a></li><li><a href="/ponts-2027/">Ponts 2027 : partir en posant peu de congés</a></li></ul></section><section class="faq"><h2>Questions fréquentes</h2><details><summary>Où va l&#x27;image ?</summary><p>Nulle part : elle est fabriquée dans votre téléphone. Vous la téléchargez ou vous la partagez vous-même, sur votre statut WhatsApp par exemple.</p></details><details><summary>D&#x27;où vient le prix affiché ?</summary><p>C&#x27;est l&#x27;aller-retour le plus bas repéré récemment pour le mois de votre départ, si vous indiquez votre ville de départ. Sans ville de départ, ou sans prix connu, l&#x27;image n&#x27;affiche aucun prix.</p></details></section><section><h2>Pour aller plus loin</h2><ul><li><a href="/escale-longue/">Longue escale : que faire à Casablanca, Istanbul, Lisbonne, Addis-Abeba</a></li><li><a href="/ponts-2027/">Ponts et jours fériés 2027 : partir en posant peu de congés</a></li><li><a href="/voyager-parent-age-enfant-seul/">Faire voyager un parent âgé ou un enfant seul</a></li><li><a href="/deces-rapatriement/">Décès loin du pays : démarches et rapatriement</a></li><li><a href="/compte-a-rebours/">Compte à rebours avant le départ, à partager</a></li><li><a href="/guides/">Tous les guides</a></li></ul></section><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Où va l'image ?", "acceptedAnswer": {"@type": "Answer", "text": "Nulle part : elle est fabriquée dans votre téléphone. Vous la téléchargez ou vous la partagez vous-même, sur votre statut WhatsApp par exemple."}}, {"@type": "Question", "name": "D'où vient le prix affiché ?", "acceptedAnswer": {"@type": "Answer", "text": "C'est l'aller-retour le plus bas repéré récemment pour le mois de votre départ, si vous indiquez votre ville de départ. Sans ville de départ, ou sans prix connu, l'image n'affiche aucun prix."}}]}</script><script src="/ac-mini.js?v=00e657f8" defer></script><script src="/compte.js?v=9479e5bf" defer></script>
+<section><h2>Votre voyage</h2><form id="cr-form" class="tool-form" novalidate><div class="tool-grid"><label><span>Destination</span><input id="cr-to" placeholder="Ville ou aéroport" autocomplete="off"></label><label><span>Date du départ</span><input id="cr-date" type="date"></label><label><span>Ville de départ (facultatif)</span><input id="cr-from" placeholder="Pour afficher le prix du moment" autocomplete="off"></label></div><p><button type="submit" class="btn">Créer mon image</button></p><p id="cr-msg" class="small" role="status"></p></form><div id="cr-out" hidden><canvas id="cr-canvas" width="1080" height="1920" style="width:min(100%,320px);height:auto;border-radius:18px;box-shadow:0 20px 50px -20px rgba(0,0,0,.5)"></canvas><p class="cr-btns" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px"><button type="button" class="btn" id="cr-share">Partager</button><a class="btn ghost" id="cr-dl" download="escale-compte-a-rebours.jpg">Télécharger l'image</a><a class="btn ghost" id="cr-wa" target="_blank" rel="noopener">Envoyer sur WhatsApp</a></p></div></section><section><h2>Et en attendant le départ</h2><ul><li><a href="/controle-avant-vol/">Contrôle avant le vol : passeport, visa, documents</a></li><li><a href="/guides/check-list-depart/">Check-list du départ</a></li><li><a href="/ponts-2027/">Ponts 2027 : partir en posant peu de congés</a></li></ul></section><section class="faq"><h2>Questions fréquentes</h2><details><summary>Où va l&#x27;image ?</summary><p>Nulle part : elle est fabriquée dans votre téléphone. Vous la téléchargez ou vous la partagez vous-même, sur votre statut WhatsApp par exemple.</p></details><details><summary>D&#x27;où vient le prix affiché ?</summary><p>C&#x27;est l&#x27;aller-retour le plus bas repéré récemment pour le mois de votre départ, si vous indiquez votre ville de départ. Sans ville de départ, ou sans prix connu, l&#x27;image n&#x27;affiche aucun prix.</p></details></section><section><h2>Pour aller plus loin</h2><ul><li><a href="/escale-longue/">Longue escale : que faire à Casablanca, Istanbul, Lisbonne, Addis-Abeba</a></li><li><a href="/ponts-2027/">Ponts et jours fériés 2027 : partir en posant peu de congés</a></li><li><a href="/voyager-parent-age-enfant-seul/">Faire voyager un parent âgé ou un enfant seul</a></li><li><a href="/deces-rapatriement/">Décès loin du pays : démarches et rapatriement</a></li><li><a href="/compte-a-rebours/">Compte à rebours avant le départ, à partager</a></li><li><a href="/guides/">Tous les guides</a></li></ul></section><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Où va l'image ?", "acceptedAnswer": {"@type": "Answer", "text": "Nulle part : elle est fabriquée dans votre téléphone. Vous la téléchargez ou vous la partagez vous-même, sur votre statut WhatsApp par exemple."}}, {"@type": "Question", "name": "D'où vient le prix affiché ?", "acceptedAnswer": {"@type": "Answer", "text": "C'est l'aller-retour le plus bas repéré récemment pour le mois de votre départ, si vous indiquez votre ville de départ. Sans ville de départ, ou sans prix connu, l'image n'affiche aucun prix."}}]}</script><script src="/ac-mini.js?v=00e657f8" defer></script><script src="/compte.js?v=1c01cce0" defer></script>
 </div>
 </main>
 <footer class="wrap">

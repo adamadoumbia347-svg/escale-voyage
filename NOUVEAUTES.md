@@ -51,3 +51,12 @@ Une tâche planifiée de Claude ajoute une nouveauté au site tous les 2 jours, 
   Koutammakou ; parc de Taï ; monts Nimba ; Lamu ; Tozeur (Chebika). Liste et raisons : `PAYS_RETIRES` et `RETIRES` dans scripts/visiter.py.
 - Relevé fait à partir d'extraits des fiches officielles (site non joignable depuis la session) : à revérifier sur diplomatie.gouv.fr avant de remettre un lieu
   ou d'en ajouter dans ces pays. Restent 29 pays et 217 lieux ; un pays est publié à partir de 4 lieux.
+
+## 13 novembre 2026 : rubans en bas de l'accueil, optimisation
+- Accueil : en bas de page, section « Envie d'explorer ? » avec deux rubans défilants (nouveautés, pays). Traductions dans site/i18n.js (dernier bloc).
+- Polices : Fraunces en une seule graisse (600) et taille optique fixe : 79 Ko de polices par page au lieu de 184 Ko. Anciennes polices supprimées
+  (Bricolage, Plus Jakarta, Instrument, JetBrains). Si un titre doit changer de graisse, il faudra recharger une autre version de Fraunces.
+- Script de langue écrit dans chaque page (scripts/build_pages.py, `_langue_inline`) : site/langue.js reste la source.
+- « Que visiter » : les cartes annoncent 70 % de la largeur d'écran (version 640 px sur les téléphones courants) ; les photos d'ouverture ont une
+  version 820 px (`<clé>-820.webp`, à créer pour tout nouveau pays : PIL, largeur 820, qualité 66).
+- Animations décoratives (formes du haut de page, avion du logo) : quelques secondes puis repos.

@@ -7,6 +7,7 @@ Un lieu sans photo n'est pas publié ; un pays avec moins de 4 lieux en photo n'
 Les lieux situés dans des zones déconseillées par les conseils aux voyageurs officiels ne sont pas publiés (voir RETIRES plus bas)."""
 import html
 import json
+import pathlib
 
 import build_i18n as B
 
@@ -372,9 +373,15 @@ def photos(site):
     return json.loads(f.read_text(encoding="utf-8")) if f.exists() else {}
 
 
-def img(ph, key, alt, eager=False, sizes="(min-width:700px) 440px, 100vw"):
+IMG_DIR = pathlib.Path(__file__).resolve().parent.parent / "site" / "img" / "visiter"
+
+
+def img(ph, key, alt, eager=False, sizes="(min-width:700px) 440px, 70vw"):
+    """Photo d'un lieu. Les cartes annoncent 70 % de la largeur d'écran : les téléphones courants prennent la version 640 px (bien plus
+    légère, à peine moins nette). Les photos d'ouverture ont aussi une version 820 px (créée à la main, voir NOUVEAUTES.md)."""
     m = ph[key]
-    return (f'<img src="/img/visiter/{key}.webp" srcset="/img/visiter/{key}-640.webp 640w, /img/visiter/{key}.webp {m["w"]}w" sizes="{sizes}" width="{m["w"]}" height="{m["h"]}" alt="{E(alt)}"'
+    mid = f"/img/visiter/{key}-820.webp 820w, " if (IMG_DIR / f"{key}-820.webp").exists() and m["w"] > 820 else ""
+    return (f'<img src="/img/visiter/{key}.webp" srcset="/img/visiter/{key}-640.webp 640w, {mid}/img/visiter/{key}.webp {m["w"]}w" sizes="{sizes}" width="{m["w"]}" height="{m["h"]}" alt="{E(alt)}"'
             + (' fetchpriority="high"' if eager else ' loading="lazy" decoding="async"') + ">")
 
 
@@ -523,7 +530,7 @@ def build(site, ctx):
         body = (f'<p class="vx-search"><label for="vx-q">{u["q"]}</label><input id="vx-q" type="search" placeholder="{u["q_ph"]}" autocomplete="off"><span id="vx-q-msg" class="small" role="status"></span></p>'
                 f'<p class="vx-tools"><a class="btn ghost" href="{A("jeu")}">{u["jeu"]}</a><a class="btn ghost" href="{A("comparer")}">{u["comparer"]}</a></p>' + envies
                 + f'<section class="vx-mapbox"><h2>{u["map_h"]}</h2><p class="small">{u["map_p"]}</p><div class="vx-zoom" role="group">{zooms}</div>'
-                  f'<div class="vx-map" id="vx-map"><div class="vx-map-in"><img src="/img/world.svg" alt="" width="2000" height="789" loading="lazy" decoding="async">{pins}</div></div>'
+                  f'<div class="vx-map" id="vx-map"><div class="vx-map-in"><img src="/img/world.svg" alt="" width="2000" height="789" fetchpriority="high">{pins}</div></div>'
                   f'<div id="vx-map-card" class="vx-map-card" role="status"></div></section>')
         for r in REGIONS:
             ps = [p for p in pays if p["region"] == r]

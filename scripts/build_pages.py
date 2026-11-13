@@ -740,19 +740,42 @@ def lite_mode(site):
     return n
 
 
-# Langue automatique (site/langue.js) : sur toutes les pages qui existent en plusieurs langues, sauf l'accueil (app.js s'en charge)
-LANGUE_JS = '<script src="/langue.js"></script>'
+# Langue automatique (site/langue.js) : sur toutes les pages qui existent en plusieurs langues, sauf l'accueil (app.js s'en charge).
+# Le script est écrit dans la page (allégé de ses commentaires) : une requête bloquante en moins avant l'affichage, et le renvoi
+# vers la bonne langue se décide dès le début du chargement. site/langue.js reste la source : c'est lui qu'on modifie.
+LANGUE_MARQUE = "<script>/*langue*/"
+LANGUE_RX = re.compile(r'<script src="/langue\.js(?:\?v=[0-9a-f]+)?"></script>\n?|<script>/\*langue\*/.*?</script>\n?', re.S)
+
+
+def _langue_inline(site):
+    out = []
+    for l in (site / "langue.js").read_text(encoding="utf-8").splitlines():
+        l = l.strip()
+        if not l or l.startswith("//"):
+            continue
+        l = re.sub(r";\s+//\s.*$", ";", l)  # commentaire en fin d'instruction
+        out.append(l)
+    js = "\n".join(out)
+    assert "</" not in js and "//" not in js.replace("://", ""), "langue.js : commentaire ou balise non géré par l'allègement"
+    return LANGUE_MARQUE + js + "</script>"
+
+
 def langue_auto(site):
     n = 0
+    tag = _langue_inline(site)
     for f in site.rglob("*.html"):
         rel = f.relative_to(site).as_posix()
         if rel == "index.html" or rel.startswith(("admin/", "widget/")):
             continue
         t = f.read_text(encoding="utf-8")
-        if 'hreflang=' not in t or "/langue.js" in t or "</head>" not in t:
+        if "</head>" not in t:
             continue
-        f.write_text(t.replace("</head>", LANGUE_JS + "\n</head>", 1), encoding="utf-8")
-        n += 1
+        u = LANGUE_RX.sub("", t)  # ancienne version (fichier séparé ou copie précédente) retirée
+        if "hreflang=" in u:
+            u = u.replace("</head>", tag + "\n</head>", 1)
+            n += 1
+        if u != t:
+            f.write_text(u, encoding="utf-8")
     return n
 
 
@@ -913,7 +936,8 @@ def main():
     s = re.sub(r"<!-- FETES:START -->.*?<!-- FETES:END -->", lambda m: '<!-- FETES:START -->\n    <div class="city-grid fete-grid">' + "".join(fcards) + '</div>\n    <!-- FETES:END -->', s, flags=re.S)
     grid = villes.cards(SITE, HUBS, airports)
     _vl = visiter.liens(SITE)
-    _jh = lambda d: E(json.dumps(d, ensure_ascii=False))
+    # Liens par langue : les langues sans page propre (es, pt, ar, de, nl) vont vers la page anglaise
+    _jh = lambda d: E(json.dumps(dict({l: d["en"] for l in ("es", "pt", "ar", "de", "nl") if "en" in d and l not in d}, **d), ensure_ascii=False))
     _nm = lambda x, suf="": (f' data-en="{E(x["nom"]["en"] + suf)}"' if "en" in x["nom"] else "") + (f' data-it="{E(x["nom"]["it"] + suf)}"' if "it" in x["nom"] else "")
     vz = "".join(f'<a href="{x["href"]["fr"]}" data-hrefs="{_jh(x["href"])}"><img src="/img/visiter/{x["key"]}-640.webp" width="640" height="{round(640 * x["m"]["h"] / x["m"]["w"])}" alt="{E(x["nom"]["fr"])}" loading="lazy" decoding="async">'
                  f'<b{_nm(x, " " + x["flag"])}>{E(x["nom"]["fr"])} {x["flag"]}</b></a>' for x in _vl)
@@ -926,6 +950,29 @@ def main():
                  + f'>{x["flag"]} {E(x["nom"]["fr"])}</span></a>' for x in _vl)
     if rb:
         rb = ('<div class="ruban" aria-label="Pays à explorer"><div class="piste">' + rb + rb.replace("<a ", '<a tabindex="-1" aria-hidden="true" ') + "</div></div>")
+    # Bas de l'accueil : deux rubans qui défilent, les nouveautés puis les pays (demande de Dobam, 13 novembre 2026)
+    _vb = {l: "/" + visiter.BASE[l] + "/" for l in ("fr", "en", "it")}
+    _sub = lambda cle, anc="": {l: _vb[l] + visiter.SUB[cle][l] + "/" + anc for l in _vb}
+    NOUV = [("🎯 Jeu : devine le pays", "🎯 Game: guess the country", _sub("jeu")), ("⚖️ Comparer deux pays", "⚖️ Compare two countries", _sub("comparer")),
+            ("🗺️ La carte du monde", "🗺️ The world map", {l: _vb[l] + "#vx-map" for l in _vb}), ("🌍 Que visiter, pays par pays", "🌍 What to visit, country by country", _vb),
+            ("🎲 Surprends-moi", "🎲 Surprise me", {"fr": "/surprends-moi/", "en": "/en/surprise-me/", "it": "/it/sorprendimi/", "de": "/de/ueberrasch-mich/"}),
+            ("🧭 Quiz : quelle destination pour toi ?", "🧭 Quiz: which destination suits you?", {"fr": "/quiz-destination/", "en": "/en/destination-quiz/", "it": "/it/quiz-destinazione/", "de": "/de/reiseziel-quiz/"}),
+            ("💸 Les prix partout dans le monde", "💸 Prices everywhere in the world", {l: "/" + pth + "/" for l, pth in build_i18n.SECTION_PATHS["anywhere"].items()}),
+            ("🧳 Vol à plusieurs étapes", "🧳 Multi-city flights", {"fr": "/vol-plusieurs-etapes/", "en": "/en/multi-city-flights/", "it": "/it/viaggio-multi-tratta/"}),
+            ("⏳ Compte à rebours avant le départ", None, {"fr": "/compte-a-rebours/"}), ("🗓️ Ponts 2027", None, {"fr": "/ponts-2027/"}),
+            ("🛬 Que faire pendant une longue escale", None, {"fr": "/escale-longue/"})]
+    for _fr, _en, _h in NOUV:
+        for _l, _u in _h.items():
+            assert (SITE / _u.split("#")[0].strip("/") / "index.html").exists(), f"ruban de l'accueil : page absente {_u}"
+    _a = lambda fr, en, hh: (f'<a href="{hh["fr"]}" data-hrefs="{_jh(hh)}"><span data-en="{E(en)}">{E(fr)}</span></a>' if en else f'<a href="{hh["fr"]}" data-only="fr">{E(fr)}</a>')
+    _piste = lambda x: '<div class="piste">' + x + x.replace("<a ", '<a tabindex="-1" aria-hidden="true" ') + "</div>"
+    nv1 = "".join(_a(*x) for x in NOUV)
+    nv2 = "".join(f'<a href="{x["href"]["fr"]}" data-hrefs="{_jh(x["href"])}"><span data-en="{E(x["flag"] + " " + x["nom"].get("en", x["nom"]["fr"]))}"' + (f' data-it="{E(x["flag"] + " " + x["nom"]["it"])}"' if "it" in x["nom"] else "")
+                  + f'>{x["flag"]} {E(x["nom"]["fr"])}</span></a>' for x in _vl) + _a("🌍 Tous les pays", "🌍 All countries", _vb)
+    nv = ('<section class="block sp-plus" id="nouveautes" aria-labelledby="nv-h"><h2 id="nv-h" data-en="Feel like exploring?">Envie d\'explorer ?</h2>'
+          '<p class="rb-l" data-en="New on Escale">Les nouveautés d\'Escale</p><div class="ruban court" aria-label="Nouveautés">' + _piste(nv1) + '</div>'
+          '<p class="rb-l" data-en="Countries, with their cities and places to see">Les pays, avec leurs villes et leurs lieux à voir</p><div class="ruban inv" aria-label="Pays à explorer">' + _piste(nv2) + '</div></section>') if _vl else ""
+    s = re.sub(r"<!-- NOUVEAUTES:START -->.*?<!-- NOUVEAUTES:END -->", lambda m: "<!-- NOUVEAUTES:START -->\n  " + nv + "\n  <!-- NOUVEAUTES:END -->", s, flags=re.S)
     s = re.sub(r"<!-- RUBAN:START -->.*?<!-- RUBAN:END -->", lambda m: "<!-- RUBAN:START -->\n    " + rb + "\n    <!-- RUBAN:END -->", s, flags=re.S)
     s = re.sub(r"<!-- VISITER:START -->.*?<!-- VISITER:END -->", lambda m: "<!-- VISITER:START -->\n    " + vz + "\n    <!-- VISITER:END -->", s, flags=re.S)
     s = re.sub(r"<!-- VILLES:START -->.*?<!-- VILLES:END -->", lambda m: "<!-- VILLES:START -->\n    " + grid + "\n    <!-- VILLES:END -->", s, flags=re.S)

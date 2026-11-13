@@ -19,7 +19,7 @@
   var iso = function (d) { return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0"); };
   var calm = false; try { calm = matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
   var ALIAS = { LHR: "LON", LGW: "LON", STN: "LON", LTN: "LON", MXP: "MIL", LIN: "MIL", BGY: "MIL", FCO: "ROM", CIA: "ROM", ORY: "CDG", BVA: "CDG", SAW: "IST", EWR: "JFK", DKR: "DSS" };
-  var db = Promise.all([get("/data/airports.json"), get("/data/photos.json"), lang === "fr" ? Promise.resolve({ MLA: "La Valette", GYD: "Bakou", SVQ: "Séville", ADB: "Izmir", VLC: "Valence", EDI: "Édimbourg", SPX: "Gizeh (Le Caire)", SPC: "Santa Cruz de La Palma", LIS: "Lisbonne", BCN: "Barcelone", LON: "Londres" }) : get("/data/noms/" + lang + ".json")]);
+  var db = Promise.all([get("/data/airports-lite.json"), get("/data/photos.json"), lang === "fr" ? Promise.resolve({ MLA: "La Valette", GYD: "Bakou", SVQ: "Séville", ADB: "Izmir", VLC: "Valence", EDI: "Édimbourg", SPX: "Gizeh (Le Caire)", SPC: "Santa Cruz de La Palma", LIS: "Lisbonne", BCN: "Barcelone", LON: "Londres" }) : get("/data/noms/" + lang + ".json")]);
   var months = []; for (var i = 0; i < 3; i++) { var d = new Date(); d.setDate(1); d.setMonth(d.getMonth() + i); months.push(iso(d)); }
 
   // Ville : ?from=, sinon la dernière choisie sur Escale, sinon Paris

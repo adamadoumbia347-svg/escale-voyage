@@ -1,10 +1,4 @@
 /* Polices hébergées sur le site (variables : une face par fichier et par plage de graisses) */
-@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:500 800;font-display:swap;src:url(/fonts/bricolage-grotesque-latin-ext-fdb6b0.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:500 800;font-display:swap;src:url(/fonts/bricolage-grotesque-latin-40c2cb.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:400 800;font-display:swap;src:url(/fonts/plus-jakarta-sans-latin-ext-341687.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:400 800;font-display:swap;src:url(/fonts/plus-jakarta-sans-latin-7660bd.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500 700;font-display:swap;src:url(/fonts/jetbrains-mono-latin-ext-c8b23d.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500 700;font-display:swap;src:url(/fonts/jetbrains-mono-latin-0a7197.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'Noto Sans Arabic';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/noto-sans-arabic-arabic-378a89.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC7,U+10EC9-10EEE,U+10EF0-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}
 @font-face{font-family:'Noto Sans Arabic';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/noto-sans-arabic-latin-ext-e197d9.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
 @font-face{font-family:'Noto Sans Arabic';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/noto-sans-arabic-latin-e4b4f4.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
@@ -867,7 +861,7 @@ main > section:nth-of-type(n+3), main .wrap > section:nth-of-type(n+3), body > f
 html[dir="rtl"] .mo-bar { transform-origin: 100% 50%; }
 
 /* ---------- « Que visiter » : un pays, ses villes et ses lieux, en photos (scripts/visiter.py) ---------- */
-.vx h1, .vx-card h2, .vx-hub h3, .vx-title { font-family: "Bricolage Grotesque", "Bricolage Fallback", var(--f-body); }
+.vx h1, .vx-card h2, .vx-hub h3, .vx-title { font-family: var(--f-display); }
 .vx-hero { position: relative; margin: 14px 0 0; border-radius: 26px; overflow: hidden; aspect-ratio: 16 / 10; background: var(--soft); box-shadow: 0 30px 60px -30px rgb(15 23 42 / .45); }
 .vx-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.06); will-change: transform; }
 .vx-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(4 18 22 / 0) 35%, rgb(4 18 22 / .82)); }
@@ -895,7 +889,7 @@ html[dir="rtl"] .mo-bar { transform-origin: 100% 50%; }
 .vx-card p.vx-cred { margin: 10px 0 0; font-size: 12px; line-height: 1.45; }
 .vx h1 { font-weight: 800; font-size: clamp(30px, 8.4vw, 46px); line-height: 1.05; letter-spacing: -.03em; }
 .vx-cta { margin-top: 30px; padding: 22px 20px; border-radius: 24px; color: #fff; background: linear-gradient(135deg, #0b8577, #1a56db); box-shadow: 0 30px 60px -30px rgb(26 86 219 / .7); }
-.vx-cta h2 { margin: 0 0 6px; color: #fff; font: 800 26px/1.15 "Bricolage Grotesque", "Bricolage Fallback", var(--f-body); letter-spacing: -.02em; }
+.vx-cta h2 { margin: 0 0 6px; color: #fff; font: 800 26px/1.15 var(--f-display); letter-spacing: -.02em; }
 .vx-cta p { margin: 0 0 14px; opacity: .95; }
 main .vx-cta .btn { background: #fff; color: #0f172a; margin: 0 8px 8px 0; }
 main .vx-cta .btn.ghost { background: rgb(255 255 255 / .16); color: #fff; border: 1px solid rgb(255 255 255 / .5); }
@@ -907,7 +901,7 @@ main .vx-cta .btn.ghost { background: rgb(255 255 255 / .16); color: #fff; borde
 .vx-hub .vx-hl { position: absolute; z-index: 1; left: 14px; right: 12px; bottom: 12px; }
 .vx-hub h3 { margin: 0; font-weight: 800; font-size: clamp(20px, 5.4vw, 28px); line-height: 1.05; letter-spacing: -.025em; color: #fff; }
 .vx-hub small { display: block; margin-top: 4px; font-size: 12.5px; font-weight: 600; opacity: .92; }
-.vx-reg { margin: 30px 0 0; font: 800 22px/1.2 "Bricolage Grotesque", "Bricolage Fallback", var(--f-body); letter-spacing: -.02em; }
+.vx-reg { margin: 30px 0 0; font: 800 22px/1.2 var(--f-display); letter-spacing: -.02em; }
 @media (min-width: 700px) { .vx-hub { grid-template-columns: repeat(3, minmax(0, 1fr)); } .vx-list { gap: 34px; } .vx-card { display: grid; grid-template-columns: 1.15fr 1fr; align-items: stretch; } .vx-card:nth-child(even) .vx-ph { order: 2; } .vx-ph { aspect-ratio: auto; min-height: 300px; } .vx-tx { padding: 26px 26px; align-self: center; } }
 
 .vx-like { position: absolute; z-index: 2; right: 12px; bottom: 12px; width: 46px; height: 46px; display: grid; place-items: center; border: 0; border-radius: 50%; background: rgb(255 255 255 / .94); color: #0f172a; cursor: pointer; box-shadow: 0 8px 20px -8px rgb(0 0 0 / .5); transition: transform .2s; }
@@ -1003,10 +997,10 @@ main .vx-cta button.btn { cursor: pointer; font: inherit; font-weight: 700; }
    Les couleurs restent celles d'Escale (fond blanc, bleu, vert d'eau) : Dobam a préféré les garder.
    Pour revenir en arrière, il suffit de retirer ce bloc.
    ============================================================================================================ */
-@font-face{font-family:'Fraunces';font-style:italic;font-weight:500 700;font-display:swap;src:url(/fonts/fraunces-italic-latin-ext-53f886.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
-@font-face{font-family:'Fraunces';font-style:italic;font-weight:500 700;font-display:swap;src:url(/fonts/fraunces-italic-latin-fa7ce0.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
-@font-face{font-family:'Fraunces';font-style:normal;font-weight:500 700;font-display:swap;src:url(/fonts/fraunces-latin-ext-a04d35.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
-@font-face{font-family:'Fraunces';font-style:normal;font-weight:500 700;font-display:swap;src:url(/fonts/fraunces-latin-069cb9.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Fraunces';font-style:italic;font-weight:500 800;font-display:swap;src:url(/fonts/fraunces-italic-600-latin-ext-e4ab92.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Fraunces';font-style:italic;font-weight:500 800;font-display:swap;src:url(/fonts/fraunces-italic-600-latin-d23b87.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Fraunces';font-style:normal;font-weight:500 800;font-display:swap;src:url(/fonts/fraunces-600-latin-ext-71e106.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Fraunces';font-style:normal;font-weight:500 800;font-display:swap;src:url(/fonts/fraunces-600-latin-77ea58.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 @font-face{font-family:'Nunito';font-style:normal;font-weight:400 800;font-display:swap;src:url(/fonts/nunito-latin-ext-ffdc8b.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
 @font-face{font-family:'Nunito';font-style:normal;font-weight:400 800;font-display:swap;src:url(/fonts/nunito-latin-166202.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 @font-face { font-family: "Nunito Fallback"; font-weight: 100 500; src: local("Arial"), local("ArialMT"), local("Helvetica"), local("Roboto"), local("Liberation Sans"); size-adjust: 100%; }
@@ -1020,11 +1014,13 @@ main .vx-cta button.btn { cursor: pointer; font: inherit; font-weight: 700; }
   --f-body: "Nunito", "Nunito Fallback", "Segoe UI", system-ui, sans-serif;
   --f-mono: "Nunito", "Nunito Fallback", "Segoe UI", system-ui, sans-serif;
 }
+:root { --teal-fonce: #086b5f; }
+.main-nav a[aria-current="page"], .lang-nav a[aria-current="page"], .main-nav a.nav-explore { color: var(--teal-fonce); }
 :root.lite { --f-display: Georgia, "Times New Roman", serif; --f-body: "Nunito Fallback", "Segoe UI", system-ui, sans-serif; --f-mono: "Nunito Fallback", "Segoe UI", system-ui, sans-serif; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --shadow-forte: 0 22px 50px -18px rgb(0 0 0 / .7); } }
-:root[data-theme="dark"] { --shadow-forte: 0 22px 50px -18px rgb(0 0 0 / .7); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --shadow-forte: 0 22px 50px -18px rgb(0 0 0 / .7); --teal-fonce: var(--teal-d); } }
+:root[data-theme="dark"] { --shadow-forte: 0 22px 50px -18px rgb(0 0 0 / .7); --teal-fonce: var(--teal-d); }
 /* Titres en Fraunces (sauf en arabe, qui garde sa police), mots forts en italique corail */
-html:root:not([lang="ar"]) :is(h1, h2, h3, .brand, .vx-title, .section-titre) { font-family: var(--f-display); font-weight: 600; letter-spacing: -.012em; font-optical-sizing: auto; }
+html:root:not([lang="ar"]) :is(h1, h2, h3, .brand, .vx-title, .section-titre) { font-family: var(--f-display); font-weight: 600; letter-spacing: -.012em; }
 html:root:not([lang="ar"]) :is(h1 em, .vx h1 span) { font-style: italic; color: var(--teal-d); }
 html:root:not([lang="ar"]) .hero h1 em { color: inherit; }
 html:root:not([lang="ar"]) .brand span { font-style: italic; }
@@ -1038,11 +1034,11 @@ a { text-underline-offset: 3px; }
 .vx-card, .vx-hub a, .vz-row a, .tool-card, .city-card, .guide-card, .inspi-card, .deal, .tr-card { transition: transform .45s var(--doux-sortie), box-shadow .45s, border-color .3s; }
 @media (hover: hover) { :is(.tool-card, .city-card, .guide-card, .inspi-card, .deal, .tr-card):hover { transform: translateY(-6px) rotate(-.4deg); box-shadow: var(--shadow-forte); } }
 .tool-card, .guide-card { border-radius: 18px; }
-/* En-tête : crème translucide ; l'avion du logo se balance */
+/* L'avion du logo se balance quelques secondes à l'arrivée (pas en continu : cela ménage la batterie) */
 .extra .logo { border-radius: 12px; font-family: var(--f-display); }
 /* Formes douces qui flottent derrière le haut des pages */
 .board { position: relative; overflow: hidden; isolation: isolate; }
-.board::before, .board::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; filter: blur(2px); opacity: .6; pointer-events: none; }
+.board::before, .board::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; opacity: .6; pointer-events: none; }
 .board::before { width: 300px; height: 300px; background: var(--jaune); top: -110px; right: -70px; }
 .board::after { width: 190px; height: 190px; background: var(--second-clair); bottom: -90px; left: -70px; }
 /* Ruban de pays qui défile (accueil) */
@@ -1060,6 +1056,8 @@ a { text-underline-offset: 3px; }
 .sp-plus { margin-top: 40px; }
 .sp-plus .rb-l { margin: 14px 0 0; font-weight: 700; color: var(--muted); font-size: .95rem; }
 .sp-plus .ruban { margin: 8px -16px 0; }
+/* Les outils qui n'existent qu'en français ne sont proposés qu'aux lecteurs du français */
+html:not([lang="fr"]) .ruban [data-only="fr"] { display: none; }
 /* Barre de lecture, bouton « haut », apparitions */
 .mo-bar { height: 4px; }
 .haut { position: fixed; right: 16px; bottom: 156px; z-index: 45; width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: 1.2rem; cursor: pointer; box-shadow: var(--shadow); opacity: 0; transform: translateY(20px) scale(.8); pointer-events: none; transition: opacity .3s, transform .4s var(--ressort); }
@@ -1068,9 +1066,9 @@ a { text-underline-offset: 3px; }
 .mo .rv.rv-in { transform: none; }
 .vx-cta, .vz-row .vz-all { box-shadow: var(--shadow-forte); }
 @media (prefers-reduced-motion: no-preference) {
-  .brand-icon { animation: plane-bob 3.5s ease-in-out infinite; }
+  .brand-icon { animation: plane-bob 3.5s ease-in-out 4; }
   @keyframes plane-bob { 0%, 100% { transform: rotate(45deg) translate(0, 0); } 50% { transform: rotate(38deg) translate(1px, -2px) scale(1.08); } }
-  .board::before { animation: flotte 14s ease-in-out infinite; } .board::after { animation: flotte 18s ease-in-out -4s infinite; }
+  .board::before { animation: flotte 14s ease-in-out 2; } .board::after { animation: flotte 18s ease-in-out 2; }
   @keyframes flotte { 0%, 100% { transform: translate(0, 0) rotate(0); } 33% { transform: translate(18px, -22px) rotate(8deg); } 66% { transform: translate(-14px, 12px) rotate(-6deg); } }
   .ruban .piste { animation: defile 60s linear infinite; } .ruban.inv .piste { animation-direction: reverse; } .ruban.court .piste { animation-duration: 38s; } .ruban:hover .piste, .ruban:focus-within .piste { animation-play-state: paused; }
   @keyframes defile { to { transform: translateX(-50%); } }
