@@ -300,7 +300,7 @@ U = {
     "fr": dict(eyebrow="Explorer le monde", h1="Que visiter {en}", lead="{n} villes et lieux à voir, en photos.", sub="{n} lieux à voir", photo="Photo",
                title="Que visiter {en} : {n} villes et lieux à voir | Escale", desc="{nom} en photos : {lieux}… Les villes et les lieux à voir, avec de vraies photos, et les vols pour {ville}.",
                like="Ajouter {n} à mes envies", carte="Carte postale", cta="Envie de partir {en} ?", cta_p="Comparez les vols pour {ville} et choisissez vos dates.",
-               dep="Je pars de", dep0="choisir une ville", vols="Voir les vols pour {ville}", partout="Voir les prix partout dans le monde", share="Partager cette page",
+               dep="Je pars de", dep0="choisir une ville", dep_ph="ville ou aéroport", vols="Voir les vols pour {ville}", partout="Voir les prix partout dans le monde", share="Partager cette page",
                share_t="Que visiter {en} : {n} villes et lieux à voir, en photos",
                budget="Calculer le budget du voyage", b_vol="Vol aller-retour, par personne (€)", b_pers="Voyageurs", b_nuits="Nuits sur place", b_log="Logement, par nuit (€)",
                b_jour="Dépenses sur place, par jour et par personne (€)", b_note="Le prix du vol est celui repéré récemment depuis votre ville ; le logement et les dépenses sont vos propres chiffres. Escale n'invente aucun prix.",
@@ -322,7 +322,7 @@ U = {
     "en": dict(eyebrow="Explore the world", h1="What to visit {en}", lead="{n} cities and places to see, in photos.", sub="{n} places to see", photo="Photo",
                title="What to visit {en}: {n} cities and places to see | Escale", desc="{nom} in photos: {lieux}… The cities and places to see, with real photos, and flights to {ville}.",
                like="Add {n} to my wishlist", carte="Postcard", cta="Ready to go?", cta_p="Compare flights to {ville} and pick your dates.",
-               dep="I'm leaving from", dep0="choose a city", vols="See flights to {ville}", partout="See prices everywhere in the world", share="Share this page",
+               dep="I'm leaving from", dep0="choose a city", dep_ph="city or airport", vols="See flights to {ville}", partout="See prices everywhere in the world", share="Share this page",
                share_t="What to visit {en}: {n} cities and places to see, in photos",
                budget="Work out the trip budget", b_vol="Return flight, per person (€)", b_pers="Travellers", b_nuits="Nights there", b_log="Accommodation, per night (€)",
                b_jour="Spending there, per day and per person (€)", b_note="The flight price is the one spotted recently from your city; accommodation and spending are your own figures. Escale never makes up a price.",
@@ -344,7 +344,7 @@ U = {
     "it": dict(eyebrow="Esplora il mondo", h1="Cosa visitare {en}", lead="{n} città e luoghi da vedere, in foto.", sub="{n} luoghi da vedere", photo="Foto",
                title="Cosa visitare {en}: {n} città e luoghi da vedere | Escale", desc="{nom} in foto: {lieux}… Le città e i luoghi da vedere, con foto vere, e i voli per {ville}.",
                like="Aggiungi {n} ai miei desideri", carte="Cartolina", cta="Voglia di partire?", cta_p="Confronta i voli per {ville} e scegli le date.",
-               dep="Parto da", dep0="scegli una città", vols="Vedi i voli per {ville}", partout="Vedi i prezzi in tutto il mondo", share="Condividi questa pagina",
+               dep="Parto da", dep0="scegli una città", dep_ph="città o aeroporto", vols="Vedi i voli per {ville}", partout="Vedi i prezzi in tutto il mondo", share="Condividi questa pagina",
                share_t="Cosa visitare {en}: {n} città e luoghi da vedere, in foto",
                budget="Calcola il budget del viaggio", b_vol="Volo andata e ritorno, a persona (€)", b_pers="Viaggiatori", b_nuits="Notti sul posto", b_log="Alloggio, a notte (€)",
                b_jour="Spese sul posto, al giorno e a persona (€)", b_note="Il prezzo del volo è quello rilevato di recente dalla tua città; alloggio e spese sono le tue cifre. Escale non inventa nessun prezzo.",
@@ -500,7 +500,7 @@ def build(site, ctx):
                 f'</div></article>' for k, l in enumerate(L, 1))
             autres = [pays[(i + k) % len(pays)] for k in (1, 2, 3)]
             cta = (f'<section class="vx-cta" data-air="{p["air"]}" data-ville="{E(p["ville"])}" data-cc="{p["cc"]}"><h2>{E(u["cta"].format(en=p["en"]))}</h2><p>{E(u["cta_p"].format(ville=p["ville"]))}</p>'
-                   f'<p class="vx-dep"><label>{u["dep"]} <select aria-label="{u["dep"]}"><option value="">{u["dep0"]}</option></select></label></p><p class="vx-prix" role="status"></p>'
+                   f'<p class="vx-dep"><label>{u["dep"]} <input type="text" class="vx-from" inputmode="search" enterkeyhint="search" autocomplete="off" spellcheck="false" placeholder="{u["dep_ph"]}" aria-label="{u["dep"]}"></label></p><p class="vx-prix" role="status"></p>'
                    f'<a class="btn" href="/?type=vols&amp;to={p["air"]}{"" if lang == "fr" else "&amp;lang=" + lang}">{E(u["vols"].format(ville=p["ville"]))}</a>'
                    f'<a class="btn ghost" href="{u["l_partout"][0]}">{u["partout"]}</a>'
                    f'<button type="button" class="btn ghost" id="vx-share" data-t="{E(u["share_t"].format(en=p["en"], n=n))}">{u["share"]}</button>'

@@ -920,7 +920,11 @@ main .vx-cta .btn.ghost { background: rgb(255 255 255 / .16); color: #fff; borde
 .vx-search label { display: block; font-weight: 700; margin-bottom: 6px; }
 .vx-search input { width: 100%; padding: 13px 16px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: 500 16px/1.2 var(--f-body); }
 .vx-search span { display: block; margin-top: 6px; min-height: 1.4em; }
-.vx-dep { margin: 0 0 8px; font-weight: 600; }
+.vx-dep { margin: 0 0 8px; font-weight: 600; position: relative; z-index: 5; }
+.vx-dep label { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; } .vx-dep .ac-wrap { flex: 1 1 220px; max-width: 340px; color: #0f172a; font-weight: 400; }
+.vx-dep input { width: 100%; box-sizing: border-box; padding: 11px 12px; border-radius: 10px; border: 0; font: 600 16px/1.2 var(--f-body); background: #fff; color: #0f172a; }
+.vx-dep label > input { flex: 1 1 220px; max-width: 340px; width: auto; }
+.vx-dep .ac-sug { background: #fff; color: #0f172a; box-shadow: 0 18px 40px -12px rgb(0 0 0 / .45); } .vx-dep .ac-sug li:hover { background: #eef2f7; } .vx-dep .ac-sug small { color: #5b6b80; }
 .vx-dep select { margin-left: 6px; padding: 8px 10px; border-radius: 10px; border: 0; font: 600 15px/1.2 var(--f-body); background: #fff; color: #0f172a; }
 .vx-prix { min-height: 3.2em; }
 main .vx-cta button.btn { cursor: pointer; font: inherit; font-weight: 700; }

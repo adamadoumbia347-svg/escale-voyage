@@ -144,26 +144,42 @@
   // ---- 3. Page d'un pays : prix du vol depuis la ville du visiteur, puis budget du voyage
   var cta = $(".vx-cta[data-air]");
   if (cta && "IntersectionObserver" in window) {
-    var out = $(".vx-prix", cta), sel = $("select", cta), air = cta.dataset.air, cc = cta.dataset.cc, vol = $("#vb-vol", cta);
-    remplirVilles(sel, air);
-    var afficher = function (from) {
+    // Le visiteur écrit lui-même sa ville ou son aéroport de départ (3 200 aéroports, liste chargée quand il touche le champ) :
+    // jusqu'au 13 novembre 2026, c'était une liste fermée de 17 villes.
+    var out = $(".vx-prix", cta), inp = $(".vx-from", cta), air = cta.dataset.air, cc = cta.dataset.cc, vol = $("#vb-vol", cta), cur = "";
+    var afficher = function (from, nom) {
+      cur = from;
       if (!from || aero(from) === air) { out.textContent = ""; return; }
       out.textContent = T.cherche;
       prix(from).then(function (P) {
-        if (sel.value !== from) return;
+        if (cur !== from) return;
         var x = P[cc], a = $("a.btn", cta);
-        if (!x || !(x.price > 0)) { out.textContent = fmt(T.aucun, { v: VILLES[from] }); if (a) a.href = lienVols(from, air); return; }
-        out.innerHTML = "<strong>" + esc(fmt(T.prix, { a: VILLES[from], b: cta.dataset.ville, p: money(x.price) })) + "</strong> " + (x.ret ? esc(fmt(T.dates, { d1: jour(x.dep), d2: jour(x.ret) })) + " " : "") + esc(T.note);
+        if (!x || !(x.price > 0)) { out.textContent = fmt(T.aucun, { v: nom }); if (a) a.href = lienVols(from, air); return; }
+        out.innerHTML = "<strong>" + esc(fmt(T.prix, { a: nom, b: cta.dataset.ville, p: money(x.price) })) + "</strong> " + (x.ret ? esc(fmt(T.dates, { d1: jour(x.dep), d2: jour(x.ret) })) + " " : "") + esc(T.note);
         if (a) a.href = lienVols(from, air, x);
         if (vol && (!vol.value || vol.dataset.auto)) { vol.value = Math.round(x.price); vol.dataset.auto = "1"; budget(); }
       });
     };
-    sel.addEventListener("change", function () { if (sel.value) lset("escale.depart", sel.value); afficher(sel.value); });
-    var io = new IntersectionObserver(function (es) {
-      if (!es[0].isIntersecting) return; io.disconnect();
-      depart(function (c) { if (VILLES[c] && aero(c) !== air) { sel.value = c; afficher(c); } });
-    }, { rootMargin: "500px 0px" });
-    io.observe(cta);
+    var acP = null, ac = function () { // recherche de ville ou d'aéroport (site/ac-mini.js), chargée une seule fois
+      if (!acP) acP = new Promise(function (ok) {
+        if (window.EscaleAC) return ok();
+        var sc = document.createElement("script"); sc.src = "/ac-mini.js"; sc.onload = ok; sc.onerror = ok; document.head.appendChild(sc);
+      }).then(function () { return window.EscaleAC ? window.EscaleAC.ready : null; }).then(function () {
+        if (!window.EscaleAC) return;
+        window.EscaleAC.attach(inp, function (code, nom) { lset("escale.aeroport", code + "|" + nom); if (VILLES[code]) lset("escale.depart", code); afficher(code, nom); });
+        if (inp.value.trim().length >= 2 && !inp.dataset.code) inp.dispatchEvent(new Event("input")); // ce qui a été tapé pendant le chargement
+      });
+      return acP;
+    };
+    if (inp) {
+      inp.addEventListener("focus", ac); inp.addEventListener("input", function () { ac(); if (!inp.value.trim()) afficher("", ""); });
+      var io = new IntersectionObserver(function (es) {
+        if (!es[0].isIntersecting) return; io.disconnect();
+        var m = (lget("escale.aeroport") || "").split("|"); // dernier départ écrit par ce visiteur (reste dans son appareil)
+        if (/^[A-Z]{3}$/.test(m[0]) && m[1] && aero(m[0]) !== air) { inp.value = m[1] + " (" + m[0] + ")"; inp.dataset.code = m[0]; afficher(m[0], m[1]); }
+      }, { rootMargin: "500px 0px" });
+      io.observe(cta);
+    }
   }
   function budget() {
     var g = function (id) { var e = document.getElementById(id); return e ? Math.max(0, Number(e.value) || 0) : 0; }, tot = document.getElementById("vb-tot"); if (!tot) return;
