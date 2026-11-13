@@ -1,13 +1,19 @@
 {
- "code": "capvert",
+ "code": "senegal2",
  "lieux": {
-  "salplage": "Praia de Santa Maria Sal Cabo Verde",
-  "salponton": "Santa Maria pier Sal island",
-  "viana": "Deserto de Viana",
-  "chaves": "Praia de Chaves Boa Vista",
-  "salrei": "Sal Rei Boa Vista Cabo Verde",
-  "santamonica": "Praia de Santa Mónica Boa Vista"
+  "lompoul": "Désert de Lompoul dunes Sénégal",
+  "djoudj": "Djoudj National Bird Sanctuary pelicans",
+  "fadiouth": "Fadiouth island shells Senegal",
+  "fadiouth2": "Joal-Fadiouth bridge cemetery",
+  "dindefelo": "Dindefelo waterfall",
+  "bandia": "Réserve de Bandia giraffe",
+  "bandia2": "Bandia reserve rhinoceros baobab Senegal",
+  "carabane": "Carabane island Casamance",
+  "capskirring": "Cap Skirring beach",
+  "bassari": "Bassari country Kédougou village Iwol",
+  "madeleine": "Îles de la Madeleine Dakar",
+  "baobab": "baobab Senegal landscape"
  },
- "demande": "2026-11-13T13:06:50",
+ "demande": "2026-11-13T13:27:59",
  "largeur": 1920
 }
