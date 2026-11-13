@@ -1,11 +1,15 @@
 {
- "code": "villes6",
+ "code": "capvert",
  "lieux": {
-  "rw-kigali": "Kigali skyline",
-  "rw-kigali2": "Kigali Convention Centre",
-  "cg-brazzaville": "Brazzaville skyline Congo river",
-  "cg-brazzaville2": "Basilique Sainte-Anne du Congo Brazzaville"
+  "santamaria": "Santa Maria Sal Cape Verde beach pier",
+  "pedralume": "Pedra de Lume salt crater Sal",
+  "boavista": "Boa Vista Cape Verde dunes Deserto de Viana",
+  "fogo": "Pico do Fogo volcano Chã das Caldeiras",
+  "santoantao": "Santo Antão Paul valley Cape Verde",
+  "mindelo": "Mindelo São Vicente Cape Verde bay",
+  "cidadevelha": "Cidade Velha Santiago Cape Verde",
+  "tarrafal": "Tarrafal Santiago Cape Verde beach"
  },
- "demande": "2026-11-13T12:44:26",
- "max": 5
+ "demande": "2026-11-13T13:04:26",
+ "largeur": 1920
 }
