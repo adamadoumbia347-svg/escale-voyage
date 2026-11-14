@@ -1,16 +1,16 @@
 {
- "code": "ibiza",
+ "code": "hiver",
  "lieux": {
-  "daltvila": "Dalt Vila Ibiza",
-  "esvedra": "Es Vedrà Ibiza",
-  "calacomte": "Cala Comte Ibiza",
-  "caladhort": "Cala d Hort Ibiza",
-  "santantoni": "Sant Antoni de Portmany sunset",
-  "port": "Ibiza town harbour view",
-  "salines": "Ses Salines Ibiza beach",
-  "portinatx": "Cala Salada Ibiza"
+  "laponie": "aurora borealis Lapland Finland",
+  "rovaniemi": "Rovaniemi winter snow forest",
+  "marrakech": "Jemaa el-Fnaa Marrakech Koutoubia",
+  "dubai": "Dubai skyline Burj Khalifa",
+  "zanzibar": "Zanzibar beach Nungwi",
+  "saly": "Saly Senegal plage",
+  "goree": "Île de Gorée",
+  "capskirring": "Cap Skirring plage"
  },
- "demande": "2026-11-14T09:11:21",
+ "demande": "2026-11-14T09:21:28",
  "largeur": 1920,
  "max": 6
 }
