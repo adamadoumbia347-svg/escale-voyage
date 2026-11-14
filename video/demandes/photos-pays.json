@@ -1,20 +1,18 @@
 {
- "code": "villesc",
+ "code": "villesd",
  "lieux": {
-  "jib": "Djibouti city view",
-  "tnr": "Antananarivo city view",
-  "bjm": "Bujumbura city",
-  "sez": "Mahé Seychelles Victoria",
-  "wdh": "Windhoek skyline",
-  "hre": "Harare skyline",
-  "lun": "Lusaka skyline",
-  "oud": "Oujda city Morocco",
-  "pap": "Port-au-Prince city view",
-  "med": "Medina Prophet's Mosque",
-  "pek": "Beijing skyline Forbidden City",
-  "mir": "Monastir Ribat Tunisia"
+  "cay": "Cayenne French Guiana city",
+  "ruh": "Riyadh skyline Kingdom Centre",
+  "iah": "Houston skyline",
+  "atl": "Atlanta skyline",
+  "amm": "Amman city view citadel",
+  "sid": "Santa Maria Sal Cape Verde beach",
+  "bey": "Beirut skyline corniche",
+  "dza": "Mayotte lagoon Dzaoudzi",
+  "iad": "Washington DC Capitol",
+  "doh": "Doha skyline corniche"
  },
- "demande": "2026-11-14T04:31:06",
+ "demande": "2026-11-14T04:33:17",
  "largeur": 1280,
  "max": 5
 }
