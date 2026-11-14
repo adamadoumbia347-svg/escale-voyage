@@ -569,7 +569,13 @@ def credits(site):
     rows = "".join(f'<li><strong>{E(l["nom"])} ({E(p["nom"])})</strong> : <a href="{E(ph[l["key"]]["page"])}" rel="noopener">{E(ph[l["key"]]["file"].replace("File:", ""))}</a>, {E(ph[l["key"]]["author"])}, '
                    + (f'<a href="{E(ph[l["key"]]["license_url"])}" rel="noopener license">{E(ph[l["key"]]["license"])}</a>' if ph[l["key"]].get("license_url") else E(ph[l["key"]]["license"]))
                    + " (recadrée et redimensionnée)</li>" for p in pays for l in p["lieux"])
-    return f'<section><h2>Photos de la rubrique « Que visiter »</h2><ul class="links">{rows}</ul></section>'
+    # Photos de ville ajoutées le 14/11/2026 pour les pages de destinations (clés « v-<code de l'aéroport> »)
+    autres = sorted((k for k in ph if k.startswith("v-")))
+    rows2 = "".join(f'<li><strong>{E(k[2:].upper())}</strong> : <a href="{E(ph[k]["page"])}" rel="noopener">{E(ph[k]["file"].replace("File:", ""))}</a>, {E(ph[k]["author"])}, '
+                    + (f'<a href="{E(ph[k]["license_url"])}" rel="noopener license">{E(ph[k]["license"])}</a>' if ph[k].get("license_url") else E(ph[k]["license"]))
+                    + " (recadrée et redimensionnée)</li>" for k in autres)
+    return (f'<section><h2>Photos de la rubrique « Que visiter »</h2><ul class="links">{rows}</ul></section>'
+            + (f'<section><h2>Photos des pages de destinations (par code d\'aéroport)</h2><ul class="links">{rows2}</ul></section>' if rows2 else ""))
 
 
 def liens(site):

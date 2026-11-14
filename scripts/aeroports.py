@@ -154,7 +154,7 @@ def build(site, ctx, hubs_paths=None):
             hh = next((h for h in ctx.get("hotels", []) if h[0] == a[0]), None)  # page hôtels de la ville, si elle existe
             hp = (ctx["hotel_slug"](hh) if lang == "fr" else B.hotel_path(hh, "en")) if hh else None
             hotel_li = f'<li><a href="/{hp}/">{E(("Hôtels pas chers à " if lang == "fr" else "Cheap hotels in ") + c)}</a></li>' if hp else ""
-            hero = f'<p class="eyebrow">{E(a[4] if lang == "fr" else a[5])}</p><h1>{t["h1"].format(c=E(c), dc=E(de(c)))}</h1><p class="hero-lead">{E(t["lead"].format(ap=ap, code=code))}</p>'
+            hero = f'<p class="eyebrow">{E(a[4] if lang == "fr" else a[5])}</p><h1>{t["h1"].format(c=E(c), dc=E(de(c)))}</h1><p class="hero-lead">{E(t["lead"].format(ap=ap, code=code))}</p>' + B.hotel_photo(site, code, c, lang, lazy=True)
             body = (f'<section><h2>{E(t["city_h"])}</h2><ul>' + "".join(f"<li>{E(x)}</li>" for x in a[8][lang]) + "</ul></section>"
                     f'<section><h2>{E(t["sim_h"])}</h2><p>{E(t["sim"].format(ops=a[11]))}</p></section>'
                     f'<section><h2>{E(t["money_h"])}</h2><p>{E(t["money"].format(cur=cur))}</p></section>'

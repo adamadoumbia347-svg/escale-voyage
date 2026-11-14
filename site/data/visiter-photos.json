@@ -1898,6 +1898,429 @@
   "page": "https://commons.wikimedia.org/wiki/File:Times_Square_20190726.jpg",
   "w": 1100
  },
+ "v-add": {
+  "author": "DaneyWiki",
+  "file": "File:AddisView.jpg",
+  "h": 734,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:AddisView.jpg",
+  "w": 1100
+ },
+ "v-amm": {
+  "author": "Falcodigiada",
+  "file": "File:View of Amman from Citadel Hill.jpeg",
+  "h": 733,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:View_of_Amman_from_Citadel_Hill.jpeg",
+  "w": 1100
+ },
+ "v-atl": {
+  "author": "Marc Merlin",
+  "file": "File:Atlanta skyline from Jackson Street Bridge 2020.jpg",
+  "h": 733,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Atlanta_skyline_from_Jackson_Street_Bridge_2020.jpg",
+  "w": 1100
+ },
+ "v-bey": {
+  "author": "Wusel007",
+  "file": "File:Beirut Corniche from University Tower.jpg",
+  "h": 825,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Beirut_Corniche_from_University_Tower.jpg",
+  "w": 1100
+ },
+ "v-bgf": {
+  "author": "Alllexxxis",
+  "file": "File:Bangui City Centre.jpg",
+  "h": 612,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Bangui_City_Centre.jpg",
+  "w": 1100
+ },
+ "v-bjl": {
+  "author": "Atamari",
+  "file": "File:Gambia banjul arch22.JPG",
+  "h": 733,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Gambia_banjul_arch22.JPG",
+  "w": 1100
+ },
+ "v-bjm": {
+  "author": "Edouard mhg",
+  "file": "File:BUJUMBURA-BURUNDI BINDOVILLE 06.jpg",
+  "h": 619,
+  "license": "CC0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:BUJUMBURA-BURUNDI_BINDOVILLE_06.jpg",
+  "w": 1100
+ },
+ "v-can": {
+  "author": "Tim Wu",
+  "file": "File:Canton Tower 20220626 (cropped).jpg",
+  "h": 733,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Canton_Tower_20220626_(cropped).jpg",
+  "w": 1100
+ },
+ "v-cay": {
+  "author": "Cayambe",
+  "file": "File:Cayenne Banque française commerciale place des palmistes 2013.jpg",
+  "h": 513,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Cayenne_Banque_fran%C3%A7aise_commerciale_place_des_palmistes_2013.jpg",
+  "w": 1100
+ },
+ "v-czl": {
+  "author": "Abdellah zou",
+  "file": "File:Constantine infrastructures - Bridges 3.jpg",
+  "h": 731,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Constantine_infrastructures_-_Bridges_3.jpg",
+  "w": 1100
+ },
+ "v-doh": {
+  "author": "Zairon",
+  "file": "File:Doha Corniche Skyline View 2.jpg",
+  "h": 715,
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Doha_Corniche_Skyline_View_2.jpg",
+  "w": 1100
+ },
+ "v-dza": {
+  "author": "VillageHero from Ulm, Germany",
+  "file": "File:Riffs before SW Mayotte (30592452163).jpg",
+  "h": 620,
+  "license": "CC BY-SA 2.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Riffs_before_SW_Mayotte_(30592452163).jpg",
+  "w": 1100
+ },
+ "v-ebb": {
+  "author": "Todd Huffman from Phoenix, AZ",
+  "file": "File:Kampala skyline.jpg",
+  "h": 825,
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Kampala_skyline.jpg",
+  "w": 1100
+ },
+ "v-fbm": {
+  "author": "T. Thielemans",
+  "file": "File:Square in Lubumbashi, 2011.jpg",
+  "h": 730,
+  "license": "CC BY 3.0",
+  "license_url": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Square_in_Lubumbashi,_2011.jpg",
+  "w": 1100
+ },
+ "v-fih": {
+  "author": "Irene2005 from Cary, North Carolina, USA",
+  "file": "File:Kinshasa Congo.jpg",
+  "h": 715,
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Kinshasa_Congo.jpg",
+  "w": 1100
+ },
+ "v-fna": {
+  "author": "Brian Harrington Spier",
+  "file": "File:Fort Thornton - Freetown - Sierra Leone.jpg",
+  "h": 773,
+  "license": "CC BY-SA 2.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Fort_Thornton_-_Freetown_-_Sierra_Leone.jpg",
+  "w": 1100
+ },
+ "v-hre": {
+  "author": "Brandon Mushori",
+  "file": "File:Harare movers and shakers.jpg",
+  "h": 825,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Harare_movers_and_shakers.jpg",
+  "w": 1100
+ },
+ "v-iad": {
+  "author": "Martin Falbisoner",
+  "file": "File:US Capitol west side.JPG",
+  "h": 569,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:US_Capitol_west_side.JPG",
+  "w": 1100
+ },
+ "v-iah": {
+  "author": "Jason Villanueva",
+  "file": "File:Houston, Texas Skyline 2017.jpg",
+  "h": 733,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Houston,_Texas_Skyline_2017.jpg",
+  "w": 1100
+ },
+ "v-jed": {
+  "author": "Joseph Azrak",
+  "file": "File:Jeddah Corniche at night.jpg",
+  "h": 825,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Jeddah_Corniche_at_night.jpg",
+  "w": 1100
+ },
+ "v-jib": {
+  "author": "Francisco Anzola",
+  "file": "File:Place Menelik in Djibouti city (25058480721).jpg",
+  "h": 731,
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Place_Menelik_in_Djibouti_city_(25058480721).jpg",
+  "w": 1100
+ },
+ "v-kan": {
+  "author": "Pappyt101",
+  "file": "File:A view of the ancient Kano City, Nigeria.jpg",
+  "h": 619,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:A_view_of_the_ancient_Kano_City,_Nigeria.jpg",
+  "w": 1100
+ },
+ "v-lad": {
+  "author": "Lars Rohwer",
+  "file": "File:Luanda feb09 ost01.jpg",
+  "h": 730,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Luanda_feb09_ost01.jpg",
+  "w": 1100
+ },
+ "v-lun": {
+  "author": "Lupali",
+  "file": "File:Lusaka, Zambia CBD Kafue Roundabout.jpg",
+  "h": 733,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Lusaka,_Zambia_CBD_Kafue_Roundabout.jpg",
+  "w": 1100
+ },
+ "v-med": {
+  "author": "TheHadiRahim",
+  "file": "File:Wide shot of the Green Dome at The Prophet's Mosque (Al Masjid-e-Nabawi).jpg",
+  "h": 733,
+  "license": "CC0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Wide_shot_of_the_Green_Dome_at_The_Prophet%27s_Mosque_(Al_Masjid-e-Nabawi).jpg",
+  "w": 1100
+ },
+ "v-mir": {
+  "author": "IssamBarhoumi",
+  "file": "File:Ribat de Monastir 111.jpg",
+  "h": 743,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Ribat_de_Monastir_111.jpg",
+  "w": 1100
+ },
+ "v-mpm": {
+  "author": "Andrew Moore from Johannesburg, South Africa",
+  "file": "File:Avenida 24 de Julho Maputo (391897906).jpg",
+  "h": 825,
+  "license": "CC BY-SA 2.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Avenida_24_de_Julho_Maputo_(391897906).jpg",
+  "w": 1100
+ },
+ "v-ndj": {
+  "author": "Yacoub",
+  "file": "File:Place de la nation2 (Tchad).jpg",
+  "h": 825,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Place_de_la_nation2_(Tchad).jpg",
+  "w": 1100
+ },
+ "v-ndr": {
+  "author": "Rachid0615",
+  "file": "File:Corniche de Nador (Marchica).jpg",
+  "h": 825,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Corniche_de_Nador_(Marchica).jpg",
+  "w": 1100
+ },
+ "v-nim": {
+  "author": "JIRCAS Library from Tsukuba, Japan",
+  "file": "File:JIRCAS Niamey view I.jpg",
+  "h": 765,
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:JIRCAS_Niamey_view_I.jpg",
+  "w": 1100
+ },
+ "v-nkc": {
+  "author": "Meddou.abdou",
+  "file": "File:Nouakchott Mauritania.jpg",
+  "h": 825,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Nouakchott_Mauritania.jpg",
+  "w": 1100
+ },
+ "v-orn": {
+  "author": "R hakka",
+  "file": "File:Vue sur Oran - Chapelle de Santa-Cruz.jpg",
+  "h": 729,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Vue_sur_Oran_-_Chapelle_de_Santa-Cruz.jpg",
+  "w": 1100
+ },
+ "v-oua": {
+  "author": "Wegmann",
+  "file": "File:Ouagadougou city centre day.JPG",
+  "h": 733,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Ouagadougou_city_centre_day.JPG",
+  "w": 1100
+ },
+ "v-oud": {
+  "author": "Moonik",
+  "file": "File:Oujda vue générale 003.JPG",
+  "h": 620,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Oujda_vue_g%C3%A9n%C3%A9rale_003.JPG",
+  "w": 1100
+ },
+ "v-oxb": {
+  "author": "Nammarci",
+  "file": "File:Bissau city center.jpg",
+  "h": 825,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Bissau_city_center.jpg",
+  "w": 1100
+ },
+ "v-pap": {
+  "author": "U.S. Navy Photo by Chief Mass Communication Specialist James G. Pinsky",
+  "file": "File:US Navy 080916-N-2653P-276 An aerial view of the Haitian capital city, Port-Au-Prince, as seen from the United Nations Stabilization Mission in Haiti (MINUSTAH) headquarters in Port-Au-Prince.jpg",
+  "h": 609,
+  "license": "Public domain",
+  "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:US_Navy_080916-N-2653P-276_An_aerial_view_of_the_Haitian_capital_city,_Port-Au-Prince,_as_seen_from_the_United_Nations_Stabilization_Mission_in_Haiti_(MINUSTAH)_headquarters_in_Port-Au-Prince.jpg",
+  "w": 1100
+ },
+ "v-pek": {
+  "author": "N509FZ",
+  "file": "File:Southeast corner tower of Forbidden City and Beijing eastern skyline (20241127133425).jpg",
+  "h": 733,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Southeast_corner_tower_of_Forbidden_City_and_Beijing_eastern_skyline_(20241127133425).jpg",
+  "w": 1100
+ },
+ "v-pnr": {
+  "author": "ArnoBOUJIKA",
+  "file": "File:Wikimédia République du Congo - Pointe Noire. 01.jpg",
+  "h": 825,
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Wikim%C3%A9dia_R%C3%A9publique_du_Congo_-_Pointe_Noire._01.jpg",
+  "w": 1100
+ },
+ "v-rai": {
+  "author": "Original uploader was David Trainer at en.wikipedia",
+  "file": "File:Praia aerial.jpg",
+  "h": 733,
+  "license": "Public domain",
+  "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Praia_aerial.jpg",
+  "w": 1100
+ },
+ "v-rob": {
+  "author": "blk24ga",
+  "file": "File:Monrovia, Liberia - panoramio (62).jpg",
+  "h": 825,
+  "license": "CC BY 3.0",
+  "license_url": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Monrovia,_Liberia_-_panoramio_(62).jpg",
+  "w": 1100
+ },
+ "v-ruh": {
+  "author": "B.alotaby",
+  "file": "File:Riyadh Skyline.jpg",
+  "h": 619,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Riyadh_Skyline.jpg",
+  "w": 1100
+ },
+ "v-sez": {
+  "author": "NorbertNagel",
+  "file": "File:Big Ben Clock Tower - Victoria - Mahe - Seychelles - 01.jpg",
+  "h": 808,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Big_Ben_Clock_Tower_-_Victoria_-_Mahe_-_Seychelles_-_01.jpg",
+  "w": 1100
+ },
+ "v-sid": {
+  "author": "brunobarbato",
+  "file": "File:Sal cape verde santa maria - panoramio - brunobarbato (10).jpg",
+  "h": 825,
+  "license": "CC BY 3.0",
+  "license_url": "https://creativecommons.org/licenses/by/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Sal_cape_verde_santa_maria_-_panoramio_-_brunobarbato_(10).jpg",
+  "w": 1100
+ },
+ "v-ssg": {
+  "author": "Ipisking at English Wikipedia",
+  "file": "File:Malabo a 13-oct-01.jpg",
+  "h": 736,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Malabo_a_13-oct-01.jpg",
+  "w": 1100
+ },
+ "v-tms": {
+  "author": "wsrolim",
+  "file": "File:Org 4cd8129a56d8fa1d 1582100284000.jpg",
+  "h": 619,
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Org_4cd8129a56d8fa1d_1582100284000.jpg",
+  "w": 1100
+ },
+ "v-tnr": {
+  "author": "Александра Пугачевская (Alexandra Pugachevsky)",
+  "file": "File:Antananarivo city heights.jpg",
+  "h": 861,
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Antananarivo_city_heights.jpg",
+  "w": 1100
+ },
+ "v-wdh": {
+  "author": "Christoph Strässler",
+  "file": "File:Christ Church in Windhoek, Namibia.jpg",
+  "h": 619,
+  "license": "CC BY-SA 2.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "page": "https://commons.wikimedia.org/wiki/File:Christ_Church_in_Windhoek,_Namibia.jpg",
+  "w": 1100
+ },
  "za-blyde": {
   "author": "Claudirene",
   "file": "File:Three Rondavels, Blyde River Canyon Nature Reserve, Mpumalanga, South Africa.jpg",

@@ -277,7 +277,8 @@ def build_hubs(site, ctx, route_paths, hotel_paths):
             know = (f'<section class="know"><h2>{E(K[0].format(b=b))}</h2>' + "".join(f"<p>{E(x)}</p>" for x in paras)
                     + (f'<h3>{E(K[5])}</h3><ul>' + "".join(f"<li>{E(x)}</li>" for x in notes[:4]) + "</ul>" if notes and K[5] else "") + "</section>")
             hero = (f'<p class="eyebrow">{E(loc(TR.COUNTRIES, country, lang))}</p><h1>{h["h1"].format(b=E(b))}</h1>'
-                    f'<p class="hero-lead">{E(h["lead"].format(b=b, n=len(rs)))}</p>')
+                    f'<p class="hero-lead">{E(h["lead"].format(b=b, n=len(rs)))}</p>'
+                    + __import__("build_i18n").hotel_photo(site, code, b, lang, lazy=True))  # photo de la ville, créditée
             body = (f'<dl class="facts">' + "".join(f"<div><dt>{E(k)}</dt><dd>{E(v)}</dd></div>" for k, v in facts) + "</dl>"
                     f'<section class="hub"><h2>{E(h["table_h"].format(b=b))}</h2><p class="small">{E(h["table_p"])}</p>'
                     f'<table class="hub-table"><thead><tr><th scope="col">{E(h["th"][0])}</th><th scope="col">{E(h["th"][1])}</th>'

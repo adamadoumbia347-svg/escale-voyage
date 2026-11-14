@@ -236,29 +236,44 @@ def route_path(r, lang):
 # Photo de la ville en haut des pages hôtels : vraie photo créditée (site/data/photos.json, Wikimedia Commons). Pour les villes
 # qui n'y sont pas, une photo de la rubrique « Que visiter » prise dans la même ville (site/data/visiter-photos.json).
 PHOTO_L = {"fr": "Photo", "en": "Photo", "es": "Foto", "pt": "Foto", "it": "Foto", "de": "Foto", "nl": "Foto", "ar": "الصورة"}
-PHOTO_VISITER = {"DLA": "cm-douala", "LFW": "tg-lome"}
+# Depuis le 14 novembre 2026, la même photo sert à toutes les pages d'une destination (trajets, « vols pour… », fêtes, aéroports) :
+# photo de la ville (photos.json), sinon photo « Que visiter » de la même ville, sinon photo de ville ajoutée sous la clé « v-<code> ».
+PHOTO_VISITER = {"DLA": "cm-douala", "LFW": "tg-lome", "LOS": "ng-lagos", "JNB": "za-johannesburg", "LBV": "ga-libreville", "KGL": "rw-kigali",
+                 "CDG": "fr-paris", "ORY": "fr-paris", "PAR": "fr-paris", "CKY": "gn-conakry", "COO": "bj-cotonou", "ABV": "ng-abuja", "NSI": "cm-yaounde",
+                 "BZV": "cg-brazzaville", "DAR": "tz-dar", "CPT": "za-lecap", "MRS": "fr-marseille", "LYS": "fr-lyon", "RBA": "ma-rabat", "BOD": "fr-bordeaux"}
+# Aéroports d'une ville qui a déjà sa photo sous un autre code
+PHOTO_ALIAS = {"LHR": "LON", "LGW": "LON", "STN": "LON", "LTN": "LON", "YUL": "YMQ", "MXP": "MIL", "LIN": "MIL", "BGY": "MIL", "FCO": "ROM", "CIA": "ROM",
+               "EWR": "JFK", "NYC": "JFK", "NRT": "HND", "TYO": "HND", "SAW": "IST", "DWC": "DXB", "ARN": "STO", "TFS": "TCI", "TFN": "TCI", "KEF": "REK"}
 _PH = {}
 
 
-def hotel_photo(site, code, alt, lang):
+def dest_photo_data(site, code):
+    """(src, srcset, auteur, licence) de la photo d'une destination, ou None."""
     if not _PH:
         _PH["v"] = {p["code"]: p for p in json.loads((site / "data" / "photos.json").read_text(encoding="utf-8"))}
         f = site / "data" / "visiter-photos.json"
         _PH["x"] = json.loads(f.read_text(encoding="utf-8")) if f.exists() else {}
-    p = _PH["v"].get(code)
+    p = _PH["v"].get(code) or _PH["v"].get(PHOTO_ALIAS.get(code, ""))
     if p:
         big = p["img"].replace(".webp", "-1280.webp")
         src, w = (big, 1280) if (site / big.lstrip("/")).exists() else (p["img"], 800)
         srcset = f' srcset="{p["img_small"]} 480w, {src} {w}w"' if p.get("img_small") else ""
-        author, lic = p["author"], p["license"]
-    else:
-        k = PHOTO_VISITER.get(code)
+        return src, srcset, p["author"], p["license"]
+    for k in (PHOTO_VISITER.get(code), "v-" + code.lower(), "v-" + PHOTO_ALIAS.get(code, "").lower()):
         x = _PH["x"].get(k) if k else None
-        if not x or not (site / "img" / "visiter" / f"{k}.webp").exists():
-            return ""
-        src, srcset = f"/img/visiter/{k}.webp", f' srcset="/img/visiter/{k}-640.webp 640w, /img/visiter/{k}.webp 1100w"'
-        author, lic = x["author"], x["license"]
-    return (f'<img class="pv-hero" src="{src}"{srcset} sizes="(max-width: 700px) 92vw, 760px" alt="{E(alt)}" width="1280" height="560" fetchpriority="high">'
+        if x and (site / "img" / "visiter" / f"{k}.webp").exists():
+            return f"/img/visiter/{k}.webp", f' srcset="/img/visiter/{k}-640.webp 640w, /img/visiter/{k}.webp 1100w"', x["author"], x["license"]
+    return None
+
+
+def hotel_photo(site, code, alt, lang, lazy=False):
+    """Photo créditée de la destination. lazy=True : pages où la photo n'est pas en haut de l'écran (chargée plus tard, sans priorité)."""
+    d = dest_photo_data(site, code)
+    if not d:
+        return ""
+    src, srcset, author, lic = d
+    attr = 'loading="lazy" decoding="async"' if lazy else 'fetchpriority="high"'
+    return (f'<img class="pv-hero" src="{src}"{srcset} sizes="(max-width: 700px) 92vw, 760px" alt="{E(alt)}" width="1280" height="560" {attr}>'
             f'<p class="pv-cred small">{PHOTO_L.get(lang, "Photo")} : {E(author[:50])}, {E(lic)} · Wikimedia Commons</p>')
 
 

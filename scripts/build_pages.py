@@ -801,6 +801,8 @@ def _langue_inline(site):
 NOFOLLOW_RX = re.compile(r'<a (?![^>]*\brel=)([^>]*href="/\?type=)')
 
 
+DEST_RX = re.compile(r'id="(?:route-calendar|price-alert)"[^>]*data-to="([A-Z]{3})"')
+HERO_FIN = '\n</div></div>\n<div class="wrap">'
 VIEWPORT_RX = re.compile(r'<meta name="viewport"[^>]*>')
 FONT_PRELOAD = "".join(f'\n<link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/{f}">'
                        for f in ("nunito-latin-166202.woff2", "fraunces-600-latin-77ea58.woff2", "fraunces-italic-600-latin-d23b87.woff2"))
@@ -819,6 +821,16 @@ def langue_auto(site):
         u = LANGUE_RX.sub("", t)  # ancienne version (fichier séparé ou copie précédente) retirée
         # Recherches préremplies : les robots n'ont pas à suivre ces liens (déjà interdits dans robots.txt, 35 % des appels au Worker le 13/11/2026)
         u = NOFOLLOW_RX.sub(r'<a rel="nofollow" \1', u)
+        # Photo de la destination sous le titre des pages trajets et fêtes, dans toutes les langues (demande de Dobam, 14/11/2026) :
+        # la destination est lue dans la page (data-to du calendrier ou de l'alerte prix). Chargée après le reste (loading="lazy").
+        if 'class="pv-hero"' not in u:
+            m = DEST_RX.search(u)
+            if m and HERO_FIN in u:
+                h1 = re.search(r"<h1[^>]*>(.*?)</h1>", u, re.S)
+                lg = re.search(r'<html[^>]* lang="([a-z]{2})', u)
+                ph = build_i18n.hotel_photo(site, m.group(1), html.unescape(re.sub(r"<[^>]+>", "", h1.group(1))).strip() if h1 else "", lg.group(1) if lg else "fr", lazy=True)
+                if ph:
+                    u = u.replace(HERO_FIN, ph + HERO_FIN, 1)
         # Polices du haut de page demandées dès le début du chargement, sur les accueils seulement
         # Mesuré le 13/11/2026 : utile sur les accueils (feuille de style dans la page : premier affichage 0,3 s plus tôt), mais sur les
         # autres pages les polices passent devant pages.css et retardent le premier texte de 0,15 s : on ne précharge donc que là.
