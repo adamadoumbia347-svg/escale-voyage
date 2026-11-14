@@ -267,13 +267,15 @@ def dest_photo_data(site, code):
 
 
 def hotel_photo(site, code, alt, lang, lazy=False):
-    """Photo créditée de la destination. lazy=True : pages où la photo n'est pas en haut de l'écran (chargée plus tard, sans priorité)."""
+    """Photo créditée de la destination. lazy=True : pages trajets, « vols pour… », fêtes, aéroports (photo sous le titre, version légère sur téléphone)."""
     d = dest_photo_data(site, code)
     if not d:
         return ""
     src, srcset, author, lic = d
-    attr = 'loading="lazy" decoding="async"' if lazy else 'fetchpriority="high"'
-    return (f'<img class="pv-hero" src="{src}"{srcset} sizes="(max-width: 700px) 92vw, 760px" alt="{E(alt)}" width="1280" height="560" {attr}>'
+    # Mesuré le 14/11/2026 sur réseau mobile lent : avec loading="lazy", la photo arrivait vers 2,6 s ; sans, vers 1,4 s.
+    # Sur téléphone, « 50vw » fait choisir la version 640 px (assez nette, deux à trois fois plus légère que la grande).
+    attr, sizes = ('decoding="async"', "(max-width: 700px) 50vw, 760px") if lazy else ('fetchpriority="high"', "(max-width: 700px) 92vw, 760px")
+    return (f'<img class="pv-hero" src="{src}"{srcset} sizes="{sizes}" alt="{E(alt)}" width="1280" height="560" {attr}>'
             f'<p class="pv-cred small">{PHOTO_L.get(lang, "Photo")} : {E(author[:50])}, {E(lic)} · Wikimedia Commons</p>')
 
 

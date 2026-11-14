@@ -822,7 +822,7 @@ def langue_auto(site):
         # Recherches préremplies : les robots n'ont pas à suivre ces liens (déjà interdits dans robots.txt, 35 % des appels au Worker le 13/11/2026)
         u = NOFOLLOW_RX.sub(r'<a rel="nofollow" \1', u)
         # Photo de la destination sous le titre des pages trajets et fêtes, dans toutes les langues (demande de Dobam, 14/11/2026) :
-        # la destination est lue dans la page (data-to du calendrier ou de l'alerte prix). Chargée après le reste (loading="lazy").
+        # la destination est lue dans la page (data-to du calendrier ou de l'alerte prix).
         if 'class="pv-hero"' not in u:
             m = DEST_RX.search(u)
             if m and HERO_FIN in u:
