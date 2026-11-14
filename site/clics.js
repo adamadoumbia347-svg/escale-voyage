@@ -56,8 +56,23 @@
   try { if (!sessionStorage.getItem("escale.v")) { sessionStorage.setItem("escale.v", "1"); store("escale.visites", String(++visits)); } } catch (e) {}
   var standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone;
   var deferred = null;
-  addEventListener("beforeinstallprompt", function (ev) { ev.preventDefault(); deferred = ev; });
   var ios = /iphone|ipad|ipod/i.test(navigator.userAgent) && !/crios|fxios/i.test(navigator.userAgent);
+  // Bouton « Installer Escale » de l'accueil (demande de Dobam, 14/11/2026) : visible seulement si le téléphone permet l'installation
+  // (Android et ordinateurs : invite du navigateur ; iPhone : on rappelle le geste « Partager puis Sur l'écran d'accueil »)
+  var ib = document.getElementById("inst-btn");
+  var showIb = function () { if (ib && I && !standalone && (deferred || ios)) { ib.textContent = "📲 " + I[1] + " Escale"; ib.hidden = false; } };
+  addEventListener("beforeinstallprompt", function (ev) { ev.preventDefault(); deferred = ev; showIb(); });
+  addEventListener("appinstalled", function () { if (ib) ib.hidden = true; });
+  showIb();
+  if (ib) ib.addEventListener("click", function () {
+    if (deferred) { deferred.prompt(); send("installer-appli"); deferred = null; ib.hidden = true; return; }
+    var old = document.querySelector(".inst-bar"); if (old) old.remove();
+    var b = document.createElement("div"); b.className = "inst-bar";
+    b.innerHTML = '<img src="/icon-192.png" alt="" width="36" height="36"><p></p><button type="button" class="inst-x" aria-label="×">×</button>';
+    b.querySelector("p").textContent = I[2];
+    b.querySelector(".inst-x").addEventListener("click", function () { b.remove(); });
+    document.body.appendChild(b); send("installer-aide");
+  });
   if (I && visits >= 2 && !standalone && !store("escale.install.non") && !/^\/recherche\//.test(path)) {
     setTimeout(function () {
       if (document.querySelector(".cc-bar") || (!deferred && !ios)) return; // bandeau des cookies affiché, ou installation impossible
