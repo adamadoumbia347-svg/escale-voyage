@@ -1704,8 +1704,10 @@
       if (routes.length < 4) return; // pas assez de données : on garde les trajets de départ
       const dd = (n) => { const x = parse(addDays(today, n)); return String(x.getDate()).padStart(2, "0") + String(x.getMonth() + 1).padStart(2, "0"); };
       const city = from.name.replace(/\s*\([A-Z]{3}\)$/, "");
-      h.textContent = fmt(T("Trajets populaires depuis {c}, aller-retour dès", "Popular routes from {c}, round trip from"), { c: city });
-      row.innerHTML = routes.map((r) => `<a class="pop-chip" href="/recherche/?flightSearch=${from.code}${dd(45)}${r.to}${dd(52)}1"><span>${esc(city)} → ${esc(byCode.get(r.to)[1])}</span><b class="pr">${esc(money(r.price, d.currency))}</b></a>`).join("");
+      // Ruban qui défile sous le titre : étiquette + trajets, écrits deux fois pour que le défilement boucle sans coupure
+      const lab = "✈️ " + fmt(T("Depuis {c}, aller-retour dès", "From {c}, round trip from"), { c: city });
+      const chips = routes.map((r) => `<a class="pop-chip" href="/recherche/?flightSearch=${from.code}${dd(45)}${r.to}${dd(52)}1"><span>${esc(city)} → ${esc(byCode.get(r.to)[1])}</span><b class="pr">${esc(money(r.price, d.currency))}</b></a>`).join("");
+      row.innerHTML = `<span class="rb-t" id="pop-hero-h">${esc(lab)}</span>${chips}<span class="rb-t" aria-hidden="true">${esc(lab)}</span>${chips.replace(/<a /g, '<a tabindex="-1" aria-hidden="true" ')}`;
     });
   }
   function fromChanged() {

@@ -121,7 +121,7 @@ export const onRequest = async (ctx: Ctx) => {
     // Pays du visiteur (donné par Cloudflare, sans cookie) : ordre des villes du titre animé et des offres du jour
     const pays = String(((ctx.request as any).cf || {}).country || "")
     // Offres du jour juste au-dessus du titre (à la place de l'étiquette « comparateur de la diaspora »)
-    // Trajets populaires sous le moteur : pour un visiteur d'un pays où Escale suit des départs (hors France, déjà la liste de départ),
+    // Trajets populaires (ruban sous le titre) : pour un visiteur d'un pays où Escale suit des départs (hors France, déjà la liste de départ),
     // les trajets de son pays avec leur prix du jour remplacent ceux de Paris (demande de Dobam, 11 novembre 2026)
     if (PAYS_SUIVIS.has(pays) && pays !== "FR") {
       // Villes de départ du pays à tour de rôle (Milan, Rome, Milan, Rome…) pour qu'aucune ne remplisse la liste à elle seule
@@ -132,7 +132,10 @@ export const onRequest = async (ctx: Ctx) => {
       const prix = await Promise.race([knownPrices(ctx, loc.map((r) => [r[0], r[1]] as [string, string])).catch(() => ({} as Record<string, Known>)), new Promise<Record<string, Known>>((ok) => setTimeout(() => ok({}), WAIT_MS))])
       const chips = loc.filter((r) => prix[`${r[0]}-${r[1]}`]).map((r) => { const k = prix[`${r[0]}-${r[1]}`]
         return `<a class="pop-chip" href="/recherche/" data-wl="${r[0]}-${r[1]}"><span>${esc(r[2])}</span><b class="pr" data-r="${r[0]}-${r[1]}">${esc(money(k.price))}${arrow(k.d7)}</b></a>` })
-      if (chips.length >= 2) out = out.replace(/(<div class="pop-row" id="pop-hero-row">)[\s\S]*?(<\/div>)/, (_m, a, z) => a + chips.join("") + z)
+      // Depuis le 14 novembre 2026, ces trajets défilent sous le titre (ruban) : étiquette + trajets, écrits deux fois pour que la boucle soit continue
+      const lab = (cache: boolean) => `<span class="rb-t"${cache ? ' aria-hidden="true"' : ' id="pop-hero-h"'} data-en="✈️ Popular routes, round trip from">✈️ Trajets populaires, aller-retour dès</span>`
+      const tous = chips.join("")
+      if (chips.length >= 2) out = out.replace(/(<div class="piste" id="pop-hero-row">)[\s\S]*?(<\/div>)/, (_m, a, z) => a + lab(false) + tous + lab(true) + tous.replace(/<a /g, '<a tabindex="-1" aria-hidden="true" ') + z)
     }
     let petits: Offre[] = []
     if (PAYS_SUIVIS.has(pays) && !(d?.items || []).some((r) => PAYS_DEPART[r.from] === pays)) {
