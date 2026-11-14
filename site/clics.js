@@ -180,6 +180,7 @@
     try { if (navigator.sendBeacon && navigator.sendBeacon("/api/clic", body)) return; } catch (e) {}
     try { fetch("/api/clic", { method: "POST", body: body, keepalive: true }); } catch (e) {}
   };
+  window.ESCALE_CLIC = send; // recherches lancées depuis le formulaire (site/app.js)
   document.addEventListener("click", function (ev) {
     var t = ev.target;
     if (t && t.closest && t.closest("#tpwl-tickets")) { send("moteur-resultat"); return; }

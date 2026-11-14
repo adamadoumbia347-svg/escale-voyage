@@ -501,6 +501,9 @@
       <div class="pass-stub"><b>${esc(stubBig)}</b>${esc(stubSmall)}</div></div>`;
   }
   let booting = true;
+  // Recherche lancée depuis le formulaire (pas celle que la page relance toute seule à l'ouverture) : +1 au compteur anonyme
+  // « moteur-form » (site/clics.js, /api/clic), pour que le nombre de recherches de la semaine les compte aussi (demande de Dobam, 14/11/2026)
+  const compte = () => { if (!booting && window.ESCALE_CLIC) { try { window.ESCALE_CLIC("moteur-form"); } catch (e) {} } };
   // Les résultats restent cachés tant que le visiteur n'a pas lancé de recherche (ou ouvert un lien de recherche)
   let searched = false;
   ["form-vols", "form-hotels", "form-voitures"].forEach((id) => $(id).addEventListener("submit", () => { if (!booting) searched = true; }, true));
@@ -1366,6 +1369,7 @@
     if (!ow && (!ret || ret < dep)) return (err.textContent = T("La date de retour doit être après l’aller.", "The return date must be after departure."));
     const s = { from, to, dep, ret, adults: +$("f-adults").value, children: +$("f-children").value, cabin: $("f-cabin").value,
       flex: $("f-flex").checked, direct: $("f-direct").checked };
+    compte();
     renderFlights(s);
     if (!booting && fromTouched) store.set("escale.from", labelOf(from.code));
     remember({ tab: "vols", label: `✈ ${from.code}→${to ? to.code : "?"} · ${dep.slice(5)}`,
@@ -1381,6 +1385,7 @@
     if (!a || !b || b <= a) return (err.textContent = T("La date de départ doit être après la date d’arrivée.", "Check-out must be after check-in."));
     if (a < today) return (err.textContent = T("La date d’arrivée est déjà passée.", "The check-in date is in the past."));
     const s = { dest, in: a, out: b, adults: +$("h-adults").value, rooms: +$("h-rooms").value };
+    compte();
     renderHotels(s);
     remember({ tab: "hotels", label: `🛏 ${dest} · ${a.slice(5)}`, fields: snapshot(["h-dest", "h-in", "h-out", "h-adults", "h-rooms"]) });
   });
@@ -1395,6 +1400,7 @@
     if (!d1 || !d2 || d2 < d1 || (d2 === d1 && t2 <= t1)) return (err.textContent = T("La restitution doit être après la prise en charge.", "Drop-off must be after pick-up."));
     if (d1 < today) return (err.textContent = T("La date de prise en charge est déjà passée.", "The pick-up date is in the past."));
     const s = { pick, drop, d1, d2, t1, t2 };
+    compte();
     renderCars(s);
     remember({ tab: "voitures", label: `🚗 ${pick.code || pick.name} · ${d1.slice(5)}`, fields: snapshot(["c-pick", "c-drop", "c-other", "c-d1", "c-t1", "c-d2", "c-t2", "c-age"]) });
   });

@@ -1,8 +1,10 @@
 import { Ctx, json, edgeCached } from "../_lib/common"
-// Compteur public de l'accueil : nombre de recherches et comparaisons lancées sur Escale ces 7 derniers jours
-// (somme des clics anonymes vers le moteur et les sites partenaires, voir api/clic.ts). Gardé 1 heure.
+// Compteur public de l'accueil : nombre de recherches ouvertes sur Escale ces 7 derniers jours, c'est-à-dire les recherches lancées
+// depuis le formulaire (« moteur-form », compté depuis le 14 novembre 2026) et les clics sur un trajet ou un prix qui ouvrent une
+// recherche (« moteur-lien », « trajet-populaire »). Les clics sur un résultat ou vers un site partenaire ne sont plus comptés ici
+// (ce ne sont pas des recherches ; ils restent dans le bilan). Clics anonymes, voir api/clic.ts. Gardé 1 heure.
 // Seul un total est rendu : ni détail, ni donnée personnelle (le compteur n'en enregistre aucune).
-const SEARCH = /^(moteur-|aviasales|trajet-populaire|tripcom|stay22|skyscanner|kayak|momondo|booking|agoda|klook|tp-media|economybookings|airalo|kiwitaxi|compensair)/
+const SEARCH = /^(moteur-form|moteur-lien|trajet-populaire)$/
 export const onRequestGet = (ctx: Ctx) => edgeCached(ctx, 3600, async () => {
   const env = ctx.env
   if (!env.ESCALE) return json({ available: false })
