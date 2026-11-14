@@ -1,16 +1,10 @@
 {
- "code": "villese",
+ "code": "villesf",
  "lieux": {
-  "fih": "Kinshasa",
-  "nkc": "Nouakchott",
-  "fna": "Freetown Sierra Leone",
-  "lad": "Luanda",
-  "bjm": "Bujumbura",
-  "hre": "Harare",
-  "lun": "Lusaka",
-  "dza": "Mayotte"
+  "lun": "Lusaka Zambia city",
+  "ndr": "Nador Morocco Marchica"
  },
- "demande": "2026-11-14T04:35:24",
+ "demande": "2026-11-14T04:37:41",
  "largeur": 1280,
  "max": 6
 }
