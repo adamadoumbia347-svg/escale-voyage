@@ -385,7 +385,9 @@ async function fillHub(ctx: Ctx, html: string) {
   const depDe = (to: string): Depart | null => grp[to] || grp[VILLE_DE[to] || ""] || null
   const prices = cells.map((m, i) => (found[i] && found[i]!.length ? Math.min(...found[i]!.map((r) => r.price)) : releve.get(`${m[1]}-${m[2]}`) ?? (m[1] === org && depDe(m[2]) ? depDe(m[2])!.p : null)))
   // Prix le plus bas de la page dans le titre et la description (onglet, Google, aperçu des liens partagés) : « Cheap flights to Tunis from €74 – … »
-  const all = prices.filter((x): x is number => typeof x === "number")
+  // Le prix du titre est celui des vols VERS la ville ; les départs n'y entrent que si le titre dit « to & from » (pages en anglais)
+  const deux = /(&amp;|&) from /.test((html.match(/<title>([^<]*)<\/title>/) || [])[1] || "")
+  const all = prices.filter((x, k): x is number => typeof x === "number" && (deux || cells[k][1] !== org))
   if (all.length) {
     const best = money(Math.min(...all))
     // Le prix se place avant les deux-points du titre (« Vols pas chers pour Dakar dès 353 € : comparer… »), sinon à la fin
