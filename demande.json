@@ -1,0 +1,16 @@
+{
+ "code": "villesafrique",
+ "lieux": {
+  "lecap": "Cape Town Table Mountain city view",
+  "lecap2": "Cape Town from Signal Hill",
+  "lecaire": "Cairo skyline Nile",
+  "gizeh": "Giza pyramids Cairo city",
+  "stonetown": "Stone Town Zanzibar",
+  "dakar": "Dakar corniche city view",
+  "renaissance": "African Renaissance Monument Dakar",
+  "koutoubia": "Koutoubia Marrakech"
+ },
+ "demande": "2026-11-14T13:11:16",
+ "largeur": 1920,
+ "max": 6
+}

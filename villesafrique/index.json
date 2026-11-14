@@ -1,0 +1,657 @@
+{
+ "code": "villesafrique",
+ "lieux": {
+  "lecap": {
+   "recherche": "Cape Town Table Mountain city view",
+   "photos": [
+    {
+     "image": "lecap/01.jpg",
+     "fichier": "File:Cape Town City Bowl and Table Mountain at dawn.jpg",
+     "auteur": "Daniel Case",
+     "licence": "CC BY-SA 3.0",
+     "description": "The City Bowl area of Cape Town and Table Mountain seen from the roof of the Strand South hotel",
+     "largeur": 5268,
+     "hauteur": 3381,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:Cape_Town_City_Bowl_and_Table_Mountain_at_dawn.jpg"
+    },
+    {
+     "image": "lecap/02.jpg",
+     "fichier": "File:Cape Town (ZA), Table Mountain -- 2024 -- 3437.jpg",
+     "auteur": "Dietmar Rabich",
+     "licence": "CC BY-SA 4.0",
+     "description": "View of Table Mountain from Orange Street, Cape Town , Western Cape , South Africa",
+     "largeur": 6559,
+     "hauteur": 3689,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:Cape_Town_(ZA),_Table_Mountain_--_2024_--_3437.jpg"
+    },
+    {
+     "image": "lecap/03.jpg",
+     "fichier": "File:Cape Town (ZA), Table Mountain, Blick auf City Bowl -- 2024 -- 2826.jpg",
+     "auteur": "Dietmar Rabich",
+     "licence": "CC BY-SA 4.0",
+     "description": "View of the city center (City Bowl) from Table Mountain , Table Mountain Nature Reserve , Cape Town , Western Cape , South Africa",
+     "largeur": 6720,
+     "hauteur": 4480,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:Cape_Town_(ZA),_Table_Mountain,_Blick_auf_City_Bowl_--_2024_--_2826.jpg"
+    },
+    {
+     "image": "lecap/04.jpg",
+     "fichier": "File:Cape Town (ZA), Table Mountain, Blick auf City Bowl -- 2024 -- 2855.jpg",
+     "auteur": "Dietmar Rabich",
+     "licence": "CC BY-SA 4.0",
+     "description": "View of the city center (City Bowl) from Table Mountain , Table Mountain Nature Reserve , Cape Town , Western Cape , South Africa",
+     "largeur": 6720,
+     "hauteur": 4480,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:Cape_Town_(ZA),_Table_Mountain,_Blick_auf_City_Bowl_--_2024_--_2855.jpg"
+    },
+    {
+     "image": "lecap/05.jpg",
+     "fichier": "File:View from Table Mountain, Cape Town 01.jpg",
+     "auteur": "Satdeep Gill",
+     "licence": "CC BY-SA 4.0",
+     "description": "View from Table Mountain, Cape Town",
+     "largeur": 7952,
+     "hauteur": 5304,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:View_from_Table_Mountain,_Cape_Town_01.jpg"
+    },
+    {
+     "image": "lecap/06.jpg",
+     "fichier": "File:Table Mountain, Cape Town (P1050222).jpg",
+     "auteur": "Matti Blume",
+     "licence": "CC BY-SA 4.0",
+     "description": "Table Mountain, Cape Town",
+     "largeur": 4000,
+     "hauteur": 3000,
+     "categories": [
+      "CC-BY-SA-4.0",
+      "July 2018 Cape Town photographs",
+      "Quality images",
+      "Quality images by MB-one",
+      "Quality images missing SDC depicts",
+      "Quality images of Cape Town",
+      "Table Mountain seen from City Bowl"
+     ],
+     "page": "https://commons.wikimedia.org/wiki/File:Table_Mountain,_Cape_Town_(P1050222).jpg"
+    }
+   ]
+  },
+  "lecap2": {
+   "recherche": "Cape Town from Signal Hill",
+   "photos": [
+    {
+     "image": "lecap2/01.jpg",
+     "fichier": "File:Cape Town (ZA), Sea Point, Nachtansicht -- 2024 -- 1867-70 - 2.jpg",
+     "auteur": "Dietmar Rabich",
+     "licence": "CC BY-SA 4.0",
+     "description": "Photographic art based on a view towards Signal Hill at night, Cape Town , Western Cape , South Africa The photograph was composed of two shots. One was created by deliberately moving the camera (ICM, Intentional Camera Movement ) horizontally, the other by moving it vertically.",
+     "largeur": 4665,
+     "hauteur": 3499,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:Cape_Town_(ZA),_Sea_Point,_Nachtansicht_--_2024_--_1867-70_-_2.jpg"
+    },
+    {
+     "image": "lecap2/02.jpg",
+     "fichier": "File:Paragliding, Cape Town (P1050339).jpg",
+     "auteur": "Matti Blume",
+     "licence": "CC BY-SA 4.0",
+     "description": "Wikimania 2018, Cape Town",
+     "largeur": 3606,
+     "hauteur": 2704,
+     "categories": [
+      "2018 in paragliding",
+      "CC-BY-SA-4.0",
+      "July 2018 Cape Town photographs",
+      "Lion's Head seen from Table Mountain plateau",
+      "Paragliding in South Africa",
+      "Quality images",
+      "Quality images by MB-one",
+      "Quality images missing SDC depicts",
+      "Robben Island seen from Table Mountain",
+      "Signal Hill seen from Table Mountain",
+      "Taken with Panasonic DMC-GH1 and LEICA DG SUMMILUX 25/F1.4",
+      "Uploaded with LrMediaWiki"
+     ],
+     "page": "https://commons.wikimedia.org/wiki/File:Paragliding,_Cape_Town_(P1050339).jpg"
+    },
+    {
+     "image": "lecap2/03.jpg",
+     "fichier": "File:Dassies, Cape Town (P1050367).jpg",
+     "auteur": "Matti Blume",
+     "licence": "CC BY-SA 4.0",
+     "description": "Dassies on Table Mountain, Cape Town",
+     "largeur": 4000,
+     "hauteur": 3000,
+     "categories": [
+      "CC-BY-SA-4.0",
+      "Cape Town Stadium",
+      "Procavia capensis of Table Mountain",
+      "Quality images",
+      "Quality images by MB-one",
+      "Quality images of Cape Town",
+      "Quality images of Procavia capensis",
+      "Quality images of mammals in South Africa"
+     ],
+     "page": "https://commons.wikimedia.org/wiki/File:Dassies,_Cape_Town_(P1050367).jpg"
+    },
+    {
+     "image": "lecap2/04.jpg",
+     "fichier": "File:View of Table Mountain from Signal Hill 4.jpg",
+     "auteur": "Photograph by Mike Peel ( www.mikepeel.net ).",
+     "licence": "CC BY-SA 4.0",
+     "description": "View of Table Mountain from Signal Hill.",
+     "largeur": 5184,
+     "hauteur": 3456,
+     "categories": [
+      "Blue sky in the Western Cape",
+      "CC-BY-SA-4.0",
+      "June 2014 in South Africa",
+      "Photos by Mike Peel using a Canon EOS 60D",
+      "Quality images",
+      "Quality images by Mike Peel",
+      "Quality images missing SDC depicts",
+      "Quality images of Cape Town",
+      "Self-published work",
+      "Table Mountain cableway",
+      "Table Mountain seen from Signal Hill"
+     ],
+     "page": "https://commons.wikimedia.org/wiki/File:View_of_Table_Mountain_from_Signal_Hill_4.jpg"
+    },
+    {
+     "image": "lecap2/05.jpg",
+     "fichier": "File:View of Table Mountain from Signal Hill 1.jpg",
+     "auteur": "Photograph by Mike Peel ( www.mikepeel.net ).",
+     "licence": "CC BY-SA 4.0",
+     "description": "View of Table Mountain , Cape Town from Signal Hill.",
+     "largeur": 5084,
+     "hauteur": 3389,
+     "categories": [
+      "Blue sky in the Western Cape",
+      "CC-BY-SA-4.0",
+      "Files with coordinates missing SDC location of creation",
+      "Images with extracted images",
+      "June 2014 in South Africa",
+      "Photos by Mike Peel using a Canon EOS 60D",
+      "Quality images",
+      "Quality images by Mike Peel",
+      "Quality images missing SDC depicts",
+      "Quality images of Western Cape",
+      "Self-published work",
+      "Table Mountain seen from Lion's Head"
+     ],
+     "page": "https://commons.wikimedia.org/wiki/File:View_of_Table_Mountain_from_Signal_Hill_1.jpg"
+    },
+    {
+     "image": "lecap2/06.jpg",
+     "fichier": "File:View from Signal Hill, Cape Town, South Africa14.jpg",
+     "auteur": "dconvertini",
+     "licence": "CC BY-SA 2.0",
+     "description": "View from Signal Hill",
+     "largeur": 6000,
+     "hauteur": 4000,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:View_from_Signal_Hill,_Cape_Town,_South_Africa14.jpg"
+    }
+   ]
+  },
+  "lecaire": {
+   "recherche": "Cairo skyline Nile",
+   "photos": [
+    {
+     "image": "lecaire/01.jpg",
+     "fichier": "File:Cairo skyline, Nile River, Egypt.jpg",
+     "auteur": "Vyacheslav Argenberg",
+     "licence": "CC BY 4.0",
+     "description": "Cairo skyline, Nile River, Egypt.",
+     "largeur": 3072,
+     "hauteur": 2048,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:Cairo_skyline,_Nile_River,_Egypt.jpg"
+    },
+    {
+     "image": "lecaire/02.jpg",
+     "fichier": "File:Cairo skyline, Panoramic view, Egypt.jpg",
+     "auteur": "Vyacheslav Argenberg",
+     "licence": "CC BY 4.0",
+     "description": "Panoramic view, Cairo skyline, Nile River, Egypt.",
+     "largeur": 3072,
+     "hauteur": 2048,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:Cairo_skyline,_Panoramic_view,_Egypt.jpg"
+    },
+    {
+     "image": "lecaire/03.jpg",
+     "fichier": "File:Nile in Cairo.jpg",
+     "auteur": "Ghaly",
+     "licence": "CC BY-SA 3.0",
+     "description": "View of the nile in Cairo",
+     "largeur": 2592,
+     "hauteur": 1944,
+     "categories": [
+      "CC-BY-SA-3.0",
+      "Egypt photographs taken on 2009-09-27",
+      "GFDL",
+      "License migration redundant",
+      "Nile in Cairo",
+      "Self-published work",
+      "Skylines of Cairo",
+      "Taken with Nokia N97"
+     ],
+     "page": "https://commons.wikimedia.org/wiki/File:Nile_in_Cairo.jpg"
+    },
+    {
+     "image": "lecaire/04.jpg",
+     "fichier": "File:Cairo and Nile Skyline.jpg",
+     "auteur": "Staeiou",
+     "licence": "CC BY-SA 2.0",
+     "description": "This is a photo of a monument in Egypt identified by the ID",
+     "largeur": 2304,
+     "hauteur": 1728,
+     "categories": [
+      "CC-BY-SA-2.0",
+      "Cairo in the 2000s",
+      "Cultural heritage monuments in Egypt with known IDs",
+      "Egypt photographs taken on 2008-07-16"
+     ],
+     "page": "https://commons.wikimedia.org/wiki/File:Cairo_and_Nile_Skyline.jpg"
+    },
+    {
+     "image": "lecaire/05.jpg",
+     "fichier": "File:Cairo skyline in the morning - Flickr - StartAgain.jpg",
+     "auteur": "Gary Denham from Edinburgh, Scotland",
+     "licence": "CC BY-SA 2.0",
+     "description": "Gezira Island. The El Gezira Hilton and the Cairo Tower (not to mention the smog!) dominate the skyline.",
+     "largeur": 2048,
+     "hauteur": 1536,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:Cairo_skyline_in_the_morning_-_Flickr_-_StartAgain.jpg"
+    },
+    {
+     "image": "lecaire/06.jpg",
+     "fichier": "File:El Gezirah Hotel, Cairo (2398217835).jpg",
+     "auteur": "air babble from England",
+     "licence": "CC BY 2.0",
+     "description": "Skyline of Cairo from the River Nile, featuring the Sofitel El Gezirah Hotel",
+     "largeur": 3072,
+     "hauteur": 2304,
+     "categories": [
+      "CC-BY-2.0",
+      "Cairo Tower in 2006",
+      "Egypt photographs taken on 2006-05-23",
+      "El Gezirah Hotel",
+      "Files with coordinates missing SDC location of creation",
+      "Flickr images reviewed by File Upload Bot (Magnus Manske)",
+      "Gezira Island",
+      "Nile in Cairo",
+      "Skylines of Cairo",
+      "Taken with Sony DSC-P150"
+     ],
+     "page": "https://commons.wikimedia.org/wiki/File:El_Gezirah_Hotel,_Cairo_(2398217835).jpg"
+    }
+   ]
+  },
+  "gizeh": {
+   "recherche": "Giza pyramids Cairo city",
+   "photos": [
+    {
+     "image": "gizeh/01.jpg",
+     "fichier": "File:Giza Traffic.JPG",
+     "auteur": "Faris El-Gwely",
+     "licence": "CC BY-SA 3.0",
+     "description": "الزحام في مدينة الجيزة، مصر.",
+     "largeur": 4320,
+     "hauteur": 3240,
+     "categories": [
+      "CC-BY-SA-3.0",
+      "Giza",
+      "Self-published work",
+      "Works by Faris El-Gwely"
+     ],
+     "page": "https://commons.wikimedia.org/wiki/File:Giza_Traffic.JPG"
+    },
+    {
+     "image": "gizeh/02.jpg",
+     "fichier": "File:Pyramids of Giza, Giza, GG, EGY (47113315194).jpg",
+     "auteur": "Warren LeMay from Chicago, IL, United States",
+     "licence": "CC0",
+     "description": "These are the famous Pyramids at Giza, located outside the former Ancient Egyptian cities of Memphis and Heliopolis, located south and north of modern-day Cairo, respectively. The earliest pyramids were located at Saqqara, to the south, which included the stepped pyramid, the bent pyramid, and the r",
+     "largeur": 3358,
+     "hauteur": 2517,
+     "categories": [
+      "CC-Zero",
+      "Files with coordinates missing SDC location of creation",
+      "Flickr images reviewed by FlickreviewR 2",
+      "Giza pyramid complex"
+     ],
+     "page": "https://commons.wikimedia.org/wiki/File:Pyramids_of_Giza,_Giza,_GG,_EGY_(47113315194).jpg"
+    },
+    {
+     "image": "gizeh/03.jpg",
+     "fichier": "File:Pyramids of Giza, Giza, GG, EGY (46986597135).jpg",
+     "auteur": "Warren LeMay from Chicago, IL, United States",
+     "licence": "CC0",
+     "description": "These are the famous Pyramids at Giza, located outside the former Ancient Egyptian cities of Memphis and Heliopolis, located south and north of modern-day Cairo, respectively. The earliest pyramids were located at Saqqara, to the south, which included the stepped pyramid, the bent pyramid, and the r",
+     "largeur": 2294,
+     "hauteur": 1720,
+     "categories": [
+      "CC-Zero",
+      "Files with coordinates missing SDC location of creation",
+      "Flickr images reviewed by FlickreviewR 2",
+      "Giza pyramid complex"
+     ],
+     "page": "https://commons.wikimedia.org/wiki/File:Pyramids_of_Giza,_Giza,_GG,_EGY_(46986597135).jpg"
+    },
+    {
+     "image": "gizeh/04.jpg",
+     "fichier": "File:Pyramids of Giza, Giza, GG, EGY (46986591195).jpg",
+     "auteur": "Warren LeMay from Chicago, IL, United States",
+     "licence": "CC0",
+     "description": "These are the famous Pyramids at Giza, located outside the former Ancient Egyptian cities of Memphis and Heliopolis, located south and north of modern-day Cairo, respectively. The earliest pyramids were located at Saqqara, to the south, which included the stepped pyramid, the bent pyramid, and the r",
+     "largeur": 2231,
+     "hauteur": 2977,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:Pyramids_of_Giza,_Giza,_GG,_EGY_(46986591195).jpg"
+    },
+    {
+     "image": "gizeh/05.jpg",
+     "fichier": "File:Pyramids of Giza, Giza, GG, EGY (46986577715).jpg",
+     "auteur": "Warren LeMay from Chicago, IL, United States",
+     "licence": "CC0",
+     "description": "These are the famous Pyramids at Giza, located outside the former Ancient Egyptian cities of Memphis and Heliopolis, located south and north of modern-day Cairo, respectively. The earliest pyramids were located at Saqqara, to the south, which included the stepped pyramid, the bent pyramid, and the r",
+     "largeur": 4032,
+     "hauteur": 3024,
+     "categories": [
+      "CC-Zero",
+      "Files with coordinates missing SDC location of creation"
+     ],
+     "page": "https://commons.wikimedia.org/wiki/File:Pyramids_of_Giza,_Giza,_GG,_EGY_(46986577715).jpg"
+    },
+    {
+     "image": "gizeh/06.jpg",
+     "fichier": "File:Pyramids of Giza, Giza, GG, EGY (46986580415).jpg",
+     "auteur": "Warren LeMay from Chicago, IL, United States",
+     "licence": "CC0",
+     "description": "These are the famous Pyramids at Giza, located outside the former Ancient Egyptian cities of Memphis and Heliopolis, located south and north of modern-day Cairo, respectively. The earliest pyramids were located at Saqqara, to the south, which included the stepped pyramid, the bent pyramid, and the r",
+     "largeur": 4032,
+     "hauteur": 3024,
+     "categories": [
+      "CC-Zero",
+      "Files with coordinates missing SDC location of creation",
+      "Flickr images reviewed by FlickreviewR 2",
+      "Giza pyramid complex"
+     ],
+     "page": "https://commons.wikimedia.org/wiki/File:Pyramids_of_Giza,_Giza,_GG,_EGY_(46986580415).jpg"
+    }
+   ]
+  },
+  "stonetown": {
+   "recherche": "Stone Town Zanzibar",
+   "photos": [
+    {
+     "image": "stonetown/01.jpg",
+     "fichier": "File:Sail Boat Sunset Stone Town Zanzibar Oct26 OM3 1123.jpg",
+     "auteur": "This Photo was taken by Timothy A. Gonsalves . Feel free to use my photos, but please mention me as the author. I would ",
+     "licence": "CC BY-SA 4.0",
+     "description": "Fishing boat sailing past the setting sun, Stone Town harbour, Unguja Urban West, Zanzibar",
+     "largeur": 4083,
+     "hauteur": 3062,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:Sail_Boat_Sunset_Stone_Town_Zanzibar_Oct26_OM3_1123.jpg"
+    },
+    {
+     "image": "stonetown/02.jpg",
+     "fichier": "File:Azam Sea Link 2 Ferry Stone Town Oct26 OM3 1121.jpg",
+     "auteur": "This Photo was taken by Timothy A. Gonsalves . Feel free to use my photos, but please mention me as the author. I would ",
+     "licence": "CC BY-SA 4.0",
+     "description": "Azam Sea Link 2 ferry anchored off Stone Town harbour, Zanzibar",
+     "largeur": 4929,
+     "hauteur": 2773,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:Azam_Sea_Link_2_Ferry_Stone_Town_Oct26_OM3_1121.jpg"
+    },
+    {
+     "image": "stonetown/03.jpg",
+     "fichier": "File:Beach Stone Town Zanzibar Oct26 A7CR 14408.jpg",
+     "auteur": "This Photo was taken by Timothy A. Gonsalves . Feel free to use my photos, but please mention me as the author. I would ",
+     "licence": "CC BY-SA 4.0",
+     "description": "Beach with boats and people swimming, Stone Town harbour, Zanzibar",
+     "largeur": 8653,
+     "hauteur": 5769,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:Beach_Stone_Town_Zanzibar_Oct26_A7CR_14408.jpg"
+    },
+    {
+     "image": "stonetown/04.jpg",
+     "fichier": "File:Narrow Street Stone Town Zanzibar Oct26 A7CR 14422.jpg",
+     "auteur": "This Photo was taken by Timothy A. Gonsalves . Feel free to use my photos, but please mention me as the author. I would ",
+     "licence": "CC BY-SA 4.0",
+     "description": "Kenyatta Road, Balcony House restaurant on the right. Stone Town, Zanzibar",
+     "largeur": 5965,
+     "hauteur": 8948,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:Narrow_Street_Stone_Town_Zanzibar_Oct26_A7CR_14422.jpg"
+    },
+    {
+     "image": "stonetown/05.jpg",
+     "fichier": "File:Narrow Street Stone Town Zanzibar Oct26 A7CR 14404.jpg",
+     "auteur": "This Photo was taken by Timothy A. Gonsalves . Feel free to use my photos, but please mention me as the author. I would ",
+     "licence": "CC BY-SA 4.0",
+     "description": "Narrow street, Stone Town, Zanzibar",
+     "largeur": 5346,
+     "hauteur": 9504,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:Narrow_Street_Stone_Town_Zanzibar_Oct26_A7CR_14404.jpg"
+    },
+    {
+     "image": "stonetown/06.jpg",
+     "fichier": "File:Cat Sitting Street Stone Town Zanzibar Oct26 A7CR 14664.jpg",
+     "auteur": "This Photo was taken by Timothy A. Gonsalves . Feel free to use my photos, but please mention me as the author. I would ",
+     "licence": "CC BY-SA 4.0",
+     "description": "Domestic cat ( Felis catus ) lying in a street in Stone Town, Zanzibar",
+     "largeur": 7443,
+     "hauteur": 4652,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:Cat_Sitting_Street_Stone_Town_Zanzibar_Oct26_A7CR_14664.jpg"
+    }
+   ]
+  },
+  "dakar": {
+   "recherche": "Dakar corniche city view",
+   "photos": []
+  },
+  "renaissance": {
+   "recherche": "African Renaissance Monument Dakar",
+   "photos": [
+    {
+     "image": "renaissance/01.jpg",
+     "fichier": "File:African Renaissance Monument Dakar 2025.jpg",
+     "auteur": "Gromane",
+     "licence": "CC0",
+     "description": "African Renaissance Monument in Dakar in 2025 during the rainy season (wintering)",
+     "largeur": 3000,
+     "hauteur": 4000,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:African_Renaissance_Monument_Dakar_2025.jpg"
+    },
+    {
+     "image": "renaissance/02.jpg",
+     "fichier": "File:StatueDakarInside.jpg",
+     "auteur": "Jjm2311",
+     "licence": "CC BY-SA 4.0",
+     "description": "Inside the African Renaissance Monument in Dakar",
+     "largeur": 4000,
+     "hauteur": 6000,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:StatueDakarInside.jpg"
+    },
+    {
+     "image": "renaissance/03.jpg",
+     "fichier": "File:Au pieds du monument de la renaissance africaine.jpg",
+     "auteur": "Bigfall91",
+     "licence": "CC BY-SA 4.0",
+     "description": "L'image décrit des personnes entrain d'escalader les marche du monument de la renaissance de Dakar.",
+     "largeur": 2592,
+     "hauteur": 1944,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:Au_pieds_du_monument_de_la_renaissance_africaine.jpg"
+    },
+    {
+     "image": "renaissance/04.jpg",
+     "fichier": "File:African Renaissance Monument (5502494604).jpg",
+     "auteur": "Jeff Attaway",
+     "licence": "CC BY 2.0",
+     "description": "Image was captured by a camera suspended by a kite line. Kite Aerial Photography (KAP) 7' Rok",
+     "largeur": 3041,
+     "hauteur": 2281,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:African_Renaissance_Monument_(5502494604).jpg"
+    },
+    {
+     "image": "renaissance/05.jpg",
+     "fichier": "File:Mamelles-Dakar-2009.jpg",
+     "auteur": "Evan M. Wheeler",
+     "licence": "CC BY-SA 2.0",
+     "description": "Les Mamelles, collines volcaniques de Dakar (Sénégal). A gauche, le Monument de la Renaissance ; à droite le phare des Mamelles",
+     "largeur": 2783,
+     "hauteur": 1901,
+     "categories": [
+      "African Renaissance Monument",
+      "CC-BY-SA-2.0",
+      "December 2009 in Senegal",
+      "Flickr images missing SDC creator",
+      "Flickr images missing SDC source of file",
+      "Flickr images reviewed by trusted users",
+      "Phare des Mamelles",
+      "Taken with Nikon D5000",
+      "Views of Dakar"
+     ],
+     "page": "https://commons.wikimedia.org/wiki/File:Mamelles-Dakar-2009.jpg"
+    },
+    {
+     "image": "renaissance/06.jpg",
+     "fichier": "File:Ouakam depuis le Monument de la Renaissance Africaine.jpg",
+     "auteur": "Dorothy Voorhees",
+     "licence": "CC BY-SA 2.0",
+     "description": "Le quartier de Ouakam (Dakar) vu depuis le Monument de la Renaissance Africaine",
+     "largeur": 2444,
+     "hauteur": 1824,
+     "categories": [
+      "African Renaissance Monument",
+      "CC-BY-SA-2.0",
+      "Flickr images missing SDC creator",
+      "Flickr images missing SDC source of file",
+      "Flickr images reviewed by trusted users",
+      "Ouakam",
+      "Taken with Canon PowerShot A560"
+     ],
+     "page": "https://commons.wikimedia.org/wiki/File:Ouakam_depuis_le_Monument_de_la_Renaissance_Africaine.jpg"
+    }
+   ]
+  },
+  "koutoubia": {
+   "recherche": "Koutoubia Marrakech",
+   "photos": [
+    {
+     "image": "koutoubia/01.jpg",
+     "fichier": "File:Mosquée de la Koutoubia - marakesh.jpg",
+     "auteur": "Baca12",
+     "licence": "CC BY-SA 4.0",
+     "description": "Koutoubia Mosque, in Marrakesh, Morocco",
+     "largeur": 3648,
+     "hauteur": 2736,
+     "categories": [
+      "2015 in Marrakech",
+      "CC-BY-SA-4.0",
+      "Images from Wiki Loves Monuments 2016",
+      "Images from Wiki Loves Monuments 2016 in Morocco",
+      "Images from Wiki Loves Monuments missing SDC depicts",
+      "Images from Wiki Loves Monuments missing SDC location of creation",
+      "Koutoubia Gardens",
+      "Koutoubia Minaret",
+      "Morocco photographs taken on 2015-10-09",
+      "Mosques in Morocco photographed in 2015",
+      "Nominated pictures for Wiki Loves Monuments International",
+      "Quality images"
+     ],
+     "page": "https://commons.wikimedia.org/wiki/File:Mosqu%C3%A9e_de_la_Koutoubia_-_marakesh.jpg"
+    },
+    {
+     "image": "koutoubia/02.jpg",
+     "fichier": "File:Koutoubia minaret from the city.JPG",
+     "auteur": "Schorle",
+     "licence": "CC BY-SA 4.0",
+     "description": "The minaret of the Koutoubia Mosque - view over the rooftops of the city of Marrakech.",
+     "largeur": 5184,
+     "hauteur": 3456,
+     "categories": [
+      "CC-BY-SA-4.0",
+      "Koutoubia Minaret",
+      "Koutoubia Mosque",
+      "Morocco photographs taken on 2016-02-13",
+      "Quality images",
+      "Quality images missing SDC depicts",
+      "Quality images of Marrakech",
+      "Quality images of minarets in Morocco",
+      "Self-published work"
+     ],
+     "page": "https://commons.wikimedia.org/wiki/File:Koutoubia_minaret_from_the_city.JPG"
+    },
+    {
+     "image": "koutoubia/03.jpg",
+     "fichier": "File:Koutoubia Marrakech. Jp.jpg",
+     "auteur": "Hamid ait taleb",
+     "licence": "CC BY-SA 4.0",
+     "description": "مسجد الكتبية بمراكش",
+     "largeur": 1968,
+     "hauteur": 3122,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:Koutoubia_Marrakech._Jp.jpg"
+    },
+    {
+     "image": "koutoubia/04.jpg",
+     "fichier": "File:Koutoubia-marrakech.jpg",
+     "auteur": "Tonkie",
+     "licence": "CC BY-SA 3.0",
+     "description": "Distance shot of Koutoubia in Marrakeck (Morocco)",
+     "largeur": 2303,
+     "hauteur": 3072,
+     "categories": [
+      "CC-BY-SA-3.0",
+      "GFDL",
+      "Koutoubia Gardens",
+      "Koutoubia Mosque",
+      "License migration redundant",
+      "Self-published work"
+     ],
+     "page": "https://commons.wikimedia.org/wiki/File:Koutoubia-marrakech.jpg"
+    },
+    {
+     "image": "koutoubia/05.jpg",
+     "fichier": "File:A01 - Marrakech, Koutoubia.jpg",
+     "auteur": "Misa.stefanovic.07",
+     "licence": "CC BY-SA 4.0",
+     "description": "Marrakech, Medina, Koutoubia Minaret",
+     "largeur": 6000,
+     "hauteur": 4000,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:A01_-_Marrakech,_Koutoubia.jpg"
+    },
+    {
+     "image": "koutoubia/06.jpg",
+     "fichier": "File:Marrakech Koutoubia Mosque (54273634927).jpg",
+     "auteur": "Jorge Franganillo",
+     "licence": "CC BY 2.0",
+     "description": "Marrakech (Morocco)",
+     "largeur": 5962,
+     "hauteur": 3577,
+     "categories": [],
+     "page": "https://commons.wikimedia.org/wiki/File:Marrakech_Koutoubia_Mosque_(54273634927).jpg"
+    }
+   ]
+  }
+ }
+}
