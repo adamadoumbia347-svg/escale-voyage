@@ -1,20 +1,20 @@
 {
- "code": "villesb",
+ "code": "villesc",
  "lieux": {
-  "rob": "Monrovia city view",
-  "ndj": "N'Djamena city",
-  "ssg": "Malabo city Equatorial Guinea",
-  "fna": "Freetown city view",
-  "pnr": "Pointe-Noire Congo city",
-  "lad": "Luanda skyline bay",
-  "bgf": "Bangui city view",
-  "fbm": "Lubumbashi city",
-  "can": "Guangzhou skyline Canton Tower",
-  "czl": "Constantine Algeria bridge",
-  "ebb": "Kampala skyline",
-  "mpm": "Maputo skyline"
+  "jib": "Djibouti city view",
+  "tnr": "Antananarivo city view",
+  "bjm": "Bujumbura city",
+  "sez": "Mahé Seychelles Victoria",
+  "wdh": "Windhoek skyline",
+  "hre": "Harare skyline",
+  "lun": "Lusaka skyline",
+  "oud": "Oujda city Morocco",
+  "pap": "Port-au-Prince city view",
+  "med": "Medina Prophet's Mosque",
+  "pek": "Beijing skyline Forbidden City",
+  "mir": "Monastir Ribat Tunisia"
  },
- "demande": "2026-11-14T04:29:12",
+ "demande": "2026-11-14T04:31:06",
  "largeur": 1280,
  "max": 5
 }
