@@ -28,9 +28,29 @@
       list.forEach(function (x) { var k = prices[x.f + "-" + x.t]; if (k && k.price) x.p = k.price; });
       set("escale.trajets", JSON.stringify(list));
     };
+    var known = {};
     fetch("/api/connus?r=" + list.map(function (x) { return x.f + "-" + x.t; }).join(","))
       .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
-      .then(function (j) { paint((j && j.prix) || {}); });
+      .then(function (j) { known = (j && j.prix) || {}; paint(known); });
+    // Trajets gardés avec leurs seuls codes (« FCO → ABJ ») : on écrit le nom des villes (« Rome → Abidjan »), demande de Dobam du 14/11/2026.
+    // Liste des aéroports partagée avec app.js (un seul téléchargement) : [code, ville, nom, pays…]
+    if (list.some(function (x) { return /^[A-Z]{3} → [A-Z]{3}$/.test(x.l || ""); })) {
+      var VILLES = { LON: "Londres", MIL: "Milan", ROM: "Rome", NYC: "New York", PAR: "Paris", TYO: "Tokyo", STO: "Stockholm", BUH: "Bucarest", MOW: "Moscou", YMQ: "Montréal", YTO: "Toronto" };
+      var nommer = function () {
+        window.ESCALE_AIRPORTS = window.ESCALE_AIRPORTS || fetch("/data/airports-lite.json").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
+        window.ESCALE_AIRPORTS.then(function (db) {
+          if (!db) return;
+          var by = {}; db.forEach(function (a) { by[a[0]] = a[1] || a[2]; });
+          var nom = function (c) { return by[c] || (lang === "fr" && VILLES[c]) || c; }, changed = false;
+          list.forEach(function (x) {
+            if (!/^[A-Z]{3} → [A-Z]{3}$/.test(x.l || "")) return;
+            var l = nom(x.f) + " → " + nom(x.t); if (l !== x.l) { x.l = l; changed = true; }
+          });
+          if (changed) paint(known);
+        });
+      };
+      if (document.readyState === "complete") nommer(); else addEventListener("load", nommer);
+    }
   }
 
   // 2. (Retiré le 13 novembre 2026, à la demande de Dobam : plus de photo derrière le titre de l'accueil.)
