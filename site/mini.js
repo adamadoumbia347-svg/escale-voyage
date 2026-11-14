@@ -23,6 +23,8 @@
     all(function (e) { e.classList.remove("mini-on"); });
     btns.forEach(function (b) { b.setAttribute("aria-expanded", b.getAttribute("data-g") === g ? "true" : "false"); });
     cur = g;
+    // Rubrique ouverte : son contenu vient tout de suite sous les icônes (« Ta prochaine escale » et « Tes recherches récentes » se replient)
+    document.documentElement.classList.toggle("mini-open", !!g);
     if (!g) return;
     G[g].s.forEach(function (q) { [].forEach.call(document.querySelectorAll(q), function (e) { e.classList.add("mini-on"); }); });
     if (tab && G[g].t) { var t = document.getElementById(G[g].t); if (t && !t.hidden) t.click(); }
