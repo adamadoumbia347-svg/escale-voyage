@@ -84,7 +84,7 @@ T = {
                how_h="Comment lire ce graphique", how=["Chaque barre est le meilleur prix aller-retour trouvé récemment pour un départ ce mois-là (calendrier des prix de notre partenaire Aviasales).",
                    "Les mois lointains ont souvent moins de prix connus : un mois vide ne veut pas dire qu'il n'y a pas de vol.",
                    "Les vacances scolaires et les fêtes font monter les prix : partir quelques jours avant ou après change beaucoup."],
-               idx_title="Meilleur mois pour partir : le mois le moins cher pour 30 destinations | Escale",
+               idx_title="Meilleur mois pour partir : le mois le moins cher, 30 villes | Escale",
                idx_desc="Le mois le moins cher pour partir à Dakar, Abidjan, Marrakech, New York, Bali, Tokyo et 24 autres destinations, en direct depuis votre aéroport.",
                idx_h1="Le meilleur mois <span>pour partir</span>", idx_lead="Choisissez une destination : vous verrez le prix aller-retour le plus bas de chaque mois, depuis votre aéroport.",
                other="Autres destinations", change="Changer d'aéroport", photo="Photo"),

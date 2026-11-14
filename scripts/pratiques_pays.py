@@ -224,7 +224,7 @@ def build(site, ctx):
             fr = lang == "fr"
             name = nf if fr else ne
             guide = f"arriver-aeroport-{sf}" if fr else f"en/arriving-at-{se}-airport"
-            title = (f"Hôtel près de l'aéroport de {name} : arriver de nuit sereinement | Escale" if fr else f"Hotel near {name} airport: arriving at night with peace of mind | Escale")
+            title = (f"Hôtel près de l'aéroport de {name} : arriver de nuit sereinement | Escale" if fr else f"Hotel near {name} airport: arriving at night, stress-free | Escale")
             desc = (f"Vol qui arrive de nuit à {name} ? Les hôtels proches de l'aéroport, le transfert à réserver et les bons réflexes pour arriver sereinement." if fr else f"Landing at night in {name}? Hotels close to the airport, the transfer to book and good habits to arrive with peace of mind.")
             hero = f'<p class="eyebrow">🌙 {"Arrivée de nuit" if fr else "Night arrival"}</p><h1>{("Dormir près de l’aéroport <span>de " + E(name) + "</span>") if fr else ("Sleep near <span>" + E(name) + " airport</span>")}</h1><p class="hero-lead">{E(desc)}</p>'
             urls.append(B.write(site, paths[lang], lang, title, desc, hero, PV.transfer(code, lang) + night_body(site, lang, name, code, guide), "", paths, ctx))

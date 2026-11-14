@@ -243,7 +243,7 @@ def p_controle():
                 f'<label><span>{lab[7]}</span><select id="cv-name">{nopt}</select></label></div><button class="btn" type="submit">{lab[8]}</button></form><div id="cv-out" aria-live="polite"></div>'
                 + SCRIPTS("controle"))
         P[lang] = dict(path="controle-avant-vol" if fr else "en/pre-flight-check",
-                       title="Contrôle avant le vol : nom, passeport, visa, évite le refus d'embarquement | Escale" if fr else "Pre-flight check: name, passport, visa, avoid being denied boarding | Escale",
+                       title="Contrôle avant le vol : nom, passeport, visa, évite le refus d'embarquement | Escale" if fr else "Pre-flight check: name, passport, visa, avoid denied boarding | Escale",
                        desc="En 1 minute, vérifie que le nom du billet correspond au passeport, que le passeport est assez valable pour ta destination et s'il te faut un visa. Évite d'être refusé à l'embarquement." if fr else "In 1 minute, check the ticket name matches your passport, your passport is valid long enough for your destination and whether you need a visa. Avoid being denied boarding.",
                        h1="Contrôle <span>avant le vol</span>" if fr else "Pre-flight <span>check</span>",
                        lead="Les deux causes les plus fréquentes de refus à l'embarquement : un nom qui ne correspond pas au passeport, et un passeport pas assez valable. Vérifie en 1 minute." if fr else "The two most common reasons for being denied boarding: a name that doesn't match the passport, and a passport not valid long enough. Check in 1 minute.", body=body)

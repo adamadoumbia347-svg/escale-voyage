@@ -18,12 +18,12 @@ LANGS = ["en", "es", "pt", "ar", "it", "de"]
 COL = {"es": 0, "pt": 1, "ar": 2, "it": 3, "de": 4}
 LOCALE = {"fr": "fr_FR", "en": "en_GB", "es": "es_ES", "pt": "pt_PT", "ar": "ar", "it": "it_IT", "de": "de_DE"}
 META = {
-    "en": ("Escale: cheap flights to every destination, live prices", "Cheap flights to every destination: live prices from dozens of airlines, the cheapest day, hotels and car rental. Free, no fees added.", "Route and hotel guides"),
-    "es": ("Escale: vuelos baratos a todos los destinos, precios en directo", "Vuelos baratos a todos los destinos: precios en directo de decenas de aerolíneas, el día más barato, hoteles y coches de alquiler. Gratis, sin comisiones.", "Guías de rutas y hoteles"),
-    "pt": ("Escale: voos baratos para todos os destinos, preços ao vivo", "Voos baratos para todos os destinos: preços ao vivo de dezenas de companhias, o dia mais barato, hotéis e aluguer de carro. Grátis, sem taxas.", "Guias de rotas e hotéis"),
-    "ar": ("Escale: رحلات طيران رخيصة إلى كل الوجهات بأسعار مباشرة", "رحلات رخيصة إلى كل الوجهات: أسعار مباشرة من عشرات شركات الطيران، أرخص يوم، فنادق وتأجير سيارات. مجانًا ودون رسوم إضافية.", "أدلة الرحلات والفنادق"),
-    "it": ("Escale: voli economici per tutte le destinazioni, prezzi in diretta", "Voli economici per tutte le destinazioni: prezzi in diretta di decine di compagnie, il giorno più economico, hotel e noleggio auto. Gratis, senza costi aggiunti.", "Guide di tratte e hotel"),
-    "de": ("Escale: günstige Flüge zu allen Zielen, Live-Preise", "Günstige Flüge zu allen Zielen: Live-Preise von Dutzenden Airlines, der günstigste Tag, Hotels und Mietwagen. Kostenlos, ohne Aufpreis.", "Strecken- und Hotelratgeber"),
+    "en": ("Escale: cheap flights to Africa and worldwide, live prices", "Cheap flights to Africa, the Maghreb and worldwide: live prices from dozens of airlines, the cheapest day, hotels and car rental. Free, no fees added.", "Route and hotel guides"),
+    "es": ("Escale: vuelos baratos a África y a todo el mundo, en directo", "Vuelos baratos a África, el Magreb y todo el mundo: precios en directo de decenas de aerolíneas, el día más barato, hoteles y coches. Gratis, sin comisiones.", "Guías de rutas y hoteles"),
+    "pt": ("Escale: voos baratos para África e todo o mundo, preços ao vivo", "Voos baratos para África, o Magrebe e todo o mundo: preços ao vivo de dezenas de companhias, o dia mais barato, hotéis e aluguer de carro. Grátis, sem taxas.", "Guias de rotas e hotéis"),
+    "ar": ("Escale: رحلات طيران رخيصة إلى أفريقيا وكل العالم بأسعار مباشرة", "رحلات رخيصة إلى أفريقيا والمغرب العربي وكل العالم: أسعار مباشرة من عشرات شركات الطيران، أرخص يوم، فنادق وتأجير سيارات. مجانًا ودون رسوم إضافية.", "أدلة الرحلات والفنادق"),
+    "it": ("Escale: voli economici per l'Africa e il mondo, prezzi in diretta", "Voli economici per l'Africa, il Maghreb e tutto il mondo: prezzi in diretta di decine di compagnie, il giorno più economico, hotel e auto. Gratis.", "Guide di tratte e hotel"),
+    "de": ("Escale: günstige Flüge nach Afrika und weltweit, Live-Preise", "Günstige Flüge nach Afrika, in den Maghreb und weltweit: Live-Preise von Dutzenden Airlines, der günstigste Tag, Hotels und Mietwagen. Kostenlos.", "Strecken- und Hotelratgeber"),
 }
 MORE = {"en": "All routes and hotels", "es": "Todas las rutas y hoteles", "pt": "Todas as rotas e hotéis", "ar": "كل الرحلات والفنادق",
         "it": "Tutte le tratte e gli hotel", "de": "Alle Strecken und Hotels"}

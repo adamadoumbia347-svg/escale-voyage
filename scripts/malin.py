@@ -46,7 +46,7 @@ def build(page, wa_btn):
             '<li><a href="/acheter-ou-attendre/">Acheter maintenant ou attendre ? Le verdict trajet par trajet</a></li>'
             '<li><a href="/bons-plans/">Les bons plans du jour</a></li></ul></section>'
             + _faq(faq) + '<script src="/match.js" defer></script>')
-    urls.append(page("match-des-aeroports", "Match des aéroports : de quelle ville partir pour payer moins cher ? | Escale",
+    urls.append(page("match-des-aeroports", "Match des aéroports : de quelle ville partir pour payer moins ? | Escale",
                      "Dakar, Abidjan, Casablanca, Alger, Tunis, Lagos… : le classement des villes de départ (Paris, Bruxelles, Milan, Rome, Genève, Londres…) avec les prix relevés aujourd'hui.",
                      hero, body, _faq_ld(faq)))
 

@@ -312,7 +312,9 @@ function render(html: string, from: string, to: string, rows: Month[], hist: Poi
     : isLow30(hist, best) ? `<p class="price-low30" style="margin:0 0 10px;font-weight:700;color:#18794e">🏆 ${esc(LOW30[lang] || LOW30.fr)}</p>` : ""
   const badge2 = ago ? `<p class="price-age" style="margin:-4px 0 10px;font-size:.85rem;color:var(--muted,#5b6474)">✅ ${esc(ago)}</p>` : ""
   return html
-    .replace(/(<title>)([^<]*?)( \| Escale)?(<\/title>)/, (_m, a, s, b, c) => a + s + ` · ${label}` + (b || "") + c)
+    // Le prix se place juste après le trajet, avant les deux-points (« Vol pas cher Paris Dakar dès 425 € : comparer… ») : à la fin du titre,
+    // Google le coupait (titres de 67 à 74 caractères). Sans deux-points, il reste à la fin.
+    .replace(/(<title>)([^<]*?)( \| Escale)?(<\/title>)/, (_m, a, s, b, c) => a + (/ ?: /.test(s) ? s.replace(/( ?: )/, ` ${label}$1`) : s + ` · ${label}`) + (b || "") + c)
     // Aperçu du lien partagé (WhatsApp, Facebook) : prix du jour et verdict (« Bon prix en ce moment »…)
     .replace(/(<meta property="og:title" content=")([^"]*)(")/, (_m, a, s, b) => a + s + ` · ${label}` + (v ? ` · ${esc(t[v.level])}` : "") + b)
     .replace(/(<meta name="description" content=")([^"]*)(")/, (_m, a, s, b) => a + esc(lead) + " — " + s + b)
