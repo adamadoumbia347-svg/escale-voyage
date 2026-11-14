@@ -1,20 +1,20 @@
 {
- "code": "villesa",
+ "code": "villesb",
  "lieux": {
-  "add": "Addis Ababa skyline",
-  "fih": "Kinshasa skyline Boulevard du 30 Juin",
-  "jed": "Jeddah corniche skyline",
-  "orn": "Oran Algeria city view Santa Cruz",
-  "rai": "Praia Cape Verde city view",
-  "bjl": "Banjul Arch 22 Gambia",
-  "oxb": "Bissau city Guinea-Bissau",
-  "oua": "Ouagadougou city view",
-  "nkc": "Nouakchott city view",
-  "nim": "Niamey city Niger river",
-  "tms": "São Tomé city",
-  "kan": "Kano city Nigeria"
+  "rob": "Monrovia city view",
+  "ndj": "N'Djamena city",
+  "ssg": "Malabo city Equatorial Guinea",
+  "fna": "Freetown city view",
+  "pnr": "Pointe-Noire Congo city",
+  "lad": "Luanda skyline bay",
+  "bgf": "Bangui city view",
+  "fbm": "Lubumbashi city",
+  "can": "Guangzhou skyline Canton Tower",
+  "czl": "Constantine Algeria bridge",
+  "ebb": "Kampala skyline",
+  "mpm": "Maputo skyline"
  },
- "demande": "2026-11-14T04:27:17",
+ "demande": "2026-11-14T04:29:12",
  "largeur": 1280,
  "max": 5
 }
