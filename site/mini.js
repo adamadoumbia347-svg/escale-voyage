@@ -7,7 +7,7 @@
   var PAYS = ".hero > .ruban:not(.pop-ruban):not(.nv-hero)";
   // rubrique → blocs à montrer, et onglet du bloc à thèmes (hub.js) à ouvrir
   var G = {
-    idees: { s: ["#hero-deal", "#budget-hook", "#inspi", "#hub", ".saison-bas"], t: "ht-deals" },
+    idees: { s: [".mini-srv", "#hero-deal", "#budget-hook", "#inspi", "#hub", ".saison-bas"], t: "ht-deals" },
     explorer: { s: [PAYS, "#hub", "#nouveautes"], t: "ht-monde" },
     outils: { s: ["#hub"], t: "ht-outils" },
     guides: { s: [".how-mini", "#guides", "#hub"], t: "ht-astuces" },

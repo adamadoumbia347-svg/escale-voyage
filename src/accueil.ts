@@ -114,8 +114,9 @@ export const onRequest = async (ctx: Ctx) => {
     const bn = d ? banner(d, "fr") : ""
     // Dernier article des actus de la semaine (src/actus.ts) : un lien discret au-dessus des blocs de l'accueil
     const act = await Promise.race([dernier(ctx), new Promise<null>((ok) => setTimeout(() => ok(null), WAIT_MS))])
-    if (act) out = out.replace('<section class="block" id="recent-block"', `<div class="wrap"><p style="margin:0 auto 14px;padding:10px 16px;border-radius:14px;border:1px solid var(--line,#e3e7ee);background:var(--surface,#fff);font-size:.95rem">📰 <strong>Actu de la semaine :</strong> <a href="/barometre-prix/actus/${act.slug}/">${esc(act.title)}</a></p></div><section class="block" id="recent-block"`)
-    if (bn) out = out.replace('<section class="block" id="recent-block"', bn + '<section class="block" id="recent-block"')
+    if (act) out = out.replace('<section class="block" id="recent-block"', `<div class="wrap mini-srv"><p style="margin:0 auto 14px;padding:10px 16px;border-radius:14px;border:1px solid var(--line,#e3e7ee);background:var(--surface,#fff);font-size:.95rem">📰 <strong>Actu de la semaine :</strong> <a href="/barometre-prix/actus/${act.slug}/">${esc(act.title)}</a></p></div><section class="block" id="recent-block"`)
+    // Accueil épuré : ces deux encarts sont rangés dans la rubrique « Idées » (classe mini-srv, voir site/mini.js)
+    if (bn) out = out.replace('<section class="block" id="recent-block"', '<div class="mini-srv">' + bn + '</div><section class="block" id="recent-block"')
     // Adresses de recherche (/?type=vols&from=…) : même page que l'accueil, pas à indexer (Search Console les listait par milliers
     // en « autre page avec balise canonique correcte »). La balise canonique vers / reste ; on ajoute noindex, follow.
     // Pays du visiteur (donné par Cloudflare, sans cookie) : ordre des villes du titre animé et des offres du jour
