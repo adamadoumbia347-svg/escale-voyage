@@ -1,19 +1,20 @@
 {
- "code": "senegal2",
+ "code": "villesa",
  "lieux": {
-  "lompoul": "Désert de Lompoul dunes Sénégal",
-  "djoudj": "Djoudj National Bird Sanctuary pelicans",
-  "fadiouth": "Fadiouth island shells Senegal",
-  "fadiouth2": "Joal-Fadiouth bridge cemetery",
-  "dindefelo": "Dindefelo waterfall",
-  "bandia": "Réserve de Bandia giraffe",
-  "bandia2": "Bandia reserve rhinoceros baobab Senegal",
-  "carabane": "Carabane island Casamance",
-  "capskirring": "Cap Skirring beach",
-  "bassari": "Bassari country Kédougou village Iwol",
-  "madeleine": "Îles de la Madeleine Dakar",
-  "baobab": "baobab Senegal landscape"
+  "add": "Addis Ababa skyline",
+  "fih": "Kinshasa skyline Boulevard du 30 Juin",
+  "jed": "Jeddah corniche skyline",
+  "orn": "Oran Algeria city view Santa Cruz",
+  "rai": "Praia Cape Verde city view",
+  "bjl": "Banjul Arch 22 Gambia",
+  "oxb": "Bissau city Guinea-Bissau",
+  "oua": "Ouagadougou city view",
+  "nkc": "Nouakchott city view",
+  "nim": "Niamey city Niger river",
+  "tms": "São Tomé city",
+  "kan": "Kano city Nigeria"
  },
- "demande": "2026-11-13T13:27:59",
- "largeur": 1920
+ "demande": "2026-11-14T04:27:17",
+ "largeur": 1280,
+ "max": 5
 }
