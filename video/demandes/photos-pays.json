@@ -1,16 +1,13 @@
 {
  "code": "innsbruck",
  "lieux": {
-  "vue": "Innsbruck panorama Nordkette city view",
-  "mariahilf": "Innsbruck Mariahilf colorful houses Inn river",
-  "dachl": "Goldenes Dachl Innsbruck",
-  "theresien": "Maria-Theresien-Straße Innsbruck Annasäule",
-  "nordkette": "Nordkette Hafelekar Innsbruck cable car",
-  "hungerburg": "Hungerburgbahn station Innsbruck",
-  "bergisel": "Bergisel ski jump Innsbruck",
-  "ambras": "Schloss Ambras Innsbruck"
+  "inn": "Innsbruck Inn Mariahilfstraße Häuser",
+  "innbrucke": "Innsbruck Innbrücke Nordkette",
+  "seegrube": "Seegrube Innsbruck",
+  "hafelekar": "Hafelekar Innsbruck",
+  "altstadt": "Innsbruck Altstadt Stadtturm view"
  },
- "demande": "2026-11-14T09:05:47",
+ "demande": "2026-11-14T09:07:54",
  "largeur": 1920,
  "max": 6
 }
