@@ -68,6 +68,8 @@
     if (!d || !d.available || !(d.week >= 100)) return;
     var n = new Intl.NumberFormat(loc).format(d.week);
     cnt.textContent = "🔎 " + f(W.count, { n: n }); cnt.hidden = false;
+    // Même chiffre, en une ligne discrète sous le bouton Rechercher (demande de Dobam, 14/11/2026)
+    var tc = document.getElementById("trust-count"); if (tc) { tc.textContent = "🔎 " + f(W.count, { n: n }); tc.hidden = false; }
     var meta = cnt.closest(".hero-meta"); if (meta) meta.classList.add("has-count");
   });
 
