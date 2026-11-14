@@ -1,13 +1,16 @@
 {
- "code": "innsbruck",
+ "code": "ibiza",
  "lieux": {
-  "inn": "Innsbruck Inn Mariahilfstraße Häuser",
-  "innbrucke": "Innsbruck Innbrücke Nordkette",
-  "seegrube": "Seegrube Innsbruck",
-  "hafelekar": "Hafelekar Innsbruck",
-  "altstadt": "Innsbruck Altstadt Stadtturm view"
+  "daltvila": "Dalt Vila Ibiza",
+  "esvedra": "Es Vedrà Ibiza",
+  "calacomte": "Cala Comte Ibiza",
+  "caladhort": "Cala d Hort Ibiza",
+  "santantoni": "Sant Antoni de Portmany sunset",
+  "port": "Ibiza town harbour view",
+  "salines": "Ses Salines Ibiza beach",
+  "portinatx": "Cala Salada Ibiza"
  },
- "demande": "2026-11-14T09:07:54",
+ "demande": "2026-11-14T09:11:21",
  "largeur": 1920,
  "max": 6
 }
