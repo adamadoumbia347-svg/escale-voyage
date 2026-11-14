@@ -83,8 +83,10 @@
         var label = lang === "fr" ? x.l : ((n[x.f] || x.f) + " → " + (n[x.t] || x.t));
         var diff = now && before ? now - before : 0;
         var trend = !diff ? "" : '<span class="ne-tr ' + (diff < 0 ? "dn" : "up") + '">' + (diff < 0 ? "↓ " : "↑ ") + esc(money(Math.abs(diff))) + " " + esc(W.since) + "</span>";
-        var href = x.u || ("/recherche/?flightSearch=" + x.f + dd(45) + x.t + dd(52) + "1");
-        nx.innerHTML = '<span class="ne-h">✈️ ' + esc(W.next) + '</span><bdi class="ne-r">' + esc(label) + "</bdi>" + (now ? '<strong class="ne-p">' + esc(money(now)) + "</strong>" : "") + trend + '<span class="ne-go">' + esc(W.go) + " →</span>";
+        var ddmm = function (s) { return s.slice(8, 10) + s.slice(5, 7); }, dj = function (s) { try { return new Date(s + "T12:00:00").toLocaleDateString(loc, { day: "numeric", month: "short" }); } catch (e) { return s; } };
+        var href = x.u || ("/recherche/?flightSearch=" + x.f + (k && k.dep ? ddmm(k.dep) + x.t + (k.ret ? ddmm(k.ret) : "") : dd(45) + x.t + dd(52)) + "1");
+        var dt = now && k.dep ? '<small class="pd">' + esc(dj(k.dep)) + (k.ret ? " → " + esc(dj(k.ret)) : "") + "</small>" : "";
+        nx.innerHTML = '<span class="ne-h">✈️ ' + esc(W.next) + '</span><bdi class="ne-r">' + esc(label) + "</bdi>" + dt + (now ? '<strong class="ne-p">' + esc(money(now)) + "</strong>" : "") + trend + '<span class="ne-go">' + esc(W.go) + " →</span>";
         nx.href = href; nx.hidden = false;
       });
     });

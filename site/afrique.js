@@ -29,7 +29,7 @@
     if (!list.length) { sec.hidden = true; return; }
     if (city) city.textContent = name;
     row.innerHTML = list.map(function (x) {
-      return '<a href="/recherche/?flightSearch=' + from + ddmm(x.dep) + x.to + (x.ret ? ddmm(x.ret) : "") + '1"><b>' + x.f + " " + esc(name) + " → " + esc(x.n) + "</b><small>" +
+      return '<a href="/recherche/?flightSearch=' + from + ddmm(x.dep) + x.to + (x.ret ? ddmm(x.ret) : "") + '1"><b>' + esc(name) + " → " + esc(x.n) + " " + x.f + "</b><small>" +
         esc(jour(x.dep)) + (x.ret ? " → " + esc(jour(x.ret)) : "") + "</small><em>" + esc((FROM[lang()] || "from ") + money(x.p)) + "</em></a>";
     }).join("");
     row.scrollLeft = 0; sec.hidden = false;

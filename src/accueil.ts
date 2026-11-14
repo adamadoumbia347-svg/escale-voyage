@@ -14,7 +14,7 @@ import { snapshotLeger } from "./bonsplans"
 const CHIP = /<b class="pr" data-r="([A-Z]{3})-([A-Z]{3})"><\/b>/g
 const CACHE_S = 3600
 const WAIT_MS = 400
-type Known = { price: number; d7: number | null }
+type Known = { price: number; d7: number | null; dep?: string; ret?: string }  // dep, ret : dates du billet le moins cher, quand elles sont connues
 
 const money = (n: number) => new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n)
 const iso = (daysAgo: number) => new Date(Date.now() - daysAgo * 864e5).toISOString().slice(0, 10)
@@ -32,7 +32,7 @@ function weekAgo(hist: Point[]) {
 
 export async function knownPrices(ctx: Ctx, pairs: [string, string][]) {
   const cache = (globalThis as any).caches?.default
-  const since = iso(3)
+  const since = iso(3), today = iso(0)
   const out: Record<string, Known> = {}
   const L = await lot(ctx).catch(() => undefined) // trajets suivis : une seule lecture KV (src/lot.ts)
   await Promise.all(pairs.map(async ([from, to]) => {
@@ -40,17 +40,23 @@ export async function knownPrices(ctx: Ctx, pairs: [string, string][]) {
     const months: Month[] = c ? await c.json() : []
     const hist: Point[] = await histDe(ctx, from, to, L)
     const last = hist[hist.length - 1]
-    const price = months.length ? Math.min(...months.map((m) => m.price)) : last && last[0] >= since ? last[1] : null
+    // Dates du billet le moins cher : relevé gardé par Cloudflare, sinon dernier relevé enregistré du trajet suivi (récent seulement)
+    const sv = L && L.m ? L.m[`${from}-${to}`] : null
+    const rows: Month[] = months.length ? months : sv && sv.rows && sv.d >= since ? sv.rows : []
+    const best = rows.filter((m) => m.price && m.dep >= today).sort((a, b) => a.price - b.price)[0]
+    const price = months.length ? Math.min(...months.map((m) => m.price)) : best ? best.price : last && last[0] >= since ? last[1] : null
     if (!price) return
     const w = weekAgo(hist)
-    out[`${from}-${to}`] = { price, d7: w ? Math.round((price / w - 1) * 100) : null }
+    const k: Known = { price, d7: w ? Math.round((price / w - 1) * 100) : null }
+    if (best && best.price === price) { k.dep = best.dep; if (best.ret) k.ret = best.ret }
+    out[`${from}-${to}`] = k
   }))
   return out
 }
 
 async function homePrices(ctx: Ctx, pairs: [string, string][]) {
   const cache = (globalThis as any).caches?.default
-  const key = new Request("https://escale.live/__accueil-prix/v2/" + new Date().toISOString().slice(0, 13))
+  const key = new Request("https://escale.live/__accueil-prix/v3/" + new Date().toISOString().slice(0, 13))
   const hit = cache ? await cache.match(key) : null
   if (hit) return (await hit.json()) as Record<string, Known>
   const job = knownPrices(ctx, pairs).then((out) => {
@@ -62,6 +68,9 @@ async function homePrices(ctx: Ctx, pairs: [string, string][]) {
   return (await Promise.race([job, new Promise<null>((ok) => setTimeout(() => ok(null), WAIT_MS))])) || {}
 }
 
+// Dates du billet, en clair (« 2 déc. → 13 janv. ») : écrites en français par le serveur, remises dans la langue du visiteur par site/accueil.js
+const jour = (s: string) => new Date(s + "T12:00:00Z").toLocaleDateString("fr-FR", { day: "numeric", month: "short", timeZone: "UTC" })
+const dates = (k: Known) => k.dep ? `<small class="pd" data-dep="${k.dep}"${k.ret ? ` data-ret="${k.ret}"` : ""}>${esc(jour(k.dep))}${k.ret ? " → " + esc(jour(k.ret)) : ""}</small>` : ""
 const arrow = (d: number | null) => d === null || Math.abs(d) < 3 ? "" : d < 0 ? ` <i class="tr dn" title="${-d} % en 7 jours">↓</i>` : ` <i class="tr up" title="+${d} % en 7 jours">↑</i>`
 
 // « Offres du jour » au-dessus du titre : les trajets les plus en dessous de leur prix habituel (src/saisir.ts), un à la fois.
@@ -109,7 +118,7 @@ export const onRequest = async (ctx: Ctx) => {
     headers.delete("content-length")
     let out = html.replace(CHIP, (all, f, t) => {
       const k = map[`${f}-${t}`]
-      return k ? `<b class="pr" data-r="${f}-${t}">${esc(money(k.price))}${arrow(k.d7)}</b>` : all
+      return k ? `${dates(k)}<b class="pr" data-r="${f}-${t}">${esc(money(k.price))}${arrow(k.d7)}</b>` : all
     })
     const bn = d ? banner(d, "fr") : ""
     // Dernier article des actus de la semaine (src/actus.ts) : un lien discret au-dessus des blocs de l'accueil
@@ -132,7 +141,7 @@ export const onRequest = async (ctx: Ctx) => {
       for (let i = 0; loc.length < 12 && files.some((f) => f[i]); i++) for (const f of files) if (f[i] && loc.length < 12) loc.push(f[i])
       const prix = await Promise.race([knownPrices(ctx, loc.map((r) => [r[0], r[1]] as [string, string])).catch(() => ({} as Record<string, Known>)), new Promise<Record<string, Known>>((ok) => setTimeout(() => ok({}), WAIT_MS))])
       const chips = loc.filter((r) => prix[`${r[0]}-${r[1]}`]).map((r) => { const k = prix[`${r[0]}-${r[1]}`]
-        return `<a class="pop-chip" href="/recherche/" data-wl="${r[0]}-${r[1]}"><span>${esc(r[2])}</span><b class="pr" data-r="${r[0]}-${r[1]}">${esc(money(k.price))}${arrow(k.d7)}</b></a>` })
+        return `<a class="pop-chip" href="/recherche/" data-wl="${r[0]}-${r[1]}"><span>${esc(r[2])}</span>${dates(k)}<b class="pr" data-r="${r[0]}-${r[1]}">${esc(money(k.price))}${arrow(k.d7)}</b></a>` })
       // Depuis le 14 novembre 2026, ces trajets défilent sous le titre (ruban) : étiquette + trajets, écrits deux fois pour que la boucle soit continue
       const lab = (cache: boolean) => `<span class="rb-t"${cache ? ' aria-hidden="true"' : ' id="pop-hero-h"'} data-en="✈️ Popular routes, round trip from">✈️ Trajets populaires, aller-retour dès</span>`
       const tous = chips.join("")

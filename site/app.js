@@ -1706,7 +1706,10 @@
       const city = from.name.replace(/\s*\([A-Z]{3}\)$/, "");
       // Ruban qui défile sous le titre : étiquette + trajets, écrits deux fois pour que le défilement boucle sans coupure
       const lab = "✈️ " + fmt(T("Depuis {c}, aller-retour dès", "From {c}, round trip from"), { c: city });
-      const chips = routes.map((r) => `<a class="pop-chip" href="/recherche/?flightSearch=${from.code}${dd(45)}${r.to}${dd(52)}1"><span>${esc(city)} → ${esc(byCode.get(r.to)[1])}</span><b class="pr">${esc(money(r.price, d.currency))}</b></a>`).join("");
+      // Dates du billet le moins cher à côté de chaque prix (demande de Dobam, 14/11/2026) ; le lien ouvre la recherche sur ces dates
+      const ddmm = (s) => s.slice(8, 10) + s.slice(5, 7);
+      const jour = (s) => { try { return new Date(s + "T12:00:00").toLocaleDateString(locale(), { day: "numeric", month: "short" }); } catch (e) { return s; } };
+      const chips = routes.map((r) => `<a class="pop-chip" href="/recherche/?flightSearch=${from.code}${r.dep ? ddmm(r.dep) : dd(45)}${r.to}${r.dep ? (r.ret ? ddmm(r.ret) : "") : dd(52)}1"><span>${esc(city)} → ${esc(byCode.get(r.to)[1])}</span>${r.dep ? `<small class="pd">${esc(jour(r.dep))}${r.ret ? " → " + esc(jour(r.ret)) : ""}</small>` : ""}<b class="pr">${esc(money(r.price, d.currency))}</b></a>`).join("");
       row.innerHTML = `<span class="rb-t" id="pop-hero-h">${esc(lab)}</span>${chips}<span class="rb-t" aria-hidden="true">${esc(lab)}</span>${chips.replace(/<a /g, '<a tabindex="-1" aria-hidden="true" ')}`;
     });
   }

@@ -16,12 +16,16 @@
   var list = []; try { list = JSON.parse(get("escale.trajets") || "[]"); } catch (e) { list = []; }
   var box = document.getElementById("my-routes"), row = document.getElementById("my-row");
   if (box && row && list.length) {
-    var link = function (x) { return x.u || ("/recherche/?flightSearch=" + x.f + dd(45) + x.t + dd(52) + "1"); };
+    var ddmm = function (s) { return s.slice(8, 10) + s.slice(5, 7); };
+    var jour = function (s) { try { return new Date(s + "T12:00:00").toLocaleDateString(loc, { day: "numeric", month: "short" }); } catch (e) { return s; } };
+    // Lien : l'adresse gardée, sinon la recherche sur les dates du billet le moins cher, sinon des dates dans six semaines
+    var link = function (x, k) { return x.u || ("/recherche/?flightSearch=" + x.f + (k && k.dep ? ddmm(k.dep) + x.t + (k.ret ? ddmm(k.ret) : "") : dd(45) + x.t + dd(52)) + "1"); };
     var paint = function (prices) {
       row.innerHTML = list.map(function (x) {
         var k = prices[x.f + "-" + x.t], now = k && k.price, diff = now && x.p ? now - x.p : 0;
         var d = !diff ? "" : diff < 0 ? ' <i class="tr dn">↓ ' + esc(money(-diff)) + "</i>" : ' <i class="tr up">↑ ' + esc(money(diff)) + "</i>";
-        return '<a class="pop-chip" href="' + esc(link(x)) + '"><span>' + esc(x.l) + "</span>" + (now ? '<b class="pr">' + esc(money(now)) + d + "</b>" : "") + "</a>";
+        var dt = now && k.dep ? '<small class="pd">' + esc(jour(k.dep)) + (k.ret ? " → " + esc(jour(k.ret)) : "") + "</small>" : "";
+        return '<a class="pop-chip" href="' + esc(link(x, k)) + '"><span>' + esc(x.l) + "</span>" + dt + (now ? '<b class="pr">' + esc(money(now)) + d + "</b>" : "") + "</a>";
       }).join("");
       box.hidden = false;
       // Le prix d'aujourd'hui devient la référence de la prochaine visite
@@ -52,6 +56,12 @@
       if (document.readyState === "complete") nommer(); else addEventListener("load", nommer);
     }
   }
+
+  // 1 bis. Dates écrites en français par le serveur dans le ruban des trajets populaires : dans la langue du visiteur
+  if (lang !== "fr") [].forEach.call(document.querySelectorAll(".pd[data-dep]"), function (e) {
+    var j = function (s) { try { return new Date(s + "T12:00:00").toLocaleDateString(loc, { day: "numeric", month: "short" }); } catch (x) { return s; } };
+    e.textContent = j(e.getAttribute("data-dep")) + (e.getAttribute("data-ret") ? " → " + j(e.getAttribute("data-ret")) : "");
+  });
 
   // 2. (Retiré le 13 novembre 2026, à la demande de Dobam : plus de photo derrière le titre de l'accueil.)
 

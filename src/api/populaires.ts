@@ -14,7 +14,7 @@ export const onRequestGet = (ctx: Ctx) => edgeCached(ctx, 3600, async () => {
   const q = new URL(ctx.request.url).searchParams
   const from = (q.get("from") || "").toUpperCase(), currency = currencyOf(q.get("currency"))
   if (!IATA.test(from)) return json({ error: "Paramètres invalides" }, { status: 400 })
-  const kv = ctx.env.ESCALE, key = `cache:pop2:${from}:${currency}`
+  const kv = ctx.env.ESCALE, key = `cache:pop3:${from}:${currency}`
   if (kv) {
     const saved = await kv.get(key, "json")
     if (saved) return json(saved)
@@ -29,7 +29,7 @@ export const onRequestGet = (ctx: Ctx) => edgeCached(ctx, 3600, async () => {
     const to = t.destination_airport || t.destination, dep = String(t.departure_at || "").slice(0, 10)
     if (!to || seen.has(to) || to === from || !t.price || dep < today || EXCLUDED.has(to) || EXCLUDED.has(t.destination)) continue
     seen.add(to)
-    routes.push({ to, city: t.destination, price: t.price, transfers: t.transfers ?? null })
+    routes.push({ to, city: t.destination, price: t.price, transfers: t.transfers ?? null, dep, ret: t.return_at ? String(t.return_at).slice(0, 10) : null })
     if (routes.length === 8) break
   }
   const out = { available: true, from, currency, updated: new Date().toISOString(), routes }
