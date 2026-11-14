@@ -73,6 +73,6 @@ def build(site, ctx):
         + ld)
     hero = ('<h1>Payer son billet d\'avion <span>en plusieurs fois</span></h1>'
             '<p class="hero-lead">Quelles compagnies acceptent le paiement en 3, 4 ou 10 fois, à quelles conditions et avec quels frais : le point, avec les liens vers les pages officielles.</p>')
-    return [B.write(site, PATH, "fr", "Payer son billet d'avion en plusieurs fois (3x, 4x, 10x) : les compagnies | Escale",
+    return [B.write(site, PATH, "fr", "Payer son billet d'avion en plusieurs fois : 3x, 4x, 10x | Escale",
                     "Corsair, Air Caraïbes, Air France, Royal Air Maroc, ASL Airlines : qui propose le paiement du billet d'avion en 3, 4 ou 10 fois, avec ou sans frais, et à quelles conditions.",
                     hero, body, "", {"fr": PATH}, ctx)]
