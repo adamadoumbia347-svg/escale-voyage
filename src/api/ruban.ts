@@ -13,7 +13,7 @@ const PAYS: Record<string, string[]> = {
   mx: ["MEX", "MEX"], br: ["GIG", "RIO"],
   gn: ["CKY", "CKY"], bj: ["COO", "COO"], tg: ["LFW", "LFW"], ga: ["LBV", "LBV"], ng: ["LOS", "LOS", "ABV"],
 }
-type Prix = { to: string; price: number; dep: string; ret: string | null }
+type Prix = { to: string; price: number; dep: string; ret: string | null; v?: string }  // v : ville ou aéroport du prix trouvé (accueil, « Vers l'Afrique »)
 
 export const onRequestGet = (ctx: Ctx) => edgeCached(ctx, 43200, async () => {
   const token = ctx.env.TRAVELPAYOUTS_TOKEN
@@ -26,7 +26,7 @@ export const onRequestGet = (ctx: Ctx) => edgeCached(ctx, 43200, async () => {
   const garder = (cc: string, t: any) => {
     const dep = String(t?.departure_at || "").slice(0, 10)
     if (!t?.price || dep < today) return
-    if (!out[cc] || t.price < out[cc].price) out[cc] = { to: PAYS[cc][0], price: Math.round(t.price), dep, ret: t.return_at ? String(t.return_at).slice(0, 10) : null }
+    if (!out[cc] || t.price < out[cc].price) out[cc] = { to: PAYS[cc][0], price: Math.round(t.price), dep, ret: t.return_at ? String(t.return_at).slice(0, 10) : null, v: String(t.destination || PAYS[cc][1]) }
   }
   const lots = await Promise.all(mois.map((m) => pricesForDates(token, { origin: from, departure_at: m, unique: "true", one_way: "false", sorting: "price", currency: "eur", limit: "1000" })))
   for (const data of lots) for (const t of data || []) {

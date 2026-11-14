@@ -11,6 +11,8 @@ window.ESCALE_I18N = {
   "Tools": ["Herramientas", "Ferramentas", "أدوات", "Strumenti", "Tools"],
   "Questions": ["Preguntas", "Perguntas", "أسئلة", "Domande", "Fragen"],
   "The whole site": ["Todo el sitio", "Todo o site", "كل الموقع", "Tutto il sito", "Die ganze Seite"],
+  "🌍 To Africa from": ["🌍 A África desde", "🌍 Para África desde", "🌍 إلى أفريقيا من", "🌍 Verso l’Africa da", "🌍 Nach Afrika ab"],
+  "See all →": ["Ver todo →", "Ver tudo →", "عرض الكل ←", "Vedi tutto →", "Alle ansehen →"],
   "Ideas:": ["Ideas:", "Ideias:", "أفكار:", "Idee:", "Ideen:"],
   "Hotels in {c}: live prices": ["Hoteles en {c}: precios en directo", "Hotéis em {c}: preços ao vivo", "فنادق {c}: أسعار مباشرة", "Hotel a {c}: prezzi in diretta", "Hotels in {c}: Live-Preise"],
   "Your routes (price now)": ["Tus rutas (precio actual)", "As suas rotas (preço atual)", "مساراتك (السعر الحالي)", "Le tue tratte (prezzo attuale)", "Deine Strecken (aktueller Preis)"],
