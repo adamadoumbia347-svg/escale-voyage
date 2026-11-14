@@ -3,6 +3,11 @@
 # pour que Google et les liens déjà partagés suivent.
 [build]
   publish = "site"
+  # Netlify ne refabrique plus rien à chaque envoi sur GitHub : la version déjà en ligne (la redirection ci-dessous) suffit.
+  # Sans cette ligne, chaque envoi déclenchait une publication Netlify et le quota gratuit du mois (300 crédits) est parti
+  # en une journée le 12 novembre 2026. « exit 0 » = « rien n'a changé, annule la fabrication ».
+  # Pour republier un jour chez Netlify, retirer cette ligne le temps d'un envoi.
+  ignore = "exit 0"
 
 [[redirects]]
   from = "/*"
