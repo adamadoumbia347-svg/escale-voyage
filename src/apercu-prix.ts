@@ -327,6 +327,35 @@ function render(html: string, from: string, to: string, rows: Month[], hist: Poi
 // Pages « destination » (tous les vols vers une ville) : chaque ligne reçoit le prix déjà connu du trajet (cache des pages trajets).
 // Les trajets pas encore en cache sont préparés en arrière-plan (3 par visite) ; hub.js complète dans le navigateur.
 const t2 = (lang: string) => ({ fr: "dès", en: "from", es: "desde", pt: "desde", ar: "من", it: "da", de: "ab", nl: "vanaf" } as Record<string, string>)[lang] || "dès"
+// Vols AU DÉPART d'une ville (bloc « Vous partez de Tunis ? » des pages destination) : une seule demande groupée à Travelpayouts par mois
+// (toutes les destinations depuis cette ville), gardée 12 heures dans le cache de Cloudflare. Sert à remplir les prix et les dates de ce
+// bloc, resté vide pour les trajets que le baromètre ne suit pas (Search Console du 14 novembre 2026 : « cheap flights » tapé en Tunisie
+// et en Algérie, 1 325 affichages en position 7, aucun clic). Rien n'est inventé : un trajet sans prix repéré reste sans prix.
+type Depart = { p: number; dep: string; ret: string | null }
+const VILLE_DE: Record<string, string> = { CDG: "PAR", ORY: "PAR", BVA: "PAR", LHR: "LON", LGW: "LON", STN: "LON", LTN: "LON", FCO: "ROM", CIA: "ROM", MXP: "MIL", LIN: "MIL", BGY: "MIL",
+  JFK: "NYC", EWR: "NYC", YUL: "YMQ", YYZ: "YTO", IST: "IST", SAW: "IST", DXB: "DXB", CMN: "CAS", DSS: "DKR", NRT: "TYO", HND: "TYO", SVO: "MOW", BRU: "BRU", CRL: "BRU" }
+async function departs(ctx: Ctx, from: string): Promise<Record<string, Depart>> {
+  const cache = (globalThis as any).caches?.default
+  const key = new Request(`https://escale.live/__departs/v1/${from}`)
+  const hit = cache ? await cache.match(key).catch(() => null) : null
+  if (hit) return (await hit.json()) as Record<string, Depart>
+  const token = String(ctx.env.TRAVELPAYOUTS_TOKEN || "")
+  const d = new Date(), today = d.toISOString().slice(0, 10)
+  const mois = [0, 1, 2].map((i) => new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + i, 1)).toISOString().slice(0, 7))
+  const lots = await Promise.all(mois.map((m) => pricesForDates(token, { origin: from, departure_at: m, unique: "true", one_way: "false", sorting: "price", currency: "eur", limit: "1000" }, 6000)))
+  const out: Record<string, Depart> = {}
+  for (const data of lots) for (const t of data || []) {
+    const dep = String(t?.departure_at || "").slice(0, 10)
+    if (!t?.price || dep < today) continue
+    for (const k of [t.destination, t.destination_airport]) {
+      if (!k) continue
+      if (!out[k] || t.price < out[k].p) out[k] = { p: Math.round(t.price), dep, ret: t.return_at ? String(t.return_at).slice(0, 10) : null }
+    }
+  }
+  if (cache && Object.keys(out).length) await cache.put(key, new Response(JSON.stringify(out), { headers: { "Cache-Control": "public, max-age=43200" } })).catch(() => {})
+  return out
+}
+
 async function fillHub(ctx: Ctx, html: string) {
   const cache = (globalThis as any).caches?.default
   const cells = [...html.matchAll(/<td class="hub-price" data-from="([A-Z]{3})" data-to="([A-Z]{3})" data-label="([^"]*)"><\/td>/g)]
@@ -343,7 +372,17 @@ async function fillHub(ctx: Ctx, html: string) {
   // suivis. Le prix arrive ainsi dans le titre même quand la page est lue par un robot loin des visiteurs habituels.
   const snap = await Promise.race([bonsplans.snapshotLeger(ctx).catch(() => null), new Promise<null>((ok) => setTimeout(() => ok(null), 300))])
   const releve = new Map((snap?.rows || []).map((r) => [`${r.from}-${r.to}`, r.price]))
-  const prices = cells.map((m, i) => (found[i] && found[i]!.length ? Math.min(...found[i]!.map((r) => r.price)) : releve.get(`${m[1]}-${m[2]}`) ?? null))
+  // Bloc « au départ de » : prix et dates du relevé groupé de la ville (600 ms d'attente au plus, sinon il se prépare pour la visite suivante)
+  const bloc = html.match(/<section class="hub" id="depart">[\s\S]*?<\/section>/)
+  const org = bloc ? (bloc[0].match(/data-from="([A-Z]{3})"/) || [])[1] : ""
+  let grp: Record<string, Depart> = {}
+  if (org) {
+    const job = departs(ctx, org).catch(() => ({} as Record<string, Depart>))
+    const r = await Promise.race([job, new Promise<null>((ok) => setTimeout(() => ok(null), 600))])
+    if (r) grp = r; else ctx.waitUntil(job)
+  }
+  const depDe = (to: string): Depart | null => grp[to] || grp[VILLE_DE[to] || ""] || null
+  const prices = cells.map((m, i) => (found[i] && found[i]!.length ? Math.min(...found[i]!.map((r) => r.price)) : releve.get(`${m[1]}-${m[2]}`) ?? (m[1] === org && depDe(m[2]) ? depDe(m[2])!.p : null)))
   // Prix le plus bas de la page dans le titre et la description (onglet, Google, aperçu des liens partagés) : « Cheap flights to Tunis from €74 – … »
   const all = prices.filter((x): x is number => typeof x === "number")
   if (all.length) {
@@ -357,11 +396,23 @@ async function fillHub(ctx: Ctx, html: string) {
       .replace(/(<meta property="og:description" content=")([^"]*)(")/, (_m, a, s, c) => a + esc(lead) + " — " + s + c)
   }
   let i = 0
-  return html.replace(/<td class="hub-price" data-from="([A-Z]{3})" data-to="([A-Z]{3})" data-label="([^"]*)"><\/td>/g, (all, _f, _t, label) => {
+  const jour = (x: string) => { try { return new Date(x + "T12:00:00Z").toLocaleDateString(t.loc, { day: "numeric", month: "short", timeZone: "UTC" }) } catch { return x } }
+  html = html.replace(/<td class="hub-price" data-from="([A-Z]{3})" data-to="([A-Z]{3})" data-label="([^"]*)"><\/td>/g, (all, f, to, label) => {
     const price = prices[i++]
     if (price === null) return all
-    return all.replace('"></td>', `" data-ssr="1">${label} <strong>${esc(money(price))}</strong></td>`)
+    // Au départ de la ville : les dates du billet le moins cher accompagnent le prix quand c'est bien ce billet-là
+    const g = f === org ? depDe(to) : null
+    const dt = g && g.p === price ? ` <small class="hub-dt" style="display:block;font-weight:600;opacity:.75">${esc(jour(g.dep))}${g.ret ? " → " + esc(jour(g.ret)) : ""}</small>` : ""
+    return all.replace('"></td>', `" data-ssr="1" data-p="${Math.round(price)}">${label} <strong>${esc(money(price))}</strong>${dt}</td>`)
   })
+  // Bloc « au départ de » : du moins cher au plus cher, les trajets sans prix à la fin
+  if (org) html = html.replace(/(<section class="hub" id="depart">[\s\S]*?<tbody>)([\s\S]*?)(<\/tbody>)/, (_m, a, corps, z) => {
+    const lignes = corps.match(/<tr>[\s\S]*?<\/tr>/g) || []
+    const prix = (l: string) => +((l.match(/data-p="(\d+)"/) || [])[1] || 1e9)
+    const tri: [number, number, string][] = lignes.map((l: string, k: number) => [prix(l), k, l])
+    return a + tri.sort((x, y) => x[0] - y[0] || x[1] - y[1]).map((x) => x[2]).join("") + z
+  })
+  return html
 }
 
 export const onRequest = async (ctx: Ctx) => {
