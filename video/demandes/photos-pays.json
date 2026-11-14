@@ -1,16 +1,14 @@
 {
- "code": "hiver",
+ "code": "prague",
  "lieux": {
-  "laponie": "aurora borealis Lapland Finland",
-  "rovaniemi": "Rovaniemi winter snow forest",
-  "marrakech": "Jemaa el-Fnaa Marrakech Koutoubia",
-  "dubai": "Dubai skyline Burj Khalifa",
-  "zanzibar": "Zanzibar beach Nungwi",
-  "saly": "Saly Senegal plage",
-  "goree": "Île de Gorée",
-  "capskirring": "Cap Skirring plage"
+  "pont": "Charles Bridge Prague",
+  "horloge": "Prague astronomical clock Old Town Square",
+  "chateau": "Prague Castle Hradčany view",
+  "vltava": "Prague Vltava bridges view Letná",
+  "tyn": "Old Town Square Prague Týn church",
+  "noel": "Prague Christmas market Old Town Square"
  },
- "demande": "2026-11-14T09:21:28",
+ "demande": "2026-11-14T09:23:07",
  "largeur": 1920,
  "max": 6
 }
