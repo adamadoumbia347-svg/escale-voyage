@@ -365,14 +365,8 @@ async function fillHub(ctx: Ctx, html: string) {
   const money = (n: number) => { try { return new Intl.NumberFormat(t.loc, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n) } catch { return Math.round(n) + " €" } }
   // Une page ne peut faire qu'un nombre limité d'opérations : le cache n'est interrogé que pour les 36 premiers trajets,
   // et deux trajets au plus sont préparés en arrière-plan. Les autres prix arrivent dans le navigateur (site/hub.js).
-  const found = await Promise.all(cells.map(async (m, i) => { const hit = cache && i < 36 ? await cache.match(cacheKey(m[1], m[2])).catch(() => null) : null; return hit ? (await hit.json()) as Month[] : null }))
-  const missing = cells.filter((_, i) => found[i] === null).slice(0, 2)
-  if (missing.length) ctx.waitUntil(Promise.all(missing.map((m) => routeMonths(ctx, m[1], m[2]).catch(() => null))))
-  // Trajets sans prix en cache à cet endroit du réseau : le relevé de la nuit (KV, src/bonsplans.ts) prend le relais pour les trajets
-  // suivis. Le prix arrive ainsi dans le titre même quand la page est lue par un robot loin des visiteurs habituels.
-  const snap = await Promise.race([bonsplans.snapshotLeger(ctx).catch(() => null), new Promise<null>((ok) => setTimeout(() => ok(null), 300))])
-  const releve = new Map((snap?.rows || []).map((r) => [`${r.from}-${r.to}`, r.price]))
-  // Bloc « au départ de » : prix et dates du relevé groupé de la ville (600 ms d'attente au plus, sinon il se prépare pour la visite suivante)
+  // Bloc « au départ de » : prix et dates du relevé groupé de la ville (600 ms d'attente au plus, sinon il se prépare pour la visite suivante).
+  // Demandé en premier : une page n'a droit qu'à une cinquantaine d'opérations, et ce relevé en prend cinq (les autres lectures sont réduites d'autant)
   const bloc = html.match(/<section class="hub" id="depart">[\s\S]*?<\/section>/)
   const org = bloc ? (bloc[0].match(/data-from="([A-Z]{3})"/) || [])[1] : ""
   let grp: Record<string, Depart> = {}
@@ -381,6 +375,13 @@ async function fillHub(ctx: Ctx, html: string) {
     const r = await Promise.race([job, new Promise<null>((ok) => setTimeout(() => ok(null), 600))])
     if (r) grp = r; else ctx.waitUntil(job)
   }
+  const found = await Promise.all(cells.map(async (m, i) => { const hit = cache && i < (org ? 26 : 36) ? await cache.match(cacheKey(m[1], m[2])).catch(() => null) : null; return hit ? (await hit.json()) as Month[] : null }))
+  const missing = cells.filter((_, i) => found[i] === null).slice(0, org ? 0 : 2)
+  if (missing.length) ctx.waitUntil(Promise.all(missing.map((m) => routeMonths(ctx, m[1], m[2]).catch(() => null))))
+  // Trajets sans prix en cache à cet endroit du réseau : le relevé de la nuit (KV, src/bonsplans.ts) prend le relais pour les trajets
+  // suivis. Le prix arrive ainsi dans le titre même quand la page est lue par un robot loin des visiteurs habituels.
+  const snap = await Promise.race([bonsplans.snapshotLeger(ctx).catch(() => null), new Promise<null>((ok) => setTimeout(() => ok(null), 300))])
+  const releve = new Map((snap?.rows || []).map((r) => [`${r.from}-${r.to}`, r.price]))
   const depDe = (to: string): Depart | null => grp[to] || grp[VILLE_DE[to] || ""] || null
   const prices = cells.map((m, i) => (found[i] && found[i]!.length ? Math.min(...found[i]!.map((r) => r.price)) : releve.get(`${m[1]}-${m[2]}`) ?? (m[1] === org && depDe(m[2]) ? depDe(m[2])!.p : null)))
   // Prix le plus bas de la page dans le titre et la description (onglet, Google, aperçu des liens partagés) : « Cheap flights to Tunis from €74 – … »
